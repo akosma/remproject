@@ -1,10 +1,12 @@
-/*
- *  sequencediagram.cpp
- *  rem
+/*!
+ * \file sequencediagram.cpp
+ * 
+ * Add a description of the file here
  *
- *  Created by Adrian on 3/9/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
+ * $LastChangedRevision$
+ * $LastChangedDate$
+ * $LastChangedBy$
+ * $HeadURL$
  */
 
 #include "sequencediagram.h"
