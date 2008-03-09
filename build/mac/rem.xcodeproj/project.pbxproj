@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A18FB450D843AA500744B33 /* project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB440D843AA500744B33 /* project.cpp */; };
+		3A18FB480D843ADE00744B33 /* diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB470D843ADE00744B33 /* diagram.cpp */; };
+		3A18FB4B0D843B0800744B33 /* element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB4A0D843B0800744B33 /* element.cpp */; };
+		3A18FB540D843B5300744B33 /* usecasediagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB530D843B5300744B33 /* usecasediagram.cpp */; };
+		3A18FB570D843B6100744B33 /* sequencediagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB560D843B6100744B33 /* sequencediagram.cpp */; };
+		3A18FB5A0D843C3E00744B33 /* classdiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB590D843C3E00744B33 /* classdiagram.cpp */; };
+		3A18FB5D0D843C5000744B33 /* property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB5C0D843C5000744B33 /* property.cpp */; };
+		3A18FB6A0D843CEF00744B33 /* note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB690D843CEF00744B33 /* note.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3A18FB430D843AA500744B33 /* project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = project.h; path = ../../src/metamodel/project.h; sourceTree = SOURCE_ROOT; };
+		3A18FB440D843AA500744B33 /* project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = project.cpp; path = ../../src/metamodel/project.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB460D843ADE00744B33 /* diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diagram.h; path = ../../src/metamodel/diagram.h; sourceTree = SOURCE_ROOT; };
+		3A18FB470D843ADE00744B33 /* diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diagram.cpp; path = ../../src/metamodel/diagram.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB490D843B0800744B33 /* element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = element.h; path = ../../src/metamodel/element.h; sourceTree = SOURCE_ROOT; };
+		3A18FB4A0D843B0800744B33 /* element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = element.cpp; path = ../../src/metamodel/element.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB520D843B5300744B33 /* usecasediagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usecasediagram.h; path = ../../src/metamodel/usecasediagram.h; sourceTree = SOURCE_ROOT; };
+		3A18FB530D843B5300744B33 /* usecasediagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = usecasediagram.cpp; path = ../../src/metamodel/usecasediagram.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB550D843B6100744B33 /* sequencediagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sequencediagram.h; path = ../../src/metamodel/sequencediagram.h; sourceTree = SOURCE_ROOT; };
+		3A18FB560D843B6100744B33 /* sequencediagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sequencediagram.cpp; path = ../../src/metamodel/sequencediagram.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB580D843C3E00744B33 /* classdiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classdiagram.h; path = ../../src/metamodel/classdiagram.h; sourceTree = SOURCE_ROOT; };
+		3A18FB590D843C3E00744B33 /* classdiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = classdiagram.cpp; path = ../../src/metamodel/classdiagram.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB5B0D843C5000744B33 /* property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = property.h; path = ../../src/metamodel/property.h; sourceTree = SOURCE_ROOT; };
+		3A18FB5C0D843C5000744B33 /* property.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = property.cpp; path = ../../src/metamodel/property.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB680D843CEF00744B33 /* note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = note.h; path = ../../src/metamodel/note.h; sourceTree = SOURCE_ROOT; };
+		3A18FB690D843CEF00744B33 /* note.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = note.cpp; path = ../../src/metamodel/note.cpp; sourceTree = SOURCE_ROOT; };
+		3A18FB6E0D843D2E00744B33 /* remtests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtests; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A18FB6C0D843D2E00744B33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* rem */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = rem;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3A18FB640D843CB600744B33 /* ui */,
+				3A18FB630D843CAF00744B33 /* libs */,
+				3A18FB620D843CA900744B33 /* storage */,
+				3A18FB610D843C9200744B33 /* metamodel */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* rem */,
+				3A18FB6E0D843D2E00744B33 /* remtests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A18FB5E0D843C6000744B33 /* diagrams */ = {
+			isa = PBXGroup;
+			children = (
+				3A18FB520D843B5300744B33 /* usecasediagram.h */,
+				3A18FB530D843B5300744B33 /* usecasediagram.cpp */,
+				3A18FB550D843B6100744B33 /* sequencediagram.h */,
+				3A18FB560D843B6100744B33 /* sequencediagram.cpp */,
+				3A18FB580D843C3E00744B33 /* classdiagram.h */,
+				3A18FB590D843C3E00744B33 /* classdiagram.cpp */,
+				3A18FB460D843ADE00744B33 /* diagram.h */,
+				3A18FB470D843ADE00744B33 /* diagram.cpp */,
+			);
+			name = diagrams;
+			sourceTree = "<group>";
+		};
+		3A18FB5F0D843C7300744B33 /* elements */ = {
+			isa = PBXGroup;
+			children = (
+				3A18FB490D843B0800744B33 /* element.h */,
+				3A18FB4A0D843B0800744B33 /* element.cpp */,
+				3A18FB5B0D843C5000744B33 /* property.h */,
+				3A18FB5C0D843C5000744B33 /* property.cpp */,
+				3A18FB680D843CEF00744B33 /* note.h */,
+				3A18FB690D843CEF00744B33 /* note.cpp */,
+			);
+			name = elements;
+			sourceTree = "<group>";
+		};
+		3A18FB600D843C8600744B33 /* projects */ = {
+			isa = PBXGroup;
+			children = (
+				3A18FB430D843AA500744B33 /* project.h */,
+				3A18FB440D843AA500744B33 /* project.cpp */,
+			);
+			name = projects;
+			sourceTree = "<group>";
+		};
+		3A18FB610D843C9200744B33 /* metamodel */ = {
+			isa = PBXGroup;
+			children = (
+				3A18FB5E0D843C6000744B33 /* diagrams */,
+				3A18FB5F0D843C7300744B33 /* elements */,
+				3A18FB600D843C8600744B33 /* projects */,
+			);
+			name = metamodel;
+			sourceTree = "<group>";
+		};
+		3A18FB620D843CA900744B33 /* storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = storage;
+			sourceTree = "<group>";
+		};
+		3A18FB630D843CAF00744B33 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		3A18FB640D843CB600744B33 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A18FB6D0D843D2E00744B33 /* remtests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A18FB720D843D6500744B33 /* Build configuration list for PBXNativeTarget "remtests" */;
+			buildPhases = (
+				3A18FB6B0D843D2E00744B33 /* Sources */,
+				3A18FB6C0D843D2E00744B33 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = remtests;
+			productName = remtests;
+			productReference = 3A18FB6E0D843D2E00744B33 /* remtests */;
+			productType = "com.apple.product-type.tool";
+		};
+		8DD76F620486A84900D96B5E /* rem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "rem" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = rem;
+			productInstallPath = "$(HOME)/bin";
+			productName = rem;
+			productReference = 8DD76F6C0486A84900D96B5E /* rem */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "rem" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* rem */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* rem */,
+				3A18FB6D0D843D2E00744B33 /* remtests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A18FB6B0D843D2E00744B33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A18FB450D843AA500744B33 /* project.cpp in Sources */,
+				3A18FB480D843ADE00744B33 /* diagram.cpp in Sources */,
+				3A18FB4B0D843B0800744B33 /* element.cpp in Sources */,
+				3A18FB540D843B5300744B33 /* usecasediagram.cpp in Sources */,
+				3A18FB570D843B6100744B33 /* sequencediagram.cpp in Sources */,
+				3A18FB5A0D843C3E00744B33 /* classdiagram.cpp in Sources */,
+				3A18FB5D0D843C5000744B33 /* property.cpp in Sources */,
+				3A18FB6A0D843CEF00744B33 /* note.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = rem;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = rem;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+			};
+			name = Release;
+		};
+		3A18FB700D843D2F00744B33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = remtests;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		3A18FB710D843D2F00744B33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = remtests;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "rem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "rem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A18FB720D843D6500744B33 /* Build configuration list for PBXNativeTarget "remtests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A18FB700D843D2F00744B33 /* Debug */,
+				3A18FB710D843D2F00744B33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
