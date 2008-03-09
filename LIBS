@@ -1,0 +1,5 @@
+Rem source code depends on the following libraries:
+
+- CppUnit 1.12  http://downloads.sourceforge.net/cppunit/cppunit-1.12.1.tar.gz
+- Juce 1.45     http://downloads.sourceforge.net/juce/juce_1_45.zip
+- SQLite 3.5.6  http://www.sqlite.org/sqlite-amalgamation-3_5_6.zip
