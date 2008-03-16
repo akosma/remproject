@@ -76,34 +76,54 @@ namespace tests
         
         UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
         
-        project.addDiagram(firstDiagram);
-        CPPUNIT_ASSERT(project.getDiagramCount() == 1);
+        project.addElement(firstDiagram);
+        CPPUNIT_ASSERT(project.getCount() == 1);
         
-        Diagram* pointer = project.getDiagram(first);
+        Diagram* pointer = project.getElement(first);
         CPPUNIT_ASSERT(firstDiagram == pointer);
         CPPUNIT_ASSERT(pointer->getName() == first);
 
         UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
-        project.addDiagram(secondDiagram);
-        CPPUNIT_ASSERT(project.getDiagramCount() == 2);
+        project.addElement(secondDiagram);
+        CPPUNIT_ASSERT(project.getCount() == 2);
 
-        pointer = project.getDiagram(second);
+        pointer = project.getElement(second);
         CPPUNIT_ASSERT(secondDiagram == pointer);
         CPPUNIT_ASSERT(pointer->getName() == second);
-        
-        project.removeDiagram(first);
-        CPPUNIT_ASSERT(project.getDiagramCount() == 1);
+		
+        project.removeElement(first);
+        CPPUNIT_ASSERT(project.getCount() == 1);
 
-        project.removeDiagram(second);
-        CPPUNIT_ASSERT(project.getDiagramCount() == 0);
+        project.removeElement(second);
+        CPPUNIT_ASSERT(project.getCount() == 0);
+        CPPUNIT_ASSERT(project.empty());
+    }
+	
+	void ProjectTest::testCanRemoveAllDiagramsFromProject()
+	{
+        const std::string first("first");
+        const std::string second("second");
+
+        Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        const std::string& firstName = firstDiagram->getName();
-        CPPUNIT_ASSERT(firstName == first);
-        delete firstDiagram;
+        UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
+        
+        project.addElement(firstDiagram);
+        CPPUNIT_ASSERT(project.getCount() == 1);
+        
+        Diagram* pointer = project.getElement(first);
+        CPPUNIT_ASSERT(firstDiagram == pointer);
+        CPPUNIT_ASSERT(pointer->getName() == first);
 
-        const std::string& secondName = secondDiagram->getName();
-        CPPUNIT_ASSERT(secondName == second);
+        UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
+        project.addElement(secondDiagram);
+        CPPUNIT_ASSERT(project.getCount() == 2);
+
+		project.removeAllElements();
+        CPPUNIT_ASSERT(project.getCount() == 0);
+
+        delete firstDiagram;
         delete secondDiagram;
-    }
+	}
 }

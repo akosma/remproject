@@ -13,6 +13,8 @@
 		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
 		3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4490D8D64B000F61DB0 /* Project.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
+		3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC076200D8D9CE8004C5A73 /* Actor.cpp */; };
 		3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,11 @@
 		3A70B4560D8D667100F61DB0 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../../README; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AC075FC0D8D9A21004C5A73 /* Element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Element.cpp; path = ../../src/metamodel/Element.cpp; sourceTree = SOURCE_ROOT; };
+		3AC075FD0D8D9A21004C5A73 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../../src/metamodel/Element.h; sourceTree = SOURCE_ROOT; };
+		3AC0761F0D8D9CE8004C5A73 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = ../../src/metamodel/Actor.h; sourceTree = SOURCE_ROOT; };
+		3AC076200D8D9CE8004C5A73 /* Actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = ../../src/metamodel/Actor.cpp; sourceTree = SOURCE_ROOT; };
+		3AC076790D8DABCF004C5A73 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Container.h; path = ../../src/metamodel/Container.h; sourceTree = SOURCE_ROOT; };
 		3ACC948A0D8D73EF0001BC71 /* UseCaseDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagram.h; path = ../../src/metamodel/UseCaseDiagram.h; sourceTree = SOURCE_ROOT; };
 		3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseDiagram.cpp; path = ../../src/metamodel/UseCaseDiagram.cpp; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				3A4EAEA00D8D313A00C4895F /* commandline */,
-				3A18FB630D843CAF00744B33 /* libs */,
 				3A18FB610D843C9200744B33 /* metamodel */,
 				3A18FB620D843CA900744B33 /* storage */,
 				3A4EAEA90D8D32BD00C4895F /* tests */,
@@ -121,6 +127,10 @@
 		3A18FB5F0D843C7300744B33 /* elements */ = {
 			isa = PBXGroup;
 			children = (
+				3AC075FC0D8D9A21004C5A73 /* Element.cpp */,
+				3AC075FD0D8D9A21004C5A73 /* Element.h */,
+				3AC0761F0D8D9CE8004C5A73 /* Actor.h */,
+				3AC076200D8D9CE8004C5A73 /* Actor.cpp */,
 			);
 			name = elements;
 			sourceTree = "<group>";
@@ -128,6 +138,7 @@
 		3A18FB610D843C9200744B33 /* metamodel */ = {
 			isa = PBXGroup;
 			children = (
+				3AC076790D8DABCF004C5A73 /* Container.h */,
 				3A18FB5E0D843C6000744B33 /* diagrams */,
 				3A18FB5F0D843C7300744B33 /* elements */,
 				3A70B4480D8D64B000F61DB0 /* Project.h */,
@@ -141,13 +152,6 @@
 			children = (
 			);
 			name = storage;
-			sourceTree = "<group>";
-		};
-		3A18FB630D843CAF00744B33 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = libs;
 			sourceTree = "<group>";
 		};
 		3A18FB640D843CB600744B33 /* ui */ = {
@@ -282,6 +286,8 @@
 				3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */,
 				3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */,
 				3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */,
+				3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */,
+				3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

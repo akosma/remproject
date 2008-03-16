@@ -15,6 +15,14 @@
 #ifndef DIAGRAM_H_
 #define DIAGRAM_H_
 
+#ifndef CONTAINER_H_
+#include "Container.h"
+#endif
+
+#ifndef ELEMENT_H_
+#include "Element.h"
+#endif
+
 #include <map>
 #include <string>
 
@@ -24,35 +32,30 @@
  */
 namespace MetaModel
 {
-    class Diagram;
-
-    typedef std::map<std::string, Diagram*> DiagramMap;
-    
     /*!
      * \class Diagram "$URL$"
      *
      *  
      */
-    class Diagram
+    class Diagram : public Container<Element>
     {
     public:
 
         /*!
          *  Diagram constructor.
          */
-        Diagram(const std::string& name);
+        Diagram(const std::string&);
 
         /*!
          *  Diagram virtual destructor.
          */
         virtual ~Diagram();
-        
+
         const std::string& getName() const;
-        
-    private:
-        std::string _name;
-    };
-    
+		
+	private:
+		std::string _name;
+	};
 }
 
 #endif /* DIAGRAM_H_ */

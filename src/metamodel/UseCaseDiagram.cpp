@@ -24,7 +24,7 @@ namespace MetaModel
      * UseCaseDiagram Constructor.
      */
     UseCaseDiagram::UseCaseDiagram(const std::string& name)
-        : Diagram(name)
+	: Diagram(name)
     {
     }
     

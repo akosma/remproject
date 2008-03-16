@@ -39,7 +39,7 @@ namespace MetaModel
         /*!
          *  UseCaseDiagram constructor.
          */
-        UseCaseDiagram(const std::string& name);
+        UseCaseDiagram(const std::string&);
 
         /*!
          *  UseCaseDiagram virtual destructor.

@@ -1,5 +1,5 @@
 /*!  
- * \file untitled 2.h
+ * \file Project.h
  * 
  * Contains the interface of the MetaModel::Project class.
  * 
@@ -14,6 +14,10 @@
 
 #ifndef PROJECT_H_
 #define PROJECT_H_
+
+#ifndef CONTAINER_H_
+#include "Container.h"
+#endif
 
 #ifndef DIAGRAM_H_
 #include "Diagram.h"
@@ -30,7 +34,7 @@ namespace MetaModel
      *
      *  
      */
-    class Project
+    class Project : public Container<Diagram>
     {
     public:
 
@@ -43,21 +47,7 @@ namespace MetaModel
          * Project virtual destructor.
          */
         virtual ~Project();
-        
-        const bool empty() const;
-
-        void addDiagram(Diagram* diagram);
-        
-        const int getDiagramCount() const;
-        
-        Diagram* getDiagram(const std::string& name);
-        
-        void removeDiagram(const std::string& diagramName);
-
-    private:
-        DiagramMap _diagrams;
-    };
-
+	};
 }
 
 #endif /* PROJECT_H_ */

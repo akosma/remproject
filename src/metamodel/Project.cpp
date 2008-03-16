@@ -1,5 +1,5 @@
 /*!  
- * \file untitled 2.h
+ * \file Project.cpp
  * 
  * Contains the implementation of the Metamodel::Project class.
  * 
@@ -24,39 +24,11 @@ namespace MetaModel
      * Project Constructor.
      */
     Project::Project()
-    : _diagrams(DiagramMap())
+    : Container<Diagram>()
     {
     }
-    
-    /*!
-     * Project Virtual destructor.
-     */
-    Project::~Project()
-    {
-    }
-    
-    const bool Project::empty() const
-    {
-        return _diagrams.empty();
-    }
-    
-    void Project::addDiagram(Diagram* diagram)
-    {
-        _diagrams[diagram->getName()] = diagram;
-    }
-    
-    const int Project::getDiagramCount() const
-    {
-        return _diagrams.size();
-    }
-    
-    Diagram* Project::getDiagram(const std::string& name)
-    {
-        return _diagrams[name];
-    }
-    
-    void Project::removeDiagram(const std::string& diagramName)
-    {
-        _diagrams.erase(diagramName);
-    }
+	
+	Project::~Project()
+	{
+	}
 }

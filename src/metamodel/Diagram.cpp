@@ -24,7 +24,8 @@ namespace MetaModel
      * Diagram Constructor.
      */
     Diagram::Diagram(const std::string& name)
-        :_name(name)
+	: Container<Element>(),
+	  _name(name)
     {
     }
     
@@ -34,7 +35,7 @@ namespace MetaModel
     Diagram::~Diagram()
     {
     }
-    
+
     const std::string& Diagram::getName() const
     {
         return _name;

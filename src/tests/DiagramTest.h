@@ -33,7 +33,7 @@ namespace tests
     {
 
         CPPUNIT_TEST_SUITE(tests::DiagramTest);
-        CPPUNIT_TEST(testWhatever);
+        CPPUNIT_TEST(testDiagramCanHaveSeveralElements);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -61,7 +61,7 @@ namespace tests
         /*!
          * Tests something.
          */
-        void testWhatever();
+        void testDiagramCanHaveSeveralElements();
     };
 }
 

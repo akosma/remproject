@@ -14,6 +14,16 @@
 
 #include "DiagramTest.h"
 
+#ifndef ACTOR_H_
+#include "../metamodel/Actor.h"
+#endif
+
+#ifndef USECASEDIAGRAM_H_
+#include "../metamodel/UseCaseDiagram.h"
+#endif
+
+using namespace MetaModel;
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -52,9 +62,17 @@ namespace tests
     /*!
      * Tests something.
      */
-    void DiagramTest::testWhatever()
+    void DiagramTest::testDiagramCanHaveSeveralElements()
     {
-        bool ok = true;
-        CPPUNIT_ASSERT(ok);
+		std::string actor1Name("actor1");
+		std::string diagramName("diagramName");
+		UseCaseDiagram* diagram = new UseCaseDiagram(diagramName);
+		Actor* actor1 = new Actor(actor1Name);
+		
+		CPPUNIT_ASSERT(diagram->getName() == diagramName);
+		CPPUNIT_ASSERT(actor1->getName() == actor1Name);
+		
+		delete actor1;
+		delete diagram;
     }
 }
