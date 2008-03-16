@@ -15,8 +15,11 @@
 #ifndef CONTAINER_H_
 #define CONTAINER_H_
 
+#include <Poco/SharedPtr.h>
 #include <string>
 #include <map>
+
+using Poco::SharedPtr;
 
 /*!
  * \namespace MetaModel
@@ -29,10 +32,12 @@ namespace MetaModel
      *
      *  
      */
-	template<class T>
+	template <class T>
     class Container
     {
     public:
+    
+        typedef std::map<std::string, SharedPtr<T>*> InternalMap;
 
         /*!
          *  Container constructor.
@@ -57,7 +62,7 @@ namespace MetaModel
 		void removeAllElements();
 
     private:
-        std::map<std::string, T*> _elements;
+        InternalMap _elements;
     };
 
     /*!
@@ -65,7 +70,7 @@ namespace MetaModel
      */
 	template <typename T>
     Container<T>::Container()
-    : _elements(std::map<std::string, T*>())
+    : _elements(InternalMap())
     {
     }
     
@@ -75,7 +80,7 @@ namespace MetaModel
 	template <typename T>
     Container<T>::~Container<T>()
     {
-		_elements.clear();
+        this->removeAllElements();
     }
     
 	template <typename T>
@@ -87,7 +92,11 @@ namespace MetaModel
 	template <typename T>
     void Container<T>::addElement(T* element)
     {
-        _elements[element->getName()] = element;
+        if (element)
+        {
+            SharedPtr<T>* ptr = new SharedPtr<T>(element);
+            _elements[element->getName()] = ptr;
+        }
     }
     
 	template <typename T>
@@ -99,13 +108,21 @@ namespace MetaModel
 	template <typename T>
     T* Container<T>::getElement(const std::string& name)
     {
-        return _elements[name];
+        SharedPtr<T>* el = _elements[name];
+        if (el)
+        {
+            return el->get();
+        }
+        else
+        {
+            return NULL;
+        }
     }
     
 	template <typename T>
     void Container<T>::removeElement(const std::string& name)
     {
-        T* element = _elements[name];
+        SharedPtr<T>* element = _elements[name];
 		if (element)
 		{
 			delete element;
@@ -116,7 +133,16 @@ namespace MetaModel
 	template <typename T>
 	void Container<T>::removeAllElements()
 	{
-		// TODO: add pointer deletion here for all the elements in the map!
+        // For the explanation of the "typename" keyword below, see
+        // http://gcc.gnu.org/ml/gcc-help/2008-01/msg00137.html and
+        // http://www.parashift.com/c++-faq-lite/templates.html#faq-35.18
+
+		typename InternalMap::iterator iter;
+        for (iter = _elements.begin(); iter != _elements.end(); ++iter)
+        {
+            delete (*iter).second;
+        }
+
 		_elements.clear();
 	}
 

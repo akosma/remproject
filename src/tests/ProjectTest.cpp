@@ -122,8 +122,5 @@ namespace tests
 
 		project.removeAllElements();
         CPPUNIT_ASSERT(project.getCount() == 0);
-
-        delete firstDiagram;
-        delete secondDiagram;
 	}
 }

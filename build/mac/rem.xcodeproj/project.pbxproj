@@ -16,6 +16,7 @@
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC076200D8D9CE8004C5A73 /* Actor.cpp */; };
 		3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */; };
+		3AF8AB450D8DB6E30084A469 /* libPocoFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		3AC076790D8DABCF004C5A73 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Container.h; path = ../../src/metamodel/Container.h; sourceTree = SOURCE_ROOT; };
 		3ACC948A0D8D73EF0001BC71 /* UseCaseDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagram.h; path = ../../src/metamodel/UseCaseDiagram.h; sourceTree = SOURCE_ROOT; };
 		3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseDiagram.cpp; path = ../../src/metamodel/UseCaseDiagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoFoundation.dylib; path = ../../lib/poco/lib/Darwin/Power_Macintosh/libPocoFoundation.dylib; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A4EB4630D8D4A3F00C4895F /* libcppunit.a in Frameworks */,
+				3AF8AB450D8DB6E30084A469 /* libPocoFoundation.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +186,7 @@
 		3A4EB4610D8D4A2700C4895F /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */,
 				3A4EB4620D8D4A3F00C4895F /* libcppunit.a */,
 			);
 			name = Libraries;
@@ -421,7 +425,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
@@ -442,9 +449,15 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../lib/poco/Foundation/include\"",
+					/usr/local/include,
+				);
 				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
