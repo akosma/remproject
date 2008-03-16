@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A18FB450D843AA500744B33 /* project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB440D843AA500744B33 /* project.cpp */; };
-		3A18FB480D843ADE00744B33 /* diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB470D843ADE00744B33 /* diagram.cpp */; };
-		3A18FB4B0D843B0800744B33 /* element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB4A0D843B0800744B33 /* element.cpp */; };
-		3A18FB540D843B5300744B33 /* usecasediagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB530D843B5300744B33 /* usecasediagram.cpp */; };
-		3A18FB570D843B6100744B33 /* sequencediagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB560D843B6100744B33 /* sequencediagram.cpp */; };
-		3A18FB5A0D843C3E00744B33 /* classdiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB590D843C3E00744B33 /* classdiagram.cpp */; };
-		3A18FB5D0D843C5000744B33 /* property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB5C0D843C5000744B33 /* property.cpp */; };
-		3A18FB6A0D843CEF00744B33 /* note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A18FB690D843CEF00744B33 /* note.cpp */; };
+		3A4EB4630D8D4A3F00C4895F /* libcppunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EB4620D8D4A3F00C4895F /* libcppunit.a */; };
+		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
+		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
+		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
+		3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4490D8D64B000F61DB0 /* Project.cpp */; };
+		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,31 +28,35 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A18FB430D843AA500744B33 /* project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = project.h; path = ../../src/metamodel/project.h; sourceTree = SOURCE_ROOT; };
-		3A18FB440D843AA500744B33 /* project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = project.cpp; path = ../../src/metamodel/project.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB460D843ADE00744B33 /* diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diagram.h; path = ../../src/metamodel/diagram.h; sourceTree = SOURCE_ROOT; };
-		3A18FB470D843ADE00744B33 /* diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diagram.cpp; path = ../../src/metamodel/diagram.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB490D843B0800744B33 /* element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = element.h; path = ../../src/metamodel/element.h; sourceTree = SOURCE_ROOT; };
-		3A18FB4A0D843B0800744B33 /* element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = element.cpp; path = ../../src/metamodel/element.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB520D843B5300744B33 /* usecasediagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usecasediagram.h; path = ../../src/metamodel/usecasediagram.h; sourceTree = SOURCE_ROOT; };
-		3A18FB530D843B5300744B33 /* usecasediagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = usecasediagram.cpp; path = ../../src/metamodel/usecasediagram.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB550D843B6100744B33 /* sequencediagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sequencediagram.h; path = ../../src/metamodel/sequencediagram.h; sourceTree = SOURCE_ROOT; };
-		3A18FB560D843B6100744B33 /* sequencediagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sequencediagram.cpp; path = ../../src/metamodel/sequencediagram.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB580D843C3E00744B33 /* classdiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classdiagram.h; path = ../../src/metamodel/classdiagram.h; sourceTree = SOURCE_ROOT; };
-		3A18FB590D843C3E00744B33 /* classdiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = classdiagram.cpp; path = ../../src/metamodel/classdiagram.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB5B0D843C5000744B33 /* property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = property.h; path = ../../src/metamodel/property.h; sourceTree = SOURCE_ROOT; };
-		3A18FB5C0D843C5000744B33 /* property.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = property.cpp; path = ../../src/metamodel/property.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB680D843CEF00744B33 /* note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = note.h; path = ../../src/metamodel/note.h; sourceTree = SOURCE_ROOT; };
-		3A18FB690D843CEF00744B33 /* note.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = note.cpp; path = ../../src/metamodel/note.cpp; sourceTree = SOURCE_ROOT; };
-		3A18FB6E0D843D2E00744B33 /* remtests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtests; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
+		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A4EB4620D8D4A3F00C4895F /* libcppunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcppunit.a; path = /usr/local/lib/libcppunit.a; sourceTree = "<absolute>"; };
+		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A70B4290D8D61E200F61DB0 /* DiagramTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramTest.h; path = ../../src/tests/DiagramTest.h; sourceTree = SOURCE_ROOT; };
+		3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTest.cpp; path = ../../src/tests/ProjectTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A70B42B0D8D61E200F61DB0 /* ProjectTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTest.h; path = ../../src/tests/ProjectTest.h; sourceTree = SOURCE_ROOT; };
+		3A70B4480D8D64B000F61DB0 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Project.h; path = ../../src/metamodel/Project.h; sourceTree = SOURCE_ROOT; };
+		3A70B4490D8D64B000F61DB0 /* Project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Project.cpp; path = ../../src/metamodel/Project.cpp; sourceTree = SOURCE_ROOT; };
+		3A70B4560D8D667100F61DB0 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../../README; sourceTree = SOURCE_ROOT; };
+		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
+		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A18FB6C0D843D2E00744B33 /* Frameworks */ = {
+		3A4EAEA20D8D320400C4895F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A4EB45A0D8D48DF00C4895F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A4EB4630D8D4A3F00C4895F /* libcppunit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 		08FB7794FE84155DC02AAC07 /* rem */ = {
 			isa = PBXGroup;
 			children = (
+				3A4EB4610D8D4A2700C4895F /* Libraries */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -81,10 +84,12 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3A18FB640D843CB600744B33 /* ui */,
+				3A4EAEA00D8D313A00C4895F /* commandline */,
 				3A18FB630D843CAF00744B33 /* libs */,
-				3A18FB620D843CA900744B33 /* storage */,
 				3A18FB610D843C9200744B33 /* metamodel */,
+				3A18FB620D843CA900744B33 /* storage */,
+				3A4EAEA90D8D32BD00C4895F /* tests */,
+				3A18FB640D843CB600744B33 /* ui */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -93,7 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				8DD76F6C0486A84900D96B5E /* rem */,
-				3A18FB6E0D843D2E00744B33 /* remtests */,
+				3A4EAEA40D8D320400C4895F /* remtool */,
+				3A4EB45C0D8D48DF00C4895F /* remtest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,14 +107,8 @@
 		3A18FB5E0D843C6000744B33 /* diagrams */ = {
 			isa = PBXGroup;
 			children = (
-				3A18FB520D843B5300744B33 /* usecasediagram.h */,
-				3A18FB530D843B5300744B33 /* usecasediagram.cpp */,
-				3A18FB550D843B6100744B33 /* sequencediagram.h */,
-				3A18FB560D843B6100744B33 /* sequencediagram.cpp */,
-				3A18FB580D843C3E00744B33 /* classdiagram.h */,
-				3A18FB590D843C3E00744B33 /* classdiagram.cpp */,
-				3A18FB460D843ADE00744B33 /* diagram.h */,
-				3A18FB470D843ADE00744B33 /* diagram.cpp */,
+				3A9BC7700D8D6C82005ED14A /* Diagram.h */,
+				3A9BC7710D8D6C82005ED14A /* Diagram.cpp */,
 			);
 			name = diagrams;
 			sourceTree = "<group>";
@@ -116,23 +116,8 @@
 		3A18FB5F0D843C7300744B33 /* elements */ = {
 			isa = PBXGroup;
 			children = (
-				3A18FB490D843B0800744B33 /* element.h */,
-				3A18FB4A0D843B0800744B33 /* element.cpp */,
-				3A18FB5B0D843C5000744B33 /* property.h */,
-				3A18FB5C0D843C5000744B33 /* property.cpp */,
-				3A18FB680D843CEF00744B33 /* note.h */,
-				3A18FB690D843CEF00744B33 /* note.cpp */,
 			);
 			name = elements;
-			sourceTree = "<group>";
-		};
-		3A18FB600D843C8600744B33 /* projects */ = {
-			isa = PBXGroup;
-			children = (
-				3A18FB430D843AA500744B33 /* project.h */,
-				3A18FB440D843AA500744B33 /* project.cpp */,
-			);
-			name = projects;
 			sourceTree = "<group>";
 		};
 		3A18FB610D843C9200744B33 /* metamodel */ = {
@@ -140,7 +125,8 @@
 			children = (
 				3A18FB5E0D843C6000744B33 /* diagrams */,
 				3A18FB5F0D843C7300744B33 /* elements */,
-				3A18FB600D843C8600744B33 /* projects */,
+				3A70B4480D8D64B000F61DB0 /* Project.h */,
+				3A70B4490D8D64B000F61DB0 /* Project.cpp */,
 			);
 			name = metamodel;
 			sourceTree = "<group>";
@@ -166,9 +152,37 @@
 			name = ui;
 			sourceTree = "<group>";
 		};
+		3A4EAEA00D8D313A00C4895F /* commandline */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = commandline;
+			sourceTree = "<group>";
+		};
+		3A4EAEA90D8D32BD00C4895F /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */,
+				3A70B4290D8D61E200F61DB0 /* DiagramTest.h */,
+				3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */,
+				3A70B42B0D8D61E200F61DB0 /* ProjectTest.h */,
+				3A4EAEAA0D8D332000C4895F /* main.cpp */,
+			);
+			name = tests;
+			sourceTree = "<group>";
+		};
+		3A4EB4610D8D4A2700C4895F /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3A4EB4620D8D4A3F00C4895F /* libcppunit.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				3A70B4560D8D667100F61DB0 /* README */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -176,20 +190,36 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A18FB6D0D843D2E00744B33 /* remtests */ = {
+		3A4EAEA30D8D320400C4895F /* remtool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A18FB720D843D6500744B33 /* Build configuration list for PBXNativeTarget "remtests" */;
+			buildConfigurationList = 3A4EAEA80D8D322200C4895F /* Build configuration list for PBXNativeTarget "remtool" */;
 			buildPhases = (
-				3A18FB6B0D843D2E00744B33 /* Sources */,
-				3A18FB6C0D843D2E00744B33 /* Frameworks */,
+				3A4EAEA10D8D320400C4895F /* Sources */,
+				3A4EAEA20D8D320400C4895F /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = remtests;
-			productName = remtests;
-			productReference = 3A18FB6E0D843D2E00744B33 /* remtests */;
+			name = remtool;
+			productName = remtool;
+			productReference = 3A4EAEA40D8D320400C4895F /* remtool */;
+			productType = "com.apple.product-type.tool";
+		};
+		3A4EB45B0D8D48DF00C4895F /* remtest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A4EB4600D8D490900C4895F /* Build configuration list for PBXNativeTarget "remtest" */;
+			buildPhases = (
+				3A4EB4590D8D48DF00C4895F /* Sources */,
+				3A4EB45A0D8D48DF00C4895F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = remtest;
+			productName = remtest;
+			productReference = 3A4EB45C0D8D48DF00C4895F /* remtest */;
 			productType = "com.apple.product-type.tool";
 		};
 		8DD76F620486A84900D96B5E /* rem */ = {
@@ -220,19 +250,32 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* rem */;
 			projectDirPath = "";
-			projectRoot = "";
+			projectRoot = ../..;
 			targets = (
 				8DD76F620486A84900D96B5E /* rem */,
-				3A18FB6D0D843D2E00744B33 /* remtests */,
+				3A4EAEA30D8D320400C4895F /* remtool */,
+				3A4EB45B0D8D48DF00C4895F /* remtest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3A18FB6B0D843D2E00744B33 /* Sources */ = {
+		3A4EAEA10D8D320400C4895F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A4EB4590D8D48DF00C4895F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */,
+				3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */,
+				3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */,
+				3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */,
+				3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,14 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A18FB450D843AA500744B33 /* project.cpp in Sources */,
-				3A18FB480D843ADE00744B33 /* diagram.cpp in Sources */,
-				3A18FB4B0D843B0800744B33 /* element.cpp in Sources */,
-				3A18FB540D843B5300744B33 /* usecasediagram.cpp in Sources */,
-				3A18FB570D843B6100744B33 /* sequencediagram.cpp in Sources */,
-				3A18FB5A0D843C3E00744B33 /* classdiagram.cpp in Sources */,
-				3A18FB5D0D843C5000744B33 /* property.cpp in Sources */,
-				3A18FB6A0D843CEF00744B33 /* note.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +320,7 @@
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -306,7 +342,7 @@
 			};
 			name = Release;
 		};
-		3A18FB700D843D2F00744B33 /* Debug */ = {
+		3A4EAEA60D8D320400C4895F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -314,23 +350,82 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
 				PREBINDING = NO;
-				PRODUCT_NAME = remtests;
+				PRODUCT_NAME = remtool;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
-		3A18FB710D843D2F00744B33 /* Release */ = {
+		3A4EAEA70D8D320400C4895F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
 				PREBINDING = NO;
-				PRODUCT_NAME = remtests;
+				PRODUCT_NAME = remtool;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		3A4EB45E0D8D48E000C4895F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = remtest;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		3A4EB45F0D8D48E000C4895F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = remtest;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -356,11 +451,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A18FB720D843D6500744B33 /* Build configuration list for PBXNativeTarget "remtests" */ = {
+		3A4EAEA80D8D322200C4895F /* Build configuration list for PBXNativeTarget "remtool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A18FB700D843D2F00744B33 /* Debug */,
-				3A18FB710D843D2F00744B33 /* Release */,
+				3A4EAEA60D8D320400C4895F /* Debug */,
+				3A4EAEA70D8D320400C4895F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A4EB4600D8D490900C4895F /* Build configuration list for PBXNativeTarget "remtest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A4EB45E0D8D48E000C4895F /* Debug */,
+				3A4EB45F0D8D48E000C4895F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
