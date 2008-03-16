@@ -66,13 +66,19 @@ namespace tests
     {
 		std::string actor1Name("actor1");
 		std::string diagramName("diagramName");
-		UseCaseDiagram* diagram = new UseCaseDiagram(diagramName);
+
+		UseCaseDiagram diagram(diagramName);
+		CPPUNIT_ASSERT(diagram.getName() == diagramName);
+        CPPUNIT_ASSERT(diagram.empty());
+        CPPUNIT_ASSERT(diagram.getCount() == 0);
+        
 		Actor* actor1 = new Actor(actor1Name);
-		
-		CPPUNIT_ASSERT(diagram->getName() == diagramName);
 		CPPUNIT_ASSERT(actor1->getName() == actor1Name);
 		
-		delete actor1;
-		delete diagram;
+        diagram.addElement(actor1);
+        CPPUNIT_ASSERT(diagram.getCount() == 1);
+        
+        Element* element = diagram.getElement(actor1Name);
+        CPPUNIT_ASSERT(element == actor1);
     }
 }
