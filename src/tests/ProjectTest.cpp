@@ -15,8 +15,18 @@
 #include "ProjectTest.h"
 
 #ifndef PROJECT_H_
-#include "Project.h"
+#include "../metamodel/Project.h"
 #endif
+
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
+#endif
+
+#ifndef USECASEDIAGRAM_H_
+#include "../metamodel/UseCaseDiagram.h"
+#endif
+
+using namespace MetaModel;
 
 /*!
  * \namespace tests
@@ -58,10 +68,42 @@ namespace tests
      */
     void ProjectTest::testProjectHasManyDiagrams()
     {
-        Metamodel::Project project;
-        project.addDiagram(Metamodel::DiagramTypes::CLASS_DIAGRAM);
+        const std::string first("first");
+        const std::string second("second");
+
+        Project project;
+        CPPUNIT_ASSERT(project.empty());
+        
+        UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
+        
+        project.addDiagram(firstDiagram);
         CPPUNIT_ASSERT(project.getDiagramCount() == 1);
-        project.removeDiagram(0);
+        
+        Diagram* pointer = project.getDiagram(first);
+        CPPUNIT_ASSERT(firstDiagram == pointer);
+        CPPUNIT_ASSERT(pointer->getName() == first);
+
+        UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
+        project.addDiagram(secondDiagram);
+        CPPUNIT_ASSERT(project.getDiagramCount() == 2);
+
+        pointer = project.getDiagram(second);
+        CPPUNIT_ASSERT(secondDiagram == pointer);
+        CPPUNIT_ASSERT(pointer->getName() == second);
+        
+        project.removeDiagram(first);
+        CPPUNIT_ASSERT(project.getDiagramCount() == 1);
+
+        project.removeDiagram(second);
         CPPUNIT_ASSERT(project.getDiagramCount() == 0);
+        CPPUNIT_ASSERT(project.empty());
+        
+        const std::string& firstName = firstDiagram->getName();
+        CPPUNIT_ASSERT(firstName == first);
+        delete firstDiagram;
+
+        const std::string& secondName = secondDiagram->getName();
+        CPPUNIT_ASSERT(secondName == second);
+        delete secondDiagram;
     }
 }
