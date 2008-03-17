@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A4EB4630D8D4A3F00C4895F /* libcppunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4EB4620D8D4A3F00C4895F /* libcppunit.a */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
 		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
@@ -16,7 +15,6 @@
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC076200D8D9CE8004C5A73 /* Actor.cpp */; };
 		3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */; };
-		3AF8AB450D8DB6E30084A469 /* libPocoFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,17 +30,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A4EB4620D8D4A3F00C4895F /* libcppunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcppunit.a; path = /usr/local/lib/libcppunit.a; sourceTree = "<absolute>"; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4290D8D61E200F61DB0 /* DiagramTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramTest.h; path = ../../src/tests/DiagramTest.h; sourceTree = SOURCE_ROOT; };
 		3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTest.cpp; path = ../../src/tests/ProjectTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B42B0D8D61E200F61DB0 /* ProjectTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTest.h; path = ../../src/tests/ProjectTest.h; sourceTree = SOURCE_ROOT; };
 		3A70B4480D8D64B000F61DB0 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Project.h; path = ../../src/metamodel/Project.h; sourceTree = SOURCE_ROOT; };
 		3A70B4490D8D64B000F61DB0 /* Project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Project.cpp; path = ../../src/metamodel/Project.cpp; sourceTree = SOURCE_ROOT; };
-		3A70B4560D8D667100F61DB0 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../../README; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
 		3AC075FC0D8D9A21004C5A73 /* Element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Element.cpp; path = ../../src/metamodel/Element.cpp; sourceTree = SOURCE_ROOT; };
@@ -52,7 +49,6 @@
 		3AC076790D8DABCF004C5A73 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Container.h; path = ../../src/metamodel/Container.h; sourceTree = SOURCE_ROOT; };
 		3ACC948A0D8D73EF0001BC71 /* UseCaseDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagram.h; path = ../../src/metamodel/UseCaseDiagram.h; sourceTree = SOURCE_ROOT; };
 		3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseDiagram.cpp; path = ../../src/metamodel/UseCaseDiagram.cpp; sourceTree = SOURCE_ROOT; };
-		3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoFoundation.dylib; path = ../../lib/poco/lib/Darwin/Power_Macintosh/libPocoFoundation.dylib; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,8 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A4EB4630D8D4A3F00C4895F /* libcppunit.a in Frameworks */,
-				3AF8AB450D8DB6E30084A469 /* libPocoFoundation.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +80,6 @@
 		08FB7794FE84155DC02AAC07 /* rem */ = {
 			isa = PBXGroup;
 			children = (
-				3A4EB4610D8D4A2700C4895F /* Libraries */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -183,19 +176,10 @@
 			name = tests;
 			sourceTree = "<group>";
 		};
-		3A4EB4610D8D4A2700C4895F /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				3AF8AB440D8DB6E30084A469 /* libPocoFoundation.dylib */,
-				3A4EB4620D8D4A3F00C4895F /* libcppunit.a */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				3A70B4560D8D667100F61DB0 /* README */,
+				3A2613790D8EFCAB00EBA471 /* README */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -348,7 +332,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Debug;
 		};
@@ -359,7 +343,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Release;
 		};
@@ -430,14 +414,20 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh\"",
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh/\"",
 				);
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
+					"-lPocoFoundation",
+					"-lcppunit",
 				);
 				PREBINDING = NO;
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = remtest;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -459,15 +449,21 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh\"",
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh/\"",
 				);
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
+					"-lPocoFoundation",
+					"-lcppunit",
 				);
 				PREBINDING = NO;
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = remtest;
-				ZERO_LINK = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				ZERO_LINK = YES;
 			};
 			name = Release;
 		};
