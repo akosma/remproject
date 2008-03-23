@@ -22,8 +22,6 @@
 #include "../metamodel/UseCaseDiagram.h"
 #endif
 
-using namespace MetaModel;
-
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -67,18 +65,18 @@ namespace tests
 		std::string actor1Name("actor1");
 		std::string diagramName("diagramName");
 
-		UseCaseDiagram diagram(diagramName);
+		metamodel::UseCaseDiagram diagram(diagramName);
 		CPPUNIT_ASSERT_EQUAL(diagramName, diagram.getName());
         CPPUNIT_ASSERT(diagram.empty());
         CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());
         
-		Actor* actor1 = new Actor(actor1Name);
+		metamodel::Actor* actor1 = new metamodel::Actor(actor1Name);
 		CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
 		
         diagram.addElement(actor1);
         CPPUNIT_ASSERT_EQUAL(1, diagram.getCount());
         
-        Element* element = diagram.getElement(actor1Name);
+        metamodel::Element* element = diagram.getElement(actor1Name);
         CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
     }
 }

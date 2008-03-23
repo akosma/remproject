@@ -1,7 +1,7 @@
 /*!  
  * \file Project.h
  * 
- * Contains the interface of the MetaModel::Project class.
+ * Contains the interface of the metamodel::Project class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -24,10 +24,10 @@
 #endif
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class Project

@@ -1,7 +1,7 @@
 /*!
  * \file SQLiteWrapper.h
  *
- * Contains the interface of the Storage::SQLiteWrapper class.
+ * Contains the interface of the storage::SQLiteWrapper class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -20,10 +20,10 @@
 #include <sqlite3.h>
 
 /*!
- * \namespace Storage
+ * \namespace storage
  * Insert a description for the namespace here
  */
-namespace Storage
+namespace storage
 {
     /*!
      * \class SQLiteWrapper

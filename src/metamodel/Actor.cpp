@@ -1,7 +1,7 @@
 /*!
  * \file Actor.cpp
  *
- * Contains the implementation of the MetaModel::Actor class.
+ * Contains the implementation of the metamodel::Actor class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "Actor.h"
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * Actor Constructor.

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
+		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
@@ -35,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		3A3556820D96D8090079D03E /* AnyPropertyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMap.h; path = ../../src/storage/AnyPropertyMap.h; sourceTree = SOURCE_ROOT; };
+		3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMap.cpp; path = ../../src/storage/AnyPropertyMap.cpp; sourceTree = SOURCE_ROOT; };
+		3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMapTest.h; path = ../../src/tests/AnyPropertyMapTest.h; sourceTree = SOURCE_ROOT; };
+		3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMapTest.cpp; path = ../../src/tests/AnyPropertyMapTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A4CD2E70D968A8A002F1AC2 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/storage/Property.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2ED0D968AD7002F1AC2 /* PropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTest.h; path = ../../src/tests/PropertyTest.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropertyTest.cpp; path = ../../src/tests/PropertyTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -164,6 +170,8 @@
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
 				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
 				3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */,
+				3A3556820D96D8090079D03E /* AnyPropertyMap.h */,
+				3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */,
 			);
 			name = storage;
 			sourceTree = "<group>";
@@ -194,6 +202,8 @@
 				3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */,
 				3A81015A0D96BF91003EFF96 /* SQLiteWrapperTest.h */,
 				3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */,
+				3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */,
+				3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -302,6 +312,8 @@
 				3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */,
 				3A8101510D96BC66003EFF96 /* SQLiteWrapper.cpp in Sources */,
 				3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */,
+				3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */,
+				3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

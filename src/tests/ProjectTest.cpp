@@ -26,8 +26,6 @@
 #include "../metamodel/UseCaseDiagram.h"
 #endif
 
-using namespace MetaModel;
-
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -71,19 +69,19 @@ namespace tests
         const std::string first("first");
         const std::string second("second");
 
-        Project project;
+        metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
+        metamodel::UseCaseDiagram* firstDiagram = new metamodel::UseCaseDiagram(first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
         
-        Diagram* pointer = project.getElement(first);
+        metamodel::Diagram* pointer = project.getElement(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
+        metamodel::UseCaseDiagram* secondDiagram = new metamodel::UseCaseDiagram(second);
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
@@ -104,19 +102,19 @@ namespace tests
         const std::string first("first");
         const std::string second("second");
 
-        Project project;
+        metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
+        metamodel::UseCaseDiagram* firstDiagram = new metamodel::UseCaseDiagram(first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
         
-        Diagram* pointer = project.getElement(first);
+        metamodel::Diagram* pointer = project.getElement(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
+        metamodel::UseCaseDiagram* secondDiagram = new metamodel::UseCaseDiagram(second);
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 

@@ -1,10 +1,11 @@
 /*!
  * \file Property.h
  *
- * Contains the interface of the Storage::Property class.
+ * Contains the interface of the storage::Property class.
  * This code is adapted from page 51 of
  * Duffy, Daniel J.; "Financial Instrument Pricing Using C++",
  * 2004, John Wiley & Sons, ISBN 0-470-85509-6
+ * (C) Datasim Education BV 2002-2004
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -21,10 +22,10 @@
 #include <string>
 
 /*!
- * \namespace Storage
+ * \namespace storage
  * Insert a description for the namespace here
  */
-namespace Storage
+namespace storage
 {
     /*!
      * \class Persistable

@@ -12,8 +12,8 @@
  * \date      3/23/08
  */
 
-#ifndef tests_PropertyTest
-#define tests_PropertyTest
+#ifndef PROPERTYTEST_H_
+#define PROPERTYTEST_H_
 
 #include <cppunit/extensions/HelperMacros.h>
 
@@ -69,4 +69,4 @@ namespace tests
 
 CPPUNIT_TEST_SUITE_REGISTRATION(tests::PropertyTest);
 
-#endif /* rem_PropertyTest */
+#endif /* PROPERTYTEST_H_ */

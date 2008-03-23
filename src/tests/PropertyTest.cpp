@@ -74,22 +74,22 @@ namespace tests
         int integer = 34;
         double d = 45.24;
 
-        Storage::Property<std::string, bool> prop1(name1, ok);
+        storage::Property<std::string, bool> prop1(name1, ok);
         CPPUNIT_ASSERT_EQUAL(ok, prop1());
         CPPUNIT_ASSERT_EQUAL(ok, prop1.getValue());
         CPPUNIT_ASSERT_EQUAL(name1, prop1.getName());
 
-        Storage::Property<std::string, std::string> prop2(name2, someValue);
+        storage::Property<std::string, std::string> prop2(name2, someValue);
         CPPUNIT_ASSERT_EQUAL(someValue, prop2());
         CPPUNIT_ASSERT_EQUAL(someValue, prop2.getValue());
         CPPUNIT_ASSERT_EQUAL(name2, prop2.getName());
 
-        Storage::Property<std::string, int> prop3(name3, integer);
+        storage::Property<std::string, int> prop3(name3, integer);
         CPPUNIT_ASSERT_EQUAL(integer, prop3());
         CPPUNIT_ASSERT_EQUAL(integer, prop3.getValue());
         CPPUNIT_ASSERT_EQUAL(name3, prop3.getName());
 
-        Storage::Property<std::string, double> prop4(name4, d);
+        storage::Property<std::string, double> prop4(name4, d);
         CPPUNIT_ASSERT_EQUAL(d, prop4());
         CPPUNIT_ASSERT_EQUAL(d, prop4.getValue());
         CPPUNIT_ASSERT_EQUAL(name4, prop4.getName());
@@ -103,7 +103,7 @@ namespace tests
         double d = 45.24;
         
         std::string name("prop");
-        Storage::AnyProperty prop(name);
+        storage::AnyProperty prop(name);
         CPPUNIT_ASSERT_EQUAL(name, prop.getName());
 
         prop.setBoolean(ok);

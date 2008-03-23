@@ -1,7 +1,7 @@
 /*!  
  * \file Project.cpp
  * 
- * Contains the implementation of the Metamodel::Project class.
+ * Contains the implementation of the metamodel::Project class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "Project.h"
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * Project Constructor.

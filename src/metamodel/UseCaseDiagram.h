@@ -1,7 +1,7 @@
 /*!
  * \file UseCaseDiagram.h
  *
- * Contains the interface of the MetaModel::UseCaseDiagram class.
+ * Contains the interface of the metamodel::UseCaseDiagram class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -22,10 +22,10 @@
 #include <string>
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class UseCaseDiagram

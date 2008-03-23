@@ -1,7 +1,7 @@
 /*!
  * \file SQLiteWrapper.cpp
  *
- * Contains the implementation of the Storage::SQLiteWrapper class.
+ * Contains the implementation of the storage::SQLiteWrapper class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "SQLiteWrapper.h"
 
 /*!
- * \namespace Storage
+ * \namespace storage
  * Insert a description for the namespace here
  */
-namespace Storage
+namespace storage
 {
     //! The file name of the SQLite database used by this class.
     std::string SQLiteWrapper::_fileName = "untitled.db";

@@ -1,7 +1,7 @@
 /*!
  * \file Container.h
  *
- * Contains the interface of the MetaModel::Container class.
+ * Contains the interface of the metamodel::Container class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -22,10 +22,10 @@
 using Poco::SharedPtr;
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class Container "$URL$"

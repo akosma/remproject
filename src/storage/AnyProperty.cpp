@@ -1,7 +1,7 @@
 /*!
  * \file AnyProperty.cpp
  *
- * Contains the implementation of the Storage::AnyProperty class.
+ * Contains the implementation of the storage::AnyProperty class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "AnyProperty.h"
 
 /*!
- * \namespace Storage
+ * \namespace storage
  * Insert a description for the namespace here
  */
-namespace Storage
+namespace storage
 {
     /*!
      * AnyProperty Constructor.

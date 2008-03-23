@@ -1,7 +1,7 @@
 /*!
  * \file AnyProperty.h
  *
- * Contains the interface of the Storage::AnyProperty class.
+ * Contains the interface of the storage::AnyProperty class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -19,17 +19,16 @@
 #include <typeinfo>
 
 #include <Poco/Any.h>
-using Poco::Any;
 
 #ifndef PROPERTY_H_
 #include "Property.h"
 #endif
 
 /*!
- * \namespace Storage
+ * \namespace storage
  * Insert a description for the namespace here
  */
-namespace Storage
+namespace storage
 {
     /*!
      * \class AnyProperty

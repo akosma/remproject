@@ -1,7 +1,7 @@
 /*!
  * \file Diagram.cpp
  *
- * Contains the implementation of the MetaModel::Diagram class.
+ * Contains the implementation of the metamodel::Diagram class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "Diagram.h"
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * Diagram Constructor.

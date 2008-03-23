@@ -1,7 +1,7 @@
 /*!
  * \file Element.cpp
  *
- * Contains the implementation of the MetaModel::Element class.
+ * Contains the implementation of the metamodel::Element class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -15,10 +15,10 @@
 #include "Element.h"
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * Element Constructor.

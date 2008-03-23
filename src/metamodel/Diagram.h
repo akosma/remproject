@@ -1,7 +1,7 @@
 /*!
  * \file Diagram.h
  *
- * Contains the interface of the MetaModel::Diagram class.
+ * Contains the interface of the metamodel::Diagram class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -27,10 +27,10 @@
 #include <string>
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class Diagram

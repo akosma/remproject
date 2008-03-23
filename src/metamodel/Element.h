@@ -1,7 +1,7 @@
 /*!
  * \file Element.h
  *
- * Contains the interface of the MetaModel::Element class.
+ * Contains the interface of the metamodel::Element class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -19,10 +19,10 @@
 #include <map>
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class Element

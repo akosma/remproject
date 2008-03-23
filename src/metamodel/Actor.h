@@ -1,7 +1,7 @@
 /*!
  * \file Actor.h
  *
- * Contains the interface of the MetaModel::Actor class.
+ * Contains the interface of the metamodel::Actor class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -23,10 +23,10 @@
 #include <vector>
 
 /*!
- * \namespace MetaModel
+ * \namespace metamodel
  * Insert a description for the namespace here
  */
-namespace MetaModel
+namespace metamodel
 {
     /*!
      * \class Actor

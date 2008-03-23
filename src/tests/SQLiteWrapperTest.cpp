@@ -69,8 +69,8 @@ namespace tests
         remove(_filename.c_str());
     
         // Calling the singleton "automagically" creates the file
-        Storage::SQLiteWrapper::setFileName(_filename);
-        Storage::SQLiteWrapper::get();
+        storage::SQLiteWrapper::setFileName(_filename);
+        storage::SQLiteWrapper::get();
     
         // Check that the file exists
         std::fstream fin;
@@ -84,7 +84,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testCreateTable()
     {
-        Storage::SQLiteWrapper& dal = Storage::SQLiteWrapper::get();
+        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
         bool ok = dal.open();
         CPPUNIT_ASSERT(ok);
         ok = dal.executeQuery("CREATE TABLE test(test1 int, test2 varchar);");
@@ -97,7 +97,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testInsertion()
     {
-        Storage::SQLiteWrapper& dal = Storage::SQLiteWrapper::get();
+        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
         bool ok = true;
         for (int i = 0; i < 1000; i++)
         {
@@ -114,7 +114,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testSelect()
     {
-        Storage::SQLiteWrapper& dal = Storage::SQLiteWrapper::get();
+        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
         bool ok = dal.open();
         CPPUNIT_ASSERT(ok);
         ok = dal.executeQuery("SELECT test1, test2 FROM test");
