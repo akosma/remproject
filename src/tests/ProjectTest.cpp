@@ -77,25 +77,25 @@ namespace tests
         UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
         
         project.addElement(firstDiagram);
-        CPPUNIT_ASSERT(project.getCount() == 1);
+        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
         
         Diagram* pointer = project.getElement(first);
-        CPPUNIT_ASSERT(firstDiagram == pointer);
-        CPPUNIT_ASSERT(pointer->getName() == first);
+        CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
+        CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
         UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
         project.addElement(secondDiagram);
-        CPPUNIT_ASSERT(project.getCount() == 2);
+        CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
         pointer = project.getElement(second);
-        CPPUNIT_ASSERT(secondDiagram == pointer);
-        CPPUNIT_ASSERT(pointer->getName() == second);
+        CPPUNIT_ASSERT_EQUAL((int)secondDiagram, (int)pointer);
+        CPPUNIT_ASSERT_EQUAL(pointer->getName(), second);
 		
         project.removeElement(first);
-        CPPUNIT_ASSERT(project.getCount() == 1);
+        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
 
         project.removeElement(second);
-        CPPUNIT_ASSERT(project.getCount() == 0);
+        CPPUNIT_ASSERT_EQUAL(0, project.getCount());
         CPPUNIT_ASSERT(project.empty());
     }
 	
@@ -110,17 +110,17 @@ namespace tests
         UseCaseDiagram* firstDiagram = new UseCaseDiagram(first);
         
         project.addElement(firstDiagram);
-        CPPUNIT_ASSERT(project.getCount() == 1);
+        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
         
         Diagram* pointer = project.getElement(first);
-        CPPUNIT_ASSERT(firstDiagram == pointer);
-        CPPUNIT_ASSERT(pointer->getName() == first);
+        CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
+        CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
         UseCaseDiagram* secondDiagram = new UseCaseDiagram(second);
         project.addElement(secondDiagram);
-        CPPUNIT_ASSERT(project.getCount() == 2);
+        CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
 		project.removeAllElements();
-        CPPUNIT_ASSERT(project.getCount() == 0);
+        CPPUNIT_ASSERT_EQUAL(0, project.getCount());
 	}
 }

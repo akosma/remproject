@@ -68,17 +68,17 @@ namespace tests
 		std::string diagramName("diagramName");
 
 		UseCaseDiagram diagram(diagramName);
-		CPPUNIT_ASSERT(diagram.getName() == diagramName);
+		CPPUNIT_ASSERT_EQUAL(diagramName, diagram.getName());
         CPPUNIT_ASSERT(diagram.empty());
-        CPPUNIT_ASSERT(diagram.getCount() == 0);
+        CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());
         
 		Actor* actor1 = new Actor(actor1Name);
-		CPPUNIT_ASSERT(actor1->getName() == actor1Name);
+		CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
 		
         diagram.addElement(actor1);
-        CPPUNIT_ASSERT(diagram.getCount() == 1);
+        CPPUNIT_ASSERT_EQUAL(1, diagram.getCount());
         
         Element* element = diagram.getElement(actor1Name);
-        CPPUNIT_ASSERT(element == actor1);
+        CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
     }
 }
