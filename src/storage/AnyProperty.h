@@ -55,10 +55,15 @@ namespace Storage
         
         const std::type_info& getType() const;
         
+        void setString(const std::string&);
+        void setInteger(const int);
+        void setDouble(const double);
+        void setBoolean(const bool);
+        
         std::string getString() const;
-        int getInt() const;
+        int getInteger() const;
         double getDouble() const;
-        bool getBool() const;
+        bool getBoolean() const;
     };
 }
 

@@ -106,23 +106,19 @@ namespace tests
         Storage::AnyProperty prop(name);
         CPPUNIT_ASSERT_EQUAL(name, prop.getName());
 
-        Poco::Any value1(ok);
-        prop(value1);
-        bool stored1 = prop.getBool();
+        prop.setBoolean(ok);
+        bool stored1 = prop.getBoolean();
         CPPUNIT_ASSERT_EQUAL(ok, stored1);
 
-        Poco::Any value2(integer);
-        prop(value2);
-        int stored2 = prop.getInt();
+        prop.setInteger(integer);
+        int stored2 = prop.getInteger();
         CPPUNIT_ASSERT_EQUAL(integer, stored2);
 
-        Poco::Any value3(someValue);
-        prop(value3);
+        prop.setString(someValue);
         std::string stored3 = prop.getString();
         CPPUNIT_ASSERT_EQUAL(someValue, stored3);
 
-        Poco::Any value4(d);
-        prop(value4);
+        prop.setDouble(d);
         double stored4 = prop.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
     }

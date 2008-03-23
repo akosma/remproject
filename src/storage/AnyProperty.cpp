@@ -49,10 +49,34 @@ namespace Storage
     AnyProperty::~AnyProperty()
     {
     }
-    
+
     const std::type_info& AnyProperty::getType() const
     {
         return this->getValue().type();
+    }
+    
+    void AnyProperty::setString(const std::string& input)
+    {
+        Poco::Any value(input);
+        this->setValue(value);
+    }
+
+    void AnyProperty::setInteger(const int input)
+    {
+        Poco::Any value(input);
+        this->setValue(value);
+    }
+
+    void AnyProperty::setDouble(const double input)
+    {
+        Poco::Any value(input);
+        this->setValue(value);
+    }
+    
+    void AnyProperty::setBoolean(const bool input)
+    {
+        Poco::Any value(input);
+        this->setValue(value);
     }
     
     std::string AnyProperty::getString() const
@@ -60,7 +84,7 @@ namespace Storage
         return Poco::RefAnyCast<std::string>(this->getValue());
     }
     
-    int AnyProperty::getInt() const
+    int AnyProperty::getInteger() const
     {
         return Poco::RefAnyCast<int>(this->getValue());
     }
@@ -70,7 +94,7 @@ namespace Storage
         return Poco::RefAnyCast<double>(this->getValue());
     }
     
-    bool AnyProperty::getBool() const
+    bool AnyProperty::getBoolean() const
     {
         return Poco::RefAnyCast<bool>(this->getValue());
     }

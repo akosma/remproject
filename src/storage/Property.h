@@ -45,6 +45,7 @@ namespace Storage
         virtual V operator()() const;
         virtual V getValue() const;
         virtual void operator()(const V&);
+        virtual void setValue(const V&);
 
         virtual N getName() const;
 
@@ -113,8 +114,14 @@ namespace Storage
         return this->value;
     }
 
-    template <class N, class V> 
+    template <class N, class V>
     void Property<N, V>::operator()(const V& value)
+    {
+        this->value = value;
+    }
+    
+    template <class N, class V>
+    void Property<N, V>::setValue(const V& value)
     {
         this->value = value;
     }
