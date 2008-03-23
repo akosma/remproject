@@ -14,6 +14,7 @@
 
 #include "AnyPropertyMap.h"
 #include <Poco/Any.h>
+#include <sstream>
 
 /*!
  * \namespace storage
@@ -104,5 +105,65 @@ namespace storage
     double AnyPropertyMap::getDouble(const std::string& key)
     {
         return _map[key].getDouble();            
+    }
+    
+    const std::string AnyPropertyMap::getStringForSelect() const
+    {
+        std::stringstream output;
+        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        for (it = _map.begin(); it != _map.end(); ++it)
+        {
+            output << it->first;
+            output << ", ";
+        }
+        std::string str = output.str();
+        int len = str.length();
+        if (len > 2)
+        {
+            str = str.substr(0, len - 2);
+        }
+        return str;
+    }
+    
+    const std::string AnyPropertyMap::getStringForInsert() const
+    {
+        std::stringstream output;
+        output << "(";
+        output << this->getStringForSelect();
+        output << ") VALUES (";
+        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        for (it = _map.begin(); it != _map.end(); ++it)
+        {
+            output << (it->second.getQuotedValue());
+            output << ", ";
+        }
+        std::string str = output.str();
+        int len = str.length();
+        if (len > 2)
+        {
+            str = str.substr(0, len - 2);
+        }
+        std::stringstream output2;
+        output2 << str;
+        output2 << ")";
+        return output2.str();
+    }
+    
+    const std::string AnyPropertyMap::getStringForUpdate() const
+    {
+        std::stringstream output;
+        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        for (it = _map.begin(); it != _map.end(); ++it)
+        {
+            output << (it->second.getNameValuePair());
+            output << ", ";
+        }
+        std::string str = output.str();
+        int len = str.length();
+        if (len > 2)
+        {
+            str = str.substr(0, len - 2);
+        }
+        return str;
     }
 }

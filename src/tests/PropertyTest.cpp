@@ -109,17 +109,21 @@ namespace tests
         prop.setBoolean(ok);
         bool stored1 = prop.getBoolean();
         CPPUNIT_ASSERT_EQUAL(ok, stored1);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), prop.getNameValuePair());
 
         prop.setInteger(integer);
         int stored2 = prop.getInteger();
         CPPUNIT_ASSERT_EQUAL(integer, stored2);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), prop.getNameValuePair());
 
         prop.setString(someValue);
         std::string stored3 = prop.getString();
         CPPUNIT_ASSERT_EQUAL(someValue, stored3);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), prop.getNameValuePair());
 
         prop.setDouble(d);
         double stored4 = prop.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), prop.getNameValuePair());
     }
 }

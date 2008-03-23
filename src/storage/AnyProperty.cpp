@@ -13,6 +13,8 @@
  */
 
 #include "AnyProperty.h"
+#include <typeinfo>
+#include <sstream>
 
 /*!
  * \namespace storage
@@ -97,5 +99,39 @@ namespace storage
     bool AnyProperty::getBoolean() const
     {
         return Poco::RefAnyCast<bool>(this->getValue());
+    }
+    
+    const std::string AnyProperty::getQuotedValue() const
+    {
+        const std::type_info& type = this->getValue().type();
+        std::stringstream output;
+        if(type == typeid(std::string))
+        {
+            output << "'";
+            output << this->getString();
+            output << "'";
+        }
+        if(type == typeid(int))
+        {
+            output << this->getInteger();
+        }
+        if(type == typeid(bool))
+        {
+            output << this->getBoolean();
+        }
+        if(type == typeid(double))
+        {
+            output << this->getDouble();
+        }
+        return output.str();
+    }
+    
+    const std::string AnyProperty::getNameValuePair() const
+    {
+        std::stringstream output;
+        output << this->getName();
+        output << " = ";
+        output << this->getQuotedValue();
+        return output.str();
     }
 }

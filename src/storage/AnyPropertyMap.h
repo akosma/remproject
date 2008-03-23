@@ -62,6 +62,10 @@ namespace storage
         bool getBoolean(const std::string&);
         double getDouble(const std::string&);
 
+        const std::string getStringForSelect() const;
+        const std::string getStringForInsert() const;
+        const std::string getStringForUpdate() const;
+
     protected:
 
     private:

@@ -15,6 +15,7 @@
 #include "AnyPropertyMapTest.h"
 
 #include <Poco/Exception.h>
+#include <iostream>
 
 #ifndef ANYPROPERTYMAP_H_
 #include "../storage/AnyPropertyMap.h"
@@ -104,6 +105,10 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(someValue, map.getString(name2));
         CPPUNIT_ASSERT_EQUAL(integer, map.getInteger(name3));
         CPPUNIT_ASSERT_EQUAL(d, map.getDouble(name4));
+        
+        CPPUNIT_ASSERT_EQUAL(std::string("prop1, prop2, prop3, prop4"), map.getStringForSelect());
+        CPPUNIT_ASSERT_EQUAL(std::string("(prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24)"), map.getStringForInsert());
+        CPPUNIT_ASSERT_EQUAL(std::string("prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24"), map.getStringForUpdate());
     }
     
     void AnyPropertyMapTest::testRetrievingInvalidPropertiesRaiseException()
