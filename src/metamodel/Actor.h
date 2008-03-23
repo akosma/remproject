@@ -49,4 +49,4 @@ namespace MetaModel
     };
 }
 
-#endif /* rem_Actor */
+#endif /* ACTOR_H_ */
