@@ -28,7 +28,7 @@ using Poco::SharedPtr;
 namespace metamodel
 {
     /*!
-     * \class Container "$URL$"
+     * \class Container
      *
      *  
      */
