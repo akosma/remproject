@@ -29,7 +29,7 @@
 namespace MetaModel
 {
     /*!
-     * \class Actor "$URL$"
+     * \class Actor
      *
      *  
      */

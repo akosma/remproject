@@ -25,7 +25,7 @@
 namespace tests
 {
     /*!
-     * \class ProjectTest "$URL$"
+     * \class ProjectTest
      *
      *  
      */

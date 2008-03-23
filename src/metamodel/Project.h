@@ -30,7 +30,7 @@
 namespace MetaModel
 {
     /*!
-     * \class Project "$URL$"
+     * \class Project
      *
      *  
      */

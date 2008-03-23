@@ -25,7 +25,7 @@
 namespace tests
 {
     /*!
-     * \class DiagramTest "$URL$"
+     * \class DiagramTest
      *
      *  
      */

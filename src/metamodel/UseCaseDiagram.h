@@ -28,7 +28,7 @@
 namespace MetaModel
 {
     /*!
-     * \class UseCaseDiagram "$URL$"
+     * \class UseCaseDiagram
      *
      *  
      */

@@ -25,7 +25,7 @@
 namespace MetaModel
 {
     /*!
-     * \class Element "$URL$"
+     * \class Element
      *
      *  
      */

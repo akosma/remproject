@@ -78,7 +78,7 @@ namespace MetaModel
      * Container<T> Virtual destructor.
      */
 	template <typename T>
-    Container<T>::~Container<T>()
+    Container<T>::~Container()
     {
         this->removeAllElements();
     }

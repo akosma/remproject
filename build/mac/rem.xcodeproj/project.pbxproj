@@ -123,8 +123,8 @@
 		3A18FB5F0D843C7300744B33 /* elements */ = {
 			isa = PBXGroup;
 			children = (
-				3AC075FC0D8D9A21004C5A73 /* Element.cpp */,
 				3AC075FD0D8D9A21004C5A73 /* Element.h */,
+				3AC075FC0D8D9A21004C5A73 /* Element.cpp */,
 				3AC0761F0D8D9CE8004C5A73 /* Actor.h */,
 				3AC076200D8D9CE8004C5A73 /* Actor.cpp */,
 			);
@@ -414,7 +414,7 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh/\"",
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/\"/**",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
@@ -449,7 +449,7 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/Power_Macintosh/\"",
+					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/\"/**",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (

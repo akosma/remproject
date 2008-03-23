@@ -33,7 +33,7 @@
 namespace MetaModel
 {
     /*!
-     * \class Diagram "$URL$"
+     * \class Diagram
      *
      *  
      */
