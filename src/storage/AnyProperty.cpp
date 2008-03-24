@@ -101,6 +101,31 @@ namespace storage
         return Poco::RefAnyCast<bool>(this->getValue());
     }
     
+    const std::string AnyProperty::getSQLiteColumnDefinition() const
+    {
+        const std::type_info& type = this->getValue().type();
+        std::stringstream output;
+        output << this->getName();
+        output << " ";
+        if(type == typeid(std::string))
+        {
+            output << "TEXT";
+        }
+        if(type == typeid(int))
+        {
+            output << "INTEGER";
+        }
+        if(type == typeid(bool))
+        {
+            output << "INTEGER";
+        }
+        if(type == typeid(double))
+        {
+            output << "REAL";
+        }
+        return output.str();
+    }
+    
     const std::string AnyProperty::getQuotedValue() const
     {
         const std::type_info& type = this->getValue().type();

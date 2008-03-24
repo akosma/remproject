@@ -107,7 +107,7 @@ namespace storage
         return _map[key].getDouble();            
     }
     
-    const std::string AnyPropertyMap::getStringForSelect() const
+    const std::string AnyPropertyMap::getColumnList() const
     {
         std::stringstream output;
         std::map<std::string, storage::AnyProperty>::const_iterator it;
@@ -125,11 +125,61 @@ namespace storage
         return str;
     }
     
-    const std::string AnyPropertyMap::getStringForInsert() const
+    const std::string AnyPropertyMap::getStringForCreateTable(std::string& tableName) const
     {
         std::stringstream output;
-        output << "(";
-        output << this->getStringForSelect();
+        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        output << "CREATE TABLE ";
+        output << tableName;
+        output << "(\n";
+        for (it = _map.begin(); it != _map.end(); ++it)
+        {
+            output << (it->second.getSQLiteColumnDefinition());
+            output << ",\n";
+        }
+        std::string str = output.str();
+        int len = str.length();
+        if (len > 2)
+        {
+            str = str.substr(0, len - 2);
+        }
+        std::stringstream output2;
+        output2 << str;
+        output2 << ");";
+        return output2.str();
+    }
+
+    const std::string AnyPropertyMap::getStringForSelect(std::string& tableName) const
+    {
+        std::stringstream output;
+        output << "SELECT ";
+        output << this->getColumnList();
+        output << " FROM ";
+        output << tableName;
+        output << ";";
+        return output.str();
+    }
+    
+    const std::string AnyPropertyMap::getStringForSelect(std::string& tableName, const int id) const
+    {
+        std::stringstream output;
+        output << "SELECT ";
+        output << this->getColumnList();
+        output << " FROM ";
+        output << tableName;
+        output << " WHERE id = ";
+        output << id;
+        output << ";";
+        return output.str();
+    }
+    
+    const std::string AnyPropertyMap::getStringForInsert(std::string& tableName) const
+    {
+        std::stringstream output;
+        output << "INSERT INTO ";
+        output << tableName;
+        output << " (";
+        output << this->getColumnList();
         output << ") VALUES (";
         std::map<std::string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
@@ -145,13 +195,16 @@ namespace storage
         }
         std::stringstream output2;
         output2 << str;
-        output2 << ")";
+        output2 << ");";
         return output2.str();
     }
     
-    const std::string AnyPropertyMap::getStringForUpdate() const
+    const std::string AnyPropertyMap::getStringForUpdate(std::string& tableName, const int id) const
     {
         std::stringstream output;
+        output << "UPDATE ";
+        output << tableName;
+        output << " SET ";
         std::map<std::string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
@@ -164,6 +217,11 @@ namespace storage
         {
             str = str.substr(0, len - 2);
         }
-        return str;
+        std::stringstream output2;
+        output2 << str;
+        output2 << " WHERE id = ";
+        output2 << id;
+        output2 << ";";
+        return output2.str();
     }
 }

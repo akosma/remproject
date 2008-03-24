@@ -64,6 +64,7 @@ namespace storage
         double getDouble() const;
         bool getBoolean() const;
 
+        const std::string getSQLiteColumnDefinition() const;
         const std::string getQuotedValue() const;
         const std::string getNameValuePair() const;
     };

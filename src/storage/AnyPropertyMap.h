@@ -62,9 +62,12 @@ namespace storage
         bool getBoolean(const std::string&);
         double getDouble(const std::string&);
 
-        const std::string getStringForSelect() const;
-        const std::string getStringForInsert() const;
-        const std::string getStringForUpdate() const;
+        const std::string getStringForCreateTable(std::string&) const;
+        const std::string getColumnList() const;
+        const std::string getStringForSelect(std::string&) const;
+        const std::string getStringForSelect(std::string&, const int id) const;
+        const std::string getStringForInsert(std::string&) const;
+        const std::string getStringForUpdate(std::string&, const int id) const;
 
     protected:
 

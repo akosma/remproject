@@ -18,6 +18,10 @@
 #include <string>
 #include <map>
 
+#ifndef ACTIVERECORD_H_
+#include "../storage/ActiveRecord.h"
+#endif
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
@@ -29,7 +33,7 @@ namespace metamodel
      *
      *  
      */
-    class Element
+    class Element : public storage::ActiveRecord<Element>
     {
     public:
 

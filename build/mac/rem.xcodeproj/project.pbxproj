@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		3A3381A40D97BE9B0066C369 /* ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecord.h; path = ../../src/storage/ActiveRecord.h; sourceTree = SOURCE_ROOT; };
 		3A3556820D96D8090079D03E /* AnyPropertyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMap.h; path = ../../src/storage/AnyPropertyMap.h; sourceTree = SOURCE_ROOT; };
 		3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMap.cpp; path = ../../src/storage/AnyPropertyMap.cpp; sourceTree = SOURCE_ROOT; };
 		3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMapTest.h; path = ../../src/tests/AnyPropertyMapTest.h; sourceTree = SOURCE_ROOT; };
@@ -165,6 +166,7 @@
 		3A18FB620D843CA900744B33 /* storage */ = {
 			isa = PBXGroup;
 			children = (
+				3A3381A40D97BE9B0066C369 /* ActiveRecord.h */,
 				3A4CD2E70D968A8A002F1AC2 /* Property.h */,
 				3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */,
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
