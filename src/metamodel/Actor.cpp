@@ -24,7 +24,7 @@ namespace metamodel
      * Actor Constructor.
      */
     Actor::Actor()
-    : Element()
+    : Element("actor")
     {
     }
     

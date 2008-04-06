@@ -40,7 +40,7 @@ namespace metamodel
         /*!
          *  Element constructor.
          */
-        Element();
+        Element(std::string);
 
         /*!
          *  Element virtual destructor.

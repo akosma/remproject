@@ -23,8 +23,8 @@ namespace metamodel
     /*!
      * Element Constructor.
      */
-    Element::Element()
-    : storage::ActiveRecord<Element>("elements")
+    Element::Element(std::string className)
+    : storage::ActiveRecord<Element>("elements", className)
     {
     }
     

@@ -58,13 +58,13 @@ namespace storage
          * Default constructor. Sets the ID to DEFAULT_ID. Used
          * to create instances that do not exist yet in the database.
          */
-        ActiveRecord(std::string);
+        ActiveRecord(std::string, std::string);
         
         /*!
          * Constructor. Used to create instances whose state is
          * already present in the database.
          */
-        ActiveRecord(std::vector<std::string>&, std::string&);
+        ActiveRecord(std::string&, std::string&, ID id, std::vector<std::string>&);
         
         /*!
          * Copy constructor.
@@ -178,6 +178,8 @@ namespace storage
         AnyPropertyMap _data;
 
         std::string _tableName;
+        
+        std::string _className;
     };
     
     /*!
@@ -185,11 +187,12 @@ namespace storage
      * to create instances that do not exist yet in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string tableName)
+    ActiveRecord<T>::ActiveRecord(std::string tableName, std::string className)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
     , _tableName (tableName)
+    , _className (className)
     {
     }
 
@@ -198,11 +201,12 @@ namespace storage
      * already present in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::vector<std::string>& elements, std::string& tableName)
-    : _id        (DEFAULT_ID)
-    , _isNew     (true)
-    , _isDirty   (true)
+    ActiveRecord<T>::ActiveRecord(std::string& tableName, std::string& className, ID id, std::vector<std::string>& elements)
+    : _id        (id)
+    , _isNew     (false)
+    , _isDirty   (false)
     , _tableName (tableName)
+    , _className (className)
     {
     }
 
@@ -217,6 +221,7 @@ namespace storage
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
     , _tableName (rhs._tableName)
+    , _className (rhs._className)
     {
     }
 
@@ -244,6 +249,7 @@ namespace storage
     	_isDirty = rhs._isDirty;
     	_isNew = rhs._isNew;
     	_tableName = rhs._tableName;
+        _className = rhs._className;
     	return *this;
     }
     
@@ -387,10 +393,12 @@ namespace storage
     	{
             createAllPropertiesForSchema();
             _data.createPrimaryKey("id");
+            addStringProperty("class");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(_tableName));
     	}
     	if (ok)
     	{
+            setStringProperty("class", _className);
     	    ok = wrapper.executeQuery(_data.getStringForInsert(_tableName));
     	}
 		wrapper.close();
