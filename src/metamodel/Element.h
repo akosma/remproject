@@ -40,19 +40,15 @@ namespace metamodel
         /*!
          *  Element constructor.
          */
-        Element(const std::string&);
+        Element();
 
         /*!
          *  Element virtual destructor.
          */
         virtual ~Element();
-		
-		const std::string& getName() const;
-
-    protected:
-
-    private:
-        std::string _name;
+        
+        void setName(std::string&);
+        std::string getName();
     };
 }
 

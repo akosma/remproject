@@ -17,6 +17,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #ifndef SQLITEWRAPPER_H_
 #include "SQLiteWrapper.h"
@@ -57,13 +58,13 @@ namespace storage
          * Default constructor. Sets the ID to DEFAULT_ID. Used
          * to create instances that do not exist yet in the database.
          */
-        ActiveRecord();
+        ActiveRecord(std::string);
         
         /*!
          * Constructor. Used to create instances whose state is
          * already present in the database.
          */
-        ActiveRecord(std::vector<std::string>&);
+        ActiveRecord(std::vector<std::string>&, std::string&);
         
         /*!
          * Copy constructor.
@@ -120,32 +121,42 @@ namespace storage
         
         static std::vector<T>* findAll();
         static T* findById(const ID id);
+        
+        void setTableName(std::string& tableName);
+        
+        void setStringProperty(const std::string&, const std::string&);
+        void setIntegerProperty(const std::string&, const int);
+        void setBooleanProperty(const std::string&, const bool);
+        void setDoubleProperty(const std::string&, const double);
+        
+        std::string getString(const std::string&);
+        int getInteger(const std::string&);
+        bool getBoolean(const std::string&);
+        double getDouble(const std::string&);
 
     protected:
 
-        /*!
-         * Pure virtual method used by subclasses to store their
-         * state in the database for the first time, using the
-         * "INSERT" SQL statement. Subclasses must perform the insertion
-         * and provide the ID that was given during the operation.
-         * 
-         * \return The ID of the current instance, as provided by SQLite.
-         */
-        virtual const ID insert();
-    
-        /*!
-         * Pure virtual method used by subclasses to store their
-         * state in the database after the first time, using the
-         * "UPDATE" SQL statement.
-         */
-        virtual void update();
-    
         /*!
          * Used by subclasses to change the "_isDirty" flag in the 
          * ActiveRecord base class; subclasses must call this method in
          * every "setter" method.
          */
         void setDirty();
+        
+    private:
+        /*!
+         * Used to store the state in the database for the first time, using the
+         * "INSERT" SQL statement.
+         * 
+         * \return The ID of the current instance, as provided by SQLite.
+         */
+        virtual const ID insert();
+
+        /*!
+         * Used to store the state in the database afterwards, using the
+         * "UPDATE" SQL statement.
+         */
+        virtual void update();
 
     private:
 
@@ -158,8 +169,10 @@ namespace storage
         //! A flag indicating whether this instance has been modified or not.
         bool _isDirty;
         
-        //! An instance of AnyPropertyMap which contains the schema to be used for this instance
-        AnyPropertyMap _prototype;
+        //! An instance of AnyPropertyMap which contains the data for this instance
+        AnyPropertyMap _data;
+
+        std::string _tableName;
     };
     
     template <class T>
@@ -170,10 +183,11 @@ namespace storage
      * to create instances that do not exist yet in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord()
+    ActiveRecord<T>::ActiveRecord(std::string tableName)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
+    , _tableName (tableName)
     {
     }
 
@@ -182,10 +196,11 @@ namespace storage
      * already present in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::vector<std::string>&)
+    ActiveRecord<T>::ActiveRecord(std::vector<std::string>& elements, std::string& tableName)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
+    , _tableName (tableName)
     {
     }
 
@@ -199,6 +214,7 @@ namespace storage
     : _id        (rhs._id)
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
+    , _tableName (rhs._tableName)
     {
     }
 
@@ -225,7 +241,66 @@ namespace storage
     	_id = rhs._id;
     	_isDirty = rhs._isDirty;
     	_isNew = rhs._isNew;
+    	_tableName = rhs._tableName;
     	return *this;
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::setTableName(std::string& tableName)
+    {
+        _tableName = tableName;
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::setStringProperty(const std::string& key, const std::string& value)
+    {
+        setDirty();
+        _data.setStringProperty(key, value);
+    }
+
+    template <class T>
+    void ActiveRecord<T>::setIntegerProperty(const std::string& key, const int value)
+    {
+        setDirty();
+        _data.setIntegerProperty(key, value);
+    }
+
+    template <class T>
+    void ActiveRecord<T>::setBooleanProperty(const std::string& key, const bool value)
+    {
+        setDirty();
+        _data.setBooleanProperty(key, value);
+    }
+
+    template <class T>
+    void ActiveRecord<T>::setDoubleProperty(const std::string& key, const double value)
+    {
+        setDirty();
+        _data.setDoubleProperty(key, value);
+    }
+    
+    template <class T>
+    std::string ActiveRecord<T>::getString(const std::string& key)
+    {
+        return _data.getString(key);
+    }
+    
+    template <class T>
+    int ActiveRecord<T>::getInteger(const std::string& key)
+    {
+        return _data.getInteger(key);
+    }
+    
+    template <class T>
+    bool ActiveRecord<T>::getBoolean(const std::string& key)
+    {
+        return _data.getBoolean(key);
+    }
+    
+    template <class T>
+    double ActiveRecord<T>::getDouble(const std::string& key)
+    {
+        return _data.getDouble(key);
     }
 
     /*!
@@ -262,13 +337,37 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::update()
     {
-        
+    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
+    	bool ok = wrapper.open();
+    	if (ok)
+    	{
+    	    ok = wrapper.executeQuery(_data.getStringForUpdate(_tableName, _id));
+    	}
+		wrapper.close();
     }
     
     template <class T>
     const ID ActiveRecord<T>::insert()
     {
-        return 1;
+    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
+    	bool ok = wrapper.open();
+    	if (!wrapper.tableExists(_tableName))
+    	{
+            ok = wrapper.executeQuery(_data.getStringForCreateTable(_tableName));
+    	}
+    	if (ok)
+    	{
+    	    ok = wrapper.executeQuery(_data.getStringForInsert(_tableName));
+    	}
+		wrapper.close();
+		if (ok)
+		{
+            return wrapper.getLastRowId();		    
+		}
+		else
+		{
+            return DEFAULT_ID;
+		}
     }
 
     /*!

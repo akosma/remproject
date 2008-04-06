@@ -23,8 +23,8 @@ namespace metamodel
     /*!
      * Element Constructor.
      */
-    Element::Element(const std::string& name)
-	:_name(name)
+    Element::Element()
+    : storage::ActiveRecord<Element>("elements")
     {
     }
     
@@ -34,9 +34,14 @@ namespace metamodel
     Element::~Element()
     {
     }
-	
-	const std::string& Element::getName() const
-	{
-		return _name;
-	}
+
+    void Element::setName(std::string& name)
+    {
+        setStringProperty("name", name);
+    }
+    
+    std::string Element::getName()
+    {
+        return getString("name");
+    }
 }

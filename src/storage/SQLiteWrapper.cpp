@@ -13,6 +13,8 @@
  */
 
 #include "SQLiteWrapper.h"
+#include <sstream>
+#include <iostream>
 
 /*!
  * \namespace storage
@@ -231,4 +233,27 @@ namespace storage
     {
         return _data;
     }
+    
+    const bool SQLiteWrapper::tableExists(const std::string& tableName)
+    {
+        std::stringstream query;
+        query << "PRAGMA table_info(\"";
+        query << tableName;
+        query << "\");";
+
+        char* error;
+        char** resultSet;
+        int numRows;
+        int numColumns;
+        
+        sqlite3_get_table(
+            _db,                  // An open database
+            query.str().c_str(),  // SQL to be executed
+            &resultSet,           // Result written to a char*[] that this points to
+            &numRows,             // Number of result rows written here
+            &numColumns,          // Number of result columns written here
+            &error                // Error msg written here
+        );
+        return numRows > 0;
+    }    
 }

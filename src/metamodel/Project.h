@@ -23,6 +23,10 @@
 #include "Diagram.h"
 #endif
 
+#ifndef ACTIVERECORD_H_
+#include "../storage/ActiveRecord.h"
+#endif
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
@@ -34,7 +38,7 @@ namespace metamodel
      *
      *  
      */
-    class Project : public Container<Diagram>
+    class Project : public Container<Diagram>//, public storage::ActiveRecord<Project>
     {
     public:
 

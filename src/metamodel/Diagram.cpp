@@ -24,8 +24,9 @@ namespace metamodel
      * Diagram Constructor.
      */
     Diagram::Diagram(const std::string& name)
-	: Container<Element>(),
-	  _name(name)
+	: Container<Element>()
+//	, storage::ActiveRecord<Diagram>(std::string("diagrams"))
+	, _name(name)
     {
     }
     

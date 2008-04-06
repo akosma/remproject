@@ -70,9 +70,10 @@ namespace tests
         CPPUNIT_ASSERT(diagram.empty());
         CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());
         
-		metamodel::Actor* actor1 = new metamodel::Actor(actor1Name);
-		CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
-		
+        metamodel::Actor* actor1 = new metamodel::Actor();
+        actor1->setName(actor1Name);
+        CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
+
         diagram.addElement(actor1);
         CPPUNIT_ASSERT_EQUAL(1, diagram.getCount());
         

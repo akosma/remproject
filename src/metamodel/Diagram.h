@@ -23,6 +23,10 @@
 #include "Element.h"
 #endif
 
+#ifndef ACTIVERECORD_H_
+#include "../storage/ActiveRecord.h"
+#endif
+
 #include <map>
 #include <string>
 
@@ -37,7 +41,7 @@ namespace metamodel
      *
      *  
      */
-    class Diagram : public Container<Element>
+    class Diagram : public Container<Element>//, public storage::ActiveRecord<Diagram>
     {
     public:
 

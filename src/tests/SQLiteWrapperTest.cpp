@@ -87,8 +87,10 @@ namespace tests
         storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
         bool ok = dal.open();
         CPPUNIT_ASSERT(ok);
+        CPPUNIT_ASSERT(!dal.tableExists("test"));
         ok = dal.executeQuery("CREATE TABLE test(test1 int, test2 varchar);");
         CPPUNIT_ASSERT(ok);
+        CPPUNIT_ASSERT(dal.tableExists("test"));
         dal.close();
     }
     

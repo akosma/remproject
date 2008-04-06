@@ -21,6 +21,7 @@
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC076200D8D9CE8004C5A73 /* Actor.cpp */; };
 		3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */; };
+		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +70,8 @@
 		3AC076790D8DABCF004C5A73 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Container.h; path = ../../src/metamodel/Container.h; sourceTree = SOURCE_ROOT; };
 		3ACC948A0D8D73EF0001BC71 /* UseCaseDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagram.h; path = ../../src/metamodel/UseCaseDiagram.h; sourceTree = SOURCE_ROOT; };
 		3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseDiagram.cpp; path = ../../src/metamodel/UseCaseDiagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
+		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* rem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rem; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +209,8 @@
 				3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */,
 				3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */,
 				3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */,
+				3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */,
+				3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */,
 				3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */,
 				3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */,
+				3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

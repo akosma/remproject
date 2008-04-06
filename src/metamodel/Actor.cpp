@@ -23,8 +23,8 @@ namespace metamodel
     /*!
      * Actor Constructor.
      */
-    Actor::Actor(const std::string& name)
-    : Element(name)
+    Actor::Actor()
+    : Element()
     {
     }
     

@@ -135,6 +135,8 @@ namespace storage
          * \return A vector of string.
          */
         const std::vector<std::string>& getData() const;
+        
+        const bool tableExists(const std::string&);
 
     private:
 

@@ -25,6 +25,7 @@ namespace metamodel
      */
     Project::Project()
     : Container<Diagram>()
+//    , storage::ActiveRecord<Project>(std::string("projects"))
     {
     }
 	

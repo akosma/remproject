@@ -40,7 +40,7 @@ namespace metamodel
         /*!
          *  Actor constructor.
          */
-        Actor(const std::string&);
+        Actor();
 
         /*!
          *  Actor virtual destructor.
