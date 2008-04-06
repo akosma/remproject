@@ -44,4 +44,13 @@ namespace metamodel
     {
         return getString("name");
     }
+    
+    void Element::createAllPropertiesForSchema()
+    {
+        addStringProperty("name");
+        addIntegerProperty("x");
+        addIntegerProperty("y");
+        addDoubleProperty("value");
+        addBooleanProperty("valid");
+    }
 }

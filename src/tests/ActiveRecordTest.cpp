@@ -58,26 +58,46 @@ namespace tests
      */
     void ActiveRecordTest::testSaveIndividualInstance()
     {
-        std::string name1("actor1");
-        std::string name2("actor2");
-		metamodel::Actor* actor = new metamodel::Actor();
-		CPPUNIT_ASSERT(actor->isNew());
+        std::string name1("john");
+        std::string name2("johnny");
+		metamodel::Actor* john = new metamodel::Actor();
+		CPPUNIT_ASSERT(john->isNew());
+		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)john->getId());
 
-        actor->setName(name1);
-		CPPUNIT_ASSERT_EQUAL(name1, actor->getName());
+        john->setName(name1);
+		CPPUNIT_ASSERT_EQUAL(name1, john->getName());
 
-		actor->save();
-		CPPUNIT_ASSERT(!actor->isNew());
-		CPPUNIT_ASSERT(!actor->isDirty());
+		john->save();
+		CPPUNIT_ASSERT(!john->isNew());
+		CPPUNIT_ASSERT(!john->isDirty());
+        CPPUNIT_ASSERT_EQUAL(0, (int)john->getId());
 
-        actor->setName(name2);
-		CPPUNIT_ASSERT(!actor->isNew());
-		CPPUNIT_ASSERT(actor->isDirty());
-		CPPUNIT_ASSERT_EQUAL(name2, actor->getName());
+        john->setName(name2);
+		CPPUNIT_ASSERT(!john->isNew());
+		CPPUNIT_ASSERT(john->isDirty());
+		CPPUNIT_ASSERT_EQUAL(name2, john->getName());
 
-		actor->save();
-		CPPUNIT_ASSERT(!actor->isNew());
-		CPPUNIT_ASSERT(!actor->isDirty());
+		john->save();
+		CPPUNIT_ASSERT(!john->isNew());
+		CPPUNIT_ASSERT(!john->isDirty());
+
+        std::string name3("peter");
+        std::string name4("pete");
+		metamodel::Actor* peter = new metamodel::Actor();
+		CPPUNIT_ASSERT(peter->isNew());
+		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)peter->getId());
+
+        peter->setName(name3);
+		CPPUNIT_ASSERT_EQUAL(name3, peter->getName());
+
+        peter->save();
+		CPPUNIT_ASSERT(!peter->isNew());
+		CPPUNIT_ASSERT(!peter->isDirty());
+        CPPUNIT_ASSERT_EQUAL(1, (int)peter->getId());
+
+        peter->setBooleanProperty("valid", true);
+        peter->save();
+		CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
     }
     
     void ActiveRecordTest::testRetrieveAllInstances()

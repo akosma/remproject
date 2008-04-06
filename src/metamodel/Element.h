@@ -49,6 +49,8 @@ namespace metamodel
         
         void setName(std::string&);
         std::string getName();
+        
+        virtual void createAllPropertiesForSchema();
     };
 }
 

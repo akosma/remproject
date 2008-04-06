@@ -56,6 +56,8 @@ namespace storage
         void setIntegerProperty(const std::string&, const int);
         void setBooleanProperty(const std::string&, const bool);
         void setDoubleProperty(const std::string&, const double);
+
+        void createPrimaryKey(const std::string&);
         
         std::string getString(const std::string&);
         int getInteger(const std::string&);

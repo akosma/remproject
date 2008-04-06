@@ -58,6 +58,7 @@ namespace storage
         void setInteger(const int);
         void setDouble(const double);
         void setBoolean(const bool);
+        void setPrimaryKey();
 
         std::string getString() const;
         int getInteger() const;
@@ -67,6 +68,9 @@ namespace storage
         const std::string getSQLiteColumnDefinition() const;
         const std::string getQuotedValue() const;
         const std::string getNameValuePair() const;
+        
+    private:
+        bool _isPrimaryKey;
     };
 }
 

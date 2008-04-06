@@ -37,6 +37,14 @@ namespace storage
     typedef long long ID;
 
     /*!
+     * Provides the default value given to
+     * 
+     * \li New instances (those that have not yet been saved in database
+     * \li Instances that failed to be saved in the database.
+     */
+    const ID DEFAULT_ID = -1;
+
+    /*!
      * \class ActiveRecord
      *
      *  
@@ -45,14 +53,6 @@ namespace storage
     class ActiveRecord
     {
     public:
-
-        /*!
-         * Provides the default value given to
-         * 
-         * \li New instances (those that have not yet been saved in database
-         * \li Instances that failed to be saved in the database.
-         */
-        static const ID DEFAULT_ID;
 
         /*!
          * Default constructor. Sets the ID to DEFAULT_ID. Used
@@ -118,17 +118,15 @@ namespace storage
          * to "insert()" and "update()". 
          */
         void save();
-        
+
         static std::vector<T>* findAll();
         static T* findById(const ID id);
-        
-        void setTableName(std::string& tableName);
         
         void setStringProperty(const std::string&, const std::string&);
         void setIntegerProperty(const std::string&, const int);
         void setBooleanProperty(const std::string&, const bool);
         void setDoubleProperty(const std::string&, const double);
-        
+
         std::string getString(const std::string&);
         int getInteger(const std::string&);
         bool getBoolean(const std::string&);
@@ -142,7 +140,14 @@ namespace storage
          * every "setter" method.
          */
         void setDirty();
-        
+
+        void addStringProperty(const std::string&);
+        void addIntegerProperty(const std::string&);
+        void addBooleanProperty(const std::string&);
+        void addDoubleProperty(const std::string&);
+
+        virtual void createAllPropertiesForSchema() = 0;
+
     private:
         /*!
          * Used to store the state in the database for the first time, using the
@@ -150,13 +155,13 @@ namespace storage
          * 
          * \return The ID of the current instance, as provided by SQLite.
          */
-        virtual const ID insert();
+        const ID insert();
 
         /*!
          * Used to store the state in the database afterwards, using the
          * "UPDATE" SQL statement.
          */
-        virtual void update();
+        void update();
 
     private:
 
@@ -175,9 +180,6 @@ namespace storage
         std::string _tableName;
     };
     
-    template <class T>
-    const ID ActiveRecord<T>::DEFAULT_ID = -1;
-
     /*!
      * Default constructor. Sets the ID to DEFAULT_ID. Used
      * to create instances that do not exist yet in the database.
@@ -246,12 +248,6 @@ namespace storage
     }
     
     template <class T>
-    void ActiveRecord<T>::setTableName(std::string& tableName)
-    {
-        _tableName = tableName;
-    }
-    
-    template <class T>
     void ActiveRecord<T>::setStringProperty(const std::string& key, const std::string& value)
     {
         setDirty();
@@ -277,6 +273,42 @@ namespace storage
     {
         setDirty();
         _data.setDoubleProperty(key, value);
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::addStringProperty(const std::string& key)
+    {
+        if (!_data.hasProperty(key))
+        {
+            _data.setStringProperty(key, "");
+        }
+    }
+
+    template <class T>
+    void ActiveRecord<T>::addIntegerProperty(const std::string& key)
+    {
+        if (!_data.hasProperty(key))
+        {
+            _data.setIntegerProperty(key, 0);
+        }
+    }
+
+    template <class T>
+    void ActiveRecord<T>::addBooleanProperty(const std::string& key)
+    {
+        if (!_data.hasProperty(key))
+        {
+            _data.setBooleanProperty(key, false);
+        }
+    }
+
+    template <class T>
+    void ActiveRecord<T>::addDoubleProperty(const std::string& key)
+    {
+        if (!_data.hasProperty(key))
+        {
+            _data.setDoubleProperty(key, 0.0);
+        }
     }
     
     template <class T>
@@ -333,7 +365,7 @@ namespace storage
     		}
     	}
     }
-    
+        
     template <class T>
     void ActiveRecord<T>::update()
     {
@@ -353,6 +385,8 @@ namespace storage
     	bool ok = wrapper.open();
     	if (!wrapper.tableExists(_tableName))
     	{
+            createAllPropertiesForSchema();
+            _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(_tableName));
     	}
     	if (ok)

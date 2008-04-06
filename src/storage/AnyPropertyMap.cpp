@@ -87,6 +87,14 @@ namespace storage
         _map[key] = prop;
     }
     
+    void AnyPropertyMap::createPrimaryKey(const std::string& key)
+    {
+        Poco::Any any(0);
+        AnyProperty prop(key, any);
+        prop.setPrimaryKey();
+        _map[key] = prop;
+    }
+    
     std::string AnyPropertyMap::getString(const std::string& key)
     {
         return _map[key].getString();

@@ -27,21 +27,25 @@ namespace storage
      */
     AnyProperty::AnyProperty()
     : Property<std::string, Poco::Any>()
+    , _isPrimaryKey(false)
     {
     }
     
     AnyProperty::AnyProperty(const std::string& name)
     : Property<std::string, Poco::Any>(name)
+    , _isPrimaryKey(false)
     {
     }
 
     AnyProperty::AnyProperty(const std::string& name, const Poco::Any& value)
     : Property<std::string, Poco::Any>(name, value)
+    , _isPrimaryKey(false)
     {
     }
 
     AnyProperty::AnyProperty(const AnyProperty& source)
     : Property<std::string, Poco::Any>(source)
+    , _isPrimaryKey(source._isPrimaryKey)
     {
     }
     
@@ -81,6 +85,11 @@ namespace storage
         this->setValue(value);
     }
     
+    void AnyProperty::setPrimaryKey()
+    {
+        _isPrimaryKey = true;
+    }
+    
     std::string AnyProperty::getString() const
     {
         return Poco::RefAnyCast<std::string>(this->getValue());
@@ -114,6 +123,10 @@ namespace storage
         if(type == typeid(int))
         {
             output << "INTEGER";
+            if (_isPrimaryKey)
+            {
+                output << " PRIMARY KEY";
+            }
         }
         if(type == typeid(bool))
         {
