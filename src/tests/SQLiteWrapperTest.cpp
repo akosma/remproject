@@ -70,7 +70,14 @@ namespace tests
     
         // Calling the singleton "automagically" creates the file
         storage::SQLiteWrapper::setFileName(_filename);
-        storage::SQLiteWrapper::get();
+        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
+
+        // We force here to have something in the database
+        bool ok = dal.open();
+        CPPUNIT_ASSERT(ok);
+        ok = dal.executeQuery("CREATE TABLE createTable(test1 int, test2 varchar);");
+        CPPUNIT_ASSERT(ok);
+        dal.close();
     
         // Check that the file exists
         std::fstream fin;

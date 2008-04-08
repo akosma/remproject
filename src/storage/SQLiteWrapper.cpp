@@ -98,6 +98,7 @@ namespace storage
             // Enhance the performance of SQLite 3
             // http://www.sqlite.org/pragma.html
             executeQuery("PRAGMA synchronous = OFF;");
+            executeQuery("PRAGMA encoding = \"UTF-8\";");
         }
         return (_resultCode == SQLITE_OK);
     }

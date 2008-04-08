@@ -1,0 +1,6 @@
+1) Build cppunit, Poco and Juce
+2) mkdir bin
+3) cd bin
+4) gmake ../src
+5) make
+6) ctest (to run the tests)

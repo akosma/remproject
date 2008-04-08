@@ -22,6 +22,9 @@
  */
 int main()
 {
+    remove("test.db");
+    remove("untitled.db");
+
     CppUnit::TextUi::TestRunner runner;
     runner.addTest(CppUnit::TestFactoryRegistry::getRegistry().makeTest());
     bool wasSucessful = runner.run();
