@@ -9,11 +9,20 @@ include_directories (
     ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
 )
 
-link_directories (
-    /usr/lib/ 
-    /usr/local/lib 
-    ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Power_Macintosh
-)
+IF (APPLE)
+    IF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
+        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Intel)
+    ELSE (CMAKE_OSX_ARCHITECTURES MATCHES i386)
+        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Power_Macintosh)
+    ENDIF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
+
+    link_directories (
+        /usr/lib/ 
+        /usr/local/lib 
+        ${POCO_LIB_DIR}
+    )
+ENDIF (APPLE)
+
 
 link_libraries(
     cppunit 
