@@ -65,7 +65,7 @@
 		3A70B4480D8D64B000F61DB0 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Project.h; path = ../../src/metamodel/Project.h; sourceTree = SOURCE_ROOT; };
 		3A70B4490D8D64B000F61DB0 /* Project.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Project.cpp; path = ../../src/metamodel/Project.cpp; sourceTree = SOURCE_ROOT; };
 		3A7596370DAFC09A000AC38C /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../src/ui/Main.cpp; sourceTree = SOURCE_ROOT; };
-		3A75965D0DAFC350000AC38C /* rem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rem.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A75965D0DAFC350000AC38C /* Rem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A75965F0DAFC350000AC38C /* rem-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rem-Info.plist"; sourceTree = "<group>"; };
 		3A7596680DAFC484000AC38C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		3A75966E0DAFC574000AC38C /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -154,7 +154,7 @@
 			children = (
 				3A4EAEA40D8D320400C4895F /* remtool */,
 				3A4EB45C0D8D48DF00C4895F /* remtest */,
-				3A75965D0DAFC350000AC38C /* rem.app */,
+				3A75965D0DAFC350000AC38C /* Rem.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,9 +307,9 @@
 			productReference = 3A4EB45C0D8D48DF00C4895F /* remtest */;
 			productType = "com.apple.product-type.tool";
 		};
-		3A75965C0DAFC350000AC38C /* rem */ = {
+		3A75965C0DAFC350000AC38C /* Rem */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A7596620DAFC351000AC38C /* Build configuration list for PBXNativeTarget "rem" */;
+			buildConfigurationList = 3A7596620DAFC351000AC38C /* Build configuration list for PBXNativeTarget "Rem" */;
 			buildPhases = (
 				3A7596590DAFC350000AC38C /* Resources */,
 				3A75965A0DAFC350000AC38C /* Sources */,
@@ -319,9 +319,9 @@
 			);
 			dependencies = (
 			);
-			name = rem;
+			name = Rem;
 			productName = rem;
-			productReference = 3A75965D0DAFC350000AC38C /* rem.app */;
+			productReference = 3A75965D0DAFC350000AC38C /* Rem.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -338,7 +338,7 @@
 			targets = (
 				3A4EAEA30D8D320400C4895F /* remtool */,
 				3A4EB45B0D8D48DF00C4895F /* remtest */,
-				3A75965C0DAFC350000AC38C /* rem */,
+				3A75965C0DAFC350000AC38C /* Rem */,
 			);
 		};
 /* End PBXProject section */
@@ -548,10 +548,7 @@
 		3A7596600DAFC351000AC38C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(NATIVE_ARCH)",
-					i386,
-				);
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -565,7 +562,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce/bin\"";
 				OTHER_LDFLAGS = "-ljucedebug";
 				PREBINDING = NO;
-				PRODUCT_NAME = rem;
+				PRODUCT_NAME = Rem;
 				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -575,20 +572,21 @@
 		3A7596610DAFC351000AC38C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce\"";
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce/bin\"";
+				OTHER_LDFLAGS = "-ljucedebug";
 				PREBINDING = NO;
-				PRODUCT_NAME = rem;
+				PRODUCT_NAME = Rem;
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -624,7 +622,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A7596620DAFC351000AC38C /* Build configuration list for PBXNativeTarget "rem" */ = {
+		3A7596620DAFC351000AC38C /* Build configuration list for PBXNativeTarget "Rem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A7596600DAFC351000AC38C /* Debug */,
