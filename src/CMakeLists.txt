@@ -1,15 +1,5 @@
 project (rem)
 
-include_directories (
-    metamodel 
-    storage 
-    tests 
-    /usr/local/include 
-    /usr/include 
-    ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
-    ${rem_SOURCE_DIR}/../lib/juce
-)
-
 IF (APPLE)
     IF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
         SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Intel)
@@ -17,12 +7,27 @@ IF (APPLE)
         SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Power_Macintosh)
     ENDIF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
 
+    include_directories (
+        metamodel 
+        storage 
+        tests 
+        /usr/local/include 
+        /usr/include 
+        ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
+        ${rem_SOURCE_DIR}/../lib/juce
+    )
+
     link_directories (
         /usr/lib/ 
         /usr/local/lib 
         ${POCO_LIB_DIR}
         ${rem_SOURCE_DIR}/../lib/juce/bin
     )
+    
+    # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
+    SET(CMAKE_OSX_ARCHITECTURES ppc)
+    SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
+    SET(PROGNAME Rem)
 
     # Info on how to use OSX frameworks taken from
     # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
@@ -45,7 +50,6 @@ IF (APPLE)
     SET(EXTRA_LIBS ${CARBON_LIBRARY} ${QUICKTIME_LIBRARY} ${APP_SERVICES_LIBRARY} ${AGL} ${CORE_AUDIO} ${CORE_SERVICES} ${IO_KIT} ${OPEN_GL})
 
 ENDIF (APPLE)
-
 
 link_libraries(
     cppunit 
