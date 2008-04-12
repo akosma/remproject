@@ -166,12 +166,27 @@ IF (APPLE)
     add_custom_command(TARGET Rem POST_BUILD
         COMMAND mkdir
             ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources
+
         COMMAND cp
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
                 ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
+
     )
 
     enable_testing()
     add_test(remtest ${rem_SOURCE_DIR}/../bin/remtest)
+    
+    # This custom target builds the documentation using Doxygen and LaTeX
+    add_custom_target(doc ALL 
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
+
+        # Generate the project's documentation (using Doxygen installed via MacPorts)
+        COMMAND /opt/local/bin/doxygen
+            
+        # Create the PDF file and then delete the source files
+        COMMAND make --directory=doc/latex pdf
+        COMMAND cp doc/latex/refman.pdf doc/
+        COMMAND rm -r doc/latex/
+    )
 
 ENDIF (APPLE)
