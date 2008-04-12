@@ -10,7 +10,9 @@
 			<key>name</key>
 			<string>remproject</string>
 			<key>regexFolderFilter</key>
-			<string>!.*/(\.[^/]*|bin|lib|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<string>!.*/(\.[^/]*|bin|build|lib|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<key>selected</key>
+			<true/>
 			<key>sourceDirectory</key>
 			<string>../..</string>
 		</dict>
