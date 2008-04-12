@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A076F0A0DAFC8390081D9A7 /* RemContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A076F090DAFC8390081D9A7 /* RemContentComponent.cpp */; };
-		3A076F150DAFC88C0081D9A7 /* RemApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A076F110DAFC88C0081D9A7 /* RemApplication.cpp */; };
-		3A076F160DAFC88C0081D9A7 /* RemWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A076F130DAFC88C0081D9A7 /* RemWindow.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
@@ -31,6 +28,10 @@
 		3A8101510D96BC66003EFF96 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
 		3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
+		3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C00DB13102000EB33E /* ContentComponent.cpp */; };
+		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
+		3AC065D60DB13353000EB33E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3AC065D50DB13353000EB33E /* icon.icns */; };
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC076210D8D9CE8004C5A73 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC076200D8D9CE8004C5A73 /* Actor.cpp */; };
 		3ACC948C0D8D73EF0001BC71 /* UseCaseDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC948B0D8D73EF0001BC71 /* UseCaseDiagram.cpp */; };
@@ -38,12 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A076F080DAFC8390081D9A7 /* RemContentComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemContentComponent.h; path = ../../src/ui/RemContentComponent.h; sourceTree = SOURCE_ROOT; };
-		3A076F090DAFC8390081D9A7 /* RemContentComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemContentComponent.cpp; path = ../../src/ui/RemContentComponent.cpp; sourceTree = SOURCE_ROOT; };
-		3A076F110DAFC88C0081D9A7 /* RemApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemApplication.cpp; path = ../../src/ui/RemApplication.cpp; sourceTree = SOURCE_ROOT; };
-		3A076F120DAFC88C0081D9A7 /* RemApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemApplication.h; path = ../../src/ui/RemApplication.h; sourceTree = SOURCE_ROOT; };
-		3A076F130DAFC88C0081D9A7 /* RemWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemWindow.cpp; path = ../../src/ui/RemWindow.cpp; sourceTree = SOURCE_ROOT; };
-		3A076F140DAFC88C0081D9A7 /* RemWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemWindow.h; path = ../../src/ui/RemWindow.h; sourceTree = SOURCE_ROOT; };
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3A3381A40D97BE9B0066C369 /* ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecord.h; path = ../../src/storage/ActiveRecord.h; sourceTree = SOURCE_ROOT; };
 		3A3556820D96D8090079D03E /* AnyPropertyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMap.h; path = ../../src/storage/AnyPropertyMap.h; sourceTree = SOURCE_ROOT; };
@@ -81,6 +76,13 @@
 		3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapperTest.cpp; path = ../../src/tests/SQLiteWrapperTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AC065BE0DB13102000EB33E /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../src/ui/Application.cpp; sourceTree = SOURCE_ROOT; };
+		3AC065BF0DB13102000EB33E /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../src/ui/Application.h; sourceTree = SOURCE_ROOT; };
+		3AC065C00DB13102000EB33E /* ContentComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContentComponent.cpp; path = ../../src/ui/ContentComponent.cpp; sourceTree = SOURCE_ROOT; };
+		3AC065C10DB13102000EB33E /* ContentComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentComponent.h; path = ../../src/ui/ContentComponent.h; sourceTree = SOURCE_ROOT; };
+		3AC065C20DB13102000EB33E /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window.cpp; path = ../../src/ui/Window.cpp; sourceTree = SOURCE_ROOT; };
+		3AC065C30DB13102000EB33E /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = ../../src/ui/Window.h; sourceTree = SOURCE_ROOT; };
+		3AC065D50DB13353000EB33E /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		3AC075FC0D8D9A21004C5A73 /* Element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Element.cpp; path = ../../src/metamodel/Element.cpp; sourceTree = SOURCE_ROOT; };
 		3AC075FD0D8D9A21004C5A73 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../../src/metamodel/Element.h; sourceTree = SOURCE_ROOT; };
 		3AC0761F0D8D9CE8004C5A73 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = ../../src/metamodel/Actor.h; sourceTree = SOURCE_ROOT; };
@@ -128,11 +130,11 @@
 		08FB7794FE84155DC02AAC07 /* rem */ = {
 			isa = PBXGroup;
 			children = (
+				3AC065D40DB1333F000EB33E /* Resources */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				3A75963B0DAFC0BE000AC38C /* Frameworks */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				3A75965F0DAFC350000AC38C /* rem-Info.plist */,
 			);
 			name = rem;
 			sourceTree = "<group>";
@@ -211,13 +213,13 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				3A076F110DAFC88C0081D9A7 /* RemApplication.cpp */,
-				3A076F120DAFC88C0081D9A7 /* RemApplication.h */,
-				3A076F130DAFC88C0081D9A7 /* RemWindow.cpp */,
-				3A076F140DAFC88C0081D9A7 /* RemWindow.h */,
+				3AC065BE0DB13102000EB33E /* Application.cpp */,
+				3AC065BF0DB13102000EB33E /* Application.h */,
+				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
+				3AC065C10DB13102000EB33E /* ContentComponent.h */,
+				3AC065C20DB13102000EB33E /* Window.cpp */,
+				3AC065C30DB13102000EB33E /* Window.h */,
 				3A7596370DAFC09A000AC38C /* Main.cpp */,
-				3A076F080DAFC8390081D9A7 /* RemContentComponent.h */,
-				3A076F090DAFC8390081D9A7 /* RemContentComponent.cpp */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -262,6 +264,15 @@
 				3A7596680DAFC484000AC38C /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3AC065D40DB1333F000EB33E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3AC065D50DB13353000EB33E /* icon.icns */,
+				3A75965F0DAFC350000AC38C /* rem-Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -349,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A75967E0DAFC5CD000AC38C /* rem-Info.plist in Resources */,
+				3AC065D60DB13353000EB33E /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,9 +401,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A7596640DAFC3B1000AC38C /* Main.cpp in Sources */,
-				3A076F0A0DAFC8390081D9A7 /* RemContentComponent.cpp in Sources */,
-				3A076F150DAFC88C0081D9A7 /* RemApplication.cpp in Sources */,
-				3A076F160DAFC88C0081D9A7 /* RemWindow.cpp in Sources */,
+				3AC065C40DB13102000EB33E /* Application.cpp in Sources */,
+				3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */,
+				3AC065C60DB13102000EB33E /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

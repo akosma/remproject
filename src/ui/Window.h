@@ -1,7 +1,7 @@
 /*!
- * \file RemWindow.h
+ * \file Window.h
  *
- * Contains the interface of the rem::RemWindow class.
+ * Contains the interface of the ui::Window class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -14,8 +14,8 @@
 
 #include "juce.h"
 
-#ifndef REMWINDOW_H_
-#define REMWINDOW_H_
+#ifndef WINDOW_H_
+#define WINDOW_H_
 
 /*!
  * \namespace ui
@@ -24,18 +24,18 @@
 namespace ui
 {
     /*!
-     * \class RemWindow
+     * \class Window
      *
      *  
      */
-    class RemWindow  : public DocumentWindow
+    class Window  : public DocumentWindow
     {
     public:
-        RemWindow();
-        ~RemWindow();
+        Window();
+        ~Window();
 
         void closeButtonPressed();
     };
 }
 
-#endif /* REMWINDOW_H_ */
+#endif /* WINDOW_H_ */

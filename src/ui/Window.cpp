@@ -1,7 +1,7 @@
 /*!
- * \file RemWindow.cpp
+ * \file Window.cpp
  *
- * Contains the implementation of the ui::RemWindow class.
+ * Contains the implementation of the ui::Window class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -12,10 +12,10 @@
  * \date      4/11/08
  */
 
-#include "RemWindow.h"
+#include "Window.h"
 
 #ifndef REMCONTENTCOMPONENT_H_
-#include "RemContentComponent.h"
+#include "ContentComponent.h"
 #endif
 
 /*!
@@ -25,24 +25,24 @@
 namespace ui
 {
     /*!
-     * RemWindow Constructor.
+     * Window Constructor.
      */
-    RemWindow::RemWindow()
+    Window::Window()
     : DocumentWindow (T("Rem"),
                       Colours::lightgrey, 
                       DocumentWindow::allButtons, 
                       true)
     {
-        setContentComponent (new RemContentComponent());
+        setContentComponent (new ContentComponent());
         setVisible (true);
         centreWithSize (400, 200);
     }
 
-    RemWindow::~RemWindow()
+    Window::~Window()
     {
     }
 
-    void RemWindow::closeButtonPressed()
+    void Window::closeButtonPressed()
     {
         JUCEApplication::quit();
     }

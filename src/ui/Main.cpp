@@ -14,8 +14,8 @@
 
 #include "juce.h"
 
-#ifndef REMAPPLICATION_H_
-#include "RemApplication.h"
+#ifndef APPLICATION_H_
+#include "Application.h"
 #endif
 
-START_JUCE_APPLICATION (ui::RemApplication)
+START_JUCE_APPLICATION (ui::Application)

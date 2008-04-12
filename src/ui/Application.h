@@ -1,7 +1,7 @@
 /*!
- * \file RemApplication.h
+ * \file Application.h
  *
- * Contains the interface of the ui::RemApplication class.
+ * Contains the interface of the ui::Application class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -14,8 +14,8 @@
  
 #include "juce.h"
 
-#ifndef REMAPPLICATION_H_
-#define REMAPPLICATION_H_
+#ifndef APPLICATION_H_
+#define APPLICATION_H_
 
 /*!
  * \namespace ui
@@ -23,19 +23,19 @@
  */
 namespace ui
 {
-    class RemWindow;
+    class Window;
 
     /*!
-     * \class RemApplication
+     * \class Application
      *
      *  
      */
-    class RemApplication : public JUCEApplication
+    class Application : public JUCEApplication
     {
     public:
-        RemApplication();
+        Application();
 
-        ~RemApplication();
+        ~Application();
         
         void initialise (const String&);
 
@@ -50,8 +50,8 @@ namespace ui
         void anotherInstanceStarted (const String&);
 
     private:
-        RemWindow* window;
+        Window* window;
     };
 }
 
-#endif /* REMAPPLICATION_H_ */
+#endif /* APPLICATION_H_ */

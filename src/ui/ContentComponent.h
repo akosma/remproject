@@ -1,7 +1,7 @@
 /*!
- * \file RemContentComponent.h
+ * \file ContentComponent.h
  *
- * Contains the interface of the ui::RemContentComponent class.
+ * Contains the interface of the ui::ContentComponent class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -14,8 +14,8 @@
 
 #include "juce.h"
 
-#ifndef REMCONTENTCOMPONENT_H_
-#define REMCONTENTCOMPONENT_H_
+#ifndef CONTENTCOMPONENT_H_
+#define CONTENTCOMPONENT_H_
 
 /*!
  * \namespace ui
@@ -24,18 +24,18 @@
 namespace ui
 {
     /*!
-     * \class RemContentComponent
+     * \class ContentComponent
      *
      *  
      */
-    class RemContentComponent : public Component
+    class ContentComponent : public Component
     {
     public:
-        RemContentComponent();
-        ~RemContentComponent();
+        ContentComponent();
+        ~ContentComponent();
 
         void paint (Graphics&);
     };
 }
 
-#endif /* REMCONTENTCOMPONENT_H_ */
+#endif /* CONTENTCOMPONENT_H_ */

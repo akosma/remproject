@@ -1,7 +1,7 @@
 /*!
- * \file RemContentComponent.cpp
+ * \file ContentComponent.cpp
  *
- * Contains the implementation of the ui::RemContentComponent class.
+ * Contains the implementation of the ui::ContentComponent class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -12,7 +12,7 @@
  * \date      4/11/08
  */
 
-#include "RemContentComponent.h"
+#include "ContentComponent.h"
 
 /*!
  * \namespace ui
@@ -20,15 +20,15 @@
  */
 namespace ui
 {
-    RemContentComponent::RemContentComponent()
+    ContentComponent::ContentComponent()
     {
     }
 
-    RemContentComponent::~RemContentComponent()
+    ContentComponent::~ContentComponent()
     {
     }
 
-    void RemContentComponent::paint (Graphics& g)
+    void ContentComponent::paint (Graphics& g)
     {
         g.fillAll (Colours::white);
         g.setColour (Colours::black);
