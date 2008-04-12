@@ -185,7 +185,7 @@ IF (APPLE)
             
         # Create the PDF file and then delete the source files
         COMMAND make --directory=doc/latex pdf
-        COMMAND cp doc/latex/refman.pdf doc/
+        COMMAND mv doc/latex/refman.pdf doc/
         COMMAND rm -r doc/latex/
     )
 
