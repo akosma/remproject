@@ -82,7 +82,7 @@ set (Rem_SRCS
 IF (APPLE)
     # Build against the correct binaries, depending on the processor architecture
     IF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
-        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Intel)
+        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/i386)
     ELSE (CMAKE_OSX_ARCHITECTURES MATCHES i386)
         SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Power_Macintosh)
     ENDIF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
