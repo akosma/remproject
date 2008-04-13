@@ -102,6 +102,18 @@ namespace tests
     
     void ActiveRecordTest::testRetrieveAllInstances()
     {
+        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findAll();
         
+        CPPUNIT_ASSERT_EQUAL(2, (int)elements->size());
+        metamodel::Element& elem0 = elements->at(0);
+        metamodel::Element& elem1 = elements->at(1);
+
+        CPPUNIT_ASSERT(!elem0.getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
+
+        CPPUNIT_ASSERT(elem1.getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.getString("class"));
+        
+        delete elements;
     }
 }

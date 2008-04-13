@@ -24,7 +24,7 @@ namespace metamodel
      * Element Constructor.
      */
     Element::Element(std::string className)
-    : storage::ActiveRecord<Element>("elements", className)
+    : storage::ActiveRecord<Element>(className)
     {
     }
     
@@ -52,5 +52,11 @@ namespace metamodel
         addIntegerProperty("y");
         addDoubleProperty("value");
         addBooleanProperty("valid");
+    }
+
+    std::string& Element::getTableName()
+    {
+        static std::string tableName("elements");
+        return tableName;
     }
 }

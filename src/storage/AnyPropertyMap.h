@@ -41,6 +41,8 @@ namespace storage
          *  AnyPropertyMap constructor.
          */
         AnyPropertyMap();
+        AnyPropertyMap(const AnyPropertyMap&);
+        AnyPropertyMap& operator=(const AnyPropertyMap&);
 
         /*!
          *  AnyPropertyMap virtual destructor.
@@ -66,8 +68,6 @@ namespace storage
 
         const std::string getStringForCreateTable(std::string&) const;
         const std::string getColumnList() const;
-        const std::string getStringForSelect(std::string&) const;
-        const std::string getStringForSelect(std::string&, const int id) const;
         const std::string getStringForInsert(std::string&) const;
         const std::string getStringForUpdate(std::string&, const int id) const;
 

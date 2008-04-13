@@ -15,6 +15,7 @@
 #include "SQLiteWrapper.h"
 #include <sstream>
 #include <iostream>
+#include <map>
 
 /*!
  * \namespace storage
@@ -151,7 +152,16 @@ namespace storage
 
             for (int i = 0; i < _numColumns * _numRows; ++i)
             {
-                _data.push_back(resultSet[_numColumns + i]);
+                // It could happen that a cell is empty!
+                char* str = resultSet[_numColumns + i];
+                if (str)
+                {
+                    _data.push_back(str);
+                }
+                else
+                {
+                    _data.push_back("");
+                }
             }
         }
         _lastRowId = sqlite3_last_insert_rowid(_db);
@@ -256,5 +266,29 @@ namespace storage
             &error                // Error msg written here
         );
         return numRows > 0;
-    }    
+    }
+
+    std::map<std::string, std::string> SQLiteWrapper::getTableSchema(const std::string& tableName)
+    {
+        std::stringstream query;
+        query << "PRAGMA table_info(\"";
+        query << tableName;
+        query << "\");";
+
+        std::map<std::string, std::string> schema;
+        bool ok = executeQuery(query.str());
+        if(ok)
+        {
+            const std::vector<std::string>& data = getData();
+            const size_t numberOfHeaders = 6;
+            const size_t dataItems = data.size();
+
+            for (size_t i = 0; i < dataItems;
+                             i = i + numberOfHeaders)
+            {
+                schema[std::string(data[i + 1])] = data[i + 2];
+            }            
+        }
+        return schema;
+    }
 }

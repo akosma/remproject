@@ -108,11 +108,9 @@ namespace tests
         
         std::string tableName("test");
         const int id = 23;
-        CPPUNIT_ASSERT_EQUAL(std::string("SELECT prop1, prop2, prop3, prop4 FROM test;"), map.getStringForSelect(tableName));
-        CPPUNIT_ASSERT_EQUAL(std::string("SELECT prop1, prop2, prop3, prop4 FROM test WHERE id = 23;"), map.getStringForSelect(tableName, id));
         CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), map.getStringForInsert(tableName));
         CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), map.getStringForUpdate(tableName, id));
-        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 INTEGER,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), map.getStringForCreateTable(tableName));
+        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), map.getStringForCreateTable(tableName));
     }
     
     void AnyPropertyMapTest::testRetrievingInvalidPropertiesRaiseException()

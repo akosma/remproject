@@ -46,6 +46,8 @@ namespace storage
         AnyProperty(const std::string&);
         AnyProperty(const std::string&, const Poco::Any&);
         AnyProperty(const AnyProperty&);
+        AnyProperty& operator =(const AnyProperty&);
+        
 
         /*!
          *  AnyProperty virtual destructor.

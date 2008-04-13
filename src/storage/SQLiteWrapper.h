@@ -17,6 +17,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <sqlite3.h>
 
 /*!
@@ -137,6 +138,8 @@ namespace storage
         const std::vector<std::string>& getData() const;
         
         const bool tableExists(const std::string&);
+        
+        std::map<std::string, std::string> getTableSchema(const std::string&);
 
     private:
 

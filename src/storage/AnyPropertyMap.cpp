@@ -38,6 +38,22 @@ namespace storage
         _map.clear();
     }
 
+    AnyPropertyMap::AnyPropertyMap(const AnyPropertyMap& source)
+    : _map (source._map)
+    {
+    }
+
+    AnyPropertyMap& AnyPropertyMap::operator=(const AnyPropertyMap& source)
+    {
+        if (this == &source)
+        {
+            return *this;
+        }
+        
+        this->_map = source._map;
+        return *this;
+    }
+
     AnyProperty& AnyPropertyMap::operator[](const std::string& key)
     {
         return _map[key.c_str()];
@@ -155,30 +171,6 @@ namespace storage
         output2 << str;
         output2 << ");";
         return output2.str();
-    }
-
-    const std::string AnyPropertyMap::getStringForSelect(std::string& tableName) const
-    {
-        std::stringstream output;
-        output << "SELECT ";
-        output << this->getColumnList();
-        output << " FROM ";
-        output << tableName;
-        output << ";";
-        return output.str();
-    }
-    
-    const std::string AnyPropertyMap::getStringForSelect(std::string& tableName, const int id) const
-    {
-        std::stringstream output;
-        output << "SELECT ";
-        output << this->getColumnList();
-        output << " FROM ";
-        output << tableName;
-        output << " WHERE id = ";
-        output << id;
-        output << ";";
-        return output.str();
     }
     
     const std::string AnyPropertyMap::getStringForInsert(std::string& tableName) const

@@ -17,7 +17,9 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <iostream>
+#include <sstream>
 
 #ifndef SQLITEWRAPPER_H_
 #include "SQLiteWrapper.h"
@@ -58,13 +60,13 @@ namespace storage
          * Default constructor. Sets the ID to DEFAULT_ID. Used
          * to create instances that do not exist yet in the database.
          */
-        ActiveRecord(std::string, std::string);
+        ActiveRecord(std::string);
         
         /*!
          * Constructor. Used to create instances whose state is
          * already present in the database.
          */
-        ActiveRecord(std::string&, std::string&, ID id, std::vector<std::string>&);
+        ActiveRecord(std::string&, ID id, std::vector<std::string>&);
         
         /*!
          * Copy constructor.
@@ -121,7 +123,7 @@ namespace storage
 
         static std::vector<T>* findAll();
         static T* findById(const ID id);
-        
+
         void setStringProperty(const std::string&, const std::string&);
         void setIntegerProperty(const std::string&, const int);
         void setBooleanProperty(const std::string&, const bool);
@@ -177,8 +179,6 @@ namespace storage
         //! An instance of AnyPropertyMap which contains the data for this instance
         AnyPropertyMap _data;
 
-        std::string _tableName;
-        
         std::string _className;
     };
     
@@ -187,11 +187,11 @@ namespace storage
      * to create instances that do not exist yet in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string tableName, std::string className)
+    ActiveRecord<T>::ActiveRecord(std::string className)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
-    , _tableName (tableName)
+    , _data      ()
     , _className (className)
     {
     }
@@ -201,11 +201,11 @@ namespace storage
      * already present in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string& tableName, std::string& className, ID id, std::vector<std::string>& elements)
+    ActiveRecord<T>::ActiveRecord(std::string& className, ID id, std::vector<std::string>& elements)
     : _id        (id)
     , _isNew     (false)
     , _isDirty   (false)
-    , _tableName (tableName)
+    , _data      ()
     , _className (className)
     {
     }
@@ -220,7 +220,7 @@ namespace storage
     : _id        (rhs._id)
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
-    , _tableName (rhs._tableName)
+    , _data      (rhs._data)
     , _className (rhs._className)
     {
     }
@@ -248,8 +248,8 @@ namespace storage
     	_id = rhs._id;
     	_isDirty = rhs._isDirty;
     	_isNew = rhs._isNew;
-    	_tableName = rhs._tableName;
         _className = rhs._className;
+        _data = rhs._data;
     	return *this;
     }
     
@@ -379,7 +379,7 @@ namespace storage
     	bool ok = wrapper.open();
     	if (ok)
     	{
-    	    ok = wrapper.executeQuery(_data.getStringForUpdate(_tableName, _id));
+    	    ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
     	}
 		wrapper.close();
     }
@@ -389,17 +389,17 @@ namespace storage
     {
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
     	bool ok = wrapper.open();
-    	if (!wrapper.tableExists(_tableName))
+    	if (!wrapper.tableExists(T::getTableName()))
     	{
             createAllPropertiesForSchema();
             _data.createPrimaryKey("id");
             addStringProperty("class");
-            ok = wrapper.executeQuery(_data.getStringForCreateTable(_tableName));
+            ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
     	}
     	if (ok)
     	{
             setStringProperty("class", _className);
-    	    ok = wrapper.executeQuery(_data.getStringForInsert(_tableName));
+    	    ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
     	}
 		wrapper.close();
 		if (ok)
@@ -457,7 +457,7 @@ namespace storage
     {
     	_isDirty = true;
     }
-
+    
     /*!
      * Static factory method that returns the instance of the
      * class that corresponds to the ID passed in parameter.
@@ -471,12 +471,19 @@ namespace storage
     template <class T>
     T* ActiveRecord<T>::findById(const ID id)
     {
+        std::stringstream query;
+        query << "SELECT * FROM ";
+        query << T::getTableName();
+        query << " WHERE id = ";
+        query << id;
+        query << ";";
+        
     	T* item = NULL;
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
     	bool ok = wrapper.open();
     	if (ok)
     	{
-    		ok = wrapper.executeQuery(T::getStringForSelect(id));
+    		ok = wrapper.executeQuery(query.str());
     		wrapper.close();
     		if (ok)
     		{
@@ -501,30 +508,64 @@ namespace storage
     template <class T>
     std::vector<T>* ActiveRecord<T>::findAll()
     {
+        std::stringstream query;
+        query << "SELECT * FROM ";
+        query << T::getTableName();
+        query << ";";
+        
     	std::vector<T>* items = new std::vector<T>;
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
     	bool ok = wrapper.open();
-    	if (ok)
-    	{
-    		ok = wrapper.executeQuery(T::getStringForSelect());
-    		wrapper.close();
-    		if (ok)
-    		{
-    			const std::vector<std::string>& data = wrapper.getData();
-    			const size_t numberOfHeaders = wrapper.getTableHeaders().size();
-    			const size_t dataItems = data.size();
+        if (ok)
+        {
+            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
+            ok = wrapper.executeQuery(query.str());
+            wrapper.close();
+            if (ok)
+            {
+                const std::vector<std::string>& data = wrapper.getData();
+                const size_t numberOfHeaders = wrapper.getTableHeaders().size();
+                const size_t dataItems = data.size();
+                const std::vector<std::string>& headers = wrapper.getTableHeaders();
 
-    			for (size_t i = 0; i < dataItems;
-    								i = i + numberOfHeaders)
-    			{
-                    // const ActiveRecordId id = atoi(data[i].c_str());
-                    // const std::string firstName(data[i + 1]);
-                    // const std::string lastName(data[i + 2]);
-    				const T item(data, i);
-    				items->push_back(item);
-    			}
-    		}
-    	}
+                for (size_t i = 0; i < dataItems;
+                                 i = i + numberOfHeaders)
+                {
+                    std::string className("");
+                    for (int j = 0; j < numberOfHeaders; ++j)
+                    {
+                        if (headers[j] == "class")
+                        {
+                            className = data[i + j];
+                            break;
+                        }
+                    }
+
+                    T item(className);
+                    item.createAllPropertiesForSchema();
+                    for (int j = 0; j < numberOfHeaders; ++j)
+                    {
+                        if(schema[headers[j]] == "TEXT")
+                        {
+                            item.setStringProperty(headers[j], data[i + j]);
+                        }
+                        else if (schema[headers[j]] == "INTEGER")
+                        {
+                            item.setIntegerProperty(headers[j], atoi(data[i + j].c_str()));
+                        }
+                        else if (schema[headers[j]] == "BOOLEAN")
+                        {
+                            item.setBooleanProperty(headers[j], atoi(data[i + j].c_str()));
+                        }
+                        else if (schema[headers[j]] == "REAL")
+                        {
+                            item.setDoubleProperty(headers[j], atof(data[i + j].c_str()));
+                        }
+                    }
+                    items->push_back(item);
+                }
+            }
+        }
     	return items;
     }
 }

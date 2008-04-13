@@ -51,6 +51,8 @@ namespace metamodel
         std::string getName();
         
         virtual void createAllPropertiesForSchema();
+        
+        static std::string& getTableName();
     };
 }
 

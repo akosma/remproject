@@ -49,6 +49,20 @@ namespace storage
     {
     }
     
+    AnyProperty& AnyProperty::operator =(const AnyProperty& source)
+    {
+        if (this == &source)
+        {
+            return *this;
+        }
+
+        Property<std::string, Poco::Any>::operator=(source);
+        this->_isPrimaryKey = source._isPrimaryKey;
+
+        return *this;
+    }
+
+    
     /*!
      * AnyProperty Virtual destructor.
      */
@@ -130,7 +144,7 @@ namespace storage
         }
         if(type == typeid(bool))
         {
-            output << "INTEGER";
+            output << "BOOLEAN";
         }
         if(type == typeid(double))
         {

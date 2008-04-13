@@ -80,10 +80,10 @@ namespace storage
     }
 
     template <class N, class V> 
-    Property<N, V>::Property(const Property<N, V>& source) 
+    Property<N, V>::Property(const Property<N, V>& source)
+    : name(source.name)
+    , value(source.value)
     {
-        this->name = source.name;
-        this->value = source.value;
     }
 
     template <class N, class V> 
@@ -95,7 +95,9 @@ namespace storage
     Property<N, V>& Property<N, V>::operator =(const Property<N, V>& source)
     {
         if (this == &source)
+        {
             return *this;
+        }
 
         this->name = source.name;
         this->value = source.value;
