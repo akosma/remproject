@@ -1,6 +1,6 @@
-project (rem)
+PROJECT (rem)
 
-set (ui_SRCS
+SET (ui_SRCS
     ui/Application.h 
     ui/Application.cpp 
 
@@ -13,7 +13,7 @@ set (ui_SRCS
     ui/Main.cpp 
 )
 
-set (storage_SRCS
+SET (storage_SRCS
     storage/ActiveRecord.h 
 
     storage/Property.h 
@@ -28,7 +28,7 @@ set (storage_SRCS
     storage/SQLiteWrapper.h 
 )
 
-set (tests_SRCS
+SET (tests_SRCS
     tests/ActiveRecordTest.cpp 
     tests/ActiveRecordTest.h 
 
@@ -50,7 +50,7 @@ set (tests_SRCS
     tests/main.cpp
 )
 
-set (metamodel_SRCS
+SET (metamodel_SRCS
     metamodel/Container.h 
 
     metamodel/Actor.cpp 
@@ -69,13 +69,13 @@ set (metamodel_SRCS
     metamodel/UseCaseDiagram.h 
 )
 
-set (remtests_SRCS 
+SET (remtests_SRCS 
     ${metamodel_SRCS} 
     ${tests_SRCS}
     ${storage_SRCS}
 )
 
-set (Rem_SRCS
+SET (Rem_SRCS
     ${ui_SRCS}
 )
 
@@ -118,7 +118,7 @@ IF (APPLE)
     )
 
     # Header files are located in these directories
-    include_directories (
+    INCLUDE_DIRECTORIES (
         metamodel 
         storage 
         tests 
@@ -129,7 +129,7 @@ IF (APPLE)
     )
 
     # Libraries are located in these directories
-    link_directories (
+    LINK_DIRECTORIES (
         /usr/lib/ 
         /usr/local/lib 
         ${POCO_LIB_DIR}
@@ -146,38 +146,53 @@ IF (APPLE)
     SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
 
     # These are the symbols for the linker
-    link_libraries(
+    LINK_LIBRARIES(
         cppunit 
         sqlite3 
         PocoFoundation
         juce
     )
 
-    add_executable (remtest 
+    ADD_EXECUTABLE (remtest 
         ${remtests_SRCS}
     )
 
-    add_executable (Rem MACOSX_BUNDLE
+    ADD_EXECUTABLE (Rem MACOSX_BUNDLE
         ${Rem_SRCS}
     )
 
-    target_link_libraries(Rem ${EXTRA_LIBS})
+    TARGET_LINK_LIBRARIES(Rem ${EXTRA_LIBS})
 
-    add_custom_command(TARGET Rem POST_BUILD
+    ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
+    
+        # Copy the application icon into the bundle
         COMMAND mkdir
             ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources
 
         COMMAND cp
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
-                ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
+                 ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
 
+        # Create the disk image from a temporary subfolder
+        COMMAND mkdir 
+            ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
+
+        COMMAND cp
+            ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
+                 ${CMAKE_CURRENT_BINARY_DIR}/Rem
+
+        COMMAND hdiutil 
+            ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
+
+        COMMAND rm 
+            ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
     )
 
-    enable_testing()
-    add_test(remtest ${rem_SOURCE_DIR}/../bin/remtest)
+    ENABLE_TESTING()
+    ADD_TEST(remtest ${rem_SOURCE_DIR}/../bin/remtest)
     
     # This custom target builds the documentation using Doxygen and LaTeX
-    add_custom_target(doc ALL 
+    ADD_CUSTOM_TARGET(doc ALL 
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
 
         # Generate the project's documentation (using Doxygen installed via MacPorts)
