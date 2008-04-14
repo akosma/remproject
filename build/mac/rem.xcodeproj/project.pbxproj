@@ -485,7 +485,10 @@
 		3A4EB45E0D8D48E000C4895F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -494,14 +497,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../lib/poco/Foundation/include\"",
+					/usr/include,
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
 					/usr/local/include,
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/\"/**",
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/lib\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
@@ -516,14 +520,17 @@
 				PRODUCT_NAME = remtest;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
 		3A4EB45F0D8D48E000C4895F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -531,14 +538,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../lib/poco/Foundation/include\"",
+					/usr/include,
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
 					/usr/local/include,
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/lib,
-					"\"$(SRCROOT)/../../lib/poco/lib/Darwin/\"/**",
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/lib\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
@@ -553,14 +561,17 @@
 				PRODUCT_NAME = remtest;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		3A7596600DAFC351000AC38C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -584,7 +595,10 @@
 		3A7596610DAFC351000AC38C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -595,7 +609,7 @@
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce/bin\"";
-				OTHER_LDFLAGS = "-ljucedebug";
+				OTHER_LDFLAGS = "-ljuce";
 				PREBINDING = NO;
 				PRODUCT_NAME = Rem;
 				SDKROOT = "";

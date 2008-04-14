@@ -1,5 +1,9 @@
 PROJECT (rem)
 
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4.0)
+SET(CMAKE_COLOR_MAKEFILE ON)
+SET(CMAKE_VERBOSE_MAKEFILE OFF)
+
 SET (ui_SRCS
     ui/Application.h 
     ui/Application.cpp 
@@ -70,8 +74,8 @@ SET (metamodel_SRCS
 )
 
 SET (remtests_SRCS 
-    ${metamodel_SRCS} 
     ${tests_SRCS}
+    ${metamodel_SRCS} 
     ${storage_SRCS}
 )
 
@@ -80,13 +84,6 @@ SET (Rem_SRCS
 )
 
 IF (APPLE)
-    # Build against the correct binaries, depending on the processor architecture
-    IF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
-        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/i386)
-    ELSE (CMAKE_OSX_ARCHITECTURES MATCHES i386)
-        SET (POCO_LIB_DIR ${rem_SOURCE_DIR}/../lib/poco/lib/Darwin/Power_Macintosh)
-    ENDIF (CMAKE_OSX_ARCHITECTURES MATCHES i386)
-
     # This information is needed to compile the GUI application as a "bundle".
     # Info on how to use OSX frameworks taken from
     # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
@@ -117,40 +114,27 @@ IF (APPLE)
         ${OPEN_GL}
     )
 
-    # Header files are located in these directories
-    INCLUDE_DIRECTORIES (
-        metamodel 
-        storage 
-        tests 
-        /usr/local/include 
-        /usr/include 
-        ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
-        ${rem_SOURCE_DIR}/../lib/juce
-    )
-
-    # Libraries are located in these directories
-    LINK_DIRECTORIES (
-        /usr/lib/ 
-        /usr/local/lib 
-        ${POCO_LIB_DIR}
-        ${rem_SOURCE_DIR}/../lib/juce/bin
-    )
-
     # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
     # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
     SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
+    SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
     SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
     SET(MACOSX_BUNDLE_BUNDLE_NAME Rem)
     SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION})
     SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
     SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
 
-    # These are the symbols for the linker
-    LINK_LIBRARIES(
-        cppunit 
-        sqlite3 
-        PocoFoundation
-        juce
+    # Header files are located in these directories
+    INCLUDE_DIRECTORIES (
+        /usr/local/include/cppunit/../  # Somehow the tests won't build if not specified like this!
+        ${rem_SOURCE_DIR}/../lib/poco-universal/poco/include
+        ${rem_SOURCE_DIR}/../lib/juce
+    )
+
+    # Libraries are located in these directories
+    LINK_DIRECTORIES (
+        ${rem_SOURCE_DIR}/../lib/poco-universal/poco/lib
+        ${rem_SOURCE_DIR}/../lib/juce/bin
     )
 
     ADD_EXECUTABLE (remtest 
@@ -161,7 +145,17 @@ IF (APPLE)
         ${Rem_SRCS}
     )
 
-    TARGET_LINK_LIBRARIES(Rem ${EXTRA_LIBS})
+    # These are the symbols for the linker
+    TARGET_LINK_LIBRARIES(Rem 
+        ${EXTRA_LIBS}
+        juce
+    )
+
+    TARGET_LINK_LIBRARIES(remtest
+        cppunit 
+        sqlite3 
+        PocoFoundation
+    )
 
     ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
     
@@ -189,7 +183,7 @@ IF (APPLE)
     )
 
     ENABLE_TESTING()
-    ADD_TEST(remtest ${rem_SOURCE_DIR}/../bin/remtest)
+    ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
     
     # This custom target builds the documentation using Doxygen and LaTeX
     ADD_CUSTOM_TARGET(doc ALL 
