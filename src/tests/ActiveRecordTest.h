@@ -34,6 +34,8 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::ActiveRecordTest);
         CPPUNIT_TEST(testSaveIndividualInstance);
         CPPUNIT_TEST(testRetrieveAllInstances);
+        CPPUNIT_TEST(testRetrieveOneInstance);
+        CPPUNIT_TEST(testSearchingForInstancesNotExistingInDatabaseReturnsNull);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -64,6 +66,10 @@ namespace tests
         void testSaveIndividualInstance();
         
         void testRetrieveAllInstances();
+
+        void testRetrieveOneInstance();
+        
+        void testSearchingForInstancesNotExistingInDatabaseReturnsNull();
 
     };
 }

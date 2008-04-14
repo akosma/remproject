@@ -22,10 +22,6 @@
 #include "../metamodel/Diagram.h"
 #endif
 
-#ifndef USECASEDIAGRAM_H_
-#include "../metamodel/UseCaseDiagram.h"
-#endif
-
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -68,11 +64,12 @@ namespace tests
     {
         const std::string first("first");
         const std::string second("second");
+        const std::string diagramClassName("usecase");
 
         metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        metamodel::UseCaseDiagram* firstDiagram = new metamodel::UseCaseDiagram(first);
+        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName, first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
@@ -81,7 +78,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::UseCaseDiagram* secondDiagram = new metamodel::UseCaseDiagram(second);
+        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName, second);
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
@@ -95,17 +92,24 @@ namespace tests
         project.removeElement(second);
         CPPUNIT_ASSERT_EQUAL(0, project.getCount());
         CPPUNIT_ASSERT(project.empty());
+
+        // Do not do the following:
+        // delete firstDiagram;
+        // delete secondDiagram;
+        // This is because "project" owns the diagrams and will delete them
+        // when the stack is cleared, at the end of this method.
     }
 	
 	void ProjectTest::testCanRemoveAllDiagramsFromProject()
 	{
         const std::string first("first");
         const std::string second("second");
+        const std::string diagramClassName("usecase");
 
         metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        metamodel::UseCaseDiagram* firstDiagram = new metamodel::UseCaseDiagram(first);
+        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName, first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
@@ -114,11 +118,17 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::UseCaseDiagram* secondDiagram = new metamodel::UseCaseDiagram(second);
+        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName, second);
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
 		project.removeAllElements();
         CPPUNIT_ASSERT_EQUAL(0, project.getCount());
+
+        // Do not do the following:
+        // delete firstDiagram;
+        // delete secondDiagram;
+        // This is because "project" owns the diagrams and will delete them
+        // when the stack is cleared, at the end of this method.
 	}
 }

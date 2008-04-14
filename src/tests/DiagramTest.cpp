@@ -14,12 +14,12 @@
 
 #include "DiagramTest.h"
 
-#ifndef ACTOR_H_
-#include "../metamodel/Actor.h"
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
 #endif
 
-#ifndef USECASEDIAGRAM_H_
-#include "../metamodel/UseCaseDiagram.h"
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
 #endif
 
 /*!
@@ -64,13 +64,15 @@ namespace tests
     {
 		std::string actor1Name("actor1");
 		std::string diagramName("diagramName");
+        std::string className("actor");
+        std::string diagramClassName("usecase");
 
-		metamodel::UseCaseDiagram diagram(diagramName);
+		metamodel::Diagram diagram(diagramClassName, diagramName);
 		CPPUNIT_ASSERT_EQUAL(diagramName, diagram.getName());
         CPPUNIT_ASSERT(diagram.empty());
         CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());
         
-        metamodel::Actor* actor1 = new metamodel::Actor();
+        metamodel::Element* actor1 = new metamodel::Element(className);
         actor1->setName(actor1Name);
         CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
 

@@ -40,7 +40,9 @@ namespace metamodel
         /*!
          *  Element constructor.
          */
-        Element(std::string);
+        Element(std::string&);
+        
+        Element(std::string&, storage::ID, storage::AnyPropertyMap&);
 
         /*!
          *  Element virtual destructor.

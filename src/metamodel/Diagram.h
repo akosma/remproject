@@ -48,7 +48,7 @@ namespace metamodel
         /*!
          *  Diagram constructor.
          */
-        Diagram(const std::string&);
+        Diagram(const std::string&, const std::string&);
 
         /*!
          *  Diagram virtual destructor.

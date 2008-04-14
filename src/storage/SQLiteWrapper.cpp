@@ -286,7 +286,7 @@ namespace storage
             for (size_t i = 0; i < dataItems;
                              i = i + numberOfHeaders)
             {
-                schema[std::string(data[i + 1])] = data[i + 2];
+                schema[data[i + 1]] = data[i + 2];
             }            
         }
         return schema;

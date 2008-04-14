@@ -23,8 +23,13 @@ namespace metamodel
     /*!
      * Element Constructor.
      */
-    Element::Element(std::string className)
+    Element::Element(std::string& className)
     : storage::ActiveRecord<Element>(className)
+    {
+    }
+    
+    Element::Element(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
+    : storage::ActiveRecord<Element>(className, id, data)
     {
     }
     

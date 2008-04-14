@@ -14,8 +14,8 @@
 
 #include "ActiveRecordTest.h"
 
-#ifndef ACTOR_H_
-#include "../metamodel/Actor.h"
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
 #endif
 
 /*!
@@ -60,7 +60,9 @@ namespace tests
     {
         std::string name1("john");
         std::string name2("johnny");
-		metamodel::Actor* john = new metamodel::Actor();
+        std::string className("actor");
+
+		metamodel::Element* john = new metamodel::Element(className);
 		CPPUNIT_ASSERT(john->isNew());
 		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)john->getId());
 
@@ -83,7 +85,7 @@ namespace tests
 
         std::string name3("peter");
         std::string name4("pete");
-		metamodel::Actor* peter = new metamodel::Actor();
+		metamodel::Element* peter = new metamodel::Element(className);
 		CPPUNIT_ASSERT(peter->isNew());
 		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)peter->getId());
 
@@ -110,10 +112,32 @@ namespace tests
 
         CPPUNIT_ASSERT(!elem0.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
+        CPPUNIT_ASSERT(!elem0.isDirty());
+        CPPUNIT_ASSERT(!elem0.isNew());
 
         CPPUNIT_ASSERT(elem1.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.getString("class"));
+        CPPUNIT_ASSERT(!elem1.isDirty());
+        CPPUNIT_ASSERT(!elem1.isNew());
         
         delete elements;
+    }
+    
+    void ActiveRecordTest::testRetrieveOneInstance()
+    {
+        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        
+        CPPUNIT_ASSERT(elem->getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
+        CPPUNIT_ASSERT(!elem->isDirty());
+        CPPUNIT_ASSERT(!elem->isNew());
+        
+        delete elem;
+    }
+    
+    void ActiveRecordTest::testSearchingForInstancesNotExistingInDatabaseReturnsNull()
+    {
+        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(15879);
+        CPPUNIT_ASSERT(elem == NULL);
     }
 }

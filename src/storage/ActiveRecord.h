@@ -66,7 +66,7 @@ namespace storage
          * Constructor. Used to create instances whose state is
          * already present in the database.
          */
-        ActiveRecord(std::string&, ID id, std::vector<std::string>&);
+        ActiveRecord(std::string&, ID, AnyPropertyMap&);
         
         /*!
          * Copy constructor.
@@ -166,6 +166,9 @@ namespace storage
         void update();
 
     private:
+        static std::vector<storage::AnyPropertyMap>* getPropertyMaps(SQLiteWrapper& wrapper, std::map<std::string, std::string>&);
+
+    private:
 
         //! The ID of the current instance.
         ID _id;
@@ -201,11 +204,11 @@ namespace storage
      * already present in the database.
      */
     template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string& className, ID id, std::vector<std::string>& elements)
+    ActiveRecord<T>::ActiveRecord(std::string& className, ID id, AnyPropertyMap& data)
     : _id        (id)
     , _isNew     (false)
     , _isDirty   (false)
-    , _data      ()
+    , _data      (data)
     , _className (className)
     {
     }
@@ -483,17 +486,20 @@ namespace storage
     	bool ok = wrapper.open();
     	if (ok)
     	{
+            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
     		ok = wrapper.executeQuery(query.str());
     		wrapper.close();
     		if (ok)
     		{
-    			const std::vector<std::string>& data = wrapper.getData();
-    			const size_t dataItems = data.size();
-
-                // const ActiveRecordId id = atoi(data[0].c_str());
-                // const std::string firstName(data[1]);
-                // const std::string lastName(data[2]);
-				item = new T(data);
+                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(wrapper, schema);
+                std::vector<storage::AnyPropertyMap>::iterator iter;
+                for (iter = maps->begin(); iter != maps->end(); ++iter)
+                {
+                    std::string className = iter->getString("class");
+                    ID currentId = iter->getInteger("id");
+                    item = new T(className, currentId, *iter);
+                }
+                delete maps;
     		}
     	}
     	return item;
@@ -520,53 +526,63 @@ namespace storage
         {
             std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
             ok = wrapper.executeQuery(query.str());
-            wrapper.close();
             if (ok)
             {
-                const std::vector<std::string>& data = wrapper.getData();
-                const size_t numberOfHeaders = wrapper.getTableHeaders().size();
-                const size_t dataItems = data.size();
-                const std::vector<std::string>& headers = wrapper.getTableHeaders();
-
-                for (size_t i = 0; i < dataItems;
-                                 i = i + numberOfHeaders)
+                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(wrapper, schema);
+                std::vector<storage::AnyPropertyMap>::iterator iter;
+                for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
-                    std::string className("");
-                    for (int j = 0; j < numberOfHeaders; ++j)
-                    {
-                        if (headers[j] == "class")
-                        {
-                            className = data[i + j];
-                            break;
-                        }
-                    }
-
-                    T item(className);
-                    item.createAllPropertiesForSchema();
-                    for (int j = 0; j < numberOfHeaders; ++j)
-                    {
-                        if(schema[headers[j]] == "TEXT")
-                        {
-                            item.setStringProperty(headers[j], data[i + j]);
-                        }
-                        else if (schema[headers[j]] == "INTEGER")
-                        {
-                            item.setIntegerProperty(headers[j], atoi(data[i + j].c_str()));
-                        }
-                        else if (schema[headers[j]] == "BOOLEAN")
-                        {
-                            item.setBooleanProperty(headers[j], atoi(data[i + j].c_str()));
-                        }
-                        else if (schema[headers[j]] == "REAL")
-                        {
-                            item.setDoubleProperty(headers[j], atof(data[i + j].c_str()));
-                        }
-                    }
+                    std::string className = iter->getString("class");
+                    ID currentId = iter->getInteger("id");
+                    T item(className, currentId, *iter);
                     items->push_back(item);
                 }
+                delete maps;
             }
+            wrapper.close();
         }
     	return items;
+    }
+    
+    template <class T>
+    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(SQLiteWrapper& wrapper, std::map<std::string, std::string>& schema)
+    {
+        std::vector<storage::AnyPropertyMap>* maps = new std::vector<storage::AnyPropertyMap>();
+        const std::vector<std::string>& data = wrapper.getData();
+        const size_t numberOfHeaders = wrapper.getTableHeaders().size();
+        const size_t dataItems = data.size();
+        const std::vector<std::string>& headers = wrapper.getTableHeaders();
+
+        for (size_t i = 0; i < dataItems;
+                         i = i + numberOfHeaders)
+        {
+            AnyPropertyMap instanceData;
+            for (int j = 0; j < numberOfHeaders; ++j)
+            {
+                const std::string& currentHeader = headers[j];
+                std::string& currentDataType = schema[currentHeader];
+                const std::string& currentValue = data[i + j];
+                
+                if(currentDataType == "TEXT")
+                {
+                    instanceData.setStringProperty(currentHeader, currentValue);
+                }
+                else if (currentDataType == "INTEGER")
+                {
+                    instanceData.setIntegerProperty(currentHeader, atoi(currentValue.c_str()));
+                }
+                else if (currentDataType == "BOOLEAN")
+                {
+                    instanceData.setBooleanProperty(currentHeader, atoi(currentValue.c_str()));
+                }
+                else if (currentDataType == "REAL")
+                {
+                    instanceData.setDoubleProperty(currentHeader, atof(currentValue.c_str()));
+                }
+            }
+            maps->push_back(instanceData);
+        }
+        return maps;
     }
 }
 

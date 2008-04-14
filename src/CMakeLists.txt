@@ -57,9 +57,6 @@ SET (tests_SRCS
 SET (metamodel_SRCS
     metamodel/Container.h 
 
-    metamodel/Actor.cpp 
-    metamodel/Actor.h 
-
     metamodel/Diagram.cpp 
     metamodel/Diagram.h 
 
@@ -68,9 +65,6 @@ SET (metamodel_SRCS
 
     metamodel/Project.cpp 
     metamodel/Project.h 
-
-    metamodel/UseCaseDiagram.cpp 
-    metamodel/UseCaseDiagram.h 
 )
 
 SET (remtests_SRCS 
