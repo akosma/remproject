@@ -56,7 +56,8 @@ namespace tests
     /*!
      * Tests something.
      */
-    void ActiveRecordTest::testSaveIndividualInstance()
+    
+    void ActiveRecordTest::testCanSaveIndividualInstance()
     {
         std::string name1("john");
         std::string name2("johnny");
@@ -100,9 +101,12 @@ namespace tests
         peter->setBooleanProperty("valid", true);
         peter->save();
 		CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
+		
+        delete john;
+        delete peter;
     }
     
-    void ActiveRecordTest::testRetrieveAllInstances()
+    void ActiveRecordTest::testCanRetrieveAllInstances()
     {
         std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findAll();
         
@@ -123,7 +127,7 @@ namespace tests
         delete elements;
     }
     
-    void ActiveRecordTest::testRetrieveOneInstance()
+    void ActiveRecordTest::testCanRetrieveOneInstance()
     {
         metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(1);
         
@@ -139,5 +143,79 @@ namespace tests
     {
         metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(15879);
         CPPUNIT_ASSERT(elem == NULL);
+    }
+    
+    void ActiveRecordTest::testDestroyingObjectsRemovesThemFromTheDatabase()
+    {
+        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        
+        CPPUNIT_ASSERT(elem->getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
+        CPPUNIT_ASSERT(!elem->isDirty());
+        CPPUNIT_ASSERT(!elem->isNew());
+
+        elem->destroy();
+        CPPUNIT_ASSERT(elem->isDirty());
+        CPPUNIT_ASSERT(elem->isNew());
+        delete elem;
+        
+        elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        CPPUNIT_ASSERT(elem == NULL);
+        
+        storage::ActiveRecord<metamodel::Element>::removeAll();
+        
+        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findAll();
+        CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
+    }
+
+    void ActiveRecordTest::testCanUseCopyConstructorSafely()
+    {
+        std::string name("john");
+        std::string className("actor");
+
+		metamodel::Element* john = new metamodel::Element(className);
+        john->setName(name);
+
+		metamodel::Element* peter = new metamodel::Element(*john);
+
+		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
+
+		john->save();
+		CPPUNIT_ASSERT(!john->isNew());
+		CPPUNIT_ASSERT(!john->isDirty());
+
+        // We saved the original, but both objects are indeed different!
+		CPPUNIT_ASSERT(peter->isNew());
+		CPPUNIT_ASSERT(peter->isDirty());
+
+        delete john;
+        delete peter;
+    }
+    
+    void ActiveRecordTest::testCanUseAssignmentOperatorSafely()
+    {
+        std::string name("john");
+        std::string className("actor");
+
+		metamodel::Element* john = new metamodel::Element(className);
+        john->setName(name);
+
+		metamodel::Element* peter = new metamodel::Element(className);
+
+        // If we just did "peter = john" then we'd have two pointers 
+        // towards the same object!
+        *peter = *john;
+
+		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
+
+		john->save();
+		CPPUNIT_ASSERT(!john->isNew());
+		CPPUNIT_ASSERT(!john->isDirty());
+
+		CPPUNIT_ASSERT(peter->isNew());
+		CPPUNIT_ASSERT(peter->isDirty());
+
+        delete john;
+        delete peter;
     }
 }

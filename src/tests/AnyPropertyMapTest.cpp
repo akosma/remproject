@@ -126,4 +126,80 @@ namespace tests
             CPPUNIT_ASSERT_EQUAL(e.message(), std::string("RefAnyCast: Failed to convert between const Any types"));
         }
     }
+    
+    void AnyPropertyMapTest::testCanUseCopyConstructorSafely()
+    {
+        storage::AnyPropertyMap map;
+
+        std::string name1("prop1");
+        std::string name2("prop2");
+        std::string name3("prop3");
+        std::string name4("prop4");
+        
+        bool ok = true;
+        std::string someValue("name");
+        int integer = 34;
+        double d = 45.24;
+        
+        map.setBooleanProperty(name1, ok);
+        map.setStringProperty(name2, someValue);
+        map.setIntegerProperty(name3, integer);
+        map.setDoubleProperty(name4, d);
+        
+        storage::AnyPropertyMap mapCopy(map);
+
+        CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name1));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name2));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
+        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
+        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
+        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
+        CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
+
+        std::string tableName("test");
+        const int id = 23;
+        CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), mapCopy.getStringForInsert(tableName));
+        CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), mapCopy.getStringForUpdate(tableName, id));
+        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), mapCopy.getStringForCreateTable(tableName));
+    }
+    
+    void AnyPropertyMapTest::testCanUseAssignmentOperatorSafely()
+    {
+        storage::AnyPropertyMap map;
+
+        std::string name1("prop1");
+        std::string name2("prop2");
+        std::string name3("prop3");
+        std::string name4("prop4");
+        
+        bool ok = true;
+        std::string someValue("name");
+        int integer = 34;
+        double d = 45.24;
+        
+        map.setBooleanProperty(name1, ok);
+        map.setStringProperty(name2, someValue);
+        map.setIntegerProperty(name3, integer);
+        map.setDoubleProperty(name4, d);
+        
+        storage::AnyPropertyMap mapCopy = map;
+
+        CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name1));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name2));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
+        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
+        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
+        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
+        CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
+
+        std::string tableName("test");
+        const int id = 23;
+        CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), mapCopy.getStringForInsert(tableName));
+        CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), mapCopy.getStringForUpdate(tableName, id));
+        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), mapCopy.getStringForCreateTable(tableName));
+    }
 }

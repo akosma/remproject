@@ -32,10 +32,13 @@ namespace tests
     class ActiveRecordTest : public CppUnit::TestFixture
     {
         CPPUNIT_TEST_SUITE(tests::ActiveRecordTest);
-        CPPUNIT_TEST(testSaveIndividualInstance);
-        CPPUNIT_TEST(testRetrieveAllInstances);
-        CPPUNIT_TEST(testRetrieveOneInstance);
+        CPPUNIT_TEST(testCanSaveIndividualInstance);
+        CPPUNIT_TEST(testCanRetrieveAllInstances);
+        CPPUNIT_TEST(testCanRetrieveOneInstance);
         CPPUNIT_TEST(testSearchingForInstancesNotExistingInDatabaseReturnsNull);
+        CPPUNIT_TEST(testDestroyingObjectsRemovesThemFromTheDatabase);
+        CPPUNIT_TEST(testCanUseCopyConstructorSafely);
+        CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -63,14 +66,14 @@ namespace tests
         /*!
          * Tests something.
          */
-        void testSaveIndividualInstance();
-        
-        void testRetrieveAllInstances();
 
-        void testRetrieveOneInstance();
-        
+        void testCanSaveIndividualInstance();        
+        void testCanRetrieveAllInstances();
+        void testCanRetrieveOneInstance();
         void testSearchingForInstancesNotExistingInDatabaseReturnsNull();
-
+        void testDestroyingObjectsRemovesThemFromTheDatabase();
+        void testCanUseCopyConstructorSafely();
+        void testCanUseAssignmentOperatorSafely();
     };
 }
 

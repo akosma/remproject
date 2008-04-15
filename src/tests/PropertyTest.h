@@ -34,6 +34,8 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::PropertyTest);
         CPPUNIT_TEST(testCanCreatePropertiesOfDifferentTypes);
         CPPUNIT_TEST(testDefaultPropertiesAcceptAnyValue);
+        CPPUNIT_TEST(testCanUseCopyConstructorSafely);
+        CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -63,6 +65,8 @@ namespace tests
          */
          void testCanCreatePropertiesOfDifferentTypes();
          void testDefaultPropertiesAcceptAnyValue();
+         void testCanUseCopyConstructorSafely();
+         void testCanUseAssignmentOperatorSafely();
 
     };
 }

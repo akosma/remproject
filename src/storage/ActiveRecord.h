@@ -120,9 +120,13 @@ namespace storage
          * to "insert()" and "update()". 
          */
         void save();
+        
+        void destroy();
 
         static std::vector<T>* findAll();
         static T* findById(const ID id);
+        static void removeAll();
+        static void remove(const ID id);
 
         void setStringProperty(const std::string&, const std::string&);
         void setIntegerProperty(const std::string&, const int);
@@ -459,6 +463,50 @@ namespace storage
     void ActiveRecord<T>::setDirty()
     {
     	_isDirty = true;
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::destroy()
+    {
+        ActiveRecord<T>::remove(_id);
+    	_isDirty = true;
+        _isNew = true;
+    }
+
+    template <class T>
+    void ActiveRecord<T>::remove(const ID id)
+    {
+        std::stringstream query;
+        query << "DELETE FROM ";
+        query << T::getTableName();
+        query << " WHERE id = ";
+        query << id;
+        query << ";";
+        
+    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
+    	bool ok = wrapper.open();
+    	if (ok)
+    	{
+    		ok = wrapper.executeQuery(query.str());
+    		wrapper.close();
+    	}
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::removeAll()
+    {
+        std::stringstream query;
+        query << "DELETE FROM ";
+        query << T::getTableName();
+        query << ";";
+        
+    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
+    	bool ok = wrapper.open();
+    	if (ok)
+    	{
+    		ok = wrapper.executeQuery(query.str());
+    		wrapper.close();
+    	}
     }
     
     /*!

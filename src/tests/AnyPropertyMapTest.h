@@ -34,6 +34,8 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::AnyPropertyMapTest);
         CPPUNIT_TEST(testAddAndRetrieveProperties);
         CPPUNIT_TEST(testRetrievingInvalidPropertiesRaiseException);
+        CPPUNIT_TEST(testCanUseCopyConstructorSafely);
+        CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -63,6 +65,8 @@ namespace tests
          */
         void testAddAndRetrieveProperties();
         void testRetrievingInvalidPropertiesRaiseException();
+        void testCanUseCopyConstructorSafely();
+        void testCanUseAssignmentOperatorSafely();
 
     };
 }

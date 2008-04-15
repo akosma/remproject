@@ -13,8 +13,6 @@
  */
 
 #include "PropertyTest.h"
-#include <Poco/Any.h>
-#include <iostream>
 
 #ifndef PROPERTY_H_
 #include "../storage/Property.h"
@@ -125,5 +123,81 @@ namespace tests
         double stored4 = prop.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), prop.getNameValuePair());
+    }
+    
+    void PropertyTest::testCanUseCopyConstructorSafely()
+    {
+        bool ok = true;
+        std::string someValue("name");
+        int integer = 34;
+        double d = 45.24;
+        
+        std::string name("prop");
+
+        storage::AnyProperty prop(name);
+        storage::AnyProperty propCopy(prop);
+        CPPUNIT_ASSERT_EQUAL(propCopy.getName(), prop.getName());
+
+        prop.setBoolean(ok);
+        storage::AnyProperty propCopy2(prop);
+        bool stored1 = propCopy2.getBoolean();
+        CPPUNIT_ASSERT_EQUAL(ok, stored1);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), propCopy2.getNameValuePair());
+
+        prop.setInteger(integer);
+        storage::AnyProperty propCopy3(prop);
+        int stored2 = propCopy3.getInteger();
+        CPPUNIT_ASSERT_EQUAL(integer, stored2);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), propCopy3.getNameValuePair());
+
+        prop.setString(someValue);
+        storage::AnyProperty propCopy4(prop);
+        std::string stored3 = propCopy4.getString();
+        CPPUNIT_ASSERT_EQUAL(someValue, stored3);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), propCopy4.getNameValuePair());
+
+        prop.setDouble(d);
+        storage::AnyProperty propCopy5(prop);
+        double stored4 = propCopy5.getDouble();
+        CPPUNIT_ASSERT_EQUAL(d, stored4);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
+    }
+    
+    void PropertyTest::testCanUseAssignmentOperatorSafely()
+    {
+        bool ok = true;
+        std::string someValue("name");
+        int integer = 34;
+        double d = 45.24;
+        
+        std::string name("prop");
+
+        storage::AnyProperty prop(name);
+        storage::AnyProperty propCopy = prop;
+        CPPUNIT_ASSERT_EQUAL(propCopy.getName(), prop.getName());
+
+        prop.setBoolean(ok);
+        storage::AnyProperty propCopy2 = prop;
+        bool stored1 = propCopy2.getBoolean();
+        CPPUNIT_ASSERT_EQUAL(ok, stored1);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), propCopy2.getNameValuePair());
+
+        prop.setInteger(integer);
+        storage::AnyProperty propCopy3 = prop;
+        int stored2 = propCopy3.getInteger();
+        CPPUNIT_ASSERT_EQUAL(integer, stored2);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), propCopy3.getNameValuePair());
+
+        prop.setString(someValue);
+        storage::AnyProperty propCopy4 = prop;
+        std::string stored3 = propCopy4.getString();
+        CPPUNIT_ASSERT_EQUAL(someValue, stored3);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), propCopy4.getNameValuePair());
+
+        prop.setDouble(d);
+        storage::AnyProperty propCopy5 = prop;
+        double stored4 = propCopy5.getDouble();
+        CPPUNIT_ASSERT_EQUAL(d, stored4);
+        CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
     }
 }
