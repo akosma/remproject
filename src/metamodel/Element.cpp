@@ -26,6 +26,7 @@ namespace metamodel
     Element::Element(std::string& className)
     : storage::ActiveRecord<Element>(className)
     {
+        createSchemaStructure();
     }
     
     Element::Element(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
@@ -40,18 +41,9 @@ namespace metamodel
     {
     }
 
-    void Element::setName(std::string& name)
+    void Element::createSchemaStructure()
     {
-        setStringProperty("name", name);
-    }
-    
-    std::string Element::getName()
-    {
-        return getString("name");
-    }
-    
-    void Element::createAllPropertiesForSchema()
-    {
+        addStringProperty("class");
         addStringProperty("name");
         addIntegerProperty("x");
         addIntegerProperty("y");

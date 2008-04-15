@@ -41,24 +41,26 @@ namespace metamodel
      *
      *  
      */
-    class Diagram : public Container<Element>//, public storage::ActiveRecord<Diagram>
+    class Diagram : public Container<Element>, public storage::ActiveRecord<Diagram>
     {
     public:
 
         /*!
          *  Diagram constructor.
          */
-        Diagram(const std::string&, const std::string&);
+        Diagram(std::string&);
+
+        Diagram(std::string&, storage::ID, storage::AnyPropertyMap&);
 
         /*!
          *  Diagram virtual destructor.
          */
         virtual ~Diagram();
 
-        const std::string& getName() const;
-		
-	private:
-		std::string _name;
+        static std::string& getTableName();
+
+    private:
+        void createSchemaStructure();
 	};
 }
 

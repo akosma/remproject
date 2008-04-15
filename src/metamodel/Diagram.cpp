@@ -23,13 +23,18 @@ namespace metamodel
     /*!
      * Diagram Constructor.
      */
-    Diagram::Diagram(const std::string& className, const std::string& name)
-	: Container<Element>()
-//	, storage::ActiveRecord<Diagram>(std::string("diagrams"))
-	, _name(name)
+    Diagram::Diagram(std::string& className)
+    : metamodel::Container<Element>()
+    , storage::ActiveRecord<Diagram>(className)
+    {
+        createSchemaStructure();
+    }
+
+    Diagram::Diagram(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
+    : storage::ActiveRecord<Diagram>(className, id, data)
     {
     }
-    
+
     /*!
      * Diagram Virtual destructor.
      */
@@ -37,8 +42,19 @@ namespace metamodel
     {
     }
 
-    const std::string& Diagram::getName() const
+    void Diagram::createSchemaStructure()
     {
-        return _name;
+        addStringProperty("class");
+        addStringProperty("name");
+        addIntegerProperty("x");
+        addIntegerProperty("y");
+        addDoubleProperty("value");
+        addBooleanProperty("valid");
+    }
+
+    std::string& Diagram::getTableName()
+    {
+        static std::string tableName("diagrams");
+        return tableName;
     }
 }

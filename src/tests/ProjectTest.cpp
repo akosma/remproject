@@ -62,14 +62,15 @@ namespace tests
      */
     void ProjectTest::testProjectHasManyDiagrams()
     {
-        const std::string first("first");
-        const std::string second("second");
-        const std::string diagramClassName("usecase");
+        std::string first("first");
+        std::string second("second");
+        std::string diagramClassName("usecase");
 
         metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName, first);
+        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        firstDiagram->setName(first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
@@ -78,7 +79,8 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName, second);
+        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        secondDiagram->setName(second);
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 
@@ -102,14 +104,15 @@ namespace tests
 	
 	void ProjectTest::testCanRemoveAllDiagramsFromProject()
 	{
-        const std::string first("first");
-        const std::string second("second");
-        const std::string diagramClassName("usecase");
+        std::string first("first");
+        std::string second("second");
+        std::string diagramClassName("usecase");
 
         metamodel::Project project;
         CPPUNIT_ASSERT(project.empty());
         
-        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName, first);
+        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        firstDiagram->setName(first);
         
         project.addElement(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getCount());
@@ -118,7 +121,9 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName, second);
+        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        secondDiagram->setName(second);
+        
         project.addElement(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getCount());
 

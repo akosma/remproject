@@ -67,7 +67,8 @@ namespace tests
         std::string className("actor");
         std::string diagramClassName("usecase");
 
-		metamodel::Diagram diagram(diagramClassName, diagramName);
+		metamodel::Diagram diagram(diagramClassName);
+        diagram.setName(diagramName);
 		CPPUNIT_ASSERT_EQUAL(diagramName, diagram.getName());
         CPPUNIT_ASSERT(diagram.empty());
         CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());

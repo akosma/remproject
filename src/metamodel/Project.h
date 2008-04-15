@@ -38,7 +38,7 @@ namespace metamodel
      *
      *  
      */
-    class Project : public Container<Diagram>//, public storage::ActiveRecord<Project>
+    class Project : public Container<Diagram>, public storage::ActiveRecord<Project>
     {
     public:
 
@@ -47,10 +47,17 @@ namespace metamodel
          */
         Project();
 
+        Project(std::string&, storage::ID, storage::AnyPropertyMap&);
+
         /*!
          * Project virtual destructor.
          */
         virtual ~Project();
+        
+        static std::string& getTableName();
+        
+    private:
+        void createSchemaStructure();
 	};
 }
 

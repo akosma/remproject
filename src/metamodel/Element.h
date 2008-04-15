@@ -41,7 +41,7 @@ namespace metamodel
          *  Element constructor.
          */
         Element(std::string&);
-        
+
         Element(std::string&, storage::ID, storage::AnyPropertyMap&);
 
         /*!
@@ -49,12 +49,11 @@ namespace metamodel
          */
         virtual ~Element();
         
-        void setName(std::string&);
-        std::string getName();
-        
-        virtual void createAllPropertiesForSchema();
-        
         static std::string& getTableName();
+        
+    private:
+        void createSchemaStructure();
+        
     };
 }
 

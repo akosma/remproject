@@ -109,6 +109,8 @@ namespace storage
          * \return An ID (long long) value.
          */
         const ID getId() const;
+        void setName(std::string&);
+        std::string getName();
 
         /*!
          * This method is the core of the ActiveRecord family of
@@ -122,11 +124,11 @@ namespace storage
         void save();
         
         void destroy();
+        static void removeAll();
+        static void remove(const ID id);
 
         static std::vector<T>* findAll();
         static T* findById(const ID id);
-        static void removeAll();
-        static void remove(const ID id);
 
         void setStringProperty(const std::string&, const std::string&);
         void setIntegerProperty(const std::string&, const int);
@@ -151,8 +153,6 @@ namespace storage
         void addIntegerProperty(const std::string&);
         void addBooleanProperty(const std::string&);
         void addDoubleProperty(const std::string&);
-
-        virtual void createAllPropertiesForSchema() = 0;
 
     private:
         /*!
@@ -398,9 +398,7 @@ namespace storage
     	bool ok = wrapper.open();
     	if (!wrapper.tableExists(T::getTableName()))
     	{
-            createAllPropertiesForSchema();
             _data.createPrimaryKey("id");
-            addStringProperty("class");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
     	}
     	if (ok)
@@ -453,6 +451,18 @@ namespace storage
     {
     	return _id;
     }
+    
+    template <class T>
+    void ActiveRecord<T>::setName(std::string& name)
+    {
+        setStringProperty("name", name);
+    }
+
+    template <class T>
+    std::string ActiveRecord<T>::getName()
+    {
+        return getString("name");
+    }    
 
     /*!
      * Used by subclasses to change the "_isDirty" flag in the 

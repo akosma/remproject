@@ -24,12 +24,37 @@ namespace metamodel
      * Project Constructor.
      */
     Project::Project()
-    : Container<Diagram>()
-//    , storage::ActiveRecord<Project>(std::string("projects"))
+    : metamodel::Container<Diagram>()
+    , storage::ActiveRecord<Project>(std::string("project"))
+    {
+        createSchemaStructure();
+    }
+
+    Project::Project(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
+    : storage::ActiveRecord<Project>(className, id, data)
     {
     }
-	
-	Project::~Project()
-	{
-	}
+    
+    /*!
+     * Project Virtual destructor.
+     */
+    Project::~Project()
+    {
+    }
+
+    void Project::createSchemaStructure()
+    {
+        addStringProperty("class");
+        addStringProperty("author");
+        addIntegerProperty("created_on");
+        addIntegerProperty("modified_on");
+        addDoubleProperty("version");
+        addBooleanProperty("valid");
+    }
+
+    std::string& Project::getTableName()
+    {
+        static std::string tableName("projects");
+        return tableName;
+    }
 }
