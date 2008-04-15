@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rem", "Rem.vcproj", "{35ACF5B3-5A7F-4F1A-8A08-AD8B437CA089}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "remtest", "remtest.vcproj", "{2FAE6D5C-B782-49E2-8C83-0F9E77BCD962}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35ACF5B3-5A7F-4F1A-8A08-AD8B437CA089}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35ACF5B3-5A7F-4F1A-8A08-AD8B437CA089}.Debug|Win32.Build.0 = Debug|Win32
+		{35ACF5B3-5A7F-4F1A-8A08-AD8B437CA089}.Release|Win32.ActiveCfg = Release|Win32
+		{35ACF5B3-5A7F-4F1A-8A08-AD8B437CA089}.Release|Win32.Build.0 = Release|Win32
+		{2FAE6D5C-B782-49E2-8C83-0F9E77BCD962}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2FAE6D5C-B782-49E2-8C83-0F9E77BCD962}.Debug|Win32.Build.0 = Debug|Win32
+		{2FAE6D5C-B782-49E2-8C83-0F9E77BCD962}.Release|Win32.ActiveCfg = Release|Win32
+		{2FAE6D5C-B782-49E2-8C83-0F9E77BCD962}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

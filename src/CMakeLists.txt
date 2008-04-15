@@ -77,6 +77,57 @@ SET (Rem_SRCS
     ${ui_SRCS}
 )
 
+IF (WIN32)
+	# /Od -> disable optimization
+	# /W3 -> warning level
+	# /ZI -> program database for edit & continue
+	# /Gm -> enable minimal rebuild
+	# /RTC1 -> runtime checks: stack frames + uninitialized variables
+	# /MTd -> Multi-threaded Debug
+	SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
+	SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
+	SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO")
+
+    # Header files are located in these directories
+    INCLUDE_DIRECTORIES (
+        C:/cppunit-1.12.0/include
+        ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
+        ${rem_SOURCE_DIR}/../lib/juce
+        ${rem_SOURCE_DIR}/../lib/sqlite
+    )
+
+    # Libraries are located in these directories
+    LINK_DIRECTORIES (
+		C:/cppunit-1.12.0/lib
+        ${rem_SOURCE_DIR}/../lib/poco/lib
+        ${rem_SOURCE_DIR}/../lib/juce/bin
+        ${rem_SOURCE_DIR}/../lib/sqlite
+    )
+
+    ADD_EXECUTABLE (remtest 
+        ${remtests_SRCS}
+    )
+
+    ADD_EXECUTABLE (Rem WIN32
+        ${Rem_SRCS}
+    )
+
+    # These are the symbols for the linker
+    TARGET_LINK_LIBRARIES(Rem
+        jucelib_static_Win32
+    )
+
+    TARGET_LINK_LIBRARIES(remtest
+        cppunitd
+        sqlite3 
+        PocoFoundation
+    )
+    
+    SET_SOURCE_FILES_PROPERTIES(${tests_SRCS} PROPERTIES
+		COMPILE_FLAGS "/MDd"
+    )    
+ENDIF (WIN32)
+
 IF (APPLE)
     # This information is needed to compile the GUI application as a "bundle".
     # Info on how to use OSX frameworks taken from
