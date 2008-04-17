@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A308A6D0DB7DE8000965CD1 /* Actor.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		3A308A6C0DB7DE8000965CD1 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = ../../src/ui/Actor.h; sourceTree = SOURCE_ROOT; };
+		3A308A6D0DB7DE8000965CD1 /* Actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = ../../src/ui/Actor.cpp; sourceTree = SOURCE_ROOT; };
 		3A3381A40D97BE9B0066C369 /* ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecord.h; path = ../../src/storage/ActiveRecord.h; sourceTree = SOURCE_ROOT; };
 		3A3556820D96D8090079D03E /* AnyPropertyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMap.h; path = ../../src/storage/AnyPropertyMap.h; sourceTree = SOURCE_ROOT; };
 		3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMap.cpp; path = ../../src/storage/AnyPropertyMap.cpp; sourceTree = SOURCE_ROOT; };
@@ -187,6 +190,7 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3A308A6B0DB7DE6A00965CD1 /* Figures */,
 				3AC065BE0DB13102000EB33E /* Application.cpp */,
 				3AC065BF0DB13102000EB33E /* Application.h */,
 				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
@@ -196,6 +200,15 @@
 				3A7596370DAFC09A000AC38C /* Main.cpp */,
 			);
 			name = ui;
+			sourceTree = "<group>";
+		};
+		3A308A6B0DB7DE6A00965CD1 /* Figures */ = {
+			isa = PBXGroup;
+			children = (
+				3A308A6C0DB7DE8000965CD1 /* Actor.h */,
+				3A308A6D0DB7DE8000965CD1 /* Actor.cpp */,
+			);
+			name = Figures;
 			sourceTree = "<group>";
 		};
 		3A4EAEA00D8D313A00C4895F /* commandline */ = {
@@ -376,6 +389,7 @@
 				3AC065C40DB13102000EB33E /* Application.cpp in Sources */,
 				3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */,
 				3AC065C60DB13102000EB33E /* Window.cpp in Sources */,
+				3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,10 +554,7 @@
 		3A7596600DAFC351000AC38C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;

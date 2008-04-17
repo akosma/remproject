@@ -28,13 +28,20 @@ namespace ui
      *
      *  
      */
-    class ContentComponent : public Component
+    class ContentComponent : public Component, public DragAndDropTarget
     {
     public:
         ContentComponent();
         ~ContentComponent();
 
         void paint (Graphics&);
+
+        bool isInterestedInDragSource (const String& sourceDescription);
+
+        void itemDropped (const String& sourceDescription,
+                              Component* sourceComponent,
+                              int x, int y);
+                              
     };
 }
 

@@ -35,7 +35,14 @@ namespace ui
     {
         setContentComponent (new ContentComponent());
         setVisible (true);
-        centreWithSize (400, 200);
+        centreWithSize (800, 600);
+        setResizable(true, true);
+
+        this->setUsingNativeTitleBar(true);
+#if JUCE_MAC
+//        MenuBarModel::setMacMainMenu(this->getContentComponent());
+//        mainWindow->setMenuBar (0);
+#endif
     }
 
     Window::~Window()

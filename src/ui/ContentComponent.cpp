@@ -14,6 +14,10 @@
 
 #include "ContentComponent.h"
 
+#ifndef ACTOR_H_
+#include "Actor.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -22,19 +26,32 @@ namespace ui
 {
     ContentComponent::ContentComponent()
     {
+        Actor* a = new Actor();
+        this->addAndMakeVisible(a, -1);
     }
 
     ContentComponent::~ContentComponent()
     {
+        this->deleteAllChildren();
     }
 
     void ContentComponent::paint (Graphics& g)
     {
         g.fillAll (Colours::white);
-        g.setColour (Colours::black);
-        g.setFont (20.0f, Font::bold);
-        g.drawText (T("Rem"),
-                    0, 0, getWidth(), getHeight(),
-                    Justification::centred, false);
+    }
+
+    bool ContentComponent::isInterestedInDragSource (const String& sourceDescription)
+    {
+        // normally you'd check the sourceDescription value to see if it's the
+        // sort of object that you're interested in before returning true, but for
+        // the demo, we'll say yes to anything..
+        return true;
+    }
+
+    void ContentComponent::itemDropped (const String& sourceDescription,
+                          Component* sourceComponent,
+                          int x, int y)
+    {
+        repaint();
     }
 }

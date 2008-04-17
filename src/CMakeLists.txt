@@ -13,6 +13,9 @@ SET (ui_SRCS
 
     ui/ContentComponent.h 
     ui/ContentComponent.cpp 
+    
+    ui/Actor.h
+    ui/Actor.cpp
 
     ui/Main.cpp 
 )
