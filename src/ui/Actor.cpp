@@ -24,10 +24,16 @@ namespace ui
     : _dragger()
     {
         setBounds (0, 0, 80, 175);
+        _resizer = new ResizableBorderComponent(this, 0);
+        _resizer->setSize(getWidth(),getHeight());
+        _resizer->setBounds(0,0,getWidth(),getHeight());
+        this->addAndMakeVisible(_resizer, -1);
+        setRepaintsOnMouseActivity (true);
     }
 
     Actor::~Actor()
     {
+        delete _resizer;
     }
     
     void Actor::mouseDown(const MouseEvent& e)
@@ -40,8 +46,17 @@ namespace ui
         _dragger.dragComponent(this, e);
     }
     
+    void Actor::resized()
+    {
+        if (_resizer)
+        {
+            _resizer->setBounds (0,0,getWidth(),getHeight());
+        }
+    }
+    
     void Actor::paint (Graphics& g)
     {
+        g.fillAll (Colours::yellow);
         g.setColour (Colours::black);
         
         const float topMargin = 10.0f;

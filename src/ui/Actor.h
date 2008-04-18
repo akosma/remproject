@@ -38,9 +38,11 @@ namespace ui
         
         void mouseDown(const MouseEvent& e);
         void mouseDrag(const MouseEvent& e);
+        virtual void resized();
         
     private:
         ComponentDragger _dragger;
+        ResizableBorderComponent* _resizer;
     };
 }
 
