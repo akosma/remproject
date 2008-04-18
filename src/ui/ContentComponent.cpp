@@ -14,10 +14,6 @@
 
 #include "ContentComponent.h"
 
-#ifndef ACTOR_H_
-#include "Actor.h"
-#endif
-
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -25,9 +21,15 @@
 namespace ui
 {
     ContentComponent::ContentComponent()
+	: _current(0)
     {
-        Actor* a = new Actor();
+        Actor* a = new Actor(this);
         this->addAndMakeVisible(a, -1);
+		a->setTopLeftPosition(10, 10);
+
+        Actor* b = new Actor(this);
+        this->addAndMakeVisible(b, -1);
+		b->setTopLeftPosition(100, 100);
     }
 
     ContentComponent::~ContentComponent()
@@ -53,5 +55,15 @@ namespace ui
                           int x, int y)
     {
         repaint();
+    }
+    
+    void ContentComponent::setCurrent(Actor* current)
+    {
+        if (_current)
+        {
+            _current->setCurrent(false);
+        }
+        _current = current;
+        _current->setCurrent(true);
     }
 }

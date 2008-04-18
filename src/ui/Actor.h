@@ -23,6 +23,8 @@
  */
 namespace ui
 {
+    class ContentComponent;
+
     /*!
      * \class Actor
      *
@@ -31,7 +33,7 @@ namespace ui
     class Actor : public Component
     {
     public:
-        Actor();
+        Actor(ContentComponent*);
         ~Actor();
 
         void paint (Graphics&);
@@ -40,9 +42,17 @@ namespace ui
         void mouseDrag(const MouseEvent& e);
         virtual void resized();
         
+        void setCurrent(bool);
+
     private:
+        bool _current;
         ComponentDragger _dragger;
         ResizableBorderComponent* _resizer;
+        ContentComponent* _parent;
+        const int _initWidth;
+        const int _initHeight;
+        const float _margin;
+        const float _strokeWidth;
     };
 }
 

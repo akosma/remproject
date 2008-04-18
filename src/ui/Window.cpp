@@ -14,7 +14,7 @@
 
 #include "Window.h"
 
-#ifndef REMCONTENTCOMPONENT_H_
+#ifndef CONTENTCOMPONENT_H_
 #include "ContentComponent.h"
 #endif
 

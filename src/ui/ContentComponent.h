@@ -17,6 +17,10 @@
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
 
+#ifndef ACTOR_H_
+#include "Actor.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -42,6 +46,10 @@ namespace ui
                               Component* sourceComponent,
                               int x, int y);
                               
+        void setCurrent(Actor*);
+	
+	private:
+		Actor* _current;
     };
 }
 
