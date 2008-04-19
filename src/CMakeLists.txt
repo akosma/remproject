@@ -134,122 +134,166 @@ IF (WIN32)
     
     SET_SOURCE_FILES_PROPERTIES(${tests_SRCS} PROPERTIES
 		COMPILE_FLAGS "/MDd"
-    )    
+    )
+    
+ELSE (WIN32)
+
+    IF (UNIX)
+        IF (APPLE)
+        # This information is needed to compile the GUI application as a "bundle".
+        # Info on how to use OSX frameworks taken from
+        # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
+            FIND_LIBRARY(CARBON_LIBRARY Carbon)
+            FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime)
+            FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices)
+            FIND_LIBRARY(AGL AGL)
+            FIND_LIBRARY(CORE_AUDIO CoreAudio)
+            FIND_LIBRARY(CORE_SERVICES CoreServices)
+            FIND_LIBRARY(IO_KIT IOKit)
+            FIND_LIBRARY(OPEN_GL OpenGL)
+            MARK_AS_ADVANCED (CARBON_LIBRARY)
+            MARK_AS_ADVANCED (QUICKTIME_LIBRARY)
+            MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
+            MARK_AS_ADVANCED (AGL)
+            MARK_AS_ADVANCED (CORE_AUDIO)
+            MARK_AS_ADVANCED (CORE_SERVICES)
+            MARK_AS_ADVANCED (IO_KIT)
+            MARK_AS_ADVANCED (OPEN_GL)
+            SET(EXTRA_LIBS 
+                ${CARBON_LIBRARY} 
+                ${QUICKTIME_LIBRARY} 
+                ${APP_SERVICES_LIBRARY} 
+                ${AGL} 
+                ${CORE_AUDIO} 
+                ${CORE_SERVICES} 
+                ${IO_KIT} 
+                ${OPEN_GL}
+            )
+        
+        # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
+        # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
+            SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
+            SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
+            SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
+            SET(MACOSX_BUNDLE_BUNDLE_NAME Rem)
+            SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION})
+            SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
+            SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
+        
+        # Header files are located in these directories
+            INCLUDE_DIRECTORIES (
+                /usr/local/include/cppunit/../  # Somehow the tests won't build if not specified like this!
+                ${rem_SOURCE_DIR}/../lib/poco-universal/poco/include
+                ${rem_SOURCE_DIR}/../lib/juce
+            )
+        
+        # Libraries are located in these directories
+            LINK_DIRECTORIES (
+                ${rem_SOURCE_DIR}/../lib/poco-universal/poco/lib
+                ${rem_SOURCE_DIR}/../lib/juce/bin
+            )
+        
+            ADD_EXECUTABLE (remtest 
+                ${remtests_SRCS}
+            )
+        
+            ADD_EXECUTABLE (Rem MACOSX_BUNDLE
+                ${Rem_SRCS}
+            )
+        
+        # These are the symbols for the linker
+            TARGET_LINK_LIBRARIES(Rem 
+                ${EXTRA_LIBS}
+                juce
+            )
+        
+            TARGET_LINK_LIBRARIES(remtest
+                cppunit 
+                sqlite3 
+                PocoFoundation
+            )
+        
+            ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
+            
+        # Copy the application icon into the bundle
+                COMMAND mkdir
+                    ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources
+        
+                COMMAND cp
+                    ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
+                        ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
+        
+        # Create the disk image from a temporary subfolder
+                COMMAND mkdir 
+                    ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
+        
+                COMMAND cp
+                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
+                        ${CMAKE_CURRENT_BINARY_DIR}/Rem
+        
+                COMMAND hdiutil 
+                    ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
+        
+                COMMAND rm 
+                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
+            )
+        
+            ENABLE_TESTING()
+            ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
+            
+        # This custom target builds the documentation using Doxygen and LaTeX
+            ADD_CUSTOM_TARGET(doc ALL 
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
+        
+        # Generate the project's documentation (using Doxygen installed via MacPorts)
+                COMMAND /opt/local/bin/doxygen
+                    
+        # Create the PDF file and then delete the source files
+                COMMAND make --directory=doc/latex pdf
+                COMMAND mv doc/latex/refman.pdf doc/
+                COMMAND rm -r doc/latex/
+            )
+        
+        ELSE (APPLE)
+            SET(EXTRA_LIBS
+                freetype 
+                pthread 
+                rt 
+                X11 
+                GL 
+                GLU 
+                Xinerama 
+                asound
+            )
+            # Header files are located in these directories
+            INCLUDE_DIRECTORIES (
+                "/usr/include"
+                ${rem_SOURCE_DIR}/../lib/juce
+            )
+        
+            # Libraries are located in these directories
+            LINK_DIRECTORIES (
+                "/usr/X11R6/lib/"
+                ${rem_SOURCE_DIR}/../lib/juce/bin
+            )
+            
+            ADD_DEFINITIONS(
+                -DLINUX
+            )
+        
+            ADD_EXECUTABLE (Rem
+                ${Rem_SRCS}
+            )
+
+            # These are the symbols for the linker
+            TARGET_LINK_LIBRARIES(Rem 
+                ${EXTRA_LIBS}
+                juce
+            )
+        
+        ENDIF (APPLE)
+    
+    ENDIF (UNIX)
+
 ENDIF (WIN32)
 
-IF (APPLE)
-    # This information is needed to compile the GUI application as a "bundle".
-    # Info on how to use OSX frameworks taken from
-    # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
-    FIND_LIBRARY(CARBON_LIBRARY Carbon)
-    FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime)
-    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices)
-    FIND_LIBRARY(AGL AGL)
-    FIND_LIBRARY(CORE_AUDIO CoreAudio)
-    FIND_LIBRARY(CORE_SERVICES CoreServices)
-    FIND_LIBRARY(IO_KIT IOKit)
-    FIND_LIBRARY(OPEN_GL OpenGL)
-    MARK_AS_ADVANCED (CARBON_LIBRARY)
-    MARK_AS_ADVANCED (QUICKTIME_LIBRARY)
-    MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
-    MARK_AS_ADVANCED (AGL)
-    MARK_AS_ADVANCED (CORE_AUDIO)
-    MARK_AS_ADVANCED (CORE_SERVICES)
-    MARK_AS_ADVANCED (IO_KIT)
-    MARK_AS_ADVANCED (OPEN_GL)
-    SET(EXTRA_LIBS 
-        ${CARBON_LIBRARY} 
-        ${QUICKTIME_LIBRARY} 
-        ${APP_SERVICES_LIBRARY} 
-        ${AGL} 
-        ${CORE_AUDIO} 
-        ${CORE_SERVICES} 
-        ${IO_KIT} 
-        ${OPEN_GL}
-    )
-
-    # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
-    # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
-    SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
-    SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
-    SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
-    SET(MACOSX_BUNDLE_BUNDLE_NAME Rem)
-    SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION})
-    SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
-    SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
-
-    # Header files are located in these directories
-    INCLUDE_DIRECTORIES (
-        /usr/local/include/cppunit/../  # Somehow the tests won't build if not specified like this!
-        ${rem_SOURCE_DIR}/../lib/poco-universal/poco/include
-        ${rem_SOURCE_DIR}/../lib/juce
-    )
-
-    # Libraries are located in these directories
-    LINK_DIRECTORIES (
-        ${rem_SOURCE_DIR}/../lib/poco-universal/poco/lib
-        ${rem_SOURCE_DIR}/../lib/juce/bin
-    )
-
-    ADD_EXECUTABLE (remtest 
-        ${remtests_SRCS}
-    )
-
-    ADD_EXECUTABLE (Rem MACOSX_BUNDLE
-        ${Rem_SRCS}
-    )
-
-    # These are the symbols for the linker
-    TARGET_LINK_LIBRARIES(Rem 
-        ${EXTRA_LIBS}
-        juce
-    )
-
-    TARGET_LINK_LIBRARIES(remtest
-        cppunit 
-        sqlite3 
-        PocoFoundation
-    )
-
-    ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
-    
-        # Copy the application icon into the bundle
-        COMMAND mkdir
-            ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources
-
-        COMMAND cp
-            ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
-                 ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
-
-        # Create the disk image from a temporary subfolder
-        COMMAND mkdir 
-            ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
-
-        COMMAND cp
-            ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
-                 ${CMAKE_CURRENT_BINARY_DIR}/Rem
-
-        COMMAND hdiutil 
-            ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
-
-        COMMAND rm 
-            ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
-    )
-
-    ENABLE_TESTING()
-    ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
-    
-    # This custom target builds the documentation using Doxygen and LaTeX
-    ADD_CUSTOM_TARGET(doc ALL 
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
-
-        # Generate the project's documentation (using Doxygen installed via MacPorts)
-        COMMAND /opt/local/bin/doxygen
-            
-        # Create the PDF file and then delete the source files
-        COMMAND make --directory=doc/latex pdf
-        COMMAND mv doc/latex/refman.pdf doc/
-        COMMAND rm -r doc/latex/
-    )
-
-ENDIF (APPLE)
