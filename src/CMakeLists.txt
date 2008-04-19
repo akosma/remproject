@@ -17,6 +17,12 @@ SET (ui_SRCS
     ui/Actor.h
     ui/Actor.cpp
 
+    ui/Figure.h
+    ui/Figure.cpp
+
+    ui/UseCaseBubble.h
+    ui/UseCaseBubble.cpp
+
     ui/Main.cpp 
 )
 
