@@ -17,8 +17,8 @@
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
 
-#ifndef ACTOR_H_
-#include "Actor.h"
+#ifndef FIGURE_H_
+#include "Figure.h"
 #endif
 
 /*!
@@ -46,10 +46,10 @@ namespace ui
                               Component* sourceComponent,
                               int x, int y);
                               
-        void setCurrent(Actor*);
+        void setCurrent(Figure*);
 	
 	private:
-		Actor* _current;
+		Figure* _current;
     };
 }
 

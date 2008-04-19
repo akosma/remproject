@@ -14,6 +14,10 @@
 
 #include "ContentComponent.h"
 
+#ifndef ACTOR_H_
+#include "Actor.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -39,7 +43,7 @@ namespace ui
 
     void ContentComponent::paint (Graphics& g)
     {
-        g.fillAll (Colours::white);
+        g.fillAll(Colours::white);
     }
 
     bool ContentComponent::isInterestedInDragSource (const String& sourceDescription)
@@ -57,7 +61,7 @@ namespace ui
         repaint();
     }
     
-    void ContentComponent::setCurrent(Actor* current)
+    void ContentComponent::setCurrent(Figure* current)
     {
         if (_current)
         {

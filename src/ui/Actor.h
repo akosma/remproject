@@ -17,42 +17,36 @@
 #ifndef ACTOR_H_
 #define ACTOR_H_
 
+#ifndef FIGURE_H_
+#include "Figure.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
  */
 namespace ui
 {
-    class ContentComponent;
-
     /*!
      * \class Actor
      *
      *  
      */
-    class Actor : public Component
+    class Actor : public Figure
     {
     public:
         Actor(ContentComponent*);
         ~Actor();
 
-        void paint (Graphics&);
-        
-        void mouseDown(const MouseEvent& e);
-        void mouseDrag(const MouseEvent& e);
-        virtual void resized();
-        
-        void setCurrent(bool);
+    protected:
+        virtual void drawFigure(Graphics&);
 
     private:
-        bool _current;
-        ComponentDragger _dragger;
-        ResizableBorderComponent* _resizer;
-        ContentComponent* _parent;
         const int _initWidth;
         const int _initHeight;
         const float _margin;
         const float _strokeWidth;
+        Label* _nameLabel;
     };
 }
 
