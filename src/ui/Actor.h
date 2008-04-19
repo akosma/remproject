@@ -36,16 +36,12 @@ namespace ui
     {
     public:
         Actor(ContentComponent*);
-        ~Actor();
+        virtual ~Actor();
 
     protected:
-        virtual void drawFigure(Graphics&);
+        virtual void drawFigure(Path&);
 
     private:
-        const int _initWidth;
-        const int _initHeight;
-        const float _margin;
-        const float _strokeWidth;
         Label* _nameLabel;
     };
 }

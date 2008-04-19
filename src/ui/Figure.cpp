@@ -27,12 +27,18 @@ namespace ui
     /*!
      * Figure Constructor.
      */
-    Figure::Figure(ContentComponent* parent)
+    Figure::Figure(ContentComponent* parent, const int initWidth, const int initHeight)
     : _current(false)
     , _dragger()
     , _resizer(0)
     , _parent(parent)
+    , _initWidth(initWidth)
+    , _initHeight(initHeight)
+    , _initMargin(10.0f)
+    , _strokeWidth(1.0f)
     {
+        setSize(_initWidth, _initHeight);
+        setBounds(0, 0, _initWidth, _initHeight);
         setRepaintsOnMouseActivity(true);
         setBroughtToFrontOnMouseClick(true);
         setBufferedToImage(true);
@@ -74,6 +80,26 @@ namespace ui
         }
     }
     
+    const int Figure::getInitialWidth()
+    {
+        return _initWidth;
+    }
+    
+    const int Figure::getInitialHeight()
+    {
+        return _initHeight;
+    }
+    
+    const float Figure::getInitialMargin()
+    {
+        return _initMargin;
+    }
+    
+    const float Figure::getStrokeWidth()
+    {
+        return _strokeWidth;
+    }
+
     void Figure::setCurrent(bool current)
     {
         _resizer->setVisible(current);
@@ -83,10 +109,14 @@ namespace ui
     
     void Figure::paint(Graphics& g)
     {
-        this->drawFigure(g);
-
+        Colour transparentWhite = Colours::white.withAlpha(0.9f);
+        g.setColour(Colours::black);
+        Path figure;
+        this->drawFigure(figure);
         if (_current)
         {
+    		g.fillAll(transparentWhite);
+
             // This will create a dashed rectangle around the selected element
 			const float dashLengths[] = { 5.0F, 5.0F };
 			g.drawDashedLine(0, 0, 0, getHeight(), dashLengths, 2, 2.0f);
@@ -94,5 +124,6 @@ namespace ui
 			g.drawDashedLine(getWidth(), 0, getWidth(), getHeight(), dashLengths, 2, 2.0f);
 			g.drawDashedLine(0, getHeight(), getWidth(), getHeight(), dashLengths, 2, 2.0f);
         }
+        g.strokePath (figure, PathStrokeType (4.0f));
     }
 }

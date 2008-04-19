@@ -17,16 +17,14 @@
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
 
-#ifndef FIGURE_H_
-#include "Figure.h"
-#endif
-
 /*!
  * \namespace ui
  * Insert a description for the namespace here
  */
 namespace ui
 {
+    class Figure;
+    
     /*!
      * \class ContentComponent
      *
@@ -38,6 +36,7 @@ namespace ui
         ContentComponent();
         ~ContentComponent();
 
+        void mouseDown(const MouseEvent& e);
         void paint (Graphics&);
 
         bool isInterestedInDragSource (const String& sourceDescription);

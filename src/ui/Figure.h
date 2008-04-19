@@ -36,7 +36,7 @@ namespace ui
         /*!
          *  Figure constructor.
          */
-        Figure(ContentComponent*);
+        Figure(ContentComponent*, const int, const int);
 
         /*!
          *  Figure virtual destructor.
@@ -52,13 +52,22 @@ namespace ui
         void setCurrent(bool);
 
     protected:
-        virtual void drawFigure(Graphics&) = 0;
+        virtual void drawFigure(Path&) = 0;
+        
+        const int getInitialWidth();
+        const int getInitialHeight();
+        const float getInitialMargin();
+        const float getStrokeWidth();
 
     private:
         bool _current;
         ComponentDragger _dragger;
         ResizableBorderComponent* _resizer;
         ContentComponent* _parent;
+        const int _initWidth;
+        const int _initHeight;
+        const float _initMargin;
+        const float _strokeWidth;
     };
 }
 

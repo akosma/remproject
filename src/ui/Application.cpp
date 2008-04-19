@@ -14,7 +14,7 @@
 
 #include "Application.h"
 
-#ifndef Window_H_
+#ifndef WINDOW_H_
 #include "Window.h"
 #endif
 
@@ -40,10 +40,7 @@ namespace ui
 
     void Application::shutdown()
     {
-        // clear up..
-
-        if (window != 0)
-            delete window;
+        delete window;
     }
 
     const String Application::getApplicationName()

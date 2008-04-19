@@ -18,6 +18,10 @@
 #include "Actor.h"
 #endif
 
+#ifndef USECASEBUBBLE_H_
+#include "UseCaseBubble.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -34,11 +38,20 @@ namespace ui
         Actor* b = new Actor(this);
         this->addAndMakeVisible(b, -1);
 		b->setTopLeftPosition(100, 100);
+		
+        UseCaseBubble* c = new UseCaseBubble(this);
+        this->addAndMakeVisible(c, -1);
+        c->setTopLeftPosition(200, 200);
     }
 
     ContentComponent::~ContentComponent()
     {
         this->deleteAllChildren();
+    }
+
+    void ContentComponent::mouseDown(const MouseEvent& e)
+    {
+        setCurrent(NULL);
     }
 
     void ContentComponent::paint (Graphics& g)
@@ -68,6 +81,9 @@ namespace ui
             _current->setCurrent(false);
         }
         _current = current;
-        _current->setCurrent(true);
+        if (_current)
+        {
+            _current->setCurrent(true);            
+        }
     }
 }
