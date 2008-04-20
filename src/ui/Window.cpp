@@ -33,12 +33,17 @@ namespace ui
                       DocumentWindow::allButtons, 
                       true)
     {
-        setContentComponent (new ContentComponent());
-        setVisible (true);
-        centreWithSize (800, 600);
+        TabbedComponent* project = new TabbedComponent(TabbedButtonBar::TabsAtBottom);
+        ContentComponent* diagram1 = new ContentComponent();
+        ContentComponent* diagram2 = new ContentComponent();
+        project->addTab(String("diagram1"), Colours::white, diagram1, true);
+        project->addTab(String("diagram2"), Colours::white, diagram2, true);
+        setContentComponent(project);
+        centreWithSize(800, 600);
         setResizable(true, true);
-
-        this->setUsingNativeTitleBar(true);
+        setUsingNativeTitleBar(true);
+        setVisible (true);
+        
 #if JUCE_MAC
 //        MenuBarModel::setMacMainMenu(this->getContentComponent());
 //        mainWindow->setMenuBar (0);

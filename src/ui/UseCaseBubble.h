@@ -44,6 +44,8 @@ namespace ui
          */
         virtual ~UseCaseBubble();
 
+        void mouseDoubleClick(const MouseEvent& e);
+    
     protected:
         virtual void drawFigure(Path&);
 

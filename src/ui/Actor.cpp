@@ -30,10 +30,16 @@ namespace ui
         _nameLabel->setTopLeftPosition(0, getInitialHeight() - 30);
         _nameLabel->setSize(getInitialWidth(), 30);
         _nameLabel->setEditable(false, true, false);
+        _nameLabel->setInterceptsMouseClicks(false, false);
     }
 
     Actor::~Actor()
     {
+    }
+    
+    void Actor::mouseDoubleClick(const MouseEvent& e)
+    {
+        _nameLabel->showEditor();
     }
     
     void Actor::drawFigure(Path& actor)

@@ -30,11 +30,17 @@ namespace ui
         const float margin = getInitialMargin();
 
         _nameLabel = new Label("NameLabel", "Name");
-        this->addAndMakeVisible(_nameLabel, 0);
         _nameLabel->setJustificationType(Justification::horizontallyCentred);
         _nameLabel->setTopLeftPosition(20 + margin, getInitialHeight() - 30);
         _nameLabel->setSize(getInitialWidth() - 40, 30);
         _nameLabel->setEditable(false, true, false);
+        _nameLabel->setInterceptsMouseClicks(false, false);
+        this->addAndMakeVisible(_nameLabel, 0);
+    }
+    
+    void UseCaseBubble::mouseDoubleClick(const MouseEvent& e)
+    {
+        _nameLabel->showEditor();
     }
     
     /*!

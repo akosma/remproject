@@ -37,6 +37,8 @@ namespace ui
     public:
         Actor(ContentComponent*);
         virtual ~Actor();
+        
+        void mouseDoubleClick(const MouseEvent& e); 
 
     protected:
         virtual void drawFigure(Path&);
