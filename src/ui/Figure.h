@@ -52,6 +52,8 @@ namespace ui
         void mouseExit(const MouseEvent&);
         void resized();
         
+        const Point* getAnchorPointRelativeTo(const Figure*) const;
+        
         void setCurrent(bool);
 
     protected:

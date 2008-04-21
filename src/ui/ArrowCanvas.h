@@ -14,6 +14,8 @@
 
 #include "juce.h"
 
+#include <vector>
+
 #ifndef ARROWCANVAS_H_
 #define ARROWCANVAS_H_
 
@@ -24,6 +26,7 @@
 namespace ui
 {
     class ContentComponent;
+    class Figure;
     
     /*!
      * \class ArrowCanvas
@@ -43,11 +46,34 @@ namespace ui
          */
         virtual ~ArrowCanvas();
 
+        void mouseDown(const MouseEvent&);
         void paint(Graphics&);
+        void setNoCurrentArrow();
+        
+        void addArrow(Figure*, Figure*);
 
     private:
         ContentComponent* _parent;
         const float _strokeWidth;
+        
+        class Arrow
+        {
+        public:
+            Arrow(Figure*, Figure*);
+            Arrow(const Arrow&);
+            Arrow& operator=(const Arrow&);
+            virtual ~Arrow();
+            const Figure* getStartFigure() const;
+            const Figure* getEndFigure() const;
+            const bool intercepts(const MouseEvent&);
+
+        private:
+            Figure* _start;
+            Figure* _end;
+        };
+        
+        std::vector<Arrow*> _arrows;
+        Arrow* _currentArrow;
     };
 }
 

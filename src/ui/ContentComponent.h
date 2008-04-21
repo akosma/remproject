@@ -24,6 +24,7 @@
 namespace ui
 {
     class Figure;
+    class ArrowCanvas;
     
     /*!
      * \class ContentComponent
@@ -36,7 +37,6 @@ namespace ui
         ContentComponent();
         ~ContentComponent();
 
-        void mouseDown(const MouseEvent&);
         void paint (Graphics&);
 
         bool isInterestedInDragSource (const String& sourceDescription);
@@ -46,8 +46,11 @@ namespace ui
                               int x, int y);
                               
         void setCurrent(Figure*);
+        
+        ArrowCanvas& getArrowCanvas();
 	
 	private:
+        ArrowCanvas* _canvas;
 		Figure* _current;
     };
 }

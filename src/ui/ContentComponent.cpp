@@ -35,10 +35,10 @@ namespace ui
     ContentComponent::ContentComponent()
 	: _current(0)
     {
-        ArrowCanvas* ac = new ArrowCanvas(this);
-        ac->setSize(800, 600);
-        ac->setBounds(0, 0, 800, 600);
-        addAndMakeVisible(ac, -1);
+        _canvas = new ArrowCanvas(this);
+        _canvas->setSize(800, 600);
+        _canvas->setBounds(0, 0, 800, 600);
+        addAndMakeVisible(_canvas, 0);
         
         Actor* a = new Actor(this);
         a->setTopLeftPosition(10, 10);
@@ -51,6 +51,9 @@ namespace ui
         UseCaseBubble* c = new UseCaseBubble(this);
         c->setTopLeftPosition(200, 200);
         addAndMakeVisible(c, -1);
+        
+        _canvas->addArrow(a, c);
+        _canvas->addArrow(a, b);
     }
 
     ContentComponent::~ContentComponent()
@@ -58,11 +61,6 @@ namespace ui
         deleteAllChildren();
     }
 
-    void ContentComponent::mouseDown(const MouseEvent& e)
-    {
-        setCurrent(NULL);
-    }
-    
     void ContentComponent::paint (Graphics& g)
     {
         g.fillAll(Colours::white);
@@ -92,7 +90,13 @@ namespace ui
         _current = current;
         if (_current)
         {
-            _current->setCurrent(true);            
+            _current->setCurrent(true);
+            _canvas->setNoCurrentArrow();
         }
+    }
+    
+    ArrowCanvas& ContentComponent::getArrowCanvas()
+    {
+        return *_canvas;
     }
 }

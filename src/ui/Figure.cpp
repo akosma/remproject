@@ -18,6 +18,10 @@
 #include "ContentComponent.h"
 #endif
 
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -74,6 +78,7 @@ namespace ui
     void Figure::mouseDrag(const MouseEvent& e)
     {
         _dragger.dragComponent(this, e);
+        _parent->getArrowCanvas().repaint();
     }
     
     void Figure::mouseEnter(const MouseEvent& e)
@@ -123,7 +128,38 @@ namespace ui
         _current = current;
 		repaint();
     }
+    
+    const Point* Figure::getAnchorPointRelativeTo(const Figure* other) const
+    {
+        const bool isBelow = (other->getY() + other->getHeight()) < this->getY();
+        const bool isAbove = (this->getY() + this->getHeight()) < other->getY();
+        const bool isRightOf = (other->getX() + other->getWidth()) < this->getX();
+        const bool isLeftOf = (this->getX() + this->getWidth()) < other->getX();
+        
+        Point* point;
+        
+        if (isBelow)
+        {
+            point = new Point(getX() + getWidth() / 2, getY());
+        }
+        
+        if (isAbove)
+        {
+            point = new Point(getX() + getWidth() / 2, getY() + getHeight());
+        }
+        
+        if (isRightOf)
+        {
+            point = new Point(getX(), getY() + getHeight() / 2);
+        }
 
+        if (isLeftOf)
+        {
+            point = new Point(getX() + getWidth(), getY() + getHeight() / 2);
+        }
+        return point;
+    }
+    
     void Figure::paint(Graphics& g)
     {
         Colour transparentWhite = Colours::white.withAlpha(0.9f);
