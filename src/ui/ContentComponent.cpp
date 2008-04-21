@@ -14,6 +14,8 @@
 
 #include "ContentComponent.h"
 
+#include <iostream>
+
 #ifndef ACTOR_H_
 #include "Actor.h"
 #endif
@@ -41,15 +43,15 @@ namespace ui
         addAndMakeVisible(_canvas, 0);
         
         Actor* a = new Actor(this);
-        a->setTopLeftPosition(10, 10);
+        a->setTopLeftPosition(100, 300);
         addAndMakeVisible(a, -1);
 
         Actor* b = new Actor(this);
-        b->setTopLeftPosition(100, 100);
+        b->setTopLeftPosition(100, 10);
         addAndMakeVisible(b, -1);
 		
         UseCaseBubble* c = new UseCaseBubble(this);
-        c->setTopLeftPosition(200, 200);
+        c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);
         
         _canvas->addArrow(a, c);
