@@ -22,6 +22,9 @@ SET (ui_SRCS
 
     ui/UseCaseBubble.h
     ui/UseCaseBubble.cpp
+    
+    ui/ArrowCanvas.h
+    ui/ArrowCanvas.cpp
 
     ui/Main.cpp 
 )
