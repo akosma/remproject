@@ -45,8 +45,11 @@ namespace ui
 
         void paint(Graphics&);
         
-        void mouseDown(const MouseEvent& e);
-        void mouseDrag(const MouseEvent& e);
+        void mouseDown(const MouseEvent&);
+        void mouseUp(const MouseEvent&);
+        void mouseDrag(const MouseEvent&);
+        void mouseEnter(const MouseEvent&);
+        void mouseExit(const MouseEvent&);
         void resized();
         
         void setCurrent(bool);
@@ -58,9 +61,13 @@ namespace ui
         const int getInitialHeight();
         const float getInitialMargin();
         const float getStrokeWidth();
+        
+    private:
+        void drawDashedLineAround(Graphics&);
 
     private:
         bool _current;
+        bool _hover;
         ComponentDragger _dragger;
         ResizableBorderComponent* _resizer;
         ContentComponent* _parent;

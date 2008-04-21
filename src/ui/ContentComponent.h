@@ -36,7 +36,7 @@ namespace ui
         ContentComponent();
         ~ContentComponent();
 
-        void mouseDown(const MouseEvent& e);
+        void mouseDown(const MouseEvent&);
         void paint (Graphics&);
 
         bool isInterestedInDragSource (const String& sourceDescription);

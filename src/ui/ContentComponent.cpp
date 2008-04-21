@@ -22,6 +22,10 @@
 #include "UseCaseBubble.h"
 #endif
 
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -31,29 +35,34 @@ namespace ui
     ContentComponent::ContentComponent()
 	: _current(0)
     {
+        ArrowCanvas* ac = new ArrowCanvas(this);
+        ac->setSize(800, 600);
+        ac->setBounds(0, 0, 800, 600);
+        addAndMakeVisible(ac, -1);
+        
         Actor* a = new Actor(this);
-        this->addAndMakeVisible(a, -1);
-		a->setTopLeftPosition(10, 10);
+        a->setTopLeftPosition(10, 10);
+        addAndMakeVisible(a, -1);
 
         Actor* b = new Actor(this);
-        this->addAndMakeVisible(b, -1);
-		b->setTopLeftPosition(100, 100);
+        b->setTopLeftPosition(100, 100);
+        addAndMakeVisible(b, -1);
 		
         UseCaseBubble* c = new UseCaseBubble(this);
-        this->addAndMakeVisible(c, -1);
         c->setTopLeftPosition(200, 200);
+        addAndMakeVisible(c, -1);
     }
 
     ContentComponent::~ContentComponent()
     {
-        this->deleteAllChildren();
+        deleteAllChildren();
     }
 
     void ContentComponent::mouseDown(const MouseEvent& e)
     {
         setCurrent(NULL);
     }
-
+    
     void ContentComponent::paint (Graphics& g)
     {
         g.fillAll(Colours::white);

@@ -13,6 +13,7 @@
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
+		3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */; };
 		3A63E7870DBB9C9D0016AFE0 /* Toolbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E7860DBB9C9D0016AFE0 /* Toolbox.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
 		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
@@ -57,6 +58,8 @@
 		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
+		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
 		3A63E7850DBB9C9D0016AFE0 /* Toolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toolbox.h; path = ../../src/ui/Toolbox.h; sourceTree = SOURCE_ROOT; };
 		3A63E7860DBB9C9D0016AFE0 /* Toolbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Toolbox.cpp; path = ../../src/ui/Toolbox.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -221,6 +224,8 @@
 				3A98E1B40DB9FB0A0095EADC /* Figure.cpp */,
 				3A98E23F0DBA0BE40095EADC /* UseCaseBubble.h */,
 				3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */,
+				3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */,
+				3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */,
 			);
 			name = Figures;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */,
 				3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */,
 				3A63E7870DBB9C9D0016AFE0 /* Toolbox.cpp in Sources */,
+				3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

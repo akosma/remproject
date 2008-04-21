@@ -29,6 +29,7 @@ namespace ui
      */
     Figure::Figure(ContentComponent* parent, const int initWidth, const int initHeight)
     : _current(false)
+    , _hover(false)
     , _dragger()
     , _resizer(0)
     , _parent(parent)
@@ -62,11 +63,27 @@ namespace ui
 		this->toFront(true);
 		_parent->setCurrent(this);
         _dragger.startDraggingComponent(this, 0);
+        setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
+    }
+    
+    void Figure::mouseUp(const MouseEvent& e)
+    {
+        setMouseCursor(MouseCursor(MouseCursor::NormalCursor));
     }
 
     void Figure::mouseDrag(const MouseEvent& e)
     {
         _dragger.dragComponent(this, e);
+    }
+    
+    void Figure::mouseEnter(const MouseEvent& e)
+    {
+        _hover = true;
+    }
+    
+    void Figure::mouseExit(const MouseEvent& e)
+    {
+        _hover = false;
     }
     
     void Figure::resized()
@@ -106,11 +123,10 @@ namespace ui
         _current = current;
 		repaint();
     }
-    
+
     void Figure::paint(Graphics& g)
     {
         Colour transparentWhite = Colours::white.withAlpha(0.9f);
-        g.setColour(Colours::black);
         Path figure;
         this->drawFigure(figure);
         if (_current)
@@ -118,12 +134,27 @@ namespace ui
     		g.fillAll(transparentWhite);
 
             // This will create a dashed rectangle around the selected element
-			const float dashLengths[] = { 5.0F, 5.0F };
-			g.drawDashedLine(0, 0, 0, getHeight(), dashLengths, 2, 2.0f);
-			g.drawDashedLine(0, 0, getWidth(), 0, dashLengths, 2, 2.0f);
-			g.drawDashedLine(getWidth(), 0, getWidth(), getHeight(), dashLengths, 2, 2.0f);
-			g.drawDashedLine(0, getHeight(), getWidth(), getHeight(), dashLengths, 2, 2.0f);
+            drawDashedLineAround(g);
         }
+        else
+        {
+            if (_hover)
+            {
+                setMouseCursor(MouseCursor(MouseCursor::PointingHandCursor));
+                g.setColour(Colours::lightgrey);
+                drawDashedLineAround(g);
+            }
+        }
+        g.setColour(Colours::black);
         g.strokePath (figure, PathStrokeType (4.0f));
+    }
+
+    void Figure::drawDashedLineAround(Graphics& g)
+    {
+        const float dashLengths[] = { 5.0F, 5.0F };
+        g.drawDashedLine(0, 0, 0, getHeight(), dashLengths, 2, 2.0f);
+        g.drawDashedLine(0, 0, getWidth(), 0, dashLengths, 2, 2.0f);
+        g.drawDashedLine(getWidth(), 0, getWidth(), getHeight(), dashLengths, 2, 2.0f);
+        g.drawDashedLine(0, getHeight(), getWidth(), getHeight(), dashLengths, 2, 2.0f);
     }
 }
