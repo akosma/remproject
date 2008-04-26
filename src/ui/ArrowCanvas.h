@@ -53,9 +53,6 @@ namespace ui
         void addArrow(Figure*, Figure*);
 
     private:
-        ContentComponent* _parent;
-        const float _strokeWidth;
-        
         class Arrow
         {
         public:
@@ -71,7 +68,10 @@ namespace ui
             Figure* _start;
             Figure* _end;
         };
-        
+
+    private:
+        ContentComponent* _parent;
+        const float _strokeWidth;
         std::vector<Arrow*> _arrows;
         Arrow* _currentArrow;
     };

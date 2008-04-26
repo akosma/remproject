@@ -26,6 +26,12 @@ SET (ui_SRCS
     ui/ArrowCanvas.h
     ui/ArrowCanvas.cpp
 
+    ui/Toolbox.h
+    ui/Toolbox.cpp
+
+    ui/ToolboxItemFactory.h
+    ui/ToolboxItemFactory.cpp
+
     ui/Main.cpp 
 )
 
@@ -90,15 +96,17 @@ SET (Rem_SRCS
 )
 
 IF (WIN32)
-	# /Od -> disable optimization
-	# /W3 -> warning level
-	# /ZI -> program database for edit & continue
-	# /Gm -> enable minimal rebuild
-	# /RTC1 -> runtime checks: stack frames + uninitialized variables
-	# /MTd -> Multi-threaded Debug
-	SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
-	SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
-	SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO")
+    # ============ BUILD SETTINGS FOR WINDOWS ============
+    # ============  USING VISUAL STUDIO 2008  ============
+    # /Od -> disable optimization
+    # /W3 -> warning level
+    # /ZI -> program database for edit & continue
+    # /Gm -> enable minimal rebuild
+    # /RTC1 -> runtime checks: stack frames + uninitialized variables
+    # /MTd -> Multi-threaded Debug
+    SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
+    SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
+    SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO")
 
     # Header files are located in these directories
     INCLUDE_DIRECTORIES (
@@ -110,7 +118,7 @@ IF (WIN32)
 
     # Libraries are located in these directories
     LINK_DIRECTORIES (
-		C:/cppunit-1.12.0/lib
+        C:/cppunit-1.12.0/lib
         ${rem_SOURCE_DIR}/../lib/poco/lib
         ${rem_SOURCE_DIR}/../lib/juce/bin
         ${rem_SOURCE_DIR}/../lib/sqlite
@@ -136,16 +144,18 @@ IF (WIN32)
     )
     
     SET_SOURCE_FILES_PROPERTIES(${tests_SRCS} PROPERTIES
-		COMPILE_FLAGS "/MDd"
+        COMPILE_FLAGS "/MDd"
     )
     
 ELSE (WIN32)
 
     IF (UNIX)
         IF (APPLE)
-        # This information is needed to compile the GUI application as a "bundle".
-        # Info on how to use OSX frameworks taken from
-        # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
+            # ============ BUILD SETTINGS FOR MAC ============
+            # ============     USING MAKEFILE     ============
+            # This information is needed to compile the GUI application as a "bundle".
+            # Info on how to use OSX frameworks taken from
+            # http://www.vtk.org/Wiki/CMake:HowToUseExistingOSXFrameworks
             FIND_LIBRARY(CARBON_LIBRARY Carbon)
             FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime)
             FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices)
@@ -173,8 +183,8 @@ ELSE (WIN32)
                 ${OPEN_GL}
             )
         
-        # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
-        # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
+            # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
+            # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
             SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
             SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
             SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
@@ -183,15 +193,16 @@ ELSE (WIN32)
             SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
             SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
         
-        # Header files are located in these directories
+            # Header files are located in these directories
             INCLUDE_DIRECTORIES (
                 /usr/local/include/cppunit/../  # Somehow the tests won't build if not specified like this!
                 ${rem_SOURCE_DIR}/../lib/poco-universal/poco/include
                 ${rem_SOURCE_DIR}/../lib/juce
             )
         
-        # Libraries are located in these directories
+            # Libraries are located in these directories
             LINK_DIRECTORIES (
+                /usr/local/lib/
                 ${rem_SOURCE_DIR}/../lib/poco-universal/poco/lib
                 ${rem_SOURCE_DIR}/../lib/juce/bin
             )
@@ -204,7 +215,7 @@ ELSE (WIN32)
                 ${Rem_SRCS}
             )
         
-        # These are the symbols for the linker
+            # These are the symbols for the linker
             TARGET_LINK_LIBRARIES(Rem 
                 ${EXTRA_LIBS}
                 juce
@@ -218,7 +229,7 @@ ELSE (WIN32)
         
             ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
             
-        # Copy the application icon into the bundle
+                # Copy the application icon into the bundle
                 COMMAND mkdir
                     ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources
         
@@ -226,7 +237,7 @@ ELSE (WIN32)
                     ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
                         ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
         
-        # Create the disk image from a temporary subfolder
+                # Create the disk image from a temporary subfolder
                 COMMAND mkdir 
                     ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
         
@@ -244,20 +255,22 @@ ELSE (WIN32)
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
             
-        # This custom target builds the documentation using Doxygen and LaTeX
+            # This custom target builds the documentation using Doxygen and LaTeX
             ADD_CUSTOM_TARGET(doc ALL 
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
         
-        # Generate the project's documentation (using Doxygen installed via MacPorts)
+                # Generate the project's documentation (using Doxygen installed via MacPorts)
                 COMMAND /opt/local/bin/doxygen
                     
-        # Create the PDF file and then delete the source files
+                # Create the PDF file and then delete the source files
                 COMMAND make --directory=doc/latex pdf
                 COMMAND mv doc/latex/refman.pdf doc/
                 COMMAND rm -r doc/latex/
             )
         
         ELSE (APPLE)
+            # ============ BUILD SETTINGS FOR KUBUNTU LINUX ============
+            # ============         USING MAKEFILE           ============
             SET(EXTRA_LIBS
                 freetype 
                 pthread 
@@ -295,8 +308,5 @@ ELSE (WIN32)
             )
         
         ENDIF (APPLE)
-    
     ENDIF (UNIX)
-
 ENDIF (WIN32)
-

@@ -12,11 +12,10 @@
  * \date      4/20/08
  */
 
+#include "juce.h"
+
 #ifndef TOOLBOX_H_
 #define TOOLBOX_H_
-
-#include <string>
-#include <vector>
 
 /*!
  * \namespace ui
@@ -24,29 +23,35 @@
  */
 namespace ui
 {
+    class ToolboxItemFactory;
+    class ContentComponent;
+    
     /*!
      * \class Toolbox
      *
      *  
      */
-    class Toolbox
+    class Toolbox : public Toolbar
     {
     public:
 
         /*!
          *  Toolbox constructor.
          */
-        Toolbox();
+        Toolbox(ContentComponent*);
 
         /*!
          *  Toolbox virtual destructor.
          */
         virtual ~Toolbox();
-
-    protected:
-
+        
+        void resized();
+        
     private:
-        std::string _param;
+        const int _initWidth;
+        const int _initHeight;
+        ToolboxItemFactory* _factory;
+        ContentComponent* _parent;
     };
 }
 
