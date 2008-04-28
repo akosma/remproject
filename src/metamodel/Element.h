@@ -22,18 +22,25 @@
 #include "../storage/ActiveRecord.h"
 #endif
 
+#ifndef BELONGSTO_H_
+#include "../storage/BelongsTo.h"
+#endif
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
  */
 namespace metamodel
 {
+    class Diagram;
+
     /*!
      * \class Element
      *
      *  
      */
     class Element : public storage::ActiveRecord<Element>
+                  , public storage::BelongsTo<Diagram>
     {
     public:
 

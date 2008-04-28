@@ -35,6 +35,7 @@ namespace tests
         CPPUNIT_TEST(testCanSaveIndividualInstance);
         CPPUNIT_TEST(testCanRetrieveAllInstances);
         CPPUNIT_TEST(testCanRetrieveOneInstance);
+        CPPUNIT_TEST(testCanUseConditionsToFindAnItem);
         CPPUNIT_TEST(testSearchingForInstancesNotExistingInDatabaseReturnsNull);
         CPPUNIT_TEST(testDestroyingObjectsRemovesThemFromTheDatabase);
         CPPUNIT_TEST(testCanUseCopyConstructorSafely);
@@ -70,6 +71,7 @@ namespace tests
         void testCanSaveIndividualInstance();        
         void testCanRetrieveAllInstances();
         void testCanRetrieveOneInstance();
+        void testCanUseConditionsToFindAnItem();
         void testSearchingForInstancesNotExistingInDatabaseReturnsNull();
         void testDestroyingObjectsRemovesThemFromTheDatabase();
         void testCanUseCopyConstructorSafely();

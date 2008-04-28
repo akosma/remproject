@@ -15,16 +15,12 @@
 #ifndef PROJECT_H_
 #define PROJECT_H_
 
-#ifndef CONTAINER_H_
-#include "Container.h"
-#endif
-
-#ifndef DIAGRAM_H_
-#include "Diagram.h"
-#endif
-
 #ifndef ACTIVERECORD_H_
 #include "../storage/ActiveRecord.h"
+#endif
+
+#ifndef HASMANY_H_
+#include "../storage/HasMany.h"
 #endif
 
 /*!
@@ -33,12 +29,15 @@
  */
 namespace metamodel
 {
+    class Diagram;
+
     /*!
      * \class Project
      *
      *  
      */
-    class Project : public Container<Diagram>, public storage::ActiveRecord<Project>
+    class Project : public storage::ActiveRecord<Project>
+                  , public storage::HasMany<Diagram>
     {
     public:
 

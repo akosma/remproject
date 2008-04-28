@@ -224,4 +224,22 @@ namespace storage
         output2 << ";";
         return output2.str();
     }
+    
+    const std::string AnyPropertyMap::getStringForWhere() const
+    {
+        std::stringstream output;
+        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        for (it = _map.begin(); it != _map.end(); ++it)
+        {
+            output << (it->second.getNameValuePair());
+            output << " AND ";
+        }
+        std::string str = output.str();
+        int len = str.length();
+        if (len > 5)
+        {
+            str = str.substr(0, len - 5);
+        }
+        return str;
+    }
 }

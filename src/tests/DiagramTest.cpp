@@ -67,20 +67,22 @@ namespace tests
         std::string className("actor");
         std::string diagramClassName("usecase");
 
-		metamodel::Diagram diagram(diagramClassName);
-        diagram.setName(diagramName);
-		CPPUNIT_ASSERT_EQUAL(diagramName, diagram.getName());
-        CPPUNIT_ASSERT(diagram.empty());
-        CPPUNIT_ASSERT_EQUAL(0, diagram.getCount());
-        
+		metamodel::Diagram* diagram = new metamodel::Diagram(diagramClassName);
+        diagram->setName(diagramName);
+		CPPUNIT_ASSERT_EQUAL(diagramName, diagram->getName());
+        CPPUNIT_ASSERT(diagram->isEmpty());
+        CPPUNIT_ASSERT_EQUAL(0, diagram->getChildrenCount());
+
         metamodel::Element* actor1 = new metamodel::Element(className);
         actor1->setName(actor1Name);
         CPPUNIT_ASSERT_EQUAL(actor1Name, actor1->getName());
 
-        diagram.addElement(actor1);
-        CPPUNIT_ASSERT_EQUAL(1, diagram.getCount());
-        
-        metamodel::Element* element = diagram.getElement(actor1Name);
+        diagram->addChild(actor1);
+        CPPUNIT_ASSERT_EQUAL(1, diagram->getChildrenCount());
+
+        metamodel::Element* element = diagram->getChild(actor1Name);
         CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
+        
+        delete diagram;
     }
 }

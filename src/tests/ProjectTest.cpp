@@ -67,33 +67,33 @@ namespace tests
         std::string diagramClassName("usecase");
 
         metamodel::Project project;
-        CPPUNIT_ASSERT(project.empty());
+        CPPUNIT_ASSERT(project.isEmpty());
         
         metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
         firstDiagram->setName(first);
         
-        project.addElement(firstDiagram);
-        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
+        project.addChild(firstDiagram);
+        CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
         
-        metamodel::Diagram* pointer = project.getElement(first);
+        metamodel::Diagram* pointer = project.getChild(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
         metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
         secondDiagram->setName(second);
-        project.addElement(secondDiagram);
-        CPPUNIT_ASSERT_EQUAL(2, project.getCount());
+        project.addChild(secondDiagram);
+        CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
 
-        pointer = project.getElement(second);
+        pointer = project.getChild(second);
         CPPUNIT_ASSERT_EQUAL((int)secondDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(pointer->getName(), second);
 		
-        project.removeElement(first);
-        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
+        project.removeChild(first);
+        CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
 
-        project.removeElement(second);
-        CPPUNIT_ASSERT_EQUAL(0, project.getCount());
-        CPPUNIT_ASSERT(project.empty());
+        project.removeChild(second);
+        CPPUNIT_ASSERT_EQUAL(0, project.getChildrenCount());
+        CPPUNIT_ASSERT(project.isEmpty());
 
         // Do not do the following:
         // delete firstDiagram;
@@ -109,26 +109,26 @@ namespace tests
         std::string diagramClassName("usecase");
 
         metamodel::Project project;
-        CPPUNIT_ASSERT(project.empty());
+        CPPUNIT_ASSERT(project.isEmpty());
         
         metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
         firstDiagram->setName(first);
         
-        project.addElement(firstDiagram);
-        CPPUNIT_ASSERT_EQUAL(1, project.getCount());
+        project.addChild(firstDiagram);
+        CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
         
-        metamodel::Diagram* pointer = project.getElement(first);
+        metamodel::Diagram* pointer = project.getChild(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
         metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
         secondDiagram->setName(second);
         
-        project.addElement(secondDiagram);
-        CPPUNIT_ASSERT_EQUAL(2, project.getCount());
+        project.addChild(secondDiagram);
+        CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
 
-		project.removeAllElements();
-        CPPUNIT_ASSERT_EQUAL(0, project.getCount());
+		project.removeAllChildren();
+        CPPUNIT_ASSERT_EQUAL(0, project.getChildrenCount());
 
         // Do not do the following:
         // delete firstDiagram;

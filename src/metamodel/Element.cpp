@@ -14,6 +14,10 @@
 
 #include "Element.h"
 
+#ifndef DIAGRAM_H_
+#include "Diagram.h"
+#endif
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
@@ -25,12 +29,15 @@ namespace metamodel
      */
     Element::Element(std::string& className)
     : storage::ActiveRecord<Element>(className)
+    , storage::BelongsTo<Diagram>()
     {
         createSchemaStructure();
+        addIntegerProperty(getParentColumn());
     }
     
     Element::Element(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
     : storage::ActiveRecord<Element>(className, id, data)
+    , storage::BelongsTo<Diagram>()
     {
     }
     

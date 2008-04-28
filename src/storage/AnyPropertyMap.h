@@ -70,6 +70,7 @@ namespace storage
         const std::string getColumnList() const;
         const std::string getStringForInsert(std::string&) const;
         const std::string getStringForUpdate(std::string&, const int id) const;
+        const std::string getStringForWhere() const;
 
     protected:
 

@@ -15,20 +15,20 @@
 #ifndef DIAGRAM_H_
 #define DIAGRAM_H_
 
-#ifndef CONTAINER_H_
-#include "Container.h"
-#endif
-
-#ifndef ELEMENT_H_
-#include "Element.h"
-#endif
+#include <map>
+#include <string>
 
 #ifndef ACTIVERECORD_H_
 #include "../storage/ActiveRecord.h"
 #endif
 
-#include <map>
-#include <string>
+#ifndef BELONGSTO_H_
+#include "../storage/BelongsTo.h"
+#endif
+
+#ifndef HASMANY_H_
+#include "../storage/HasMany.h"
+#endif
 
 /*!
  * \namespace metamodel
@@ -36,12 +36,17 @@
  */
 namespace metamodel
 {
+    class Project;
+    class Element;
+
     /*!
      * \class Diagram
      *
      *  
      */
-    class Diagram : public Container<Element>, public storage::ActiveRecord<Diagram>
+    class Diagram : public storage::ActiveRecord<Diagram>
+                  , public storage::BelongsTo<Project>
+                  , public storage::HasMany<Element>
     {
     public:
 

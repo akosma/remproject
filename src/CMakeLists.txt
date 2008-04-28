@@ -37,6 +37,8 @@ SET (ui_SRCS
 
 SET (storage_SRCS
     storage/ActiveRecord.h 
+    storage/BelongsTo.h
+    storage/HasMany.h
 
     storage/Property.h 
 
@@ -73,8 +75,6 @@ SET (tests_SRCS
 )
 
 SET (metamodel_SRCS
-    metamodel/Container.h 
-
     metamodel/Diagram.cpp 
     metamodel/Diagram.h 
 

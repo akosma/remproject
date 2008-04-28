@@ -18,6 +18,10 @@
 #include "../metamodel/Element.h"
 #endif
 
+#ifndef ANYPROPERTYMAP_H_
+#include "../storage/AnyPropertyMap.h"
+#endif
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -137,6 +141,25 @@ namespace tests
         CPPUNIT_ASSERT(!elem->isNew());
         
         delete elem;
+    }
+    
+    void ActiveRecordTest::testCanUseConditionsToFindAnItem()
+    {
+        std::string name("peter");
+        storage::AnyPropertyMap conditions;
+        conditions.setStringProperty("name", name);
+        conditions.setBooleanProperty("valid", true);
+        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findByCondition(conditions);
+        
+        CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());
+        metamodel::Element& elem0 = elements->at(0);
+
+        CPPUNIT_ASSERT(elem0.getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
+        CPPUNIT_ASSERT(!elem0.isDirty());
+        CPPUNIT_ASSERT(!elem0.isNew());
+        
+        delete elements;
     }
     
     void ActiveRecordTest::testSearchingForInstancesNotExistingInDatabaseReturnsNull()

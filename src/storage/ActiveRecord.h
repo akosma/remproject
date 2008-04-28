@@ -128,6 +128,7 @@ namespace storage
         static void remove(const ID id);
 
         static std::vector<T>* findAll();
+        static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
         static T* findById(const ID id);
 
         void setStringProperty(const std::string&, const std::string&);
@@ -170,7 +171,8 @@ namespace storage
         void update();
 
     private:
-        static std::vector<storage::AnyPropertyMap>* getPropertyMaps(SQLiteWrapper& wrapper, std::map<std::string, std::string>&);
+        static std::vector<storage::AnyPropertyMap>* getPropertyMaps(std::map<std::string, std::string>&);
+        static std::vector<T>* getVectorByQuery(std::string&);
 
     private:
 
@@ -549,7 +551,7 @@ namespace storage
     		wrapper.close();
     		if (ok)
     		{
-                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(wrapper, schema);
+                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
@@ -577,34 +579,28 @@ namespace storage
         query << T::getTableName();
         query << ";";
         
-    	std::vector<T>* items = new std::vector<T>;
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-        if (ok)
-        {
-            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
-            ok = wrapper.executeQuery(query.str());
-            if (ok)
-            {
-                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(wrapper, schema);
-                std::vector<storage::AnyPropertyMap>::iterator iter;
-                for (iter = maps->begin(); iter != maps->end(); ++iter)
-                {
-                    std::string className = iter->getString("class");
-                    ID currentId = iter->getInteger("id");
-                    T item(className, currentId, *iter);
-                    items->push_back(item);
-                }
-                delete maps;
-            }
-            wrapper.close();
-        }
-    	return items;
+        std::string q = query.str();
+        return getVectorByQuery(q);
     }
     
     template <class T>
-    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(SQLiteWrapper& wrapper, std::map<std::string, std::string>& schema)
+    std::vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
     {
+        std::stringstream query;
+        query << "SELECT * FROM ";
+        query << T::getTableName();
+        query << " WHERE ";
+        query << conditions.getStringForWhere();
+        query << ";";
+        
+        std::string q = query.str();
+        return getVectorByQuery(q);
+    }
+    
+    template <class T>
+    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(std::map<std::string, std::string>& schema)
+    {
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
         std::vector<storage::AnyPropertyMap>* maps = new std::vector<storage::AnyPropertyMap>();
         const std::vector<std::string>& data = wrapper.getData();
         const size_t numberOfHeaders = wrapper.getTableHeaders().size();
@@ -641,6 +637,34 @@ namespace storage
             maps->push_back(instanceData);
         }
         return maps;
+    }
+    
+    template <class T>
+    std::vector<T>* ActiveRecord<T>::getVectorByQuery(std::string& query)
+    {
+    	std::vector<T>* items = new std::vector<T>;
+    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
+    	bool ok = wrapper.open();
+        if (ok)
+        {
+            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
+            ok = wrapper.executeQuery(query);
+            if (ok)
+            {
+                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
+                std::vector<storage::AnyPropertyMap>::iterator iter;
+                for (iter = maps->begin(); iter != maps->end(); ++iter)
+                {
+                    std::string className = iter->getString("class");
+                    ID currentId = iter->getInteger("id");
+                    T item(className, currentId, *iter);
+                    items->push_back(item);
+                }
+                delete maps;
+            }
+            wrapper.close();
+        }
+    	return items;        
     }
 }
 
