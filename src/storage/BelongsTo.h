@@ -47,7 +47,7 @@ namespace storage
         
         void setParent(T*);
         T* getParent();
-        std::string& getParentColumn();
+        std::string getParentColumn();
         
     private:
         T* _parent;
@@ -105,7 +105,7 @@ namespace storage
     }
     
     template <class T>
-    std::string& BelongsTo<T>::getParentColumn()
+    std::string BelongsTo<T>::getParentColumn()
     {
         return _parentColumn;
     }

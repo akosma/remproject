@@ -18,6 +18,14 @@
 #include "../metamodel/Element.h"
 #endif
 
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
+#endif
+
+#ifndef PROJECT_H_
+#include "../metamodel/Project.h"
+#endif
+
 #ifndef ANYPROPERTYMAP_H_
 #include "../storage/AnyPropertyMap.h"
 #endif
@@ -240,5 +248,24 @@ namespace tests
 
         delete john;
         delete peter;
+    }
+    
+    void ActiveRecordTest::testObjectCanSaveItsChildren()
+    {
+        std::string first("first");
+        std::string second("second");
+        std::string diagramClassName("usecase");
+
+        metamodel::Project project;        
+        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        firstDiagram->setName(first);
+        project.addChild(firstDiagram);
+
+        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        secondDiagram->setName(second);
+        project.addChild(secondDiagram);
+        CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
+
+        project.save();
     }
 }

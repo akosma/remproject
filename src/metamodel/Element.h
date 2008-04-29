@@ -16,7 +16,6 @@
 #define ELEMENT_H_
 
 #include <string>
-#include <map>
 
 #ifndef ACTIVERECORD_H_
 #include "../storage/ActiveRecord.h"
@@ -25,6 +24,12 @@
 #ifndef BELONGSTO_H_
 #include "../storage/BelongsTo.h"
 #endif
+
+#ifndef HASMANY_H_
+#include "../storage/HasMany.h"
+#endif
+
+using namespace storage;
 
 /*!
  * \namespace metamodel
@@ -39,8 +44,9 @@ namespace metamodel
      *
      *  
      */
-    class Element : public storage::ActiveRecord<Element>
-                  , public storage::BelongsTo<Diagram>
+    class Element : public ActiveRecord<Element
+                         , BelongsTo<Diagram> 
+                         , HasMany<NoChildren> >
     {
     public:
 
@@ -49,15 +55,15 @@ namespace metamodel
          */
         Element(std::string&);
 
-        Element(std::string&, storage::ID, storage::AnyPropertyMap&);
+        Element(std::string&, storage::ID, AnyPropertyMap&);
 
         /*!
          *  Element virtual destructor.
          */
         virtual ~Element();
-        
+
         static std::string& getTableName();
-        
+
     private:
         void createSchemaStructure();
         

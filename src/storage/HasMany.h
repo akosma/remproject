@@ -57,6 +57,8 @@ namespace storage
         void removeChild(const std::string&);
 		
 		void removeAllChildren();
+        
+        void saveChildren();
 
     private:
         InternalMap _children;
@@ -133,7 +135,16 @@ namespace storage
 
 		_children.clear();
 	}
-
+    
+    template <typename T>
+    void HasMany<T>::saveChildren()
+    {
+		typename InternalMap::iterator iter;
+        for (iter = _children.begin(); iter != _children.end(); ++iter)
+        {
+            iter->second->save();
+        }
+    }
 }
 
 #endif /* HASMANY_H_ */

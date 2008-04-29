@@ -22,6 +22,8 @@
 #include "Element.h"
 #endif
 
+using namespace storage;
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
@@ -32,18 +34,13 @@ namespace metamodel
      * Diagram Constructor.
      */
     Diagram::Diagram(std::string& className)
-    : storage::ActiveRecord<Diagram>(className)
-    , storage::BelongsTo<Project>()
-    , storage::HasMany<Element>()
+    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element> >(className)
     {
         createSchemaStructure();
-        addIntegerProperty(getParentColumn());
     }
 
-    Diagram::Diagram(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
-    : storage::ActiveRecord<Diagram>(className, id, data)
-    , storage::BelongsTo<Project>()
-    , storage::HasMany<Element>()
+    Diagram::Diagram(std::string& className, storage::ID id, AnyPropertyMap& data)
+    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element> >(className, id, data)
     {
     }
 

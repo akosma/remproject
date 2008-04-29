@@ -18,6 +18,8 @@
 #include "Diagram.h"
 #endif
 
+using namespace storage;
+
 /*!
  * \namespace metamodel
  * Insert a description for the namespace here
@@ -28,15 +30,13 @@ namespace metamodel
      * Project Constructor.
      */
     Project::Project()
-    : storage::ActiveRecord<Project>(std::string("project"))
-    , storage::HasMany<Diagram>()
+    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram> >(std::string("project"))
     {
         createSchemaStructure();
     }
 
-    Project::Project(std::string& className, storage::ID id, storage::AnyPropertyMap& data)
-    : storage::ActiveRecord<Project>(className, id, data)
-    , storage::HasMany<Diagram>()
+    Project::Project(std::string& className, storage::ID id, AnyPropertyMap& data)
+    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram> >(className, id, data)
     {
     }
     
@@ -56,7 +56,7 @@ namespace metamodel
         addDoubleProperty("version");
         addBooleanProperty("valid");
     }
-
+    
     std::string& Project::getTableName()
     {
         static std::string tableName("projects");

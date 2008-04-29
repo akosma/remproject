@@ -18,10 +18,6 @@
 #include <map>
 #include <string>
 
-#ifndef ACTIVERECORD_H_
-#include "../storage/ActiveRecord.h"
-#endif
-
 #ifndef BELONGSTO_H_
 #include "../storage/BelongsTo.h"
 #endif
@@ -29,6 +25,12 @@
 #ifndef HASMANY_H_
 #include "../storage/HasMany.h"
 #endif
+
+#ifndef ACTIVERECORD_H_
+#include "../storage/ActiveRecord.h"
+#endif
+
+using namespace storage;
 
 /*!
  * \namespace metamodel
@@ -44,9 +46,9 @@ namespace metamodel
      *
      *  
      */
-    class Diagram : public storage::ActiveRecord<Diagram>
-                  , public storage::BelongsTo<Project>
-                  , public storage::HasMany<Element>
+    class Diagram : public ActiveRecord<Diagram
+                         , BelongsTo<Project>
+                         , HasMany<Element> >
     {
     public:
 
@@ -55,7 +57,7 @@ namespace metamodel
          */
         Diagram(std::string&);
 
-        Diagram(std::string&, storage::ID, storage::AnyPropertyMap&);
+        Diagram(std::string&, storage::ID, AnyPropertyMap&);
 
         /*!
          *  Diagram virtual destructor.

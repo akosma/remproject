@@ -40,6 +40,7 @@ namespace tests
         CPPUNIT_TEST(testDestroyingObjectsRemovesThemFromTheDatabase);
         CPPUNIT_TEST(testCanUseCopyConstructorSafely);
         CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
+        CPPUNIT_TEST(testObjectCanSaveItsChildren);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -76,6 +77,7 @@ namespace tests
         void testDestroyingObjectsRemovesThemFromTheDatabase();
         void testCanUseCopyConstructorSafely();
         void testCanUseAssignmentOperatorSafely();
+        void testObjectCanSaveItsChildren();
     };
 }
 

@@ -19,9 +19,15 @@
 #include "../storage/ActiveRecord.h"
 #endif
 
+#ifndef BELONGSTO_H_
+#include "../storage/BelongsTo.h"
+#endif
+
 #ifndef HASMANY_H_
 #include "../storage/HasMany.h"
 #endif
+
+using namespace storage;
 
 /*!
  * \namespace metamodel
@@ -36,8 +42,9 @@ namespace metamodel
      *
      *  
      */
-    class Project : public storage::ActiveRecord<Project>
-                  , public storage::HasMany<Diagram>
+    class Project : public ActiveRecord<Project
+                         , BelongsTo<NoParent>
+                         , HasMany<Diagram> >
     {
     public:
 
@@ -52,9 +59,9 @@ namespace metamodel
          * Project virtual destructor.
          */
         virtual ~Project();
-        
+
         static std::string& getTableName();
-        
+
     private:
         void createSchemaStructure();
 	};

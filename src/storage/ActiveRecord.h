@@ -35,6 +35,27 @@
  */
 namespace storage
 {
+    class NoParent
+    {
+    public:
+        NoParent() : _parentColumn("no_parent") {}
+        std::string& getParentColumn() { return _parentColumn; }
+        static std::string& getTableName()
+        { 
+            static std::string tableName("no_parent");
+            return tableName; 
+        }
+    private:
+        std::string _parentColumn;
+    };
+
+    class NoChildren
+    {
+    public:
+        void save() {};
+        void saveChildren() {};
+    };
+    
     //! Represents the ID stored in the database for each ActiveRecord instance.
     typedef long long ID;
 
@@ -51,8 +72,11 @@ namespace storage
      *
      *  
      */
-	template <class T>
-    class ActiveRecord
+	template <class T
+             , class P = NoParent
+             , class C = NoChildren>
+    class ActiveRecord : public P
+                       , public C
     {
     public:
 
@@ -195,8 +219,8 @@ namespace storage
      * Default constructor. Sets the ID to DEFAULT_ID. Used
      * to create instances that do not exist yet in the database.
      */
-    template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string className)
+    template <class T, class P, class C>
+    ActiveRecord<T, P, C>::ActiveRecord(std::string className)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
@@ -209,8 +233,8 @@ namespace storage
      * Constructor. Used to create instances whose state is
      * already present in the database.
      */
-    template <class T>
-    ActiveRecord<T>::ActiveRecord(std::string& className, ID id, AnyPropertyMap& data)
+    template <class T, class P, class C>
+    ActiveRecord<T, P, C>::ActiveRecord(std::string& className, ID id, AnyPropertyMap& data)
     : _id        (id)
     , _isNew     (false)
     , _isDirty   (false)
@@ -224,8 +248,8 @@ namespace storage
      * 
      * \param rhs The instance to copy from ("right hand side").
      */
-    template <class T>
-    ActiveRecord<T>::ActiveRecord(const ActiveRecord& rhs)
+    template <class T, class P, class C>
+    ActiveRecord<T, P, C>::ActiveRecord(const ActiveRecord& rhs)
     : _id        (rhs._id)
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
@@ -237,8 +261,8 @@ namespace storage
     /*!
      * Virtual destructor.
      */
-    template <class T>
-    ActiveRecord<T>::~ActiveRecord()
+    template <class T, class P, class C>
+    ActiveRecord<T, P, C>::~ActiveRecord()
     {
     }
 
@@ -247,8 +271,8 @@ namespace storage
      * 
      * \param rhs The instance to copy from ("right hand side").
      */
-    template <class T>
-    ActiveRecord<T>& ActiveRecord<T>::operator=(const ActiveRecord& rhs)
+    template <class T, class P, class C>
+    ActiveRecord<T, P, C>& ActiveRecord<T, P, C>::operator=(const ActiveRecord& rhs)
     {
     	if (this == &rhs)
     	{
@@ -262,36 +286,36 @@ namespace storage
     	return *this;
     }
     
-    template <class T>
-    void ActiveRecord<T>::setStringProperty(const std::string& key, const std::string& value)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setStringProperty(const std::string& key, const std::string& value)
     {
         setDirty();
         _data.setStringProperty(key, value);
     }
 
-    template <class T>
-    void ActiveRecord<T>::setIntegerProperty(const std::string& key, const int value)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setIntegerProperty(const std::string& key, const int value)
     {
         setDirty();
         _data.setIntegerProperty(key, value);
     }
 
-    template <class T>
-    void ActiveRecord<T>::setBooleanProperty(const std::string& key, const bool value)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setBooleanProperty(const std::string& key, const bool value)
     {
         setDirty();
         _data.setBooleanProperty(key, value);
     }
 
-    template <class T>
-    void ActiveRecord<T>::setDoubleProperty(const std::string& key, const double value)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setDoubleProperty(const std::string& key, const double value)
     {
         setDirty();
         _data.setDoubleProperty(key, value);
     }
     
-    template <class T>
-    void ActiveRecord<T>::addStringProperty(const std::string& key)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::addStringProperty(const std::string& key)
     {
         if (!_data.hasProperty(key))
         {
@@ -299,8 +323,8 @@ namespace storage
         }
     }
 
-    template <class T>
-    void ActiveRecord<T>::addIntegerProperty(const std::string& key)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::addIntegerProperty(const std::string& key)
     {
         if (!_data.hasProperty(key))
         {
@@ -308,8 +332,8 @@ namespace storage
         }
     }
 
-    template <class T>
-    void ActiveRecord<T>::addBooleanProperty(const std::string& key)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::addBooleanProperty(const std::string& key)
     {
         if (!_data.hasProperty(key))
         {
@@ -317,8 +341,8 @@ namespace storage
         }
     }
 
-    template <class T>
-    void ActiveRecord<T>::addDoubleProperty(const std::string& key)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::addDoubleProperty(const std::string& key)
     {
         if (!_data.hasProperty(key))
         {
@@ -326,26 +350,26 @@ namespace storage
         }
     }
     
-    template <class T>
-    std::string ActiveRecord<T>::getString(const std::string& key)
+    template <class T, class P, class C>
+    std::string ActiveRecord<T, P, C>::getString(const std::string& key)
     {
         return _data.getString(key);
     }
     
-    template <class T>
-    int ActiveRecord<T>::getInteger(const std::string& key)
+    template <class T, class P, class C>
+    int ActiveRecord<T, P, C>::getInteger(const std::string& key)
     {
         return _data.getInteger(key);
     }
     
-    template <class T>
-    bool ActiveRecord<T>::getBoolean(const std::string& key)
+    template <class T, class P, class C>
+    bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
     {
         return _data.getBoolean(key);
     }
     
-    template <class T>
-    double ActiveRecord<T>::getDouble(const std::string& key)
+    template <class T, class P, class C>
+    double ActiveRecord<T, P, C>::getDouble(const std::string& key)
     {
         return _data.getDouble(key);
     }
@@ -359,8 +383,8 @@ namespace storage
      * framework for subclasses, that must provide an implementation
      * to "insert()" and "update()". 
      */
-    template <class T>
-    void ActiveRecord<T>::save()
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::save()
     {
     	if (_isNew)
     	{
@@ -379,10 +403,11 @@ namespace storage
     			_isDirty = false;
     		}
     	}
+        C::saveChildren();
     }
         
-    template <class T>
-    void ActiveRecord<T>::update()
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::update()
     {
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
     	bool ok = wrapper.open();
@@ -393,13 +418,14 @@ namespace storage
 		wrapper.close();
     }
     
-    template <class T>
-    const ID ActiveRecord<T>::insert()
+    template <class T, class P, class C>
+    const ID ActiveRecord<T, P, C>::insert()
     {
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
     	bool ok = wrapper.open();
     	if (!wrapper.tableExists(T::getTableName()))
     	{
+            addIntegerProperty(P::getParentColumn());
             _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
     	}
@@ -425,8 +451,8 @@ namespace storage
      * 
      * \return A boolean value.
      */
-    template <class T>
-    const bool ActiveRecord<T>::isDirty() const
+    template <class T, class P, class C>
+    const bool ActiveRecord<T, P, C>::isDirty() const
     {
     	return _isDirty;
     }
@@ -437,8 +463,8 @@ namespace storage
      * 
      * \return A boolean value.
      */
-    template <class T>
-    const bool ActiveRecord<T>::isNew() const
+    template <class T, class P, class C>
+    const bool ActiveRecord<T, P, C>::isNew() const
     {
     	return _isNew;
     }
@@ -448,20 +474,20 @@ namespace storage
      * 
      * \return A ActiveRecordId (long long) value.
      */
-    template <class T>
-    const ID ActiveRecord<T>::getId() const
+    template <class T, class P, class C>
+    const ID ActiveRecord<T, P, C>::getId() const
     {
     	return _id;
     }
     
-    template <class T>
-    void ActiveRecord<T>::setName(std::string& name)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setName(std::string& name)
     {
         setStringProperty("name", name);
     }
 
-    template <class T>
-    std::string ActiveRecord<T>::getName()
+    template <class T, class P, class C>
+    std::string ActiveRecord<T, P, C>::getName()
     {
         return getString("name");
     }    
@@ -471,22 +497,22 @@ namespace storage
      * ActiveRecord base class; subclasses must call this method in
      * every "setter" method.
      */
-    template <class T>
-    void ActiveRecord<T>::setDirty()
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setDirty()
     {
     	_isDirty = true;
     }
     
-    template <class T>
-    void ActiveRecord<T>::destroy()
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::destroy()
     {
-        ActiveRecord<T>::remove(_id);
+        ActiveRecord<T, P, C>::remove(_id);
     	_isDirty = true;
         _isNew = true;
     }
 
-    template <class T>
-    void ActiveRecord<T>::remove(const ID id)
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::remove(const ID id)
     {
         std::stringstream query;
         query << "DELETE FROM ";
@@ -504,8 +530,8 @@ namespace storage
     	}
     }
     
-    template <class T>
-    void ActiveRecord<T>::removeAll()
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::removeAll()
     {
         std::stringstream query;
         query << "DELETE FROM ";
@@ -531,8 +557,8 @@ namespace storage
      *
      * \return A pointer to an instance, or NULL.
      */
-    template <class T>
-    T* ActiveRecord<T>::findById(const ID id)
+    template <class T, class P, class C>
+    T* ActiveRecord<T, P, C>::findById(const ID id)
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -571,8 +597,8 @@ namespace storage
      *
      * \return A vector of instances.
      */
-    template <class T>
-    std::vector<T>* ActiveRecord<T>::findAll()
+    template <class T, class P, class C>
+    std::vector<T>* ActiveRecord<T, P, C>::findAll()
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -583,8 +609,8 @@ namespace storage
         return getVectorByQuery(q);
     }
     
-    template <class T>
-    std::vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
+    template <class T, class P, class C>
+    std::vector<T>* ActiveRecord<T, P, C>::findByCondition(const storage::AnyPropertyMap& conditions)
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -597,8 +623,8 @@ namespace storage
         return getVectorByQuery(q);
     }
     
-    template <class T>
-    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(std::map<std::string, std::string>& schema)
+    template <class T, class P, class C>
+    std::vector<storage::AnyPropertyMap>* ActiveRecord<T, P, C>::getPropertyMaps(std::map<std::string, std::string>& schema)
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         std::vector<storage::AnyPropertyMap>* maps = new std::vector<storage::AnyPropertyMap>();
@@ -639,8 +665,8 @@ namespace storage
         return maps;
     }
     
-    template <class T>
-    std::vector<T>* ActiveRecord<T>::getVectorByQuery(std::string& query)
+    template <class T, class P, class C>
+    std::vector<T>* ActiveRecord<T, P, C>::getVectorByQuery(std::string& query)
     {
     	std::vector<T>* items = new std::vector<T>;
     	SQLiteWrapper& wrapper = SQLiteWrapper::get();
