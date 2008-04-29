@@ -255,17 +255,29 @@ namespace tests
         std::string first("first");
         std::string second("second");
         std::string diagramClassName("usecase");
+        std::string projectName("test");
 
-        metamodel::Project project;        
+        metamodel::Project* project = new metamodel::Project();
+        project->setName(projectName);
         metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
         firstDiagram->setName(first);
-        project.addChild(firstDiagram);
+        project->addChild(firstDiagram);
+        firstDiagram->setParent(project);
+
+        metamodel::Project* parent = firstDiagram->getParent();
+        CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 
         metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
         secondDiagram->setName(second);
-        project.addChild(secondDiagram);
-        CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
+        project->addChild(secondDiagram);
+        secondDiagram->setParent(project);
 
-        project.save();
+        CPPUNIT_ASSERT_EQUAL(2, project->getChildrenCount());
+
+        parent = secondDiagram->getParent();
+        CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
+
+        project->save();
+        delete project;
     }
 }
