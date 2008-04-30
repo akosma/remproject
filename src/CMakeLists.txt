@@ -251,7 +251,7 @@ ELSE (WIN32)
                 COMMAND rm 
                     ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
             )
-        
+
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
             
@@ -267,6 +267,26 @@ ELSE (WIN32)
                 COMMAND mv doc/latex/refman.pdf doc/
                 COMMAND rm -r doc/latex/
             )
+            
+            INSTALL(TARGETS Rem
+                RUNTIME DESTINATION Applications
+            )
+
+            SET(CPACK_PACKAGE_NAME "Rem")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
+            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};Rem;Rem;/")
+            SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
+            #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE")
+            #SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README")
+            SET(CPACK_PACKAGE_VERSION_MAJOR "1")
+            SET(CPACK_PACKAGE_VERSION_MINOR "0")
+            SET(CPACK_PACKAGE_VERSION_PATCH "0")
+            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+            SET(CPACK_PACKAGE_EXECUTABLES "Rem" "Rem")
+            SET(CPACK_GENERATOR "PackageMaker")
+            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "/Applications/Rem")
+            INCLUDE(CPack)
         
         ELSE (APPLE)
             # ============ BUILD SETTINGS FOR KUBUNTU LINUX ============
