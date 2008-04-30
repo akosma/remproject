@@ -28,7 +28,7 @@ namespace storage
      *
      *  
      */
-    template <class T>
+    template <class P>
     class BelongsTo
     {
     public:
@@ -42,46 +42,46 @@ namespace storage
          *  BelongsTo virtual destructor.
          */
         virtual ~BelongsTo();
-        BelongsTo(const BelongsTo<T>&);
-        BelongsTo<T>& operator=(const BelongsTo<T>&);
+        BelongsTo(const BelongsTo<P>&);
+        BelongsTo<P>& operator=(const BelongsTo<P>&);
         
-        void setParent(T*);
-        T* getParent();
+        void setParent(P*);
+        P* getParent();
         std::string getParentColumn();
         
     private:
-        T* _parent;
+        P* _parent;
         std::string _parentColumn;
     };
 
     /*!
      * 
      */
-    template <class T>
-    BelongsTo<T>::BelongsTo()
+    template <class P>
+    BelongsTo<P>::BelongsTo()
     : _parent(0)
     , _parentColumn("")
     {
         std::stringstream name;
-        name << T::getTableName();
+        name << P::getTableName();
         name << "_id";
         _parentColumn = name.str();
     }
     
-    template <class T>
-    BelongsTo<T>::~BelongsTo()
+    template <class P>
+    BelongsTo<P>::~BelongsTo()
     {
     }
     
-    template <class T>
-    BelongsTo<T>::BelongsTo(const BelongsTo<T>& source)
+    template <class P>
+    BelongsTo<P>::BelongsTo(const BelongsTo<P>& source)
     : _parent(source._parent)
     , _parentColumn(source._parentColumn)
     {
     }
     
-    template <class T>
-    BelongsTo<T>& BelongsTo<T>::operator=(const BelongsTo<T>& source)
+    template <class P>
+    BelongsTo<P>& BelongsTo<P>::operator=(const BelongsTo<P>& source)
     {
         if (this != &source)
         {
@@ -92,20 +92,20 @@ namespace storage
         return *this;
     }
     
-    template <class T>
-    void BelongsTo<T>::setParent(T* parent)
+    template <class P>
+    void BelongsTo<P>::setParent(P* parent)
     {
         _parent = parent;
     }
     
-    template <class T>
-    T* BelongsTo<T>::getParent()
+    template <class P>
+    P* BelongsTo<P>::getParent()
     {
         return _parent;
     }
     
-    template <class T>
-    std::string BelongsTo<T>::getParentColumn()
+    template <class P>
+    std::string BelongsTo<P>::getParentColumn()
     {
         return _parentColumn;
     }

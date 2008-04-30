@@ -30,13 +30,13 @@ namespace metamodel
      * Element Constructor.
      */
     Element::Element(std::string& className)
-    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren> >(className)
+    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className)
     {
         createSchemaStructure();
     }
     
     Element::Element(std::string& className, storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren> >(className, id, data)
+    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className, id, data)
     {
     }
     

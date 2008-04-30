@@ -22,6 +22,8 @@
 #include "../metamodel/Diagram.h"
 #endif
 
+using namespace metamodel;
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -66,20 +68,20 @@ namespace tests
         std::string second("second");
         std::string diagramClassName("usecase");
 
-        metamodel::Project project;
+        Project project;
         CPPUNIT_ASSERT(project.isEmpty());
         
-        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
         
         project.addChild(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
         
-        metamodel::Diagram* pointer = project.getChild(first);
+        Diagram* pointer = project.getChild(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* secondDiagram = new Diagram(diagramClassName);
         secondDiagram->setName(second);
         project.addChild(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
@@ -108,20 +110,20 @@ namespace tests
         std::string second("second");
         std::string diagramClassName("usecase");
 
-        metamodel::Project project;
+        Project project;
         CPPUNIT_ASSERT(project.isEmpty());
         
-        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
         
         project.addChild(firstDiagram);
         CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
         
-        metamodel::Diagram* pointer = project.getChild(first);
+        Diagram* pointer = project.getChild(first);
         CPPUNIT_ASSERT_EQUAL((int)firstDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(first, pointer->getName());
 
-        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* secondDiagram = new Diagram(diagramClassName);
         secondDiagram->setName(second);
         
         project.addChild(secondDiagram);

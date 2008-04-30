@@ -30,13 +30,13 @@ namespace metamodel
      * Project Constructor.
      */
     Project::Project()
-    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram> >(std::string("project"))
+    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram, Project> >(std::string("project"))
     {
         createSchemaStructure();
     }
 
     Project::Project(std::string& className, storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram> >(className, id, data)
+    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram, Project> >(className, id, data)
     {
     }
     

@@ -34,13 +34,13 @@ namespace metamodel
      * Diagram Constructor.
      */
     Diagram::Diagram(std::string& className)
-    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element> >(className)
+    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element, Diagram> >(className)
     {
         createSchemaStructure();
     }
 
     Diagram::Diagram(std::string& className, storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element> >(className, id, data)
+    : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element, Diagram> >(className, id, data)
     {
     }
 

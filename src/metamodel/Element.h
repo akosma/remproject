@@ -46,7 +46,7 @@ namespace metamodel
      */
     class Element : public ActiveRecord<Element
                          , BelongsTo<Diagram> 
-                         , HasMany<NoChildren> >
+                         , HasMany<NoChildren, Element> >
     {
     public:
 

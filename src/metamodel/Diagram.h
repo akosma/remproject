@@ -48,7 +48,7 @@ namespace metamodel
      */
     class Diagram : public ActiveRecord<Diagram
                          , BelongsTo<Project>
-                         , HasMany<Element> >
+                         , HasMany<Element, Diagram> >
     {
     public:
 

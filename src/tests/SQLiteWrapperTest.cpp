@@ -24,6 +24,8 @@
 #include "../storage/SQLiteWrapper.h"
 #endif
 
+using namespace storage;
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -69,8 +71,8 @@ namespace tests
         remove(_filename.c_str());
     
         // Calling the singleton "automagically" creates the file
-        storage::SQLiteWrapper::setFileName(_filename);
-        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
+        SQLiteWrapper::setFileName(_filename);
+        SQLiteWrapper& dal = SQLiteWrapper::get();
 
         // We force here to have something in the database
         bool ok = dal.open();
@@ -91,7 +93,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testCreateTable()
     {
-        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
+        SQLiteWrapper& dal = SQLiteWrapper::get();
         bool ok = dal.open();
         CPPUNIT_ASSERT(ok);
         CPPUNIT_ASSERT(!dal.tableExists("test"));
@@ -106,7 +108,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testInsertion()
     {
-        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
+        SQLiteWrapper& dal = SQLiteWrapper::get();
         bool ok = true;
         for (int i = 0; i < 1000; i++)
         {
@@ -123,7 +125,7 @@ namespace tests
      */
     void SQLiteWrapperTest::testSelect()
     {
-        storage::SQLiteWrapper& dal = storage::SQLiteWrapper::get();
+        SQLiteWrapper& dal = SQLiteWrapper::get();
         bool ok = dal.open();
         CPPUNIT_ASSERT(ok);
         ok = dal.executeQuery("SELECT test1, test2 FROM test");

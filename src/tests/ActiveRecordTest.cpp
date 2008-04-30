@@ -30,6 +30,9 @@
 #include "../storage/AnyPropertyMap.h"
 #endif
 
+using namespace metamodel;
+using namespace storage;
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -75,9 +78,9 @@ namespace tests
         std::string name2("johnny");
         std::string className("actor");
 
-		metamodel::Element* john = new metamodel::Element(className);
+		Element* john = new Element(className);
 		CPPUNIT_ASSERT(john->isNew());
-		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)john->getId());
+		CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)john->getId());
 
         john->setName(name1);
 		CPPUNIT_ASSERT_EQUAL(name1, john->getName());
@@ -98,9 +101,9 @@ namespace tests
 
         std::string name3("peter");
         std::string name4("pete");
-		metamodel::Element* peter = new metamodel::Element(className);
+		Element* peter = new Element(className);
 		CPPUNIT_ASSERT(peter->isNew());
-		CPPUNIT_ASSERT_EQUAL((int)storage::DEFAULT_ID, (int)peter->getId());
+		CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)peter->getId());
 
         peter->setName(name3);
 		CPPUNIT_ASSERT_EQUAL(name3, peter->getName());
@@ -120,11 +123,11 @@ namespace tests
     
     void ActiveRecordTest::testCanRetrieveAllInstances()
     {
-        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findAll();
+        std::vector<Element>* elements = ActiveRecord<Element>::findAll();
         
         CPPUNIT_ASSERT_EQUAL(2, (int)elements->size());
-        metamodel::Element& elem0 = elements->at(0);
-        metamodel::Element& elem1 = elements->at(1);
+        Element& elem0 = elements->at(0);
+        Element& elem1 = elements->at(1);
 
         CPPUNIT_ASSERT(!elem0.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
@@ -141,7 +144,7 @@ namespace tests
     
     void ActiveRecordTest::testCanRetrieveOneInstance()
     {
-        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        Element* elem = ActiveRecord<Element>::findById(1);
         
         CPPUNIT_ASSERT(elem->getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
@@ -154,13 +157,13 @@ namespace tests
     void ActiveRecordTest::testCanUseConditionsToFindAnItem()
     {
         std::string name("peter");
-        storage::AnyPropertyMap conditions;
+        AnyPropertyMap conditions;
         conditions.setStringProperty("name", name);
         conditions.setBooleanProperty("valid", true);
-        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findByCondition(conditions);
+        std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(conditions);
         
         CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());
-        metamodel::Element& elem0 = elements->at(0);
+        Element& elem0 = elements->at(0);
 
         CPPUNIT_ASSERT(elem0.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
@@ -172,13 +175,13 @@ namespace tests
     
     void ActiveRecordTest::testSearchingForInstancesNotExistingInDatabaseReturnsNull()
     {
-        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(15879);
+        Element* elem = ActiveRecord<Element>::findById(15879);
         CPPUNIT_ASSERT(elem == NULL);
     }
     
     void ActiveRecordTest::testDestroyingObjectsRemovesThemFromTheDatabase()
     {
-        metamodel::Element* elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        Element* elem = ActiveRecord<Element>::findById(1);
         
         CPPUNIT_ASSERT(elem->getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
@@ -190,12 +193,12 @@ namespace tests
         CPPUNIT_ASSERT(elem->isNew());
         delete elem;
         
-        elem = storage::ActiveRecord<metamodel::Element>::findById(1);
+        elem = ActiveRecord<Element>::findById(1);
         CPPUNIT_ASSERT(elem == NULL);
         
-        storage::ActiveRecord<metamodel::Element>::removeAll();
+        ActiveRecord<Element>::removeAll();
         
-        std::vector<metamodel::Element>* elements = storage::ActiveRecord<metamodel::Element>::findAll();
+        std::vector<Element>* elements = ActiveRecord<Element>::findAll();
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
     }
 
@@ -204,10 +207,10 @@ namespace tests
         std::string name("john");
         std::string className("actor");
 
-		metamodel::Element* john = new metamodel::Element(className);
+		Element* john = new Element(className);
         john->setName(name);
 
-		metamodel::Element* peter = new metamodel::Element(*john);
+		Element* peter = new Element(*john);
 
 		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
 
@@ -228,10 +231,10 @@ namespace tests
         std::string name("john");
         std::string className("actor");
 
-		metamodel::Element* john = new metamodel::Element(className);
+		Element* john = new Element(className);
         john->setName(name);
 
-		metamodel::Element* peter = new metamodel::Element(className);
+		Element* peter = new Element(className);
 
         // If we just did "peter = john" then we'd have two pointers 
         // towards the same object!
@@ -257,24 +260,27 @@ namespace tests
         std::string diagramClassName("usecase");
         std::string projectName("test");
 
-        metamodel::Project* project = new metamodel::Project();
+        Project* project = new Project();
         project->setName(projectName);
-        metamodel::Diagram* firstDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
+        
+        // Thanks to "dynamic_cast", when adding a child, we're setting 
+        // also the "parent" pointer in the child object.
         project->addChild(firstDiagram);
-        firstDiagram->setParent(project);
 
-        metamodel::Project* parent = firstDiagram->getParent();
+        Project* parent = firstDiagram->getParent();
+        CPPUNIT_ASSERT_EQUAL((int)project, (int)firstDiagram->getParent());
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 
-        metamodel::Diagram* secondDiagram = new metamodel::Diagram(diagramClassName);
+        Diagram* secondDiagram = new Diagram(diagramClassName);
         secondDiagram->setName(second);
         project->addChild(secondDiagram);
-        secondDiagram->setParent(project);
 
         CPPUNIT_ASSERT_EQUAL(2, project->getChildrenCount());
 
         parent = secondDiagram->getParent();
+        CPPUNIT_ASSERT_EQUAL((int)project, (int)secondDiagram->getParent());
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 
         project->save();

@@ -44,7 +44,7 @@ namespace metamodel
      */
     class Project : public ActiveRecord<Project
                          , BelongsTo<NoParent>
-                         , HasMany<Diagram> >
+                         , HasMany<Diagram, Project> >
     {
     public:
 

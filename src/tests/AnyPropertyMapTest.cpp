@@ -25,6 +25,8 @@
 #include "../storage/AnyProperty.h"
 #endif
 
+using namespace storage;
+
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -65,7 +67,7 @@ namespace tests
      */
     void AnyPropertyMapTest::testAddAndRetrieveProperties()
     {
-        storage::AnyPropertyMap map;
+        AnyPropertyMap map;
 
         std::string name1("prop1");
         std::string name2("prop2");
@@ -115,7 +117,7 @@ namespace tests
     
     void AnyPropertyMapTest::testRetrievingInvalidPropertiesRaiseException()
     {
-        storage::AnyPropertyMap map;
+        AnyPropertyMap map;
         std::string name1("prop1");
         try
         {
@@ -129,7 +131,7 @@ namespace tests
     
     void AnyPropertyMapTest::testCanUseCopyConstructorSafely()
     {
-        storage::AnyPropertyMap map;
+        AnyPropertyMap map;
 
         std::string name1("prop1");
         std::string name2("prop2");
@@ -146,7 +148,7 @@ namespace tests
         map.setIntegerProperty(name3, integer);
         map.setDoubleProperty(name4, d);
         
-        storage::AnyPropertyMap mapCopy(map);
+        AnyPropertyMap mapCopy(map);
 
         CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
         CPPUNIT_ASSERT(mapCopy.hasProperty(name1));
@@ -167,7 +169,7 @@ namespace tests
     
     void AnyPropertyMapTest::testCanUseAssignmentOperatorSafely()
     {
-        storage::AnyPropertyMap map;
+        AnyPropertyMap map;
 
         std::string name1("prop1");
         std::string name2("prop2");
@@ -184,7 +186,7 @@ namespace tests
         map.setIntegerProperty(name3, integer);
         map.setDoubleProperty(name4, d);
         
-        storage::AnyPropertyMap mapCopy = map;
+        AnyPropertyMap mapCopy = map;
 
         CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
         CPPUNIT_ASSERT(mapCopy.hasProperty(name1));

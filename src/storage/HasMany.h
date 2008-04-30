@@ -29,12 +29,12 @@ namespace storage
      *
      *  
      */
-	template <class T>
+	template <class C, class P>
     class HasMany
     {
     public:
     
-        typedef std::map<std::string, T*> InternalMap;
+        typedef std::map<std::string, C*> InternalMap;
 
         /*!
          *  HasMany constructor.
@@ -48,11 +48,11 @@ namespace storage
 
         const bool isEmpty() const;
 
-        void addChild(T*);
+        void addChild(C*);
         
         const int getChildrenCount() const;
         
-        T* getChild(const std::string&);
+        C* getChild(const std::string&);
         
         void removeChild(const std::string&);
 		
@@ -65,54 +65,67 @@ namespace storage
     };
 
     /*!
-     * HasMany<T> Constructor.
+     * HasMany<C, P> Constructor.
      */
-	template <typename T>
-    HasMany<T>::HasMany()
+	template <class C, class P>
+    HasMany<C, P>::HasMany()
     : _children()
     {
     }
     
     /*!
-     * HasMany<T> Virtual destructor.
+     * HasMany<C, P> Virtual destructor.
      */
-	template <typename T>
-    HasMany<T>::~HasMany()
+	template <class C, class P>
+    HasMany<C, P>::~HasMany()
     {
         this->removeAllChildren();
     }
     
-	template <typename T>
-    const bool HasMany<T>::isEmpty() const
+	template <class C, class P>
+    const bool HasMany<C, P>::isEmpty() const
     {
         return _children.empty();
     }
     
-	template <typename T>
-    void HasMany<T>::addChild(T* child)
+	template <class C, class P>
+    void HasMany<C, P>::addChild(C* child)
     {
         if (child)
         {
             _children[child->getName()] = child;
+            
+            // The logic behind the "dynamic_cast" below is brilliantly
+            // explained here:
+            // http://carcino.gen.nz/tech/cpp/multiple_inheritance_this.php
+            // Also look at 
+            // http://www.acm.org/crossroads/xrds3-1/ovp3-1.html
+            // for a good explanation of the different C++ cast operators.
+
+            // Basically, when using multiple inheritance, you must use 
+            // the dynamic_cast operator to get the correct "this" pointer
+            // value needed. And this also explains the need of a second
+            // template class parameter, with the type of the parent.
+            child->setParent(dynamic_cast<P*>(this));
         }
     }
     
-	template <typename T>
-    const int HasMany<T>::getChildrenCount() const
+	template <class C, class P>
+    const int HasMany<C, P>::getChildrenCount() const
     {
         return _children.size();
     }
     
-	template <typename T>
-    T* HasMany<T>::getChild(const std::string& name)
+	template <class C, class P>
+    C* HasMany<C, P>::getChild(const std::string& name)
     {
         return _children[name];
     }
     
-	template <typename T>
-    void HasMany<T>::removeChild(const std::string& name)
+	template <class C, class P>
+    void HasMany<C, P>::removeChild(const std::string& name)
     {
-        T* element = _children[name];
+        C* element = _children[name];
 		if (element)
 		{
 			delete element;
@@ -120,8 +133,8 @@ namespace storage
 		}
     }
 	
-	template <typename T>
-	void HasMany<T>::removeAllChildren()
+	template <class C, class P>
+	void HasMany<C, P>::removeAllChildren()
 	{
         // For the explanation of the "typename" keyword below, see
         // http://gcc.gnu.org/ml/gcc-help/2008-01/msg00137.html and
@@ -136,8 +149,8 @@ namespace storage
 		_children.clear();
 	}
     
-    template <typename T>
-    void HasMany<T>::saveChildren()
+    template <class C, class P>
+    void HasMany<C, P>::saveChildren()
     {
 		typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
