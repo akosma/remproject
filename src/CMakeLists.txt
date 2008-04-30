@@ -237,44 +237,44 @@ ELSE (WIN32)
                     ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
                         ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
         
-                # Create the disk image from a temporary subfolder
-                COMMAND mkdir 
-                    ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
-        
-                COMMAND cp
-                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
-                        ${CMAKE_CURRENT_BINARY_DIR}/Rem
-        
-                COMMAND hdiutil 
-                    ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
-        
-                COMMAND rm 
-                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                ## Create the disk image from a temporary subfolder
+                #COMMAND mkdir 
+                #    ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                #        
+                #COMMAND cp
+                #    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
+                #        ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                #        
+                #COMMAND hdiutil 
+                #    ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
+                #        
+                #COMMAND rm 
+                #    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
             )
 
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
             
             # This custom target builds the documentation using Doxygen and LaTeX
-            ADD_CUSTOM_TARGET(doc ALL 
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
-        
-                # Generate the project's documentation (using Doxygen installed via MacPorts)
-                COMMAND /opt/local/bin/doxygen
-                    
-                # Create the PDF file and then delete the source files
-                COMMAND make --directory=doc/latex pdf
-                COMMAND mv doc/latex/refman.pdf doc/
-                COMMAND rm -r doc/latex/
-            )
+            #ADD_CUSTOM_TARGET(doc ALL 
+            #    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
+            #        
+            #    # Generate the project's documentation (using Doxygen installed via MacPorts)
+            #    COMMAND /opt/local/bin/doxygen
+            #        
+            #    # Create the PDF file and then delete the source files
+            #    COMMAND make --directory=doc/latex pdf
+            #    COMMAND mv doc/latex/refman.pdf doc/
+            #    COMMAND rm -r doc/latex/
+            #)
             
             INSTALL(TARGETS Rem
-                RUNTIME DESTINATION Applications
+                RUNTIME DESTINATION "/Applications"
             )
 
             SET(CPACK_PACKAGE_NAME "Rem")
+            SET(CPACK_SYSTEM_NAME "Darwin")
             SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
-            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};Rem;Rem;/")
             SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
             SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
             #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE")
@@ -282,10 +282,11 @@ ELSE (WIN32)
             SET(CPACK_PACKAGE_VERSION_MAJOR "1")
             SET(CPACK_PACKAGE_VERSION_MINOR "0")
             SET(CPACK_PACKAGE_VERSION_PATCH "0")
-            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
-            SET(CPACK_PACKAGE_EXECUTABLES "Rem" "Rem")
+            #SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+            #SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
             SET(CPACK_GENERATOR "PackageMaker")
-            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "/Applications/Rem")
+            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "/Applications")
+            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};rem;Rem;/")
             INCLUDE(CPack)
         
         ELSE (APPLE)
