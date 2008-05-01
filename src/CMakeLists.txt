@@ -236,20 +236,23 @@ ELSE (WIN32)
                 COMMAND cp
                     ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../build/mac/*.icns
                         ${CMAKE_CURRENT_BINARY_DIR}/Rem.app/Contents/Resources/
-        
-                ## Create the disk image from a temporary subfolder
-                #COMMAND mkdir 
-                #    ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
-                #        
-                #COMMAND cp
-                #    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
-                #        ${CMAKE_CURRENT_BINARY_DIR}/Rem
-                #        
-                #COMMAND hdiutil 
-                #    ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
-                #        
-                #COMMAND rm 
-                #    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
+
+                # Create the disk image from a temporary subfolder
+                COMMAND mkdir 
+                    ARGS ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                        
+                COMMAND cp
+                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem.app
+                        ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                        
+                COMMAND ln
+                    ARGS -s /Applications ${CMAKE_CURRENT_BINARY_DIR}/Rem
+                        
+                COMMAND hdiutil 
+                    ARGS create -srcfolder ${CMAKE_CURRENT_BINARY_DIR}/Rem ${CMAKE_CURRENT_BINARY_DIR}/Rem.dmg
+                        
+                COMMAND rm 
+                    ARGS -r ${CMAKE_CURRENT_BINARY_DIR}/Rem
             )
 
             ENABLE_TESTING()
@@ -268,26 +271,27 @@ ELSE (WIN32)
             #    COMMAND rm -r doc/latex/
             #)
             
-            INSTALL(TARGETS Rem
-                RUNTIME DESTINATION "/Applications"
-            )
-
-            SET(CPACK_PACKAGE_NAME "Rem")
-            SET(CPACK_SYSTEM_NAME "Darwin")
-            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
-            SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
-            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
-            #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE")
-            #SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README")
-            SET(CPACK_PACKAGE_VERSION_MAJOR "1")
-            SET(CPACK_PACKAGE_VERSION_MINOR "0")
-            SET(CPACK_PACKAGE_VERSION_PATCH "0")
-            #SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+            # The support for Mac OS X bundle installation is in the CVS version:
+            # http://www.cmake.org/pipermail/cmake/2007-October/016893.html
+            #INSTALL(TARGETS Rem
+            #    RUNTIME DESTINATION Applications
+            #)
+            #
+            #SET(CPACK_PACKAGE_NAME "Rem")
+            #SET(CPACK_SYSTEM_NAME "Darwin")
+            #SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
+            #SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
+            #SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
+            #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE.txt")
+            #SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README.txt")
+            #SET(CPACK_PACKAGE_VERSION_MAJOR "1")
+            #SET(CPACK_PACKAGE_VERSION_MINOR "0")
+            #SET(CPACK_PACKAGE_VERSION_PATCH "0")
+            #SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
             #SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
-            SET(CPACK_GENERATOR "PackageMaker")
-            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "/Applications")
-            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};rem;Rem;/")
-            INCLUDE(CPack)
+            #SET(CPACK_GENERATOR "PackageMaker")
+            #SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${CMAKE_PROJECT_NAME};ALL;/")
+            #INCLUDE(CPack)
         
         ELSE (APPLE)
             # ============ BUILD SETTINGS FOR KUBUNTU LINUX ============
