@@ -206,6 +206,7 @@ namespace tests
     {
         std::string name("john");
         std::string className("actor");
+        
 
 		Element* john = new Element(className);
         john->setName(name);
@@ -213,17 +214,33 @@ namespace tests
 		Element* peter = new Element(*john);
 
 		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
-
+        
 		john->save();
 		CPPUNIT_ASSERT(!john->isNew());
 		CPPUNIT_ASSERT(!john->isDirty());
 
         // We saved the original, but both objects are indeed different!
+        CPPUNIT_ASSERT((int)peter != (int)john);
 		CPPUNIT_ASSERT(peter->isNew());
 		CPPUNIT_ASSERT(peter->isDirty());
 
-        delete john;
-        delete peter;
+        // Add everything to a diagram now and copy the diagram
+        std::string diagramClassName("diagram");
+        std::string diagramName("diagramName");
+        Diagram* diagram = new Diagram(diagramName);
+        diagram->setName(diagramName);
+
+        diagram->addChild(john);
+        diagram->addChild(peter);
+
+        Diagram* diagramCopy = new Diagram(*diagram);
+
+        CPPUNIT_ASSERT_EQUAL(diagram->getName(), diagramCopy->getName());
+
+        // The copy constructor does NOT copy the children!
+        CPPUNIT_ASSERT_EQUAL(0, diagramCopy->getChildrenCount());
+
+        delete diagram;
     }
     
     void ActiveRecordTest::testCanUseAssignmentOperatorSafely()
@@ -279,6 +296,7 @@ namespace tests
 
         CPPUNIT_ASSERT_EQUAL(2, project->getChildrenCount());
 
+        // The pointer to the parent is correctly set thanks to the dynamic_cast operator:
         parent = secondDiagram->getParent();
         CPPUNIT_ASSERT_EQUAL((int)project, (int)secondDiagram->getParent());
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());

@@ -40,11 +40,15 @@ namespace storage
          *  HasMany constructor.
          */
         HasMany();
+        
+        HasMany(const HasMany&);
 
         /*!
          *  HasMany virtual destructor.
          */
         virtual ~HasMany();
+        
+        HasMany& operator=(const HasMany&);
 
         const bool isEmpty() const;
 
@@ -62,6 +66,7 @@ namespace storage
 
     private:
         InternalMap _children;
+        bool _beingDeleted;
     };
 
     /*!
@@ -70,7 +75,21 @@ namespace storage
 	template <class C, class P>
     HasMany<C, P>::HasMany()
     : _children()
+    , _beingDeleted(false)
     {
+    }
+    
+    template <class C, class P>
+    HasMany<C, P>::HasMany(const HasMany& rhs)
+    : _children()
+    , _beingDeleted(false)
+    {
+    }
+    
+    template <class C, class P>
+    HasMany<C, P>& HasMany<C, P>::operator=(const HasMany& rhs)
+    {
+        return *this;
     }
     
     /*!
@@ -79,6 +98,9 @@ namespace storage
 	template <class C, class P>
     HasMany<C, P>::~HasMany()
     {
+        // We set a safeguard here, to be used in the implementation of
+        // void HasMany<C, P>::removeAllChildren() below
+        _beingDeleted = true;
         this->removeAllChildren();
     }
     
@@ -107,6 +129,7 @@ namespace storage
             // value needed. And this also explains the need of a second
             // template class parameter, with the type of the parent.
             child->setParent(dynamic_cast<P*>(this));
+            dynamic_cast<P*>(this)->setDirty();
         }
     }
     
@@ -128,8 +151,10 @@ namespace storage
         C* element = _children[name];
 		if (element)
 		{
+            element->destroy();
 			delete element;
 			_children.erase(name);
+            dynamic_cast<P*>(this)->setDirty();
 		}
     }
 	
@@ -143,10 +168,18 @@ namespace storage
 		typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
         {
-            delete (*iter).second;
+            C* element = (*iter).second;
+            element->destroy();
+            delete element;
         }
-
 		_children.clear();
+        
+        // This method is called during deletion from memory!
+        // This safeguard makes sure there aren't impossible casts at that moment.
+        if (!_beingDeleted)
+        {
+            dynamic_cast<P*>(this)->setDirty();
+        }
 	}
     
     template <class C, class P>

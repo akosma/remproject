@@ -35,27 +35,6 @@
  */
 namespace storage
 {
-    class NoParent
-    {
-    public:
-        NoParent() : _parentColumn("no_parent") {}
-        std::string& getParentColumn() { return _parentColumn; }
-        static std::string& getTableName()
-        { 
-            static std::string tableName("no_parent");
-            return tableName; 
-        }
-    private:
-        std::string _parentColumn;
-    };
-
-    class NoChildren
-    {
-    public:
-        void save() {};
-        void saveChildren() {};
-    };
-    
     //! Represents the ID stored in the database for each ActiveRecord instance.
     typedef long long ID;
 
@@ -67,6 +46,39 @@ namespace storage
      */
     const ID DEFAULT_ID = -1;
 
+    class NoParent
+    {
+    public:
+        NoParent() : _parentColumn("no_parent") {}
+        virtual ~NoParent() {}
+        const std::string& getParentColumn() const { return _parentColumn; }
+        static std::string& getTableName()
+        { 
+            static std::string tableName("no_parent");
+            return tableName; 
+        }
+        const ID getId() const
+        {
+            return DEFAULT_ID;
+        }
+        const ID getParentId() const
+        {
+            return DEFAULT_ID;
+        }
+    private:
+        std::string _parentColumn;
+    };
+
+    class NoChildren
+    {
+    public:
+        NoChildren() {}
+        virtual ~NoChildren() {}
+        void save() {}
+        void saveChildren() {}
+        void destroy() {}
+    };
+    
     /*!
      * \class ActiveRecord
      *
@@ -165,14 +177,14 @@ namespace storage
         bool getBoolean(const std::string&);
         double getDouble(const std::string&);
 
-    protected:
-
         /*!
-         * Used by subclasses to change the "_isDirty" flag in the 
+         * Used to change the "_isDirty" flag in the 
          * ActiveRecord base class; subclasses must call this method in
          * every "setter" method.
          */
         void setDirty();
+
+    protected:
 
         void addStringProperty(const std::string&);
         void addIntegerProperty(const std::string&);
@@ -221,7 +233,9 @@ namespace storage
      */
     template <class T, class P, class C>
     ActiveRecord<T, P, C>::ActiveRecord(std::string className)
-    : _id        (DEFAULT_ID)
+    : P()
+    , C()
+    , _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
     , _data      ()
@@ -235,7 +249,9 @@ namespace storage
      */
     template <class T, class P, class C>
     ActiveRecord<T, P, C>::ActiveRecord(std::string& className, ID id, AnyPropertyMap& data)
-    : _id        (id)
+    : P()
+    , C()
+    , _id        (id)
     , _isNew     (false)
     , _isDirty   (false)
     , _data      (data)
@@ -250,7 +266,9 @@ namespace storage
      */
     template <class T, class P, class C>
     ActiveRecord<T, P, C>::ActiveRecord(const ActiveRecord& rhs)
-    : _id        (rhs._id)
+    : P(rhs)
+    , C(rhs)
+    , _id        (rhs._id)
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
     , _data      (rhs._data)
@@ -274,15 +292,17 @@ namespace storage
     template <class T, class P, class C>
     ActiveRecord<T, P, C>& ActiveRecord<T, P, C>::operator=(const ActiveRecord& rhs)
     {
-    	if (this == &rhs)
+    	if (this != &rhs)
     	{
-    		return *this;
+            P::operator=(rhs);
+            C::operator=(rhs);
+            
+            _id = rhs._id;
+            _isDirty = rhs._isDirty;
+            _isNew = rhs._isNew;
+            _className = rhs._className;
+            _data = rhs._data;
     	}
-    	_id = rhs._id;
-    	_isDirty = rhs._isDirty;
-    	_isNew = rhs._isNew;
-        _className = rhs._className;
-        _data = rhs._data;
     	return *this;
     }
     
@@ -386,6 +406,11 @@ namespace storage
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::save()
     {
+        ID parentId = P::getParentId();
+        if (parentId != DEFAULT_ID)
+        {
+            setIntegerProperty(P::getParentColumn(), parentId);
+        }
     	if (_isNew)
     	{
     		_id = insert();
@@ -402,7 +427,7 @@ namespace storage
     			update();
     			_isDirty = false;
     		}
-    	}
+    	}        
         C::saveChildren();
     }
         
@@ -506,9 +531,12 @@ namespace storage
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::destroy()
     {
-        ActiveRecord<T, P, C>::remove(_id);
-    	_isDirty = true;
-        _isNew = true;
+        if (_id != DEFAULT_ID)
+        {
+            ActiveRecord<T, P, C>::remove(_id);
+            _isDirty = true;
+            _isNew = true;
+        }
     }
 
     template <class T, class P, class C>

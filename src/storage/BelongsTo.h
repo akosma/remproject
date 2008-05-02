@@ -17,6 +17,10 @@
 
 #include <sstream>
 
+#ifndef ACTIVERECORD_H_
+#include "../storage/ActiveRecord.h"
+#endif
+
 /*!
  * \namespace storage
  * Insert a description for the namespace here
@@ -46,8 +50,9 @@ namespace storage
         BelongsTo<P>& operator=(const BelongsTo<P>&);
         
         void setParent(P*);
-        P* getParent();
-        std::string getParentColumn();
+        P* getParent() const;
+        const storage::ID getParentId() const;
+        const std::string& getParentColumn() const;
         
     private:
         P* _parent;
@@ -74,21 +79,15 @@ namespace storage
     }
     
     template <class P>
-    BelongsTo<P>::BelongsTo(const BelongsTo<P>& source)
-    : _parent(source._parent)
-    , _parentColumn(source._parentColumn)
+    BelongsTo<P>::BelongsTo(const BelongsTo<P>& rhs)
+    : _parent(0)
+    , _parentColumn("")
     {
     }
     
     template <class P>
-    BelongsTo<P>& BelongsTo<P>::operator=(const BelongsTo<P>& source)
+    BelongsTo<P>& BelongsTo<P>::operator=(const BelongsTo<P>& rhs)
     {
-        if (this != &source)
-        {
-            this->_parent = source._parent;
-            this->_parentColumn = source._parentColumn;
-        }
-
         return *this;
     }
     
@@ -99,13 +98,26 @@ namespace storage
     }
     
     template <class P>
-    P* BelongsTo<P>::getParent()
+    P* BelongsTo<P>::getParent() const
     {
         return _parent;
     }
     
     template <class P>
-    std::string BelongsTo<P>::getParentColumn()
+    const storage::ID BelongsTo<P>::getParentId() const
+    {
+        if (_parent)
+        {
+            return _parent->getId();
+        }
+        else
+        {
+            return storage::DEFAULT_ID;
+        }
+    }
+    
+    template <class P>
+    const std::string& BelongsTo<P>::getParentColumn() const
     {
         return _parentColumn;
     }
