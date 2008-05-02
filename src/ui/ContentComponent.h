@@ -48,10 +48,10 @@ namespace ui
         void setCurrent(Figure*);
         
         ArrowCanvas& getArrowCanvas();
-	
-	private:
+    
+    private:
         ArrowCanvas* _canvas;
-		Figure* _current;
+        Figure* _current;
     };
 }
 

@@ -81,45 +81,45 @@ namespace tests
         std::string name2("johnny");
         std::string className("actor");
 
-		Element* john = new Element(className);
-		CPPUNIT_ASSERT(john->isNew());
-		CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)john->getId());
+        Element* john = new Element(className);
+        CPPUNIT_ASSERT(john->isNew());
+        CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)john->getId());
 
         john->setName(name1);
-		CPPUNIT_ASSERT_EQUAL(name1, john->getName());
+        CPPUNIT_ASSERT_EQUAL(name1, john->getName());
 
-		john->save();
-		CPPUNIT_ASSERT(!john->isNew());
-		CPPUNIT_ASSERT(!john->isDirty());
+        john->save();
+        CPPUNIT_ASSERT(!john->isNew());
+        CPPUNIT_ASSERT(!john->isDirty());
         CPPUNIT_ASSERT_EQUAL(0, (int)john->getId());
 
         john->setName(name2);
-		CPPUNIT_ASSERT(!john->isNew());
-		CPPUNIT_ASSERT(john->isDirty());
-		CPPUNIT_ASSERT_EQUAL(name2, john->getName());
+        CPPUNIT_ASSERT(!john->isNew());
+        CPPUNIT_ASSERT(john->isDirty());
+        CPPUNIT_ASSERT_EQUAL(name2, john->getName());
 
-		john->save();
-		CPPUNIT_ASSERT(!john->isNew());
-		CPPUNIT_ASSERT(!john->isDirty());
+        john->save();
+        CPPUNIT_ASSERT(!john->isNew());
+        CPPUNIT_ASSERT(!john->isDirty());
 
         std::string name3("peter");
         std::string name4("pete");
-		Element* peter = new Element(className);
-		CPPUNIT_ASSERT(peter->isNew());
-		CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)peter->getId());
+        Element* peter = new Element(className);
+        CPPUNIT_ASSERT(peter->isNew());
+        CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)peter->getId());
 
         peter->setName(name3);
-		CPPUNIT_ASSERT_EQUAL(name3, peter->getName());
+        CPPUNIT_ASSERT_EQUAL(name3, peter->getName());
 
         peter->save();
-		CPPUNIT_ASSERT(!peter->isNew());
-		CPPUNIT_ASSERT(!peter->isDirty());
+        CPPUNIT_ASSERT(!peter->isNew());
+        CPPUNIT_ASSERT(!peter->isDirty());
         CPPUNIT_ASSERT_EQUAL(1, (int)peter->getId());
 
         peter->setBoolean("valid", true);
         peter->save();
-		CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
-		
+        CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
+        
         delete john;
         delete peter;
     }
@@ -211,21 +211,21 @@ namespace tests
         std::string className("actor");
         
 
-		Element* john = new Element(className);
+        Element* john = new Element(className);
         john->setName(name);
 
-		Element* peter = new Element(*john);
+        Element* peter = new Element(*john);
 
-		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
+        CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
         
-		john->save();
-		CPPUNIT_ASSERT(!john->isNew());
-		CPPUNIT_ASSERT(!john->isDirty());
+        john->save();
+        CPPUNIT_ASSERT(!john->isNew());
+        CPPUNIT_ASSERT(!john->isDirty());
 
         // We saved the original, but both objects are indeed different!
         CPPUNIT_ASSERT((int)peter != (int)john);
-		CPPUNIT_ASSERT(peter->isNew());
-		CPPUNIT_ASSERT(peter->isDirty());
+        CPPUNIT_ASSERT(peter->isNew());
+        CPPUNIT_ASSERT(peter->isDirty());
 
         // Add everything to a diagram now and copy the diagram
         std::string diagramClassName("diagram");
@@ -251,23 +251,23 @@ namespace tests
         std::string name("john");
         std::string className("actor");
 
-		Element* john = new Element(className);
+        Element* john = new Element(className);
         john->setName(name);
 
-		Element* peter = new Element(className);
+        Element* peter = new Element(className);
 
         // If we just did "peter = john" then we'd have two pointers 
         // towards the same object!
         *peter = *john;
 
-		CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
+        CPPUNIT_ASSERT_EQUAL(peter->getName(), john->getName());
 
-		john->save();
-		CPPUNIT_ASSERT(!john->isNew());
-		CPPUNIT_ASSERT(!john->isDirty());
+        john->save();
+        CPPUNIT_ASSERT(!john->isNew());
+        CPPUNIT_ASSERT(!john->isDirty());
 
-		CPPUNIT_ASSERT(peter->isNew());
-		CPPUNIT_ASSERT(peter->isDirty());
+        CPPUNIT_ASSERT(peter->isNew());
+        CPPUNIT_ASSERT(peter->isDirty());
 
         delete john;
         delete peter;

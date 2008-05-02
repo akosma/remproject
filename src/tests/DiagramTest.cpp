@@ -64,14 +64,14 @@ namespace tests
      */
     void DiagramTest::testDiagramCanHaveSeveralElements()
     {
-		std::string actor1Name("actor1");
-		std::string diagramName("diagramName");
+        std::string actor1Name("actor1");
+        std::string diagramName("diagramName");
         std::string className("actor");
         std::string diagramClassName("usecase");
 
-		Diagram* diagram = new Diagram(diagramClassName);
+        Diagram* diagram = new Diagram(diagramClassName);
         diagram->setName(diagramName);
-		CPPUNIT_ASSERT_EQUAL(diagramName, diagram->getName());
+        CPPUNIT_ASSERT_EQUAL(diagramName, diagram->getName());
         CPPUNIT_ASSERT(diagram->isEmpty());
         CPPUNIT_ASSERT_EQUAL(0, diagram->getChildrenCount());
 

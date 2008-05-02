@@ -39,7 +39,7 @@
 namespace ui
 {
     ContentComponent::ContentComponent()
-	: _current(0)
+    : _current(0)
     {
         _canvas = new ArrowCanvas(this);
         _canvas->setSize(800, 600);
@@ -53,7 +53,7 @@ namespace ui
         Actor* b = new Actor(this);
         b->setTopLeftPosition(100, 10);
         addAndMakeVisible(b, -1);
-		
+        
         UseCaseBubble* c = new UseCaseBubble(this);
         c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);

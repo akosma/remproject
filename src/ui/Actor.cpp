@@ -56,7 +56,7 @@ namespace ui
         const int vertMargin = currentHeight * margin / initHeight;
         
         const float headWidth = currentWidth * 35.0f / initWidth;
-		const float headHeight = currentHeight * 35.0f / initHeight;
+        const float headHeight = currentHeight * 35.0f / initHeight;
         const float bodyLength = currentHeight * 80.0f / initHeight;
         const float legHeight = currentHeight * 50.0f / initHeight;
         const float armHeight = currentHeight * 30.0f / initHeight;

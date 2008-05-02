@@ -29,7 +29,7 @@ namespace storage
      *
      *  
      */
-	template <class C, class P>
+    template <class C, class P>
     class HasMany
     {
     public:
@@ -59,8 +59,8 @@ namespace storage
         C* getChild(const std::string&);
         
         void removeChild(const std::string&);
-		
-		void removeAllChildren();
+        
+        void removeAllChildren();
         
         void saveChildren();
 
@@ -72,7 +72,7 @@ namespace storage
     /*!
      * HasMany<C, P> Constructor.
      */
-	template <class C, class P>
+    template <class C, class P>
     HasMany<C, P>::HasMany()
     : _children()
     , _beingDeleted(false)
@@ -95,7 +95,7 @@ namespace storage
     /*!
      * HasMany<C, P> Virtual destructor.
      */
-	template <class C, class P>
+    template <class C, class P>
     HasMany<C, P>::~HasMany()
     {
         // We set a safeguard here, to be used in the implementation of
@@ -104,13 +104,13 @@ namespace storage
         this->removeAllChildren();
     }
     
-	template <class C, class P>
+    template <class C, class P>
     const bool HasMany<C, P>::isEmpty() const
     {
         return _children.empty();
     }
     
-	template <class C, class P>
+    template <class C, class P>
     void HasMany<C, P>::addChild(C* child)
     {
         if (child)
@@ -133,46 +133,46 @@ namespace storage
         }
     }
     
-	template <class C, class P>
+    template <class C, class P>
     const int HasMany<C, P>::getChildrenCount() const
     {
         return _children.size();
     }
     
-	template <class C, class P>
+    template <class C, class P>
     C* HasMany<C, P>::getChild(const std::string& name)
     {
         return _children[name];
     }
     
-	template <class C, class P>
+    template <class C, class P>
     void HasMany<C, P>::removeChild(const std::string& name)
     {
         C* element = _children[name];
-		if (element)
-		{
+        if (element)
+        {
             element->destroy();
-			delete element;
-			_children.erase(name);
+            delete element;
+            _children.erase(name);
             dynamic_cast<P*>(this)->setDirty();
-		}
+        }
     }
-	
-	template <class C, class P>
-	void HasMany<C, P>::removeAllChildren()
-	{
+    
+    template <class C, class P>
+    void HasMany<C, P>::removeAllChildren()
+    {
         // For the explanation of the "typename" keyword below, see
         // http://gcc.gnu.org/ml/gcc-help/2008-01/msg00137.html and
         // http://www.parashift.com/c++-faq-lite/templates.html#faq-35.18
 
-		typename InternalMap::iterator iter;
+        typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
         {
             C* element = (*iter).second;
             element->destroy();
             delete element;
         }
-		_children.clear();
+        _children.clear();
         
         // This method is called during deletion from memory!
         // This safeguard makes sure there aren't impossible casts at that moment.
@@ -180,12 +180,12 @@ namespace storage
         {
             dynamic_cast<P*>(this)->setDirty();
         }
-	}
+    }
     
     template <class C, class P>
     void HasMany<C, P>::saveChildren()
     {
-		typename InternalMap::iterator iter;
+        typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
         {
             iter->second->save();

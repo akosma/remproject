@@ -64,7 +64,7 @@ namespace metamodel
 
     private:
         void createSchemaStructure();
-	};
+    };
 }
 
 #endif /* PROJECT_H_ */

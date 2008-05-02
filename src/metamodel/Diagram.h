@@ -68,7 +68,7 @@ namespace metamodel
 
     private:
         void createSchemaStructure();
-	};
+    };
 }
 
 #endif /* DIAGRAM_H_ */

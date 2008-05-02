@@ -63,7 +63,7 @@ namespace ui
         const int vertMargin = currentHeight * margin / initHeight;
 
         const float width = currentWidth * 180.0f / initWidth;
-		const float height = currentHeight * 130.0f / initHeight;
+        const float height = currentHeight * 130.0f / initHeight;
 
         const float startX = horizMargin;
         const float startY = vertMargin;

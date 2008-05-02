@@ -86,7 +86,7 @@ namespace storage
      *
      *  
      */
-	template <class T
+    template <class T
              , class P = NoParent
              , class C = NoChildren>
     class ActiveRecord : public P
@@ -300,8 +300,8 @@ namespace storage
     template <class T, class P, class C>
     ActiveRecord<T, P, C>& ActiveRecord<T, P, C>::operator=(const ActiveRecord& rhs)
     {
-    	if (this != &rhs)
-    	{
+        if (this != &rhs)
+        {
             P::operator=(rhs);
             C::operator=(rhs);
             
@@ -310,8 +310,8 @@ namespace storage
             _isNew = rhs._isNew;
             _className = rhs._className;
             _data = rhs._data;
-    	}
-    	return *this;
+        }
+        return *this;
     }
     
     template <class T, class P, class C>
@@ -454,67 +454,67 @@ namespace storage
         {
             setInteger(P::getParentColumn(), parentId);
         }
-    	if (_isNew)
-    	{
-    		_id = insert();
-    		if (_id != DEFAULT_ID)
-    		{
-    			_isNew = false;
-    			_isDirty = false;
-    		}
-    	}
-    	else
-    	{
+        if (_isNew)
+        {
+            _id = insert();
+            if (_id != DEFAULT_ID)
+            {
+                _isNew = false;
+                _isDirty = false;
+            }
+        }
+        else
+        {
             update();
             _isDirty = false;
-    	}        
+        }        
         C::saveChildren();
     }
         
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::update()
     {
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-    	if (ok)
-    	{
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (ok)
+        {
             Poco::DateTime now;
             setDateTime("updated_on", now);
-    	    ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
-    	}
-		wrapper.close();
+            ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
+        }
+        wrapper.close();
     }
     
     template <class T, class P, class C>
     const ID ActiveRecord<T, P, C>::insert()
     {
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-    	if (!wrapper.tableExists(T::getTableName()))
-    	{
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (!wrapper.tableExists(T::getTableName()))
+        {
             addIntegerProperty(P::getParentColumn());
             addDateTimeProperty("created_on");
             addDateTimeProperty("updated_on");
             _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
-    	}
-    	if (ok)
-    	{
+        }
+        if (ok)
+        {
             setString("class", _className);
             Poco::DateTime now;
             setDateTime("created_on", now);
             setDateTime("updated_on", now);
-    	    ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
-    	}
-		wrapper.close();
-		if (ok)
-		{
-            return wrapper.getLastRowId();		    
-		}
-		else
-		{
+            ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
+        }
+        wrapper.close();
+        if (ok)
+        {
+            return wrapper.getLastRowId();            
+        }
+        else
+        {
             return DEFAULT_ID;
-		}
+        }
     }
 
     /*!
@@ -526,7 +526,7 @@ namespace storage
     template <class T, class P, class C>
     const bool ActiveRecord<T, P, C>::isDirty() const
     {
-    	return _isDirty;
+        return _isDirty;
     }
 
     /*!
@@ -538,7 +538,7 @@ namespace storage
     template <class T, class P, class C>
     const bool ActiveRecord<T, P, C>::isNew() const
     {
-    	return _isNew;
+        return _isNew;
     }
 
     /*!
@@ -549,7 +549,7 @@ namespace storage
     template <class T, class P, class C>
     const ID ActiveRecord<T, P, C>::getId() const
     {
-    	return _id;
+        return _id;
     }
     
     template <class T, class P, class C>
@@ -572,7 +572,7 @@ namespace storage
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setDirty()
     {
-    	_isDirty = true;
+        _isDirty = true;
     }
     
     template <class T, class P, class C>
@@ -596,13 +596,13 @@ namespace storage
         query << id;
         query << ";";
         
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-    	if (ok)
-    	{
-    		ok = wrapper.executeQuery(query.str());
-    		wrapper.close();
-    	}
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (ok)
+        {
+            ok = wrapper.executeQuery(query.str());
+            wrapper.close();
+        }
     }
     
     template <class T, class P, class C>
@@ -613,13 +613,13 @@ namespace storage
         query << T::getTableName();
         query << ";";
         
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-    	if (ok)
-    	{
-    		ok = wrapper.executeQuery(query.str());
-    		wrapper.close();
-    	}
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (ok)
+        {
+            ok = wrapper.executeQuery(query.str());
+            wrapper.close();
+        }
     }
     
     /*!
@@ -642,16 +642,16 @@ namespace storage
         query << id;
         query << ";";
         
-    	T* item = NULL;
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
-    	if (ok)
-    	{
+        T* item = NULL;
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (ok)
+        {
             std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
-    		ok = wrapper.executeQuery(query.str());
-    		wrapper.close();
-    		if (ok)
-    		{
+            ok = wrapper.executeQuery(query.str());
+            wrapper.close();
+            if (ok)
+            {
                 std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
@@ -661,9 +661,9 @@ namespace storage
                     item = new T(className, currentId, *iter);
                 }
                 delete maps;
-    		}
-    	}
-    	return item;
+            }
+        }
+        return item;
     }
 
     /*!
@@ -752,9 +752,9 @@ namespace storage
     template <class T, class P, class C>
     std::vector<T>* ActiveRecord<T, P, C>::getVectorByQuery(std::string& query)
     {
-    	std::vector<T>* items = new std::vector<T>;
-    	SQLiteWrapper& wrapper = SQLiteWrapper::get();
-    	bool ok = wrapper.open();
+        std::vector<T>* items = new std::vector<T>;
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
         if (ok)
         {
             std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
@@ -774,7 +774,7 @@ namespace storage
             }
             wrapper.close();
         }
-    	return items;        
+        return items;        
     }
 }
 

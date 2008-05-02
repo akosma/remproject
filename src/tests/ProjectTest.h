@@ -63,8 +63,8 @@ namespace tests
          * Tests something.
          */
         void testProjectHasManyDiagrams();
-		
-		void testCanRemoveAllDiagramsFromProject();
+        
+        void testCanRemoveAllDiagramsFromProject();
     };
 }
 

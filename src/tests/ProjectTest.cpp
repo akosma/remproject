@@ -89,7 +89,7 @@ namespace tests
         pointer = project.getChild(second);
         CPPUNIT_ASSERT_EQUAL((int)secondDiagram, (int)pointer);
         CPPUNIT_ASSERT_EQUAL(pointer->getName(), second);
-		
+        
         project.removeChild(first);
         CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
 
@@ -103,9 +103,9 @@ namespace tests
         // This is because "project" owns the diagrams and will delete them
         // when the stack is cleared, at the end of this method.
     }
-	
-	void ProjectTest::testCanRemoveAllDiagramsFromProject()
-	{
+    
+    void ProjectTest::testCanRemoveAllDiagramsFromProject()
+    {
         std::string first("first");
         std::string second("second");
         std::string diagramClassName("usecase");
@@ -129,7 +129,7 @@ namespace tests
         project.addChild(secondDiagram);
         CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
 
-		project.removeAllChildren();
+        project.removeAllChildren();
         CPPUNIT_ASSERT_EQUAL(0, project.getChildrenCount());
 
         // Do not do the following:
@@ -137,5 +137,5 @@ namespace tests
         // delete secondDiagram;
         // This is because "project" owns the diagrams and will delete them
         // when the stack is cleared, at the end of this method.
-	}
+    }
 }

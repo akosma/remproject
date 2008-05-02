@@ -64,8 +64,8 @@ namespace ui
 
     void Figure::mouseDown(const MouseEvent& e)
     {
-		this->toFront(true);
-		_parent->setCurrent(this);
+        this->toFront(true);
+        _parent->setCurrent(this);
         _dragger.startDraggingComponent(this, 0);
         setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
     }
@@ -96,8 +96,8 @@ namespace ui
         // Somehow resized() is called before _resizer is constructed!
         if (_parent && _resizer)
         {
-			this->toFront(true);
-			_parent->setCurrent(this);
+            this->toFront(true);
+            _parent->setCurrent(this);
             _resizer->setBounds (0,0,getWidth(),getHeight());
         }
     }
@@ -126,7 +126,7 @@ namespace ui
     {
         _resizer->setVisible(current);
         _current = current;
-		repaint();
+        repaint();
     }
     
     const Point* Figure::getAnchorPointRelativeTo(const Figure* other) const
@@ -167,7 +167,7 @@ namespace ui
         this->drawFigure(figure);
         if (_current)
         {
-    		g.fillAll(transparentWhite);
+            g.fillAll(transparentWhite);
 
             // This will create a dashed rectangle around the selected element
             drawDashedLineAround(g);
