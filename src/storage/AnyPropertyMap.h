@@ -18,6 +18,8 @@
 #include <string>
 #include <map>
 
+#include <Poco/DateTime.h>
+
 #ifndef ANYPROPERTY_H_
 #include "AnyProperty.h"
 #endif
@@ -54,17 +56,19 @@ namespace storage
         const bool isEmpty() const;
         const unsigned int count() const;
         
-        void setStringProperty(const std::string&, const std::string&);
-        void setIntegerProperty(const std::string&, const int);
-        void setBooleanProperty(const std::string&, const bool);
-        void setDoubleProperty(const std::string&, const double);
+        void setString(const std::string&, const std::string&);
+        void setInteger(const std::string&, const int);
+        void setBoolean(const std::string&, const bool);
+        void setDouble(const std::string&, const double);
+        void setDateTime(const std::string& key, const Poco::DateTime& value);
 
         void createPrimaryKey(const std::string&);
         
-        std::string getString(const std::string&);
-        int getInteger(const std::string&);
-        bool getBoolean(const std::string&);
-        double getDouble(const std::string&);
+        const std::string getString(const std::string&);
+        const int getInteger(const std::string&);
+        const bool getBoolean(const std::string&);
+        const double getDouble(const std::string&);
+        const Poco::DateTime getDateTime(const std::string&);
 
         const std::string getStringForCreateTable(std::string&) const;
         const std::string getColumnList() const;

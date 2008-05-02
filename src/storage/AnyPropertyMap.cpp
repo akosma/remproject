@@ -75,28 +75,35 @@ namespace storage
         return (unsigned int)_map.size();
     }
     
-    void AnyPropertyMap::setStringProperty(const std::string& key, const std::string& value)
+    void AnyPropertyMap::setString(const std::string& key, const std::string& value)
     {
         Poco::Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
-    void AnyPropertyMap::setIntegerProperty(const std::string& key, const int value)
+    void AnyPropertyMap::setInteger(const std::string& key, const int value)
     {
         Poco::Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
-    void AnyPropertyMap::setBooleanProperty(const std::string& key, const bool value)
+    void AnyPropertyMap::setBoolean(const std::string& key, const bool value)
     {
         Poco::Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
-    void AnyPropertyMap::setDoubleProperty(const std::string& key, const double value)
+    void AnyPropertyMap::setDouble(const std::string& key, const double value)
+    {
+        Poco::Any any(value);
+        AnyProperty prop(key, any);
+        _map[key] = prop;
+    }
+    
+    void AnyPropertyMap::setDateTime(const std::string& key, const Poco::DateTime& value)
     {
         Poco::Any any(value);
         AnyProperty prop(key, any);
@@ -111,24 +118,29 @@ namespace storage
         _map[key] = prop;
     }
     
-    std::string AnyPropertyMap::getString(const std::string& key)
+    const std::string AnyPropertyMap::getString(const std::string& key)
     {
         return _map[key].getString();
     }
     
-    int AnyPropertyMap::getInteger(const std::string& key)
+    const int AnyPropertyMap::getInteger(const std::string& key)
     {
         return _map[key].getInteger();            
     }
     
-    bool AnyPropertyMap::getBoolean(const std::string& key)
+    const bool AnyPropertyMap::getBoolean(const std::string& key)
     {
         return _map[key].getBoolean();            
     }
     
-    double AnyPropertyMap::getDouble(const std::string& key)
+    const double AnyPropertyMap::getDouble(const std::string& key)
     {
         return _map[key].getDouble();            
+    }
+    
+    const Poco::DateTime AnyPropertyMap::getDateTime(const std::string& key)
+    {
+        return _map[key].getDateTime();
     }
     
     const std::string AnyPropertyMap::getColumnList() const

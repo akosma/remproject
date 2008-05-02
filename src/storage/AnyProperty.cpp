@@ -57,7 +57,7 @@ namespace storage
         }
 
         Property<std::string, Poco::Any>::operator=(source);
-        this->_isPrimaryKey = source._isPrimaryKey;
+        _isPrimaryKey = source._isPrimaryKey;
 
         return *this;
     }
@@ -72,31 +72,37 @@ namespace storage
 
     const std::type_info& AnyProperty::getType() const
     {
-        return this->getValue().type();
+        return getValue().type();
     }
     
     void AnyProperty::setString(const std::string& input)
     {
         Poco::Any value(input);
-        this->setValue(value);
+        setValue(value);
     }
 
     void AnyProperty::setInteger(const int input)
     {
         Poco::Any value(input);
-        this->setValue(value);
+        setValue(value);
     }
 
     void AnyProperty::setDouble(const double input)
     {
         Poco::Any value(input);
-        this->setValue(value);
+        setValue(value);
     }
     
     void AnyProperty::setBoolean(const bool input)
     {
         Poco::Any value(input);
-        this->setValue(value);
+        setValue(value);
+    }
+    
+    void AnyProperty::setDateTime(const Poco::DateTime& input)
+    {
+        Poco::Any value(input);
+        setValue(value);
     }
     
     void AnyProperty::setPrimaryKey()
@@ -104,31 +110,36 @@ namespace storage
         _isPrimaryKey = true;
     }
     
-    std::string AnyProperty::getString() const
+    const std::string AnyProperty::getString() const
     {
-        return Poco::RefAnyCast<std::string>(this->getValue());
+        return Poco::RefAnyCast<std::string>(getValue());
     }
     
-    int AnyProperty::getInteger() const
+    const int AnyProperty::getInteger() const
     {
-        return Poco::RefAnyCast<int>(this->getValue());
+        return Poco::RefAnyCast<int>(getValue());
     }
     
-    double AnyProperty::getDouble() const
+    const double AnyProperty::getDouble() const
     {
-        return Poco::RefAnyCast<double>(this->getValue());
+        return Poco::RefAnyCast<double>(getValue());
     }
     
-    bool AnyProperty::getBoolean() const
+    const bool AnyProperty::getBoolean() const
     {
-        return Poco::RefAnyCast<bool>(this->getValue());
+        return Poco::RefAnyCast<bool>(getValue());
+    }
+    
+    const Poco::DateTime AnyProperty::getDateTime() const
+    {
+        return Poco::RefAnyCast<Poco::DateTime>(getValue());
     }
     
     const std::string AnyProperty::getSQLiteColumnDefinition() const
     {
-        const std::type_info& type = this->getValue().type();
+        const std::type_info& type = getValue().type();
         std::stringstream output;
-        output << this->getName();
+        output << getName();
         output << " ";
         if(type == typeid(std::string))
         {
@@ -150,30 +161,38 @@ namespace storage
         {
             output << "REAL";
         }
+        if(type == typeid(Poco::DateTime))
+        {
+            output << "DATETIME";
+        }
         return output.str();
     }
     
     const std::string AnyProperty::getQuotedValue() const
     {
-        const std::type_info& type = this->getValue().type();
+        const std::type_info& type = getValue().type();
         std::stringstream output;
         if(type == typeid(std::string))
         {
             output << "'";
-            output << this->getString();
+            output << getString();
             output << "'";
         }
         if(type == typeid(int))
         {
-            output << this->getInteger();
+            output << getInteger();
         }
         if(type == typeid(bool))
         {
-            output << this->getBoolean();
+            output << getBoolean();
         }
         if(type == typeid(double))
         {
-            output << this->getDouble();
+            output << getDouble();
+        }
+        if(type == typeid(Poco::DateTime))
+        {
+            output << getDateTime().utcTime();
         }
         return output.str();
     }
@@ -181,9 +200,9 @@ namespace storage
     const std::string AnyProperty::getNameValuePair() const
     {
         std::stringstream output;
-        output << this->getName();
+        output << getName();
         output << " = ";
-        output << this->getQuotedValue();
+        output << getQuotedValue();
         return output.str();
     }
 }

@@ -41,6 +41,7 @@ namespace tests
         CPPUNIT_TEST(testCanUseCopyConstructorSafely);
         CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST(testObjectCanSaveItsChildren);
+        CPPUNIT_TEST(testSavedObjectsHaveCreationAndUpdateTime);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -78,6 +79,7 @@ namespace tests
         void testCanUseCopyConstructorSafely();
         void testCanUseAssignmentOperatorSafely();
         void testObjectCanSaveItsChildren();
+        void testSavedObjectsHaveCreationAndUpdateTime();
     };
 }
 

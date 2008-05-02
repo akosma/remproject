@@ -21,6 +21,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <Poco/DateTime.h>
+
 #ifndef SQLITEWRAPPER_H_
 #include "SQLiteWrapper.h"
 #endif
@@ -167,15 +169,20 @@ namespace storage
         static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
         static T* findById(const ID id);
 
-        void setStringProperty(const std::string&, const std::string&);
-        void setIntegerProperty(const std::string&, const int);
-        void setBooleanProperty(const std::string&, const bool);
-        void setDoubleProperty(const std::string&, const double);
+        void setString(const std::string&, const std::string&);
+        void setInteger(const std::string&, const int);
+        void setBoolean(const std::string&, const bool);
+        void setDouble(const std::string&, const double);
+        void setDateTime(const std::string&, const Poco::DateTime&);
 
-        std::string getString(const std::string&);
-        int getInteger(const std::string&);
-        bool getBoolean(const std::string&);
-        double getDouble(const std::string&);
+        const std::string getString(const std::string&);
+        const int getInteger(const std::string&);
+        const bool getBoolean(const std::string&);
+        const double getDouble(const std::string&);
+        const Poco::DateTime getDateTime(const std::string&);
+        
+        const Poco::DateTime getCreationDateTime();
+        const Poco::DateTime getLastModificationDateTime();
 
         /*!
          * Used to change the "_isDirty" flag in the 
@@ -190,6 +197,7 @@ namespace storage
         void addIntegerProperty(const std::string&);
         void addBooleanProperty(const std::string&);
         void addDoubleProperty(const std::string&);
+        void addDateTimeProperty(const std::string&);
 
     private:
         /*!
@@ -307,31 +315,38 @@ namespace storage
     }
     
     template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setStringProperty(const std::string& key, const std::string& value)
+    void ActiveRecord<T, P, C>::setString(const std::string& key, const std::string& value)
     {
         setDirty();
-        _data.setStringProperty(key, value);
+        _data.setString(key, value);
     }
 
     template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setIntegerProperty(const std::string& key, const int value)
+    void ActiveRecord<T, P, C>::setInteger(const std::string& key, const int value)
     {
         setDirty();
-        _data.setIntegerProperty(key, value);
+        _data.setInteger(key, value);
     }
 
     template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setBooleanProperty(const std::string& key, const bool value)
+    void ActiveRecord<T, P, C>::setBoolean(const std::string& key, const bool value)
     {
         setDirty();
-        _data.setBooleanProperty(key, value);
+        _data.setBoolean(key, value);
     }
 
     template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setDoubleProperty(const std::string& key, const double value)
+    void ActiveRecord<T, P, C>::setDouble(const std::string& key, const double value)
     {
         setDirty();
-        _data.setDoubleProperty(key, value);
+        _data.setDouble(key, value);
+    }
+    
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setDateTime(const std::string& key, const Poco::DateTime& value)
+    {
+        setDirty();
+        _data.setDateTime(key, value);
     }
     
     template <class T, class P, class C>
@@ -339,7 +354,7 @@ namespace storage
     {
         if (!_data.hasProperty(key))
         {
-            _data.setStringProperty(key, "");
+            _data.setString(key, "");
         }
     }
 
@@ -348,7 +363,7 @@ namespace storage
     {
         if (!_data.hasProperty(key))
         {
-            _data.setIntegerProperty(key, 0);
+            _data.setInteger(key, 0);
         }
     }
 
@@ -357,7 +372,7 @@ namespace storage
     {
         if (!_data.hasProperty(key))
         {
-            _data.setBooleanProperty(key, false);
+            _data.setBoolean(key, false);
         }
     }
 
@@ -366,32 +381,60 @@ namespace storage
     {
         if (!_data.hasProperty(key))
         {
-            _data.setDoubleProperty(key, 0.0);
+            _data.setDouble(key, 0.0);
         }
     }
     
     template <class T, class P, class C>
-    std::string ActiveRecord<T, P, C>::getString(const std::string& key)
+    void ActiveRecord<T, P, C>::addDateTimeProperty(const std::string& key)
+    {
+        if (!_data.hasProperty(key))
+        {
+            Poco::DateTime now;
+            _data.setDateTime(key, now);
+        }
+    }
+    
+    template <class T, class P, class C>
+    const std::string ActiveRecord<T, P, C>::getString(const std::string& key)
     {
         return _data.getString(key);
     }
     
     template <class T, class P, class C>
-    int ActiveRecord<T, P, C>::getInteger(const std::string& key)
+    const int ActiveRecord<T, P, C>::getInteger(const std::string& key)
     {
         return _data.getInteger(key);
     }
     
     template <class T, class P, class C>
-    bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
+    const bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
     {
         return _data.getBoolean(key);
     }
     
     template <class T, class P, class C>
-    double ActiveRecord<T, P, C>::getDouble(const std::string& key)
+    const double ActiveRecord<T, P, C>::getDouble(const std::string& key)
     {
         return _data.getDouble(key);
+    }
+    
+    template <class T, class P, class C>
+    const Poco::DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
+    {
+        return _data.getDateTime(key);
+    }
+    
+    template <class T, class P, class C>
+    const Poco::DateTime ActiveRecord<T, P, C>::getCreationDateTime()
+    {
+        return _data.getDateTime("created_on");
+    }
+    
+    template <class T, class P, class C>
+    const Poco::DateTime ActiveRecord<T, P, C>::getLastModificationDateTime()
+    {
+        return _data.getDateTime("updated_on");
     }
 
     /*!
@@ -409,7 +452,7 @@ namespace storage
         ID parentId = P::getParentId();
         if (parentId != DEFAULT_ID)
         {
-            setIntegerProperty(P::getParentColumn(), parentId);
+            setInteger(P::getParentColumn(), parentId);
         }
     	if (_isNew)
     	{
@@ -422,11 +465,8 @@ namespace storage
     	}
     	else
     	{
-    		if (_isDirty)
-    		{
-    			update();
-    			_isDirty = false;
-    		}
+            update();
+            _isDirty = false;
     	}        
         C::saveChildren();
     }
@@ -438,6 +478,8 @@ namespace storage
     	bool ok = wrapper.open();
     	if (ok)
     	{
+            Poco::DateTime now;
+            setDateTime("updated_on", now);
     	    ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
     	}
 		wrapper.close();
@@ -451,12 +493,17 @@ namespace storage
     	if (!wrapper.tableExists(T::getTableName()))
     	{
             addIntegerProperty(P::getParentColumn());
+            addDateTimeProperty("created_on");
+            addDateTimeProperty("updated_on");
             _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
     	}
     	if (ok)
     	{
-            setStringProperty("class", _className);
+            setString("class", _className);
+            Poco::DateTime now;
+            setDateTime("created_on", now);
+            setDateTime("updated_on", now);
     	    ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
     	}
 		wrapper.close();
@@ -508,7 +555,7 @@ namespace storage
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setName(std::string& name)
     {
-        setStringProperty("name", name);
+        setString("name", name);
     }
 
     template <class T, class P, class C>
@@ -673,19 +720,28 @@ namespace storage
                 
                 if(currentDataType == "TEXT")
                 {
-                    instanceData.setStringProperty(currentHeader, currentValue);
+                    instanceData.setString(currentHeader, currentValue);
                 }
                 else if (currentDataType == "INTEGER")
                 {
-                    instanceData.setIntegerProperty(currentHeader, atoi(currentValue.c_str()));
+                    instanceData.setInteger(currentHeader, atoi(currentValue.c_str()));
                 }
                 else if (currentDataType == "BOOLEAN")
                 {
-                    instanceData.setBooleanProperty(currentHeader, atoi(currentValue.c_str()));
+                    instanceData.setBoolean(currentHeader, atoi(currentValue.c_str()));
                 }
                 else if (currentDataType == "REAL")
                 {
-                    instanceData.setDoubleProperty(currentHeader, atof(currentValue.c_str()));
+                    instanceData.setDouble(currentHeader, atof(currentValue.c_str()));
+                }
+                else if (currentDataType == "DATETIME")
+                {
+                    // We have to use the "long long atoll(const*)" function to 
+                    // cast the string value coming from the DB layer into an int64 value,
+                    // that is used to create a Timestamp, used to create a proper DateTime instance.
+                    long long num = atoll(currentValue.c_str());
+                    Poco::DateTime date(Poco::Timestamp::fromUtcTime(num));
+                    instanceData.setDateTime(currentHeader, date);
                 }
             }
             maps->push_back(instanceData);

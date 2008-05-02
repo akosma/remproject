@@ -14,6 +14,9 @@
 
 #include "ActiveRecordTest.h"
 
+#include <Poco/DateTime.h>
+#include <Poco/Stopwatch.h>
+
 #ifndef ELEMENT_H_
 #include "../metamodel/Element.h"
 #endif
@@ -113,7 +116,7 @@ namespace tests
 		CPPUNIT_ASSERT(!peter->isDirty());
         CPPUNIT_ASSERT_EQUAL(1, (int)peter->getId());
 
-        peter->setBooleanProperty("valid", true);
+        peter->setBoolean("valid", true);
         peter->save();
 		CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
 		
@@ -158,8 +161,8 @@ namespace tests
     {
         std::string name("peter");
         AnyPropertyMap conditions;
-        conditions.setStringProperty("name", name);
-        conditions.setBooleanProperty("valid", true);
+        conditions.setString("name", name);
+        conditions.setBoolean("valid", true);
         std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(conditions);
         
         CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());
@@ -303,5 +306,38 @@ namespace tests
 
         project->save();
         delete project;
+    }
+    
+    void ActiveRecordTest::testSavedObjectsHaveCreationAndUpdateTime()
+    {
+        std::string element("timedElement");
+        std::string className("actor");
+        
+        Element* actor = new Element(className);
+        actor->setName(element);
+
+        actor->save();
+        Poco::DateTime saved1 = actor->getCreationDateTime();
+        Poco::DateTime updated1 = actor->getLastModificationDateTime();
+        CPPUNIT_ASSERT(saved1 == updated1);
+        
+        // Let's wait a couple of seconds and save the actor again
+        Poco::Stopwatch watch;
+        watch.start();
+        while (watch.elapsedSeconds() < 1) {}
+        watch.stop();
+        
+        actor->save();
+        Poco::DateTime saved2 = actor->getCreationDateTime();
+        Poco::DateTime updated2 = actor->getLastModificationDateTime();
+        CPPUNIT_ASSERT(saved2 < updated2);
+        CPPUNIT_ASSERT(saved1 == saved2);
+        
+        // Let's retrieve all of this from the DB and compare
+        Element* retrieved = ActiveRecord<Element>::findById(actor->getId());
+        Poco::DateTime saved3 = retrieved->getCreationDateTime();
+        Poco::DateTime updated3 = retrieved->getLastModificationDateTime();
+        CPPUNIT_ASSERT(saved2 == saved3);
+        CPPUNIT_ASSERT(updated2 == updated3);
     }
 }

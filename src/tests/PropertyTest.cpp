@@ -14,6 +14,10 @@
 
 #include "PropertyTest.h"
 
+#include <sstream>
+
+#include <Poco/DateTime.h>
+
 #ifndef PROPERTY_H_
 #include "../storage/Property.h"
 #endif
@@ -68,11 +72,13 @@ namespace tests
         std::string name2("prop2");
         std::string name3("prop3");
         std::string name4("prop4");
+        std::string name5("prop5");
         
         bool ok = true;
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
 
         Property<std::string, bool> prop1(name1, ok);
         CPPUNIT_ASSERT_EQUAL(ok, prop1());
@@ -93,6 +99,11 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(d, prop4());
         CPPUNIT_ASSERT_EQUAL(d, prop4.getValue());
         CPPUNIT_ASSERT_EQUAL(name4, prop4.getName());
+        
+        Property<std::string, Poco::DateTime> prop5(name5, now);
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), prop5().utcTime());
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), prop5.getValue().utcTime());
+        CPPUNIT_ASSERT_EQUAL(name5, prop5.getName());
     }
     
     void PropertyTest::testDefaultPropertiesAcceptAnyValue()
@@ -101,6 +112,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
         
         std::string name("prop");
         AnyProperty prop(name);
@@ -125,6 +137,14 @@ namespace tests
         double stored4 = prop.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), prop.getNameValuePair());
+        
+        prop.setDateTime(now);
+        Poco::DateTime stored5 = prop.getDateTime();
+        std::stringstream nameValue;
+        nameValue << "prop = ";
+        nameValue << now.utcTime();
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), stored5.utcTime());
+        CPPUNIT_ASSERT_EQUAL(nameValue.str(), prop.getNameValuePair());
     }
     
     void PropertyTest::testCanUseCopyConstructorSafely()
@@ -133,6 +153,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
         
         std::string name("prop");
 
@@ -163,6 +184,15 @@ namespace tests
         double stored4 = propCopy5.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
+
+        prop.setDateTime(now);
+        AnyProperty propCopy6(prop);
+        Poco::DateTime stored5 = propCopy6.getDateTime();
+        std::stringstream nameValue;
+        nameValue << "prop = ";
+        nameValue << now.utcTime();
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), stored5.utcTime());
+        CPPUNIT_ASSERT_EQUAL(nameValue.str(), propCopy6.getNameValuePair());
     }
     
     void PropertyTest::testCanUseAssignmentOperatorSafely()
@@ -171,6 +201,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
         
         std::string name("prop");
 
@@ -201,5 +232,14 @@ namespace tests
         double stored4 = propCopy5.getDouble();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
+
+        prop.setDateTime(now);
+        AnyProperty propCopy6 = prop;
+        Poco::DateTime stored5 = propCopy6.getDateTime();
+        std::stringstream nameValue;
+        nameValue << "prop = ";
+        nameValue << now.utcTime();
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), stored5.utcTime());
+        CPPUNIT_ASSERT_EQUAL(nameValue.str(), propCopy6.getNameValuePair());
     }
 }

@@ -14,8 +14,10 @@
 
 #include "AnyPropertyMapTest.h"
 
+#include <sstream>
+
 #include <Poco/Exception.h>
-#include <iostream>
+#include <Poco/DateTime.h>
 
 #ifndef ANYPROPERTYMAP_H_
 #include "../storage/AnyPropertyMap.h"
@@ -73,11 +75,13 @@ namespace tests
         std::string name2("prop2");
         std::string name3("prop3");
         std::string name4("prop4");
+        std::string name5("prop5");
         
         bool ok = true;
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
 
         CPPUNIT_ASSERT(map.isEmpty());
         CPPUNIT_ASSERT_EQUAL(0, (int)map.count());
@@ -86,33 +90,51 @@ namespace tests
         CPPUNIT_ASSERT(!map.hasProperty(name3));
         CPPUNIT_ASSERT(!map.hasProperty(name4));
         
-        map.setBooleanProperty(name1, ok);
+        map.setBoolean(name1, ok);
         CPPUNIT_ASSERT_EQUAL(1, (int)map.count());
 
-        map.setStringProperty(name2, someValue);
+        map.setString(name2, someValue);
         CPPUNIT_ASSERT_EQUAL(2, (int)map.count());
 
-        map.setIntegerProperty(name3, integer);
+        map.setInteger(name3, integer);
         CPPUNIT_ASSERT_EQUAL(3, (int)map.count());
 
-        map.setDoubleProperty(name4, d);
+        map.setDouble(name4, d);
         CPPUNIT_ASSERT_EQUAL(4, (int)map.count());
+
+        map.setDateTime(name5, now);
+        CPPUNIT_ASSERT_EQUAL(5, (int)map.count());
 
         CPPUNIT_ASSERT(map.hasProperty(name1));
         CPPUNIT_ASSERT(map.hasProperty(name2));
         CPPUNIT_ASSERT(map.hasProperty(name3));
         CPPUNIT_ASSERT(map.hasProperty(name4));
+        CPPUNIT_ASSERT(map.hasProperty(name5));
         
         CPPUNIT_ASSERT_EQUAL(ok, map.getBoolean(name1));
         CPPUNIT_ASSERT_EQUAL(someValue, map.getString(name2));
         CPPUNIT_ASSERT_EQUAL(integer, map.getInteger(name3));
         CPPUNIT_ASSERT_EQUAL(d, map.getDouble(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), map.getDateTime(name5).utcTime());
         
+        std::stringstream insertQuery;
+        insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";
+        insertQuery << "(1, 'name', 34, 45.24, ";
+        insertQuery << now.utcTime();
+        insertQuery << ");";
+        
+        std::stringstream updateQuery;
+        updateQuery << "UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24, prop5 = ";
+        updateQuery << now.utcTime();
+        updateQuery << " WHERE id = 23;";
+
+        std::string createQuery("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL,\nprop5 DATETIME);");
+
         std::string tableName("test");
         const int id = 23;
-        CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), map.getStringForInsert(tableName));
-        CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), map.getStringForUpdate(tableName, id));
-        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), map.getStringForCreateTable(tableName));
+        CPPUNIT_ASSERT_EQUAL(insertQuery.str(), map.getStringForInsert(tableName));
+        CPPUNIT_ASSERT_EQUAL(updateQuery.str(), map.getStringForUpdate(tableName, id));
+        CPPUNIT_ASSERT_EQUAL(createQuery, map.getStringForCreateTable(tableName));
     }
     
     void AnyPropertyMapTest::testRetrievingInvalidPropertiesRaiseException()
@@ -137,34 +159,52 @@ namespace tests
         std::string name2("prop2");
         std::string name3("prop3");
         std::string name4("prop4");
+        std::string name5("prop5");
         
         bool ok = true;
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
         
-        map.setBooleanProperty(name1, ok);
-        map.setStringProperty(name2, someValue);
-        map.setIntegerProperty(name3, integer);
-        map.setDoubleProperty(name4, d);
+        map.setBoolean(name1, ok);
+        map.setString(name2, someValue);
+        map.setInteger(name3, integer);
+        map.setDouble(name4, d);
+        map.setDateTime(name5, now);
         
         AnyPropertyMap mapCopy(map);
 
-        CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
+        CPPUNIT_ASSERT_EQUAL(5, (int)mapCopy.count());
         CPPUNIT_ASSERT(mapCopy.hasProperty(name1));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name2));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name5));
         CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
         CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
         CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
         CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.getDateTime(name5).utcTime());
+
+        std::stringstream insertQuery;
+        insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";
+        insertQuery << "(1, 'name', 34, 45.24, ";
+        insertQuery << now.utcTime();
+        insertQuery << ");";
+        
+        std::stringstream updateQuery;
+        updateQuery << "UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24, prop5 = ";
+        updateQuery << now.utcTime();
+        updateQuery << " WHERE id = 23;";
+
+        std::string createQuery("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL,\nprop5 DATETIME);");
 
         std::string tableName("test");
         const int id = 23;
-        CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), mapCopy.getStringForInsert(tableName));
-        CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), mapCopy.getStringForUpdate(tableName, id));
-        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), mapCopy.getStringForCreateTable(tableName));
+        CPPUNIT_ASSERT_EQUAL(insertQuery.str(), mapCopy.getStringForInsert(tableName));
+        CPPUNIT_ASSERT_EQUAL(updateQuery.str(), mapCopy.getStringForUpdate(tableName, id));
+        CPPUNIT_ASSERT_EQUAL(createQuery, mapCopy.getStringForCreateTable(tableName));
     }
     
     void AnyPropertyMapTest::testCanUseAssignmentOperatorSafely()
@@ -175,33 +215,51 @@ namespace tests
         std::string name2("prop2");
         std::string name3("prop3");
         std::string name4("prop4");
-        
+        std::string name5("prop5");
+
         bool ok = true;
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
+        Poco::DateTime now;
         
-        map.setBooleanProperty(name1, ok);
-        map.setStringProperty(name2, someValue);
-        map.setIntegerProperty(name3, integer);
-        map.setDoubleProperty(name4, d);
+        map.setBoolean(name1, ok);
+        map.setString(name2, someValue);
+        map.setInteger(name3, integer);
+        map.setDouble(name4, d);
+        map.setDateTime(name5, now);
         
         AnyPropertyMap mapCopy = map;
 
-        CPPUNIT_ASSERT_EQUAL(4, (int)mapCopy.count());
+        CPPUNIT_ASSERT_EQUAL(5, (int)mapCopy.count());
         CPPUNIT_ASSERT(mapCopy.hasProperty(name1));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name2));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
+        CPPUNIT_ASSERT(mapCopy.hasProperty(name5));
         CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
         CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
         CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
         CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.getDateTime(name5).utcTime());
+
+        std::stringstream insertQuery;
+        insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";
+        insertQuery << "(1, 'name', 34, 45.24, ";
+        insertQuery << now.utcTime();
+        insertQuery << ");";
+        
+        std::stringstream updateQuery;
+        updateQuery << "UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24, prop5 = ";
+        updateQuery << now.utcTime();
+        updateQuery << " WHERE id = 23;";
+
+        std::string createQuery("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL,\nprop5 DATETIME);");
 
         std::string tableName("test");
         const int id = 23;
-        CPPUNIT_ASSERT_EQUAL(std::string("INSERT INTO test (prop1, prop2, prop3, prop4) VALUES (1, 'name', 34, 45.24);"), mapCopy.getStringForInsert(tableName));
-        CPPUNIT_ASSERT_EQUAL(std::string("UPDATE test SET prop1 = 1, prop2 = 'name', prop3 = 34, prop4 = 45.24 WHERE id = 23;"), mapCopy.getStringForUpdate(tableName, id));
-        CPPUNIT_ASSERT_EQUAL(std::string("CREATE TABLE test(\nprop1 BOOLEAN,\nprop2 TEXT,\nprop3 INTEGER,\nprop4 REAL);"), mapCopy.getStringForCreateTable(tableName));
+        CPPUNIT_ASSERT_EQUAL(insertQuery.str(), mapCopy.getStringForInsert(tableName));
+        CPPUNIT_ASSERT_EQUAL(updateQuery.str(), mapCopy.getStringForUpdate(tableName, id));
+        CPPUNIT_ASSERT_EQUAL(createQuery, mapCopy.getStringForCreateTable(tableName));
     }
 }
