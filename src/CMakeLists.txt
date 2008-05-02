@@ -258,19 +258,6 @@ ELSE (WIN32)
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
             
-            # This custom target builds the documentation using Doxygen and LaTeX
-            #ADD_CUSTOM_TARGET(doc ALL 
-            #    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../
-            #        
-            #    # Generate the project's documentation (using Doxygen installed via MacPorts)
-            #    COMMAND /opt/local/bin/doxygen
-            #        
-            #    # Create the PDF file and then delete the source files
-            #    COMMAND make --directory=doc/latex pdf
-            #    COMMAND mv doc/latex/refman.pdf doc/
-            #    COMMAND rm -r doc/latex/
-            #)
-            
             # The support for Mac OS X bundle installation is in the CVS version:
             # http://www.cmake.org/pipermail/cmake/2007-October/016893.html
             #INSTALL(TARGETS Rem
