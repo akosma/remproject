@@ -61,6 +61,7 @@ namespace tests
         CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST(testObjectCanSaveItsChildren);
         CPPUNIT_TEST(testSavedObjectsHaveCreationAndUpdateTime);
+        CPPUNIT_TEST(testSettingAChildDirtySetsTheParentDirtyToo);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -99,6 +100,7 @@ namespace tests
         void testCanUseAssignmentOperatorSafely();
         void testObjectCanSaveItsChildren();
         void testSavedObjectsHaveCreationAndUpdateTime();
+        void testSettingAChildDirtySetsTheParentDirtyToo();
     };
 }
 

@@ -78,7 +78,7 @@ namespace metamodel
          * 
          * \param className The name of the subclass of the current instance.
          */
-        Element(std::string&);
+        Element(const std::string&);
 
         /*!
          * Constructor required by ActiveRecord, to instantiate objects
@@ -88,7 +88,7 @@ namespace metamodel
          * \param id The ID of the current instance.
          * \param data The data of the current instance.
          */
-        Element(std::string&, storage::ID, AnyPropertyMap&);
+        Element(const std::string&, const storage::ID, AnyPropertyMap&);
 
         /*!
          *  Element virtual destructor.

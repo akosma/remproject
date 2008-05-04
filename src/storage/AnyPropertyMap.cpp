@@ -136,6 +136,12 @@ namespace storage
         }
     }
     
+    /*!
+     * Sets the string value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     void AnyPropertyMap::setString(const std::string& key, const std::string& value)
     {
         Poco::Any any(value);
@@ -143,6 +149,12 @@ namespace storage
         _map[key] = prop;
     }
 
+    /*!
+     * Sets the integer value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     void AnyPropertyMap::setInteger(const std::string& key, const int value)
     {
         Poco::Any any(value);
@@ -150,6 +162,12 @@ namespace storage
         _map[key] = prop;
     }
 
+    /*!
+     * Sets the boolean value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     void AnyPropertyMap::setBoolean(const std::string& key, const bool value)
     {
         Poco::Any any(value);
@@ -157,6 +175,12 @@ namespace storage
         _map[key] = prop;
     }
 
+    /*!
+     * Sets the double value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     void AnyPropertyMap::setDouble(const std::string& key, const double value)
     {
         Poco::Any any(value);
@@ -164,6 +188,12 @@ namespace storage
         _map[key] = prop;
     }
     
+    /*!
+     * Sets the date/time value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     void AnyPropertyMap::setDateTime(const std::string& key, const Poco::DateTime& value)
     {
         Poco::Any any(value);
@@ -171,37 +201,72 @@ namespace storage
         _map[key] = prop;
     }
     
+    /*!
+     * Returns the string value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current string value of the named property
+     */
+    const std::string AnyPropertyMap::getString(const std::string& key)
+    {
+        return _map[key].getString();
+    }
+    
+    /*!
+     * Returns the integer value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current integer value of the named property
+     */
+    const int AnyPropertyMap::getInteger(const std::string& key)
+    {
+        return _map[key].getInteger();            
+    }
+    
+    /*!
+     * Returns the boolean value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current boolean value of the named property
+     */
+    const bool AnyPropertyMap::getBoolean(const std::string& key)
+    {
+        return _map[key].getBoolean();            
+    }
+    
+    /*!
+     * Returns the double value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current double value of the named property
+     */
+    const double AnyPropertyMap::getDouble(const std::string& key)
+    {
+        return _map[key].getDouble();            
+    }
+    
+    /*!
+     * Returns the date/time value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current date/time value of the named property
+     */
+    const Poco::DateTime AnyPropertyMap::getDateTime(const std::string& key)
+    {
+        return _map[key].getDateTime();
+    }
+
     void AnyPropertyMap::createPrimaryKey(const std::string& key)
     {
         Poco::Any any(0);
         AnyProperty prop(key, any);
         prop.setPrimaryKey();
         _map[key] = prop;
-    }
-    
-    const std::string AnyPropertyMap::getString(const std::string& key)
-    {
-        return _map[key].getString();
-    }
-    
-    const int AnyPropertyMap::getInteger(const std::string& key)
-    {
-        return _map[key].getInteger();            
-    }
-    
-    const bool AnyPropertyMap::getBoolean(const std::string& key)
-    {
-        return _map[key].getBoolean();            
-    }
-    
-    const double AnyPropertyMap::getDouble(const std::string& key)
-    {
-        return _map[key].getDouble();            
-    }
-    
-    const Poco::DateTime AnyPropertyMap::getDateTime(const std::string& key)
-    {
-        return _map[key].getDateTime();
     }
     
     const std::string AnyPropertyMap::getColumnList() const

@@ -57,43 +57,136 @@
  */
 namespace storage
 {
+    /*!
+     * \class NoParent
+     *
+     * Dummy class used by ActiveRecord subclasses who do not wish
+     * to be related to a "parent" class. It implements many methods
+     * required during template instantiation at compile-time.
+     */
 	class NoParent
     {
     public:
-        NoParent() : _parentColumn("no_parent") {}
-        virtual ~NoParent() {}
-        const std::string& getParentColumn() const { return _parentColumn; }
+        /*!
+         * Constructor
+         */
+        NoParent() 
+        : _parentColumn("no_parent") 
+        {
+        }
+
+        /*!
+         * Virtual destructor
+         */
+        virtual ~NoParent() 
+        {
+        }
+
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        const std::string& getParentColumn() const
+        {
+            return _parentColumn;
+        }
+
+        /*!
+         * Placeholder method required at template instantiation time
+         */
         static std::string& getTableName()
         { 
             static std::string tableName("no_parent");
             return tableName; 
         }
+
+        /*!
+         * Placeholder method required at template instantiation time
+         */
         const ID getId() const
         {
             return DEFAULT_ID;
         }
+
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        void setDirty()
+        {
+        }
+        
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        const bool hasParent() const
+        {
+            return false;
+        }
+        
+        /*!
+         * Placeholder method required at template instantiation time
+         */
         const ID getParentId() const
         {
             return DEFAULT_ID;
         }
     private:
+        //! Used to return a valid string reference only
         std::string _parentColumn;
     };
 
+    /*!
+     * \class NoChildren
+     *
+     * Dummy class used by ActiveRecord subclasses who do not wish
+     * to have related "child" instances. It implements many methods
+     * required during template instantiation at compile-time.
+     */
     class NoChildren
     {
     public:
-        NoChildren() {}
-        virtual ~NoChildren() {}
-        void save() {}
-        void saveChildren() {}
-        void destroy() {}
+        /*!
+         * Constructor
+         */
+        NoChildren()
+        {
+        }
+        
+        /*!
+         * Virtual destructor
+         */
+        virtual ~NoChildren()
+        {
+        }
+        
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        void save() 
+        {
+        }
+
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        void saveChildren()
+        {
+        }
+        
+        /*!
+         * Placeholder method required at template instantiation time
+         */
+        void destroy()
+        {
+        }
     };
     
     /*!
      * \class ActiveRecord
      *
-     *  
+     * Base template class for all objects that can be saved into a SQLite class.
+     * Its design is heavily inspired by the classes of the same name in the
+     * Ruby on Rails web development framework:
+     * http://rubyonrails.org/
      */
     template <class T
              , class P = NoParent
@@ -102,28 +195,37 @@ namespace storage
                        , public C
     {
     public:
+        /** \name ConstructorsDestructor Constructors, destructor and assignment operator
+        }**/
+        //@{
 
         /*!
          * Default constructor. Sets the ID to DEFAULT_ID. Used
          * to create instances that do not exist yet in the database.
+         * 
+         * \param className The subclass name of the current instance.
          */
-        ActiveRecord(std::string);
+        ActiveRecord(const std::string&);
         
         /*!
-         * Constructor. Used to create instances whose state is
-         * already present in the database.
+         * Constructor. Used to create instances already existing in the database.
+         * This constructor is called by the ActiveRecord::getVectorByQuery() method.
+         * 
+         * \param className The subclass name of the current instance.
+         * \param id The ID of the current instance
+         * \param data An AnyPropertyMap containing the internal state of the instance
          */
-        ActiveRecord(std::string&, ID, AnyPropertyMap&);
+        ActiveRecord(const std::string&, const ID, AnyPropertyMap&);
         
         /*!
          * Copy constructor.
          * 
-         * \param rhs The instance to copy from ("right hand side").
+         * \param rhs The instance to copy data from.
          */
         ActiveRecord(const ActiveRecord&);
 
         /*!
-         *  ActiveRecord virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ActiveRecord();
 
@@ -134,6 +236,108 @@ namespace storage
          */
         ActiveRecord& operator=(const ActiveRecord&);
 
+        //@}
+    
+    public:
+        /** \name DynamicObjectMethods Instance methods helping to work with dynamic objects.
+        }**/
+        //@{
+
+        /*!
+         * Sets the string value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
+        void setString(const std::string&, const std::string&);
+        
+        /*!
+         * Sets the integer value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
+        void setInteger(const std::string&, const int);
+
+        /*!
+         * Sets the boolean value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
+        void setBoolean(const std::string&, const bool);
+
+        /*!
+         * Sets the double value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
+        void setDouble(const std::string&, const double);
+
+        /*!
+         * Sets the date/time value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
+        void setDateTime(const std::string&, const Poco::DateTime&);
+
+        /*!
+         * Returns the string value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current string value of the named property
+         */
+        const std::string getString(const std::string&);
+
+        /*!
+         * Returns the integer value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current integer value of the named property
+         */
+        const int getInteger(const std::string&);
+
+        /*!
+         * Returns the boolean value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current boolean value of the named property
+         */
+        const bool getBoolean(const std::string&);
+
+        /*!
+         * Returns the double value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current double value of the named property
+         */
+        const double getDouble(const std::string&);
+
+        /*!
+         * Returns the date/time value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current date/time value of the named property
+         */
+        const Poco::DateTime getDateTime(const std::string&);
+
+    protected:
+        void addStringProperty(const std::string&);
+        void addIntegerProperty(const std::string&);
+        void addBooleanProperty(const std::string&);
+        void addDoubleProperty(const std::string&);
+        void addDateTimeProperty(const std::string&);
+
+        //@}
+
+    public:
         /*!
          * Returns a value indicating if the current instance has been
          * modified since it was retrieved from the database.
@@ -146,7 +350,8 @@ namespace storage
          * Returns a value indicating whether the current instance
          * exists in the database or not.
          * 
-         * \return A boolean value.
+         * \return A boolean value stating whether the current instance 
+         * exists in the database (false) or not (true).
          */
         const bool isNew() const;
         
@@ -158,40 +363,17 @@ namespace storage
         const ID getId() const;
         void setName(std::string&);
         std::string getName();
+        const Poco::DateTime getCreationDateTime();
+        const Poco::DateTime getLastModificationDateTime();
 
         /*!
          * This method is the core of the ActiveRecord family of
          * classes. Clients use it to write the current state of
          * the instance into the database.
-         * 
-         * This is a "template method", that provides the basic 
-         * framework for subclasses, that must provide an implementation
-         * to "insert()" and "update()". 
          */
         void save();
         
         void destroy();
-        static void removeAll();
-        static void remove(const ID);
-
-        static std::vector<T>* findAll();
-        static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
-        static T* findById(const ID);
-
-        void setString(const std::string&, const std::string&);
-        void setInteger(const std::string&, const int);
-        void setBoolean(const std::string&, const bool);
-        void setDouble(const std::string&, const double);
-        void setDateTime(const std::string&, const Poco::DateTime&);
-
-        const std::string getString(const std::string&);
-        const int getInteger(const std::string&);
-        const bool getBoolean(const std::string&);
-        const double getDouble(const std::string&);
-        const Poco::DateTime getDateTime(const std::string&);
-        
-        const Poco::DateTime getCreationDateTime();
-        const Poco::DateTime getLastModificationDateTime();
 
         /*!
          * Used to change the "_isDirty" flag in the 
@@ -200,14 +382,15 @@ namespace storage
          */
         void setDirty();
 
-    protected:
+    public:
+        static void removeAll();
+        static void remove(const ID);
 
-        void addStringProperty(const std::string&);
-        void addIntegerProperty(const std::string&);
-        void addBooleanProperty(const std::string&);
-        void addDoubleProperty(const std::string&);
-        void addDateTimeProperty(const std::string&);
-        
+        static std::vector<T>* findAll();
+        static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
+        static T* findById(const ID);
+
+    protected:
         virtual void createSchemaStructure() = 0;
 
     private:
@@ -224,17 +407,29 @@ namespace storage
          * "UPDATE" SQL statement.
          */
         void update();
+        
+        void setParentId(const ID value);
+        void setLastModificationDateTimeToNow();
+        void setCreationDateTimeToNow();
+        void setClassName(const std::string&);
 
     private:
         static std::vector<storage::AnyPropertyMap>* getPropertyMaps(std::map<std::string, std::string>&);
         static std::vector<T>* getVectorByQuery(std::string&);
 
 #if __WORDSIZE != 64
-		static long long int atoll(const char* s);
+        /*!
+         * 32-bit implementation of the atoll() function, taken from
+         * http://www.koders.com/c/fid41B415AF8E97572E9336D135F2329BD2D56E1B07.aspx
+         * 
+         * \param s An array of char
+         *
+         * \return A long long value (64-bit long integer)
+         */
+		static long long int atoll(const char*);
 #endif
 
     private:
-
         //! The ID of the current instance.
         ID _id;
     
@@ -247,15 +442,22 @@ namespace storage
         //! An instance of AnyPropertyMap which contains the data for this instance
         AnyPropertyMap _data;
 
+        //! The subclass name of the current instance.
         std::string _className;
     };
     
+    /** \name ConstructorsDestructor Constructors, destructor and assignment operator
+    }**/
+    //@{
+
     /*!
      * Default constructor. Sets the ID to DEFAULT_ID. Used
      * to create instances that do not exist yet in the database.
+     * 
+     * \param className The subclass name of the current instance.
      */
     template <class T, class P, class C>
-    ActiveRecord<T, P, C>::ActiveRecord(std::string className)
+    ActiveRecord<T, P, C>::ActiveRecord(const std::string& className)
     : P()
     , C()
     , _id        (DEFAULT_ID)
@@ -267,11 +469,15 @@ namespace storage
     }
 
     /*!
-     * Constructor. Used to create instances whose state is
-     * already present in the database.
+     * Constructor. Used to create instances already existing in the database.
+     * This constructor is called by the ActiveRecord::getVectorByQuery() method.
+     * 
+     * \param className The subclass name of the current instance.
+     * \param id The ID of the current instance
+     * \param data An AnyPropertyMap containing the internal state of the instance
      */
     template <class T, class P, class C>
-    ActiveRecord<T, P, C>::ActiveRecord(std::string& className, ID id, AnyPropertyMap& data)
+    ActiveRecord<T, P, C>::ActiveRecord(const std::string& className, const ID id, AnyPropertyMap& data)
     : P()
     , C()
     , _id        (id)
@@ -285,7 +491,7 @@ namespace storage
     /*!
      * Copy constructor.
      * 
-     * \param rhs The instance to copy from ("right hand side").
+     * \param rhs The instance to copy data from.
      */
     template <class T, class P, class C>
     ActiveRecord<T, P, C>::ActiveRecord(const ActiveRecord& rhs)
@@ -329,6 +535,18 @@ namespace storage
         return *this;
     }
     
+    //@}
+    
+    /** \name DynamicObjectMethods Instance methods helping to work with dynamic objects.
+    }**/
+    //@{
+    
+    /*!
+     * Sets the string value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setString(const std::string& key, const std::string& value)
     {
@@ -336,6 +554,12 @@ namespace storage
         _data.setString(key, value);
     }
 
+    /*!
+     * Sets the integer value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setInteger(const std::string& key, const int value)
     {
@@ -343,6 +567,12 @@ namespace storage
         _data.setInteger(key, value);
     }
 
+    /*!
+     * Sets the boolean value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setBoolean(const std::string& key, const bool value)
     {
@@ -350,6 +580,12 @@ namespace storage
         _data.setBoolean(key, value);
     }
 
+    /*!
+     * Sets the double value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setDouble(const std::string& key, const double value)
     {
@@ -357,11 +593,82 @@ namespace storage
         _data.setDouble(key, value);
     }
     
+    /*!
+     * Sets the date/time value of the property whose name is the first parameter.
+     * 
+     * \param key The name of the property to set
+     * \param value The value of the property to set
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::setDateTime(const std::string& key, const Poco::DateTime& value)
     {
         setDirty();
         _data.setDateTime(key, value);
+    }
+    
+    /*!
+     * Returns the string value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current string value of the named property
+     */
+    template <class T, class P, class C>
+    const std::string ActiveRecord<T, P, C>::getString(const std::string& key)
+    {
+        return _data.getString(key);
+    }
+    
+    /*!
+     * Returns the integer value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current integer value of the named property
+     */
+    template <class T, class P, class C>
+    const int ActiveRecord<T, P, C>::getInteger(const std::string& key)
+    {
+        return _data.getInteger(key);
+    }
+    
+    /*!
+     * Returns the boolean value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current boolean value of the named property
+     */
+    template <class T, class P, class C>
+    const bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
+    {
+        return _data.getBoolean(key);
+    }
+    
+    /*!
+     * Returns the double value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current double value of the named property
+     */
+    template <class T, class P, class C>
+    const double ActiveRecord<T, P, C>::getDouble(const std::string& key)
+    {
+        return _data.getDouble(key);
+    }
+    
+    /*!
+     * Returns the date/time value of the property whose name is passed as parameter.
+     * 
+     * \param key The name of the property to get
+     * 
+     * \return The current date/time value of the named property
+     */
+    template <class T, class P, class C>
+    const Poco::DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
+    {
+        return _data.getDateTime(key);
     }
     
     template <class T, class P, class C>
@@ -393,41 +700,26 @@ namespace storage
     {
         _data.addDateTimeProperty(key);
     }
+
+    //@}
     
-    template <class T, class P, class C>
-    const std::string ActiveRecord<T, P, C>::getString(const std::string& key)
-    {
-        return _data.getString(key);
-    }
-    
-    template <class T, class P, class C>
-    const int ActiveRecord<T, P, C>::getInteger(const std::string& key)
-    {
-        return _data.getInteger(key);
-    }
-    
-    template <class T, class P, class C>
-    const bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
-    {
-        return _data.getBoolean(key);
-    }
-    
-    template <class T, class P, class C>
-    const double ActiveRecord<T, P, C>::getDouble(const std::string& key)
-    {
-        return _data.getDouble(key);
-    }
-    
-    template <class T, class P, class C>
-    const Poco::DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
-    {
-        return _data.getDateTime(key);
-    }
+    /** \name SpecialProperties Getters and setters for some special properties
+    }**/
+    //@{
     
     template <class T, class P, class C>
     const Poco::DateTime ActiveRecord<T, P, C>::getCreationDateTime()
     {
         return _data.getDateTime("created_on");
+    }
+
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setCreationDateTimeToNow()
+    {
+        // Do not call "setDirty()" here!
+        Poco::DateTime now;
+        _data.setDateTime("created_on", now);
+        _data.setDateTime("updated_on", now);
     }
     
     template <class T, class P, class C>
@@ -436,14 +728,57 @@ namespace storage
         return _data.getDateTime("updated_on");
     }
 
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setLastModificationDateTimeToNow()
+    {
+        // Do not call "setDirty()" here!
+        Poco::DateTime now;
+        _data.setDateTime("updated_on", now);
+    }
+
+    /*!
+     * Returns the ID of the current instance.
+     * 
+     * \return An ID (long long) value.
+     */
+    template <class T, class P, class C>
+    const ID ActiveRecord<T, P, C>::getId() const
+    {
+        return _id;
+    }
+    
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setName(std::string& name)
+    {
+        setString("name", name);
+    }
+
+    template <class T, class P, class C>
+    std::string ActiveRecord<T, P, C>::getName()
+    {
+        return getString("name");
+    }
+    
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setParentId(const ID value)
+    {
+        // Do not call "setDirty()" here!
+        _data.setInteger(P::getParentColumn(), (int)value);
+    }
+
+    template <class T, class P, class C>
+    void ActiveRecord<T, P, C>::setClassName(const std::string& value)
+    {
+        // Do not call "setDirty()" here!
+        _data.setString("class", value);
+    }
+    
+    //@}
+
     /*!
      * This method is the core of the ActiveRecord family of
      * classes. Clients use it to write the current state of
      * the instance into the database.
-     * 
-     * This is a "template method", that provides the basic 
-     * framework for subclasses, that must provide an implementation
-     * to "insert()" and "update()". 
      */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::save()
@@ -451,7 +786,7 @@ namespace storage
         ID parentId = P::getParentId();
         if (parentId != DEFAULT_ID)
         {
-            setInteger(P::getParentColumn(), parentId);
+            setParentId(parentId);
         }
         if (_isNew)
         {
@@ -477,8 +812,7 @@ namespace storage
         bool ok = wrapper.open();
         if (ok)
         {
-            Poco::DateTime now;
-            setDateTime("updated_on", now);
+            setLastModificationDateTimeToNow();
             ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
         }
         wrapper.close();
@@ -505,10 +839,8 @@ namespace storage
         }
         if (ok)
         {
-            setString("class", _className);
-            Poco::DateTime now;
-            setDateTime("created_on", now);
-            setDateTime("updated_on", now);
+            setClassName(_className);
+            setCreationDateTimeToNow();
             ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
         }
         wrapper.close();
@@ -547,29 +879,6 @@ namespace storage
     }
 
     /*!
-     * Returns the ID of the current instance.
-     * 
-     * \return A ActiveRecordId (long long) value.
-     */
-    template <class T, class P, class C>
-    const ID ActiveRecord<T, P, C>::getId() const
-    {
-        return _id;
-    }
-    
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setName(std::string& name)
-    {
-        setString("name", name);
-    }
-
-    template <class T, class P, class C>
-    std::string ActiveRecord<T, P, C>::getName()
-    {
-        return getString("name");
-    }    
-
-    /*!
      * Used by subclasses to change the "_isDirty" flag in the 
      * ActiveRecord base class; subclasses must call this method in
      * every "setter" method.
@@ -578,6 +887,10 @@ namespace storage
     void ActiveRecord<T, P, C>::setDirty()
     {
         _isDirty = true;
+        if (P::hasParent())
+        {
+            P::getParent()->setDirty();
+        }
     }
     
     template <class T, class P, class C>
@@ -783,7 +1096,14 @@ namespace storage
     }
 
 #if __WORDSIZE != 64
-	// This code comes from http://www.koders.com/c/fid41B415AF8E97572E9336D135F2329BD2D56E1B07.aspx
+    /*!
+     * 32-bit implementation of the atoll() function, taken from
+     * http://www.koders.com/c/fid41B415AF8E97572E9336D135F2329BD2D56E1B07.aspx
+     * 
+     * \param s An array of char
+     *
+     * \return A long long value (64-bit long integer)
+     */
     template <class T, class P, class C>
 	long long int ActiveRecord<T, P, C>::atoll(const char* s) 
 	{

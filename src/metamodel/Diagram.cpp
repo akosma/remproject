@@ -54,7 +54,7 @@ namespace metamodel
      * 
      * \param className The name of the subclass of the current instance.
      */
-    Diagram::Diagram(std::string& className)
+    Diagram::Diagram(const std::string& className)
     : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element, Diagram> >(className)
     {
     }
@@ -67,7 +67,7 @@ namespace metamodel
      * \param id The ID of the current instance.
      * \param data The data of the current instance.
      */
-    Diagram::Diagram(std::string& className, storage::ID id, AnyPropertyMap& data)
+    Diagram::Diagram(const std::string& className, const storage::ID id, AnyPropertyMap& data)
     : ActiveRecord<Diagram, BelongsTo<Project>, HasMany<Element, Diagram> >(className, id, data)
     {
     }

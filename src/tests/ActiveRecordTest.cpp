@@ -364,4 +364,37 @@ namespace tests
         CPPUNIT_ASSERT(saved2 == saved3);
         CPPUNIT_ASSERT(updated2 == updated3);
     }
+    
+    void ActiveRecordTest::testSettingAChildDirtySetsTheParentDirtyToo()
+    {
+        std::string projectName("test");
+        std::string diagramClassName("usecase");
+        std::string first("first");
+        std::string second("second");
+
+        Project* project = new Project();
+        project->setName(projectName);
+        Diagram* diagram = new Diagram(diagramClassName);
+        diagram->setName(first);
+        project->addChild(diagram);
+
+        CPPUNIT_ASSERT(project->isNew());
+        CPPUNIT_ASSERT(diagram->isNew());
+
+        project->save();
+        
+        CPPUNIT_ASSERT(!project->isNew());
+        CPPUNIT_ASSERT(!project->isDirty());
+
+        CPPUNIT_ASSERT(!diagram->isNew());
+        CPPUNIT_ASSERT(!diagram->isDirty());
+
+        diagram->setName(second);
+
+        CPPUNIT_ASSERT(project->isDirty());
+        CPPUNIT_ASSERT(diagram->isDirty());
+        
+        delete project;
+        delete diagram;
+    }
 }

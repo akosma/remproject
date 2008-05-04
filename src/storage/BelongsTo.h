@@ -69,6 +69,7 @@ namespace storage
         BelongsTo(const BelongsTo<P>&);
         BelongsTo<P>& operator=(const BelongsTo<P>&);
         
+        const bool hasParent() const;
         void setParent(P*);
         P* getParent() const;
         const storage::ID getParentId() const;
@@ -109,6 +110,12 @@ namespace storage
     BelongsTo<P>& BelongsTo<P>::operator=(const BelongsTo<P>& rhs)
     {
         return *this;
+    }
+    
+    template <class P>
+    const bool BelongsTo<P>::hasParent() const
+    {
+        return _parent != NULL;
     }
     
     template <class P>

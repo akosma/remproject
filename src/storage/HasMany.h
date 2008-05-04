@@ -137,9 +137,6 @@ namespace storage
     private:
         //! The children objects related to the current instance.
         InternalMap _children;
-        
-        //! An internal flag used when the current instance is being deleted.
-        bool _beingDeleted;
     };
 
     /*!
@@ -148,7 +145,6 @@ namespace storage
     template <class C, class P>
     HasMany<C, P>::HasMany()
     : _children()
-    , _beingDeleted(false)
     {
     }
 
@@ -160,7 +156,6 @@ namespace storage
     template <class C, class P>
     HasMany<C, P>::HasMany(const HasMany& rhs)
     : _children()
-    , _beingDeleted(false)
     {
     }
 
@@ -183,10 +178,6 @@ namespace storage
     template <class C, class P>
     HasMany<C, P>::~HasMany()
     {
-        // We set a safeguard here, to be used in the implementation of
-        // void HasMany<C, P>::removeAllChildren() below
-        _beingDeleted = true;
-        this->removeAllChildren();
     }
 
     /*!
@@ -289,13 +280,6 @@ namespace storage
             delete element;
         }
         _children.clear();
-        
-        // This method is called during deletion from memory!
-        // This safeguard makes sure there aren't impossible casts at that moment.
-        if (!_beingDeleted)
-        {
-            dynamic_cast<P*>(this)->setDirty();
-        }
     }
     
     /*!

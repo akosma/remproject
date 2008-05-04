@@ -82,27 +82,100 @@ namespace storage
         void addDoubleProperty(const std::string&);
         void addDateTimeProperty(const std::string&);
         
+        /*!
+         * Sets the string value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
         void setString(const std::string&, const std::string&);
+
+        /*!
+         * Sets the integer value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
         void setInteger(const std::string&, const int);
+
+        /*!
+         * Sets the boolean value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
         void setBoolean(const std::string&, const bool);
+
+        /*!
+         * Sets the double value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
         void setDouble(const std::string&, const double);
+
+        /*!
+         * Sets the date/time value of the property whose name is the first parameter.
+         * 
+         * \param key The name of the property to set
+         * \param value The value of the property to set
+         */
         void setDateTime(const std::string& key, const Poco::DateTime& value);
 
-        void createPrimaryKey(const std::string&);
-        
+        /*!
+         * Returns the string value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current string value of the named property
+         */
         const std::string getString(const std::string&);
+
+        /*!
+         * Returns the integer value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current integer value of the named property
+         */
         const int getInteger(const std::string&);
+
+        /*!
+         * Returns the boolean value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current boolean value of the named property
+         */
         const bool getBoolean(const std::string&);
+
+        /*!
+         * Returns the double value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current double value of the named property
+         */
         const double getDouble(const std::string&);
+
+        /*!
+         * Returns the date/time value of the property whose name is passed as parameter.
+         * 
+         * \param key The name of the property to get
+         * 
+         * \return The current date/time value of the named property
+         */
         const Poco::DateTime getDateTime(const std::string&);
 
+        void createPrimaryKey(const std::string&);
+
         const std::string getStringForCreateTable(std::string&) const;
-        const std::string getColumnList() const;
         const std::string getStringForInsert(std::string&) const;
         const std::string getStringForUpdate(std::string&, const int id) const;
         const std::string getStringForWhere() const;
 
-    protected:
+    private:
+        const std::string getColumnList() const;
 
     private:
         std::map<std::string, AnyProperty> _map;

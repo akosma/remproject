@@ -77,8 +77,8 @@ namespace ui
         c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);
         
-        Toolbox* t = new Toolbox(this);
-        addAndMakeVisible(t, -1);
+        // Toolbox* t = new Toolbox(this);
+        // addAndMakeVisible(t, -1);
         
         _canvas->addArrow(a, c);
         _canvas->addArrow(a, b);

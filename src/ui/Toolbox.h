@@ -33,6 +33,10 @@
 
 #include "juce.h"
 
+#ifndef TOOLBOXITEMFACTORY_H_
+#include "ToolboxItemFactory.h"
+#endif
+
 #ifndef TOOLBOX_H_
 #define TOOLBOX_H_
 
@@ -42,7 +46,6 @@
  */
 namespace ui
 {
-    class ToolboxItemFactory;
     class ContentComponent;
     
     /*!
@@ -69,7 +72,7 @@ namespace ui
     private:
         const int _initWidth;
         const int _initHeight;
-        ToolboxItemFactory* _factory;
+        ToolboxItemFactory _factory;
         ContentComponent* _parent;
     };
 }

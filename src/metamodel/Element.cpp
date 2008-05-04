@@ -33,6 +33,10 @@
 
 #include "Element.h"
 
+#ifndef PROJECT_H_
+#include "../metamodel/Project.h"
+#endif
+
 #ifndef DIAGRAM_H_
 #include "Diagram.h"
 #endif
@@ -50,7 +54,7 @@ namespace metamodel
      * 
      * \param className The name of the subclass of the current instance.
      */
-    Element::Element(std::string& className)
+    Element::Element(const std::string& className)
     : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className)
     {
     }
@@ -63,7 +67,7 @@ namespace metamodel
      * \param id The ID of the current instance.
      * \param data The data of the current instance.
      */
-    Element::Element(std::string& className, storage::ID id, AnyPropertyMap& data)
+    Element::Element(const std::string& className, const storage::ID id, AnyPropertyMap& data)
     : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className, id, data)
     {
     }

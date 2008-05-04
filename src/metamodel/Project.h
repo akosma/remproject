@@ -85,7 +85,7 @@ namespace metamodel
          * \param id The ID of the current instance.
          * \param data The data of the current instance.
          */
-        Project(std::string&, storage::ID, storage::AnyPropertyMap&);
+        Project(const std::string&, const storage::ID, storage::AnyPropertyMap&);
 
         /*!
          * Project virtual destructor.

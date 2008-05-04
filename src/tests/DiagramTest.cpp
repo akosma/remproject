@@ -33,6 +33,10 @@
 
 #include "DiagramTest.h"
 
+#ifndef PROJECT_H_
+#include "../metamodel/Project.h"
+#endif
+
 #ifndef ELEMENT_H_
 #include "../metamodel/Element.h"
 #endif

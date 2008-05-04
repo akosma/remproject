@@ -66,7 +66,7 @@ namespace metamodel
      * \param id The ID of the current instance.
      * \param data The data of the current instance.
      */
-    Project::Project(std::string& className, storage::ID id, AnyPropertyMap& data)
+    Project::Project(const std::string& className, const storage::ID id, AnyPropertyMap& data)
     : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram, Project> >(className, id, data)
     {
     }
