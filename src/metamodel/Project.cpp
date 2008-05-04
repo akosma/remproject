@@ -33,6 +33,10 @@
 
 #include "Project.h"
 
+#ifndef ELEMENT_H_
+#include "Element.h"
+#endif
+
 #ifndef DIAGRAM_H_
 #include "Diagram.h"
 #endif

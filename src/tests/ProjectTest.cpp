@@ -37,6 +37,10 @@
 #include "../metamodel/Project.h"
 #endif
 
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
+#endif
+
 #ifndef DIAGRAM_H_
 #include "../metamodel/Diagram.h"
 #endif

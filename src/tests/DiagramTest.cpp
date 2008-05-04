@@ -33,12 +33,12 @@
 
 #include "DiagramTest.h"
 
-#ifndef DIAGRAM_H_
-#include "../metamodel/Diagram.h"
-#endif
-
 #ifndef ELEMENT_H_
 #include "../metamodel/Element.h"
+#endif
+
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
 #endif
 
 using namespace metamodel;

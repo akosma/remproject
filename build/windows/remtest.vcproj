@@ -405,7 +405,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\src\metamodel\Container.h"
+				RelativePath="..\..\src\storage\BelongsTo.h"
 				>
 			</File>
 			<File
@@ -434,6 +434,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\metamodel\Element.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\HasMany.h"
 				>
 			</File>
 			<File

@@ -214,7 +214,15 @@
 			Name="Source Files"
 			>
 			<File
+				RelativePath="..\..\src\ui\Actor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Application.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ArrowCanvas.cpp"
 				>
 			</File>
 			<File
@@ -222,7 +230,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\Figure.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\Toolbox.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ToolboxItemFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseBubble.cpp"
 				>
 			</File>
 			<File
@@ -234,11 +258,35 @@
 			Name="Header Files"
 			>
 			<File
+				RelativePath="..\..\src\ui\Actor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Application.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\ArrowCanvas.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ContentComponent.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\Figure.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\Toolbox.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ToolboxItemFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseBubble.h"
 				>
 			</File>
 			<File

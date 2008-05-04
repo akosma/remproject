@@ -57,7 +57,7 @@
  */
 namespace storage
 {
-    class NoParent
+	class NoParent
     {
     public:
         NoParent() : _parentColumn("no_parent") {}
@@ -228,6 +228,10 @@ namespace storage
     private:
         static std::vector<storage::AnyPropertyMap>* getPropertyMaps(std::map<std::string, std::string>&);
         static std::vector<T>* getVectorByQuery(std::string&);
+
+#if __WORDSIZE != 64
+		static long long int atoll(const char* s);
+#endif
 
     private:
 
@@ -777,6 +781,27 @@ namespace storage
         }
         return items;        
     }
+
+#if __WORDSIZE != 64
+	// This code comes from http://www.koders.com/c/fid41B415AF8E97572E9336D135F2329BD2D56E1B07.aspx
+    template <class T, class P, class C>
+	long long int ActiveRecord<T, P, C>::atoll(const char* s) 
+	{
+	  long long int v = 0;
+	  int sign = 1;
+	  while(*s == ' ' || (unsigned int)(*s - 9) < 5u) ++s;
+	  switch (*s) 
+	  {
+		  case '-': sign=-1;
+		  case '+': ++s;
+	  }
+	  while ((unsigned int) (*s - '0') < 10u) 
+	  {
+		v = v * 10 + *s - '0'; ++s;
+	  }
+	  return sign == -1 ? -v : v;
+	}
+#endif
 }
 
 #endif /* ACTIVERECORD_H_ */
