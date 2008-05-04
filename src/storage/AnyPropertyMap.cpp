@@ -1,3 +1,22 @@
+/*
+ * Rem - Requirements and Entity Modeler = UML + AOP + Open Source + Cross Platform
+ * Copyright (C) 2008 Adrian Kosmaczewski - http://remproject.org/
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 /*!
  * \file AnyPropertyMap.cpp
  *
@@ -18,7 +37,8 @@
 
 /*!
  * \namespace storage
- * Insert a description for the namespace here
+ * Holds the classes used to store instances in SQLite files, allowing them
+ * to be chained among them, using a simple syntax in class declarations.
  */
 namespace storage
 {
@@ -73,6 +93,47 @@ namespace storage
     const unsigned int AnyPropertyMap::count() const
     {
         return (unsigned int)_map.size();
+    }
+
+    void AnyPropertyMap::addStringProperty(const std::string& key)
+    {
+        if (!hasProperty(key))
+        {
+            setString(key, "");
+        }
+    }
+
+    void AnyPropertyMap::addIntegerProperty(const std::string& key)
+    {
+        if (!hasProperty(key))
+        {
+            setInteger(key, 0);
+        }
+    }
+
+    void AnyPropertyMap::addBooleanProperty(const std::string& key)
+    {
+        if (!hasProperty(key))
+        {
+            setBoolean(key, false);
+        }
+    }
+
+    void AnyPropertyMap::addDoubleProperty(const std::string& key)
+    {
+        if (!hasProperty(key))
+        {
+            setDouble(key, 0.0);
+        }
+    }
+    
+    void AnyPropertyMap::addDateTimeProperty(const std::string& key)
+    {
+        if (!hasProperty(key))
+        {
+            Poco::DateTime now;
+            setDateTime(key, now);
+        }
     }
     
     void AnyPropertyMap::setString(const std::string& key, const std::string& value)

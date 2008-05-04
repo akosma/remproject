@@ -1,3 +1,22 @@
+/*
+ * Rem - Requirements and Entity Modeler = UML + AOP + Open Source + Cross Platform
+ * Copyright (C) 2008 Adrian Kosmaczewski - http://remproject.org/
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 /*!
  * \file ActiveRecordTest.cpp
  *
@@ -132,12 +151,10 @@ namespace tests
         Element& elem0 = elements->at(0);
         Element& elem1 = elements->at(1);
 
-        CPPUNIT_ASSERT(!elem0.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
 
-        CPPUNIT_ASSERT(elem1.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.getString("class"));
         CPPUNIT_ASSERT(!elem1.isDirty());
         CPPUNIT_ASSERT(!elem1.isNew());
@@ -149,7 +166,6 @@ namespace tests
     {
         Element* elem = ActiveRecord<Element>::findById(1);
         
-        CPPUNIT_ASSERT(elem->getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
@@ -160,15 +176,24 @@ namespace tests
     void ActiveRecordTest::testCanUseConditionsToFindAnItem()
     {
         std::string name("peter");
-        AnyPropertyMap conditions;
-        conditions.setString("name", name);
-        conditions.setBoolean("valid", true);
-        std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(conditions);
         
-        CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());
+        AnyPropertyMap invalidConditions;
+        invalidConditions.setString("name", name);
+        invalidConditions.setBoolean("valid", true);
+        std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(invalidConditions);
+        
+        CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
+        
+        delete elements;
+        
+        AnyPropertyMap validConditions;
+        validConditions.setString("name", name);
+        elements = ActiveRecord<Element>::findByCondition(validConditions);
+        
+        CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());        
+        
         Element& elem0 = elements->at(0);
 
-        CPPUNIT_ASSERT(elem0.getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
@@ -186,7 +211,6 @@ namespace tests
     {
         Element* elem = ActiveRecord<Element>::findById(1);
         
-        CPPUNIT_ASSERT(elem->getBoolean("valid"));
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());

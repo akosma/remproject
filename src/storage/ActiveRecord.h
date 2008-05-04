@@ -1,7 +1,26 @@
+/*
+ * Rem - Requirements and Entity Modeler = UML + AOP + Open Source + Cross Platform
+ * Copyright (C) 2008 Adrian Kosmaczewski - http://remproject.org/
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 /*!
  * \file ActiveRecord.h
  *
- * Contains the interface of the storage::ActiveRecord class.
+ * Contains the interface and implementation of the storage::ActiveRecord template class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -33,7 +52,8 @@
 
 /*!
  * \namespace storage
- * Insert a description for the namespace here
+ * Holds the classes used to store instances in SQLite files, allowing them
+ * to be chained among them, using a simple syntax in class declarations.
  */
 namespace storage
 {
@@ -111,7 +131,7 @@ namespace storage
          * 
          * \param rhs The instance to copy from ("right hand side").
          */
-        ActiveRecord(const ActiveRecord& rhs);
+        ActiveRecord(const ActiveRecord&);
 
         /*!
          *  ActiveRecord virtual destructor.
@@ -123,7 +143,7 @@ namespace storage
          * 
          * \param rhs The instance to copy from ("right hand side").
          */
-        ActiveRecord& operator=(const ActiveRecord& rhs);
+        ActiveRecord& operator=(const ActiveRecord&);
 
         /*!
          * Returns a value indicating if the current instance has been
@@ -163,11 +183,11 @@ namespace storage
         
         void destroy();
         static void removeAll();
-        static void remove(const ID id);
+        static void remove(const ID);
 
         static std::vector<T>* findAll();
         static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
-        static T* findById(const ID id);
+        static T* findById(const ID);
 
         void setString(const std::string&, const std::string&);
         void setInteger(const std::string&, const int);
@@ -198,6 +218,8 @@ namespace storage
         void addBooleanProperty(const std::string&);
         void addDoubleProperty(const std::string&);
         void addDateTimeProperty(const std::string&);
+        
+        virtual void createSchemaStructure() = 0;
 
     private:
         /*!
@@ -352,47 +374,31 @@ namespace storage
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::addStringProperty(const std::string& key)
     {
-        if (!_data.hasProperty(key))
-        {
-            _data.setString(key, "");
-        }
+        _data.addStringProperty(key);
     }
 
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::addIntegerProperty(const std::string& key)
     {
-        if (!_data.hasProperty(key))
-        {
-            _data.setInteger(key, 0);
-        }
+        _data.addIntegerProperty(key);
     }
 
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::addBooleanProperty(const std::string& key)
     {
-        if (!_data.hasProperty(key))
-        {
-            _data.setBoolean(key, false);
-        }
+        _data.addBooleanProperty(key);
     }
 
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::addDoubleProperty(const std::string& key)
     {
-        if (!_data.hasProperty(key))
-        {
-            _data.setDouble(key, 0.0);
-        }
+        _data.addDoubleProperty(key);
     }
     
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::addDateTimeProperty(const std::string& key)
     {
-        if (!_data.hasProperty(key))
-        {
-            Poco::DateTime now;
-            _data.setDateTime(key, now);
-        }
+        _data.addDateTimeProperty(key);
     }
     
     template <class T, class P, class C>
@@ -492,7 +498,13 @@ namespace storage
         bool ok = wrapper.open();
         if (!wrapper.tableExists(T::getTableName()))
         {
+            // Ask the subclass to create its own structure
+            createSchemaStructure();
+            
+            // Add some more required properties
             addIntegerProperty(P::getParentColumn());
+            addStringProperty("class");
+            addStringProperty("name");
             addDateTimeProperty("created_on");
             addDateTimeProperty("updated_on");
             _data.createPrimaryKey("id");
