@@ -30,6 +30,5 @@ cmake ../src
 make
 
 # Launch the tests
-cd bin
 ctest
 cd ..
