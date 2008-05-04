@@ -106,7 +106,7 @@ namespace storage
      * 
      * \return A boolean value; true in case of success, false otherwise.
      */
-    bool SQLiteWrapper::open()
+    const bool SQLiteWrapper::open()
     {
         _resultCode = sqlite3_open(_fileName.c_str(), &_db);
         if(_resultCode)
@@ -133,7 +133,7 @@ namespace storage
      * 
      * \return A boolean value; true in case of success, false otherwise.
      */
-    bool SQLiteWrapper::executeQuery(const std::string& query)
+    const bool SQLiteWrapper::executeQuery(const std::string& query)
     {
         char* error;
         char** resultSet;
@@ -203,9 +203,9 @@ namespace storage
     /*!
      * Returns the ID of the last element inserted or updated in the database.
      * 
-     * \return A long long value (very long!)
+     * \return A ID value (very long!)
      */
-    const long long SQLiteWrapper::getLastRowId() const
+    const ID SQLiteWrapper::getLastRowId() const
     {
         return _lastRowId;
     }
@@ -264,14 +264,25 @@ namespace storage
     {
         return _data;
     }
-    
+
+    /*!
+     * Tests whether the table passed as parameter exists in the database.
+     *
+     * \param tableName The name of the table being tested.
+     * 
+     * \return A boolean stating whether the table exists (true) or not (false)
+     */
     const bool SQLiteWrapper::tableExists(const std::string& tableName)
     {
+        // This method uses the "table_info" PRAGMA command described here:
+        // http://www.sqlite.org/pragma.html
         std::stringstream query;
         query << "PRAGMA table_info(\"";
         query << tableName;
         query << "\");";
 
+        // This method does not use the "executeQuery()" method to
+        // avoid modifying the internal state of the current SQLiteWrapper instance.
         char* error;
         char** resultSet;
         int numRows;
@@ -288,8 +299,18 @@ namespace storage
         return numRows > 0;
     }
 
-    std::map<std::string, std::string> SQLiteWrapper::getTableSchema(const std::string& tableName)
+    /*!
+     * Returns a map with the name and type of the columns of the table
+     * whose name is passed as parameter.
+     * 
+     * \param tableName The name of the table whose schema is sought.
+     *
+     * \return An std::map instance with pairs representing: [column name = column type]
+     */
+    const std::map<std::string, std::string> SQLiteWrapper::getTableSchema(const std::string& tableName)
     {
+        // This method uses the "table_info" PRAGMA command described here:
+        // http://www.sqlite.org/pragma.html
         std::stringstream query;
         query << "PRAGMA table_info(\"";
         query << tableName;

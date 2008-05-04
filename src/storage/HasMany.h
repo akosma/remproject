@@ -47,50 +47,103 @@ namespace storage
     /*!
      * \class HasMany
      *
-     *  
+     * Used by ActiveRecord subclasses to create a simple relationship between an
+     * instance and its related children. This template class is closely related to
+     * the BelongsTo template class.
      */
     template <class C, class P>
     class HasMany
     {
     public:
     
-        typedef std::map<std::string, C*> InternalMap;
-
         /*!
          *  HasMany constructor.
          */
         HasMany();
-        
+
+        /*!
+         * Copy constructor.
+         *
+         * \param rhs The instance to copy values from.
+         */
         HasMany(const HasMany&);
 
         /*!
-         *  HasMany virtual destructor.
+         *  Virtual destructor.
          */
         virtual ~HasMany();
         
+        /*!
+         * Assignment operator.
+         *
+         * \param rhs The instance to copy values from.
+         * 
+         * \return A reference to the current instance.
+         */
         HasMany& operator=(const HasMany&);
 
-        const bool isEmpty() const;
+        /*!
+         * Returns a boolean value stating whether the current instance 
+         * has children elements in it.
+         *
+         * \return A boolean value stating whether there are children (true) or not (false)
+         */
+        const bool hasChildren() const;
 
+        /*!
+         * Adds the pointer passed as parameter to the collection of child instances.
+         *
+         * \param child The pointer to add to the children collection.
+         */
         void addChild(C*);
-        
+
+        /*!
+         * Returns the number of children associated to the current instance.
+         *
+         * \return The number of children.
+         */
         const int getChildrenCount() const;
         
+        /*!
+         * Returns the child whose name is passed as parameter.
+         *
+         * \param name The name of the child being sought.
+         *
+         * \return A pointer to the instance, or NULL if none was found.
+         */
         C* getChild(const std::string&);
-        
+
+        /*!
+         * Removes the child whose name is passed as parameter.
+         *
+         * \param name The name of the child to be deleted.
+         */
         void removeChild(const std::string&);
         
+        /*!
+         * Removes all the child elements associated to the current instance.
+         */
         void removeAllChildren();
         
+        /*!
+         * Saves all the child elements associated to the current instance.
+         */
         void saveChildren();
 
     private:
+        //! Shortcut to make code more readable.
+        typedef std::map<std::string, C*> InternalMap;
+
+    private:
+        //! The children objects related to the current instance.
         InternalMap _children;
+        
+        //! An internal flag used when the current instance is being deleted.
         bool _beingDeleted;
     };
 
     /*!
-     * HasMany<C, P> Constructor.
+     * HasMany constructor.
      */
     template <class C, class P>
     HasMany<C, P>::HasMany()
@@ -98,14 +151,26 @@ namespace storage
     , _beingDeleted(false)
     {
     }
-    
+
+    /*!
+     * Copy constructor.
+     *
+     * \param rhs The instance to copy values from.
+     */
     template <class C, class P>
     HasMany<C, P>::HasMany(const HasMany& rhs)
     : _children()
     , _beingDeleted(false)
     {
     }
-    
+
+    /*!
+     * Assignment operator.
+     *
+     * \param rhs The instance to copy values from.
+     * 
+     * \return A reference to the current instance.
+     */
     template <class C, class P>
     HasMany<C, P>& HasMany<C, P>::operator=(const HasMany& rhs)
     {
@@ -113,7 +178,7 @@ namespace storage
     }
     
     /*!
-     * HasMany<C, P> Virtual destructor.
+     * Virtual destructor.
      */
     template <class C, class P>
     HasMany<C, P>::~HasMany()
@@ -123,13 +188,24 @@ namespace storage
         _beingDeleted = true;
         this->removeAllChildren();
     }
-    
+
+    /*!
+     * Returns a boolean value stating whether the current instance 
+     * has children elements in it.
+     *
+     * \return A boolean value stating whether there are children (true) or not (false)
+     */
     template <class C, class P>
-    const bool HasMany<C, P>::isEmpty() const
+    const bool HasMany<C, P>::hasChildren() const
     {
-        return _children.empty();
+        return !_children.empty();
     }
-    
+
+    /*!
+     * Adds the pointer passed as parameter to the collection of child instances.
+     *
+     * \param child The pointer to add to the children collection.
+     */
     template <class C, class P>
     void HasMany<C, P>::addChild(C* child)
     {
@@ -152,19 +228,36 @@ namespace storage
             dynamic_cast<P*>(this)->setDirty();
         }
     }
-    
+
+    /*!
+     * Returns the number of children associated to the current instance.
+     *
+     * \return The number of children.
+     */
     template <class C, class P>
     const int HasMany<C, P>::getChildrenCount() const
     {
         return _children.size();
     }
-    
+
+    /*!
+     * Returns the child whose name is passed as parameter.
+     *
+     * \param name The name of the child being sought.
+     *
+     * \return A pointer to the instance, or NULL if none was found.
+     */
     template <class C, class P>
     C* HasMany<C, P>::getChild(const std::string& name)
     {
         return _children[name];
     }
-    
+
+    /*!
+     * Removes the child whose name is passed as parameter.
+     *
+     * \param name The name of the child to be deleted.
+     */
     template <class C, class P>
     void HasMany<C, P>::removeChild(const std::string& name)
     {
@@ -177,7 +270,10 @@ namespace storage
             dynamic_cast<P*>(this)->setDirty();
         }
     }
-    
+
+    /*!
+     * Removes all the child elements associated to the current instance.
+     */
     template <class C, class P>
     void HasMany<C, P>::removeAllChildren()
     {
@@ -202,6 +298,9 @@ namespace storage
         }
     }
     
+    /*!
+     * Saves all the child elements associated to the current instance.
+     */
     template <class C, class P>
     void HasMany<C, P>::saveChildren()
     {

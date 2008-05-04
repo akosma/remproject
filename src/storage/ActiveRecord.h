@@ -57,17 +57,6 @@
  */
 namespace storage
 {
-    //! Represents the ID stored in the database for each ActiveRecord instance.
-    typedef long long ID;
-
-    /*!
-     * Provides the default value given to
-     * 
-     * \li New instances (those that have not yet been saved in database
-     * \li Instances that failed to be saved in the database.
-     */
-    const ID DEFAULT_ID = -1;
-
     class NoParent
     {
     public:

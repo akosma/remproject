@@ -91,7 +91,7 @@ namespace tests
         Diagram* diagram = new Diagram(diagramClassName);
         diagram->setName(diagramName);
         CPPUNIT_ASSERT_EQUAL(diagramName, diagram->getName());
-        CPPUNIT_ASSERT(diagram->isEmpty());
+        CPPUNIT_ASSERT(!diagram->hasChildren());
         CPPUNIT_ASSERT_EQUAL(0, diagram->getChildrenCount());
 
         Element* actor1 = new Element(className);

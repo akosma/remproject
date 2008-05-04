@@ -88,7 +88,7 @@ namespace tests
         std::string diagramClassName("usecase");
 
         Project project;
-        CPPUNIT_ASSERT(project.isEmpty());
+        CPPUNIT_ASSERT(!project.hasChildren());
         
         Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
@@ -114,7 +114,7 @@ namespace tests
 
         project.removeChild(second);
         CPPUNIT_ASSERT_EQUAL(0, project.getChildrenCount());
-        CPPUNIT_ASSERT(project.isEmpty());
+        CPPUNIT_ASSERT(!project.hasChildren());
 
         // Do not do the following:
         // delete firstDiagram;
@@ -130,7 +130,7 @@ namespace tests
         std::string diagramClassName("usecase");
 
         Project project;
-        CPPUNIT_ASSERT(project.isEmpty());
+        CPPUNIT_ASSERT(!project.hasChildren());
         
         Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);

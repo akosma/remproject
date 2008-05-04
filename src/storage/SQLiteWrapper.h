@@ -46,6 +46,17 @@
  */
 namespace storage
 {
+    //! Represents the ID stored in the database for each ActiveRecord instance.
+    typedef long long ID;
+
+    /*!
+     * Provides the default value given to
+     * 
+     * \li New instances (those that have not yet been saved in database
+     * \li Instances that failed to be saved in the database.
+     */
+    const ID DEFAULT_ID = -1;
+
     /*!
      * \class SQLiteWrapper
      * Proxy class used to access the SQLite database where all the information
@@ -73,7 +84,7 @@ namespace storage
          * 
          * \param fileName A string with the file name.
          */
-        static void setFileName(const std::string& fileName);
+        static void setFileName(const std::string&);
 
         /*!
          * Returns the singleton instance of this class.
@@ -89,7 +100,7 @@ namespace storage
          * 
          * \return A boolean value; true in case of success, false otherwise.
          */
-        bool open();
+        const bool open();
 
         /*!
          * This is the heart of the class; this method takes a SQL query
@@ -100,7 +111,7 @@ namespace storage
          * 
          * \return A boolean value; true in case of success, false otherwise.
          */
-        bool executeQuery(const std::string& query);
+        const bool executeQuery(const std::string&);
 
         /*!
          * Closes the connection to the SQLite database. Clients must call
@@ -115,7 +126,7 @@ namespace storage
          * 
          * \return A long long value (very long!)
          */
-        const long long getLastRowId() const;
+        const ID getLastRowId() const;
 
         /*!
          * Returns the last result code given by SQLite upon execution
@@ -157,9 +168,24 @@ namespace storage
          */
         const std::vector<std::string>& getData() const;
         
+        /*!
+         * Tests whether the table passed as parameter exists in the database.
+         *
+         * \param tableName The name of the table being tested.
+         * 
+         * \return A boolean stating whether the table exists (true) or not (false)
+         */
         const bool tableExists(const std::string&);
         
-        std::map<std::string, std::string> getTableSchema(const std::string&);
+        /*!
+         * Returns a map with the name and type of the columns of the table
+         * whose name is passed as parameter.
+         * 
+         * \param tableName The name of the table whose schema is sought.
+         *
+         * \return An std::map instance with pairs representing: [column name = column type]
+         */
+        const std::map<std::string, std::string> getTableSchema(const std::string&);
 
     private:
 
@@ -215,7 +241,7 @@ namespace storage
         int _numColumns;
 
         //! The ID of the last element inserted or updated in the database.
-        long long _lastRowId;
+        ID _lastRowId;
 
         //! An error message returned by SQLite.
         std::string _errorMsg;

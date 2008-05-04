@@ -92,6 +92,8 @@ namespace storage
          * Assignment operator.
          *
          * \param rhs A Property instance to copy name and values from.
+         * 
+         * \return A reference to the current instance.
          */
         Property<N, V>& operator=(const Property<N, V>&);
 
@@ -208,6 +210,8 @@ namespace storage
      * Assignment operator.
      *
      * \param rhs A Property instance to copy name and values from.
+     *
+     * \return A reference to the current instance.
      */
     template <class N, class V>  
     Property<N, V>& Property<N, V>::operator=(const Property<N, V>& rhs)
