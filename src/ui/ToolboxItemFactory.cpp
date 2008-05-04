@@ -70,35 +70,38 @@ namespace ui
     ToolbarItemComponent* ToolboxItemFactory::createItem(const int itemId)
     {
         Font font("Helvetica", 12.0, 0);
+        ToolbarItemComponent* component = NULL;
+        // The brackets for the 'case' statements are required as explained here:
+        // http://theory.uwinnipeg.ca/gnu/libg++/g++FAQ_42.html
         switch (itemId)
         {
         case arrow:
+        {
             DrawableText* text1 = new DrawableText();
             text1->setColour(Colours::black);
             text1->setText("arrow", font);
-            ToolbarButton* button1 = new ToolbarButton(arrow, "arrow", text1, text1);
-            button1->setBounds(0, 0, 50, 50);
-            return button1;
-
+            component = new ToolbarButton(arrow, "arrow", text1, text1);
+            component->setBounds(0, 0, 50, 50);
+        }
         case actor:
+        {
             DrawableText* text2 = new DrawableText();
             text2->setColour(Colours::black);
             text2->setText("actor", font);
-            ToolbarButton* button2 = new ToolbarButton(actor, "actor", text2, text2);
-            button2->setBounds(0, 50, 50, 50);
-            return button2;
-
+            component = new ToolbarButton(actor, "actor", text2, text2);
+            component->setBounds(0, 50, 50, 50);
+        }
         case use_case:
+        {
             DrawableText* text3 = new DrawableText();
             text3->setColour(Colours::black);
             text3->setText("use case", font);
-            ToolbarButton* button3 = new ToolbarButton(use_case, "use case", text3, text3);
-            button3->setBounds(0, 100, 50, 50);
-            return button3;
-
+            component = new ToolbarButton(use_case, "use case", text3, text3);
+            component->setBounds(0, 100, 50, 50);
+        }
         default:
             break;
         }
-        return NULL;
+        return component;
     }
 }

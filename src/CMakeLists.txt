@@ -312,14 +312,18 @@ ELSE (WIN32)
             )
             # Header files are located in these directories
             INCLUDE_DIRECTORIES (
+                "/usr/local/include/"
                 "/usr/include"
                 ${rem_SOURCE_DIR}/../lib/juce
+                ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
             )
         
             # Libraries are located in these directories
             LINK_DIRECTORIES (
+                "/usr/local/lib/"
                 "/usr/X11R6/lib/"
                 ${rem_SOURCE_DIR}/../lib/juce/bin
+                ${rem_SOURCE_DIR}/../lib/poco/lib/Linux/i686/
             )
             
             ADD_DEFINITIONS(
@@ -330,12 +334,25 @@ ELSE (WIN32)
                 ${Rem_SRCS}
             )
 
+            ADD_EXECUTABLE (remtest 
+                ${remtests_SRCS}
+            )
+
             # These are the symbols for the linker
             TARGET_LINK_LIBRARIES(Rem 
                 ${EXTRA_LIBS}
                 juce
             )
-        
+
+            TARGET_LINK_LIBRARIES(remtest
+                cppunit 
+                sqlite3 
+                PocoFoundation
+            )
+
+            ENABLE_TESTING()
+            ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
+
         ENDIF (APPLE)
     ENDIF (UNIX)
 ENDIF (WIN32)
