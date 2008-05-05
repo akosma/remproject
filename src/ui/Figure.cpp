@@ -155,7 +155,7 @@ namespace ui
         const bool isRightOf = (other->getX() + other->getWidth()) < this->getX();
         const bool isLeftOf = (this->getX() + this->getWidth()) < other->getX();
         
-        Point* point;
+        Point* point = NULL;
         
         if (isBelow)
         {

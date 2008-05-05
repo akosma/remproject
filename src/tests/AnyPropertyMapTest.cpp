@@ -35,6 +35,10 @@
 
 #include <sstream>
 
+#if WIN32
+#include <new>
+#endif
+
 #include <Poco/Exception.h>
 #include <Poco/DateTime.h>
 
@@ -164,10 +168,19 @@ namespace tests
         {
             std::string value = map.getString(name1);
         }
+#if WIN32
+		catch(std::bad_alloc& e)
+		{
+			std::string expectedMessage("bad allocation");
+			std::string message(e.what());
+			CPPUNIT_ASSERT_EQUAL(expectedMessage, message);
+		}
+#else
         catch(Poco::BadCastException& e)
         {
             CPPUNIT_ASSERT_EQUAL(e.message(), std::string("RefAnyCast: Failed to convert between const Any types"));
         }
+#endif
     }
     
     void AnyPropertyMapTest::testCanUseCopyConstructorSafely()
