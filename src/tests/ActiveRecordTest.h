@@ -62,6 +62,7 @@ namespace tests
         CPPUNIT_TEST(testObjectCanSaveItsChildren);
         CPPUNIT_TEST(testSavedObjectsHaveCreationAndUpdateTime);
         CPPUNIT_TEST(testSettingAChildDirtySetsTheParentDirtyToo);
+        CPPUNIT_TEST(testObjectsCannotBeAttackedWithSqlInjection);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -101,6 +102,7 @@ namespace tests
         void testObjectCanSaveItsChildren();
         void testSavedObjectsHaveCreationAndUpdateTime();
         void testSettingAChildDirtySetsTheParentDirtyToo();
+        void testObjectsCannotBeAttackedWithSqlInjection();
     };
 }
 

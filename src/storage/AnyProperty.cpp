@@ -35,6 +35,8 @@
 #include <typeinfo>
 #include <sstream>
 
+#include <Poco/String.h>
+
 /*!
  * \namespace storage
  * Holds the classes used to store instances in SQLite files, allowing them
@@ -194,8 +196,11 @@ namespace storage
         std::stringstream output;
         if(type == typeid(std::string))
         {
+            // This prevents SQL-injection attacks or corruptions on the file.
+            std::string doubleQuote("'");
+            std::string singleQuote("''");
             output << "'";
-            output << getString();
+            output << Poco::replace<std::string>(getString(), doubleQuote, singleQuote);
             output << "'";
         }
         if(type == typeid(int))

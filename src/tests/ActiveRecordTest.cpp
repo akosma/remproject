@@ -397,4 +397,37 @@ namespace tests
         delete project;
         delete diagram;
     }
+    
+    void ActiveRecordTest::testObjectsCannotBeAttackedWithSqlInjection()
+    {
+        std::string projectName("Robert O'Hara");
+        std::string diagramClassName("William \"Braveheart\" Gibson");
+        std::string diagramName("You can't guess what users will insert in the \"database\" file");
+        
+        Project* project = new Project();
+        project->setName(projectName);
+        Diagram* diagram = new Diagram(diagramClassName);
+        diagram->setName(diagramName);
+        project->addChild(diagram);
+        
+        project->save();
+
+        Project* retrievedProject = ActiveRecord<Project>::findById(project->getId());
+        CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), project->getName());
+        CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
+        
+        AnyPropertyMap condition;
+        condition.setInteger("projects_id", project->getId());
+        std::vector<Diagram>* diagrams = ActiveRecord<Diagram>::findByCondition(condition);
+        CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());
+
+        Diagram& retrievedDiagram = diagrams->at(0);
+        CPPUNIT_ASSERT_EQUAL(retrievedDiagram.getName(), diagram->getName());
+        CPPUNIT_ASSERT_EQUAL(retrievedDiagram.getName(), diagramName);
+        
+        delete diagram;
+        delete project;
+        delete diagrams;
+        delete retrievedProject;
+    }
 }
