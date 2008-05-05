@@ -64,7 +64,7 @@ namespace storage
      * to be related to a "parent" class. It implements many methods
      * required during template instantiation at compile-time.
      */
-	class NoParent
+    class NoParent
     {
     public:
         /*!
@@ -426,7 +426,7 @@ namespace storage
          *
          * \return A long long value (64-bit long integer)
          */
-		static long long int atoll(const char*);
+        static long long int atoll(const char*);
 #endif
 
     private:
@@ -1105,22 +1105,22 @@ namespace storage
      * \return A long long value (64-bit long integer)
      */
     template <class T, class P, class C>
-	long long int ActiveRecord<T, P, C>::atoll(const char* s) 
-	{
-	  long long int v = 0;
-	  int sign = 1;
-	  while(*s == ' ' || (unsigned int)(*s - 9) < 5u) ++s;
-	  switch (*s) 
-	  {
-		  case '-': sign=-1;
-		  case '+': ++s;
-	  }
-	  while ((unsigned int) (*s - '0') < 10u) 
-	  {
-		v = v * 10 + *s - '0'; ++s;
-	  }
-	  return sign == -1 ? -v : v;
-	}
+    long long int ActiveRecord<T, P, C>::atoll(const char* s) 
+    {
+        long long int v = 0;
+        int sign = 1;
+        while(*s == ' ' || (unsigned int)(*s - 9) < 5u) ++s;
+        switch (*s) 
+        {
+            case '-': sign=-1;
+            case '+': ++s;
+        }
+        while ((unsigned int) (*s - '0') < 10u) 
+        {
+            v = v * 10 + *s - '0'; ++s;
+        }
+        return sign == -1 ? -v : v;
+    }
 #endif
 }
 
