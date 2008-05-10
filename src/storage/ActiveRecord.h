@@ -180,10 +180,11 @@ namespace storage
         }
     };
     
+    //! Base class for all objects stored in SQLite files.
     /*!
      * \class ActiveRecord
      *
-     * Base template class for all objects that can be saved into a SQLite class.
+     * Base template class for all objects that can be saved into a SQLite file.
      * Its design is heavily inspired by the classes of the same name in the
      * Ruby on Rails web development framework:
      * http://rubyonrails.org/
@@ -195,10 +196,8 @@ namespace storage
                        , public C
     {
     public:
-        /** \name ConstructorsDestructor Constructors, destructor and assignment operator
-        }**/
-        //@{
-
+        
+        //! Default constructor
         /*!
          * Default constructor. Sets the ID to DEFAULT_ID. Used
          * to create instances that do not exist yet in the database.
@@ -207,6 +206,7 @@ namespace storage
          */
         ActiveRecord(const std::string&);
         
+        //! Constructor used for instances retrieved from the database
         /*!
          * Constructor. Used to create instances already existing in the database.
          * This constructor is called by the ActiveRecord::getVectorByQuery() method.
@@ -235,13 +235,6 @@ namespace storage
          * \param rhs The instance to copy from ("right hand side").
          */
         ActiveRecord& operator=(const ActiveRecord&);
-
-        //@}
-    
-    public:
-        /** \name DynamicObjectMethods Instance methods helping to work with dynamic objects.
-        }**/
-        //@{
 
         /*!
          * Sets the string value of the property whose name is the first parameter.
@@ -328,16 +321,6 @@ namespace storage
          */
         const Poco::DateTime getDateTime(const std::string&);
 
-    protected:
-        void addStringProperty(const std::string&);
-        void addIntegerProperty(const std::string&);
-        void addBooleanProperty(const std::string&);
-        void addDoubleProperty(const std::string&);
-        void addDateTimeProperty(const std::string&);
-
-        //@}
-
-    public:
         /*!
          * Returns a value indicating if the current instance has been
          * modified since it was retrieved from the database.
@@ -391,20 +374,26 @@ namespace storage
         static T* findById(const ID);
 
     protected:
+        void addStringProperty(const std::string&);
+        void addIntegerProperty(const std::string&);
+        void addBooleanProperty(const std::string&);
+        void addDoubleProperty(const std::string&);
+        void addDateTimeProperty(const std::string&);
+
         virtual void createSchemaStructure() = 0;
 
     private:
         /*!
-         * Used to store the state in the database for the first time, using the
-         * "INSERT" SQL statement.
-         * 
-         * \return The ID of the current instance, as provided by SQLite.
+         * Called by "save()" on objects that do not exist yet in the database.
+         * If required, this method will create the database tables for the object.
+         *
+         * \return The ID of the instance that has been inserted, or DEFAULT_ID 
+         * if the instance could not be inserted propertly.
          */
         const ID insert();
 
         /*!
-         * Used to store the state in the database afterwards, using the
-         * "UPDATE" SQL statement.
+         * Called by "save()" on objects that already exist on the database.
          */
         void update();
         
@@ -446,8 +435,7 @@ namespace storage
         std::string _className;
     };
     
-    /** \name ConstructorsDestructor Constructors, destructor and assignment operator
-    }**/
+    /** \name ConstructorsDestructor Constructors, destructor and assignment operator **/
     //@{
 
     /*!
@@ -537,8 +525,7 @@ namespace storage
     
     //@}
     
-    /** \name DynamicObjectMethods Instance methods helping to work with dynamic objects.
-    }**/
+    /** \name DynamicObjectMethods Instance methods helping to work with dynamic objects. **/
     //@{
     
     /*!
@@ -703,8 +690,7 @@ namespace storage
 
     //@}
     
-    /** \name SpecialProperties Getters and setters for some special properties
-    }**/
+    /** \name SpecialProperties Getters and setters for some special properties **/
     //@{
     
     template <class T, class P, class C>
@@ -804,7 +790,10 @@ namespace storage
         }        
         C::saveChildren();
     }
-        
+
+    /*!
+     * Called by "save()" on objects that already exist on the database.
+     */
     template <class T, class P, class C>
     void ActiveRecord<T, P, C>::update()
     {
@@ -818,6 +807,13 @@ namespace storage
         wrapper.close();
     }
     
+    /*!
+     * Called by "save()" on objects that do not exist yet in the database.
+     * If required, this method will create the database tables for the object.
+     *
+     * \return The ID of the instance that has been inserted, or DEFAULT_ID 
+     * if the instance could not be inserted propertly.
+     */
     template <class T, class P, class C>
     const ID ActiveRecord<T, P, C>::insert()
     {

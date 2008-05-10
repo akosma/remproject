@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Implementation of the Diagram class
 /*!
  * \file Diagram.cpp
  *
@@ -43,14 +44,16 @@
 
 using namespace storage;
 
+//! Model classes for UML projects
 /*!
  * \namespace metamodel
  * Holds the classes representing the different parts of an UML project.
  */
 namespace metamodel
 {
+    //! Default constructor
     /*!
-     * Diagram Constructor.
+     *  Diagram constructor.
      * 
      * \param className The name of the subclass of the current instance.
      */
@@ -59,6 +62,7 @@ namespace metamodel
     {
     }
 
+    //! Constructor used for instances retrieved from a file
     /*!
      * Constructor required by ActiveRecord, to instantiate objects
      * that are retrieved from the SQLite file.
@@ -72,22 +76,15 @@ namespace metamodel
     {
     }
 
+    //! Virtual destructor
     /*!
-     * Diagram Virtual destructor.
+     *  Diagram virtual destructor.
      */
     Diagram::~Diagram()
     {
     }
 
-    /*!
-     * Creates dynamically the complete structure of fields 
-     * needed by all the instances of this class.
-     */
-    void Diagram::createSchemaStructure()
-    {
-        addBooleanProperty("valid");
-    }
-
+    //! Get the name of the table used to store instances of this class
     /*!
      * Returns the name of the SQLite table to be used to store
      * instances of this class. This static method is required by
@@ -99,5 +96,15 @@ namespace metamodel
     {
         static std::string tableName("diagrams");
         return tableName;
+    }
+
+    //! Create all the fields required for all the instances of this class.
+    /*!
+     * Creates dynamically the complete structure of fields 
+     * needed by all the instances of this class.
+     */
+    void Diagram::createSchemaStructure()
+    {
+        addBooleanProperty("valid");
     }
 }

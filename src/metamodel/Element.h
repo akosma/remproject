@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Interface of the Element class
 /*!
  * \file Element.h
  *
@@ -50,18 +51,18 @@
 
 using namespace storage;
 
+//! Model classes for UML projects
 /*!
  * \namespace metamodel
  * Holds the classes representing the different parts of an UML project.
  */
 namespace metamodel
 {
-    /*
-     * Forward declaration of the Diagram class, used as parameter for the 
-     * template specializations in the Element class declaration.
-     */
+     // Forward declaration of the Diagram class, used as parameter for the 
+     // template specializations in the Element class declaration.
     class Diagram;
 
+    //! Parts composing a Diagram.
     /*!
      * \class Element
      *
@@ -73,6 +74,7 @@ namespace metamodel
     {
     public:
 
+        //! Default constructor
         /*!
          *  Element constructor.
          * 
@@ -80,6 +82,7 @@ namespace metamodel
          */
         Element(const std::string&);
 
+        //! Constructor used for instances retrieved from a file
         /*!
          * Constructor required by ActiveRecord, to instantiate objects
          * that are retrieved from the SQLite file.
@@ -90,11 +93,13 @@ namespace metamodel
          */
         Element(const std::string&, const storage::ID, AnyPropertyMap&);
 
+        //! Virtual destructor
         /*!
          *  Element virtual destructor.
          */
         virtual ~Element();
 
+        //! Get the name of the table used to store instances of this class
         /*!
          * Returns the name of the SQLite table to be used to store
          * instances of this class. This static method is required by
@@ -105,6 +110,8 @@ namespace metamodel
         static std::string& getTableName();
 
     protected:
+
+        //! Create all the fields required for all the instances of this class.
         /*!
          * Creates dynamically the complete structure of fields 
          * needed by all the instances of this class.

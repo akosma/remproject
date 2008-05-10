@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Implementation of the Project class
 /*!  
  * \file Project.cpp
  * 
@@ -43,14 +44,16 @@
 
 using namespace storage;
 
+//! Model classes for UML projects
 /*!
  * \namespace metamodel
  * Holds the classes representing the different parts of an UML project.
  */
 namespace metamodel
 {
+    //! Default constructor
     /*!
-     * Project Constructor. This constructor does not take parameters,
+     * Project constructor. This constructor does not take parameters,
      * since each SQLite file has one and only one Project instance.
      */
     Project::Project()
@@ -58,6 +61,7 @@ namespace metamodel
     {
     }
 
+    //! Constructor used for instances retrieved from a file
     /*!
      * Constructor required by ActiveRecord, to instantiate objects
      * that are retrieved from the SQLite file.
@@ -71,23 +75,15 @@ namespace metamodel
     {
     }
     
+    //! Virtual destructor
     /*!
-     * Project Virtual destructor.
+     * Project virtual destructor.
      */
     Project::~Project()
     {
     }
 
-    /*!
-     * Creates dynamically the complete structure of fields 
-     * needed by all the instances of this class.
-     */
-    void Project::createSchemaStructure()
-    {
-        addStringProperty("author");
-        addDoubleProperty("version");
-    }
-    
+    //! Get the name of the table used to store instances of this class
     /*!
      * Returns the name of the SQLite table to be used to store
      * instances of this class. This static method is required by
@@ -99,5 +95,16 @@ namespace metamodel
     {
         static std::string tableName("projects");
         return tableName;
+    }
+
+    //! Create all the fields required for all the instances of this class.
+    /*!
+     * Creates dynamically the complete structure of fields 
+     * needed by all the instances of this class.
+     */
+    void Project::createSchemaStructure()
+    {
+        addStringProperty("author");
+        addDoubleProperty("version");
     }
 }

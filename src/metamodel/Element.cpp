@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Implementation of the Element class
 /*!
  * \file Element.cpp
  *
@@ -43,14 +44,16 @@
 
 using namespace storage;
 
+//! Model classes for UML projects
 /*!
  * \namespace metamodel
  * Holds the classes representing the different parts of an UML project.
  */
 namespace metamodel
 {
+    //! Default constructor
     /*!
-     * Element Constructor.
+     *  Element constructor.
      * 
      * \param className The name of the subclass of the current instance.
      */
@@ -59,6 +62,7 @@ namespace metamodel
     {
     }
     
+    //! Constructor used for instances retrieved from a file
     /*!
      * Constructor required by ActiveRecord, to instantiate objects
      * that are retrieved from the SQLite file.
@@ -72,25 +76,15 @@ namespace metamodel
     {
     }
     
+    //! Virtual destructor
     /*!
-     * Element Virtual destructor.
+     *  Element virtual destructor.
      */
     Element::~Element()
     {
     }
 
-    /*!
-     * Creates dynamically the complete structure of fields 
-     * needed by all the instances of this class.
-     */
-    void Element::createSchemaStructure()
-    {
-        addIntegerProperty("x");
-        addIntegerProperty("y");
-        addIntegerProperty("width");
-        addIntegerProperty("height");
-    }
-
+    //! Get the name of the table used to store instances of this class
     /*!
      * Returns the name of the SQLite table to be used to store
      * instances of this class. This static method is required by
@@ -102,5 +96,18 @@ namespace metamodel
     {
         static std::string tableName("elements");
         return tableName;
+    }
+
+    //! Create all the fields required for all the instances of this class.
+    /*!
+     * Creates dynamically the complete structure of fields 
+     * needed by all the instances of this class.
+     */
+    void Element::createSchemaStructure()
+    {
+        addIntegerProperty("x");
+        addIntegerProperty("y");
+        addIntegerProperty("width");
+        addIntegerProperty("height");
     }
 }
