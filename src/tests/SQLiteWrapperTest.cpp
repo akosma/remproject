@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the tests::SQLiteWrapperTest class.
 /*!
  * \file SQLiteWrapperTest.cpp
  *
@@ -43,47 +44,27 @@
 #include "../storage/SQLiteWrapper.h"
 #endif
 
-using namespace storage;
+using storage::SQLiteWrapper;
 
-/*!
- * \namespace tests
- * This namespace holds the classes that derive from 
- * CppUnit::TestFixture, containing unit tests for the application.
- */
 namespace tests
 {
-    /*!
-     * Constructor.
-     */
     SQLiteWrapperTest::SQLiteWrapperTest()
     : _filename("test.db")
     {
     }
-    
-    /*!
-     * Virtual destructor.
-     */
+
     SQLiteWrapperTest::~SQLiteWrapperTest()
     {
     }
-    
-    /*!
-     * Called by CppUnit before each test.
-     */
+
     void SQLiteWrapperTest::setUp()
     {
     }
-    
-    /*!
-     * Called by CppUnit after each test.
-     */
+
     void SQLiteWrapperTest::tearDown()
     {
     }
-    
-    /*!
-     * Tests the automatic creation of a database file.
-     */
+
     void SQLiteWrapperTest::testCreateDatabase()
     {
         // Delete the file if it already exists
@@ -106,10 +87,7 @@ namespace tests
         CPPUNIT_ASSERT(fin.is_open());
         fin.close();
     }
-    
-    /*!
-     * Tests the creation of tables.
-     */
+
     void SQLiteWrapperTest::testCreateTable()
     {
         SQLiteWrapper& dal = SQLiteWrapper::get();
@@ -121,10 +99,7 @@ namespace tests
         CPPUNIT_ASSERT(dal.tableExists("test"));
         dal.close();
     }
-    
-    /*!
-     * Tests the insertion of values in the table created previously.
-     */
+
     void SQLiteWrapperTest::testInsertion()
     {
         SQLiteWrapper& dal = SQLiteWrapper::get();
@@ -138,10 +113,7 @@ namespace tests
             dal.close();
         }
     }
-    
-    /*!
-     * Tests the reading of values stored previously.
-     */
+
     void SQLiteWrapperTest::testSelect()
     {
         SQLiteWrapper& dal = SQLiteWrapper::get();

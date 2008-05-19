@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the tests::DiagramTest class.
 /*!  
  * \file DiagramTest.h
  * 
@@ -45,46 +46,27 @@
 #include "../metamodel/Diagram.h"
 #endif
 
-using namespace metamodel;
+using metamodel::Diagram;
+using metamodel::Element;
 
-/*!
- * \namespace tests
- * This namespace holds the classes that derive from 
- * CppUnit::TestFixture, containing unit tests for the application.
- */
 namespace tests
 {
-    /*!
-     * DiagramTest Constructor.
-     */
     DiagramTest::DiagramTest()
     {
     }
-    
-    /*!
-     * DiagramTest Virtual destructor.
-     */
+
     DiagramTest::~DiagramTest()
     {
     }
 
-    /*!
-     * Called by CppUnit before each test.
-     */
     void DiagramTest::setUp()
     {
     }
-    
-    /*!
-     * Called by CppUnit after each test.
-     */
+
     void DiagramTest::tearDown()
     {
     }
 
-    /*!
-     * Tests something.
-     */
     void DiagramTest::testDiagramCanHaveSeveralElements()
     {
         std::string actor1Name("actor1");

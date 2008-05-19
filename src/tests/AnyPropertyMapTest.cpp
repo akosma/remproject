@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the tests::AnyPropertyMapTest class.
 /*!
  * \file AnyPropertyMapTest.cpp
  *
@@ -46,50 +47,26 @@
 #include "../storage/AnyPropertyMap.h"
 #endif
 
-#ifndef ANYPROPERTY_H_
-#include "../storage/AnyProperty.h"
-#endif
+using storage::AnyPropertyMap;
 
-using namespace storage;
-
-/*!
- * \namespace tests
- * This namespace holds the classes that derive from 
- * CppUnit::TestFixture, containing unit tests for the application.
- */
 namespace tests
 {
-    /*!
-     * AnyPropertyMapTest Constructor.
-     */
     AnyPropertyMapTest::AnyPropertyMapTest()
     {
     }
-    
-    /*!
-     * AnyPropertyMapTest Virtual destructor.
-     */
+
     AnyPropertyMapTest::~AnyPropertyMapTest()
     {
     }
 
-    /*!
-     * Called by CppUnit before each test.
-     */
     void AnyPropertyMapTest::setUp()
     {
     }
-    
-    /*!
-     * Called by CppUnit after each test.
-     */
+
     void AnyPropertyMapTest::tearDown()
     {
     }
 
-    /*!
-     * Tests something.
-     */
     void AnyPropertyMapTest::testAddAndRetrieveProperties()
     {
         AnyPropertyMap map;

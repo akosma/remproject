@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the tests::PropertyTest class.
 /*!
  * \file PropertyTest.cpp
  *
@@ -45,46 +46,27 @@
 #include "../storage/AnyProperty.h"
 #endif
 
-using namespace storage;
+using storage::Property;
+using storage::AnyProperty;
 
-/*!
- * \namespace tests
- * This namespace holds the classes that derive from 
- * CppUnit::TestFixture, containing unit tests for the application.
- */
 namespace tests
 {
-    /*!
-     * PropertyTest Constructor.
-     */
     PropertyTest::PropertyTest()
     {
     }
-    
-    /*!
-     * PropertyTest Virtual destructor.
-     */
+
     PropertyTest::~PropertyTest()
     {
     }
 
-    /*!
-     * Called by CppUnit before each test.
-     */
     void PropertyTest::setUp()
     {
     }
-    
-    /*!
-     * Called by CppUnit after each test.
-     */
+
     void PropertyTest::tearDown()
     {
     }
 
-    /*!
-     * Tests something.
-     */
     void PropertyTest::testCanCreatePropertiesOfDifferentTypes()
     {
         std::string name1("prop1");

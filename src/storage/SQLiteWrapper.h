@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the storage::SQLiteWrapper class.
 /*!
  * \file SQLiteWrapper.h
  *
@@ -39,6 +40,7 @@
 #include <map>
 #include <sqlite3.h>
 
+//! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
  * Holds the classes used to store instances in SQLite files, allowing them
@@ -49,14 +51,16 @@ namespace storage
     //! Represents the ID stored in the database for each ActiveRecord instance.
     typedef long long ID;
 
+    //! Provides the default value given to new instances.
     /*!
-     * Provides the default value given to
+     * Provides the default value given to new instances.
      * 
      * \li New instances (those that have not yet been saved in database
      * \li Instances that failed to be saved in the database.
      */
     const ID DEFAULT_ID = -1;
 
+    //! Proxy class used to access SQLite databases.
     /*!
      * \class SQLiteWrapper
      * Proxy class used to access the SQLite database where all the information
@@ -73,11 +77,13 @@ namespace storage
     {
     public:
 
+        //! SQLiteWrapper virtual destructor.
         /*!
          *  SQLiteWrapper virtual destructor.
          */
         virtual ~SQLiteWrapper();
 
+        //! Sets the file name of the SQLite database.
         /*!
          * Sets the file name of the SQLite database. If no name is
          * given, the "untitled.db" name is used.
@@ -86,6 +92,7 @@ namespace storage
          */
         static void setFileName(const std::string&);
 
+        //! Returns the singleton instance of this class.
         /*!
          * Returns the singleton instance of this class.
          * 
@@ -93,6 +100,7 @@ namespace storage
          */
         static SQLiteWrapper& get();
 
+        //! Opens the connection to the SQLite database.
         /*!
          * Opens the connection to the SQLite database. Clients must
          * call this method before "executeQuery()" or they will get 
@@ -102,6 +110,7 @@ namespace storage
          */
         const bool open();
 
+        //! Executes the query passed as parameter.
         /*!
          * This is the heart of the class; this method takes a SQL query
          * in a std::string and sets the internal state of the class
@@ -113,6 +122,7 @@ namespace storage
          */
         const bool executeQuery(const std::string&);
 
+        //! Closes the connection to the SQLite database.
         /*!
          * Closes the connection to the SQLite database. Clients must call
          * this method when they have finished using the database file.
@@ -121,6 +131,7 @@ namespace storage
          */
         void close();
 
+        //! Returns the ID of the last element inserted or updated in the database.
         /*!
          * Returns the ID of the last element inserted or updated in the database.
          * 
@@ -128,14 +139,15 @@ namespace storage
          */
         const ID getLastRowId() const;
 
+        //! Returns the last result code given by SQLite upon execution of the last query.
         /*!
-         * Returns the last result code given by SQLite upon execution
-         * of the last query.
+         * Returns the last result code given by SQLite upon execution of the last query.
          * 
          * \return An integer value.
          */
         const int getLastResultCode() const;
 
+        //! Returns the last query executed by this instance.
         /*!
          * Returns the last query executed by this instance,
          * regardless of it being successful or not.
@@ -144,6 +156,7 @@ namespace storage
          */
         const std::string& getLastQuery() const;
 
+        //! Returns the last error message provided by SQLite.
         /*!
          * Returns the last error message provided by SQLite.
          * 
@@ -151,6 +164,7 @@ namespace storage
          */
         const std::string& getLastErrorMsg() const;
 
+        //! Returns the headers of the last resultset.
         /*!
          * Returns a const reference to a vector, holding
          * the table headers corresponding to the last resultset
@@ -160,6 +174,7 @@ namespace storage
          */
         const std::vector<std::string>& getTableHeaders() const;
 
+        //! Returns the data retrieved by the last query.
         /*!
          * Returns a const reference to a vector holding the data
          * of the last resultset retrieved from the database.
@@ -168,6 +183,7 @@ namespace storage
          */
         const std::vector<std::string>& getData() const;
         
+        //! Tests whether the table passed as parameter exists in the database.
         /*!
          * Tests whether the table passed as parameter exists in the database.
          *
@@ -177,6 +193,7 @@ namespace storage
          */
         const bool tableExists(const std::string&);
         
+        //! Returns the column names of the table passed as parameter.
         /*!
          * Returns a map with the name and type of the columns of the table
          * whose name is passed as parameter.
@@ -189,6 +206,7 @@ namespace storage
 
     private:
 
+        //! Private constructor.
         /*!
          * Private constructor. Since this class is a singleton, 
          * only the static method "get()" is used to build a unique
@@ -198,6 +216,7 @@ namespace storage
          */
         SQLiteWrapper();
 
+        //! Private copy constructor.
         /*!
          * Private copy constructor.
          * 
@@ -210,6 +229,7 @@ namespace storage
          */
         SQLiteWrapper(const SQLiteWrapper& rhs);
 
+        //! Private assignment operator.
         /*!
          * Private assignment operator.
          * 

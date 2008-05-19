@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the storage::AnyProperty class.
 /*!
  * \file AnyProperty.cpp
  *
@@ -37,16 +38,8 @@
 
 #include <Poco/String.h>
 
-/*!
- * \namespace storage
- * Holds the classes used to store instances in SQLite files, allowing them
- * to be chained among them, using a simple syntax in class declarations.
- */
 namespace storage
 {
-    /*!
-     * AnyProperty Constructor.
-     */
     AnyProperty::AnyProperty()
     : Property<std::string, Poco::Any>()
     , _isPrimaryKey(false)
@@ -84,10 +77,6 @@ namespace storage
         return *this;
     }
 
-    
-    /*!
-     * AnyProperty Virtual destructor.
-     */
     AnyProperty::~AnyProperty()
     {
     }

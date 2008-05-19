@@ -42,67 +42,32 @@
 #include "Diagram.h"
 #endif
 
-using namespace storage;
+using storage::ActiveRecord;
+using storage::BelongsTo;
+using storage::HasMany;
 
-//! Model classes for UML projects
-/*!
- * \namespace metamodel
- * Holds the classes representing the different parts of an UML project.
- */
 namespace metamodel
 {
-    //! Default constructor
-    /*!
-     *  Element constructor.
-     * 
-     * \param className The name of the subclass of the current instance.
-     */
     Element::Element(const std::string& className)
     : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className)
     {
     }
-    
-    //! Constructor used for instances retrieved from a file
-    /*!
-     * Constructor required by ActiveRecord, to instantiate objects
-     * that are retrieved from the SQLite file.
-     * 
-     * \param className The subclass name of the current instance.
-     * \param id The ID of the current instance.
-     * \param data The data of the current instance.
-     */
+
     Element::Element(const std::string& className, const storage::ID id, AnyPropertyMap& data)
     : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className, id, data)
     {
     }
-    
-    //! Virtual destructor
-    /*!
-     *  Element virtual destructor.
-     */
+
     Element::~Element()
     {
     }
 
-    //! Get the name of the table used to store instances of this class
-    /*!
-     * Returns the name of the SQLite table to be used to store
-     * instances of this class. This static method is required by
-     * the "informal protocol" of the storage::ActiveRecord subsystem.
-     *
-     * \return A string with the name of the database table.
-     */
     std::string& Element::getTableName()
     {
         static std::string tableName("elements");
         return tableName;
     }
 
-    //! Create all the fields required for all the instances of this class.
-    /*!
-     * Creates dynamically the complete structure of fields 
-     * needed by all the instances of this class.
-     */
     void Element::createSchemaStructure()
     {
         addIntegerProperty("x");

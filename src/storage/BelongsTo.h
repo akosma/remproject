@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface and implementation of the storage::BelongsTo template class.
 /*!
  * \file BelongsTo.h
  *
@@ -40,6 +41,7 @@
 #include "../storage/ActiveRecord.h"
 #endif
 
+//! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
  * Holds the classes used to store instances in SQLite files, allowing them

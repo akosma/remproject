@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface and implementation of the storage::HasMany template class.
 /*!
  * \file HasMany.h
  *
@@ -36,7 +37,17 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
+#ifndef ANYPROPERTYMAP_H_
+#include "AnyPropertyMap.h"
+#endif
+
+#ifndef ACTIVERECORD_H_
+#include "ActiveRecord.h"
+#endif
+
+//! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
  * Holds the classes used to store instances in SQLite files, allowing them
@@ -44,6 +55,7 @@
  */
 namespace storage
 {
+    //! Represents a "has many" relationship between ActiveRecord classes
     /*!
      * \class HasMany
      *
@@ -55,26 +67,29 @@ namespace storage
     class HasMany
     {
     public:
-    
+        //! Default constructor.
         /*!
          *  HasMany constructor.
          */
         HasMany();
 
+        //! Copy constructor.
         /*!
-         * Copy constructor.
+         * Copy constructor. The children instances are NOT copied.
          *
          * \param rhs The instance to copy values from.
          */
         HasMany(const HasMany&);
 
+        //! Virtual destructor.
         /*!
          *  Virtual destructor.
          */
         virtual ~HasMany();
         
+        //! Assignment operator.
         /*!
-         * Assignment operator.
+         * Assignment operator. Nothing is copied.
          *
          * \param rhs The instance to copy values from.
          * 
@@ -82,14 +97,16 @@ namespace storage
          */
         HasMany& operator=(const HasMany&);
 
+        //! Tells whether the current instance has related elements.
         /*!
          * Returns a boolean value stating whether the current instance 
          * has children elements in it.
          *
          * \return A boolean value stating whether there are children (true) or not (false)
          */
-        const bool hasChildren() const;
+        const bool hasChildren();
 
+        //! Adds the object passed as parameter as child of the current instance.
         /*!
          * Adds the pointer passed as parameter to the collection of child instances.
          *
@@ -97,13 +114,15 @@ namespace storage
          */
         void addChild(C*);
 
+        //! Gets the number of children of the current instance.
         /*!
          * Returns the number of children associated to the current instance.
          *
          * \return The number of children.
          */
-        const int getChildrenCount() const;
+        const int getChildrenCount();
         
+        //! Returns the child whose name is passed as parameter.
         /*!
          * Returns the child whose name is passed as parameter.
          *
@@ -113,6 +132,7 @@ namespace storage
          */
         C* getChild(const std::string&);
 
+        //! Removes the child whose name is passed as parameter.
         /*!
          * Removes the child whose name is passed as parameter.
          *
@@ -120,83 +140,93 @@ namespace storage
          */
         void removeChild(const std::string&);
         
+        //! Removes all the children.
         /*!
          * Removes all the child elements associated to the current instance.
          */
         void removeAllChildren();
         
+        //! Saves all the child elements associated to the current instance.
         /*!
          * Saves all the child elements associated to the current instance.
          */
         void saveChildren();
+        
+        //! States whether the children are in memory.
+        /*!
+         * States whether the children are in memory.
+         * 
+         * \return A boolean; true if the children are in memory, false otherwise.
+         */
+        const bool hasLoadedChildren() const;
+    
+    private:
+        //! Performs "lazy-loading" of children instances.
+        /*!
+         * Performs "lazy-loading" of children instances. This method is used 
+         * by all the other methods that require the collection of children
+         * instances to be available in memory.
+         */
+        void lazyLoadChildren();
+        
+        //! Returns a "casted-down" pointer of the current instance.
+        /*!
+         * Returns a "casted-down" pointer of the current instance, 
+         * and caches it for future use.
+         *
+         * \return A "casted-down" pointer of the current instance.
+         */
+        P* getSelf();
 
     private:
-        //! Shortcut to make code more readable.
+        //! Shortcut to make the code more readable.
         typedef std::map<std::string, C*> InternalMap;
 
     private:
         //! The children objects related to the current instance.
         InternalMap _children;
+        
+        //! Flag used by the "lazyLoadChildren()" method.
+        bool _childrenLoaded;
+        
+        //! Variable used to access members through dynamic_cast<>
+        P* _self;
     };
 
-    /*!
-     * HasMany constructor.
-     */
     template <class C, class P>
     HasMany<C, P>::HasMany()
     : _children()
+    , _childrenLoaded(false)
+    , _self(NULL)
     {
     }
 
-    /*!
-     * Copy constructor.
-     *
-     * \param rhs The instance to copy values from.
-     */
     template <class C, class P>
     HasMany<C, P>::HasMany(const HasMany& rhs)
     : _children()
+    , _childrenLoaded(false)
+    , _self(NULL)
     {
     }
 
-    /*!
-     * Assignment operator.
-     *
-     * \param rhs The instance to copy values from.
-     * 
-     * \return A reference to the current instance.
-     */
     template <class C, class P>
     HasMany<C, P>& HasMany<C, P>::operator=(const HasMany& rhs)
     {
         return *this;
     }
     
-    /*!
-     * Virtual destructor.
-     */
     template <class C, class P>
     HasMany<C, P>::~HasMany()
     {
     }
 
-    /*!
-     * Returns a boolean value stating whether the current instance 
-     * has children elements in it.
-     *
-     * \return A boolean value stating whether there are children (true) or not (false)
-     */
     template <class C, class P>
-    const bool HasMany<C, P>::hasChildren() const
+    const bool HasMany<C, P>::hasChildren()
     {
+        lazyLoadChildren();
         return !_children.empty();
     }
 
-    /*!
-     * Adds the pointer passed as parameter to the collection of child instances.
-     *
-     * \param child The pointer to add to the children collection.
-     */
     template <class C, class P>
     void HasMany<C, P>::addChild(C* child)
     {
@@ -215,56 +245,39 @@ namespace storage
             // the dynamic_cast operator to get the correct "this" pointer
             // value needed. And this also explains the need of a second
             // template class parameter, with the type of the parent.
-            child->setParent(dynamic_cast<P*>(this));
-            dynamic_cast<P*>(this)->setDirty();
+            child->setParent(getSelf());
+            getSelf()->setDirty();
         }
     }
 
-    /*!
-     * Returns the number of children associated to the current instance.
-     *
-     * \return The number of children.
-     */
     template <class C, class P>
-    const int HasMany<C, P>::getChildrenCount() const
+    const int HasMany<C, P>::getChildrenCount()
     {
+        lazyLoadChildren();
         return _children.size();
     }
 
-    /*!
-     * Returns the child whose name is passed as parameter.
-     *
-     * \param name The name of the child being sought.
-     *
-     * \return A pointer to the instance, or NULL if none was found.
-     */
     template <class C, class P>
     C* HasMany<C, P>::getChild(const std::string& name)
     {
+        lazyLoadChildren();
         return _children[name];
     }
 
-    /*!
-     * Removes the child whose name is passed as parameter.
-     *
-     * \param name The name of the child to be deleted.
-     */
     template <class C, class P>
     void HasMany<C, P>::removeChild(const std::string& name)
     {
+        lazyLoadChildren();
         C* element = _children[name];
         if (element)
         {
             element->destroy();
             delete element;
             _children.erase(name);
-            dynamic_cast<P*>(this)->setDirty();
+            getSelf()->setDirty();
         }
     }
 
-    /*!
-     * Removes all the child elements associated to the current instance.
-     */
     template <class C, class P>
     void HasMany<C, P>::removeAllChildren()
     {
@@ -272,6 +285,7 @@ namespace storage
         // http://gcc.gnu.org/ml/gcc-help/2008-01/msg00137.html and
         // http://www.parashift.com/c++-faq-lite/templates.html#faq-35.18
 
+        lazyLoadChildren();
         typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
         {
@@ -281,10 +295,7 @@ namespace storage
         }
         _children.clear();
     }
-    
-    /*!
-     * Saves all the child elements associated to the current instance.
-     */
+
     template <class C, class P>
     void HasMany<C, P>::saveChildren()
     {
@@ -293,6 +304,50 @@ namespace storage
         {
             iter->second->save();
         }
+        _childrenLoaded = true;
+    }
+
+    template <class C, class P>
+    const bool HasMany<C, P>::hasLoadedChildren() const
+    {
+        return _childrenLoaded;
+    }
+
+    template <class C, class P>
+    void HasMany<C, P>::lazyLoadChildren()
+    {
+        // It only makes sense to load children of objects
+        // existing in the database...
+        if (!getSelf()->isNew() && !_childrenLoaded)
+        {
+            // Do not load again
+            _childrenLoaded = true;
+
+            AnyPropertyMap conditions;
+            conditions.setInteger(P::getTableName() + "_id", getSelf()->getId());
+            std::vector<C>* elements = ActiveRecord<C, P>::findByCondition(conditions);
+
+            typename std::vector<C>::iterator iter;
+            for (iter = elements->begin(); iter != elements->end(); ++iter)
+            {
+                // Let's create a temporary object to insert into the internal map
+                C* element = new C(*iter);
+                _children[element->getName()] = element;
+                delete element;
+            }
+
+            delete elements;
+        }
+    }
+    
+    template <class C, class P>
+    P* HasMany<C, P>::getSelf()
+    {
+        if (!_self)
+        {
+            _self = dynamic_cast<P*>(this);
+        }
+        return _self;
     }
 }
 

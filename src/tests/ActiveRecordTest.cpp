@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the tests::ActiveRecordTest class.
 /*!
  * \file ActiveRecordTest.cpp
  *
@@ -52,48 +53,30 @@
 #include "../storage/AnyPropertyMap.h"
 #endif
 
-using namespace metamodel;
-using namespace storage;
+using metamodel::Element;
+using metamodel::Diagram;
+using metamodel::Project;
+using storage::AnyPropertyMap;
+using storage::DEFAULT_ID;
 
-/*!
- * \namespace tests
- * This namespace holds the classes that derive from 
- * CppUnit::TestFixture, containing unit tests for the application.
- */
 namespace tests
 {
-    /*!
-     * ActiveRecordTest Constructor.
-     */
     ActiveRecordTest::ActiveRecordTest()
     {
     }
-    
-    /*!
-     * ActiveRecordTest Virtual destructor.
-     */
+
     ActiveRecordTest::~ActiveRecordTest()
     {
     }
 
-    /*!
-     * Called by CppUnit before each test.
-     */
     void ActiveRecordTest::setUp()
     {
     }
-    
-    /*!
-     * Called by CppUnit after each test.
-     */
+
     void ActiveRecordTest::tearDown()
     {
     }
 
-    /*!
-     * Tests something.
-     */
-    
     void ActiveRecordTest::testCanSaveIndividualInstance()
     {
         std::string name1("john");
@@ -429,5 +412,18 @@ namespace tests
         delete project;
         delete diagrams;
         delete retrievedProject;
+    }
+    
+    void ActiveRecordTest::testUsesLazyLoadingToRetrieveChildren()
+    {
+        // At this point, the project has not loaded the diagrams
+        Project* project = ActiveRecord<Project>::findById(0);
+        CPPUNIT_ASSERT(!project->hasLoadedChildren());
+        
+        // Now the project will load its diagrams; there should be two of them
+        const int count = project->getChildrenCount();
+        CPPUNIT_ASSERT(project->hasLoadedChildren());
+        CPPUNIT_ASSERT_EQUAL(2, count);
+        delete project;
     }
 }

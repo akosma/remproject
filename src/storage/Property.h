@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface and implementation of the storage::Property template class.
 /*!
  * \file Property.h
  *
@@ -40,6 +41,7 @@
 
 #include <string>
 
+//! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
  * Holds the classes used to store instances in SQLite files, allowing them
@@ -151,9 +153,6 @@ namespace storage
         V value;
     };
 
-    /*!
-     * Property constructor. Creates a new Property instance with default values.
-     */
     template <class N, class V> 
     Property<N, V>::Property()
     {
@@ -161,11 +160,6 @@ namespace storage
         this->value = V();
     }
 
-    /*!
-     * Property constructor. Creates a new Property with the name passed as parameter.
-     * 
-     * \param name The name of the new instance.
-     */
     template <class N, class V> 
     Property<N, V>::Property(const N& name)
     {
@@ -173,12 +167,6 @@ namespace storage
         this->value = V();
     }
 
-    /*!
-     * Property constructor. Creates a new Property with the name and value passed as parameters.
-     * 
-     * \param name The name of the new instance.
-     * \param value The value of the new instance.
-     */
     template <class N, class V> 
     Property<N, V>::Property(const N& name, const V& value)
     {
@@ -186,11 +174,6 @@ namespace storage
         this->value = value;
     }
 
-    /*!
-     * Copy constructor.
-     *
-     * \param rhs A Property instance to copy name and values from.
-     */
     template <class N, class V> 
     Property<N, V>::Property(const Property<N, V>& rhs)
     : name(rhs.name)
@@ -198,21 +181,11 @@ namespace storage
     {
     }
 
-    /*!
-     * Virtual destructor.
-     */
     template <class N, class V> 
     Property<N, V>::~Property()
     {
     }
 
-    /*!
-     * Assignment operator.
-     *
-     * \param rhs A Property instance to copy name and values from.
-     *
-     * \return A reference to the current instance.
-     */
     template <class N, class V>  
     Property<N, V>& Property<N, V>::operator=(const Property<N, V>& rhs)
     {
@@ -225,15 +198,6 @@ namespace storage
         return *this;
     }
 
-    /*!
-     * Comparison operator. Tests whether the current instance is "equal" (that is,
-     * whether it has the same name and value) as the Property 
-     * passed as parameter.
-     * 
-     * \param rhs The Property instance to compare to.
-     *
-     * \return A boolean stating whether both instances were equal (true) or not (false)
-     */
     template <class N, class V> 
     const bool Property<N, V>::operator==(const Property<N, V>& rhs)
     {
@@ -248,55 +212,30 @@ namespace storage
         return true;
     }
 
-    /*!
-     * Parenthesis operator. Same as Property::getValue()
-     *
-     * \return The value of the current instance.
-     */
     template <class N, class V> 
     V Property<N, V>::operator()() const
     {
         return this->value;
     }
 
-    /*!
-     * Returns the value of the current instance.
-     *
-     * \return The value of the current instance.
-     */
     template <class N, class V> 
     V Property<N, V>::getValue() const
     {
         return this->value;
     }
 
-    /*!
-     * Parenthesis operator. Same as Property::setValue(const V& value)
-     *
-     * \param value The new value for the current instance.
-     */
     template <class N, class V>
     void Property<N, V>::operator()(const V& value)
     {
         this->value = value;
     }
-    
-    /*!
-     * Sets the value of the current instance.
-     *
-     * \param value The new value for the current instance.
-     */
+
     template <class N, class V>
     void Property<N, V>::setValue(const V& value)
     {
         this->value = value;
     }
 
-    /*!
-     * Returns the name of the current Property.
-     *
-     * \return The name of the current Property.
-     */
     template <class N, class V> 
     N Property<N, V>::getName() const
     {

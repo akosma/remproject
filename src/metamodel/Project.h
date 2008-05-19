@@ -47,7 +47,10 @@
 #include "../storage/HasMany.h"
 #endif
 
-using namespace storage;
+using storage::ActiveRecord;
+using storage::BelongsTo;
+using storage::HasMany;
+using storage::NoParent;
 
 //! Model classes for UML projects
 /*!

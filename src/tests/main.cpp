@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the entry point of the test application, using the CppUnit framework.
 /*!
  * \file main.cpp
  *

@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the tests::AnyPropertyMapTest class.
 /*!
  * \file ActiveRecordTest.h
  *
@@ -63,6 +64,7 @@ namespace tests
         CPPUNIT_TEST(testSavedObjectsHaveCreationAndUpdateTime);
         CPPUNIT_TEST(testSettingAChildDirtySetsTheParentDirtyToo);
         CPPUNIT_TEST(testObjectsCannotBeAttackedWithSqlInjection);
+        CPPUNIT_TEST(testUsesLazyLoadingToRetrieveChildren);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -103,6 +105,7 @@ namespace tests
         void testSavedObjectsHaveCreationAndUpdateTime();
         void testSettingAChildDirtySetsTheParentDirtyToo();
         void testObjectsCannotBeAttackedWithSqlInjection();
+        void testUsesLazyLoadingToRetrieveChildren();
     };
 }
 
