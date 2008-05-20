@@ -49,6 +49,7 @@
  */
 namespace storage
 {
+    //! Represents a tuple "name=value"
     /*!
      * \class Property
      *

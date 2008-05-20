@@ -91,20 +91,21 @@ namespace storage
         /*!
          * Placeholder method required at template instantiation time
          */
-        const std::string& getParentColumn() const
-        {
-            return _parentColumn;
-        }
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
         static std::string& getTableName()
         { 
             static std::string tableName("no_parent");
             return tableName; 
         }
+
+        // //! Placeholder method required at template instantiation time.
+        // /*!
+        //  * Placeholder method required at template instantiation time
+        //  */
+        // static std::string& getParentColumnName()
+        // { 
+        //     static std::string columnName("no_parent");
+        //     return columnName;
+        // }
 
         //! Placeholder method required at template instantiation time.
         /*!
@@ -214,6 +215,9 @@ namespace storage
     {
     public:
         
+        //! \name Constructors, Destructor and Assignment Operator
+        //@{
+        
         //! Default constructor
         /*!
          * Default constructor. Sets the ID to DEFAULT_ID. Used
@@ -255,6 +259,11 @@ namespace storage
          * \param rhs The instance to copy from ("right hand side").
          */
         ActiveRecord& operator=(const ActiveRecord&);
+
+        //@}
+
+        //! \name Dynamic Object Public Methods
+        //@{
 
         //! Set a string property.
         /*!
@@ -351,6 +360,11 @@ namespace storage
          */
         const Poco::DateTime getDateTime(const std::string&);
 
+        //@}
+
+        //! \name Database Related Instance Methods
+        //@{
+
         //! States whether the current instance should be saved.
         /*!
          * Returns a value indicating if the current instance has been
@@ -432,7 +446,12 @@ namespace storage
          * every "setter" method.
          */
         void setDirty();
-        
+
+        //@}
+
+        //! \name Database Related Class Methods
+        //@{
+
     public:
         //! Deletes all the objects from disk.
         /*!
@@ -481,6 +500,11 @@ namespace storage
          */
         static T* findById(const ID);
 
+        //@}
+
+        //! \name Dynamic Object Protected Methods
+        //@{
+
     protected:
         //! Adds a string property to the current instance.
         /*!
@@ -522,6 +546,11 @@ namespace storage
          */
         void addDateTimeProperty(const std::string&);
 
+        //@}
+
+        //! \name Protected Pure Virtual Method
+        //@{
+
         //! Used by subclasses to specify their internal structure.
         /*!
          * Used by subclasses to specify their internal structure.
@@ -529,6 +558,11 @@ namespace storage
          * before creating the database tables.
          */
         virtual void createSchemaStructure() = 0;
+
+        //@}
+
+        //! \name Private Instance Methods
+        //@{
 
     private:
         //! Called by "save()" on objects that do not exist yet in the database.
@@ -574,6 +608,11 @@ namespace storage
          */
         void setClassName(const std::string&);
 
+        //@}
+
+        //! \name Private Class Methods
+        //@{
+
     private:
         //! Casts the result of the SQLite query into the columns required by the current instance.
         /*!
@@ -600,6 +639,11 @@ namespace storage
          */
         static std::vector<T>* getVectorByQuery(std::string&);
 
+        //@}
+
+        //! \name Platform-Specific Class Method
+        //@{
+
 #if __WORDSIZE != 64
         //! 32-bit implementation of the atoll() function.
         /*!
@@ -613,6 +657,11 @@ namespace storage
          */
         static long long int atoll(const char*);
 #endif
+
+        //@}
+
+        //! \name Private Instance Fields
+        //@{
 
     private:
         //! The ID of the current instance.
@@ -629,6 +678,9 @@ namespace storage
 
         //! The subclass name of the current instance.
         std::string _className;
+
+        //@}
+
     };
 
     template <class T, class P, class C>
@@ -835,7 +887,7 @@ namespace storage
     void ActiveRecord<T, P, C>::setParentId(const ID value)
     {
         // Do not call "setDirty()" here!
-        _data.setInteger(P::getParentColumn(), (int)value);
+        _data.setInteger(T::getParentColumnName(), (int)value);
     }
 
     template <class T, class P, class C>
@@ -894,7 +946,7 @@ namespace storage
             createSchemaStructure();
             
             // Add some more required properties
-            addIntegerProperty(P::getParentColumn());
+            addIntegerProperty(T::getParentColumnName());
             addStringProperty("class");
             addStringProperty("name");
             addDateTimeProperty("created_on");

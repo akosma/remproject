@@ -68,6 +68,12 @@ namespace metamodel
         return tableName;
     }
 
+    std::string& Diagram::getParentColumnName()
+    {
+        static std::string columnName("project_id");
+        return columnName;
+    }
+
     void Diagram::createSchemaStructure()
     {
         addBooleanProperty("valid");

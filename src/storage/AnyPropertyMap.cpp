@@ -48,19 +48,18 @@ namespace storage
         _map.clear();
     }
 
-    AnyPropertyMap::AnyPropertyMap(const AnyPropertyMap& source)
-    : _map (source._map)
+    AnyPropertyMap::AnyPropertyMap(const AnyPropertyMap& rhs)
+    : _map (rhs._map)
     {
     }
 
-    AnyPropertyMap& AnyPropertyMap::operator=(const AnyPropertyMap& source)
+    AnyPropertyMap& AnyPropertyMap::operator=(const AnyPropertyMap& rhs)
     {
-        if (this == &source)
+        if (this != &rhs)
         {
-            return *this;
+            this->_map = rhs._map;
         }
         
-        this->_map = source._map;
         return *this;
     }
 

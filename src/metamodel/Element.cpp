@@ -68,6 +68,12 @@ namespace metamodel
         return tableName;
     }
 
+    std::string& Element::getParentColumnName()
+    {
+        static std::string columnName("diagram_id");
+        return columnName;
+    }
+
     void Element::createSchemaStructure()
     {
         addIntegerProperty("x");

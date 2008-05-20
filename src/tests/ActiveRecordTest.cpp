@@ -400,7 +400,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
         
         AnyPropertyMap condition;
-        condition.setInteger("projects_id", project->getId());
+        condition.setInteger("project_id", project->getId());
         std::vector<Diagram>* diagrams = ActiveRecord<Diagram>::findByCondition(condition);
         CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());
 

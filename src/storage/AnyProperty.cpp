@@ -58,21 +58,19 @@ namespace storage
     {
     }
 
-    AnyProperty::AnyProperty(const AnyProperty& source)
-    : Property<std::string, Poco::Any>(source)
-    , _isPrimaryKey(source._isPrimaryKey)
+    AnyProperty::AnyProperty(const AnyProperty& rhs)
+    : Property<std::string, Poco::Any>(rhs)
+    , _isPrimaryKey(rhs._isPrimaryKey)
     {
     }
     
-    AnyProperty& AnyProperty::operator =(const AnyProperty& source)
+    AnyProperty& AnyProperty::operator =(const AnyProperty& rhs)
     {
-        if (this == &source)
+        if (this != &rhs)
         {
-            return *this;
+            Property<std::string, Poco::Any>::operator=(rhs);
+            _isPrimaryKey = rhs._isPrimaryKey;
         }
-
-        Property<std::string, Poco::Any>::operator=(source);
-        _isPrimaryKey = source._isPrimaryKey;
 
         return *this;
     }

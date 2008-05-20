@@ -113,6 +113,16 @@ namespace metamodel
          */
         static std::string& getTableName();
 
+        //! Get the name of the column used to store the ID of the parent of this class
+        /*!
+         * Returns the name of the SQLite column to be used to store the ID 
+         * of the parent instance of this class. This static method is required by
+         * the "informal protocol" of the storage::ActiveRecord subsystem.
+         *
+         * \return A string with the name of the database table.
+         */
+        static std::string& getParentColumnName();
+
     protected:
 
         //! Create all the fields required for all the instances of this class.

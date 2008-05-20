@@ -37,8 +37,8 @@
 
 #include <sstream>
 
-#ifndef ACTIVERECORD_H_
-#include "../storage/ActiveRecord.h"
+#ifndef SQLITEWRAPPERTEST_H_
+#include "../storage/SQLiteWrapper.h"
 #endif
 
 //! Framework for storing instances in SQLite files.
@@ -49,51 +49,93 @@
  */
 namespace storage
 {
+    //! Represents a child-parent relationship.
     /*!
      * \class BelongsTo
      *
-     *  
+     * Used by ActiveRecord subclasses to create a simple relationship between an
+     * instance and its related parent. This template class is closely related to
+     * the HasMany template class.
      */
     template <class P>
     class BelongsTo
     {
     public:
 
+        //! Constructor.
         /*!
-         *  BelongsTo constructor.
+         *  Constructor.
          */
         BelongsTo();
 
+        //! Virtual destructor.
         /*!
-         *  BelongsTo virtual destructor.
+         *  Virtual destructor.
          */
         virtual ~BelongsTo();
+        
+        //! Copy constructor.
+        /*!
+         * Copy constructor.
+         * 
+         * \param rhs The object to assign to the current instance.
+         */
         BelongsTo(const BelongsTo<P>&);
+        
+        //! Assignment operator.
+        /*!
+         * Assignment operator.
+         * 
+         * \param rhs The object to assign to the current instance.
+         * 
+         * \return A reference to the current instance.
+         */
         BelongsTo<P>& operator=(const BelongsTo<P>&);
-        
+
+        //! States whether the current instance has a parent or not.
+        /*!
+         * States whether the current instance has a parent or not.
+         * 
+         * \return A boolean value.
+         */
         const bool hasParent() const;
-        void setParent(P*);
-        P* getParent() const;
-        const storage::ID getParentId() const;
-        const std::string& getParentColumn() const;
         
+        //! Sets a parent to the current instance.
+        /*!
+         * Sets a parent to the current instance.
+         * 
+         * \param parent A pointer to the instance of which this object is child.
+         */
+        void setParent(P*);
+        
+        //! Gets the parent of the current instance.
+        /*!
+         * Gets the parent of the current instance.
+         * 
+         * \return A pointer to the parent of the current instance.
+         */
+        P* getParent() const;
+        
+        //! Returns the ID of the parent of the current instance.
+        /*!
+         * Returns the ID of the parent of the current instance.
+         * This method simplifies the implementation of this class, since
+         * otherwise it should have imported the ActiveRecord class.
+         * 
+         * \return A const storage::ID value.
+         */
+        const storage::ID getParentId() const;
+    
     private:
+        
+        //! Holds the pointer to the parent of the current instance.
         P* _parent;
-        std::string _parentColumn;
     };
 
-    /*!
-     * 
-     */
     template <class P>
     BelongsTo<P>::BelongsTo()
     : _parent(0)
-    , _parentColumn("")
     {
-        std::stringstream name;
-        name << P::getTableName();
-        name << "_id";
-        _parentColumn = name.str();
     }
     
     template <class P>
@@ -104,7 +146,6 @@ namespace storage
     template <class P>
     BelongsTo<P>::BelongsTo(const BelongsTo<P>& rhs)
     : _parent(0)
-    , _parentColumn("")
     {
     }
     
@@ -143,12 +184,6 @@ namespace storage
         {
             return storage::DEFAULT_ID;
         }
-    }
-    
-    template <class P>
-    const std::string& BelongsTo<P>::getParentColumn() const
-    {
-        return _parentColumn;
     }
 }
 

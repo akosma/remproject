@@ -324,7 +324,7 @@ namespace storage
             _childrenLoaded = true;
 
             AnyPropertyMap conditions;
-            conditions.setInteger(P::getTableName() + "_id", getSelf()->getId());
+            conditions.setInteger(C::getParentColumnName(), getSelf()->getId());
             std::vector<C>* elements = ActiveRecord<C, P>::findByCondition(conditions);
 
             typename std::vector<C>::iterator iter;

@@ -68,6 +68,12 @@ namespace metamodel
         return tableName;
     }
 
+    std::string& Project::getParentColumnName()
+    {
+        static std::string columnName("no_parent");
+        return columnName;
+    }
+
     void Project::createSchemaStructure()
     {
         addStringProperty("author");

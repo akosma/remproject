@@ -52,38 +52,127 @@
  */
 namespace storage
 {
+    //! Collection of AnyProperty instances.
     /*!
      * \class AnyPropertyMap
      *
-     *  
+     * Wrapper around an std::map of string and AnyProperties.
+     * It offers several methods that allow for the creation of 
+     * SQL statements representing the structure and contents
+     * of the values inside the map.
      */
     class AnyPropertyMap
     {
     public:
 
+        //! Constructor.
         /*!
-         *  AnyPropertyMap constructor.
+         *  Constructor.
          */
         AnyPropertyMap();
+        
+        //! Copy constructor.
+        /*!
+         * Copy constructor.
+         * 
+         * \param rhs The instance to copy from.
+         */
         AnyPropertyMap(const AnyPropertyMap&);
+        
+        //! Assignment operator.
+        /*!
+         * Assignment operator.
+         * 
+         * \param rhs The instance to assign from.
+         * 
+         * \return A reference to the current instance.
+         */
         AnyPropertyMap& operator=(const AnyPropertyMap&);
 
+        //! Virtual destructor.
         /*!
-         *  AnyPropertyMap virtual destructor.
+         *  Virtual destructor.
          */
         virtual ~AnyPropertyMap();
-        
+
+        //! Square bracket operator.
+        /*!
+         * Square bracket operator. Returns a reference to the property
+         * whose key is passed as parameter.
+         * 
+         * \param key The key to the object being sought.
+         *
+         * \return A reference to the sought property.
+         */
         AnyProperty& operator[](const std::string&);
+        
+        //! States whether the object referenced by the key exists in the current instance.
+        /*!
+         * States whether the object referenced by the key exists in the current instance.
+         * 
+         * \param key The key to the object being sought.
+         *
+         * \return A boolean; true if the object exists, false otherwise.
+         */
         const bool hasProperty(const std::string&) const;
+        
+        //! States whether the current instance has any contained items.
+        /*!
+         * States whether the current instance has any contained items.
+         * 
+         * \return A boolean value.
+         */
         const bool isEmpty() const;
+        
+        //! Returns the number of items stored in the current instance.
+        /*!
+         * Returns the number of items stored in the current instance.
+         * 
+         * \return The number of items stored.
+         */
         const unsigned int count() const;
         
+        //! Adds a string property to the current instance.
+        /*!
+         * Adds a string property to the current instance.
+         * 
+         * \param key The name of the property to add.
+         */
         void addStringProperty(const std::string&);
+
+        //! Adds an integer property to the current instance.
+        /*!
+         * Adds an integer property to the current instance.
+         * 
+         * \param key The name of the property to add.
+         */
         void addIntegerProperty(const std::string&);
+
+        //! Adds a boolean property to the current instance.
+        /*!
+         * Adds a boolean property to the current instance.
+         * 
+         * \param key The name of the property to add.
+         */
         void addBooleanProperty(const std::string&);
+
+        //! Adds a double property to the current instance.
+        /*!
+         * Adds a double property to the current instance.
+         * 
+         * \param key The name of the property to add.
+         */
         void addDoubleProperty(const std::string&);
+
+        //! Adds a DateTime property to the current instance.
+        /*!
+         * Adds a DateTime property to the current instance.
+         * 
+         * \param key The name of the property to add.
+         */
         void addDateTimeProperty(const std::string&);
         
+        //! Sets the string value of the property whose name is the first parameter.
         /*!
          * Sets the string value of the property whose name is the first parameter.
          * 
@@ -92,6 +181,7 @@ namespace storage
          */
         void setString(const std::string&, const std::string&);
 
+        //! Sets the string value of the property whose name is the first parameter.
         /*!
          * Sets the integer value of the property whose name is the first parameter.
          * 
@@ -100,6 +190,7 @@ namespace storage
          */
         void setInteger(const std::string&, const int);
 
+        //! Sets the boolean value of the property whose name is the first parameter.
         /*!
          * Sets the boolean value of the property whose name is the first parameter.
          * 
@@ -108,6 +199,7 @@ namespace storage
          */
         void setBoolean(const std::string&, const bool);
 
+        //! Sets the double value of the property whose name is the first parameter.
         /*!
          * Sets the double value of the property whose name is the first parameter.
          * 
@@ -116,6 +208,7 @@ namespace storage
          */
         void setDouble(const std::string&, const double);
 
+        //! Sets the date/time value of the property whose name is the first parameter.
         /*!
          * Sets the date/time value of the property whose name is the first parameter.
          * 
@@ -124,6 +217,7 @@ namespace storage
          */
         void setDateTime(const std::string& key, const Poco::DateTime& value);
 
+        //! Returns the string value of the property whose name is passed as parameter.
         /*!
          * Returns the string value of the property whose name is passed as parameter.
          * 
@@ -133,6 +227,7 @@ namespace storage
          */
         const std::string getString(const std::string&);
 
+        //! Returns the integer value of the property whose name is passed as parameter.
         /*!
          * Returns the integer value of the property whose name is passed as parameter.
          * 
@@ -142,6 +237,7 @@ namespace storage
          */
         const int getInteger(const std::string&);
 
+        //! Returns the boolean value of the property whose name is passed as parameter.
         /*!
          * Returns the boolean value of the property whose name is passed as parameter.
          * 
@@ -151,6 +247,7 @@ namespace storage
          */
         const bool getBoolean(const std::string&);
 
+        //! Returns the double value of the property whose name is passed as parameter.
         /*!
          * Returns the double value of the property whose name is passed as parameter.
          * 
@@ -160,6 +257,7 @@ namespace storage
          */
         const double getDouble(const std::string&);
 
+        //! Returns the date/time value of the property whose name is passed as parameter.
         /*!
          * Returns the date/time value of the property whose name is passed as parameter.
          * 
@@ -169,17 +267,59 @@ namespace storage
          */
         const Poco::DateTime getDateTime(const std::string&);
 
+        //! Creates an integer property marked as "primary key".
+        /*!
+         * Creates an integer property marked as "primary key".
+         * 
+         * \param key The name of the new property.
+         */
         void createPrimaryKey(const std::string&);
 
+        //! Generates a CREATE TABLE SQL statement.
+        /*!
+         * Generates a CREATE TABLE SQL statement.
+         * 
+         * \return A string.
+         */
         const std::string getStringForCreateTable(std::string&) const;
+
+        //! Generates an INSERT SQL statement.
+        /*!
+         * Generates an INSERT SQL statement.
+         * 
+         * \return A string.
+         */
         const std::string getStringForInsert(std::string&) const;
+
+        //! Generates an UPDATE SQL statement.
+        /*!
+         * Generates an UPDATE SQL statement.
+         * 
+         * \return A string.
+         */
         const std::string getStringForUpdate(std::string&, const int id) const;
+
+        //! Generates a CREATE TABLE SQL statement.
+        /*!
+         * Generates a CREATE TABLE SQL statement.
+         * 
+         * \return A string.
+         */
         const std::string getStringForWhere() const;
 
     private:
+        
+        //! Used by the getStringForInsert() method.
+        /*!
+         * Used by the getStringForInsert() method. Generates a list
+         * of columns used in the INSERT SQL statement.
+         * 
+         * \return A string.
+         */
         const std::string getColumnList() const;
 
     private:
+        //! The wrapped map of properties.
         std::map<std::string, AnyProperty> _map;
     };
 }
