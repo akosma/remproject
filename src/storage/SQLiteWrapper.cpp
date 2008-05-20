@@ -34,7 +34,6 @@
 
 #include "SQLiteWrapper.h"
 #include <sstream>
-#include <iostream>
 #include <map>
 
 namespace storage

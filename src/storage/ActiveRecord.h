@@ -38,7 +38,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <iostream>
 #include <sstream>
 
 #include <Poco/DateTime.h>

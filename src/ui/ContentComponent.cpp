@@ -33,8 +33,6 @@
 
 #include "ContentComponent.h"
 
-#include <iostream>
-
 #ifndef ACTOR_H_
 #include "Actor.h"
 #endif
