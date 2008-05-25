@@ -410,8 +410,30 @@ namespace tests
     
     void ActiveRecordTest::testUsesLazyLoadingToRetrieveChildren()
     {
+        // Create a project with two diagrams inside
+        std::string first("first");
+        std::string second("second");
+        std::string diagramClassName("usecase");
+        std::string projectName("test");
+
+        Project* project = new Project();
+        project->setName(projectName);
+
+        Diagram* firstDiagram = new Diagram(diagramClassName);
+        firstDiagram->setName(first);
+        project->addChild(firstDiagram);
+
+        Diagram* secondDiagram = new Diagram(diagramClassName);
+        secondDiagram->setName(second);
+        project->addChild(secondDiagram);
+
+        project->save();
+        
+        const storage::ID id = project->getId();
+        delete project;
+
         // At this point, the project has not loaded the diagrams
-        Project* project = ActiveRecord<Project>::findById(0);
+        project = ActiveRecord<Project>::findById(id);
         CPPUNIT_ASSERT(!project->hasLoadedChildren());
         
         // Now the project will load its diagrams; there should be two of them

@@ -118,6 +118,7 @@ SET (remtests_SRCS
     ${metamodel_SRCS} 
     ${storage_SRCS}
     ${utility_SRCS}
+    ${controller_SRCS}
 )
 
 SET (Rem_SRCS
