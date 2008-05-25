@@ -169,6 +169,8 @@ IF (WIN32)
     # These are the symbols for the linker
     TARGET_LINK_LIBRARIES(Rem
         jucelib_static_Win32
+        sqlite3 
+        PocoFoundation
     )
 
     TARGET_LINK_LIBRARIES(remtest
@@ -361,6 +363,8 @@ ELSE (WIN32)
             TARGET_LINK_LIBRARIES(Rem 
                 ${EXTRA_LIBS}
                 juce
+                sqlite3 
+                PocoFoundation
             )
 
             TARGET_LINK_LIBRARIES(remtest
