@@ -33,6 +33,7 @@
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AA5DE790DE9AAC50059C4D9 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C00DB13102000EB33E /* ContentComponent.cpp */; };
 		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
@@ -51,7 +52,6 @@
 		3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMap.cpp; path = ../../src/storage/AnyPropertyMap.cpp; sourceTree = SOURCE_ROOT; };
 		3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMapTest.h; path = ../../src/tests/AnyPropertyMapTest.h; sourceTree = SOURCE_ROOT; };
 		3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMapTest.cpp; path = ../../src/tests/AnyPropertyMapTest.cpp; sourceTree = SOURCE_ROOT; };
-		3A4CD2E70D968A8A002F1AC2 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/storage/Property.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2ED0D968AD7002F1AC2 /* PropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTest.h; path = ../../src/tests/PropertyTest.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropertyTest.cpp; path = ../../src/tests/PropertyTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyProperty.h; path = ../../src/storage/AnyProperty.h; sourceTree = SOURCE_ROOT; };
@@ -90,6 +90,10 @@
 		3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseBubble.cpp; path = ../../src/ui/UseCaseBubble.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AA5DE770DE9AAC50059C4D9 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../../src/controller/Controller.h; sourceTree = SOURCE_ROOT; };
+		3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../../src/controller/Controller.cpp; sourceTree = SOURCE_ROOT; };
+		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
+		3AA5DE830DE9AD070059C4D9 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/utility/Property.h; sourceTree = SOURCE_ROOT; };
 		3AC065BE0DB13102000EB33E /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../src/ui/Application.cpp; sourceTree = SOURCE_ROOT; };
 		3AC065BF0DB13102000EB33E /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../src/ui/Application.h; sourceTree = SOURCE_ROOT; };
 		3AC065C00DB13102000EB33E /* ContentComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContentComponent.cpp; path = ../../src/ui/ContentComponent.cpp; sourceTree = SOURCE_ROOT; };
@@ -156,10 +160,12 @@
 			isa = PBXGroup;
 			children = (
 				3A4EAEA00D8D313A00C4895F /* commandline */,
+				3AA5DE760DE9AAA20059C4D9 /* controller */,
 				3A18FB610D843C9200744B33 /* metamodel */,
 				3A18FB620D843CA900744B33 /* storage */,
 				3A4EAEA90D8D32BD00C4895F /* tests */,
 				3A18FB640D843CB600744B33 /* ui */,
+				3AA5DE7B0DE9AB4B0059C4D9 /* utility */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -193,7 +199,6 @@
 				3A3381A40D97BE9B0066C369 /* ActiveRecord.h */,
 				3AD1A8700DC64F20009977AE /* BelongsTo.h */,
 				3AD1A8760DC64FF4009977AE /* HasMany.h */,
-				3A4CD2E70D968A8A002F1AC2 /* Property.h */,
 				3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */,
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
 				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
@@ -286,6 +291,24 @@
 				3A7596680DAFC484000AC38C /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3AA5DE760DE9AAA20059C4D9 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				3AA5DE770DE9AAC50059C4D9 /* Controller.h */,
+				3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		3AA5DE7B0DE9AB4B0059C4D9 /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				3AA5DE830DE9AD070059C4D9 /* Property.h */,
+				3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */,
+			);
+			name = utility;
 			sourceTree = "<group>";
 		};
 		3AC065D40DB1333F000EB33E /* Resources */ = {
@@ -413,6 +436,7 @@
 				3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */,
 				3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */,
 				3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */,
+				3AA5DE790DE9AAC50059C4D9 /* Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
