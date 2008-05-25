@@ -41,7 +41,8 @@ namespace storage
     std::string SQLiteWrapper::_fileName = "untitled.db";
 
     SQLiteWrapper::SQLiteWrapper()
-    : _resultCode    (0)
+    : Singleton<SQLiteWrapper>()
+    , _resultCode    (0)
     , _numRows       (0)
     , _numColumns    (0)
     , _lastRowId     (0)
@@ -62,14 +63,6 @@ namespace storage
     void SQLiteWrapper::setFileName(const std::string& fileName)
     {
         _fileName = fileName;
-    }
-
-    SQLiteWrapper& SQLiteWrapper::get()
-    {
-        // Optimized Singleton instance for single-threaded applications
-        // taken from http://www.inquiry.com/techtips/cpp_pro/10min/10min0200.asp
-        static SQLiteWrapper _dal;
-        return _dal;
     }
 
     const bool SQLiteWrapper::open()

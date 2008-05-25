@@ -41,11 +41,11 @@
 
 #include <string>
 
-//! TODO: add description
+//! Contains several classes used throughout the project.
 /*!
  * \namespace utility
  *
- * TODO: add description
+ * Contains several classes used throughout the project.
  */
 namespace utility
 {

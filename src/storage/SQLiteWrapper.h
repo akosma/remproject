@@ -40,6 +40,10 @@
 #include <map>
 #include <sqlite3.h>
 
+#include "../utility/Singleton.h"
+
+using utility::Singleton;
+
 //! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
@@ -73,7 +77,7 @@ namespace storage
      * in the "BirthdayCard" project by Adrian Kosmaczewski
      * http://kosmaczewski.net/projects/birthdaycard/
      */
-    class SQLiteWrapper
+    class SQLiteWrapper : public Singleton<SQLiteWrapper>
     {
     public:
 
@@ -91,14 +95,6 @@ namespace storage
          * \param fileName A string with the file name.
          */
         static void setFileName(const std::string&);
-
-        //! Returns the singleton instance of this class.
-        /*!
-         * Returns the singleton instance of this class.
-         * 
-         * \return A reference to the singleton instance.
-         */
-        static SQLiteWrapper& get();
 
         //! Opens the connection to the SQLite database.
         /*!
@@ -205,44 +201,14 @@ namespace storage
         const std::map<std::string, std::string> getTableSchema(const std::string&);
 
     private:
-
-        //! Private constructor.
+        //! Constructor.
         /*!
-         * Private constructor. Since this class is a singleton, 
-         * only the static method "get()" is used to build a unique
-         * instance for all the application. This singleton is not
-         * thread-safe, but for this application, this is more than
-         * enough.
+         * Constructor.
          */
         SQLiteWrapper();
 
-        //! Private copy constructor.
-        /*!
-         * Private copy constructor.
-         * 
-         * This trick comes from "Effective C++, Third Edition"
-         * by Scott Meyers (ISBN 0-321-33487-6)
-         * "Item 6: Explicitly disallow the use of compiler-generated
-         * functions you do not want", page 37
-         * 
-         * \param rhs The SQLiteWrapper reference to copy from.
-         */
-        SQLiteWrapper(const SQLiteWrapper& rhs);
-
-        //! Private assignment operator.
-        /*!
-         * Private assignment operator.
-         * 
-         * This trick comes from "Effective C++, Third Edition"
-         * by Scott Meyers (ISBN 0-321-33487-6)
-         * "Item 6: Explicitly disallow the use of compiler-generated
-         * functions you do not want", page 37
-         * 
-         * \param rhs The SQLiteWrapper reference to copy from.
-         * 
-         * \return A reference to the current SQLiteWrapper.
-         */
-        SQLiteWrapper& operator=(const SQLiteWrapper& rhs);
+        //! Allow the Singleton template class to access the private constructor.
+        friend SQLiteWrapper& Singleton<SQLiteWrapper>::get();
 
     private:
 
