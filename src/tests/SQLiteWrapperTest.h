@@ -37,6 +37,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
+//! Contains the test classes of the application.
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 

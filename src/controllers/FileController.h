@@ -55,18 +55,19 @@ using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
 
-//! Contains the FileController class of the application.
+//! Contains the controller classes of the application.
 /*!
  * \namespace controller
- * Contains the FileController class of the application, following
+ * Contains the controller classes of the application, following
  * the naming conventions of the MVC design pattern.
  */
 namespace controllers
 {
-    //! Inteface between the View and Model of the MVC architecture.
+    //! Controller grouping file-based operations.
     /*!
      * \class FileController
      *
+     * Controller grouping file-based operations.
      * Provides an isolation interface between the classes in the 
      * "ui" or "commandline" namespaces (the "View"), and those 
      * in the "metamodel" namespace (the "Model"), following the MVC

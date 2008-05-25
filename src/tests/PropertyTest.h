@@ -37,6 +37,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
+//! Contains the test classes of the application.
 /*!
  * \namespace tests
  * This namespace holds the classes that derive from 
@@ -61,12 +62,12 @@ namespace tests
     public:
 
         /*!
-         *  PropertyTest constructor.
+         * Constructor.
          */
         PropertyTest();
 
         /*!
-         *  PropertyTest virtual destructor.
+         * Virtual destructor.
          */
         virtual ~PropertyTest();
 
