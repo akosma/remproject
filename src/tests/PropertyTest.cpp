@@ -39,14 +39,14 @@
 #include <Poco/DateTime.h>
 
 #ifndef PROPERTY_H_
-#include "../storage/Property.h"
+#include "../utility/Property.h"
 #endif
 
 #ifndef ANYPROPERTY_H_
 #include "../storage/AnyProperty.h"
 #endif
 
-using storage::Property;
+using utility::Property;
 using storage::AnyProperty;
 
 namespace tests

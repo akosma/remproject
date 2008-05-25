@@ -57,8 +57,6 @@ SET (storage_SRCS
     storage/BelongsTo.h
     storage/HasMany.h
 
-    storage/Property.h 
-
     storage/AnyProperty.cpp 
     storage/AnyProperty.h 
 
@@ -102,10 +100,21 @@ SET (metamodel_SRCS
     metamodel/Project.h 
 )
 
+SET (controller_SRCS
+    controller/Controller.cpp
+    controller/Controller.h
+)
+
+SET (utility_SRCS
+    utility/Singleton.h
+    utility/Property.h
+)
+
 SET (remtests_SRCS 
     ${tests_SRCS}
     ${metamodel_SRCS} 
     ${storage_SRCS}
+    ${utility_SRCS}
 )
 
 SET (Rem_SRCS

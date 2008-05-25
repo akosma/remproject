@@ -42,8 +42,10 @@
 #include <Poco/DateTime.h>
 
 #ifndef PROPERTY_H_
-#include "Property.h"
+#include "../utility/Property.h"
 #endif
+
+using utility::Property;
 
 //! Framework for storing instances in SQLite files.
 /*!

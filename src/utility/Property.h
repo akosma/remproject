@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface and implementation of the storage::Property template class.
+//! Contains the interface and implementation of the utility::Property template class.
 /*!
  * \file Property.h
  *
- * Contains the interface and implementation of the storage::Property template class.
+ * Contains the interface and implementation of the utility::Property template class.
  * This code is adapted from page 51 of
  * Duffy, Daniel J.; "Financial Instrument Pricing Using C++",
  * 2004, John Wiley & Sons, ISBN 0-470-85509-6
@@ -41,13 +41,13 @@
 
 #include <string>
 
-//! Framework for storing instances in SQLite files.
+//! TODO: add description
 /*!
- * \namespace storage
- * Holds the classes used to store instances in SQLite files, allowing them
- * to be chained among them, using a simple syntax in class declarations.
+ * \namespace utility
+ *
+ * TODO: add description
  */
-namespace storage
+namespace utility
 {
     //! Represents a tuple "name=value"
     /*!
