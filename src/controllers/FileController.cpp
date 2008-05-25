@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the controller::Controller class.
+//! Contains the implementation of the controllers::FileController class.
 /*!
- * \file Controller.cpp
+ * \file FileController.cpp
  *
- * Contains the implementation of the controller::Controller class.
+ * Contains the implementation of the controllers::FileController class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,7 +32,7 @@
  * \date      5/25/08
  */
 
-#include "Controller.h"
+#include "FileController.h"
 
 // The Mac OS X compiler requires this line, because "nil" is a reserved
 // word in the Objective-C language, and without it this file won't compile.
@@ -51,29 +51,29 @@ using storage::SQLiteWrapper;
 using Poco::UUIDGenerator;
 using Poco::UUID;
 
-namespace controller
+namespace controllers
 {
-    Controller::Controller()
-    : Singleton<Controller>()
+    FileController::FileController()
+    : Singleton<FileController>()
     , _project(NULL)
     , _currentDiagram(NULL)
     , _counter(0)
     {
     }
 
-    Controller::~Controller()
+    FileController::~FileController()
     {
         closeProject();
     }
     
-    const bool Controller::openProject(const std::string& path)
+    const bool FileController::openProject(const std::string& path)
     {
         if (_project)
         {
             closeProject();
         }
-        SQLiteWrapper::setFileName(path);
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        wrapper.setFileName(path);
         const bool ok = wrapper.open();
         if (ok)
         {
@@ -82,7 +82,7 @@ namespace controller
         return ok;
     }
     
-    void Controller::newProject()
+    void FileController::newProject()
     {
         if (_project)
         {
@@ -93,11 +93,11 @@ namespace controller
         path << "untitled ";
         path << _counter;
         path << ".rem";
-        SQLiteWrapper::setFileName(path.str());
+        SQLiteWrapper::get().setFileName(path.str());
         _project = new Project();
     }
     
-    void Controller::saveProject()
+    void FileController::saveProject()
     {
         if (_project)
         {
@@ -105,16 +105,16 @@ namespace controller
         }
     }
     
-    void Controller::saveProjectAs(const std::string& path)
+    void FileController::saveProjectAs(const std::string& path)
     {
         if (_project && _project->isNew())
         {
-            SQLiteWrapper::setFileName(path);
+            SQLiteWrapper::get().setFileName(path);
             saveProject();
         }
     }
     
-    void Controller::closeProject()
+    void FileController::closeProject()
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         wrapper.close();
@@ -124,7 +124,7 @@ namespace controller
         _currentDiagram = NULL;
     }
     
-    void Controller::addDiagram(const std::string& className)
+    void FileController::addDiagram(const std::string& className)
     {
         if (_project)
         {
@@ -138,12 +138,12 @@ namespace controller
         }
     }
     
-    const bool Controller::hasCurrentProject() const
+    const bool FileController::hasCurrentProject() const
     {
         return (_project != NULL);
     }
 
-    const bool Controller::hasCurrentDiagram() const
+    const bool FileController::hasCurrentDiagram() const
     {
         return (_currentDiagram != NULL);
     }

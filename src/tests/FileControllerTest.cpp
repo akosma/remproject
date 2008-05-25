@@ -1,7 +1,7 @@
 /*!
- * \file ControllerTest.cpp
+ * \file FileControllerTest.cpp
  *
- * Contains the implementation of the tests::ControllerTest class.
+ * Contains the implementation of the tests::FileControllerTest class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -12,19 +12,19 @@
  * \date      5/25/08
  */
 
-#include "ControllerTest.h"
+#include "FileControllerTest.h"
 
 #include <fstream>
 
-#ifndef CONTROLLER_H_
-#include "../controller/Controller.h"
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
 #endif
 
 #ifndef SQLITEWRAPPER_H_
 #include "../storage/SQLiteWrapper.h"
 #endif
 
-using controller::Controller;
+using controllers::FileController;
 using storage::SQLiteWrapper;
 
 /*!
@@ -34,32 +34,33 @@ using storage::SQLiteWrapper;
  */
 namespace tests
 {
-    ControllerTest::ControllerTest()
+    FileControllerTest::FileControllerTest()
     {
     }
     
-    ControllerTest::~ControllerTest()
+    FileControllerTest::~FileControllerTest()
     {
     }
 
-    void ControllerTest::testControllerIsSingleton()
+    void FileControllerTest::testFileControllerIsSingleton()
     {
-        Controller& controller1 = Controller::get();
-        Controller& controller2 = Controller::get();
+        FileController& controller1 = FileController::get();
+        FileController& controller2 = FileController::get();
         
         // Both references point to the same instance
         CPPUNIT_ASSERT_EQUAL((int)&controller1, (int)&controller2);
     }
     
-    void ControllerTest::testCanCreateNewProject()
+    void FileControllerTest::testCanCreateNewProject()
     {
-        Controller& controller = Controller::get();
+        FileController& controller = FileController::get();
         CPPUNIT_ASSERT(!controller.hasCurrentProject());
         
         controller.newProject();
         CPPUNIT_ASSERT(controller.hasCurrentProject());
 
-        const std::string filename1 = SQLiteWrapper::getFileName();
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        const std::string filename1 = wrapper.getFileName();
 
         controller.closeProject();
         CPPUNIT_ASSERT(!controller.hasCurrentProject());
@@ -67,20 +68,21 @@ namespace tests
         controller.newProject();
         CPPUNIT_ASSERT(controller.hasCurrentProject());
         
-        const std::string filename2 = SQLiteWrapper::getFileName();
+        const std::string filename2 = wrapper.getFileName();
         
         CPPUNIT_ASSERT(filename1 != filename2);
     }
 
-    void ControllerTest::testCanSaveOpenAndCloseProject()
+    void FileControllerTest::testCanSaveOpenAndCloseProject()
     {
-        Controller& controller = Controller::get();
+        FileController& controller = FileController::get();
         controller.newProject();
         
         const std::string chosenFileName("whatever.rem");
         controller.saveProjectAs(chosenFileName);
         
-        const std::string& filename = SQLiteWrapper::getFileName();
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        const std::string& filename = wrapper.getFileName();
         
         CPPUNIT_ASSERT_EQUAL(filename, chosenFileName);
 
@@ -97,9 +99,9 @@ namespace tests
         CPPUNIT_ASSERT(controller.hasCurrentProject());
     }
     
-    void ControllerTest::testCanAddDiagram()
+    void FileControllerTest::testCanAddDiagram()
     {
-        Controller& controller = Controller::get();
+        FileController& controller = FileController::get();
         controller.newProject();
         controller.saveProject();
         
@@ -107,5 +109,7 @@ namespace tests
         const std::string diagramClassName("usecase");
         controller.addDiagram(diagramClassName);
         CPPUNIT_ASSERT(controller.hasCurrentDiagram());
+        
+        controller.saveProject();
     }
 }

@@ -1,7 +1,7 @@
 /*!
- * \file ControllerTest.h
+ * \file FileControllerTest.h
  *
- * Contains the interface of the tests::ControllerTest class.
+ * Contains the interface of the tests::FileControllerTest class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -12,8 +12,8 @@
  * \date      5/25/08
  */
 
-#ifndef tests_ControllerTest
-#define tests_ControllerTest
+#ifndef FILECONTROLLERTEST_H_
+#define FILECONTROLLERTEST_H_
 
 #include <cppunit/extensions/HelperMacros.h>
 
@@ -25,14 +25,14 @@
 namespace tests
 {
     /*!
-     * \class ControllerTest
+     * \class FileControllerTest
      *
      *  
      */
-    class ControllerTest : public CppUnit::TestFixture
+    class FileControllerTest : public CppUnit::TestFixture
     {
-        CPPUNIT_TEST_SUITE(tests::ControllerTest);
-        CPPUNIT_TEST(testControllerIsSingleton);
+        CPPUNIT_TEST_SUITE(tests::FileControllerTest);
+        CPPUNIT_TEST(testFileControllerIsSingleton);
         CPPUNIT_TEST(testCanCreateNewProject);
         CPPUNIT_TEST(testCanSaveOpenAndCloseProject);
         CPPUNIT_TEST(testCanAddDiagram);
@@ -41,22 +41,22 @@ namespace tests
     public:
 
         /*!
-         *  ControllerTest constructor.
+         *  FileControllerTest constructor.
          */
-        ControllerTest();
+        FileControllerTest();
 
         /*!
-         *  ControllerTest virtual destructor.
+         *  FileControllerTest virtual destructor.
          */
-        virtual ~ControllerTest();
+        virtual ~FileControllerTest();
 
-        void testControllerIsSingleton();
+        void testFileControllerIsSingleton();
         void testCanCreateNewProject();
         void testCanSaveOpenAndCloseProject();
         void testCanAddDiagram();
     };
 }
 
-CPPUNIT_TEST_SUITE_REGISTRATION(tests::ControllerTest);
+CPPUNIT_TEST_SUITE_REGISTRATION(tests::FileControllerTest);
 
-#endif /* rem_ControllerTest */
+#endif /* FILECONTROLLERTEST_H_ */

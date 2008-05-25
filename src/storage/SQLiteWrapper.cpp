@@ -38,10 +38,9 @@
 
 namespace storage
 {
-    std::string SQLiteWrapper::_fileName = "untitled.db";
-
     SQLiteWrapper::SQLiteWrapper()
     : Singleton<SQLiteWrapper>()
+    , _fileName      ("untitled.db")
     , _resultCode    (0)
     , _numRows       (0)
     , _numColumns    (0)

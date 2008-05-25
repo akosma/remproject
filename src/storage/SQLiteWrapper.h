@@ -96,7 +96,7 @@ namespace storage
          * 
          * \param fileName A string with the file name.
          */
-        static void setFileName(const std::string&);
+        void setFileName(const std::string&);
         
         //! Gets the file name of the SQLite database.
         /*!
@@ -104,7 +104,7 @@ namespace storage
          * 
          * \return A string.
          */
-        static const std::string& getFileName();
+        const std::string& getFileName();
 
         //! Opens the connection to the SQLite database.
         /*!
@@ -223,9 +223,7 @@ namespace storage
     private:
 
         //! The file name of the SQLite database used by this class.
-        static std::string _fileName;
-
-    private:
+        std::string _fileName;
 
         //! The result code of the last query executed on the database
         int _resultCode;

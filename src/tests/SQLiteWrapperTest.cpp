@@ -63,8 +63,8 @@ namespace tests
         remove(_filename.c_str());
     
         // Calling the singleton "automagically" creates the file
-        SQLiteWrapper::setFileName(_filename);
         SQLiteWrapper& dal = SQLiteWrapper::get();
+        dal.setFileName(_filename);
 
         // We force here to have something in the database
         bool ok = dal.open();

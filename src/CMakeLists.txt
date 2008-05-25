@@ -68,8 +68,8 @@ SET (storage_SRCS
 )
 
 SET (tests_SRCS
-    tests/ControllerTest.cpp
-    tests/ControllerTest.h
+    tests/FileControllerTest.cpp
+    tests/FileControllerTest.h
     
     tests/ActiveRecordTest.cpp 
     tests/ActiveRecordTest.h 
@@ -103,9 +103,9 @@ SET (metamodel_SRCS
     metamodel/Project.h 
 )
 
-SET (controller_SRCS
-    controller/Controller.cpp
-    controller/Controller.h
+SET (controllers_SRCS
+    controllers/FileController.cpp
+    controllers/FileController.h
 )
 
 SET (utility_SRCS
@@ -118,7 +118,7 @@ SET (remtests_SRCS
     ${metamodel_SRCS} 
     ${storage_SRCS}
     ${utility_SRCS}
-    ${controller_SRCS}
+    ${controllers_SRCS}
 )
 
 SET (Rem_SRCS
@@ -126,7 +126,7 @@ SET (Rem_SRCS
     ${metamodel_SRCS} 
     ${storage_SRCS}
     ${utility_SRCS}
-    ${controller_SRCS}
+    ${controllers_SRCS}
 )
 
 IF (WIN32)

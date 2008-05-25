@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the controller::Controller class.
+//! Contains the interface of the controllers::FileController class.
 /*!
- * \file Controller.h
+ * \file FileController.h
  *
- * Contains the interface of the controller::Controller class.
+ * Contains the interface of the controllers::FileController class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,8 +32,8 @@
  * \date      5/25/08
  */
 
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
+#ifndef FILECONTROLLER_H_
+#define FILECONTROLLER_H_
 
 #ifndef SINGLETON_H_
 #include "../utility/Singleton.h"
@@ -55,24 +55,24 @@ using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
 
-//! Contains the Controller class of the application.
+//! Contains the FileController class of the application.
 /*!
  * \namespace controller
- * Contains the Controller class of the application, following
+ * Contains the FileController class of the application, following
  * the naming conventions of the MVC design pattern.
  */
-namespace controller
+namespace controllers
 {
     //! Inteface between the View and Model of the MVC architecture.
     /*!
-     * \class Controller
+     * \class FileController
      *
      * Provides an isolation interface between the classes in the 
      * "ui" or "commandline" namespaces (the "View"), and those 
      * in the "metamodel" namespace (the "Model"), following the MVC
      * design pattern.
      */
-    class Controller : public Singleton<Controller>
+    class FileController : public Singleton<FileController>
     {
     public:
 
@@ -80,7 +80,7 @@ namespace controller
         /*!
          * Virtual destructor.
          */
-        virtual ~Controller();
+        virtual ~FileController();
         
         //! Loads the project whose path is passed as parameter.
         /*!
@@ -150,13 +150,13 @@ namespace controller
         /*!
          * Private constructor.
          */
-        Controller();
+        FileController();
 
         //! Allow the Singleton template class to access the private constructor.
-        friend Controller& Singleton<Controller>::get();
+        friend FileController& Singleton<FileController>::get();
         
     private:
-        //! Instance of the Project class "controlled" by this Controller.
+        //! Instance of the Project class "controlled" by this FileController.
         Project* _project;
         
         //! Diagram where all operations are sent by default.
@@ -167,4 +167,4 @@ namespace controller
     };
 }
 
-#endif /* CONTROLLER_H_ */
+#endif /* FILECONTROLLER_H_ */

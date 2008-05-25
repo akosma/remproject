@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
+		3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */; };
 		3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A308A6D0DB7DE8000965CD1 /* Actor.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
@@ -33,8 +35,6 @@
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
-		3AA5DE790DE9AAC50059C4D9 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */; };
-		3AB7B2E10DE9D18100CFF5A4 /* ControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7B2E00DE9D18100CFF5A4 /* ControllerTest.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C00DB13102000EB33E /* ContentComponent.cpp */; };
 		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
@@ -45,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0840390DE9F6770080A93A /* FileController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileController.cpp; path = ../../src/controllers/FileController.cpp; sourceTree = SOURCE_ROOT; };
+		3A08403A0DE9F6770080A93A /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileController.h; path = ../../src/controllers/FileController.h; sourceTree = SOURCE_ROOT; };
+		3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileControllerTest.cpp; path = ../../src/tests/FileControllerTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileControllerTest.h; path = ../../src/tests/FileControllerTest.h; sourceTree = SOURCE_ROOT; };
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3A308A6C0DB7DE8000965CD1 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = ../../src/ui/Actor.h; sourceTree = SOURCE_ROOT; };
 		3A308A6D0DB7DE8000965CD1 /* Actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = ../../src/ui/Actor.cpp; sourceTree = SOURCE_ROOT; };
@@ -91,12 +95,8 @@
 		3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseBubble.cpp; path = ../../src/ui/UseCaseBubble.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
-		3AA5DE770DE9AAC50059C4D9 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../../src/controller/Controller.h; sourceTree = SOURCE_ROOT; };
-		3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../../src/controller/Controller.cpp; sourceTree = SOURCE_ROOT; };
 		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE830DE9AD070059C4D9 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/utility/Property.h; sourceTree = SOURCE_ROOT; };
-		3AB7B2DF0DE9D18100CFF5A4 /* ControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerTest.h; path = ../../src/tests/ControllerTest.h; sourceTree = SOURCE_ROOT; };
-		3AB7B2E00DE9D18100CFF5A4 /* ControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ControllerTest.cpp; path = ../../src/tests/ControllerTest.cpp; sourceTree = SOURCE_ROOT; };
 		3AC065BE0DB13102000EB33E /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../src/ui/Application.cpp; sourceTree = SOURCE_ROOT; };
 		3AC065BF0DB13102000EB33E /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../src/ui/Application.h; sourceTree = SOURCE_ROOT; };
 		3AC065C00DB13102000EB33E /* ContentComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContentComponent.cpp; path = ../../src/ui/ContentComponent.cpp; sourceTree = SOURCE_ROOT; };
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4EAEA00D8D313A00C4895F /* commandline */,
-				3AA5DE760DE9AAA20059C4D9 /* controller */,
+				3AA5DE760DE9AAA20059C4D9 /* controllers */,
 				3A18FB610D843C9200744B33 /* metamodel */,
 				3A18FB620D843CA900744B33 /* storage */,
 				3A4EAEA90D8D32BD00C4895F /* tests */,
@@ -253,6 +253,8 @@
 		3A4EAEA90D8D32BD00C4895F /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */,
+				3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */,
 				3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */,
 				3A70B4290D8D61E200F61DB0 /* DiagramTest.h */,
 				3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */,
@@ -266,8 +268,6 @@
 				3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */,
 				3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */,
 				3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */,
-				3AB7B2DF0DE9D18100CFF5A4 /* ControllerTest.h */,
-				3AB7B2E00DE9D18100CFF5A4 /* ControllerTest.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -298,13 +298,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3AA5DE760DE9AAA20059C4D9 /* controller */ = {
+		3AA5DE760DE9AAA20059C4D9 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3AA5DE770DE9AAC50059C4D9 /* Controller.h */,
-				3AA5DE780DE9AAC50059C4D9 /* Controller.cpp */,
+				3A0840390DE9F6770080A93A /* FileController.cpp */,
+				3A08403A0DE9F6770080A93A /* FileController.h */,
 			);
-			name = controller;
+			name = controllers;
 			sourceTree = "<group>";
 		};
 		3AA5DE7B0DE9AB4B0059C4D9 /* utility */ = {
@@ -441,8 +441,8 @@
 				3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */,
 				3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */,
 				3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */,
-				3AA5DE790DE9AAC50059C4D9 /* Controller.cpp in Sources */,
-				3AB7B2E10DE9D18100CFF5A4 /* ControllerTest.cpp in Sources */,
+				3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */,
+				3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
