@@ -233,18 +233,6 @@ namespace storage
         if (child)
         {
             _children[child->getName()] = child;
-            
-            // The logic behind the "dynamic_cast" below is brilliantly
-            // explained here:
-            // http://carcino.gen.nz/tech/cpp/multiple_inheritance_this.php
-            // Also look at 
-            // http://www.acm.org/crossroads/xrds3-1/ovp3-1.html
-            // for a good explanation of the different C++ cast operators.
-
-            // Basically, when using multiple inheritance, you must use 
-            // the dynamic_cast operator to get the correct "this" pointer
-            // value needed. And this also explains the need of a second
-            // template class parameter, with the type of the parent.
             child->setParent(getSelf());
             getSelf()->setDirty();
         }
@@ -345,6 +333,17 @@ namespace storage
     {
         if (!_self)
         {
+            // The logic behind the "dynamic_cast" below is brilliantly
+            // explained here:
+            // http://carcino.gen.nz/tech/cpp/multiple_inheritance_this.php
+            // Also look at 
+            // http://www.acm.org/crossroads/xrds3-1/ovp3-1.html
+            // for a good explanation of the different C++ cast operators.
+
+            // Basically, when using multiple inheritance, you must use 
+            // the dynamic_cast operator to get the correct "this" pointer
+            // value needed. And this also explains the need of a second
+            // template class parameter, with the type of the parent.
             _self = dynamic_cast<P*>(this);
         }
         return _self;
