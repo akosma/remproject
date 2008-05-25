@@ -57,14 +57,6 @@ namespace tests
     {
     }
 
-    void SQLiteWrapperTest::setUp()
-    {
-    }
-
-    void SQLiteWrapperTest::tearDown()
-    {
-    }
-
     void SQLiteWrapperTest::testCreateDatabase()
     {
         // Delete the file if it already exists

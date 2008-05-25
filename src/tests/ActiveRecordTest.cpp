@@ -71,14 +71,6 @@ namespace tests
     {
     }
 
-    void ActiveRecordTest::setUp()
-    {
-    }
-
-    void ActiveRecordTest::tearDown()
-    {
-    }
-
     void ActiveRecordTest::testCanSaveIndividualInstance()
     {
         std::string name1("john");

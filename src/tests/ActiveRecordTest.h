@@ -79,20 +79,6 @@ namespace tests
          */
         virtual ~ActiveRecordTest();
 
-        /*!
-         * Called by CppUnit before each test.
-         */
-        void setUp();
-
-        /*!
-         * Called by CppUnit after each test.
-         */
-        void tearDown();
-
-        /*!
-         * Tests something.
-         */
-
         void testCanSaveIndividualInstance();        
         void testCanRetrieveAllInstances();
         void testCanRetrieveOneInstance();

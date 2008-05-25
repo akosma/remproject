@@ -70,23 +70,10 @@ namespace tests
          */
         virtual ~PropertyTest();
 
-        /*!
-         * Called by CppUnit before each test.
-         */
-        void setUp();
-
-        /*!
-         * Called by CppUnit after each test.
-         */
-        void tearDown();
-
-        /*!
-         * Tests something.
-         */
-         void testCanCreatePropertiesOfDifferentTypes();
-         void testDefaultPropertiesAcceptAnyValue();
-         void testCanUseCopyConstructorSafely();
-         void testCanUseAssignmentOperatorSafely();
+        void testCanCreatePropertiesOfDifferentTypes();
+        void testDefaultPropertiesAcceptAnyValue();
+        void testCanUseCopyConstructorSafely();
+        void testCanUseAssignmentOperatorSafely();
 
     };
 }

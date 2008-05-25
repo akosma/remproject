@@ -64,6 +64,11 @@ namespace storage
     {
         _fileName = fileName;
     }
+    
+    const std::string& SQLiteWrapper::getFileName()
+    {
+        return _fileName;
+    }
 
     const bool SQLiteWrapper::open()
     {

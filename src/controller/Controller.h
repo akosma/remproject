@@ -54,7 +54,6 @@
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
-using metamodel::Element;
 
 //! Contains the Controller class of the application.
 /*!
@@ -82,6 +81,68 @@ namespace controller
          * Virtual destructor.
          */
         virtual ~Controller();
+        
+        //! Loads the project whose path is passed as parameter.
+        /*!
+         * Loads the project whose path is passed as parameter.
+         * 
+         * \param path The path of the project file to load.
+         * 
+         * \return A boolean value; "true" if the file could be opened,
+         * "false" otherwise.
+         */
+        const bool openProject(const std::string&);
+        
+        //! Creates a new project in memory.
+        /*!
+         * Creates a new project in memory. Use the "saveProject(const std::string&)"
+         * method to save it on disk.
+         */
+        void newProject();
+        
+        //! Saves the current project in disk.
+        /*!
+         * Saves the current project in disk.
+         */
+        void saveProject();
+
+        //! Saves the current project in disk with the specified name.
+        /*!
+         * Saves the current project in disk with the specified name.
+         * 
+         * \param path The path of the new project file.
+         */
+        void saveProjectAs(const std::string&);
+
+        //! Closes the current project.
+        /*!
+         * Closes the current project.
+         */
+        void closeProject();
+
+        //! Adds a diagram to the current project.
+        /*!
+         * Adds a diagram to the current project and sets it as current.
+         * 
+         * \param className The type of diagram to create (use-case, class, etc).
+         */
+        void addDiagram(const std::string&);
+        
+        //! States whether the controller has a current project.
+        /*!
+         * States whether the controller has a current project.
+         * 
+         * \return A boolean value.
+         */
+        const bool hasCurrentProject() const;
+
+        //! States whether the controller has a current diagram.
+        /*!
+         * States whether the controller has a current diagram.
+         * 
+         * \return A boolean value.
+         */
+        const bool hasCurrentDiagram() const;
 
     private:
 
@@ -95,8 +156,14 @@ namespace controller
         friend Controller& Singleton<Controller>::get();
         
     private:
-        //! Instance of the Project class controlled by this Controller.
-        Project _project;
+        //! Instance of the Project class "controlled" by this Controller.
+        Project* _project;
+        
+        //! Diagram where all operations are sent by default.
+        Diagram* _currentDiagram;
+        
+        //! Counter used for the file names of new projects.
+        int _counter;
     };
 }
 

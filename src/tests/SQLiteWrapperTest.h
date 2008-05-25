@@ -72,16 +72,6 @@ namespace tests
         virtual ~SQLiteWrapperTest();
 
         /*!
-         * Called by CppUnit before each test.
-         */
-        void setUp();
-
-        /*!
-         * Called by CppUnit after each test.
-         */
-        void tearDown();
-
-        /*!
          * Tests the automatic creation of a database file.
          */
         void testCreateDatabase();

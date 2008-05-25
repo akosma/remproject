@@ -68,6 +68,9 @@ SET (storage_SRCS
 )
 
 SET (tests_SRCS
+    tests/ControllerTest.cpp
+    tests/ControllerTest.h
+    
     tests/ActiveRecordTest.cpp 
     tests/ActiveRecordTest.h 
 
@@ -119,6 +122,10 @@ SET (remtests_SRCS
 
 SET (Rem_SRCS
     ${ui_SRCS}
+    ${metamodel_SRCS} 
+    ${storage_SRCS}
+    ${utility_SRCS}
+    ${controller_SRCS}
 )
 
 IF (WIN32)
@@ -245,6 +252,8 @@ ELSE (WIN32)
             TARGET_LINK_LIBRARIES(Rem 
                 ${EXTRA_LIBS}
                 juce
+                sqlite3 
+                PocoFoundation
             )
         
             TARGET_LINK_LIBRARIES(remtest

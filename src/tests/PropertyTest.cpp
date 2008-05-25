@@ -60,14 +60,6 @@ namespace tests
     {
     }
 
-    void PropertyTest::setUp()
-    {
-    }
-
-    void PropertyTest::tearDown()
-    {
-    }
-
     void PropertyTest::testCanCreatePropertiesOfDifferentTypes()
     {
         std::string name1("prop1");

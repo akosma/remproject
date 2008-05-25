@@ -61,14 +61,6 @@ namespace tests
     {
     }
 
-    void AnyPropertyMapTest::setUp()
-    {
-    }
-
-    void AnyPropertyMapTest::tearDown()
-    {
-    }
-
     void AnyPropertyMapTest::testAddAndRetrieveProperties()
     {
         AnyPropertyMap map;

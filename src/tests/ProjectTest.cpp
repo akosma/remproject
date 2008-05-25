@@ -60,14 +60,6 @@ namespace tests
     {
     }
 
-    void ProjectTest::setUp()
-    {
-    }
-
-    void ProjectTest::tearDown()
-    {
-    }
-
     void ProjectTest::testProjectHasManyDiagrams()
     {
         std::string first("first");

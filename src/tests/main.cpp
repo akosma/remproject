@@ -34,6 +34,7 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <cstdlib>
 
+//! Entry point of the test application.
 /*!
  * Entry point of the test application.
  * 
@@ -42,8 +43,11 @@
  */
 int main()
 {
+    // Remove files from previous tests
     remove("test.db");
     remove("untitled.db");
+    remove("whatever.rem");
+    remove("untitled 4.rem");
 
     CppUnit::TextUi::TestRunner runner;
     runner.addTest(CppUnit::TestFactoryRegistry::getRegistry().makeTest());

@@ -59,14 +59,6 @@ namespace tests
     {
     }
 
-    void DiagramTest::setUp()
-    {
-    }
-
-    void DiagramTest::tearDown()
-    {
-    }
-
     void DiagramTest::testDiagramCanHaveSeveralElements()
     {
         std::string actor1Name("actor1");

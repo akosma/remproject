@@ -68,19 +68,6 @@ namespace tests
          */
         virtual ~DiagramTest();
 
-        /*!
-         * Called by CppUnit before each test.
-         */
-        void setUp();
-
-        /*!
-         * Called by CppUnit after each test.
-         */
-        void tearDown();
-
-        /*!
-         * Tests something.
-         */
         void testDiagramCanHaveSeveralElements();
     };
 }
