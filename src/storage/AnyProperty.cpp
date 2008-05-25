@@ -36,30 +36,37 @@
 #include <typeinfo>
 #include <sstream>
 
+#include <Poco/Any.h>
 #include <Poco/String.h>
+#include <Poco/DateTime.h>
+
+using Poco::Any;
+using Poco::RefAnyCast;
+using Poco::DateTime;
+using Poco::replace;
 
 namespace storage
 {
     AnyProperty::AnyProperty()
-    : Property<std::string, Poco::Any>()
+    : Property<std::string, Any>()
     , _isPrimaryKey(false)
     {
     }
     
     AnyProperty::AnyProperty(const std::string& name)
-    : Property<std::string, Poco::Any>(name)
+    : Property<std::string, Any>(name)
     , _isPrimaryKey(false)
     {
     }
 
-    AnyProperty::AnyProperty(const std::string& name, const Poco::Any& value)
-    : Property<std::string, Poco::Any>(name, value)
+    AnyProperty::AnyProperty(const std::string& name, const Any& value)
+    : Property<std::string, Any>(name, value)
     , _isPrimaryKey(false)
     {
     }
 
     AnyProperty::AnyProperty(const AnyProperty& rhs)
-    : Property<std::string, Poco::Any>(rhs)
+    : Property<std::string, Any>(rhs)
     , _isPrimaryKey(rhs._isPrimaryKey)
     {
     }
@@ -68,7 +75,7 @@ namespace storage
     {
         if (this != &rhs)
         {
-            Property<std::string, Poco::Any>::operator=(rhs);
+            Property<std::string, Any>::operator=(rhs);
             _isPrimaryKey = rhs._isPrimaryKey;
         }
 
@@ -86,31 +93,31 @@ namespace storage
     
     void AnyProperty::setString(const std::string& input)
     {
-        Poco::Any value(input);
+        Any value(input);
         setValue(value);
     }
 
     void AnyProperty::setInteger(const int input)
     {
-        Poco::Any value(input);
+        Any value(input);
         setValue(value);
     }
 
     void AnyProperty::setDouble(const double input)
     {
-        Poco::Any value(input);
+        Any value(input);
         setValue(value);
     }
     
     void AnyProperty::setBoolean(const bool input)
     {
-        Poco::Any value(input);
+        Any value(input);
         setValue(value);
     }
     
-    void AnyProperty::setDateTime(const Poco::DateTime& input)
+    void AnyProperty::setDateTime(const DateTime& input)
     {
-        Poco::Any value(input);
+        Any value(input);
         setValue(value);
     }
     
@@ -121,27 +128,27 @@ namespace storage
     
     const std::string AnyProperty::getString() const
     {
-        return Poco::RefAnyCast<std::string>(getValue());
+        return RefAnyCast<std::string>(getValue());
     }
     
     const int AnyProperty::getInteger() const
     {
-        return Poco::RefAnyCast<int>(getValue());
+        return RefAnyCast<int>(getValue());
     }
     
     const double AnyProperty::getDouble() const
     {
-        return Poco::RefAnyCast<double>(getValue());
+        return RefAnyCast<double>(getValue());
     }
     
     const bool AnyProperty::getBoolean() const
     {
-        return Poco::RefAnyCast<bool>(getValue());
+        return RefAnyCast<bool>(getValue());
     }
     
-    const Poco::DateTime AnyProperty::getDateTime() const
+    const DateTime AnyProperty::getDateTime() const
     {
-        return Poco::RefAnyCast<Poco::DateTime>(getValue());
+        return RefAnyCast<DateTime>(getValue());
     }
     
     const std::string AnyProperty::getSQLiteColumnDefinition() const
@@ -170,7 +177,7 @@ namespace storage
         {
             output << "REAL";
         }
-        if(type == typeid(Poco::DateTime))
+        if(type == typeid(DateTime))
         {
             output << "DATETIME";
         }
@@ -187,7 +194,7 @@ namespace storage
             std::string doubleQuote("'");
             std::string singleQuote("''");
             output << "'";
-            output << Poco::replace<std::string>(getString(), doubleQuote, singleQuote);
+            output << replace<std::string>(getString(), doubleQuote, singleQuote);
             output << "'";
         }
         if(type == typeid(int))
@@ -202,7 +209,7 @@ namespace storage
         {
             output << getDouble();
         }
-        if(type == typeid(Poco::DateTime))
+        if(type == typeid(DateTime))
         {
             output << getDateTime().utcTime();
         }

@@ -46,6 +46,8 @@
 #endif
 
 using utility::Property;
+using Poco::Any;
+using Poco::DateTime;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -60,17 +62,17 @@ namespace storage
      * \class AnyProperty
      *
      * This class specializes the Property class, creating named instances
-     * of Poco::Any. The Poco::Any class is a derived version of the Boost
+     * of the Any class (Poco namespace). The Any class is a derived version of the Boost
      * class of the same name, which can hold values of any type, preserving
      * their original types and avoiding the use of void* pointers. 
-     * To avoid clients to handle the Poco::Any class, as well as having to
+     * To avoid clients to handle the Any class, as well as having to
      * "manually" cast back to the original type, this class provides setters
      * and getters for the types stored in SQLite tables.
      * Whenever a client sets a property of a certain type, it must make sure
      * that it uses the corresponding getter; otherwise a runtime exception is
      * thrown to the caller.
      */
-    class AnyProperty : public Property<std::string, Poco::Any>
+    class AnyProperty : public Property<std::string, Any>
     {
     public:
 
@@ -95,7 +97,7 @@ namespace storage
          * \param name A name for the current property.
          * \param value A value for the current property.
          */
-        AnyProperty(const std::string&, const Poco::Any&);
+        AnyProperty(const std::string&, const Any&);
         
         //! Copy constructor.
         /*!
@@ -166,14 +168,14 @@ namespace storage
          */
         void setBoolean(const bool);
 
-        //! Sets a Poco::DateTime value to the current instance.
+        //! Sets a DateTime value to the current instance.
         /*!
-         * Sets a Poco::DateTime value to the current instance. 
+         * Sets a DateTime value to the current instance. 
          * Any previous value is discarded.
          * 
          * \param input The new value for the property.
          */
-        void setDateTime(const Poco::DateTime&);
+        void setDateTime(const DateTime&);
 
         //! Sets the current instance as "primary key".
         /*!
@@ -215,13 +217,13 @@ namespace storage
          */
         const bool getBoolean() const;
         
-        //! Returns the Poco::DateTime value of the current instance.
+        //! Returns the DateTime value of the current instance.
         /*!
-         * Returns the Poco::DateTime value of the current instance.
+         * Returns the DateTime value of the current instance.
          * 
-         * \return The current Poco::DateTime value.
+         * \return The current DateTime value.
          */
-        const Poco::DateTime getDateTime() const;
+        const DateTime getDateTime() const;
 
         //! Returns the SQL statement that defines a SQLite column for this property.
         /*!

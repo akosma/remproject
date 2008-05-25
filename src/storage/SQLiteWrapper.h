@@ -40,7 +40,9 @@
 #include <map>
 #include <sqlite3.h>
 
+#ifndef SINGLETON_H_
 #include "../utility/Singleton.h"
+#endif
 
 using utility::Singleton;
 
@@ -201,9 +203,9 @@ namespace storage
         const std::map<std::string, std::string> getTableSchema(const std::string&);
 
     private:
-        //! Constructor.
+        //! Private constructor.
         /*!
-         * Constructor.
+         * Private constructor.
          */
         SQLiteWrapper();
 

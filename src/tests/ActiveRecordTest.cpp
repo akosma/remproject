@@ -58,6 +58,8 @@ using metamodel::Diagram;
 using metamodel::Project;
 using storage::AnyPropertyMap;
 using storage::DEFAULT_ID;
+using Poco::DateTime;
+using Poco::Stopwatch;
 
 namespace tests
 {
@@ -324,26 +326,26 @@ namespace tests
         actor->setName(element);
 
         actor->save();
-        Poco::DateTime saved1 = actor->getCreationDateTime();
-        Poco::DateTime updated1 = actor->getLastModificationDateTime();
+        DateTime saved1 = actor->getCreationDateTime();
+        DateTime updated1 = actor->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved1 == updated1);
         
         // Let's wait a couple of seconds and save the actor again
-        Poco::Stopwatch watch;
+        Stopwatch watch;
         watch.start();
         while (watch.elapsedSeconds() < 1) {}
         watch.stop();
         
         actor->save();
-        Poco::DateTime saved2 = actor->getCreationDateTime();
-        Poco::DateTime updated2 = actor->getLastModificationDateTime();
+        DateTime saved2 = actor->getCreationDateTime();
+        DateTime updated2 = actor->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved2 < updated2);
         CPPUNIT_ASSERT(saved1 == saved2);
         
         // Let's retrieve all of this from the DB and compare
         Element* retrieved = ActiveRecord<Element>::findById(actor->getId());
-        Poco::DateTime saved3 = retrieved->getCreationDateTime();
-        Poco::DateTime updated3 = retrieved->getLastModificationDateTime();
+        DateTime saved3 = retrieved->getCreationDateTime();
+        DateTime updated3 = retrieved->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved2 == saved3);
         CPPUNIT_ASSERT(updated2 == updated3);
     }

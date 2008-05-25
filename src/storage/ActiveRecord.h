@@ -50,6 +50,9 @@
 #include "AnyPropertyMap.h"
 #endif
 
+using Poco::DateTime;
+using Poco::Timestamp;
+
 //! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
@@ -307,7 +310,7 @@ namespace storage
          * \param key The name of the property to set
          * \param value The value of the property to set
          */
-        void setDateTime(const std::string&, const Poco::DateTime&);
+        void setDateTime(const std::string&, const DateTime&);
 
         //! Get a string property.
         /*!
@@ -357,7 +360,7 @@ namespace storage
          * 
          * \return The current date/time value of the named property
          */
-        const Poco::DateTime getDateTime(const std::string&);
+        const DateTime getDateTime(const std::string&);
 
         //@}
 
@@ -413,7 +416,7 @@ namespace storage
          *
          * \return A DateTime instance.
          */
-        const Poco::DateTime getCreationDateTime();
+        const DateTime getCreationDateTime();
 
         //! Returns the moment of the last modification of the current instance.
         /*!
@@ -421,7 +424,7 @@ namespace storage
          *
          * \return A DateTime instance.
          */
-        const Poco::DateTime getLastModificationDateTime();
+        const DateTime getLastModificationDateTime();
 
         //! Saves (inserts or updates) the current instance to disk.
         /*!
@@ -769,7 +772,7 @@ namespace storage
     }
 
     template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setDateTime(const std::string& key, const Poco::DateTime& value)
+    void ActiveRecord<T, P, C>::setDateTime(const std::string& key, const DateTime& value)
     {
         setDirty();
         _data.setDateTime(key, value);
@@ -800,7 +803,7 @@ namespace storage
     }
 
     template <class T, class P, class C>
-    const Poco::DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
+    const DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
     {
         return _data.getDateTime(key);
     }
@@ -836,7 +839,7 @@ namespace storage
     }
 
     template <class T, class P, class C>
-    const Poco::DateTime ActiveRecord<T, P, C>::getCreationDateTime()
+    const DateTime ActiveRecord<T, P, C>::getCreationDateTime()
     {
         return _data.getDateTime("created_on");
     }
@@ -845,13 +848,13 @@ namespace storage
     void ActiveRecord<T, P, C>::setCreationDateTimeToNow()
     {
         // Do not call "setDirty()" here!
-        Poco::DateTime now;
+        DateTime now;
         _data.setDateTime("created_on", now);
         _data.setDateTime("updated_on", now);
     }
     
     template <class T, class P, class C>
-    const Poco::DateTime ActiveRecord<T, P, C>::getLastModificationDateTime()
+    const DateTime ActiveRecord<T, P, C>::getLastModificationDateTime()
     {
         return _data.getDateTime("updated_on");
     }
@@ -860,7 +863,7 @@ namespace storage
     void ActiveRecord<T, P, C>::setLastModificationDateTimeToNow()
     {
         // Do not call "setDirty()" here!
-        Poco::DateTime now;
+        DateTime now;
         _data.setDateTime("updated_on", now);
     }
 
@@ -1141,7 +1144,7 @@ namespace storage
                     // cast the string value coming from the DB layer into an int64 value,
                     // that is used to create a Timestamp, used to create a proper DateTime instance.
                     long long num = atoll(currentValue.c_str());
-                    Poco::DateTime date(Poco::Timestamp::fromUtcTime(num));
+                    DateTime date(Timestamp::fromUtcTime(num));
                     instanceData.setDateTime(currentHeader, date);
                 }
             }

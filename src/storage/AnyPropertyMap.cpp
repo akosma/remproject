@@ -34,7 +34,11 @@
 
 #include "AnyPropertyMap.h"
 #include <Poco/Any.h>
+#include <Poco/DateTime.h>
 #include <sstream>
+
+using Poco::DateTime;
+using Poco::Any;
 
 namespace storage
 {
@@ -120,42 +124,42 @@ namespace storage
     {
         if (!hasProperty(key))
         {
-            Poco::DateTime now;
+            DateTime now;
             setDateTime(key, now);
         }
     }
 
     void AnyPropertyMap::setString(const std::string& key, const std::string& value)
     {
-        Poco::Any any(value);
+        Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
     void AnyPropertyMap::setInteger(const std::string& key, const int value)
     {
-        Poco::Any any(value);
+        Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
     void AnyPropertyMap::setBoolean(const std::string& key, const bool value)
     {
-        Poco::Any any(value);
+        Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
     void AnyPropertyMap::setDouble(const std::string& key, const double value)
     {
-        Poco::Any any(value);
+        Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
 
-    void AnyPropertyMap::setDateTime(const std::string& key, const Poco::DateTime& value)
+    void AnyPropertyMap::setDateTime(const std::string& key, const DateTime& value)
     {
-        Poco::Any any(value);
+        Any any(value);
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
@@ -180,14 +184,14 @@ namespace storage
         return _map[key].getDouble();            
     }
 
-    const Poco::DateTime AnyPropertyMap::getDateTime(const std::string& key)
+    const DateTime AnyPropertyMap::getDateTime(const std::string& key)
     {
         return _map[key].getDateTime();
     }
 
     void AnyPropertyMap::createPrimaryKey(const std::string& key)
     {
-        Poco::Any any(0);
+        Any any(0);
         AnyProperty prop(key, any);
         prop.setPrimaryKey();
         _map[key] = prop;

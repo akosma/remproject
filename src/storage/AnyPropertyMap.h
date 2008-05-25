@@ -44,6 +44,8 @@
 #include "AnyProperty.h"
 #endif
 
+using Poco::DateTime;
+
 //! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
@@ -215,7 +217,7 @@ namespace storage
          * \param key The name of the property to set
          * \param value The value of the property to set
          */
-        void setDateTime(const std::string& key, const Poco::DateTime& value);
+        void setDateTime(const std::string& key, const DateTime& value);
 
         //! Returns the string value of the property whose name is passed as parameter.
         /*!
@@ -265,7 +267,7 @@ namespace storage
          * 
          * \return The current date/time value of the named property
          */
-        const Poco::DateTime getDateTime(const std::string&);
+        const DateTime getDateTime(const std::string&);
 
         //! Creates an integer property marked as "primary key".
         /*!

@@ -48,6 +48,8 @@
 #endif
 
 using storage::AnyPropertyMap;
+using Poco::DateTime;
+using Poco::BadCastException;
 
 namespace tests
 {
@@ -81,7 +83,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
-        Poco::DateTime now;
+        DateTime now;
 
         CPPUNIT_ASSERT(map.isEmpty());
         CPPUNIT_ASSERT_EQUAL(0, (int)map.count());
@@ -153,7 +155,7 @@ namespace tests
 			CPPUNIT_ASSERT_EQUAL(expectedMessage, message);
 		}
 #else
-        catch(Poco::BadCastException& e)
+        catch(BadCastException& e)
         {
             CPPUNIT_ASSERT_EQUAL(e.message(), std::string("RefAnyCast: Failed to convert between const Any types"));
         }
@@ -174,7 +176,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
-        Poco::DateTime now;
+        DateTime now;
         
         map.setBoolean(name1, ok);
         map.setString(name2, someValue);
@@ -230,7 +232,7 @@ namespace tests
         std::string someValue("name");
         int integer = 34;
         double d = 45.24;
-        Poco::DateTime now;
+        DateTime now;
         
         map.setBoolean(name1, ok);
         map.setString(name2, someValue);
