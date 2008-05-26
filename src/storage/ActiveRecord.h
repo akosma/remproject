@@ -50,6 +50,10 @@
 #include "AnyPropertyMap.h"
 #endif
 
+#ifndef PERSISTABLE_H_
+#include "Persistable.h"
+#endif
+
 using Poco::DateTime;
 using Poco::Timestamp;
 
@@ -61,145 +65,6 @@ using Poco::Timestamp;
  */
 namespace storage
 {
-    //! Dummy class used in template instantiation.
-    /*!
-     * \class NoParent
-     *
-     * Dummy class used by ActiveRecord subclasses who do not wish
-     * to be related to a "parent" class. It implements many methods
-     * required during template instantiation at compile-time.
-     */
-    class NoParent
-    {
-    public:
-        //! Constructor
-        /*!
-         * Constructor
-         */
-        NoParent() 
-        : _parentColumn("no_parent") 
-        {
-        }
-
-        //! Virtual destructor
-        /*!
-         * Virtual destructor
-         */
-        virtual ~NoParent() 
-        {
-        }
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        static std::string& getTableName()
-        { 
-            static std::string tableName("no_parent");
-            return tableName; 
-        }
-
-        // //! Placeholder method required at template instantiation time.
-        // /*!
-        //  * Placeholder method required at template instantiation time
-        //  */
-        // static std::string& getParentColumnName()
-        // { 
-        //     static std::string columnName("no_parent");
-        //     return columnName;
-        // }
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        const ID getId() const
-        {
-            return DEFAULT_ID;
-        }
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        void setDirty()
-        {
-        }
-        
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        const bool hasParent() const
-        {
-            return false;
-        }
-        
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        const ID getParentId() const
-        {
-            return DEFAULT_ID;
-        }
-    private:
-        //! Used to return a valid string reference only
-        std::string _parentColumn;
-    };
-
-    //! Dummy class used in template instantiation.
-    /*!
-     * \class NoChildren
-     *
-     * Dummy class used by ActiveRecord subclasses who do not wish
-     * to have related "child" instances. It implements many methods
-     * required during template instantiation at compile-time.
-     */
-    class NoChildren
-    {
-    public:
-        //! Constructor.
-        /*!
-         * Constructor.
-         */
-        NoChildren()
-        {
-        }
-        
-        //! Virtual destructor.
-        /*!
-         * Virtual destructor.
-         */
-        virtual ~NoChildren()
-        {
-        }
-        
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        void save() 
-        {
-        }
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        void saveChildren()
-        {
-        }
-        
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        void destroy()
-        {
-        }
-    };
-    
     //! Base class for all objects stored in SQLite files.
     /*!
      * \class ActiveRecord
@@ -209,11 +74,8 @@ namespace storage
      * Ruby on Rails web development framework:
      * http://rubyonrails.org/
      */
-    template <class T
-             , class P = NoParent
-             , class C = NoChildren>
-    class ActiveRecord : public P
-                       , public C
+    template <class T>
+    class ActiveRecord : public virtual Persistable
     {
     public:
         
@@ -384,7 +246,7 @@ namespace storage
          * \return A boolean value stating whether the current instance 
          * exists in the database (false) or not (true).
          */
-        const bool isNew() const;
+        virtual const bool isNew() const;
         
         //! Gets the ID of the current instance.
         /*!
@@ -392,7 +254,7 @@ namespace storage
          * 
          * \return An ID (long long) value.
          */
-        const ID getId() const;
+        virtual const ID getId() const;
         
         //! Sets the name of the current instance.
         /*!
@@ -432,14 +294,14 @@ namespace storage
          * classes. Clients use it to write the current state of
          * the instance into the database.
          */
-        void save();
+        virtual void save();
         
         //! Deletes the current instance from disk.
         /*!
          * Deletes the current instance from disk. It does not deletes
          * the object from memory though.
          */
-        void destroy();
+        virtual void destroy();
 
         //! Changes the "_isDirty" flag of the current instance.
         /*!
@@ -447,7 +309,7 @@ namespace storage
          * ActiveRecord base class; subclasses must call this method in
          * every "setter" method.
          */
-        void setDirty();
+        virtual void setDirty();
 
         //@}
 
@@ -685,11 +547,9 @@ namespace storage
 
     };
 
-    template <class T, class P, class C>
-    ActiveRecord<T, P, C>::ActiveRecord(const std::string& className)
-    : P()
-    , C()
-    , _id        (DEFAULT_ID)
+    template <class T>
+    ActiveRecord<T>::ActiveRecord(const std::string& className)
+    : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
     , _data      ()
@@ -697,11 +557,9 @@ namespace storage
     {
     }
 
-    template <class T, class P, class C>
-    ActiveRecord<T, P, C>::ActiveRecord(const std::string& className, const ID id, AnyPropertyMap& data)
-    : P()
-    , C()
-    , _id        (id)
+    template <class T>
+    ActiveRecord<T>::ActiveRecord(const std::string& className, const ID id, AnyPropertyMap& data)
+    : _id        (id)
     , _isNew     (false)
     , _isDirty   (false)
     , _data      (data)
@@ -709,11 +567,9 @@ namespace storage
     {
     }
 
-    template <class T, class P, class C>
-    ActiveRecord<T, P, C>::ActiveRecord(const ActiveRecord& rhs)
-    : P(rhs)
-    , C(rhs)
-    , _id        (rhs._id)
+    template <class T>
+    ActiveRecord<T>::ActiveRecord(const ActiveRecord& rhs)
+    : _id        (rhs._id)
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
     , _data      (rhs._data)
@@ -721,19 +577,16 @@ namespace storage
     {
     }
 
-    template <class T, class P, class C>
-    ActiveRecord<T, P, C>::~ActiveRecord()
+    template <class T>
+    ActiveRecord<T>::~ActiveRecord()
     {
     }
 
-    template <class T, class P, class C>
-    ActiveRecord<T, P, C>& ActiveRecord<T, P, C>::operator=(const ActiveRecord& rhs)
+    template <class T>
+    ActiveRecord<T>& ActiveRecord<T>::operator=(const ActiveRecord& rhs)
     {
         if (this != &rhs)
         {
-            P::operator=(rhs);
-            C::operator=(rhs);
-            
             _id = rhs._id;
             _isDirty = rhs._isDirty;
             _isNew = rhs._isNew;
@@ -743,109 +596,109 @@ namespace storage
         return *this;
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setString(const std::string& key, const std::string& value)
+    template <class T>
+    void ActiveRecord<T>::setString(const std::string& key, const std::string& value)
     {
         setDirty();
         _data.setString(key, value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setInteger(const std::string& key, const int value)
+    template <class T>
+    void ActiveRecord<T>::setInteger(const std::string& key, const int value)
     {
         setDirty();
         _data.setInteger(key, value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setBoolean(const std::string& key, const bool value)
+    template <class T>
+    void ActiveRecord<T>::setBoolean(const std::string& key, const bool value)
     {
         setDirty();
         _data.setBoolean(key, value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setDouble(const std::string& key, const double value)
+    template <class T>
+    void ActiveRecord<T>::setDouble(const std::string& key, const double value)
     {
         setDirty();
         _data.setDouble(key, value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setDateTime(const std::string& key, const DateTime& value)
+    template <class T>
+    void ActiveRecord<T>::setDateTime(const std::string& key, const DateTime& value)
     {
         setDirty();
         _data.setDateTime(key, value);
     }
 
-    template <class T, class P, class C>
-    const std::string ActiveRecord<T, P, C>::getString(const std::string& key)
+    template <class T>
+    const std::string ActiveRecord<T>::getString(const std::string& key)
     {
         return _data.getString(key);
     }
 
-    template <class T, class P, class C>
-    const int ActiveRecord<T, P, C>::getInteger(const std::string& key)
+    template <class T>
+    const int ActiveRecord<T>::getInteger(const std::string& key)
     {
         return _data.getInteger(key);
     }
 
-    template <class T, class P, class C>
-    const bool ActiveRecord<T, P, C>::getBoolean(const std::string& key)
+    template <class T>
+    const bool ActiveRecord<T>::getBoolean(const std::string& key)
     {
         return _data.getBoolean(key);
     }
 
-    template <class T, class P, class C>
-    const double ActiveRecord<T, P, C>::getDouble(const std::string& key)
+    template <class T>
+    const double ActiveRecord<T>::getDouble(const std::string& key)
     {
         return _data.getDouble(key);
     }
 
-    template <class T, class P, class C>
-    const DateTime ActiveRecord<T, P, C>::getDateTime(const std::string& key)
+    template <class T>
+    const DateTime ActiveRecord<T>::getDateTime(const std::string& key)
     {
         return _data.getDateTime(key);
     }
     
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::addStringProperty(const std::string& key)
+    template <class T>
+    void ActiveRecord<T>::addStringProperty(const std::string& key)
     {
         _data.addStringProperty(key);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::addIntegerProperty(const std::string& key)
+    template <class T>
+    void ActiveRecord<T>::addIntegerProperty(const std::string& key)
     {
         _data.addIntegerProperty(key);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::addBooleanProperty(const std::string& key)
+    template <class T>
+    void ActiveRecord<T>::addBooleanProperty(const std::string& key)
     {
         _data.addBooleanProperty(key);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::addDoubleProperty(const std::string& key)
+    template <class T>
+    void ActiveRecord<T>::addDoubleProperty(const std::string& key)
     {
         _data.addDoubleProperty(key);
     }
     
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::addDateTimeProperty(const std::string& key)
+    template <class T>
+    void ActiveRecord<T>::addDateTimeProperty(const std::string& key)
     {
         _data.addDateTimeProperty(key);
     }
 
-    template <class T, class P, class C>
-    const DateTime ActiveRecord<T, P, C>::getCreationDateTime()
+    template <class T>
+    const DateTime ActiveRecord<T>::getCreationDateTime()
     {
         return _data.getDateTime("created_on");
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setCreationDateTimeToNow()
+    template <class T>
+    void ActiveRecord<T>::setCreationDateTimeToNow()
     {
         // Do not call "setDirty()" here!
         DateTime now;
@@ -853,56 +706,56 @@ namespace storage
         _data.setDateTime("updated_on", now);
     }
     
-    template <class T, class P, class C>
-    const DateTime ActiveRecord<T, P, C>::getLastModificationDateTime()
+    template <class T>
+    const DateTime ActiveRecord<T>::getLastModificationDateTime()
     {
         return _data.getDateTime("updated_on");
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setLastModificationDateTimeToNow()
+    template <class T>
+    void ActiveRecord<T>::setLastModificationDateTimeToNow()
     {
         // Do not call "setDirty()" here!
         DateTime now;
         _data.setDateTime("updated_on", now);
     }
 
-    template <class T, class P, class C>
-    const ID ActiveRecord<T, P, C>::getId() const
+    template <class T>
+    const ID ActiveRecord<T>::getId() const
     {
         return _id;
     }
     
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setName(std::string& name)
+    template <class T>
+    void ActiveRecord<T>::setName(std::string& name)
     {
         setString("name", name);
     }
 
-    template <class T, class P, class C>
-    std::string ActiveRecord<T, P, C>::getName()
+    template <class T>
+    std::string ActiveRecord<T>::getName()
     {
         return getString("name");
     }
     
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setParentId(const ID value)
+    template <class T>
+    void ActiveRecord<T>::setParentId(const ID value)
     {
         // Do not call "setDirty()" here!
         _data.setInteger(T::getParentColumnName(), (int)value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setClassName(const std::string& value)
+    template <class T>
+    void ActiveRecord<T>::setClassName(const std::string& value)
     {
         // Do not call "setDirty()" here!
         _data.setString("class", value);
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::save()
+    template <class T>
+    void ActiveRecord<T>::save()
     {
-        ID parentId = P::getParentId();
+        ID parentId = getParentId();
         if (parentId != DEFAULT_ID)
         {
             setParentId(parentId);
@@ -921,11 +774,11 @@ namespace storage
             update();
             _isDirty = false;
         }        
-        C::saveChildren();
+        saveChildren();
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::update()
+    template <class T>
+    void ActiveRecord<T>::update()
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         bool ok = wrapper.open();
@@ -937,8 +790,8 @@ namespace storage
         wrapper.close();
     }
 
-    template <class T, class P, class C>
-    const ID ActiveRecord<T, P, C>::insert()
+    template <class T>
+    const ID ActiveRecord<T>::insert()
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         bool ok = wrapper.open();
@@ -973,41 +826,41 @@ namespace storage
         }
     }
 
-    template <class T, class P, class C>
-    const bool ActiveRecord<T, P, C>::isDirty() const
+    template <class T>
+    const bool ActiveRecord<T>::isDirty() const
     {
         return _isDirty;
     }
 
-    template <class T, class P, class C>
-    const bool ActiveRecord<T, P, C>::isNew() const
+    template <class T>
+    const bool ActiveRecord<T>::isNew() const
     {
         return _isNew;
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::setDirty()
+    template <class T>
+    void ActiveRecord<T>::setDirty()
     {
         _isDirty = true;
-        if (P::hasParent())
+        if (hasParent())
         {
-            P::getParent()->setDirty();
+            getParent()->setDirty();
         }
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::destroy()
+    template <class T>
+    void ActiveRecord<T>::destroy()
     {
         if (_id != DEFAULT_ID)
         {
-            ActiveRecord<T, P, C>::remove(_id);
+            ActiveRecord<T>::remove(_id);
             _isDirty = true;
             _isNew = true;
         }
     }
 
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::remove(const ID id)
+    template <class T>
+    void ActiveRecord<T>::remove(const ID id)
     {
         std::stringstream query;
         query << "DELETE FROM ";
@@ -1025,8 +878,8 @@ namespace storage
         }
     }
     
-    template <class T, class P, class C>
-    void ActiveRecord<T, P, C>::removeAll()
+    template <class T>
+    void ActiveRecord<T>::removeAll()
     {
         std::stringstream query;
         query << "DELETE FROM ";
@@ -1042,8 +895,8 @@ namespace storage
         }
     }
 
-    template <class T, class P, class C>
-    T* ActiveRecord<T, P, C>::findById(const ID id)
+    template <class T>
+    T* ActiveRecord<T>::findById(const ID id)
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -1076,8 +929,8 @@ namespace storage
         return item;
     }
 
-    template <class T, class P, class C>
-    std::vector<T>* ActiveRecord<T, P, C>::findAll()
+    template <class T>
+    std::vector<T>* ActiveRecord<T>::findAll()
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -1088,8 +941,8 @@ namespace storage
         return getVectorByQuery(q);
     }
     
-    template <class T, class P, class C>
-    std::vector<T>* ActiveRecord<T, P, C>::findByCondition(const storage::AnyPropertyMap& conditions)
+    template <class T>
+    std::vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
     {
         std::stringstream query;
         query << "SELECT * FROM ";
@@ -1102,8 +955,8 @@ namespace storage
         return getVectorByQuery(q);
     }
     
-    template <class T, class P, class C>
-    std::vector<storage::AnyPropertyMap>* ActiveRecord<T, P, C>::getPropertyMaps(std::map<std::string, std::string>& schema)
+    template <class T>
+    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(std::map<std::string, std::string>& schema)
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         std::vector<storage::AnyPropertyMap>* maps = new std::vector<storage::AnyPropertyMap>();
@@ -1153,8 +1006,8 @@ namespace storage
         return maps;
     }
     
-    template <class T, class P, class C>
-    std::vector<T>* ActiveRecord<T, P, C>::getVectorByQuery(std::string& query)
+    template <class T>
+    std::vector<T>* ActiveRecord<T>::getVectorByQuery(std::string& query)
     {
         std::vector<T>* items = new std::vector<T>;
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
@@ -1182,8 +1035,8 @@ namespace storage
     }
 
 #if __WORDSIZE != 64
-    template <class T, class P, class C>
-    long long int ActiveRecord<T, P, C>::atoll(const char* s) 
+    template <class T>
+    long long int ActiveRecord<T>::atoll(const char* s) 
     {
         long long int v = 0;
         int sign = 1;

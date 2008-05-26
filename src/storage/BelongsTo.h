@@ -37,8 +37,12 @@
 
 #include <sstream>
 
-#ifndef SQLITEWRAPPERTEST_H_
-#include "../storage/SQLiteWrapper.h"
+#ifndef SQLITEWRAPPER_H_
+#include "SQLiteWrapper.h"
+#endif
+
+#ifndef PERSISTABLE_H_
+#include "Persistable.h"
 #endif
 
 //! Framework for storing instances in SQLite files.
@@ -58,7 +62,7 @@ namespace storage
      * the HasMany template class.
      */
     template <class P>
-    class BelongsTo
+    class BelongsTo : public virtual Persistable
     {
     public:
 
@@ -98,7 +102,7 @@ namespace storage
          * 
          * \return A boolean value.
          */
-        const bool hasParent() const;
+        virtual const bool hasParent() const;
         
         //! Sets a parent to the current instance.
         /*!
@@ -106,7 +110,7 @@ namespace storage
          * 
          * \param parent A pointer to the instance of which this object is child.
          */
-        void setParent(P*);
+        void setParent(Persistable*);
         
         //! Gets the parent of the current instance.
         /*!
@@ -114,22 +118,20 @@ namespace storage
          * 
          * \return A pointer to the parent of the current instance.
          */
-        P* getParent() const;
+        virtual Persistable* getParent() const;
         
         //! Returns the ID of the parent of the current instance.
         /*!
          * Returns the ID of the parent of the current instance.
-         * This method simplifies the implementation of this class, since
-         * otherwise it should have imported the ActiveRecord class.
          * 
          * \return A const storage::ID value.
          */
-        const storage::ID getParentId() const;
+        virtual const storage::ID getParentId() const;
     
     private:
         
         //! Holds the pointer to the parent of the current instance.
-        P* _parent;
+        Persistable* _parent;
     };
 
     template <class P>
@@ -162,13 +164,13 @@ namespace storage
     }
     
     template <class P>
-    void BelongsTo<P>::setParent(P* parent)
+    void BelongsTo<P>::setParent(Persistable* parent)
     {
         _parent = parent;
     }
     
     template <class P>
-    P* BelongsTo<P>::getParent() const
+    Persistable* BelongsTo<P>::getParent() const
     {
         return _parent;
     }

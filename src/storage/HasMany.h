@@ -43,8 +43,8 @@
 #include "AnyPropertyMap.h"
 #endif
 
-#ifndef ACTIVERECORD_H_
-#include "ActiveRecord.h"
+#ifndef PERSISTABLE_H_
+#include "Persistable.h"
 #endif
 
 //! Framework for storing instances in SQLite files.
@@ -63,8 +63,8 @@ namespace storage
      * instance and its related children. This template class is closely related to
      * the BelongsTo template class.
      */
-    template <class C, class P>
-    class HasMany
+    template <class C>
+    class HasMany : public virtual Persistable
     {
     public:
         //! Default constructor.
@@ -150,7 +150,7 @@ namespace storage
         /*!
          * Saves all the child elements associated to the current instance.
          */
-        void saveChildren();
+        virtual void saveChildren();
         
         //! States whether the children are in memory.
         /*!
@@ -169,15 +169,6 @@ namespace storage
          */
         void lazyLoadChildren();
         
-        //! Returns a "casted-down" pointer of the current instance.
-        /*!
-         * Returns a "casted-down" pointer of the current instance, 
-         * and caches it for future use.
-         *
-         * \return A "casted-down" pointer of the current instance.
-         */
-        P* getSelf();
-
     private:
         //! Shortcut to make the code more readable.
         typedef std::map<std::string, C*> InternalMap;
@@ -188,72 +179,67 @@ namespace storage
         
         //! Flag used by the "lazyLoadChildren()" method.
         bool _childrenLoaded;
-        
-        //! Variable used to access members through dynamic_cast<>
-        P* _self;
     };
 
-    template <class C, class P>
-    HasMany<C, P>::HasMany()
+    template <class C>
+    HasMany<C>::HasMany()
     : _children()
     , _childrenLoaded(false)
-    , _self(NULL)
     {
     }
 
-    template <class C, class P>
-    HasMany<C, P>::HasMany(const HasMany& rhs)
+    template <class C>
+    HasMany<C>::HasMany(const HasMany& rhs)
     : _children()
     , _childrenLoaded(false)
-    , _self(NULL)
     {
     }
 
-    template <class C, class P>
-    HasMany<C, P>& HasMany<C, P>::operator=(const HasMany& rhs)
+    template <class C>
+    HasMany<C>& HasMany<C>::operator=(const HasMany& rhs)
     {
         return *this;
     }
     
-    template <class C, class P>
-    HasMany<C, P>::~HasMany()
+    template <class C>
+    HasMany<C>::~HasMany()
     {
     }
 
-    template <class C, class P>
-    const bool HasMany<C, P>::hasChildren()
+    template <class C>
+    const bool HasMany<C>::hasChildren()
     {
         lazyLoadChildren();
         return !_children.empty();
     }
 
-    template <class C, class P>
-    void HasMany<C, P>::addChild(C* child)
+    template <class C>
+    void HasMany<C>::addChild(C* child)
     {
         if (child)
         {
             _children[child->getName()] = child;
-            child->setParent(getSelf());
-            getSelf()->setDirty();
+            child->setParent(this);
+            setDirty();
         }
     }
 
-    template <class C, class P>
-    const int HasMany<C, P>::getChildrenCount()
+    template <class C>
+    const int HasMany<C>::getChildrenCount()
     {
         lazyLoadChildren();
         return _children.size();
     }
 
-    template <class C, class P>
-    C* HasMany<C, P>::getChild(const std::string& name)
+    template <class C>
+    C* HasMany<C>::getChild(const std::string& name)
     {
         lazyLoadChildren();
         return _children[name];
     }
 
-    template <class C, class P>
-    void HasMany<C, P>::removeChild(const std::string& name)
+    template <class C>
+    void HasMany<C>::removeChild(const std::string& name)
     {
         lazyLoadChildren();
         C* element = _children[name];
@@ -262,12 +248,12 @@ namespace storage
             element->destroy();
             delete element;
             _children.erase(name);
-            getSelf()->setDirty();
+            setDirty();
         }
     }
 
-    template <class C, class P>
-    void HasMany<C, P>::removeAllChildren()
+    template <class C>
+    void HasMany<C>::removeAllChildren()
     {
         // For the explanation of the "typename" keyword below, see
         // http://gcc.gnu.org/ml/gcc-help/2008-01/msg00137.html and
@@ -284,8 +270,8 @@ namespace storage
         _children.clear();
     }
 
-    template <class C, class P>
-    void HasMany<C, P>::saveChildren()
+    template <class C>
+    void HasMany<C>::saveChildren()
     {
         typename InternalMap::iterator iter;
         for (iter = _children.begin(); iter != _children.end(); ++iter)
@@ -295,25 +281,25 @@ namespace storage
         _childrenLoaded = true;
     }
 
-    template <class C, class P>
-    const bool HasMany<C, P>::hasLoadedChildren() const
+    template <class C>
+    const bool HasMany<C>::hasLoadedChildren() const
     {
         return _childrenLoaded;
     }
 
-    template <class C, class P>
-    void HasMany<C, P>::lazyLoadChildren()
+    template <class C>
+    void HasMany<C>::lazyLoadChildren()
     {
         // It only makes sense to load children of objects
         // existing in the database...
-        if (!getSelf()->isNew() && !_childrenLoaded)
+        if (!isNew() && !_childrenLoaded)
         {
             // Do not load again
             _childrenLoaded = true;
 
             AnyPropertyMap conditions;
-            conditions.setInteger(C::getParentColumnName(), getSelf()->getId());
-            std::vector<C>* elements = ActiveRecord<C, P>::findByCondition(conditions);
+            conditions.setInteger(C::getParentColumnName(), getId());
+            std::vector<C>* elements = C::findByCondition(conditions);
 
             typename std::vector<C>::iterator iter;
             for (iter = elements->begin(); iter != elements->end(); ++iter)
@@ -326,27 +312,6 @@ namespace storage
 
             delete elements;
         }
-    }
-    
-    template <class C, class P>
-    P* HasMany<C, P>::getSelf()
-    {
-        if (!_self)
-        {
-            // The logic behind the "dynamic_cast" below is brilliantly
-            // explained here:
-            // http://carcino.gen.nz/tech/cpp/multiple_inheritance_this.php
-            // Also look at 
-            // http://www.acm.org/crossroads/xrds3-1/ovp3-1.html
-            // for a good explanation of the different C++ cast operators.
-
-            // Basically, when using multiple inheritance, you must use 
-            // the dynamic_cast operator to get the correct "this" pointer
-            // value needed. And this also explains the need of a second
-            // template class parameter, with the type of the parent.
-            _self = dynamic_cast<P*>(this);
-        }
-        return _self;
     }
 }
 

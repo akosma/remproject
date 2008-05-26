@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Implementation of the Diagram class
+//! Contains the implementation of the storage::None class.
 /*!
- * \file Diagram.cpp
+ * \file None.cpp
  *
- * Contains the implementation of the metamodel::Diagram class.
+ * Contains the implementation of the storage::None class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,57 +29,56 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      3/16/08
+ * \date      5/26/08
  */
 
-#include "Diagram.h"
+#include "None.h"
 
-#ifndef PROJECT_H_
-#include "Project.h"
-#endif
-
-#ifndef ELEMENT_H_
-#include "Element.h"
-#endif
-
-using storage::ActiveRecord;
-using storage::BelongsTo;
-using storage::HasMany;
-
-namespace metamodel
+namespace storage
 {
-    Diagram::Diagram(const std::string& className)
-    : ActiveRecord<Diagram>(className)
-    , BelongsTo<Project>()
-    , HasMany<Element>()
+    None::None()
+    : _parentColumn("no_parent")
+    {
+    }
+    
+    None::~None()
     {
     }
 
-    Diagram::Diagram(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Diagram>(className, id, data)
-    , BelongsTo<Project>()
-    , HasMany<Element>()
+    std::string& None::getTableName()
+    { 
+        static std::string tableName("no_parent");
+        return tableName; 
+    }
+
+    const ID None::getId() const
+    {
+        return DEFAULT_ID;
+    }
+
+    void None::setDirty() 
+    {
+    }
+    
+    const bool None::hasParent() const
+    {
+        return false;
+    }
+
+    void None::save()
     {
     }
 
-    Diagram::~Diagram()
+    void None::saveChildren()
     {
     }
 
-    std::string& Diagram::getTableName()
+    void None::destroy()
     {
-        static std::string tableName("diagrams");
-        return tableName;
     }
-
-    std::string& Diagram::getParentColumnName()
+    
+    const ID None::getParentId() const
     {
-        static std::string columnName("project_id");
-        return columnName;
-    }
-
-    void Diagram::createSchemaStructure()
-    {
-        addBooleanProperty("valid");
+        return DEFAULT_ID;
     }
 }

@@ -35,7 +35,7 @@
 #include "Element.h"
 
 #ifndef PROJECT_H_
-#include "../metamodel/Project.h"
+#include "Project.h"
 #endif
 
 #ifndef DIAGRAM_H_
@@ -45,16 +45,21 @@
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
+using storage::None;
 
 namespace metamodel
 {
     Element::Element(const std::string& className)
-    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className)
+    : ActiveRecord<Element>(className)
+    , BelongsTo<Diagram>()
+    , HasMany<None>()
     {
     }
 
     Element::Element(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Element, BelongsTo<Diagram>, HasMany<NoChildren, Element> >(className, id, data)
+    : ActiveRecord<Element>(className, id, data)
+    , BelongsTo<Diagram>()
+    , HasMany<None>()
     {
     }
 

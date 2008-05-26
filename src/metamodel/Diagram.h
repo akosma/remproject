@@ -77,9 +77,9 @@ namespace metamodel
      * Represents a container of Elements, arranged in a certain way,
      * representing a UML drawing, and belonging to a Project.
      */
-    class Diagram : public ActiveRecord<Diagram
-                         , BelongsTo<Project>
-                         , HasMany<Element, Diagram> >
+    class Diagram : public ActiveRecord<Diagram>
+                  , public BelongsTo<Project>
+                  , public HasMany<Element>
     {
     public:
 

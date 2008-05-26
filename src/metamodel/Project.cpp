@@ -42,19 +42,28 @@
 #include "Diagram.h"
 #endif
 
+#ifndef NONE_H_
+#include "../storage/None.h"
+#endif
+
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
+using storage::None;
 
 namespace metamodel
 {
     Project::Project()
-    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram, Project> >(std::string("project"))
+    : ActiveRecord<Project>(std::string("project"))
+    , BelongsTo<None>()
+    , HasMany<Diagram>()
     {
     }
 
     Project::Project(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Project, BelongsTo<NoParent>, HasMany<Diagram, Project> >(className, id, data)
+    : ActiveRecord<Project>(className, id, data)
+    , BelongsTo<None>()
+    , HasMany<Diagram>()
     {
     }
 

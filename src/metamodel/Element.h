@@ -49,11 +49,15 @@
 #include "../storage/HasMany.h"
 #endif
 
+#ifndef NONE_H_
+#include "../storage/None.h"
+#endif
+
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
-using storage::NoChildren;
 using storage::AnyPropertyMap;
+using storage::None;
 
 //! Model classes for UML projects
 /*!
@@ -72,9 +76,9 @@ namespace metamodel
      *
      * Represents a single visual element rendered inside a Diagram.
      */
-    class Element : public ActiveRecord<Element
-                         , BelongsTo<Diagram> 
-                         , HasMany<NoChildren, Element> >
+    class Element : public ActiveRecord<Element>
+                  , public BelongsTo<Diagram> 
+                  , public HasMany<None>
     {
     public:
 
