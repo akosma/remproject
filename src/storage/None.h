@@ -109,18 +109,6 @@ namespace storage
          */
         virtual void saveChildren();
 
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        virtual void destroy();
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
-        virtual const ID getParentId() const;
-
     private:
         //! Used to return a valid string reference only
         std::string _parentColumn;

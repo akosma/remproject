@@ -84,4 +84,27 @@ namespace tests
         
         delete diagram;
     }
+    
+    void DiagramTest::testCanAddElementsUsingOperator()
+    {
+        std::string diagramClassName("usecase");
+        std::string diagramName("diagramName");
+        Diagram* diagram = new Diagram(diagramClassName);
+        diagram->setName(diagramName);
+
+        std::string className("actor");
+        std::string actor1Name("actor1");
+        Element* actor1 = new Element(className);
+        actor1->setName(actor1Name);
+
+        // The "<<" operator requires the receiving object 
+        // to be treated as a reference, and not as a pointer
+        (*diagram) << actor1;
+        CPPUNIT_ASSERT_EQUAL(1, diagram->getChildrenCount());
+
+        Element* element = diagram->getChild(actor1Name);
+        CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
+        
+        delete diagram;
+    }
 }

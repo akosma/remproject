@@ -136,4 +136,17 @@ namespace tests
         // This is because "project" owns the diagrams and will delete them
         // when the stack is cleared, at the end of this method.
     }
+    
+    void ProjectTest::testCanAddElementsUsingOperator()
+    {
+        std::string first("first");
+        std::string diagramClassName("usecase");
+
+        Project project;
+        Diagram* firstDiagram = new Diagram(diagramClassName);
+        firstDiagram->setName(first);
+        
+        project << firstDiagram;
+        CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
+    }
 }

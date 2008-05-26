@@ -72,13 +72,4 @@ namespace storage
     void None::saveChildren()
     {
     }
-
-    void None::destroy()
-    {
-    }
-    
-    const ID None::getParentId() const
-    {
-        return DEFAULT_ID;
-    }
 }

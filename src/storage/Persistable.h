@@ -101,14 +101,6 @@ namespace storage
          */
         virtual void save() = 0;
 
-        //! Deletes the current instance from disk.
-        /*!
-         * Deletes the current instance from disk. It does not deletes
-         * the object from memory though.
-         * Implemented in the ActiveRecord class.
-         */
-        virtual void destroy() = 0;
-        
         //@}
 
         //! \name Methods implemented in the BelongsTo class.
@@ -131,15 +123,6 @@ namespace storage
          * \return A pointer to the parent of the current instance.
          */
         virtual Persistable* getParent() const = 0;
-        
-        //! Returns the ID of the parent of the current instance.
-        /*!
-         * Returns the ID of the parent of the current instance.
-         * Implemented in the BelongsTo class.
-         * 
-         * \return A const storage::ID value.
-         */
-        virtual const storage::ID getParentId() const = 0;
 
         //@}
 

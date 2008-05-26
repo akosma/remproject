@@ -129,14 +129,6 @@ namespace storage
          * \return A pointer to the parent of the current instance.
          */
         P* getCastParent() const;
-        
-        //! Returns the ID of the parent of the current instance.
-        /*!
-         * Returns the ID of the parent of the current instance.
-         * 
-         * \return A const storage::ID value.
-         */
-        virtual const storage::ID getParentId() const;
     
     private:
         
@@ -176,6 +168,8 @@ namespace storage
     template <class P>
     void BelongsTo<P>::setParent(Persistable* parent)
     {
+        // Here we enforce the interface that, for polymorphic
+        // reasons, cannot be enforced in the method signature!
         _parent = dynamic_cast<P*>(parent);
     }
     
@@ -188,20 +182,7 @@ namespace storage
     template <class P>
     P* BelongsTo<P>::getCastParent() const
     {
-        return dynamic_cast<P*>(_parent);
-    }
-    
-    template <class P>
-    const storage::ID BelongsTo<P>::getParentId() const
-    {
-        if (_parent)
-        {
-            return _parent->getId();
-        }
-        else
-        {
-            return storage::DEFAULT_ID;
-        }
+        return _parent;
     }
 }
 

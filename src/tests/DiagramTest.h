@@ -55,6 +55,7 @@ namespace tests
 
         CPPUNIT_TEST_SUITE(tests::DiagramTest);
         CPPUNIT_TEST(testDiagramCanHaveSeveralElements);
+        CPPUNIT_TEST(testCanAddElementsUsingOperator);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -70,6 +71,7 @@ namespace tests
         virtual ~DiagramTest();
 
         void testDiagramCanHaveSeveralElements();
+        void testCanAddElementsUsingOperator();
     };
 }
 

@@ -56,6 +56,7 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::ProjectTest);
         CPPUNIT_TEST(testProjectHasManyDiagrams);
         CPPUNIT_TEST(testCanRemoveAllDiagramsFromProject);
+        CPPUNIT_TEST(testCanAddElementsUsingOperator);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -72,6 +73,7 @@ namespace tests
 
         void testProjectHasManyDiagrams();
         void testCanRemoveAllDiagramsFromProject();
+        void testCanAddElementsUsingOperator();
     };
 }
 

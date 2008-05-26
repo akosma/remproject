@@ -113,6 +113,15 @@ namespace storage
          * \param child The pointer to add to the children collection.
          */
         void addChild(C*);
+        
+        //! Adds the object passed as parameter as child of the current instance.
+        /*!
+         * Adds the pointer passed as parameter to the collection of child instances.
+         * Using this operator is identical to a call to the "addChild()" method.
+         *
+         * \param child The pointer to add to the children collection.
+         */
+        HasMany& operator<<(C*);
 
         //! Gets the number of children of the current instance.
         /*!
@@ -222,6 +231,13 @@ namespace storage
             child->setParent(this);
             setDirty();
         }
+    }
+    
+    template <class C>
+    HasMany<C>& HasMany<C>::operator<<(C* child)
+    {
+        addChild(child);
+        return *this;
     }
 
     template <class C>

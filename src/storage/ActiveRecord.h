@@ -755,10 +755,14 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::save()
     {
-        ID parentId = getParentId();
-        if (parentId != DEFAULT_ID)
+        if (hasParent())
         {
-            setParentId(parentId);
+            // This should work always!
+            // hasParent() means that getParent() won't return NULL;
+            // and moreover, children's call to "save()" comes AFTER the 
+            // parent's call to "save()"
+            // (see the "saveChildren()" call at the end of this method...)
+            setParentId(getParent()->getId());
         }
         if (_isNew)
         {
