@@ -298,7 +298,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(2, project->getChildrenCount());
 
         parent = secondDiagram->getCastParent();
-        CPPUNIT_ASSERT_EQUAL((int)project, (int)secondDiagram->getParent());
+        CPPUNIT_ASSERT_EQUAL((int)project, (int)parent);
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 
         project->save();

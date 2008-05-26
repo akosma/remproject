@@ -277,6 +277,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\controllers\FileController.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\tests\FileControllerTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\tests\main.cpp"
 				>
 				<FileConfiguration
@@ -295,6 +303,10 @@
 						RuntimeLibrary="3"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\None.cpp"
+				>
 			</File>
 			<File
 				RelativePath="..\..\src\metamodel\Project.cpp"
@@ -437,7 +449,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\controllers\FileController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\tests\FileControllerTest.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\storage\HasMany.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\None.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\Persistable.h"
 				>
 			</File>
 			<File
@@ -469,6 +497,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\utility\Property.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\tests\PropertyTest.h"
 				>
 				<FileConfiguration
@@ -487,6 +519,10 @@
 						RuntimeLibrary="3"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\utility\Singleton.h"
+				>
 			</File>
 			<File
 				RelativePath="..\..\src\storage\SQLiteWrapper.h"

@@ -122,8 +122,8 @@ namespace tests
         
         CPPUNIT_ASSERT(!controller.hasCurrentDiagram());
         const std::string diagramClassName("usecase");
-        controller.addDiagram(diagramClassName);
-        CPPUNIT_ASSERT(controller.hasCurrentDiagram());
+//        controller.addDiagram(diagramClassName);
+//        CPPUNIT_ASSERT(controller.hasCurrentDiagram());
         
         controller.saveProject();
     }
