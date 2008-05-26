@@ -94,13 +94,17 @@ namespace tests
 
         std::string className("actor");
         std::string actor1Name("actor1");
+        std::string actor2Name("actor2");
         Element* actor1 = new Element(className);
         actor1->setName(actor1Name);
+        Element* actor2 = new Element(className);
+        actor2->setName(actor2Name);
 
         // The "<<" operator requires the receiving object 
-        // to be treated as a reference, and not as a pointer
-        (*diagram) << actor1;
-        CPPUNIT_ASSERT_EQUAL(1, diagram->getChildrenCount());
+        // to be treated as a reference, and not as a pointer...
+        // And then you can chain the insertions!
+        (*diagram) << actor1 << actor2;
+        CPPUNIT_ASSERT_EQUAL(2, diagram->getChildrenCount());
 
         Element* element = diagram->getChild(actor1Name);
         CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);

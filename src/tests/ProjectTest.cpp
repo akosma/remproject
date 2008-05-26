@@ -140,13 +140,16 @@ namespace tests
     void ProjectTest::testCanAddElementsUsingOperator()
     {
         std::string first("first");
+        std::string second("second");
         std::string diagramClassName("usecase");
 
         Project project;
         Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
+        Diagram* secondDiagram = new Diagram(diagramClassName);
+        secondDiagram->setName(second);
         
-        project << firstDiagram;
-        CPPUNIT_ASSERT_EQUAL(1, project.getChildrenCount());
+        project << firstDiagram << secondDiagram;
+        CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
     }
 }
