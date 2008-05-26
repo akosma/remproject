@@ -285,12 +285,9 @@ namespace tests
         project->setName(projectName);
         Diagram* firstDiagram = new Diagram(diagramClassName);
         firstDiagram->setName(first);
-        
-        // Thanks to "dynamic_cast", when adding a child, we're setting 
-        // also the "parent" pointer in the child object.
         project->addChild(firstDiagram);
 
-        Project* parent = dynamic_cast<Project*>(firstDiagram->getParent());
+        Project* parent = firstDiagram->getCastParent();
         CPPUNIT_ASSERT_EQUAL((int)project, (int)parent);
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 
@@ -300,8 +297,7 @@ namespace tests
 
         CPPUNIT_ASSERT_EQUAL(2, project->getChildrenCount());
 
-        // The pointer to the parent is correctly set thanks to the dynamic_cast operator:
-        parent = dynamic_cast<Project*>(secondDiagram->getParent());
+        parent = secondDiagram->getCastParent();
         CPPUNIT_ASSERT_EQUAL((int)project, (int)secondDiagram->getParent());
         CPPUNIT_ASSERT_EQUAL(project->getName(), parent->getName());
 

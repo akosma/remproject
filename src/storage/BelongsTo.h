@@ -120,6 +120,16 @@ namespace storage
          */
         virtual Persistable* getParent() const;
         
+        //! Gets a cast-down pointer to the parent of the current instance.
+        /*!
+         * Gets a cast-down pointer to the parent of the current instance.
+         * This is a convenience method, to avoid clients having to implement
+         * a dynamic_cast<>() operation every time.
+         * 
+         * \return A pointer to the parent of the current instance.
+         */
+        P* getCastParent() const;
+        
         //! Returns the ID of the parent of the current instance.
         /*!
          * Returns the ID of the parent of the current instance.
@@ -131,7 +141,7 @@ namespace storage
     private:
         
         //! Holds the pointer to the parent of the current instance.
-        Persistable* _parent;
+        P* _parent;
     };
 
     template <class P>
@@ -166,13 +176,19 @@ namespace storage
     template <class P>
     void BelongsTo<P>::setParent(Persistable* parent)
     {
-        _parent = parent;
+        _parent = dynamic_cast<P*>(parent);
     }
     
     template <class P>
     Persistable* BelongsTo<P>::getParent() const
     {
         return _parent;
+    }
+    
+    template <class P>
+    P* BelongsTo<P>::getCastParent() const
+    {
+        return dynamic_cast<P*>(_parent);
     }
     
     template <class P>
