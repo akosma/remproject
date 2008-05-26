@@ -36,6 +36,7 @@
 
 // The Mac OS X compiler requires this line, because "nil" is a reserved
 // word in the Objective-C language, and without it this file won't compile.
+// (The Poco/UUID.h file has definitions of a "nil()" method!)
 #undef nil
 
 #include <sstream>
