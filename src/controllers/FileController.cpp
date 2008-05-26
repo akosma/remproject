@@ -41,14 +41,15 @@
 // word in the Objective-C language, and without it this file won't compile.
 // (The Poco/UUID.h file has definitions of a "nil()" method!)
 #undef nil
+#endif
 
+#if defined(_WIN32)
+#include <cstdio>
+#else
 #include <Poco/UUIDGenerator.h>
 #include <Poco/UUID.h>
-
 using Poco::UUIDGenerator;
 using Poco::UUID;
-#else
-#include <cstdio>
 #endif
 
 #ifndef SQLITEWRAPPER_H_
@@ -135,12 +136,12 @@ namespace controllers
         if (_project)
         {
             Diagram* diagram = new Diagram(className);
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(_WIN32)
+			std::string name(tmpnam(NULL));
+#else
             UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
             UUID uuid = generator.createRandom();
             std::string name = uuid.toString();
-#else
-			std::string name(tmpnam(NULL));
 #endif
             diagram->setName(name);
             _project->addChild(diagram);
