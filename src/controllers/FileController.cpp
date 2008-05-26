@@ -134,7 +134,7 @@ namespace controllers
             Diagram* diagram = new Diagram(className);
             UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
             UUID uuid = generator.createRandom();
-            std::string& name = uuid.toString();
+            std::string name = uuid.toString();
             diagram->setName(name);
             _project->addChild(diagram);
             _currentDiagram = diagram;
