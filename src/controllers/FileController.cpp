@@ -34,25 +34,28 @@
 
 #include "FileController.h"
 
+#include <sstream>
+
 #if defined(__APPLE__) && defined(__MACH__)
 // The Mac OS X compiler requires this line, because "nil" is a reserved
 // word in the Objective-C language, and without it this file won't compile.
 // (The Poco/UUID.h file has definitions of a "nil()" method!)
 #undef nil
-#endif
-
-#include <sstream>
 
 #include <Poco/UUIDGenerator.h>
 #include <Poco/UUID.h>
+
+using Poco::UUIDGenerator;
+using Poco::UUID;
+#else
+#include <cstdio>
+#endif
 
 #ifndef SQLITEWRAPPER_H_
 #include "../storage/SQLiteWrapper.h"
 #endif
 
 using storage::SQLiteWrapper;
-using Poco::UUIDGenerator;
-using Poco::UUID;
 
 namespace controllers
 {
@@ -132,9 +135,13 @@ namespace controllers
         if (_project)
         {
             Diagram* diagram = new Diagram(className);
+#if defined(__APPLE__) && defined(__MACH__)
             UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
             UUID uuid = generator.createRandom();
             std::string name = uuid.toString();
+#else
+			std::string name(tmpnam(NULL));
+#endif
             diagram->setName(name);
             _project->addChild(diagram);
             _currentDiagram = diagram;
