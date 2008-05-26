@@ -34,10 +34,12 @@
 
 #include "FileController.h"
 
+#if defined(__APPLE__) && defined(__MACH__)
 // The Mac OS X compiler requires this line, because "nil" is a reserved
 // word in the Objective-C language, and without it this file won't compile.
 // (The Poco/UUID.h file has definitions of a "nil()" method!)
 #undef nil
+#endif
 
 #include <sstream>
 
