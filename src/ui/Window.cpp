@@ -73,7 +73,7 @@ namespace ui
         // delete image;
         
         
-#if JUCE_MAC
+#if defined(__APPLE__) && defined(__MACH__)
 //        MenuBarModel::setMacMainMenu(this->getContentComponent());
 //        mainWindow->setMenuBar (0);
 #endif

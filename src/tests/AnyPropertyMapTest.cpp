@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-#if WIN32
+#if defined(_WIN32)
 #include <new>
 #endif
 
@@ -139,7 +139,7 @@ namespace tests
         {
             std::string value = map.getString(name1);
         }
-#if WIN32
+#if defined(_WIN32)
 		catch(std::bad_alloc& e)
 		{
 			std::string expectedMessage("bad allocation");
