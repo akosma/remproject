@@ -45,12 +45,6 @@ namespace storage
     {
     }
 
-    std::string& None::getTableName()
-    { 
-        static std::string tableName("no_parent");
-        return tableName; 
-    }
-
     const ID None::getId() const
     {
         return DEFAULT_ID;

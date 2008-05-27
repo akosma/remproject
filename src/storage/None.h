@@ -77,12 +77,6 @@ namespace storage
         /*!
          * Placeholder method required at template instantiation time
          */
-        static std::string& getTableName();
-
-        //! Placeholder method required at template instantiation time.
-        /*!
-         * Placeholder method required at template instantiation time
-         */
         virtual const ID getId() const;
 
         //! Placeholder method required at template instantiation time.
