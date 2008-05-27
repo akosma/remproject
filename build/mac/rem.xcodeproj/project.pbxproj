@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
 		3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */; };
-		3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A308A6D0DB7DE8000965CD1 /* Actor.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
+		3A3852000DECAC1B009A749A /* ActorFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */; };
+		3A3852010DECAC1B009A749A /* UseCaseFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */; };
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
@@ -32,7 +33,6 @@
 		3A8101510D96BC66003EFF96 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
 		3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */; };
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
-		3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
 		3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
@@ -52,13 +52,15 @@
 		3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileControllerTest.cpp; path = ../../src/tests/FileControllerTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileControllerTest.h; path = ../../src/tests/FileControllerTest.h; sourceTree = SOURCE_ROOT; };
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		3A308A6C0DB7DE8000965CD1 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = ../../src/ui/Actor.h; sourceTree = SOURCE_ROOT; };
-		3A308A6D0DB7DE8000965CD1 /* Actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = ../../src/ui/Actor.cpp; sourceTree = SOURCE_ROOT; };
 		3A3381A40D97BE9B0066C369 /* ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecord.h; path = ../../src/storage/ActiveRecord.h; sourceTree = SOURCE_ROOT; };
 		3A3556820D96D8090079D03E /* AnyPropertyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMap.h; path = ../../src/storage/AnyPropertyMap.h; sourceTree = SOURCE_ROOT; };
 		3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMap.cpp; path = ../../src/storage/AnyPropertyMap.cpp; sourceTree = SOURCE_ROOT; };
 		3A3556870D96D8D60079D03E /* AnyPropertyMapTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPropertyMapTest.h; path = ../../src/tests/AnyPropertyMapTest.h; sourceTree = SOURCE_ROOT; };
 		3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyPropertyMapTest.cpp; path = ../../src/tests/AnyPropertyMapTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActorFigure.cpp; path = ../../src/ui/ActorFigure.cpp; sourceTree = SOURCE_ROOT; };
+		3A3851FD0DECAC1B009A749A /* ActorFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActorFigure.h; path = ../../src/ui/ActorFigure.h; sourceTree = SOURCE_ROOT; };
+		3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseFigure.cpp; path = ../../src/ui/UseCaseFigure.cpp; sourceTree = SOURCE_ROOT; };
+		3A3851FF0DECAC1B009A749A /* UseCaseFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseFigure.h; path = ../../src/ui/UseCaseFigure.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2ED0D968AD7002F1AC2 /* PropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTest.h; path = ../../src/tests/PropertyTest.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropertyTest.cpp; path = ../../src/tests/PropertyTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyProperty.h; path = ../../src/storage/AnyProperty.h; sourceTree = SOURCE_ROOT; };
@@ -91,8 +93,6 @@
 		3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapperTest.cpp; path = ../../src/tests/SQLiteWrapperTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A98E1B30DB9FB0A0095EADC /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Figure.h; path = ../../src/ui/Figure.h; sourceTree = SOURCE_ROOT; };
 		3A98E1B40DB9FB0A0095EADC /* Figure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Figure.cpp; path = ../../src/ui/Figure.cpp; sourceTree = SOURCE_ROOT; };
-		3A98E23F0DBA0BE40095EADC /* UseCaseBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseBubble.h; path = ../../src/ui/UseCaseBubble.h; sourceTree = SOURCE_ROOT; };
-		3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseBubble.cpp; path = ../../src/ui/UseCaseBubble.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
 		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
@@ -239,12 +239,12 @@
 		3A308A6B0DB7DE6A00965CD1 /* Figures */ = {
 			isa = PBXGroup;
 			children = (
-				3A308A6C0DB7DE8000965CD1 /* Actor.h */,
-				3A308A6D0DB7DE8000965CD1 /* Actor.cpp */,
+				3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */,
+				3A3851FD0DECAC1B009A749A /* ActorFigure.h */,
+				3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */,
+				3A3851FF0DECAC1B009A749A /* UseCaseFigure.h */,
 				3A98E1B30DB9FB0A0095EADC /* Figure.h */,
 				3A98E1B40DB9FB0A0095EADC /* Figure.cpp */,
-				3A98E23F0DBA0BE40095EADC /* UseCaseBubble.h */,
-				3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */,
 				3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */,
 				3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */,
 			);
@@ -465,13 +465,13 @@
 				3AC065C40DB13102000EB33E /* Application.cpp in Sources */,
 				3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */,
 				3AC065C60DB13102000EB33E /* Window.cpp in Sources */,
-				3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */,
 				3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */,
-				3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */,
 				3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */,
 				3AC4D3420DEC9C9F00D26FFA /* ActorToolbarButton.cpp in Sources */,
 				3AC4D3430DEC9C9F00D26FFA /* Toolbar.cpp in Sources */,
 				3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */,
+				3A3852000DECAC1B009A749A /* ActorFigure.cpp in Sources */,
+				3A3852010DECAC1B009A749A /* UseCaseFigure.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

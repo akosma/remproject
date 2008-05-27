@@ -31,14 +31,14 @@ SET (ui_SRCS
     ui/ContentComponent.h 
     ui/ContentComponent.cpp 
     
-    ui/Actor.h
-    ui/Actor.cpp
+    ui/ActorFigure.h
+    ui/ActorFigure.cpp
 
     ui/Figure.h
     ui/Figure.cpp
 
-    ui/UseCaseBubble.h
-    ui/UseCaseBubble.cpp
+    ui/UseCaseFigure.h
+    ui/UseCaseFigure.cpp
     
     ui/ArrowCanvas.h
     ui/ArrowCanvas.cpp

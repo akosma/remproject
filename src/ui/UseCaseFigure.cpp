@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file UseCaseBubble.cpp
+ * \file UseCaseFigure.cpp
  *
- * Contains the implementation of the ui::UseCaseBubble class.
+ * Contains the implementation of the ui::UseCaseFigure class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,7 +31,7 @@
  * \date      4/19/08
  */
 
-#include "UseCaseBubble.h"
+#include "UseCaseFigure.h"
 
 /*!
  * \namespace ui
@@ -40,9 +40,9 @@
 namespace ui
 {
     /*!
-     * UseCaseBubble Constructor.
+     * UseCaseFigure Constructor.
      */
-    UseCaseBubble::UseCaseBubble(ContentComponent* parent)
+    UseCaseFigure::UseCaseFigure(ContentComponent* parent)
     : Figure(parent, 200, 150)
     , _nameLabel(0)
     {
@@ -57,19 +57,19 @@ namespace ui
         this->addAndMakeVisible(_nameLabel, 0);
     }
     
-    void UseCaseBubble::mouseDoubleClick(const MouseEvent& e)
+    void UseCaseFigure::mouseDoubleClick(const MouseEvent& e)
     {
         _nameLabel->showEditor();
     }
     
     /*!
-     * UseCaseBubble Virtual destructor.
+     * UseCaseFigure Virtual destructor.
      */
-    UseCaseBubble::~UseCaseBubble()
+    UseCaseFigure::~UseCaseFigure()
     {
     }
 
-    void UseCaseBubble::drawFigure(Path& usecase)
+    void UseCaseFigure::drawFigure(Path& usecase)
     {
         const int currentWidth = getWidth();
         const int currentHeight = getHeight();

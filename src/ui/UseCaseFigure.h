@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file Actor.h
+ * \file UseCaseFigure.h
  *
- * Contains the interface of the ui::Actor class.
+ * Contains the interface of the ui::UseCaseFigure class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,13 +28,11 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/17/08
+ * \date      4/19/08
  */
 
-#include "juce.h"
-
-#ifndef ACTOR_H_
-#define ACTOR_H_
+#ifndef USECASEFIGURE_H_
+#define USECASEFIGURE_H_
 
 #ifndef FIGURE_H_
 #include "Figure.h"
@@ -47,18 +45,26 @@
 namespace ui
 {
     /*!
-     * \class Actor
+     * \class UseCaseFigure
      *
      *  
      */
-    class Actor : public Figure
+    class UseCaseFigure : public Figure
     {
     public:
-        Actor(ContentComponent*);
-        virtual ~Actor();
-        
-        void mouseDoubleClick(const MouseEvent& e); 
 
+        /*!
+         *  UseCaseFigure constructor.
+         */
+        UseCaseFigure(ContentComponent*);
+
+        /*!
+         *  UseCaseFigure virtual destructor.
+         */
+        virtual ~UseCaseFigure();
+
+        void mouseDoubleClick(const MouseEvent& e);
+    
     protected:
         virtual void drawFigure(Path&);
 
@@ -67,4 +73,4 @@ namespace ui
     };
 }
 
-#endif /* ACTOR_H_ */
+#endif /* USECASEFIGURE_H_ */

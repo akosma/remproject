@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file UseCaseBubble.h
+ * \file ActorFigure.h
  *
- * Contains the interface of the ui::UseCaseBubble class.
+ * Contains the interface of the ui::ActorFigure class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,11 +28,13 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/19/08
+ * \date      4/17/08
  */
 
-#ifndef USECASEBUBBLE_H_
-#define USECASEBUBBLE_H_
+#include "juce.h"
+
+#ifndef ACTORFIGURE_H_
+#define ACTORFIGURE_H_
 
 #ifndef FIGURE_H_
 #include "Figure.h"
@@ -45,26 +47,18 @@
 namespace ui
 {
     /*!
-     * \class UseCaseBubble
+     * \class ActorFigure
      *
      *  
      */
-    class UseCaseBubble : public Figure
+    class ActorFigure : public Figure
     {
     public:
+        ActorFigure(ContentComponent*);
+        virtual ~ActorFigure();
+        
+        void mouseDoubleClick(const MouseEvent& e); 
 
-        /*!
-         *  UseCaseBubble constructor.
-         */
-        UseCaseBubble(ContentComponent*);
-
-        /*!
-         *  UseCaseBubble virtual destructor.
-         */
-        virtual ~UseCaseBubble();
-
-        void mouseDoubleClick(const MouseEvent& e);
-    
     protected:
         virtual void drawFigure(Path&);
 
@@ -73,4 +67,4 @@ namespace ui
     };
 }
 
-#endif /* USECASEBUBBLE_H_ */
+#endif /* ACTORFIGURE_H_ */

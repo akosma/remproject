@@ -33,12 +33,12 @@
 
 #include "ContentComponent.h"
 
-#ifndef ACTOR_H_
-#include "Actor.h"
+#ifndef ACTORFIGURE_H_
+#include "ActorFigure.h"
 #endif
 
-#ifndef USECASEBUBBLE_H_
-#include "UseCaseBubble.h"
+#ifndef USECASEFIGURE_H_
+#include "UseCaseFigure.h"
 #endif
 
 #ifndef ARROWCANVAS_H_
@@ -61,15 +61,15 @@ namespace ui
         _canvas->setBounds(0, 0, 800, 600);
         addAndMakeVisible(_canvas, 0);
         
-        Actor* a = new Actor(this);
+        ActorFigure* a = new ActorFigure(this);
         a->setTopLeftPosition(100, 300);
         addAndMakeVisible(a, -1);
 
-        Actor* b = new Actor(this);
+        ActorFigure* b = new ActorFigure(this);
         b->setTopLeftPosition(100, 10);
         addAndMakeVisible(b, -1);
         
-        UseCaseBubble* c = new UseCaseBubble(this);
+        UseCaseFigure* c = new UseCaseFigure(this);
         c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);
         

@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file Actor.cpp
+ * \file ActorFigure.cpp
  *
- * Contains the implementation of the ui::Actor class.
+ * Contains the implementation of the ui::ActorFigure class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,7 +31,7 @@
  * \date      4/17/08
  */
 
-#include "Actor.h"
+#include "ActorFigure.h"
 
 /*!
  * \namespace ui
@@ -39,7 +39,7 @@
  */
 namespace ui
 {
-    Actor::Actor(ContentComponent* parent)
+    ActorFigure::ActorFigure(ContentComponent* parent)
     : Figure(parent, 80, 200)
     , _nameLabel(0)
     {
@@ -52,16 +52,16 @@ namespace ui
         _nameLabel->setInterceptsMouseClicks(false, false);
     }
 
-    Actor::~Actor()
+    ActorFigure::~ActorFigure()
     {
     }
     
-    void Actor::mouseDoubleClick(const MouseEvent& e)
+    void ActorFigure::mouseDoubleClick(const MouseEvent& e)
     {
         _nameLabel->showEditor();
     }
     
-    void Actor::drawFigure(Path& actor)
+    void ActorFigure::drawFigure(Path& actor)
     {
         const int currentWidth = getWidth();
         const int currentHeight = getHeight();
