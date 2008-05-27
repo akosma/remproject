@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the storage::None class.
+//! Contains the implementation of the storage::Persistable class.
 /*!
- * \file None.cpp
+ * \file Persistable.cpp
  *
- * Contains the implementation of the storage::None class.
+ * Contains the implementation of the storage::Persistable class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,38 +32,47 @@
  * \date      5/26/08
  */
 
-#include "None.h"
+#include "Persistable.h"
 
 namespace storage
 {
-    None::None()
-    : _parentColumn("no_parent")
+    Persistable::Persistable()
     {
     }
     
-    None::~None()
+    Persistable::~Persistable()
     {
     }
 
-    const ID None::getId() const
+    const ID Persistable::getId() const
     {
         return DEFAULT_ID;
     }
 
-    void None::setDirty() 
+    void Persistable::setDirty() 
     {
     }
     
-    const bool None::hasParent() const
+    const bool Persistable::isNew()
     {
         return false;
     }
 
-    void None::save()
+    void Persistable::save()
     {
     }
+    
+    const bool Persistable::hasParent() const
+    {
+        return false;
+    }
+    
+    Persistable* Persistable::getParent() const
+    {
+        return NULL;
+    }
 
-    void None::saveChildren()
+    void Persistable::saveChildren()
     {
     }
 }

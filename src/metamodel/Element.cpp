@@ -45,21 +45,18 @@
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
-using storage::None;
 
 namespace metamodel
 {
     Element::Element(const std::string& className)
     : ActiveRecord<Element>(className)
     , BelongsTo<Diagram>()
-    , HasMany<None>()
     {
     }
 
     Element::Element(const std::string& className, const storage::ID id, AnyPropertyMap& data)
     : ActiveRecord<Element>(className, id, data)
     , BelongsTo<Diagram>()
-    , HasMany<None>()
     {
     }
 

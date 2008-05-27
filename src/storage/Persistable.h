@@ -35,6 +35,8 @@
 #ifndef PERSISTABLE_H_
 #define PERSISTABLE_H_
 
+#include <string>
+
 #ifndef SQLITEWRAPPER_H_
 #include "SQLiteWrapper.h"
 #endif
@@ -47,11 +49,11 @@
  */
 namespace storage
 {
-    //! Abstract base class for the ActiveRecord family of classes.
+    //! Base class for the ActiveRecord family of classes.
     /*!
      * \class Persistable
      *
-     * Abstract base class for the ActiveRecord family of classes
+     * Base class for the ActiveRecord family of classes
      * implemented in this namespace. This class provides a common
      * interface allowing "sister-class delegation" as explained here:
      * http://www.parashift.com/c++-faq-lite/multiple-inheritance.html#faq-25.10
@@ -59,6 +61,23 @@ namespace storage
     class Persistable
     {
     public:
+    
+        //! \name Constructor and Destructor
+        //@{
+        
+        //! Constructor
+        /*!
+         * Constructor
+         */
+        Persistable();
+        
+        //! Virtual destructor
+        /*!
+         * Virtual destructor
+         */
+        virtual ~Persistable();
+        
+        //@}
 
         //! \name Methods implemented in the ActiveRecord class.
         //@{
@@ -70,7 +89,7 @@ namespace storage
          * 
          * \return An ID (long long) value.
          */
-        virtual const ID getId() const = 0;
+        virtual const ID getId() const;
 
         //! Changes the "_isDirty" flag of the current instance.
         /*!
@@ -79,7 +98,7 @@ namespace storage
          * every "setter" method.
          * Implemented in the ActiveRecord class.
          */
-        virtual void setDirty() = 0;
+        virtual void setDirty();
 
         //! States whether the current instance exists only in memory.
         /*!
@@ -90,7 +109,7 @@ namespace storage
          * \return A boolean value stating whether the current instance 
          * exists in the database (false) or not (true).
          */
-        virtual const bool isNew() const = 0;
+        virtual const bool isNew();
 
         //! Saves (inserts or updates) the current instance to disk.
         /*!
@@ -99,7 +118,7 @@ namespace storage
          * the instance into the database.
          * Implemented in the ActiveRecord class.
          */
-        virtual void save() = 0;
+        virtual void save();
 
         //@}
 
@@ -113,7 +132,7 @@ namespace storage
          * 
          * \return A boolean value.
          */
-        virtual const bool hasParent() const = 0;
+        virtual const bool hasParent() const;
 
         //! Gets the parent of the current instance.
         /*!
@@ -122,7 +141,7 @@ namespace storage
          * 
          * \return A pointer to the parent of the current instance.
          */
-        virtual Persistable* getParent() const = 0;
+        virtual Persistable* getParent() const;
 
         //@}
 
@@ -134,7 +153,7 @@ namespace storage
          * Saves all the child elements associated to the current instance.
          * Implemented in the HasMany class.
          */
-        virtual void saveChildren() = 0;
+        virtual void saveChildren();
 
         //@}
     };

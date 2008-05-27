@@ -40,7 +40,7 @@
 		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
 		3AC065D60DB13353000EB33E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3AC065D50DB13353000EB33E /* icon.icns */; };
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
-		3AC17A000DEB2B5400A22606 /* None.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC179FF0DEB2B5400A22606 /* None.cpp */; };
+		3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
 		3AE94FA40DC3571900145786 /* ToolboxItemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE94FA30DC3571900145786 /* ToolboxItemFactory.cpp */; };
 /* End PBXBuildFile section */
@@ -108,8 +108,7 @@
 		3AC075FC0D8D9A21004C5A73 /* Element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Element.cpp; path = ../../src/metamodel/Element.cpp; sourceTree = SOURCE_ROOT; };
 		3AC075FD0D8D9A21004C5A73 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../../src/metamodel/Element.h; sourceTree = SOURCE_ROOT; };
 		3AC1798D0DEB1F5300A22606 /* Persistable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Persistable.h; path = ../../src/storage/Persistable.h; sourceTree = SOURCE_ROOT; };
-		3AC179FE0DEB2B5400A22606 /* None.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = None.h; path = ../../src/storage/None.h; sourceTree = SOURCE_ROOT; };
-		3AC179FF0DEB2B5400A22606 /* None.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = None.cpp; path = ../../src/storage/None.cpp; sourceTree = SOURCE_ROOT; };
+		3AC608C90DEC0A34002D0B12 /* Persistable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Persistable.cpp; path = ../../src/storage/Persistable.cpp; sourceTree = SOURCE_ROOT; };
 		3AD1A8700DC64F20009977AE /* BelongsTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BelongsTo.h; path = ../../src/storage/BelongsTo.h; sourceTree = SOURCE_ROOT; };
 		3AD1A8760DC64FF4009977AE /* HasMany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HasMany.h; path = ../../src/storage/HasMany.h; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
@@ -203,12 +202,11 @@
 		3A18FB620D843CA900744B33 /* storage */ = {
 			isa = PBXGroup;
 			children = (
+				3AC608C90DEC0A34002D0B12 /* Persistable.cpp */,
 				3AC1798D0DEB1F5300A22606 /* Persistable.h */,
 				3A3381A40D97BE9B0066C369 /* ActiveRecord.h */,
 				3AD1A8700DC64F20009977AE /* BelongsTo.h */,
 				3AD1A8760DC64FF4009977AE /* HasMany.h */,
-				3AC179FE0DEB2B5400A22606 /* None.h */,
-				3AC179FF0DEB2B5400A22606 /* None.cpp */,
 				3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */,
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
 				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
@@ -450,7 +448,7 @@
 				3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */,
 				3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */,
 				3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */,
-				3AC17A000DEB2B5400A22606 /* None.cpp in Sources */,
+				3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

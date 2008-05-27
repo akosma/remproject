@@ -47,14 +47,9 @@
 #include "../storage/HasMany.h"
 #endif
 
-#ifndef NONE_H_
-#include "../storage/None.h"
-#endif
-
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
-using storage::None;
 
 //! Model classes for UML projects
 /*!
@@ -74,7 +69,6 @@ namespace metamodel
      * Represents a single Project, containing many diagrams in it.
      */
     class Project : public ActiveRecord<Project>
-                  , public BelongsTo<None>
                   , public HasMany<Diagram>
     {
     public:

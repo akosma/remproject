@@ -56,10 +56,9 @@ SET (storage_SRCS
     storage/ActiveRecord.h 
     storage/BelongsTo.h
     storage/HasMany.h
+
+    storage/Persistable.cpp
     storage/Persistable.h
-    
-    storage/None.cpp
-    storage/None.h
 
     storage/AnyProperty.cpp 
     storage/AnyProperty.h 
