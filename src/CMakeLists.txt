@@ -43,11 +43,14 @@ SET (ui_SRCS
     ui/ArrowCanvas.h
     ui/ArrowCanvas.cpp
 
-    ui/Toolbox.h
-    ui/Toolbox.cpp
+    ui/Toolbar.h
+    ui/Toolbar.cpp
 
-    ui/ToolboxItemFactory.h
-    ui/ToolboxItemFactory.cpp
+    ui/ActorToolbarButton.h
+    ui/ActorToolbarButton.cpp
+
+    ui/UseCaseToolbarButton.h
+    ui/UseCaseToolbarButton.cpp
 
     ui/Main.cpp 
 )

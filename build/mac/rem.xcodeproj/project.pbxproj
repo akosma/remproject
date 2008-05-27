@@ -16,7 +16,6 @@
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
 		3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */; };
-		3A63E7870DBB9C9D0016AFE0 /* Toolbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E7860DBB9C9D0016AFE0 /* Toolbox.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
 		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
 		3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4490D8D64B000F61DB0 /* Project.cpp */; };
@@ -35,14 +34,16 @@
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E2400DBA0BE40095EADC /* UseCaseBubble.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C00DB13102000EB33E /* ContentComponent.cpp */; };
 		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
 		3AC065D60DB13353000EB33E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3AC065D50DB13353000EB33E /* icon.icns */; };
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
+		3AC4D3420DEC9C9F00D26FFA /* ActorToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */; };
+		3AC4D3430DEC9C9F00D26FFA /* Toolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4D3400DEC9C9F00D26FFA /* Toolbar.cpp */; };
 		3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
-		3AE94FA40DC3571900145786 /* ToolboxItemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE94FA30DC3571900145786 /* ToolboxItemFactory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,8 +68,6 @@
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
-		3A63E7850DBB9C9D0016AFE0 /* Toolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toolbox.h; path = ../../src/ui/Toolbox.h; sourceTree = SOURCE_ROOT; };
-		3A63E7860DBB9C9D0016AFE0 /* Toolbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Toolbox.cpp; path = ../../src/ui/Toolbox.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4290D8D61E200F61DB0 /* DiagramTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramTest.h; path = ../../src/tests/DiagramTest.h; sourceTree = SOURCE_ROOT; };
 		3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTest.cpp; path = ../../src/tests/ProjectTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -98,6 +97,8 @@
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
 		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE830DE9AD070059C4D9 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/utility/Property.h; sourceTree = SOURCE_ROOT; };
+		3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseToolbarButton.cpp; path = ../../src/ui/UseCaseToolbarButton.cpp; sourceTree = SOURCE_ROOT; };
+		3AC013070DECA62C000E5B92 /* UseCaseToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseToolbarButton.h; path = ../../src/ui/UseCaseToolbarButton.h; sourceTree = SOURCE_ROOT; };
 		3AC065BE0DB13102000EB33E /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../src/ui/Application.cpp; sourceTree = SOURCE_ROOT; };
 		3AC065BF0DB13102000EB33E /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../src/ui/Application.h; sourceTree = SOURCE_ROOT; };
 		3AC065C00DB13102000EB33E /* ContentComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ContentComponent.cpp; path = ../../src/ui/ContentComponent.cpp; sourceTree = SOURCE_ROOT; };
@@ -108,13 +109,15 @@
 		3AC075FC0D8D9A21004C5A73 /* Element.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Element.cpp; path = ../../src/metamodel/Element.cpp; sourceTree = SOURCE_ROOT; };
 		3AC075FD0D8D9A21004C5A73 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../../src/metamodel/Element.h; sourceTree = SOURCE_ROOT; };
 		3AC1798D0DEB1F5300A22606 /* Persistable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Persistable.h; path = ../../src/storage/Persistable.h; sourceTree = SOURCE_ROOT; };
+		3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActorToolbarButton.cpp; path = ../../src/ui/ActorToolbarButton.cpp; sourceTree = SOURCE_ROOT; };
+		3AC4D33F0DEC9C9F00D26FFA /* ActorToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActorToolbarButton.h; path = ../../src/ui/ActorToolbarButton.h; sourceTree = SOURCE_ROOT; };
+		3AC4D3400DEC9C9F00D26FFA /* Toolbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Toolbar.cpp; path = ../../src/ui/Toolbar.cpp; sourceTree = SOURCE_ROOT; };
+		3AC4D3410DEC9C9F00D26FFA /* Toolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toolbar.h; path = ../../src/ui/Toolbar.h; sourceTree = SOURCE_ROOT; };
 		3AC608C90DEC0A34002D0B12 /* Persistable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Persistable.cpp; path = ../../src/storage/Persistable.cpp; sourceTree = SOURCE_ROOT; };
 		3AD1A8700DC64F20009977AE /* BelongsTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BelongsTo.h; path = ../../src/storage/BelongsTo.h; sourceTree = SOURCE_ROOT; };
 		3AD1A8760DC64FF4009977AE /* HasMany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HasMany.h; path = ../../src/storage/HasMany.h; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
 		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
-		3AE94FA20DC3571900145786 /* ToolboxItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolboxItemFactory.h; path = ../../src/ui/ToolboxItemFactory.h; sourceTree = SOURCE_ROOT; };
-		3AE94FA30DC3571900145786 /* ToolboxItemFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ToolboxItemFactory.cpp; path = ../../src/ui/ToolboxItemFactory.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,10 +283,12 @@
 		3A63E7840DBB9C510016AFE0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3A63E7850DBB9C9D0016AFE0 /* Toolbox.h */,
-				3A63E7860DBB9C9D0016AFE0 /* Toolbox.cpp */,
-				3AE94FA20DC3571900145786 /* ToolboxItemFactory.h */,
-				3AE94FA30DC3571900145786 /* ToolboxItemFactory.cpp */,
+				3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */,
+				3AC013070DECA62C000E5B92 /* UseCaseToolbarButton.h */,
+				3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */,
+				3AC4D33F0DEC9C9F00D26FFA /* ActorToolbarButton.h */,
+				3AC4D3400DEC9C9F00D26FFA /* Toolbar.cpp */,
+				3AC4D3410DEC9C9F00D26FFA /* Toolbar.h */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -463,9 +468,10 @@
 				3A308A6E0DB7DE8000965CD1 /* Actor.cpp in Sources */,
 				3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */,
 				3A98E2410DBA0BE40095EADC /* UseCaseBubble.cpp in Sources */,
-				3A63E7870DBB9C9D0016AFE0 /* Toolbox.cpp in Sources */,
 				3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */,
-				3AE94FA40DC3571900145786 /* ToolboxItemFactory.cpp in Sources */,
+				3AC4D3420DEC9C9F00D26FFA /* ActorToolbarButton.cpp in Sources */,
+				3AC4D3430DEC9C9F00D26FFA /* Toolbar.cpp in Sources */,
+				3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

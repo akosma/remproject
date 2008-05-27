@@ -45,9 +45,7 @@
 #include "ArrowCanvas.h"
 #endif
 
-#ifndef TOOLBOX_H_
-#include "Toolbox.h"
-#endif
+#include "Toolbar.h"
 
 /*!
  * \namespace ui
@@ -75,8 +73,9 @@ namespace ui
         c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);
         
-        // Toolbox* t = new Toolbox(this);
-        // addAndMakeVisible(t, -1);
+        Toolbar* t = new Toolbar();
+        t->setTopLeftPosition(10, 10);
+        addAndMakeVisible(t, -1);
         
         _canvas->addArrow(a, c);
         _canvas->addArrow(a, b);
