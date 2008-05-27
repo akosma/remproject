@@ -35,8 +35,6 @@
 #ifndef BELONGSTO_H_
 #define BELONGSTO_H_
 
-#include <sstream>
-
 #ifndef SQLITEWRAPPER_H_
 #include "SQLiteWrapper.h"
 #endif
