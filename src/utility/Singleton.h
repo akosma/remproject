@@ -35,9 +35,6 @@
 #ifndef SINGLETON_H_
 #define SINGLETON_H_
 
-#include <string>
-#include <vector>
-
 //! Contains several classes used throughout the project.
 /*!
  * \namespace utility
@@ -83,36 +80,6 @@ namespace utility
          * \return A reference to the singleton instance.
          */
         static T& get();
-        
-    private:
-
-        //! Private copy constructor.
-        /*!
-         * Private copy constructor.
-         * 
-         * This trick comes from "Effective C++, Third Edition"
-         * by Scott Meyers (ISBN 0-321-33487-6)
-         * "Item 6: Explicitly disallow the use of compiler-generated
-         * functions you do not want", page 37
-         * 
-         * \param rhs The SQLiteWrapper reference to copy from.
-         */
-        Singleton(const Singleton& rhs);
-
-        //! Private assignment operator.
-        /*!
-         * Private assignment operator.
-         * 
-         * This trick comes from "Effective C++, Third Edition"
-         * by Scott Meyers (ISBN 0-321-33487-6)
-         * "Item 6: Explicitly disallow the use of compiler-generated
-         * functions you do not want", page 37
-         * 
-         * \param rhs The SQLiteWrapper reference to copy from.
-         * 
-         * \return A reference to the current SQLiteWrapper.
-         */
-        Singleton& operator=(const Singleton& rhs);
     };
     
     template <class T>
