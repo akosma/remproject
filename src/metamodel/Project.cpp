@@ -78,7 +78,7 @@ namespace metamodel
 
     void Project::createSchemaStructure()
     {
-        addStringProperty("author");
-        addDoubleProperty("version");
+        addProperty<std::string>("author");
+        addProperty<double>("version");
     }
 }

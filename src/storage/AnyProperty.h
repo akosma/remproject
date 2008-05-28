@@ -46,6 +46,7 @@
 #endif
 
 using utility::Property;
+using Poco::RefAnyCast;
 using Poco::Any;
 using Poco::DateTime;
 
@@ -132,50 +133,35 @@ namespace storage
          */
         const std::type_info& getType() const;
 
-        //! Sets a string value to the current instance.
+        //! Sets a value to the current instance.
         /*!
-         * Sets a string value to the current instance. 
+         * Sets a value to the current instance. 
          * Any previous value is discarded.
+         * This function is inlined in the header 
+         * file to avoid link problems.
          * 
          * \param input The new value for the property.
          */
-        void setString(const std::string&);
+        template <class T>
+        void set(const T& input)
+        {
+            Any value(input);
+            setValue(value);
+        }
 
-        //! Sets an integer value to the current instance.
+        //! Returns the value of the current instance.
         /*!
-         * Sets an integer value to the current instance. 
-         * Any previous value is discarded.
+         * Returns the value of the current instance.
+         * This function is inlined in the header 
+         * file to avoid link problems.
          * 
-         * \param input The new value for the property.
+         * \return The current string value.
          */
-        void setInteger(const int);
-
-        //! Sets a double value to the current instance.
-        /*!
-         * Sets a double value to the current instance. 
-         * Any previous value is discarded.
-         * 
-         * \param input The new value for the property.
-         */
-        void setDouble(const double);
-        
-        //! Sets a boolean value to the current instance.
-        /*!
-         * Sets a boolean value to the current instance. 
-         * Any previous value is discarded.
-         * 
-         * \param input The new value for the property.
-         */
-        void setBoolean(const bool);
-
-        //! Sets a DateTime value to the current instance.
-        /*!
-         * Sets a DateTime value to the current instance. 
-         * Any previous value is discarded.
-         * 
-         * \param input The new value for the property.
-         */
-        void setDateTime(const DateTime&);
+        template <class T>
+        const T get() const
+        {
+            return RefAnyCast<T>(getValue());
+        }
 
         //! Sets the current instance as "primary key".
         /*!
@@ -184,46 +170,6 @@ namespace storage
          * to create the table for a particular ActiveRecord class.
          */
         void setPrimaryKey();
-
-        //! Returns the string value of the current instance.
-        /*!
-         * Returns the string value of the current instance.
-         * 
-         * \return The current string value.
-         */
-        const std::string getString() const;
-
-        //! Returns the integer value of the current instance.
-        /*!
-         * Returns the integer value of the current instance.
-         * 
-         * \return The current integer value.
-         */
-        const int getInteger() const;
-
-        //! Returns the double value of the current instance.
-        /*!
-         * Returns the double value of the current instance.
-         * 
-         * \return The current double value.
-         */
-        const double getDouble() const;
-
-        //! Returns the boolean value of the current instance.
-        /*!
-         * Returns the boolean value of the current instance.
-         * 
-         * \return The current boolean value.
-         */
-        const bool getBoolean() const;
-        
-        //! Returns the DateTime value of the current instance.
-        /*!
-         * Returns the DateTime value of the current instance.
-         * 
-         * \return The current DateTime value.
-         */
-        const DateTime getDateTime() const;
 
         //! Returns the SQL statement that defines a SQLite column for this property.
         /*!

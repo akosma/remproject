@@ -129,100 +129,26 @@ namespace storage
         //! \name Dynamic Object Public Methods
         //@{
 
-        //! Set a string property.
+        //! Set a property.
         /*!
-         * Sets the string value of the property whose name is the first parameter.
+         * Sets the value of the property whose name is the first parameter.
          * 
          * \param key The name of the property to set
          * \param value The value of the property to set
          */
-        void setString(const std::string&, const std::string&);
+        template <class U>
+        void set(const std::string&, const U&);
         
-        //! Set an integer property.
+        //! Get a property.
         /*!
-         * Sets the integer value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setInteger(const std::string&, const int);
-
-        //! Set a boolean property.
-        /*!
-         * Sets the boolean value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setBoolean(const std::string&, const bool);
-
-        //! Set a double property.
-        /*!
-         * Sets the double value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setDouble(const std::string&, const double);
-
-        //! Set a DateTime property.
-        /*!
-         * Sets the date/time value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setDateTime(const std::string&, const DateTime&);
-
-        //! Get a string property.
-        /*!
-         * Returns the string value of the property whose name is passed as parameter.
+         * Returns the value of the property whose name is passed as parameter.
          * 
          * \param key The name of the property to get
          * 
-         * \return The current string value of the named property
+         * \return The current value of the named property
          */
-        const std::string getString(const std::string&);
-
-        //! Get an integer property.
-        /*!
-         * Returns the integer value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current integer value of the named property
-         */
-        const int getInteger(const std::string&);
-
-        //! Get a boolean property.
-        /*!
-         * Returns the boolean value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current boolean value of the named property
-         */
-        const bool getBoolean(const std::string&);
-
-        //! Get a double property.
-        /*!
-         * Returns the double value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current double value of the named property
-         */
-        const double getDouble(const std::string&);
-
-        //! Get a DateTime property.
-        /*!
-         * Returns the date/time value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current date/time value of the named property
-         */
-        const DateTime getDateTime(const std::string&);
+        template <class U>
+        const U get(const std::string&);
 
         //@}
 
@@ -370,45 +296,14 @@ namespace storage
         //@{
 
     protected:
-        //! Adds a string property to the current instance.
+        //! Adds a property to the current instance.
         /*!
-         * Adds a string property to the current instance.
+         * Adds a property to the current instance.
          * 
          * \param key The name of the property to add.
          */
-        void addStringProperty(const std::string&);
-
-        //! Adds an integer property to the current instance.
-        /*!
-         * Adds an integer property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addIntegerProperty(const std::string&);
-
-        //! Adds a boolean property to the current instance.
-        /*!
-         * Adds a boolean property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addBooleanProperty(const std::string&);
-
-        //! Adds a double property to the current instance.
-        /*!
-         * Adds a double property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addDoubleProperty(const std::string&);
-
-        //! Adds a DateTime property to the current instance.
-        /*!
-         * Adds a DateTime property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addDateTimeProperty(const std::string&);
+        template <class U>
+        void addProperty(const std::string&);
 
         //@}
 
@@ -597,104 +492,31 @@ namespace storage
     }
 
     template <class T>
-    void ActiveRecord<T>::setString(const std::string& key, const std::string& value)
+    template <class U>
+    void ActiveRecord<T>::set(const std::string& key, const U& value)
     {
         setDirty();
-        _data.setString(key, value);
+        _data.set<U>(key, value);
     }
 
     template <class T>
-    void ActiveRecord<T>::setInteger(const std::string& key, const int value)
+    template <class U>
+    const U ActiveRecord<T>::get(const std::string& key)
     {
-        setDirty();
-        _data.setInteger(key, value);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::setBoolean(const std::string& key, const bool value)
-    {
-        setDirty();
-        _data.setBoolean(key, value);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::setDouble(const std::string& key, const double value)
-    {
-        setDirty();
-        _data.setDouble(key, value);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::setDateTime(const std::string& key, const DateTime& value)
-    {
-        setDirty();
-        _data.setDateTime(key, value);
-    }
-
-    template <class T>
-    const std::string ActiveRecord<T>::getString(const std::string& key)
-    {
-        return _data.getString(key);
-    }
-
-    template <class T>
-    const int ActiveRecord<T>::getInteger(const std::string& key)
-    {
-        return _data.getInteger(key);
-    }
-
-    template <class T>
-    const bool ActiveRecord<T>::getBoolean(const std::string& key)
-    {
-        return _data.getBoolean(key);
-    }
-
-    template <class T>
-    const double ActiveRecord<T>::getDouble(const std::string& key)
-    {
-        return _data.getDouble(key);
-    }
-
-    template <class T>
-    const DateTime ActiveRecord<T>::getDateTime(const std::string& key)
-    {
-        return _data.getDateTime(key);
+        return _data.get<U>(key);
     }
     
     template <class T>
-    void ActiveRecord<T>::addStringProperty(const std::string& key)
+    template <class U>
+    void ActiveRecord<T>::addProperty(const std::string& key)
     {
-        _data.addStringProperty(key);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::addIntegerProperty(const std::string& key)
-    {
-        _data.addIntegerProperty(key);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::addBooleanProperty(const std::string& key)
-    {
-        _data.addBooleanProperty(key);
-    }
-
-    template <class T>
-    void ActiveRecord<T>::addDoubleProperty(const std::string& key)
-    {
-        _data.addDoubleProperty(key);
-    }
-    
-    template <class T>
-    void ActiveRecord<T>::addDateTimeProperty(const std::string& key)
-    {
-        _data.addDateTimeProperty(key);
+        _data.addProperty<U>(key);
     }
 
     template <class T>
     const DateTime ActiveRecord<T>::getCreationDateTime()
     {
-        return _data.getDateTime("created_on");
+        return _data.get<DateTime>("created_on");
     }
 
     template <class T>
@@ -702,14 +524,14 @@ namespace storage
     {
         // Do not call "setDirty()" here!
         DateTime now;
-        _data.setDateTime("created_on", now);
-        _data.setDateTime("updated_on", now);
+        _data.set<DateTime>("created_on", now);
+        _data.set<DateTime>("updated_on", now);
     }
     
     template <class T>
     const DateTime ActiveRecord<T>::getLastModificationDateTime()
     {
-        return _data.getDateTime("updated_on");
+        return _data.get<DateTime>("updated_on");
     }
 
     template <class T>
@@ -717,7 +539,7 @@ namespace storage
     {
         // Do not call "setDirty()" here!
         DateTime now;
-        _data.setDateTime("updated_on", now);
+        _data.set<DateTime>("updated_on", now);
     }
 
     template <class T>
@@ -729,27 +551,27 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::setName(std::string& name)
     {
-        setString("name", name);
+        set<std::string>("name", name);
     }
 
     template <class T>
     std::string ActiveRecord<T>::getName()
     {
-        return getString("name");
+        return get<std::string>("name");
     }
     
     template <class T>
     void ActiveRecord<T>::setParentId(const ID value)
     {
         // Do not call "setDirty()" here!
-        _data.setInteger(T::getParentColumnName(), (int)value);
+        _data.set<int>(T::getParentColumnName(), (int)value);
     }
 
     template <class T>
     void ActiveRecord<T>::setClassName(const std::string& value)
     {
         // Do not call "setDirty()" here!
-        _data.setString("class", value);
+        _data.set<std::string>("class", value);
     }
 
     template <class T>
@@ -805,11 +627,11 @@ namespace storage
             createSchemaStructure();
             
             // Add some more required properties
-            addIntegerProperty(T::getParentColumnName());
-            addStringProperty("class");
-            addStringProperty("name");
-            addDateTimeProperty("created_on");
-            addDateTimeProperty("updated_on");
+            addProperty<int>(T::getParentColumnName());
+            addProperty<std::string>("class");
+            addProperty<std::string>("name");
+            addProperty<DateTime>("created_on");
+            addProperty<DateTime>("updated_on");
             _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
         }
@@ -923,8 +745,8 @@ namespace storage
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
-                    std::string className = iter->getString("class");
-                    ID currentId = iter->getInteger("id");
+                    std::string className = iter->get<std::string>("class");
+                    ID currentId = iter->get<int>("id");
                     item = new T(className, currentId, *iter);
                 }
                 delete maps;
@@ -981,19 +803,19 @@ namespace storage
                 
                 if(currentDataType == "TEXT")
                 {
-                    instanceData.setString(currentHeader, currentValue);
+                    instanceData.set<std::string>(currentHeader, currentValue);
                 }
                 else if (currentDataType == "INTEGER")
                 {
-                    instanceData.setInteger(currentHeader, atoi(currentValue.c_str()));
+                    instanceData.set<int>(currentHeader, atoi(currentValue.c_str()));
                 }
                 else if (currentDataType == "BOOLEAN")
                 {
-                    instanceData.setBoolean(currentHeader, atoi(currentValue.c_str()));
+                    instanceData.set<bool>(currentHeader, atoi(currentValue.c_str()));
                 }
                 else if (currentDataType == "REAL")
                 {
-                    instanceData.setDouble(currentHeader, atof(currentValue.c_str()));
+                    instanceData.set<double>(currentHeader, atof(currentValue.c_str()));
                 }
                 else if (currentDataType == "DATETIME")
                 {
@@ -1002,7 +824,7 @@ namespace storage
                     // that is used to create a Timestamp, used to create a proper DateTime instance.
                     long long num = atoll(currentValue.c_str());
                     DateTime date(Timestamp::fromUtcTime(num));
-                    instanceData.setDateTime(currentHeader, date);
+                    instanceData.set<DateTime>(currentHeader, date);
                 }
             }
             maps->push_back(instanceData);
@@ -1026,8 +848,8 @@ namespace storage
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
-                    std::string className = iter->getString("class");
-                    ID currentId = iter->getInteger("id");
+                    std::string className = iter->get<std::string>("class");
+                    ID currentId = iter->get<int>("id");
                     T item(className, currentId, *iter);
                     items->push_back(item);
                 }

@@ -314,7 +314,7 @@ namespace storage
             _childrenLoaded = true;
 
             AnyPropertyMap conditions;
-            conditions.setInteger(C::getParentColumnName(), getId());
+            conditions.set<int>(C::getParentColumnName(), getId());
             std::vector<C>* elements = C::findByCondition(conditions);
 
             typename std::vector<C>::iterator iter;

@@ -78,9 +78,9 @@ namespace metamodel
 
     void Element::createSchemaStructure()
     {
-        addIntegerProperty("x");
-        addIntegerProperty("y");
-        addIntegerProperty("width");
-        addIntegerProperty("height");
+        addProperty<int>("x");
+        addProperty<int>("y");
+        addProperty<int>("width");
+        addProperty<int>("height");
     }
 }

@@ -134,140 +134,52 @@ namespace storage
          */
         const unsigned int count() const;
         
-        //! Adds a string property to the current instance.
+        //! Adds a property to the current instance.
         /*!
-         * Adds a string property to the current instance.
+         * Adds a property to the current instance.
+         * This function is inlined in the header file to avoid link problems.
          * 
          * \param key The name of the property to add.
          */
-        void addStringProperty(const std::string&);
-
-        //! Adds an integer property to the current instance.
-        /*!
-         * Adds an integer property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addIntegerProperty(const std::string&);
-
-        //! Adds a boolean property to the current instance.
-        /*!
-         * Adds a boolean property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addBooleanProperty(const std::string&);
-
-        //! Adds a double property to the current instance.
-        /*!
-         * Adds a double property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addDoubleProperty(const std::string&);
-
-        //! Adds a DateTime property to the current instance.
-        /*!
-         * Adds a DateTime property to the current instance.
-         * 
-         * \param key The name of the property to add.
-         */
-        void addDateTimeProperty(const std::string&);
+        template <class T>
+        void addProperty(const std::string& key)
+        {
+            if (!hasProperty(key))
+            {
+                set<T>(key, T());
+            }
+        }
         
-        //! Sets the string value of the property whose name is the first parameter.
+        //! Sets the value of the property whose name is the first parameter.
         /*!
-         * Sets the string value of the property whose name is the first parameter.
+         * Sets the value of the property whose name is the first parameter.
+         * This function is inlined in the header file to avoid link problems.
          * 
          * \param key The name of the property to set
          * \param value The value of the property to set
          */
-        void setString(const std::string&, const std::string&);
-
-        //! Sets the string value of the property whose name is the first parameter.
-        /*!
-         * Sets the integer value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setInteger(const std::string&, const int);
-
-        //! Sets the boolean value of the property whose name is the first parameter.
-        /*!
-         * Sets the boolean value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setBoolean(const std::string&, const bool);
-
-        //! Sets the double value of the property whose name is the first parameter.
-        /*!
-         * Sets the double value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setDouble(const std::string&, const double);
-
-        //! Sets the date/time value of the property whose name is the first parameter.
-        /*!
-         * Sets the date/time value of the property whose name is the first parameter.
-         * 
-         * \param key The name of the property to set
-         * \param value The value of the property to set
-         */
-        void setDateTime(const std::string& key, const DateTime& value);
+        template <class T>
+        void set(const std::string& key, const T& value)
+        {
+            Any any(value);
+            AnyProperty prop(key, any);
+            _map[key] = prop;
+        }
 
         //! Returns the string value of the property whose name is passed as parameter.
         /*!
          * Returns the string value of the property whose name is passed as parameter.
+         * This function is inlined in the header file to avoid link problems.
          * 
          * \param key The name of the property to get
          * 
          * \return The current string value of the named property
          */
-        const std::string getString(const std::string&);
-
-        //! Returns the integer value of the property whose name is passed as parameter.
-        /*!
-         * Returns the integer value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current integer value of the named property
-         */
-        const int getInteger(const std::string&);
-
-        //! Returns the boolean value of the property whose name is passed as parameter.
-        /*!
-         * Returns the boolean value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current boolean value of the named property
-         */
-        const bool getBoolean(const std::string&);
-
-        //! Returns the double value of the property whose name is passed as parameter.
-        /*!
-         * Returns the double value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current double value of the named property
-         */
-        const double getDouble(const std::string&);
-
-        //! Returns the date/time value of the property whose name is passed as parameter.
-        /*!
-         * Returns the date/time value of the property whose name is passed as parameter.
-         * 
-         * \param key The name of the property to get
-         * 
-         * \return The current date/time value of the named property
-         */
-        const DateTime getDateTime(const std::string&);
+        template <class T>
+        const T get(const std::string& key)
+        {
+            return _map[key].get<T>();
+        }
 
         //! Creates an integer property marked as "primary key".
         /*!

@@ -84,19 +84,19 @@ namespace tests
         CPPUNIT_ASSERT(!map.hasProperty(name3));
         CPPUNIT_ASSERT(!map.hasProperty(name4));
         
-        map.setBoolean(name1, ok);
+        map.set<bool>(name1, ok);
         CPPUNIT_ASSERT_EQUAL(1, (int)map.count());
 
-        map.setString(name2, someValue);
+        map.set<std::string>(name2, someValue);
         CPPUNIT_ASSERT_EQUAL(2, (int)map.count());
 
-        map.setInteger(name3, integer);
+        map.set<int>(name3, integer);
         CPPUNIT_ASSERT_EQUAL(3, (int)map.count());
 
-        map.setDouble(name4, d);
+        map.set<double>(name4, d);
         CPPUNIT_ASSERT_EQUAL(4, (int)map.count());
 
-        map.setDateTime(name5, now);
+        map.set<DateTime>(name5, now);
         CPPUNIT_ASSERT_EQUAL(5, (int)map.count());
 
         CPPUNIT_ASSERT(map.hasProperty(name1));
@@ -105,11 +105,11 @@ namespace tests
         CPPUNIT_ASSERT(map.hasProperty(name4));
         CPPUNIT_ASSERT(map.hasProperty(name5));
         
-        CPPUNIT_ASSERT_EQUAL(ok, map.getBoolean(name1));
-        CPPUNIT_ASSERT_EQUAL(someValue, map.getString(name2));
-        CPPUNIT_ASSERT_EQUAL(integer, map.getInteger(name3));
-        CPPUNIT_ASSERT_EQUAL(d, map.getDouble(name4));
-        CPPUNIT_ASSERT_EQUAL(now.utcTime(), map.getDateTime(name5).utcTime());
+        CPPUNIT_ASSERT_EQUAL(ok, map.get<bool>(name1));
+        CPPUNIT_ASSERT_EQUAL(someValue, map.get<std::string>(name2));
+        CPPUNIT_ASSERT_EQUAL(integer, map.get<int>(name3));
+        CPPUNIT_ASSERT_EQUAL(d, map.get<double>(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), map.get<DateTime>(name5).utcTime());
         
         std::stringstream insertQuery;
         insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";
@@ -137,7 +137,7 @@ namespace tests
         std::string name1("prop1");
         try
         {
-            std::string value = map.getString(name1);
+            std::string value = map.get<std::string>(name1);
         }
 #if defined(_WIN32)
 		catch(std::bad_alloc& e)
@@ -170,11 +170,11 @@ namespace tests
         double d = 45.24;
         DateTime now;
         
-        map.setBoolean(name1, ok);
-        map.setString(name2, someValue);
-        map.setInteger(name3, integer);
-        map.setDouble(name4, d);
-        map.setDateTime(name5, now);
+        map.set<bool>(name1, ok);
+        map.set<std::string>(name2, someValue);
+        map.set<int>(name3, integer);
+        map.set<double>(name4, d);
+        map.set<DateTime>(name5, now);
         
         AnyPropertyMap mapCopy(map);
 
@@ -184,11 +184,11 @@ namespace tests
         CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name5));
-        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
-        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
-        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
-        CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
-        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.getDateTime(name5).utcTime());
+        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.get<bool>(name1));
+        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.get<std::string>(name2));
+        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.get<int>(name3));
+        CPPUNIT_ASSERT_EQUAL(d, mapCopy.get<double>(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.get<DateTime>(name5).utcTime());
 
         std::stringstream insertQuery;
         insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";
@@ -226,11 +226,11 @@ namespace tests
         double d = 45.24;
         DateTime now;
         
-        map.setBoolean(name1, ok);
-        map.setString(name2, someValue);
-        map.setInteger(name3, integer);
-        map.setDouble(name4, d);
-        map.setDateTime(name5, now);
+        map.set<bool>(name1, ok);
+        map.set<std::string>(name2, someValue);
+        map.set<int>(name3, integer);
+        map.set<double>(name4, d);
+        map.set<DateTime>(name5, now);
         
         AnyPropertyMap mapCopy = map;
 
@@ -240,11 +240,11 @@ namespace tests
         CPPUNIT_ASSERT(mapCopy.hasProperty(name3));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name4));
         CPPUNIT_ASSERT(mapCopy.hasProperty(name5));
-        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.getBoolean(name1));
-        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.getString(name2));
-        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.getInteger(name3));
-        CPPUNIT_ASSERT_EQUAL(d, mapCopy.getDouble(name4));
-        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.getDateTime(name5).utcTime());
+        CPPUNIT_ASSERT_EQUAL(ok, mapCopy.get<bool>(name1));
+        CPPUNIT_ASSERT_EQUAL(someValue, mapCopy.get<std::string>(name2));
+        CPPUNIT_ASSERT_EQUAL(integer, mapCopy.get<int>(name3));
+        CPPUNIT_ASSERT_EQUAL(d, mapCopy.get<double>(name4));
+        CPPUNIT_ASSERT_EQUAL(now.utcTime(), mapCopy.get<DateTime>(name5).utcTime());
 
         std::stringstream insertQuery;
         insertQuery << "INSERT INTO test (prop1, prop2, prop3, prop4, prop5) VALUES ";

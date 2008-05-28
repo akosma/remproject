@@ -112,28 +112,28 @@ namespace tests
         AnyProperty prop(name);
         CPPUNIT_ASSERT_EQUAL(name, prop.getName());
 
-        prop.setBoolean(ok);
-        bool stored1 = prop.getBoolean();
+        prop.set<bool>(ok);
+        bool stored1 = prop.get<bool>();
         CPPUNIT_ASSERT_EQUAL(ok, stored1);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), prop.getNameValuePair());
 
-        prop.setInteger(integer);
-        int stored2 = prop.getInteger();
+        prop.set<int>(integer);
+        int stored2 = prop.get<int>();
         CPPUNIT_ASSERT_EQUAL(integer, stored2);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), prop.getNameValuePair());
 
-        prop.setString(someValue);
-        std::string stored3 = prop.getString();
+        prop.set<std::string>(someValue);
+        std::string stored3 = prop.get<std::string>();
         CPPUNIT_ASSERT_EQUAL(someValue, stored3);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), prop.getNameValuePair());
 
-        prop.setDouble(d);
-        double stored4 = prop.getDouble();
+        prop.set<double>(d);
+        double stored4 = prop.get<double>();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), prop.getNameValuePair());
         
-        prop.setDateTime(now);
-        DateTime stored5 = prop.getDateTime();
+        prop.set<DateTime>(now);
+        DateTime stored5 = prop.get<DateTime>();
         std::stringstream nameValue;
         nameValue << "prop = ";
         nameValue << now.utcTime();
@@ -155,33 +155,33 @@ namespace tests
         AnyProperty propCopy(prop);
         CPPUNIT_ASSERT_EQUAL(propCopy.getName(), prop.getName());
 
-        prop.setBoolean(ok);
+        prop.set<bool>(ok);
         AnyProperty propCopy2(prop);
-        bool stored1 = propCopy2.getBoolean();
+        bool stored1 = propCopy2.get<bool>();
         CPPUNIT_ASSERT_EQUAL(ok, stored1);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), propCopy2.getNameValuePair());
 
-        prop.setInteger(integer);
+        prop.set<int>(integer);
         AnyProperty propCopy3(prop);
-        int stored2 = propCopy3.getInteger();
+        int stored2 = propCopy3.get<int>();
         CPPUNIT_ASSERT_EQUAL(integer, stored2);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), propCopy3.getNameValuePair());
 
-        prop.setString(someValue);
+        prop.set<std::string>(someValue);
         AnyProperty propCopy4(prop);
-        std::string stored3 = propCopy4.getString();
+        std::string stored3 = propCopy4.get<std::string>();
         CPPUNIT_ASSERT_EQUAL(someValue, stored3);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), propCopy4.getNameValuePair());
 
-        prop.setDouble(d);
+        prop.set<double>(d);
         AnyProperty propCopy5(prop);
-        double stored4 = propCopy5.getDouble();
+        double stored4 = propCopy5.get<double>();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
 
-        prop.setDateTime(now);
+        prop.set<DateTime>(now);
         AnyProperty propCopy6(prop);
-        DateTime stored5 = propCopy6.getDateTime();
+        DateTime stored5 = propCopy6.get<DateTime>();
         std::stringstream nameValue;
         nameValue << "prop = ";
         nameValue << now.utcTime();
@@ -203,33 +203,33 @@ namespace tests
         AnyProperty propCopy = prop;
         CPPUNIT_ASSERT_EQUAL(propCopy.getName(), prop.getName());
 
-        prop.setBoolean(ok);
+        prop.set<bool>(ok);
         AnyProperty propCopy2 = prop;
-        bool stored1 = propCopy2.getBoolean();
+        bool stored1 = propCopy2.get<bool>();
         CPPUNIT_ASSERT_EQUAL(ok, stored1);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 1"), propCopy2.getNameValuePair());
 
-        prop.setInteger(integer);
+        prop.set<int>(integer);
         AnyProperty propCopy3 = prop;
-        int stored2 = propCopy3.getInteger();
+        int stored2 = propCopy3.get<int>();
         CPPUNIT_ASSERT_EQUAL(integer, stored2);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 34"), propCopy3.getNameValuePair());
 
-        prop.setString(someValue);
+        prop.set<std::string>(someValue);
         AnyProperty propCopy4 = prop;
-        std::string stored3 = propCopy4.getString();
+        std::string stored3 = propCopy4.get<std::string>();
         CPPUNIT_ASSERT_EQUAL(someValue, stored3);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 'name'"), propCopy4.getNameValuePair());
 
-        prop.setDouble(d);
+        prop.set<double>(d);
         AnyProperty propCopy5 = prop;
-        double stored4 = propCopy5.getDouble();
+        double stored4 = propCopy5.get<double>();
         CPPUNIT_ASSERT_EQUAL(d, stored4);
         CPPUNIT_ASSERT_EQUAL(std::string("prop = 45.24"), propCopy5.getNameValuePair());        
 
-        prop.setDateTime(now);
+        prop.set<DateTime>(now);
         AnyProperty propCopy6 = prop;
-        DateTime stored5 = propCopy6.getDateTime();
+        DateTime stored5 = propCopy6.get<DateTime>();
         std::stringstream nameValue;
         nameValue << "prop = ";
         nameValue << now.utcTime();

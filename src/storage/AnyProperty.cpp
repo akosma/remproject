@@ -41,7 +41,6 @@
 #include <Poco/DateTime.h>
 
 using Poco::Any;
-using Poco::RefAnyCast;
 using Poco::DateTime;
 using Poco::replace;
 
@@ -91,66 +90,11 @@ namespace storage
         return getValue().type();
     }
     
-    void AnyProperty::setString(const std::string& input)
-    {
-        Any value(input);
-        setValue(value);
-    }
-
-    void AnyProperty::setInteger(const int input)
-    {
-        Any value(input);
-        setValue(value);
-    }
-
-    void AnyProperty::setDouble(const double input)
-    {
-        Any value(input);
-        setValue(value);
-    }
-    
-    void AnyProperty::setBoolean(const bool input)
-    {
-        Any value(input);
-        setValue(value);
-    }
-    
-    void AnyProperty::setDateTime(const DateTime& input)
-    {
-        Any value(input);
-        setValue(value);
-    }
-    
     void AnyProperty::setPrimaryKey()
     {
         _isPrimaryKey = true;
     }
-    
-    const std::string AnyProperty::getString() const
-    {
-        return RefAnyCast<std::string>(getValue());
-    }
-    
-    const int AnyProperty::getInteger() const
-    {
-        return RefAnyCast<int>(getValue());
-    }
-    
-    const double AnyProperty::getDouble() const
-    {
-        return RefAnyCast<double>(getValue());
-    }
-    
-    const bool AnyProperty::getBoolean() const
-    {
-        return RefAnyCast<bool>(getValue());
-    }
-    
-    const DateTime AnyProperty::getDateTime() const
-    {
-        return RefAnyCast<DateTime>(getValue());
-    }
-    
+
     const std::string AnyProperty::getSQLiteColumnDefinition() const
     {
         const std::type_info& type = getValue().type();
@@ -194,24 +138,24 @@ namespace storage
             std::string doubleQuote("'");
             std::string singleQuote("''");
             output << "'";
-            output << replace<std::string>(getString(), doubleQuote, singleQuote);
+            output << replace<std::string>(get<std::string>(), doubleQuote, singleQuote);
             output << "'";
         }
         if(type == typeid(int))
         {
-            output << getInteger();
+            output << get<int>();
         }
         if(type == typeid(bool))
         {
-            output << getBoolean();
+            output << get<bool>();
         }
         if(type == typeid(double))
         {
-            output << getDouble();
+            output << get<double>();
         }
         if(type == typeid(DateTime))
         {
-            output << getDateTime().utcTime();
+            output << get<DateTime>().utcTime();
         }
         return output.str();
     }

@@ -80,6 +80,6 @@ namespace metamodel
 
     void Diagram::createSchemaStructure()
     {
-        addBooleanProperty("valid");
+        addProperty<bool>("valid");
     }
 }

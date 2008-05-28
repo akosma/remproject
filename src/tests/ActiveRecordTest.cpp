@@ -112,9 +112,9 @@ namespace tests
         CPPUNIT_ASSERT(!peter->isDirty());
         CPPUNIT_ASSERT_EQUAL(1, (int)peter->getId());
 
-        peter->setBoolean("valid", true);
+        peter->set<bool>("valid", true);
         peter->save();
-        CPPUNIT_ASSERT_EQUAL(true, peter->getBoolean("valid"));
+        CPPUNIT_ASSERT_EQUAL(true, peter->get<bool>("valid"));
         
         delete john;
         delete peter;
@@ -128,11 +128,11 @@ namespace tests
         Element& elem0 = elements->at(0);
         Element& elem1 = elements->at(1);
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.get<std::string>("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.getString("class"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.get<std::string>("class"));
         CPPUNIT_ASSERT(!elem1.isDirty());
         CPPUNIT_ASSERT(!elem1.isNew());
         
@@ -143,7 +143,7 @@ namespace tests
     {
         Element* elem = ActiveRecord<Element>::findById(1);
         
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
         
@@ -155,8 +155,8 @@ namespace tests
         std::string name("peter");
         
         AnyPropertyMap invalidConditions;
-        invalidConditions.setString("name", name);
-        invalidConditions.setBoolean("valid", true);
+        invalidConditions.set<std::string>("name", name);
+        invalidConditions.set<bool>("valid", true);
         std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(invalidConditions);
         
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
@@ -164,14 +164,14 @@ namespace tests
         delete elements;
         
         AnyPropertyMap validConditions;
-        validConditions.setString("name", name);
+        validConditions.set<std::string>("name", name);
         elements = ActiveRecord<Element>::findByCondition(validConditions);
         
         CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());        
         
         Element& elem0 = elements->at(0);
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.getString("class"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.get<std::string>("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
         
@@ -188,7 +188,7 @@ namespace tests
     {
         Element* elem = ActiveRecord<Element>::findById(1);
         
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->getString("class"));
+        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
 
@@ -390,7 +390,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
         
         AnyPropertyMap condition;
-        condition.setInteger("project_id", project->getId());
+        condition.set<int>("project_id", project->getId());
         std::vector<Diagram>* diagrams = ActiveRecord<Diagram>::findByCondition(condition);
         CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());
 
