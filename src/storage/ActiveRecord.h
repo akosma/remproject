@@ -305,19 +305,6 @@ namespace storage
 
         //@}
 
-        //! \name Protected Pure Virtual Method
-        //@{
-
-        //! Used by subclasses to specify their internal structure.
-        /*!
-         * Used by subclasses to specify their internal structure.
-         * Subclasses must implement this method, which is called right
-         * before creating the database tables.
-         */
-        virtual void createSchemaStructure() = 0;
-
-        //@}
-
         //! \name Private Instance Methods
         //@{
 

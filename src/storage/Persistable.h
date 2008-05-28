@@ -156,6 +156,22 @@ namespace storage
         virtual void saveChildren();
 
         //@}
+        
+    protected:
+        
+        //! \name Methods implemented by the final classes.
+        //@{
+
+        //! Used by subclasses to specify their internal structure.
+        /*!
+         * Used by subclasses to specify their internal structure.
+         * Subclasses must implement this method, which is called right
+         * before creating the database tables.
+         * Implemented in the final classes.
+         */
+        virtual void createSchemaStructure() = 0;
+
+        //@}
     };
 }
 
