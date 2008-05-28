@@ -214,7 +214,11 @@
 			Name="Source Files"
 			>
 			<File
-				RelativePath="..\..\src\ui\Actor.cpp"
+				RelativePath="..\..\src\ui\ActorFigure.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ActorToolbarButton.cpp"
 				>
 			</File>
 			<File
@@ -238,15 +242,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\Toolbox.cpp"
+				RelativePath="..\..\src\ui\Toolbar.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ToolboxItemFactory.cpp"
+				RelativePath="..\..\src\ui\UseCaseFigure.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\UseCaseBubble.cpp"
+				RelativePath="..\..\src\ui\UseCaseToolbarButton.cpp"
 				>
 			</File>
 			<File
@@ -258,7 +262,11 @@
 			Name="Header Files"
 			>
 			<File
-				RelativePath="..\..\src\ui\Actor.h"
+				RelativePath="..\..\src\ui\ActorFigure.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ActorToolbarButton.h"
 				>
 			</File>
 			<File
@@ -278,15 +286,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\Toolbox.h"
+				RelativePath="..\..\src\ui\Toolbar.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ToolboxItemFactory.h"
+				RelativePath="..\..\src\ui\UseCaseFigure.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\UseCaseBubble.h"
+				RelativePath="..\..\src\ui\UseCaseToolbarButton.h"
 				>
 			</File>
 			<File

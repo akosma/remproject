@@ -277,6 +277,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\tests\ElementTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\controllers\FileController.cpp"
 				>
 			</File>
@@ -305,7 +309,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\src\storage\None.cpp"
+				RelativePath="..\..\src\metamodel\Member.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\Persistable.cpp"
 				>
 			</File>
 			<File
@@ -449,6 +457,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\tests\ElementTest.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\controllers\FileController.h"
 				>
 			</File>
@@ -461,7 +473,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\storage\None.h"
+				RelativePath="..\..\src\metamodel\Member.h"
 				>
 			</File>
 			<File

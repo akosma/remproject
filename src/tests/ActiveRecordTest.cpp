@@ -143,6 +143,7 @@ namespace tests
     {
         Element* elem = ActiveRecord<Element>::findById(1);
         
+		CPPUNIT_ASSERT(elem);
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
@@ -187,7 +188,8 @@ namespace tests
     void ActiveRecordTest::testDestroyingObjectsRemovesThemFromTheDatabase()
     {
         Element* elem = ActiveRecord<Element>::findById(1);
-        
+
+		CPPUNIT_ASSERT(elem);
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
@@ -332,6 +334,7 @@ namespace tests
         
         // Let's retrieve all of this from the DB and compare
         Element* retrieved = ActiveRecord<Element>::findById(actor->getId());
+		CPPUNIT_ASSERT(retrieved);
         DateTime saved3 = retrieved->getCreationDateTime();
         DateTime updated3 = retrieved->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved2 == saved3);
@@ -386,6 +389,7 @@ namespace tests
         project->save();
 
         Project* retrievedProject = ActiveRecord<Project>::findById(project->getId());
+		CPPUNIT_ASSERT(retrievedProject);
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), project->getName());
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
         
@@ -430,6 +434,7 @@ namespace tests
 
         // At this point, the project has not loaded the diagrams
         project = ActiveRecord<Project>::findById(id);
+		CPPUNIT_ASSERT(project);
         CPPUNIT_ASSERT(!project->hasLoadedChildren());
         
         // Now the project will load its diagrams; there should be two of them
