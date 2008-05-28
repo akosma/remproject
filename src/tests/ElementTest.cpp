@@ -1,6 +1,6 @@
 /*
  * Rem - Requirements and Entity Modeler = UML + AOP + Open Source + Cross Platform
- * Copyright (C) 2008 Adrian Kosmaczewski - http://remelement.org/
+ * Copyright (C) 2008 Adrian Kosmaczewski - http://remproject.org/
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
