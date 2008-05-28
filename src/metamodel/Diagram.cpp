@@ -55,8 +55,8 @@ namespace metamodel
     {
     }
 
-    Diagram::Diagram(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Diagram>(className, id, data)
+    Diagram::Diagram(AnyPropertyMap& data)
+    : ActiveRecord<Diagram>(data)
     , BelongsTo<Project>()
     , HasMany<Element>()
     {

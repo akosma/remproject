@@ -54,8 +54,8 @@ namespace metamodel
     {
     }
 
-    Element::Element(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Element>(className, id, data)
+    Element::Element(AnyPropertyMap& data)
+    : ActiveRecord<Element>(data)
     , BelongsTo<Diagram>()
     {
     }

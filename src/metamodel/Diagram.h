@@ -96,11 +96,9 @@ namespace metamodel
          * Constructor required by ActiveRecord, to instantiate objects
          * that are retrieved from the SQLite file.
          * 
-         * \param className The subclass name of the current instance.
-         * \param id The ID of the current instance.
          * \param data The data of the current instance.
          */
-        Diagram(const std::string&, const storage::ID, AnyPropertyMap&);
+        Diagram(AnyPropertyMap&);
 
         //! Virtual destructor
         /*!

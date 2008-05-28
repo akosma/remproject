@@ -96,11 +96,9 @@ namespace storage
          * Constructor. Used to create instances already existing in the database.
          * This constructor is called by the ActiveRecord::getVectorByQuery() method.
          * 
-         * \param className The subclass name of the current instance.
-         * \param id The ID of the current instance
          * \param data An AnyPropertyMap containing the internal state of the instance
          */
-        ActiveRecord(const std::string&, const ID, AnyPropertyMap&);
+        ActiveRecord(AnyPropertyMap&);
         
         //! Copy constructor.
         /*!
@@ -453,12 +451,12 @@ namespace storage
     }
 
     template <class T>
-    ActiveRecord<T>::ActiveRecord(const std::string& className, const ID id, AnyPropertyMap& data)
-    : _id        (id)
+    ActiveRecord<T>::ActiveRecord(AnyPropertyMap& data)
+    : _id        (data.get<int>("id"))
     , _isNew     (false)
     , _isDirty   (false)
     , _data      (data)
-    , _className (className)
+    , _className (data.get<std::string>("class"))
     {
     }
 
@@ -745,9 +743,7 @@ namespace storage
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
-                    std::string className = iter->get<std::string>("class");
-                    ID currentId = iter->get<int>("id");
-                    item = new T(className, currentId, *iter);
+                    item = new T(*iter);
                 }
                 delete maps;
             }
@@ -848,9 +844,7 @@ namespace storage
                 std::vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
-                    std::string className = iter->get<std::string>("class");
-                    ID currentId = iter->get<int>("id");
-                    T item(className, currentId, *iter);
+                    T item(*iter);
                     items->push_back(item);
                 }
                 delete maps;

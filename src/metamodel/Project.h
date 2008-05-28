@@ -50,6 +50,7 @@
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
+using storage::AnyPropertyMap;
 
 //! Model classes for UML projects
 /*!
@@ -85,11 +86,9 @@ namespace metamodel
          * Constructor required by ActiveRecord, to instantiate objects
          * that are retrieved from the SQLite file.
          * 
-         * \param className The subclass name of the current instance.
-         * \param id The ID of the current instance.
          * \param data The data of the current instance.
          */
-        Project(const std::string&, const storage::ID, storage::AnyPropertyMap&);
+        Project(AnyPropertyMap&);
 
         //! Virtual destructor
         /*!

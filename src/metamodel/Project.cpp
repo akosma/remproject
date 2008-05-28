@@ -54,8 +54,8 @@ namespace metamodel
     {
     }
 
-    Project::Project(const std::string& className, const storage::ID id, AnyPropertyMap& data)
-    : ActiveRecord<Project>(className, id, data)
+    Project::Project(AnyPropertyMap& data)
+    : ActiveRecord<Project>(data)
     , HasMany<Diagram>()
     {
     }
