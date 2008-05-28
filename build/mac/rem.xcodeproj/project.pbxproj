@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A02E6370DEDCBD6009A9590 /* Member.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A02E6350DEDCBD1009A9590 /* Member.cpp */; };
+		3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A02E69A0DEDD4EE009A9590 /* ElementTest.cpp */; };
 		3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
 		3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
@@ -47,6 +49,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A02E6340DEDCBD1009A9590 /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Member.h; path = ../../src/metamodel/Member.h; sourceTree = SOURCE_ROOT; };
+		3A02E6350DEDCBD1009A9590 /* Member.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Member.cpp; path = ../../src/metamodel/Member.cpp; sourceTree = SOURCE_ROOT; };
+		3A02E6990DEDD4EE009A9590 /* ElementTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ElementTest.h; path = ../../src/tests/ElementTest.h; sourceTree = SOURCE_ROOT; };
+		3A02E69A0DEDD4EE009A9590 /* ElementTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementTest.cpp; path = ../../src/tests/ElementTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A0840390DE9F6770080A93A /* FileController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileController.cpp; path = ../../src/controllers/FileController.cpp; sourceTree = SOURCE_ROOT; };
 		3A08403A0DE9F6770080A93A /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileController.h; path = ../../src/controllers/FileController.h; sourceTree = SOURCE_ROOT; };
 		3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileControllerTest.cpp; path = ../../src/tests/FileControllerTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -198,6 +204,8 @@
 				3A9BC7710D8D6C82005ED14A /* Diagram.cpp */,
 				3AC075FD0D8D9A21004C5A73 /* Element.h */,
 				3AC075FC0D8D9A21004C5A73 /* Element.cpp */,
+				3A02E6340DEDCBD1009A9590 /* Member.h */,
+				3A02E6350DEDCBD1009A9590 /* Member.cpp */,
 			);
 			name = metamodel;
 			sourceTree = "<group>";
@@ -276,6 +284,8 @@
 				3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */,
 				3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */,
 				3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */,
+				3A02E6990DEDD4EE009A9590 /* ElementTest.h */,
+				3A02E69A0DEDD4EE009A9590 /* ElementTest.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -454,6 +464,8 @@
 				3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */,
 				3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */,
 				3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */,
+				3A02E6370DEDCBD6009A9590 /* Member.cpp in Sources */,
+				3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -94,6 +94,9 @@ SET (tests_SRCS
 
     tests/SQLiteWrapperTest.cpp 
     tests/SQLiteWrapperTest.h 
+    
+    tests/ElementTest.cpp
+    tests/ElementTest.h
 
     tests/main.cpp
 )
@@ -107,6 +110,9 @@ SET (metamodel_SRCS
 
     metamodel/Project.cpp 
     metamodel/Project.h 
+    
+    metamodel/Member.cpp
+    metamodel/Member.h
 )
 
 SET (controllers_SRCS

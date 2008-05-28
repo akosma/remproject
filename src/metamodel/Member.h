@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Interface of the Element class
+//! Contains the interface of the metamodel::Member class.
 /*!
- * \file Element.h
+ * \file Member.h
  *
- * Contains the interface of the metamodel::Element class.
+ * Contains the interface of the metamodel::Member class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,11 +29,11 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      3/16/08
+ * \date      5/28/08
  */
 
-#ifndef ELEMENT_H_
-#define ELEMENT_H_
+#ifndef MEMBER_H_
+#define MEMBER_H_
 
 #include <string>
 
@@ -49,10 +49,6 @@
 #include "../storage/HasMany.h"
 #endif
 
-#ifndef MEMBER_H_
-#include "Member.h"
-#endif
-
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
@@ -65,29 +61,24 @@ using storage::AnyPropertyMap;
  */
 namespace metamodel
 {
-     // Forward declaration of the Diagram class, used as parameter for the 
-     // template specializations in the Element class declaration.
-    class Diagram;
-    
-    //! Parts composing a Diagram.
+    class Element;
+
     /*!
-     * \class Element
+     * \class Member
      *
-     * Represents a single visual element rendered inside a Diagram.
+     *  
      */
-    class Element : public ActiveRecord<Element>
-                  , public BelongsTo<Diagram>
-                  , public HasMany<Member>
+    class Member : public ActiveRecord<Member>
+                 , public BelongsTo<Element>
     {
     public:
-
         //! Default constructor
         /*!
-         *  Element constructor.
+         *  Member constructor.
          * 
          * \param className The name of the subclass of the current instance.
          */
-        Element(const std::string&);
+        Member(const std::string&);
 
         //! Constructor used for instances retrieved from a file
         /*!
@@ -96,13 +87,13 @@ namespace metamodel
          * 
          * \param data The data of the current instance.
          */
-        Element(AnyPropertyMap&);
+        Member(AnyPropertyMap&);
 
         //! Virtual destructor
         /*!
-         *  Element virtual destructor.
+         *  Member virtual destructor.
          */
-        virtual ~Element();
+        virtual ~Member();
 
         //! Get the name of the table used to store instances of this class
         /*!
@@ -132,8 +123,7 @@ namespace metamodel
          * needed by all the instances of this class.
          */
         virtual void createSchemaStructure();
-        
     };
 }
 
-#endif /* ELEMENT_H_ */
+#endif /* MEMBER_H_ */

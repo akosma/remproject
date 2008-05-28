@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Implementation of the Element class
+//! Implementation of the Member class
 /*!
- * \file Element.cpp
+ * \file Member.cpp
  *
- * Contains the implementation of the metamodel::Element class.
+ * Contains the implementation of the metamodel::Member class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,17 +29,13 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      3/16/08
+ * \date      5/28/08
  */
 
+#include "Member.h"
+
+#ifndef ELEMENT_H_
 #include "Element.h"
-
-#ifndef PROJECT_H_
-#include "Project.h"
-#endif
-
-#ifndef DIAGRAM_H_
-#include "Diagram.h"
 #endif
 
 using storage::ActiveRecord;
@@ -48,41 +44,37 @@ using storage::HasMany;
 
 namespace metamodel
 {
-    Element::Element(const std::string& className)
-    : ActiveRecord<Element>(className)
-    , BelongsTo<Diagram>()
-    , HasMany<Member>()
+    Member::Member(const std::string& className)
+    : ActiveRecord<Member>(className)
+    , BelongsTo<Element>()
     {
     }
 
-    Element::Element(AnyPropertyMap& data)
-    : ActiveRecord<Element>(data)
-    , BelongsTo<Diagram>()
-    , HasMany<Member>()
+    Member::Member(AnyPropertyMap& data)
+    : ActiveRecord<Member>(data)
+    , BelongsTo<Element>()
     {
     }
 
-    Element::~Element()
+    Member::~Member()
     {
     }
 
-    std::string& Element::getTableName()
+    std::string& Member::getTableName()
     {
-        static std::string tableName("elements");
+        static std::string tableName("members");
         return tableName;
     }
 
-    std::string& Element::getParentColumnName()
+    std::string& Member::getParentColumnName()
     {
-        static std::string columnName("diagram_id");
+        static std::string columnName("element_id");
         return columnName;
     }
 
-    void Element::createSchemaStructure()
+    void Member::createSchemaStructure()
     {
-        addProperty<int>("x");
-        addProperty<int>("y");
-        addProperty<int>("width");
-        addProperty<int>("height");
+        addProperty<int>("someint");
+        addProperty<int>("anotherint");
     }
 }
