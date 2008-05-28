@@ -140,6 +140,16 @@ namespace storage
          * \return A pointer to the instance, or NULL if none was found.
          */
         C* getChild(const std::string&);
+        
+        //! Returns the child whose name is passed as parameter.
+        /*!
+         * Returns the child whose name is passed as parameter.
+         *
+         * \param name The name of the child being sought.
+         *
+         * \return A pointer to the instance, or NULL if none was found.
+         */
+        C* operator[](const std::string& name);
 
         //! Removes the child whose name is passed as parameter.
         /*!
@@ -252,6 +262,12 @@ namespace storage
     {
         lazyLoadChildren();
         return _children[name];
+    }
+
+    template <class C>
+    C* HasMany<C>::operator[](const std::string& name)
+    {
+        return getChild(name);
     }
 
     template <class C>
