@@ -174,7 +174,7 @@ namespace storage
     template <class P>
     Persistable* BelongsTo<P>::getParent() const
     {
-        return reinterpret_cast<Persistable*>(_parent);
+        return (Persistable*)(_parent);
     }
     
     template <class P>
