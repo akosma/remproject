@@ -38,6 +38,7 @@
 
 #if defined(_WIN32)
 #include <new>
+using std::bad_alloc;
 #endif
 
 #include <Poco/Exception.h>
