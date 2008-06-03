@@ -41,6 +41,8 @@
 
 #include <string>
 
+using std::string;
+
 //! Contains several classes used throughout the project.
 /*!
  * \namespace utility
@@ -55,7 +57,7 @@ namespace utility
      *
      * Represents a strongly-typed structure with a name and a value.
      */
-    template <class N = std::string, class V = double>
+    template <class N = string, class V = double>
     class Property
     {
     public:

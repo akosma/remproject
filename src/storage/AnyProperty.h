@@ -49,6 +49,8 @@ using utility::Property;
 using Poco::RefAnyCast;
 using Poco::Any;
 using Poco::DateTime;
+using std::string;
+using std::type_info;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -73,7 +75,7 @@ namespace storage
      * that it uses the corresponding getter; otherwise a runtime exception is
      * thrown to the caller.
      */
-    class AnyProperty : public Property<std::string, Any>
+    class AnyProperty : public Property<string, Any>
     {
     public:
 
@@ -89,7 +91,7 @@ namespace storage
          * 
          * \param name A name for the current property.
          */
-        AnyProperty(const std::string&);
+        AnyProperty(const string&);
 
         //! Constructor.
         /*!
@@ -98,7 +100,7 @@ namespace storage
          * \param name A name for the current property.
          * \param value A value for the current property.
          */
-        AnyProperty(const std::string&, const Any&);
+        AnyProperty(const string&, const Any&);
         
         //! Copy constructor.
         /*!
@@ -129,9 +131,9 @@ namespace storage
          * Returns a platform-specific information stating 
          * the underlying type of the current instance.
          * 
-         * \return An std::type_info reference.
+         * \return An type_info reference.
          */
-        const std::type_info& getType() const;
+        const type_info& getType() const;
 
         //! Sets a value to the current instance.
         /*!
@@ -177,7 +179,7 @@ namespace storage
          *
          * \return A string with a SQL statement.
          */
-        const std::string getSQLiteColumnDefinition() const;
+        const string getSQLiteColumnDefinition() const;
         
         //! Returns a string with the current value of this instance.
         /*!
@@ -186,7 +188,7 @@ namespace storage
          * surrounded by quotes, as required by SQL statements. This
          * method also takes care to avoid SQL injection problems.
          */
-        const std::string getQuotedValue() const;
+        const string getQuotedValue() const;
         
         //! Returns a string with both the name and the value of the current property.
         /*!
@@ -196,7 +198,7 @@ namespace storage
          * 
          * \return A string in the form "name = 'value'"
          */
-        const std::string getNameValuePair() const;
+        const string getNameValuePair() const;
         
     private:
         

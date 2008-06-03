@@ -48,6 +48,7 @@
 
 using metamodel::Diagram;
 using metamodel::Element;
+using std::string;
 
 namespace tests
 {
@@ -61,10 +62,10 @@ namespace tests
 
     void DiagramTest::testDiagramCanHaveSeveralElements()
     {
-        std::string actor1Name("actor1");
-        std::string diagramName("diagramName");
-        std::string className("actor");
-        std::string diagramClassName("usecase");
+        string actor1Name("actor1");
+        string diagramName("diagramName");
+        string className("actor");
+        string diagramClassName("usecase");
 
         Diagram* diagram = new Diagram(diagramClassName);
         diagram->setName(diagramName);
@@ -87,14 +88,14 @@ namespace tests
     
     void DiagramTest::testCanAddElementsUsingOperator()
     {
-        std::string diagramClassName("usecase");
-        std::string diagramName("diagramName");
+        string diagramClassName("usecase");
+        string diagramName("diagramName");
         Diagram* diagram = new Diagram(diagramClassName);
         diagram->setName(diagramName);
 
-        std::string className("actor");
-        std::string actor1Name("actor1");
-        std::string actor2Name("actor2");
+        string className("actor");
+        string actor1Name("actor1");
+        string actor2Name("actor2");
         Element* actor1 = new Element(className);
         actor1->setName(actor1Name);
         Element* actor2 = new Element(className);

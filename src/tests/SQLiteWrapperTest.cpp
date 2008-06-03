@@ -45,6 +45,9 @@
 #endif
 
 using storage::SQLiteWrapper;
+using std::string;
+using std::vector;
+using std::fstream;
 
 namespace tests
 {
@@ -74,8 +77,8 @@ namespace tests
         dal.close();
     
         // Check that the file exists
-        std::fstream fin;
-        fin.open(_filename.c_str(), std::fstream::in);
+        fstream fin;
+        fin.open(_filename.c_str(), fstream::in);
         CPPUNIT_ASSERT(fin.is_open());
         fin.close();
     }
@@ -115,7 +118,7 @@ namespace tests
         CPPUNIT_ASSERT(ok);
         dal.close();
         
-        const std::vector<std::string>& data = dal.getData();
+        const vector<string>& data = dal.getData();
         const size_t numberOfHeaders = dal.getTableHeaders().size();
         const size_t dataItems = data.size();
     

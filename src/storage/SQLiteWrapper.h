@@ -45,6 +45,9 @@
 #endif
 
 using utility::Singleton;
+using std::string;
+using std::vector;
+using std::map;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -96,7 +99,7 @@ namespace storage
          * 
          * \param fileName A string with the file name.
          */
-        void setFileName(const std::string&);
+        void setFileName(const string&);
         
         //! Gets the file name of the SQLite database.
         /*!
@@ -104,7 +107,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string& getFileName();
+        const string& getFileName();
 
         //! Opens the connection to the SQLite database.
         /*!
@@ -119,14 +122,14 @@ namespace storage
         //! Executes the query passed as parameter.
         /*!
          * This is the heart of the class; this method takes a SQL query
-         * in a std::string and sets the internal state of the class
+         * in a string and sets the internal state of the class
          * to inform clients about the result of the query.
          * 
          * \param query The query to execute.
          * 
          * \return A boolean value; true in case of success, false otherwise.
          */
-        const bool executeQuery(const std::string&);
+        const bool executeQuery(const string&);
 
         //! Closes the connection to the SQLite database.
         /*!
@@ -160,7 +163,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string& getLastQuery() const;
+        const string& getLastQuery() const;
 
         //! Returns the last error message provided by SQLite.
         /*!
@@ -168,7 +171,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string& getLastErrorMsg() const;
+        const string& getLastErrorMsg() const;
 
         //! Returns the headers of the last resultset.
         /*!
@@ -178,7 +181,7 @@ namespace storage
          * 
          * \return A vector of string.
          */
-        const std::vector<std::string>& getTableHeaders() const;
+        const vector<string>& getTableHeaders() const;
 
         //! Returns the data retrieved by the last query.
         /*!
@@ -187,7 +190,7 @@ namespace storage
          * 
          * \return A vector of string.
          */
-        const std::vector<std::string>& getData() const;
+        const vector<string>& getData() const;
         
         //! Tests whether the table passed as parameter exists in the database.
         /*!
@@ -197,7 +200,7 @@ namespace storage
          * 
          * \return A boolean stating whether the table exists (true) or not (false)
          */
-        const bool tableExists(const std::string&);
+        const bool tableExists(const string&);
         
         //! Returns the column names of the table passed as parameter.
         /*!
@@ -206,9 +209,9 @@ namespace storage
          * 
          * \param tableName The name of the table whose schema is sought.
          *
-         * \return An std::map instance with pairs representing: [column name = column type]
+         * \return An map instance with pairs representing: [column name = column type]
          */
-        const std::map<std::string, std::string> getTableSchema(const std::string&);
+        const map<string, string> getTableSchema(const string&);
 
     private:
         //! Private constructor.
@@ -223,7 +226,7 @@ namespace storage
     private:
 
         //! The file name of the SQLite database used by this class.
-        std::string _fileName;
+        string _fileName;
 
         //! The result code of the last query executed on the database
         int _resultCode;
@@ -238,16 +241,16 @@ namespace storage
         ID _lastRowId;
 
         //! An error message returned by SQLite.
-        std::string _errorMsg;
+        string _errorMsg;
 
         //! The last query executed.
-        std::string _lastQuery;
+        string _lastQuery;
 
         //! A vector containing the headers of the last resultset.
-        std::vector<std::string> _columnHeaders;
+        vector<string> _columnHeaders;
 
         //! A vector containing the data retrieved from the database.
-        std::vector<std::string> _data;
+        vector<string> _data;
 
         //! A variable representing the SQLite database itself.
         sqlite3* _db;

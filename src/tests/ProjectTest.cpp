@@ -49,6 +49,7 @@
 using metamodel::Project;
 using metamodel::Diagram;
 using metamodel::Element;
+using std::string;
 
 namespace tests
 {
@@ -62,9 +63,9 @@ namespace tests
 
     void ProjectTest::testProjectHasManyDiagrams()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
 
         Project project;
         CPPUNIT_ASSERT(!project.hasChildren());
@@ -104,9 +105,9 @@ namespace tests
     
     void ProjectTest::testCanRemoveAllDiagramsFromProject()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
 
         Project project;
         CPPUNIT_ASSERT(!project.hasChildren());
@@ -139,9 +140,9 @@ namespace tests
     
     void ProjectTest::testCanAddElementsUsingOperator()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
 
         Project project;
         Diagram* firstDiagram = new Diagram(diagramClassName);
@@ -155,9 +156,9 @@ namespace tests
     
     void ProjectTest::testCanRetrieveElementsUsingOperator()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
 
         Project project;
         Diagram* firstDiagram = new Diagram(diagramClassName);

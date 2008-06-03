@@ -43,29 +43,32 @@
 using Poco::Any;
 using Poco::DateTime;
 using Poco::replace;
+using std::string;
+using std::type_info;
+using std::stringstream;
 
 namespace storage
 {
     AnyProperty::AnyProperty()
-    : Property<std::string, Any>()
+    : Property<string, Any>()
     , _isPrimaryKey(false)
     {
     }
     
-    AnyProperty::AnyProperty(const std::string& name)
-    : Property<std::string, Any>(name)
+    AnyProperty::AnyProperty(const string& name)
+    : Property<string, Any>(name)
     , _isPrimaryKey(false)
     {
     }
 
-    AnyProperty::AnyProperty(const std::string& name, const Any& value)
-    : Property<std::string, Any>(name, value)
+    AnyProperty::AnyProperty(const string& name, const Any& value)
+    : Property<string, Any>(name, value)
     , _isPrimaryKey(false)
     {
     }
 
     AnyProperty::AnyProperty(const AnyProperty& rhs)
-    : Property<std::string, Any>(rhs)
+    : Property<string, Any>(rhs)
     , _isPrimaryKey(rhs._isPrimaryKey)
     {
     }
@@ -74,7 +77,7 @@ namespace storage
     {
         if (this != &rhs)
         {
-            Property<std::string, Any>::operator=(rhs);
+            Property<string, Any>::operator=(rhs);
             _isPrimaryKey = rhs._isPrimaryKey;
         }
 
@@ -85,7 +88,7 @@ namespace storage
     {
     }
 
-    const std::type_info& AnyProperty::getType() const
+    const type_info& AnyProperty::getType() const
     {
         return getValue().type();
     }
@@ -95,13 +98,13 @@ namespace storage
         _isPrimaryKey = true;
     }
 
-    const std::string AnyProperty::getSQLiteColumnDefinition() const
+    const string AnyProperty::getSQLiteColumnDefinition() const
     {
-        const std::type_info& type = getValue().type();
-        std::stringstream output;
+        const type_info& type = getValue().type();
+        stringstream output;
         output << getName();
         output << " ";
-        if(type == typeid(std::string))
+        if(type == typeid(string))
         {
             output << "TEXT";
         }
@@ -128,17 +131,17 @@ namespace storage
         return output.str();
     }
     
-    const std::string AnyProperty::getQuotedValue() const
+    const string AnyProperty::getQuotedValue() const
     {
-        const std::type_info& type = getValue().type();
-        std::stringstream output;
-        if(type == typeid(std::string))
+        const type_info& type = getValue().type();
+        stringstream output;
+        if(type == typeid(string))
         {
             // This prevents SQL-injection attacks or corruptions on the file.
-            std::string doubleQuote("'");
-            std::string singleQuote("''");
+            string doubleQuote("'");
+            string singleQuote("''");
             output << "'";
-            output << replace<std::string>(get<std::string>(), doubleQuote, singleQuote);
+            output << replace<string>(get<string>(), doubleQuote, singleQuote);
             output << "'";
         }
         if(type == typeid(int))
@@ -160,9 +163,9 @@ namespace storage
         return output.str();
     }
     
-    const std::string AnyProperty::getNameValuePair() const
+    const string AnyProperty::getNameValuePair() const
     {
-        std::stringstream output;
+        stringstream output;
         output << getName();
         output << " = ";
         output << getQuotedValue();

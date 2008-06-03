@@ -39,6 +39,9 @@
 
 using Poco::DateTime;
 using Poco::Any;
+using std::string;
+using std::stringstream;
+using std::map;
 
 namespace storage
 {
@@ -67,14 +70,14 @@ namespace storage
         return *this;
     }
 
-    AnyProperty& AnyPropertyMap::operator[](const std::string& key)
+    AnyProperty& AnyPropertyMap::operator[](const string& key)
     {
         return _map[key.c_str()];
     }
 
-    const bool AnyPropertyMap::hasProperty(const std::string& key) const
+    const bool AnyPropertyMap::hasProperty(const string& key) const
     {
-        std::map<std::string, storage::AnyProperty>::const_iterator it = _map.find(key);
+        map<string, storage::AnyProperty>::const_iterator it = _map.find(key);
         return (it != _map.end());
     }
 
@@ -88,7 +91,7 @@ namespace storage
         return (unsigned int)_map.size();
     }
 
-    void AnyPropertyMap::createPrimaryKey(const std::string& key)
+    void AnyPropertyMap::createPrimaryKey(const string& key)
     {
         Any any(0);
         AnyProperty prop(key, any);
@@ -96,16 +99,16 @@ namespace storage
         _map[key] = prop;
     }
     
-    const std::string AnyPropertyMap::getColumnList() const
+    const string AnyPropertyMap::getColumnList() const
     {
-        std::stringstream output;
-        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        stringstream output;
+        map<string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << it->first;
             output << ", ";
         }
-        std::string str = output.str();
+        string str = output.str();
         int len = str.length();
         if (len > 2)
         {
@@ -114,10 +117,10 @@ namespace storage
         return str;
     }
     
-    const std::string AnyPropertyMap::getStringForCreateTable(std::string& tableName) const
+    const string AnyPropertyMap::getStringForCreateTable(string& tableName) const
     {
-        std::stringstream output;
-        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        stringstream output;
+        map<string, storage::AnyProperty>::const_iterator it;
         output << "CREATE TABLE ";
         output << tableName;
         output << "(\n";
@@ -126,63 +129,63 @@ namespace storage
             output << (it->second.getSQLiteColumnDefinition());
             output << ",\n";
         }
-        std::string str = output.str();
+        string str = output.str();
         int len = str.length();
         if (len > 2)
         {
             str = str.substr(0, len - 2);
         }
-        std::stringstream output2;
+        stringstream output2;
         output2 << str;
         output2 << ");";
         return output2.str();
     }
     
-    const std::string AnyPropertyMap::getStringForInsert(std::string& tableName) const
+    const string AnyPropertyMap::getStringForInsert(string& tableName) const
     {
-        std::stringstream output;
+        stringstream output;
         output << "INSERT INTO ";
         output << tableName;
         output << " (";
         output << this->getColumnList();
         output << ") VALUES (";
-        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        map<string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getQuotedValue());
             output << ", ";
         }
-        std::string str = output.str();
+        string str = output.str();
         int len = str.length();
         if (len > 2)
         {
             str = str.substr(0, len - 2);
         }
-        std::stringstream output2;
+        stringstream output2;
         output2 << str;
         output2 << ");";
         return output2.str();
     }
     
-    const std::string AnyPropertyMap::getStringForUpdate(std::string& tableName, const int id) const
+    const string AnyPropertyMap::getStringForUpdate(string& tableName, const int id) const
     {
-        std::stringstream output;
+        stringstream output;
         output << "UPDATE ";
         output << tableName;
         output << " SET ";
-        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        map<string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getNameValuePair());
             output << ", ";
         }
-        std::string str = output.str();
+        string str = output.str();
         int len = str.length();
         if (len > 2)
         {
             str = str.substr(0, len - 2);
         }
-        std::stringstream output2;
+        stringstream output2;
         output2 << str;
         output2 << " WHERE id = ";
         output2 << id;
@@ -190,16 +193,16 @@ namespace storage
         return output2.str();
     }
     
-    const std::string AnyPropertyMap::getStringForWhere() const
+    const string AnyPropertyMap::getStringForWhere() const
     {
-        std::stringstream output;
-        std::map<std::string, storage::AnyProperty>::const_iterator it;
+        stringstream output;
+        map<string, storage::AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getNameValuePair());
             output << " AND ";
         }
-        std::string str = output.str();
+        string str = output.str();
         int len = str.length();
         if (len > 5)
         {

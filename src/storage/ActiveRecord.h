@@ -56,6 +56,10 @@
 
 using Poco::DateTime;
 using Poco::Timestamp;
+using std::string;
+using std::vector;
+using std::map;
+using std::stringstream;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -89,7 +93,7 @@ namespace storage
          * 
          * \param className The subclass name of the current instance.
          */
-        ActiveRecord(const std::string&);
+        ActiveRecord(const string&);
         
         //! Constructor used for instances retrieved from the database
         /*!
@@ -135,7 +139,7 @@ namespace storage
          * \param value The value of the property to set
          */
         template <class U>
-        void set(const std::string&, const U&);
+        void set(const string&, const U&);
         
         //! Get a property.
         /*!
@@ -146,7 +150,7 @@ namespace storage
          * \return The current value of the named property
          */
         template <class U>
-        const U get(const std::string&);
+        const U get(const string&);
 
         //@}
 
@@ -186,7 +190,7 @@ namespace storage
          * 
          * \param name The name of the current instance.
          */
-        void setName(std::string&);
+        void setName(string&);
         
         //! Returns the name of the current instance.
         /*!
@@ -194,7 +198,7 @@ namespace storage
          *
          * \return A string with the name of the current instance.
          */
-        std::string getName();
+        string getName();
         
         //! Returns the moment of creation of the current instance.
         /*!
@@ -263,7 +267,7 @@ namespace storage
          *
          * \return A pointer to a vector of the specified type.
          */
-        static std::vector<T>* findAll();
+        static vector<T>* findAll();
 
         //! Retrieves all objects from disk satisfying some conditions.
         /*!
@@ -275,7 +279,7 @@ namespace storage
          *
          * \return A pointer to a vector of the specified type.
          */
-        static std::vector<T>* findByCondition(const storage::AnyPropertyMap&);
+        static vector<T>* findByCondition(const storage::AnyPropertyMap&);
         
         //! Retrieves the object whose ID is passed as parameter.
         /*!
@@ -301,7 +305,7 @@ namespace storage
          * \param key The name of the property to add.
          */
         template <class U>
-        void addProperty(const std::string&);
+        void addProperty(const string&);
 
         //@}
 
@@ -350,7 +354,7 @@ namespace storage
          *
          * \param value The name of he subclass of the current object.
          */
-        void setClassName(const std::string&);
+        void setClassName(const string&);
 
         //@}
 
@@ -369,7 +373,7 @@ namespace storage
          * 
          * \return A vector of property maps.
          */
-        static std::vector<storage::AnyPropertyMap>* getPropertyMaps(std::map<std::string, std::string>&);
+        static vector<storage::AnyPropertyMap>* getPropertyMaps(map<string, string>&);
         
         //! Returns a vector of instances as requested by the input query.
         /*!
@@ -381,7 +385,7 @@ namespace storage
          *
          * \return A pointer to a vector of instances of the required type.
          */
-        static std::vector<T>* getVectorByQuery(std::string&);
+        static vector<T>* getVectorByQuery(string&);
 
         //@}
 
@@ -421,14 +425,14 @@ namespace storage
         AnyPropertyMap _data;
 
         //! The subclass name of the current instance.
-        std::string _className;
+        string _className;
 
         //@}
 
     };
 
     template <class T>
-    ActiveRecord<T>::ActiveRecord(const std::string& className)
+    ActiveRecord<T>::ActiveRecord(const string& className)
     : _id        (DEFAULT_ID)
     , _isNew     (true)
     , _isDirty   (true)
@@ -443,7 +447,7 @@ namespace storage
     , _isNew     (false)
     , _isDirty   (false)
     , _data      (data)
-    , _className (data.get<std::string>("class"))
+    , _className (data.get<string>("class"))
     {
     }
 
@@ -478,7 +482,7 @@ namespace storage
 
     template <class T>
     template <class U>
-    void ActiveRecord<T>::set(const std::string& key, const U& value)
+    void ActiveRecord<T>::set(const string& key, const U& value)
     {
         setDirty();
         _data.set<U>(key, value);
@@ -486,14 +490,14 @@ namespace storage
 
     template <class T>
     template <class U>
-    const U ActiveRecord<T>::get(const std::string& key)
+    const U ActiveRecord<T>::get(const string& key)
     {
         return _data.get<U>(key);
     }
     
     template <class T>
     template <class U>
-    void ActiveRecord<T>::addProperty(const std::string& key)
+    void ActiveRecord<T>::addProperty(const string& key)
     {
         _data.addProperty<U>(key);
     }
@@ -534,15 +538,15 @@ namespace storage
     }
     
     template <class T>
-    void ActiveRecord<T>::setName(std::string& name)
+    void ActiveRecord<T>::setName(string& name)
     {
-        set<std::string>("name", name);
+        set<string>("name", name);
     }
 
     template <class T>
-    std::string ActiveRecord<T>::getName()
+    string ActiveRecord<T>::getName()
     {
-        return get<std::string>("name");
+        return get<string>("name");
     }
     
     template <class T>
@@ -553,10 +557,10 @@ namespace storage
     }
 
     template <class T>
-    void ActiveRecord<T>::setClassName(const std::string& value)
+    void ActiveRecord<T>::setClassName(const string& value)
     {
         // Do not call "setDirty()" here!
-        _data.set<std::string>("class", value);
+        _data.set<string>("class", value);
     }
 
     template <class T>
@@ -613,8 +617,8 @@ namespace storage
             
             // Add some more required properties
             addProperty<int>(T::getParentColumnName());
-            addProperty<std::string>("class");
-            addProperty<std::string>("name");
+            addProperty<string>("class");
+            addProperty<string>("name");
             addProperty<DateTime>("created_on");
             addProperty<DateTime>("updated_on");
             _data.createPrimaryKey("id");
@@ -673,7 +677,7 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::remove(const ID id)
     {
-        std::stringstream query;
+        stringstream query;
         query << "DELETE FROM ";
         query << T::getTableName();
         query << " WHERE id = ";
@@ -692,7 +696,7 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::removeAll()
     {
-        std::stringstream query;
+        stringstream query;
         query << "DELETE FROM ";
         query << T::getTableName();
         query << ";";
@@ -709,7 +713,7 @@ namespace storage
     template <class T>
     T* ActiveRecord<T>::findById(const ID id)
     {
-        std::stringstream query;
+        stringstream query;
         query << "SELECT * FROM ";
         query << T::getTableName();
         query << " WHERE id = ";
@@ -721,13 +725,13 @@ namespace storage
         bool ok = wrapper.open();
         if (ok)
         {
-            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
+            map<string, string> schema = wrapper.getTableSchema(T::getTableName());
             ok = wrapper.executeQuery(query.str());
             wrapper.close();
             if (ok)
             {
-                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
-                std::vector<storage::AnyPropertyMap>::iterator iter;
+                vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
+                vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
                     item = new T(*iter);
@@ -739,40 +743,40 @@ namespace storage
     }
 
     template <class T>
-    std::vector<T>* ActiveRecord<T>::findAll()
+    vector<T>* ActiveRecord<T>::findAll()
     {
-        std::stringstream query;
+        stringstream query;
         query << "SELECT * FROM ";
         query << T::getTableName();
         query << ";";
         
-        std::string q = query.str();
+        string q = query.str();
         return getVectorByQuery(q);
     }
     
     template <class T>
-    std::vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
+    vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
     {
-        std::stringstream query;
+        stringstream query;
         query << "SELECT * FROM ";
         query << T::getTableName();
         query << " WHERE ";
         query << conditions.getStringForWhere();
         query << ";";
         
-        std::string q = query.str();
+        string q = query.str();
         return getVectorByQuery(q);
     }
     
     template <class T>
-    std::vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(std::map<std::string, std::string>& schema)
+    vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(map<string, string>& schema)
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        std::vector<storage::AnyPropertyMap>* maps = new std::vector<storage::AnyPropertyMap>();
-        const std::vector<std::string>& data = wrapper.getData();
+        vector<storage::AnyPropertyMap>* maps = new vector<storage::AnyPropertyMap>();
+        const vector<string>& data = wrapper.getData();
         const size_t numberOfHeaders = wrapper.getTableHeaders().size();
         const size_t dataItems = data.size();
-        const std::vector<std::string>& headers = wrapper.getTableHeaders();
+        const vector<string>& headers = wrapper.getTableHeaders();
 
         for (size_t i = 0; i < dataItems;
                          i = i + numberOfHeaders)
@@ -780,13 +784,13 @@ namespace storage
             AnyPropertyMap instanceData;
             for (int j = 0; j < numberOfHeaders; ++j)
             {
-                const std::string& currentHeader = headers[j];
-                std::string& currentDataType = schema[currentHeader];
-                const std::string& currentValue = data[i + j];
+                const string& currentHeader = headers[j];
+                string& currentDataType = schema[currentHeader];
+                const string& currentValue = data[i + j];
                 
                 if(currentDataType == "TEXT")
                 {
-                    instanceData.set<std::string>(currentHeader, currentValue);
+                    instanceData.set<string>(currentHeader, currentValue);
                 }
                 else if (currentDataType == "INTEGER")
                 {
@@ -816,19 +820,19 @@ namespace storage
     }
     
     template <class T>
-    std::vector<T>* ActiveRecord<T>::getVectorByQuery(std::string& query)
+    vector<T>* ActiveRecord<T>::getVectorByQuery(string& query)
     {
-        std::vector<T>* items = new std::vector<T>;
+        vector<T>* items = new vector<T>;
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
         bool ok = wrapper.open();
         if (ok)
         {
-            std::map<std::string, std::string> schema = wrapper.getTableSchema(T::getTableName());
+            map<string, string> schema = wrapper.getTableSchema(T::getTableName());
             ok = wrapper.executeQuery(query);
             if (ok)
             {
-                std::vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
-                std::vector<storage::AnyPropertyMap>::iterator iter;
+                vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
+                vector<storage::AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
                     T item(*iter);

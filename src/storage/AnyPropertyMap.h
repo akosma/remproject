@@ -45,6 +45,8 @@
 #endif
 
 using Poco::DateTime;
+using std::string;
+using std::map;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -58,7 +60,7 @@ namespace storage
     /*!
      * \class AnyPropertyMap
      *
-     * Wrapper around an std::map of string and AnyProperties.
+     * Wrapper around an map of string and AnyProperties.
      * It offers several methods that allow for the creation of 
      * SQL statements representing the structure and contents
      * of the values inside the map.
@@ -106,7 +108,7 @@ namespace storage
          *
          * \return A reference to the sought property.
          */
-        AnyProperty& operator[](const std::string&);
+        AnyProperty& operator[](const string&);
         
         //! States whether the object referenced by the key exists in the current instance.
         /*!
@@ -116,7 +118,7 @@ namespace storage
          *
          * \return A boolean; true if the object exists, false otherwise.
          */
-        const bool hasProperty(const std::string&) const;
+        const bool hasProperty(const string&) const;
         
         //! States whether the current instance has any contained items.
         /*!
@@ -142,7 +144,7 @@ namespace storage
          * \param key The name of the property to add.
          */
         template <class T>
-        void addProperty(const std::string& key)
+        void addProperty(const string& key)
         {
             if (!hasProperty(key))
             {
@@ -159,7 +161,7 @@ namespace storage
          * \param value The value of the property to set
          */
         template <class T>
-        void set(const std::string& key, const T& value)
+        void set(const string& key, const T& value)
         {
             Any any(value);
             AnyProperty prop(key, any);
@@ -176,7 +178,7 @@ namespace storage
          * \return The current string value of the named property
          */
         template <class T>
-        const T get(const std::string& key)
+        const T get(const string& key)
         {
             return _map[key].get<T>();
         }
@@ -187,7 +189,7 @@ namespace storage
          * 
          * \param key The name of the new property.
          */
-        void createPrimaryKey(const std::string&);
+        void createPrimaryKey(const string&);
 
         //! Generates a CREATE TABLE SQL statement.
         /*!
@@ -195,7 +197,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string getStringForCreateTable(std::string&) const;
+        const string getStringForCreateTable(string&) const;
 
         //! Generates an INSERT SQL statement.
         /*!
@@ -203,7 +205,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string getStringForInsert(std::string&) const;
+        const string getStringForInsert(string&) const;
 
         //! Generates an UPDATE SQL statement.
         /*!
@@ -211,7 +213,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string getStringForUpdate(std::string&, const int id) const;
+        const string getStringForUpdate(string&, const int id) const;
 
         //! Generates a CREATE TABLE SQL statement.
         /*!
@@ -219,7 +221,7 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string getStringForWhere() const;
+        const string getStringForWhere() const;
 
     private:
         
@@ -230,11 +232,11 @@ namespace storage
          * 
          * \return A string.
          */
-        const std::string getColumnList() const;
+        const string getColumnList() const;
 
     private:
         //! The wrapped map of properties.
-        std::map<std::string, AnyProperty> _map;
+        map<string, AnyProperty> _map;
     };
 }
 

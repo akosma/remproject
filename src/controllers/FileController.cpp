@@ -35,6 +35,7 @@
 #include "FileController.h"
 
 #include <sstream>
+#include <string>
 
 #if defined(__APPLE__) && defined(__MACH__)
 // The Mac OS X compiler requires this line, because "nil" is a reserved
@@ -57,6 +58,8 @@ using Poco::UUID;
 #endif
 
 using storage::SQLiteWrapper;
+using std::string;
+using std::stringstream;
 
 namespace controllers
 {
@@ -73,7 +76,7 @@ namespace controllers
         closeProject();
     }
     
-    const bool FileController::openProject(const std::string& path)
+    const bool FileController::openProject(const string& path)
     {
         if (_project)
         {
@@ -96,7 +99,7 @@ namespace controllers
             closeProject();
         }
         _counter++;
-        std::stringstream path;
+        stringstream path;
         path << "untitled ";
         path << _counter;
         path << ".rem";
@@ -112,7 +115,7 @@ namespace controllers
         }
     }
     
-    void FileController::saveProjectAs(const std::string& path)
+    void FileController::saveProjectAs(const string& path)
     {
         if (_project && _project->isNew())
         {
@@ -131,17 +134,17 @@ namespace controllers
         _currentDiagram = NULL;
     }
     
-    void FileController::addDiagram(const std::string& className)
+    void FileController::addDiagram(const string& className)
     {
         if (_project)
         {
             Diagram* diagram = new Diagram(className);
 #if defined(_WIN32)
-            std::string name(tmpnam(NULL));
+            string name(tmpnam(NULL));
 #else
             UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
             UUID uuid = generator.createRandom();
-            std::string name = uuid.toString();
+            string name = uuid.toString();
 #endif
             diagram->setName(name);
             _project->addChild(diagram);

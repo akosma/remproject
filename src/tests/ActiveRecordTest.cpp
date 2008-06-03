@@ -60,6 +60,8 @@ using storage::AnyPropertyMap;
 using storage::DEFAULT_ID;
 using Poco::DateTime;
 using Poco::Stopwatch;
+using std::string;
+using std::vector;
 
 namespace tests
 {
@@ -73,9 +75,9 @@ namespace tests
 
     void ActiveRecordTest::testCanSaveIndividualInstance()
     {
-        std::string name1("john");
-        std::string name2("johnny");
-        std::string className("actor");
+        string name1("john");
+        string name2("johnny");
+        string className("actor");
 
         Element* john = new Element(className);
         CPPUNIT_ASSERT(john->isNew());
@@ -98,8 +100,8 @@ namespace tests
         CPPUNIT_ASSERT(!john->isNew());
         CPPUNIT_ASSERT(!john->isDirty());
 
-        std::string name3("peter");
-        std::string name4("pete");
+        string name3("peter");
+        string name4("pete");
         Element* peter = new Element(className);
         CPPUNIT_ASSERT(peter->isNew());
         CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)peter->getId());
@@ -122,17 +124,17 @@ namespace tests
     
     void ActiveRecordTest::testCanRetrieveAllInstances()
     {
-        std::vector<Element>* elements = Element::findAll();
+        vector<Element>* elements = Element::findAll();
         
         CPPUNIT_ASSERT_EQUAL(2, (int)elements->size());
         Element& elem0 = elements->at(0);
         Element& elem1 = elements->at(1);
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.get<std::string>("class"));
+        CPPUNIT_ASSERT_EQUAL(string("actor"), elem0.get<string>("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem1.get<std::string>("class"));
+        CPPUNIT_ASSERT_EQUAL(string("actor"), elem1.get<string>("class"));
         CPPUNIT_ASSERT(!elem1.isDirty());
         CPPUNIT_ASSERT(!elem1.isNew());
         
@@ -144,7 +146,7 @@ namespace tests
         Element* elem = Element::findById(1);
         
         CPPUNIT_ASSERT(elem);
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
+        CPPUNIT_ASSERT_EQUAL(string("actor"), elem->get<string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
         
@@ -153,26 +155,26 @@ namespace tests
     
     void ActiveRecordTest::testCanUseConditionsToFindAnItem()
     {
-        std::string name("peter");
+        string name("peter");
         
         AnyPropertyMap invalidConditions;
-        invalidConditions.set<std::string>("name", name);
+        invalidConditions.set<string>("name", name);
         invalidConditions.set<bool>("valid", true);
-        std::vector<Element>* elements = Element::findByCondition(invalidConditions);
+        vector<Element>* elements = Element::findByCondition(invalidConditions);
         
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
         
         delete elements;
         
         AnyPropertyMap validConditions;
-        validConditions.set<std::string>("name", name);
+        validConditions.set<string>("name", name);
         elements = Element::findByCondition(validConditions);
         
         CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());        
         
         Element& elem0 = elements->at(0);
 
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem0.get<std::string>("class"));
+        CPPUNIT_ASSERT_EQUAL(string("actor"), elem0.get<string>("class"));
         CPPUNIT_ASSERT(!elem0.isDirty());
         CPPUNIT_ASSERT(!elem0.isNew());
         
@@ -190,7 +192,7 @@ namespace tests
         Element* elem = Element::findById(1);
 
         CPPUNIT_ASSERT(elem);
-        CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
+        CPPUNIT_ASSERT_EQUAL(string("actor"), elem->get<string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
 
@@ -204,14 +206,14 @@ namespace tests
         
         Element::removeAll();
         
-        std::vector<Element>* elements = Element::findAll();
+        vector<Element>* elements = Element::findAll();
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
     }
 
     void ActiveRecordTest::testCanUseCopyConstructorSafely()
     {
-        std::string name("john");
-        std::string className("actor");
+        string name("john");
+        string className("actor");
         
 
         Element* john = new Element(className);
@@ -231,8 +233,8 @@ namespace tests
         CPPUNIT_ASSERT(peter->isDirty());
 
         // Add everything to a diagram now and copy the diagram
-        std::string diagramClassName("diagram");
-        std::string diagramName("diagramName");
+        string diagramClassName("diagram");
+        string diagramName("diagramName");
         Diagram* diagram = new Diagram(diagramName);
         diagram->setName(diagramName);
 
@@ -251,8 +253,8 @@ namespace tests
     
     void ActiveRecordTest::testCanUseAssignmentOperatorSafely()
     {
-        std::string name("john");
-        std::string className("actor");
+        string name("john");
+        string className("actor");
 
         Element* john = new Element(className);
         john->setName(name);
@@ -278,10 +280,10 @@ namespace tests
     
     void ActiveRecordTest::testObjectCanSaveItsChildren()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
-        std::string projectName("test");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
+        string projectName("test");
 
         Project* project = new Project();
         project->setName(projectName);
@@ -309,8 +311,8 @@ namespace tests
     
     void ActiveRecordTest::testSavedObjectsHaveCreationAndUpdateTime()
     {
-        std::string element("timedElement");
-        std::string className("actor");
+        string element("timedElement");
+        string className("actor");
         
         Element* actor = new Element(className);
         actor->setName(element);
@@ -343,10 +345,10 @@ namespace tests
     
     void ActiveRecordTest::testSettingAChildDirtySetsTheParentDirtyToo()
     {
-        std::string projectName("test");
-        std::string diagramClassName("usecase");
-        std::string first("first");
-        std::string second("second");
+        string projectName("test");
+        string diagramClassName("usecase");
+        string first("first");
+        string second("second");
 
         Project* project = new Project();
         project->setName(projectName);
@@ -376,9 +378,9 @@ namespace tests
     
     void ActiveRecordTest::testObjectsCannotBeAttackedWithSqlInjection()
     {
-        std::string projectName("Robert O'Hara");
-        std::string diagramClassName("William \"Braveheart\" Gibson");
-        std::string diagramName("You can't guess what users will insert in the \"database\" file");
+        string projectName("Robert O'Hara");
+        string diagramClassName("William \"Braveheart\" Gibson");
+        string diagramName("You can't guess what users will insert in the \"database\" file");
         
         Project* project = new Project();
         project->setName(projectName);
@@ -395,7 +397,7 @@ namespace tests
         
         AnyPropertyMap condition;
         condition.set<int>("project_id", project->getId());
-        std::vector<Diagram>* diagrams = Diagram::findByCondition(condition);
+        vector<Diagram>* diagrams = Diagram::findByCondition(condition);
         CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());
 
         Diagram& retrievedDiagram = diagrams->at(0);
@@ -411,10 +413,10 @@ namespace tests
     void ActiveRecordTest::testUsesLazyLoadingToRetrieveChildren()
     {
         // Create a project with two diagrams inside
-        std::string first("first");
-        std::string second("second");
-        std::string diagramClassName("usecase");
-        std::string projectName("test");
+        string first("first");
+        string second("second");
+        string diagramClassName("usecase");
+        string projectName("test");
 
         Project* project = new Project();
         project->setName(projectName);

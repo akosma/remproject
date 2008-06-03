@@ -38,6 +38,8 @@
 #ifndef ARROWCANVAS_H_
 #define ARROWCANVAS_H_
 
+using std::vector;
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -91,7 +93,7 @@ namespace ui
     private:
         ContentComponent* _parent;
         const float _strokeWidth;
-        std::vector<Arrow*> _arrows;
+        vector<Arrow*> _arrows;
         Arrow* _currentArrow;
     };
 }

@@ -45,10 +45,11 @@
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
+using std::string;
 
 namespace metamodel
 {
-    Element::Element(const std::string& className)
+    Element::Element(const string& className)
     : ActiveRecord<Element>(className)
     , BelongsTo<Diagram>()
     , HasMany<Member>()
@@ -66,15 +67,15 @@ namespace metamodel
     {
     }
 
-    std::string& Element::getTableName()
+    string& Element::getTableName()
     {
-        static std::string tableName("elements");
+        static string tableName("elements");
         return tableName;
     }
 
-    std::string& Element::getParentColumnName()
+    string& Element::getParentColumnName()
     {
-        static std::string columnName("diagram_id");
+        static string columnName("diagram_id");
         return columnName;
     }
 

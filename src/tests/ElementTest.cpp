@@ -34,6 +34,8 @@
 
 #include "ElementTest.h"
 
+#include <string>
+
 #ifndef ELEMENT_H_
 #include "../metamodel/Element.h"
 #endif
@@ -44,6 +46,7 @@
 
 using metamodel::Element;
 using metamodel::Member;
+using std::string;
 
 namespace tests
 {
@@ -57,10 +60,10 @@ namespace tests
 
     void ElementTest::testElementHasManyMembers()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string memberClassName("field");
-        std::string elementClassName("class");
+        string first("first");
+        string second("second");
+        string memberClassName("field");
+        string elementClassName("class");
 
         Element element(elementClassName);
         CPPUNIT_ASSERT(!element.hasChildren());
@@ -94,10 +97,10 @@ namespace tests
     
     void ElementTest::testCanRemoveAllMembersFromElement()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string memberClassName("field");
-        std::string elementClassName("class");
+        string first("first");
+        string second("second");
+        string memberClassName("field");
+        string elementClassName("class");
 
         Element element(elementClassName);
         CPPUNIT_ASSERT(!element.hasChildren());
@@ -124,10 +127,10 @@ namespace tests
     
     void ElementTest::testCanAddMembersUsingOperator()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string memberClassName("field");
-        std::string elementClassName("class");
+        string first("first");
+        string second("second");
+        string memberClassName("field");
+        string elementClassName("class");
 
         Element element(elementClassName);
         Member* firstMember = new Member(memberClassName);
@@ -141,10 +144,10 @@ namespace tests
     
     void ElementTest::testCanRetrieveMembersUsingOperator()
     {
-        std::string first("first");
-        std::string second("second");
-        std::string memberClassName("field");
-        std::string elementClassName("class");
+        string first("first");
+        string second("second");
+        string memberClassName("field");
+        string elementClassName("class");
 
         Element element(elementClassName);
         Member* firstMember = new Member(memberClassName);

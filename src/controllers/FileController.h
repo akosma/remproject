@@ -54,6 +54,7 @@
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
+using std::string;
 
 //! Contains the controller classes of the application.
 /*!
@@ -92,11 +93,11 @@ namespace controllers
          * \return A boolean value; "true" if the file could be opened,
          * "false" otherwise.
          */
-        const bool openProject(const std::string&);
+        const bool openProject(const string&);
         
         //! Creates a new project in memory.
         /*!
-         * Creates a new project in memory. Use the "saveProject(const std::string&)"
+         * Creates a new project in memory. Use the "saveProject(const string&)"
          * method to save it on disk.
          */
         void newProject();
@@ -113,7 +114,7 @@ namespace controllers
          * 
          * \param path The path of the new project file.
          */
-        void saveProjectAs(const std::string&);
+        void saveProjectAs(const string&);
 
         //! Closes the current project.
         /*!
@@ -127,7 +128,7 @@ namespace controllers
          * 
          * \param className The type of diagram to create (use-case, class, etc).
          */
-        void addDiagram(const std::string&);
+        void addDiagram(const string&);
         
         //! States whether the controller has a current project.
         /*!

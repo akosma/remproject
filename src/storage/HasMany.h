@@ -47,6 +47,10 @@
 #include "Persistable.h"
 #endif
 
+using std::string;
+using std::map;
+using std::vector;
+
 //! Framework for storing instances in SQLite files.
 /*!
  * \namespace storage
@@ -139,7 +143,7 @@ namespace storage
          *
          * \return A pointer to the instance, or NULL if none was found.
          */
-        C* getChild(const std::string&);
+        C* getChild(const string&);
         
         //! Returns the child whose name is passed as parameter.
         /*!
@@ -149,7 +153,7 @@ namespace storage
          *
          * \return A pointer to the instance, or NULL if none was found.
          */
-        C* operator[](const std::string& name);
+        C* operator[](const string& name);
 
         //! Removes the child whose name is passed as parameter.
         /*!
@@ -157,7 +161,7 @@ namespace storage
          *
          * \param name The name of the child to be deleted.
          */
-        void removeChild(const std::string&);
+        void removeChild(const string&);
         
         //! Removes all the children.
         /*!
@@ -190,7 +194,7 @@ namespace storage
         
     private:
         //! Shortcut to make the code more readable.
-        typedef std::map<std::string, C*> InternalMap;
+        typedef map<string, C*> InternalMap;
 
     private:
         //! The children objects related to the current instance.
@@ -258,20 +262,20 @@ namespace storage
     }
 
     template <class C>
-    C* HasMany<C>::getChild(const std::string& name)
+    C* HasMany<C>::getChild(const string& name)
     {
         lazyLoadChildren();
         return _children[name];
     }
 
     template <class C>
-    C* HasMany<C>::operator[](const std::string& name)
+    C* HasMany<C>::operator[](const string& name)
     {
         return getChild(name);
     }
 
     template <class C>
-    void HasMany<C>::removeChild(const std::string& name)
+    void HasMany<C>::removeChild(const string& name)
     {
         lazyLoadChildren();
         C* element = _children[name];
@@ -331,9 +335,9 @@ namespace storage
 
             AnyPropertyMap conditions;
             conditions.set<int>(C::getParentColumnName(), getId());
-            std::vector<C>* elements = C::findByCondition(conditions);
+            vector<C>* elements = C::findByCondition(conditions);
 
-            typename std::vector<C>::iterator iter;
+            typename vector<C>::iterator iter;
             for (iter = elements->begin(); iter != elements->end(); ++iter)
             {
                 // Let's create a temporary object to insert into the internal map

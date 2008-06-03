@@ -45,11 +45,12 @@
 using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
+using std::string;
 
 namespace metamodel
 {
     Project::Project()
-    : ActiveRecord<Project>(std::string("project"))
+    : ActiveRecord<Project>(string("project"))
     , HasMany<Diagram>()
     {
     }
@@ -64,21 +65,21 @@ namespace metamodel
     {
     }
 
-    std::string& Project::getTableName()
+    string& Project::getTableName()
     {
-        static std::string tableName("projects");
+        static string tableName("projects");
         return tableName;
     }
 
-    std::string& Project::getParentColumnName()
+    string& Project::getParentColumnName()
     {
-        static std::string columnName("no_parent");
+        static string columnName("no_parent");
         return columnName;
     }
 
     void Project::createSchemaStructure()
     {
-        addProperty<std::string>("author");
+        addProperty<string>("author");
         addProperty<double>("version");
     }
 }

@@ -46,6 +46,8 @@
 
 using controllers::FileController;
 using storage::SQLiteWrapper;
+using std::string;
+using std::fstream;
 
 namespace tests
 {
@@ -75,7 +77,7 @@ namespace tests
         CPPUNIT_ASSERT(controller.hasCurrentProject());
 
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        const std::string filename1 = wrapper.getFileName();
+        const string filename1 = wrapper.getFileName();
 
         controller.closeProject();
         CPPUNIT_ASSERT(!controller.hasCurrentProject());
@@ -83,7 +85,7 @@ namespace tests
         controller.newProject();
         CPPUNIT_ASSERT(controller.hasCurrentProject());
         
-        const std::string filename2 = wrapper.getFileName();
+        const string filename2 = wrapper.getFileName();
         
         CPPUNIT_ASSERT(filename1 != filename2);
     }
@@ -93,17 +95,17 @@ namespace tests
         FileController& controller = FileController::get();
         controller.newProject();
         
-        const std::string chosenFileName("whatever.rem");
+        const string chosenFileName("whatever.rem");
         controller.saveProjectAs(chosenFileName);
         
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        const std::string& filename = wrapper.getFileName();
+        const string& filename = wrapper.getFileName();
         
         CPPUNIT_ASSERT_EQUAL(filename, chosenFileName);
 
         // Check that the file exists
-        std::fstream fin;
-        fin.open(filename.c_str(), std::fstream::in);
+        fstream fin;
+        fin.open(filename.c_str(), fstream::in);
         CPPUNIT_ASSERT(fin.is_open());
         fin.close();
 
@@ -121,7 +123,7 @@ namespace tests
         controller.saveProject();
         
         CPPUNIT_ASSERT(!controller.hasCurrentDiagram());
-        const std::string diagramClassName("usecase");
+        const string diagramClassName("usecase");
         controller.addDiagram(diagramClassName);
         CPPUNIT_ASSERT(controller.hasCurrentDiagram());
         

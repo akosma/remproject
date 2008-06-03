@@ -41,6 +41,8 @@
 #include "Figure.h"
 #endif
 
+using std::vector;
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -66,7 +68,7 @@ namespace ui
      */
     ArrowCanvas::~ArrowCanvas()
     {
-        std::vector<ArrowCanvas::Arrow*>::iterator it;
+        vector<ArrowCanvas::Arrow*>::iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
             delete (*it);
@@ -77,7 +79,7 @@ namespace ui
     void ArrowCanvas::mouseDown(const MouseEvent& e)
     {
         _currentArrow = NULL;
-        std::vector<ArrowCanvas::Arrow*>::iterator it;
+        vector<ArrowCanvas::Arrow*>::iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
             if ((*it)->intercepts(e))
@@ -98,7 +100,7 @@ namespace ui
     void ArrowCanvas::paint(Graphics& g)
     {
         g.fillAll(Colours::white);
-        std::vector<ArrowCanvas::Arrow*>::const_iterator it;
+        vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
             Path arrow;

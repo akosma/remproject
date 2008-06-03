@@ -37,6 +37,8 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
+using std::string;
+
 //! Contains the test classes of the application.
 /*!
  * \namespace tests
@@ -93,7 +95,7 @@ namespace tests
         void testSelect();
 
     private:
-        const std::string _filename;
+        const string _filename;
     };
 }
 

@@ -54,6 +54,7 @@ using storage::ActiveRecord;
 using storage::BelongsTo;
 using storage::HasMany;
 using storage::AnyPropertyMap;
+using std::string;
 
 //! Model classes for UML projects
 /*!
@@ -89,7 +90,7 @@ namespace metamodel
          * 
          * \param className The name of the subclass of the current instance.
          */
-        Diagram(const std::string&);
+        Diagram(const string&);
 
         //! Constructor used for instances retrieved from a file
         /*!
@@ -114,7 +115,7 @@ namespace metamodel
          *
          * \return A string with the name of the database table.
          */
-        static std::string& getTableName();
+        static string& getTableName();
 
         //! Get the name of the column used to store the ID of the parent of this class
         /*!
@@ -124,7 +125,7 @@ namespace metamodel
          *
          * \return A string with the name of the database table.
          */
-        static std::string& getParentColumnName();
+        static string& getParentColumnName();
 
     protected:
 

@@ -35,6 +35,11 @@
 #include "SQLiteWrapper.h"
 #include <sstream>
 #include <map>
+#include <string>
+
+using std::string;
+using std::stringstream;
+using std::map;
 
 namespace storage
 {
@@ -47,8 +52,8 @@ namespace storage
     , _lastRowId     (0)
     , _errorMsg      ("")
     , _lastQuery     ("")
-    , _columnHeaders (std::vector<std::string>())
-    , _data          (std::vector<std::string>())
+    , _columnHeaders (vector<string>())
+    , _data          (vector<string>())
     , _db            (0)
     {
         open();
@@ -59,12 +64,12 @@ namespace storage
         sqlite3_close(_db);
     }
 
-    void SQLiteWrapper::setFileName(const std::string& fileName)
+    void SQLiteWrapper::setFileName(const string& fileName)
     {
         _fileName = fileName;
     }
     
-    const std::string& SQLiteWrapper::getFileName()
+    const string& SQLiteWrapper::getFileName()
     {
         return _fileName;
     }
@@ -89,7 +94,7 @@ namespace storage
         return (_resultCode == SQLITE_OK);
     }
 
-    const bool SQLiteWrapper::executeQuery(const std::string& query)
+    const bool SQLiteWrapper::executeQuery(const string& query)
     {
         char* error;
         char** resultSet;
@@ -160,31 +165,31 @@ namespace storage
         return _resultCode;
     }
 
-    const std::string& SQLiteWrapper::getLastQuery() const
+    const string& SQLiteWrapper::getLastQuery() const
     {
         return _lastQuery;
     }
 
-    const std::string& SQLiteWrapper::getLastErrorMsg() const
+    const string& SQLiteWrapper::getLastErrorMsg() const
     {
         return _errorMsg;
     }
 
-    const std::vector<std::string>& SQLiteWrapper::getTableHeaders() const
+    const vector<string>& SQLiteWrapper::getTableHeaders() const
     {
         return _columnHeaders;
     }
 
-    const std::vector<std::string>& SQLiteWrapper::getData() const
+    const vector<string>& SQLiteWrapper::getData() const
     {
         return _data;
     }
 
-    const bool SQLiteWrapper::tableExists(const std::string& tableName)
+    const bool SQLiteWrapper::tableExists(const string& tableName)
     {
         // This method uses the "table_info" PRAGMA command described here:
         // http://www.sqlite.org/pragma.html
-        std::stringstream query;
+        stringstream query;
         query << "PRAGMA table_info(\"";
         query << tableName;
         query << "\");";
@@ -207,20 +212,20 @@ namespace storage
         return numRows > 0;
     }
 
-    const std::map<std::string, std::string> SQLiteWrapper::getTableSchema(const std::string& tableName)
+    const map<string, string> SQLiteWrapper::getTableSchema(const string& tableName)
     {
         // This method uses the "table_info" PRAGMA command described here:
         // http://www.sqlite.org/pragma.html
-        std::stringstream query;
+        stringstream query;
         query << "PRAGMA table_info(\"";
         query << tableName;
         query << "\");";
 
-        std::map<std::string, std::string> schema;
+        map<string, string> schema;
         bool ok = executeQuery(query.str());
         if(ok)
         {
-            const std::vector<std::string>& data = getData();
+            const vector<string>& data = getData();
             const size_t numberOfHeaders = 6;
             const size_t dataItems = data.size();
 
