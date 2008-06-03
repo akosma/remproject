@@ -113,10 +113,10 @@ namespace ui
             const Figure* end = (*it)->getEndFigure();
             const Point* s = start->getAnchorPointRelativeTo(end);
             const Point* e = end->getAnchorPointRelativeTo(start);
-			if (s && e)
-			{
-	            arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
-			}
+            if (s && e)
+            {
+                arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
+            }
             g.strokePath(arrow, PathStrokeType (width));
             delete s;
             delete e;

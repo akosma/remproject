@@ -140,12 +140,12 @@ namespace tests
             std::string value = map.get<std::string>(name1);
         }
 #if defined(_WIN32)
-		catch(std::bad_alloc& e)
-		{
-			std::string expectedMessage("bad allocation");
-			std::string message(e.what());
-			CPPUNIT_ASSERT_EQUAL(expectedMessage, message);
-		}
+        catch(std::bad_alloc& e)
+        {
+            std::string expectedMessage("bad allocation");
+            std::string message(e.what());
+            CPPUNIT_ASSERT_EQUAL(expectedMessage, message);
+        }
 #else
         catch(BadCastException& e)
         {

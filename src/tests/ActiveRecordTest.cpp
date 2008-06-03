@@ -122,7 +122,7 @@ namespace tests
     
     void ActiveRecordTest::testCanRetrieveAllInstances()
     {
-        std::vector<Element>* elements = ActiveRecord<Element>::findAll();
+        std::vector<Element>* elements = Element::findAll();
         
         CPPUNIT_ASSERT_EQUAL(2, (int)elements->size());
         Element& elem0 = elements->at(0);
@@ -141,9 +141,9 @@ namespace tests
     
     void ActiveRecordTest::testCanRetrieveOneInstance()
     {
-        Element* elem = ActiveRecord<Element>::findById(1);
+        Element* elem = Element::findById(1);
         
-		CPPUNIT_ASSERT(elem);
+        CPPUNIT_ASSERT(elem);
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
@@ -158,7 +158,7 @@ namespace tests
         AnyPropertyMap invalidConditions;
         invalidConditions.set<std::string>("name", name);
         invalidConditions.set<bool>("valid", true);
-        std::vector<Element>* elements = ActiveRecord<Element>::findByCondition(invalidConditions);
+        std::vector<Element>* elements = Element::findByCondition(invalidConditions);
         
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
         
@@ -166,7 +166,7 @@ namespace tests
         
         AnyPropertyMap validConditions;
         validConditions.set<std::string>("name", name);
-        elements = ActiveRecord<Element>::findByCondition(validConditions);
+        elements = Element::findByCondition(validConditions);
         
         CPPUNIT_ASSERT_EQUAL(1, (int)elements->size());        
         
@@ -181,15 +181,15 @@ namespace tests
     
     void ActiveRecordTest::testSearchingForInstancesNotExistingInDatabaseReturnsNull()
     {
-        Element* elem = ActiveRecord<Element>::findById(15879);
+        Element* elem = Element::findById(15879);
         CPPUNIT_ASSERT(elem == NULL);
     }
     
     void ActiveRecordTest::testDestroyingObjectsRemovesThemFromTheDatabase()
     {
-        Element* elem = ActiveRecord<Element>::findById(1);
+        Element* elem = Element::findById(1);
 
-		CPPUNIT_ASSERT(elem);
+        CPPUNIT_ASSERT(elem);
         CPPUNIT_ASSERT_EQUAL(std::string("actor"), elem->get<std::string>("class"));
         CPPUNIT_ASSERT(!elem->isDirty());
         CPPUNIT_ASSERT(!elem->isNew());
@@ -199,12 +199,12 @@ namespace tests
         CPPUNIT_ASSERT(elem->isNew());
         delete elem;
         
-        elem = ActiveRecord<Element>::findById(1);
+        elem = Element::findById(1);
         CPPUNIT_ASSERT(elem == NULL);
         
-        ActiveRecord<Element>::removeAll();
+        Element::removeAll();
         
-        std::vector<Element>* elements = ActiveRecord<Element>::findAll();
+        std::vector<Element>* elements = Element::findAll();
         CPPUNIT_ASSERT_EQUAL(0, (int)elements->size());
     }
 
@@ -333,8 +333,8 @@ namespace tests
         CPPUNIT_ASSERT(saved1 == saved2);
         
         // Let's retrieve all of this from the DB and compare
-        Element* retrieved = ActiveRecord<Element>::findById(actor->getId());
-		CPPUNIT_ASSERT(retrieved);
+        Element* retrieved = Element::findById(actor->getId());
+        CPPUNIT_ASSERT(retrieved);
         DateTime saved3 = retrieved->getCreationDateTime();
         DateTime updated3 = retrieved->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved2 == saved3);
@@ -388,14 +388,14 @@ namespace tests
         
         project->save();
 
-        Project* retrievedProject = ActiveRecord<Project>::findById(project->getId());
-		CPPUNIT_ASSERT(retrievedProject);
+        Project* retrievedProject = Project::findById(project->getId());
+        CPPUNIT_ASSERT(retrievedProject);
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), project->getName());
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
         
         AnyPropertyMap condition;
         condition.set<int>("project_id", project->getId());
-        std::vector<Diagram>* diagrams = ActiveRecord<Diagram>::findByCondition(condition);
+        std::vector<Diagram>* diagrams = Diagram::findByCondition(condition);
         CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());
 
         Diagram& retrievedDiagram = diagrams->at(0);
@@ -433,8 +433,8 @@ namespace tests
         delete project;
 
         // At this point, the project has not loaded the diagrams
-        project = ActiveRecord<Project>::findById(id);
-		CPPUNIT_ASSERT(project);
+        project = Project::findById(id);
+        CPPUNIT_ASSERT(project);
         CPPUNIT_ASSERT(!project->hasLoadedChildren());
         
         // Now the project will load its diagrams; there should be two of them

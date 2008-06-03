@@ -84,7 +84,7 @@ namespace controllers
         const bool ok = wrapper.open();
         if (ok)
         {
-            _project = ActiveRecord<Project>::findById(0);
+            _project = Project::findById(0);
         }
         return ok;
     }
@@ -137,7 +137,7 @@ namespace controllers
         {
             Diagram* diagram = new Diagram(className);
 #if defined(_WIN32)
-			std::string name(tmpnam(NULL));
+            std::string name(tmpnam(NULL));
 #else
             UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
             UUID uuid = generator.createRandom();

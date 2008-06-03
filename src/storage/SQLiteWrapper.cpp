@@ -83,8 +83,8 @@ namespace storage
             // http://www.sqlite.org/pragma.html
             executeQuery("PRAGMA synchronous = OFF;");
             executeQuery("PRAGMA encoding = \"UTF-8\";");
-			executeQuery("PRAGMA locking_mode = EXCLUSIVE;");
-			executeQuery("PRAGMA read_uncommitted = 0;");
+            executeQuery("PRAGMA locking_mode = EXCLUSIVE;");
+            executeQuery("PRAGMA read_uncommitted = 0;");
         }
         return (_resultCode == SQLITE_OK);
     }
