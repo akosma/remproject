@@ -37,6 +37,7 @@
 #include <Poco/DateTime.h>
 #include <sstream>
 
+using storage::AnyProperty;
 using Poco::DateTime;
 using Poco::Any;
 using std::string;
@@ -77,7 +78,7 @@ namespace storage
 
     const bool AnyPropertyMap::hasProperty(const string& key) const
     {
-        map<string, storage::AnyProperty>::const_iterator it = _map.find(key);
+        map<string, AnyProperty>::const_iterator it = _map.find(key);
         return (it != _map.end());
     }
 
@@ -102,7 +103,7 @@ namespace storage
     const string AnyPropertyMap::getColumnList() const
     {
         stringstream output;
-        map<string, storage::AnyProperty>::const_iterator it;
+        map<string, AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << it->first;
@@ -120,7 +121,7 @@ namespace storage
     const string AnyPropertyMap::getStringForCreateTable(string& tableName) const
     {
         stringstream output;
-        map<string, storage::AnyProperty>::const_iterator it;
+        map<string, AnyProperty>::const_iterator it;
         output << "CREATE TABLE ";
         output << tableName;
         output << "(\n";
@@ -149,7 +150,7 @@ namespace storage
         output << " (";
         output << this->getColumnList();
         output << ") VALUES (";
-        map<string, storage::AnyProperty>::const_iterator it;
+        map<string, AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getQuotedValue());
@@ -173,7 +174,7 @@ namespace storage
         output << "UPDATE ";
         output << tableName;
         output << " SET ";
-        map<string, storage::AnyProperty>::const_iterator it;
+        map<string, AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getNameValuePair());
@@ -196,7 +197,7 @@ namespace storage
     const string AnyPropertyMap::getStringForWhere() const
     {
         stringstream output;
-        map<string, storage::AnyProperty>::const_iterator it;
+        map<string, AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
             output << (it->second.getNameValuePair());

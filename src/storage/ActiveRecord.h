@@ -54,6 +54,7 @@
 #include "Persistable.h"
 #endif
 
+using storage::AnyPropertyMap;
 using Poco::DateTime;
 using Poco::Timestamp;
 using std::string;
@@ -279,7 +280,7 @@ namespace storage
          *
          * \return A pointer to a vector of the specified type.
          */
-        static vector<T>* findByCondition(const storage::AnyPropertyMap&);
+        static vector<T>* findByCondition(const AnyPropertyMap&);
         
         //! Retrieves the object whose ID is passed as parameter.
         /*!
@@ -373,7 +374,7 @@ namespace storage
          * 
          * \return A vector of property maps.
          */
-        static vector<storage::AnyPropertyMap>* getPropertyMaps(map<string, string>&);
+        static vector<AnyPropertyMap>* getPropertyMaps(map<string, string>&);
         
         //! Returns a vector of instances as requested by the input query.
         /*!
@@ -730,8 +731,8 @@ namespace storage
             wrapper.close();
             if (ok)
             {
-                vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
-                vector<storage::AnyPropertyMap>::iterator iter;
+                vector<AnyPropertyMap>* maps = getPropertyMaps(schema);
+                vector<AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
                     item = new T(*iter);
@@ -755,7 +756,7 @@ namespace storage
     }
     
     template <class T>
-    vector<T>* ActiveRecord<T>::findByCondition(const storage::AnyPropertyMap& conditions)
+    vector<T>* ActiveRecord<T>::findByCondition(const AnyPropertyMap& conditions)
     {
         stringstream query;
         query << "SELECT * FROM ";
@@ -769,10 +770,10 @@ namespace storage
     }
     
     template <class T>
-    vector<storage::AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(map<string, string>& schema)
+    vector<AnyPropertyMap>* ActiveRecord<T>::getPropertyMaps(map<string, string>& schema)
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        vector<storage::AnyPropertyMap>* maps = new vector<storage::AnyPropertyMap>();
+        vector<AnyPropertyMap>* maps = new vector<AnyPropertyMap>();
         const vector<string>& data = wrapper.getData();
         const size_t numberOfHeaders = wrapper.getTableHeaders().size();
         const size_t dataItems = data.size();
@@ -831,8 +832,8 @@ namespace storage
             ok = wrapper.executeQuery(query);
             if (ok)
             {
-                vector<storage::AnyPropertyMap>* maps = getPropertyMaps(schema);
-                vector<storage::AnyPropertyMap>::iterator iter;
+                vector<AnyPropertyMap>* maps = getPropertyMaps(schema);
+                vector<AnyPropertyMap>::iterator iter;
                 for (iter = maps->begin(); iter != maps->end(); ++iter)
                 {
                     T item(*iter);

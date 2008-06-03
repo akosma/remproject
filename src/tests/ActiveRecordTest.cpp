@@ -431,7 +431,7 @@ namespace tests
 
         project->save();
         
-        const storage::ID id = project->getId();
+        const ID id = project->getId();
         delete project;
 
         // At this point, the project has not loaded the diagrams
