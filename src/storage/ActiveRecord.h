@@ -349,14 +349,6 @@ namespace storage
          */
         void setCreationDateTimeToNow();
 
-        //! Sets the subclass name of the current object.
-        /*!
-         * Sets the subclass name of the current object.
-         *
-         * \param value The name of he subclass of the current object.
-         */
-        void setClassName(const string&);
-
         //@}
 
         //! \name Private Class Methods
@@ -425,9 +417,6 @@ namespace storage
         //! An instance of AnyPropertyMap which contains the data for this instance
         AnyPropertyMap _data;
 
-        //! The subclass name of the current instance.
-        string _className;
-
         //@}
 
     };
@@ -438,8 +427,8 @@ namespace storage
     , _isNew     (true)
     , _isDirty   (true)
     , _data      ()
-    , _className (className)
     {
+        _data.set<string>("class", className);
     }
 
     template <class T>
@@ -448,7 +437,6 @@ namespace storage
     , _isNew     (false)
     , _isDirty   (false)
     , _data      (data)
-    , _className (data.get<string>("class"))
     {
     }
 
@@ -458,7 +446,6 @@ namespace storage
     , _isNew     (rhs._isNew)
     , _isDirty   (rhs._isDirty)
     , _data      (rhs._data)
-    , _className (rhs._className)
     {
     }
 
@@ -475,7 +462,6 @@ namespace storage
             _id = rhs._id;
             _isDirty = rhs._isDirty;
             _isNew = rhs._isNew;
-            _className = rhs._className;
             _data = rhs._data;
         }
         return *this;
@@ -558,13 +544,6 @@ namespace storage
     }
 
     template <class T>
-    void ActiveRecord<T>::setClassName(const string& value)
-    {
-        // Do not call "setDirty()" here!
-        _data.set<string>("class", value);
-    }
-
-    template <class T>
     void ActiveRecord<T>::save()
     {
         if (hasParent())
@@ -627,7 +606,6 @@ namespace storage
         }
         if (ok)
         {
-            setClassName(_className);
             setCreationDateTimeToNow();
             ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
         }
@@ -779,8 +757,7 @@ namespace storage
         const size_t dataItems = data.size();
         const vector<string>& headers = wrapper.getTableHeaders();
 
-        for (size_t i = 0; i < dataItems;
-                         i = i + numberOfHeaders)
+        for (size_t i = 0; i < dataItems; i = i + numberOfHeaders)
         {
             AnyPropertyMap instanceData;
             for (int j = 0; j < numberOfHeaders; ++j)
