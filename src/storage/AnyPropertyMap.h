@@ -47,6 +47,7 @@
 using Poco::DateTime;
 using std::string;
 using std::map;
+using std::pair;
 
 //! Framework for storing instances in SQLite files.
 /*!
@@ -219,6 +220,44 @@ namespace storage
          * \return A string.
          */
         const string getColumnList() const;
+
+        //! Pointer to some private methods used by joinMap.
+        /*!
+         * Several methods in this class must iterate on all the elements of
+         * the map, extract some value and build a string out of them.
+         * This typedef helps abstracting the algorithm from these methods,
+         * who just pass a pointer of this type to joinMap to get the required string.
+         * The definition follows the instructions set in 
+         * http://www.parashift.com/c++-faq-lite/pointers-to-members.html#faq-33.5
+         */
+        typedef const string (AnyPropertyMap::*Extractor)(const pair<string, AnyProperty>&) const;
+        #define CALL_MEMBER_FN(object,ptrToMember)  ((object).*(ptrToMember))
+        
+        //! Iterates over the internal map of AnyProperty applying a transformation.
+        /*!
+         * Iterates over the internal map of AnyProperty applying a transformation.
+         * The method applies an "Extractor" method to the current map of AnyProperty
+         * and extracts a string
+         * 
+         * \param e A pointer to a method taking a pair of string and AnyProperty and
+         * returning a string.
+         * \param separator A string used to separate each value in the map.
+         * 
+         * \return A string.
+         */
+        const string joinMap(AnyPropertyMap::Extractor, const string&) const;
+        
+        //! Used by joinMap
+        const string getKey(const pair<string, AnyProperty>&) const;
+
+        //! Used by joinMap
+        const string getSQLiteColumnDefinition(const pair<string, AnyProperty>&) const;
+
+        //! Used by joinMap
+        const string getQuotedValue(const pair<string, AnyProperty>&) const;
+
+        //! Used by joinMap
+        const string getNameValuePair(const pair<string, AnyProperty>&) const;
 
     private:
         //! The wrapped map of properties.

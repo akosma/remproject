@@ -102,44 +102,18 @@ namespace storage
     
     const string AnyPropertyMap::getColumnList() const
     {
-        stringstream output;
-        map<string, AnyProperty>::const_iterator it;
-        for (it = _map.begin(); it != _map.end(); ++it)
-        {
-            output << it->first;
-            output << ", ";
-        }
-        string str = output.str();
-        int len = str.length();
-        if (len > 2)
-        {
-            str = str.substr(0, len - 2);
-        }
-        return str;
+        return joinMap(&AnyPropertyMap::getKey, ", ");
     }
     
     const string AnyPropertyMap::getStringForCreateTable(string& tableName) const
     {
         stringstream output;
-        map<string, AnyProperty>::const_iterator it;
         output << "CREATE TABLE ";
         output << tableName;
         output << "(\n";
-        for (it = _map.begin(); it != _map.end(); ++it)
-        {
-            output << (it->second.getSQLiteColumnDefinition());
-            output << ",\n";
-        }
-        string str = output.str();
-        int len = str.length();
-        if (len > 2)
-        {
-            str = str.substr(0, len - 2);
-        }
-        stringstream output2;
-        output2 << str;
-        output2 << ");";
-        return output2.str();
+        output << joinMap(&AnyPropertyMap::getSQLiteColumnDefinition, ",\n");
+        output << ");";
+        return output.str();
     }
     
     const string AnyPropertyMap::getStringForInsert(string& tableName) const
@@ -150,22 +124,9 @@ namespace storage
         output << " (";
         output << this->getColumnList();
         output << ") VALUES (";
-        map<string, AnyProperty>::const_iterator it;
-        for (it = _map.begin(); it != _map.end(); ++it)
-        {
-            output << (it->second.getQuotedValue());
-            output << ", ";
-        }
-        string str = output.str();
-        int len = str.length();
-        if (len > 2)
-        {
-            str = str.substr(0, len - 2);
-        }
-        stringstream output2;
-        output2 << str;
-        output2 << ");";
-        return output2.str();
+        output << joinMap(&AnyPropertyMap::getQuotedValue, ", ");
+        output << ");";
+        return output.str();
     }
     
     const string AnyPropertyMap::getStringForUpdate(string& tableName, const int id) const
@@ -174,41 +135,56 @@ namespace storage
         output << "UPDATE ";
         output << tableName;
         output << " SET ";
-        map<string, AnyProperty>::const_iterator it;
-        for (it = _map.begin(); it != _map.end(); ++it)
-        {
-            output << (it->second.getNameValuePair());
-            output << ", ";
-        }
-        string str = output.str();
-        int len = str.length();
-        if (len > 2)
-        {
-            str = str.substr(0, len - 2);
-        }
-        stringstream output2;
-        output2 << str;
-        output2 << " WHERE id = ";
-        output2 << id;
-        output2 << ";";
-        return output2.str();
+        output << joinMap(&AnyPropertyMap::getNameValuePair, ", ");
+        output << " WHERE id = ";
+        output << id;
+        output << ";";
+        return output.str();
     }
     
     const string AnyPropertyMap::getStringForWhere() const
     {
         stringstream output;
+        output << joinMap(&AnyPropertyMap::getNameValuePair, " AND ");
+        return output.str();
+    }
+
+    const string AnyPropertyMap::joinMap(AnyPropertyMap::Extractor e, const string& separator) const
+    {
+        stringstream output;
         map<string, AnyProperty>::const_iterator it;
         for (it = _map.begin(); it != _map.end(); ++it)
         {
-            output << (it->second.getNameValuePair());
-            output << " AND ";
+            output << CALL_MEMBER_FN(*this, e)(*it);
+            output << separator;
         }
+        const int separatorLength = separator.length();
         string str = output.str();
-        int len = str.length();
-        if (len > 5)
+        const int len = str.length();
+        if (len > separatorLength)
         {
-            str = str.substr(0, len - 5);
+            str = str.substr(0, len - separatorLength);
         }
         return str;
+    }
+    
+    const string AnyPropertyMap::getKey(const pair<string, AnyProperty>& p) const
+    {
+        return p.first;
+    }
+    
+    const string AnyPropertyMap::getSQLiteColumnDefinition(const pair<string, AnyProperty>& p) const
+    {
+        return p.second.getSQLiteColumnDefinition();
+    }
+    
+    const string AnyPropertyMap::getQuotedValue(const pair<string, AnyProperty>& p) const
+    {
+        return p.second.getQuotedValue();
+    }
+    
+    const string AnyPropertyMap::getNameValuePair(const pair<string, AnyProperty>& p) const
+    {
+        return p.second.getNameValuePair();
     }
 }
