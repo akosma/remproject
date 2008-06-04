@@ -140,30 +140,23 @@ namespace storage
          * Sets a value to the current instance. 
          * Any previous value is discarded.
          * This function is inlined in the header 
-         * file to avoid link problems.
+         * file to avoid linker errors.
          * 
          * \param input The new value for the property.
          */
         template <class T>
-        void set(const T& input)
-        {
-            Any value(input);
-            setValue(value);
-        }
+        void set(const T& input);
 
         //! Returns the value of the current instance.
         /*!
          * Returns the value of the current instance.
          * This function is inlined in the header 
-         * file to avoid link problems.
+         * file to avoid linker errors.
          * 
          * \return The current string value.
          */
         template <class T>
-        const T get() const
-        {
-            return RefAnyCast<T>(getValue());
-        }
+        const T& get() const;
 
         //! Sets the current instance as "primary key".
         /*!
@@ -205,6 +198,19 @@ namespace storage
         //! States whether the current property should be used as a primary key.
         bool _isPrimaryKey;
     };
+
+    template <class T>
+    void AnyProperty::set(const T& input)
+    {
+        Any value(input);
+        setValue(value);
+    }
+
+    template <class T>
+    const T& AnyProperty::get() const
+    {
+        return RefAnyCast<T>(getValue());
+    }
 }
 
 #endif /* ANYPROPERTY_H_ */

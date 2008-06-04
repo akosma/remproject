@@ -151,7 +151,7 @@ namespace storage
          * \return The current value of the named property
          */
         template <class U>
-        const U get(const string&);
+        const U& get(const string&);
 
         //@}
 
@@ -191,15 +191,15 @@ namespace storage
          * 
          * \param name The name of the current instance.
          */
-        void setName(string&);
+        void setName(const string&);
         
         //! Returns the name of the current instance.
         /*!
          * Returns the name of the current instance.
          *
-         * \return A string with the name of the current instance.
+         * \return A reference to a string with the name of the current instance.
          */
-        string getName();
+        const string& getName();
         
         //! Returns the moment of creation of the current instance.
         /*!
@@ -207,7 +207,7 @@ namespace storage
          *
          * \return A DateTime instance.
          */
-        const DateTime getCreationDateTime();
+        const DateTime& getCreationDateTime();
 
         //! Returns the moment of the last modification of the current instance.
         /*!
@@ -215,7 +215,7 @@ namespace storage
          *
          * \return A DateTime instance.
          */
-        const DateTime getLastModificationDateTime();
+        const DateTime& getLastModificationDateTime();
 
         //! Saves (inserts or updates) the current instance to disk.
         /*!
@@ -491,7 +491,7 @@ namespace storage
 
     template <class T>
     template <class U>
-    const U ActiveRecord<T>::get(const string& key)
+    const U& ActiveRecord<T>::get(const string& key)
     {
         return _data.get<U>(key);
     }
@@ -504,7 +504,7 @@ namespace storage
     }
 
     template <class T>
-    const DateTime ActiveRecord<T>::getCreationDateTime()
+    const DateTime& ActiveRecord<T>::getCreationDateTime()
     {
         return _data.get<DateTime>("created_on");
     }
@@ -519,7 +519,7 @@ namespace storage
     }
     
     template <class T>
-    const DateTime ActiveRecord<T>::getLastModificationDateTime()
+    const DateTime& ActiveRecord<T>::getLastModificationDateTime()
     {
         return _data.get<DateTime>("updated_on");
     }
@@ -539,13 +539,13 @@ namespace storage
     }
     
     template <class T>
-    void ActiveRecord<T>::setName(string& name)
+    void ActiveRecord<T>::setName(const string& name)
     {
         set<string>("name", name);
     }
 
     template <class T>
-    string ActiveRecord<T>::getName()
+    const string& ActiveRecord<T>::getName()
     {
         return get<string>("name");
     }

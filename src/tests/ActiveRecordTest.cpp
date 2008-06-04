@@ -75,9 +75,9 @@ namespace tests
 
     void ActiveRecordTest::testCanSaveIndividualInstance()
     {
-        string name1("john");
-        string name2("johnny");
-        string className("actor");
+        const string name1("john");
+        const string name2("johnny");
+        const string className("actor");
 
         Element* john = new Element(className);
         CPPUNIT_ASSERT(john->isNew());
@@ -100,8 +100,8 @@ namespace tests
         CPPUNIT_ASSERT(!john->isNew());
         CPPUNIT_ASSERT(!john->isDirty());
 
-        string name3("peter");
-        string name4("pete");
+        const string name3("peter");
+        const string name4("pete");
         Element* peter = new Element(className);
         CPPUNIT_ASSERT(peter->isNew());
         CPPUNIT_ASSERT_EQUAL((int)DEFAULT_ID, (int)peter->getId());
@@ -155,7 +155,7 @@ namespace tests
     
     void ActiveRecordTest::testCanUseConditionsToFindAnItem()
     {
-        string name("peter");
+        const string name("peter");
         
         AnyPropertyMap invalidConditions;
         invalidConditions.set<string>("name", name);
@@ -212,10 +212,9 @@ namespace tests
 
     void ActiveRecordTest::testCanUseCopyConstructorSafely()
     {
-        string name("john");
-        string className("actor");
+        const string name("john");
+        const string className("actor");
         
-
         Element* john = new Element(className);
         john->setName(name);
 
@@ -253,8 +252,8 @@ namespace tests
     
     void ActiveRecordTest::testCanUseAssignmentOperatorSafely()
     {
-        string name("john");
-        string className("actor");
+        const string name("john");
+        const string className("actor");
 
         Element* john = new Element(className);
         john->setName(name);
@@ -280,10 +279,10 @@ namespace tests
     
     void ActiveRecordTest::testObjectCanSaveItsChildren()
     {
-        string first("first");
-        string second("second");
-        string diagramClassName("usecase");
-        string projectName("test");
+        const string first("first");
+        const string second("second");
+        const string diagramClassName("usecase");
+        const string projectName("test");
 
         Project* project = new Project();
         project->setName(projectName);
@@ -311,15 +310,15 @@ namespace tests
     
     void ActiveRecordTest::testSavedObjectsHaveCreationAndUpdateTime()
     {
-        string element("timedElement");
-        string className("actor");
+        const string element("timedElement");
+        const string className("actor");
         
         Element* actor = new Element(className);
         actor->setName(element);
 
         actor->save();
-        DateTime saved1 = actor->getCreationDateTime();
-        DateTime updated1 = actor->getLastModificationDateTime();
+        const DateTime saved1 = actor->getCreationDateTime();
+        const DateTime updated1 = actor->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved1 == updated1);
         
         // Let's wait a couple of seconds and save the actor again
@@ -329,26 +328,27 @@ namespace tests
         watch.stop();
         
         actor->save();
-        DateTime saved2 = actor->getCreationDateTime();
-        DateTime updated2 = actor->getLastModificationDateTime();
-        CPPUNIT_ASSERT(saved2 < updated2);
+        const DateTime saved2 = actor->getCreationDateTime();
+        const DateTime updated2 = actor->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved1 == saved2);
+        CPPUNIT_ASSERT(saved2 < updated2);
+        CPPUNIT_ASSERT(updated1 < updated2);
         
         // Let's retrieve all of this from the DB and compare
         Element* retrieved = Element::findById(actor->getId());
         CPPUNIT_ASSERT(retrieved);
-        DateTime saved3 = retrieved->getCreationDateTime();
-        DateTime updated3 = retrieved->getLastModificationDateTime();
+        const DateTime saved3 = retrieved->getCreationDateTime();
+        const DateTime updated3 = retrieved->getLastModificationDateTime();
         CPPUNIT_ASSERT(saved2 == saved3);
         CPPUNIT_ASSERT(updated2 == updated3);
     }
     
     void ActiveRecordTest::testSettingAChildDirtySetsTheParentDirtyToo()
     {
-        string projectName("test");
-        string diagramClassName("usecase");
-        string first("first");
-        string second("second");
+        const string projectName("test");
+        const string diagramClassName("usecase");
+        const string first("first");
+        const string second("second");
 
         Project* project = new Project();
         project->setName(projectName);
@@ -378,9 +378,9 @@ namespace tests
     
     void ActiveRecordTest::testObjectsCannotBeAttackedWithSqlInjection()
     {
-        string projectName("Robert O'Hara");
-        string diagramClassName("William \"Braveheart\" Gibson");
-        string diagramName("You can't guess what users will insert in the \"database\" file");
+        const string projectName("Robert O'Hara");
+        const string diagramClassName("William \"Braveheart\" Gibson");
+        const string diagramName("You can't guess what users will insert in the \"database\" file");
         
         Project* project = new Project();
         project->setName(projectName);
@@ -413,10 +413,10 @@ namespace tests
     void ActiveRecordTest::testUsesLazyLoadingToRetrieveChildren()
     {
         // Create a project with two diagrams inside
-        string first("first");
-        string second("second");
-        string diagramClassName("usecase");
-        string projectName("test");
+        const string first("first");
+        const string second("second");
+        const string diagramClassName("usecase");
+        const string projectName("test");
 
         Project* project = new Project();
         project->setName(projectName);

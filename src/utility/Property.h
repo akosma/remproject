@@ -118,14 +118,14 @@ namespace utility
          *
          * \return The value of the current instance.
          */
-        virtual V operator()() const;
+        virtual const V& operator()() const;
         
         /*!
          * Returns the value of the current instance.
          *
          * \return The value of the current instance.
          */
-        virtual V getValue() const;
+        virtual const V& getValue() const;
 
         /*!
          * Parenthesis operator. Same as Property::setValue(const V& value)
@@ -146,7 +146,7 @@ namespace utility
          *
          * \return The name of the current Property.
          */
-        virtual N getName() const;
+        virtual const N& getName() const;
 
     private:
         //! The name of the current instance.
@@ -216,13 +216,13 @@ namespace utility
     }
 
     template <class N, class V> 
-    V Property<N, V>::operator()() const
+    const V& Property<N, V>::operator()() const
     {
         return this->value;
     }
 
     template <class N, class V> 
-    V Property<N, V>::getValue() const
+    const V& Property<N, V>::getValue() const
     {
         return this->value;
     }
@@ -240,7 +240,7 @@ namespace utility
     }
 
     template <class N, class V> 
-    N Property<N, V>::getName() const
+    const N& Property<N, V>::getName() const
     {
         return this->name;
     }

@@ -139,49 +139,35 @@ namespace storage
         //! Adds a property to the current instance.
         /*!
          * Adds a property to the current instance.
-         * This function is inlined in the header file to avoid link problems.
+         * This function is inlined in the header file to avoid linker errors.
          * 
          * \param key The name of the property to add.
          */
         template <class T>
-        void addProperty(const string& key)
-        {
-            if (!hasProperty(key))
-            {
-                set<T>(key, T());
-            }
-        }
+        void addProperty(const string&);
         
         //! Sets the value of the property whose name is the first parameter.
         /*!
          * Sets the value of the property whose name is the first parameter.
-         * This function is inlined in the header file to avoid link problems.
+         * This function is inlined in the header file to avoid linker errors.
          * 
          * \param key The name of the property to set
          * \param value The value of the property to set
          */
         template <class T>
-        void set(const string& key, const T& value)
-        {
-            Any any(value);
-            AnyProperty prop(key, any);
-            _map[key] = prop;
-        }
+        void set(const string& key, const T&);
 
         //! Returns the string value of the property whose name is passed as parameter.
         /*!
          * Returns the string value of the property whose name is passed as parameter.
-         * This function is inlined in the header file to avoid link problems.
+         * This function is inlined in the header file to avoid linker errors.
          * 
          * \param key The name of the property to get
          * 
          * \return The current string value of the named property
          */
         template <class T>
-        const T get(const string& key)
-        {
-            return _map[key].get<T>();
-        }
+        const T& get(const string&);
 
         //! Creates an integer property marked as "primary key".
         /*!
@@ -238,6 +224,29 @@ namespace storage
         //! The wrapped map of properties.
         map<string, AnyProperty> _map;
     };
+
+    template <class T>
+    void AnyPropertyMap::addProperty(const string& key)
+    {
+        if (!hasProperty(key))
+        {
+            set<T>(key, T());
+        }
+    }
+    
+    template <class T>
+    void AnyPropertyMap::set(const string& key, const T& value)
+    {
+        Any any(value);
+        AnyProperty prop(key, any);
+        _map[key] = prop;
+    }
+
+    template <class T>
+    const T& AnyPropertyMap::get(const string& key)
+    {
+        return _map[key].get<T>();
+    }
 }
 
 #endif /* ANYPROPERTYMAP_H_ */
