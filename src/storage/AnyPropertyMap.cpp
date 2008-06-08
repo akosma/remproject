@@ -142,13 +142,6 @@ namespace storage
         return output.str();
     }
     
-    const string AnyPropertyMap::getStringForWhere() const
-    {
-        stringstream output;
-        output << joinMap(&AnyPropertyMap::getNameValuePair, " AND ");
-        return output.str();
-    }
-
     const string AnyPropertyMap::joinMap(AnyPropertyMap::Extractor e, const string& separator) const
     {
         stringstream output;

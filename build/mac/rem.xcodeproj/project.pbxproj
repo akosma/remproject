@@ -34,6 +34,7 @@
 		3A75967E0DAFC5CD000AC38C /* rem-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A75965F0DAFC350000AC38C /* rem-Info.plist */; };
 		3A8101510D96BC66003EFF96 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
 		3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */; };
+		3A8DB0490DF9C33D00B9D679 /* FindConditions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */; };
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
 		3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */; };
@@ -97,6 +98,8 @@
 		3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapper.cpp; path = ../../src/storage/SQLiteWrapper.cpp; sourceTree = SOURCE_ROOT; };
 		3A81015A0D96BF91003EFF96 /* SQLiteWrapperTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLiteWrapperTest.h; path = ../../src/tests/SQLiteWrapperTest.h; sourceTree = SOURCE_ROOT; };
 		3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapperTest.cpp; path = ../../src/tests/SQLiteWrapperTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A8DB0110DF9BC4F00B9D679 /* FindConditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindConditions.h; path = ../../src/storage/FindConditions.h; sourceTree = SOURCE_ROOT; };
+		3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FindConditions.cpp; path = ../../src/storage/FindConditions.cpp; sourceTree = SOURCE_ROOT; };
 		3A98E1B30DB9FB0A0095EADC /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Figure.h; path = ../../src/ui/Figure.h; sourceTree = SOURCE_ROOT; };
 		3A98E1B40DB9FB0A0095EADC /* Figure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Figure.cpp; path = ../../src/ui/Figure.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
@@ -213,17 +216,19 @@
 		3A18FB620D843CA900744B33 /* storage */ = {
 			isa = PBXGroup;
 			children = (
-				3AC608C90DEC0A34002D0B12 /* Persistable.cpp */,
-				3AC1798D0DEB1F5300A22606 /* Persistable.h */,
 				3A3381A40D97BE9B0066C369 /* ActiveRecord.h */,
 				3AD1A8700DC64F20009977AE /* BelongsTo.h */,
 				3AD1A8760DC64FF4009977AE /* HasMany.h */,
+				3AC1798D0DEB1F5300A22606 /* Persistable.h */,
+				3AC608C90DEC0A34002D0B12 /* Persistable.cpp */,
 				3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */,
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
 				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
 				3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */,
 				3A3556820D96D8090079D03E /* AnyPropertyMap.h */,
 				3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */,
+				3A8DB0110DF9BC4F00B9D679 /* FindConditions.h */,
+				3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */,
 			);
 			name = storage;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */,
 				3A02E6370DEDCBD6009A9590 /* Member.cpp in Sources */,
 				3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */,
+				3A8DB0490DF9C33D00B9D679 /* FindConditions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

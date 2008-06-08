@@ -68,6 +68,9 @@ SET (storage_SRCS
 
     storage/AnyPropertyMap.cpp 
     storage/AnyPropertyMap.h 
+    
+    storage/FindConditions.cpp
+    storage/FindConditions.h
 
     storage/SQLiteWrapper.cpp 
     storage/SQLiteWrapper.h 

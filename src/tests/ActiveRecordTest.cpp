@@ -49,14 +49,14 @@
 #include "../metamodel/Project.h"
 #endif
 
-#ifndef ANYPROPERTYMAP_H_
-#include "../storage/AnyPropertyMap.h"
+#ifndef FINDCONDITIONS_H_
+#include "../storage/FindConditions.h"
 #endif
 
 using metamodel::Element;
 using metamodel::Diagram;
 using metamodel::Project;
-using storage::AnyPropertyMap;
+using storage::FindConditions;
 using storage::DEFAULT_ID;
 using Poco::DateTime;
 using Poco::Stopwatch;
@@ -157,7 +157,7 @@ namespace tests
     {
         const string name("peter");
         
-        AnyPropertyMap invalidConditions;
+        FindConditions invalidConditions;
         invalidConditions.set<string>("name", name);
         invalidConditions.set<bool>("valid", true);
         vector<Element>* elements = Element::findByCondition(invalidConditions);
@@ -166,7 +166,7 @@ namespace tests
         
         delete elements;
         
-        AnyPropertyMap validConditions;
+        FindConditions validConditions;
         validConditions.set<string>("name", name);
         elements = Element::findByCondition(validConditions);
         
@@ -395,7 +395,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), project->getName());
         CPPUNIT_ASSERT_EQUAL(retrievedProject->getName(), projectName);
         
-        AnyPropertyMap condition;
+        FindConditions condition;
         condition.set<int>("project_id", project->getId());
         vector<Diagram>* diagrams = Diagram::findByCondition(condition);
         CPPUNIT_ASSERT_EQUAL(1, (int)diagrams->size());

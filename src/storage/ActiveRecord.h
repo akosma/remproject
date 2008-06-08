@@ -50,6 +50,10 @@
 #include "AnyPropertyMap.h"
 #endif
 
+#ifndef FINDCONDITIONS_H_
+#include "FindConditions.h"
+#endif
+
 #ifndef PERSISTABLE_H_
 #include "Persistable.h"
 #endif
@@ -276,11 +280,12 @@ namespace storage
          * Callers to this method are responsible of disposing of the
          * resulting pointer, or a leak may occur.
          *
-         * \param conditions A map of properties.
+         * \param conditions A map of properties specifying "WHERE" conditions
+         * concatenated by "AND" boolean operators.
          *
          * \return A pointer to a vector of the specified type.
          */
-        static vector<T>* findByCondition(const AnyPropertyMap&);
+        static vector<T>* findByCondition(const FindConditions&);
         
         //! Retrieves the object whose ID is passed as parameter.
         /*!
@@ -734,7 +739,7 @@ namespace storage
     }
     
     template <class T>
-    vector<T>* ActiveRecord<T>::findByCondition(const AnyPropertyMap& conditions)
+    vector<T>* ActiveRecord<T>::findByCondition(const FindConditions& conditions)
     {
         stringstream query;
         query << "SELECT * FROM ";

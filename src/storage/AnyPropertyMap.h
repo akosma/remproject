@@ -202,15 +202,7 @@ namespace storage
          */
         const string getStringForUpdate(string&, const int id) const;
 
-        //! Generates a CREATE TABLE SQL statement.
-        /*!
-         * Generates a CREATE TABLE SQL statement.
-         * 
-         * \return A string.
-         */
-        const string getStringForWhere() const;
-
-    private:
+    protected:
         
         //! Used by the getStringForInsert() method.
         /*!

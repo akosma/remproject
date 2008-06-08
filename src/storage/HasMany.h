@@ -39,8 +39,8 @@
 #include <map>
 #include <vector>
 
-#ifndef ANYPROPERTYMAP_H_
-#include "AnyPropertyMap.h"
+#ifndef FINDCONDITIONS_H_
+#include "FindConditions.h"
 #endif
 
 #ifndef PERSISTABLE_H_
@@ -333,7 +333,7 @@ namespace storage
             // Do not load again
             _childrenLoaded = true;
 
-            AnyPropertyMap conditions;
+            FindConditions conditions;
             conditions.set<int>(C::getParentColumnName(), getId());
             vector<C>* elements = C::findByCondition(conditions);
 
