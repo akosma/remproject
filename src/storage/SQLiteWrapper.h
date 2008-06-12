@@ -118,6 +118,14 @@ namespace storage
          * \return A boolean value; true in case of success, false otherwise.
          */
         const bool open();
+        
+        //! States whether the current database is open or not.
+        /*!
+         * States whether the current database is open or not.
+         * 
+         * \return A boolean value; true if the database is open, false otherwise.
+         */
+        const bool isOpen();
 
         //! Executes the query passed as parameter.
         /*!
@@ -220,6 +228,17 @@ namespace storage
          */
         SQLiteWrapper();
 
+        //! Alternative to the "executeQuery()" method.
+        /*!
+         * Alternative to the "executeQuery()" method, to avoid 
+         * modifying the internal state of the current SQLiteWrapper instance.
+         * 
+         * \param query The query to execute.
+         * 
+         * \return The number of modified rows by the statement.
+         */
+        const int executePrivateQuery(const string&);
+
         //! Allow the Singleton template class to access the private constructor.
         friend SQLiteWrapper& Singleton<SQLiteWrapper>::get();
 
@@ -227,6 +246,9 @@ namespace storage
 
         //! The file name of the SQLite database used by this class.
         string _fileName;
+        
+        //! Specifies whether the current database is open or not.
+        bool _isOpen;
 
         //! The result code of the last query executed on the database
         int _resultCode;

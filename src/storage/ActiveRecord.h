@@ -327,7 +327,7 @@ namespace storage
          * \return The ID of the instance that has been inserted, or DEFAULT_ID 
          * if the instance could not be inserted propertly.
          */
-        const ID insert();
+        void insert();
 
         //! Called by "save()" on objects that already exist on the database.
         /*!
@@ -551,50 +551,52 @@ namespace storage
     template <class T>
     void ActiveRecord<T>::save()
     {
-        if (hasParent())
+        SQLiteWrapper& wrapper = SQLiteWrapper::get();
+        bool ok = wrapper.open();
+        if (ok)
         {
-            // This should work always!
-            // hasParent() means that getParent() won't return NULL;
-            // and moreover, children's call to "save()" comes AFTER the 
-            // parent's call to "save()"
-            // (see the "saveChildren()" call at the end of this method...)
-            setParentId(getParent()->getId());
-        }
-        if (_isNew)
-        {
-            _id = insert();
-            if (_id != DEFAULT_ID)
+            if (hasParent())
             {
-                _isNew = false;
-                _isDirty = false;
+                // This should work always!
+                // hasParent() means that getParent() won't return NULL;
+                // and moreover, children's call to "save()" comes AFTER the 
+                // parent's call to "save()"
+                // (see the "saveChildren()" call at the end of this method...)
+                setParentId(getParent()->getId());
             }
+            if (_isNew)
+            {
+                insert();
+                _id = wrapper.getLastRowId();
+                if (_id != DEFAULT_ID)
+                {
+                    _isNew = false;
+                    _isDirty = false;
+                }
+            }
+            else
+            {
+                update();
+                _isDirty = false;
+            }        
+            saveChildren();
         }
-        else
-        {
-            update();
-            _isDirty = false;
-        }        
-        saveChildren();
+        wrapper.close();
     }
 
     template <class T>
     void ActiveRecord<T>::update()
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        bool ok = wrapper.open();
-        if (ok)
-        {
-            setLastModificationDateTimeToNow();
-            ok = wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
-        }
-        wrapper.close();
+        setLastModificationDateTimeToNow();
+        wrapper.executeQuery(_data.getStringForUpdate(T::getTableName(), _id));
     }
 
     template <class T>
-    const ID ActiveRecord<T>::insert()
+    void ActiveRecord<T>::insert()
     {
         SQLiteWrapper& wrapper = SQLiteWrapper::get();
-        bool ok = wrapper.open();
+        bool ok = false;
         if (!wrapper.tableExists(T::getTableName()))
         {
             // Ask the subclass to create its own structure
@@ -609,20 +611,8 @@ namespace storage
             _data.createPrimaryKey("id");
             ok = wrapper.executeQuery(_data.getStringForCreateTable(T::getTableName()));
         }
-        if (ok)
-        {
-            setCreationDateTimeToNow();
-            ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
-        }
-        wrapper.close();
-        if (ok)
-        {
-            return wrapper.getLastRowId();            
-        }
-        else
-        {
-            return DEFAULT_ID;
-        }
+        setCreationDateTimeToNow();
+        ok = wrapper.executeQuery(_data.getStringForInsert(T::getTableName()));
     }
 
     template <class T>

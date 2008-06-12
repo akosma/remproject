@@ -99,14 +99,14 @@ namespace tests
     {
         SQLiteWrapper& dal = SQLiteWrapper::get();
         bool ok = true;
+        ok = dal.open();
         for (int i = 0; i < 1000; i++)
         {
-            ok = dal.open();
             CPPUNIT_ASSERT(ok);
             ok = dal.executeQuery("INSERT INTO test (test1, test2) VALUES (1, '2');");
             CPPUNIT_ASSERT(ok);
-            dal.close();
         }
+        dal.close();
     }
 
     void SQLiteWrapperTest::testSelect()
@@ -121,7 +121,7 @@ namespace tests
         const vector<string>& data = dal.getData();
         const size_t numberOfHeaders = dal.getTableHeaders().size();
         const size_t dataItems = data.size();
-    
+        
         CPPUNIT_ASSERT(dataItems == 2000);
         CPPUNIT_ASSERT(numberOfHeaders == 2);
         

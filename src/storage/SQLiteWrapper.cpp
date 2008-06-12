@@ -46,6 +46,7 @@ namespace storage
     SQLiteWrapper::SQLiteWrapper()
     : Singleton<SQLiteWrapper>()
     , _fileName      ("untitled.db")
+    , _isOpen        (false)
     , _resultCode    (0)
     , _numRows       (0)
     , _numColumns    (0)
@@ -56,7 +57,6 @@ namespace storage
     , _data          (vector<string>())
     , _db            (0)
     {
-        open();
     }
 
     SQLiteWrapper::~SQLiteWrapper()
@@ -76,22 +76,34 @@ namespace storage
 
     const bool SQLiteWrapper::open()
     {
-        _resultCode = sqlite3_open(_fileName.c_str(), &_db);
-        if(_resultCode)
+        bool ok = true;
+        if (!_isOpen)
         {
-            fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(_db));
-            close();
+            _resultCode = sqlite3_open(_fileName.c_str(), &_db);
+            ok = (_resultCode == SQLITE_OK);
+            if(!ok)
+            {
+                fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(_db));
+                close();
+            }
+            else
+            {
+                // Enhance the performance of SQLite 3
+                // http://www.sqlite.org/pragma.html
+                executePrivateQuery("PRAGMA synchronous = OFF;");
+                executePrivateQuery("PRAGMA encoding = \"UTF-8\";");
+                executePrivateQuery("PRAGMA locking_mode = EXCLUSIVE;");
+                executePrivateQuery("PRAGMA read_uncommitted = 0;");
+                executePrivateQuery("BEGIN TRANSACTION;");
+                _isOpen = true;
+            }
         }
-        else
-        {
-            // Enhance the performance of SQLite 3
-            // http://www.sqlite.org/pragma.html
-            executeQuery("PRAGMA synchronous = OFF;");
-            executeQuery("PRAGMA encoding = \"UTF-8\";");
-            executeQuery("PRAGMA locking_mode = EXCLUSIVE;");
-            executeQuery("PRAGMA read_uncommitted = 0;");
-        }
-        return (_resultCode == SQLITE_OK);
+        return ok;
+    }
+    
+    const bool SQLiteWrapper::isOpen()
+    {
+        return _isOpen;
     }
 
     const bool SQLiteWrapper::executeQuery(const string& query)
@@ -149,10 +161,33 @@ namespace storage
         sqlite3_free_table(resultSet);
         return (_resultCode == SQLITE_OK);
     }
+    
+    const int SQLiteWrapper::executePrivateQuery(const string& query)
+    {
+        char* error;
+        char** resultSet;
+        int numRows;
+        int numColumns;
+        
+        sqlite3_get_table(
+            _db,                  // An open database
+            query.c_str(),        // SQL to be executed
+            &resultSet,           // Result written to a char*[] that this points to
+            &numRows,             // Number of result rows written here
+            &numColumns,          // Number of result columns written here
+            &error                // Error msg written here
+        );
+        return numRows;
+    }
 
     void SQLiteWrapper::close()
     {
-        _resultCode = sqlite3_close(_db);
+        if (_isOpen)
+        {
+            executePrivateQuery("COMMIT TRANSACTION;");
+            _isOpen = false;
+            _resultCode = sqlite3_close(_db);
+        }
     }
 
     const ID SQLiteWrapper::getLastRowId() const
@@ -194,21 +229,7 @@ namespace storage
         query << tableName;
         query << "\");";
 
-        // This method does not use the "executeQuery()" method to
-        // avoid modifying the internal state of the current SQLiteWrapper instance.
-        char* error;
-        char** resultSet;
-        int numRows;
-        int numColumns;
-        
-        sqlite3_get_table(
-            _db,                  // An open database
-            query.str().c_str(),  // SQL to be executed
-            &resultSet,           // Result written to a char*[] that this points to
-            &numRows,             // Number of result rows written here
-            &numColumns,          // Number of result columns written here
-            &error                // Error msg written here
-        );
+        const int numRows = executePrivateQuery(query.str().c_str());
         return numRows > 0;
     }
 
