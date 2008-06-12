@@ -202,6 +202,20 @@ ELSE (WIN32)
 
     IF (UNIX)
         IF (APPLE)
+            # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
+            # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
+            # By the way, there is a bug in the cross-compilation SDKs for Tiger in Leopard, 
+            # so you need to follow these instructions:
+            # http://groups.google.com/group/vim_mac/browse_thread/thread/064da55ec412e768
+            SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
+            SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
+            SET(CMAKE_FIND_ROOT_PATH /Developer/SDKs/MacOSX10.4u.sdk)
+            SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
+            SET(MACOSX_BUNDLE_BUNDLE_NAME Rem)
+            SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION})
+            SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
+            SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
+
             # ============ BUILD SETTINGS FOR MAC ============
             # ============     USING MAKEFILE     ============
             # This information is needed to compile the GUI application as a "bundle".
@@ -233,16 +247,6 @@ ELSE (WIN32)
                 ${IO_KIT} 
                 ${OPEN_GL}
             )
-        
-            # This is bundle metadata to create "bundles" and "Universal Binaries" on Mac OS X
-            # http://www.cmake.org/Wiki/CMake_FAQ#How_do_I_build_universal_binaries_on_Mac_OS_X.3F
-            SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.5.sdk)
-            SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
-            SET(MACOSX_BUNDLE_ICON_FILE icon.icns)
-            SET(MACOSX_BUNDLE_BUNDLE_NAME Rem)
-            SET(MACOSX_BUNDLE_BUNDLE_VERSION ${VERSION})
-            SET(MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION})
-            SET(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${VERSION}")
         
             # Header files are located in these directories
             INCLUDE_DIRECTORIES (
@@ -311,27 +315,27 @@ ELSE (WIN32)
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
             
-            # The support for Mac OS X bundle installation is in the CVS version:
+            # The support for Mac OS X bundle installation is available for version 2.6 of CMake:
             # http://www.cmake.org/pipermail/cmake/2007-October/016893.html
-            #INSTALL(TARGETS Rem
-            #    RUNTIME DESTINATION Applications
-            #)
-            #
-            #SET(CPACK_PACKAGE_NAME "Rem")
-            #SET(CPACK_SYSTEM_NAME "Darwin")
-            #SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
-            #SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
-            #SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
-            #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE.txt")
-            #SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README.txt")
-            #SET(CPACK_PACKAGE_VERSION_MAJOR "1")
-            #SET(CPACK_PACKAGE_VERSION_MINOR "0")
-            #SET(CPACK_PACKAGE_VERSION_PATCH "0")
-            #SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
-            #SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
-            #SET(CPACK_GENERATOR "PackageMaker")
-            #SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${CMAKE_PROJECT_NAME};ALL;/")
-            #INCLUDE(CPack)
+            INSTALL(TARGETS Rem
+               BUNDLE DESTINATION /Applications
+            )
+            
+            SET(CPACK_PACKAGE_NAME "Rem")
+            SET(CPACK_SYSTEM_NAME "Darwin")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
+            SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
+            SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE.txt")
+            SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README.txt")
+            SET(CPACK_PACKAGE_VERSION_MAJOR "1")
+            SET(CPACK_PACKAGE_VERSION_MINOR "0")
+            SET(CPACK_PACKAGE_VERSION_PATCH "0")
+            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+            SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
+            SET(CPACK_GENERATOR "PackageMaker")
+            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${CMAKE_PROJECT_NAME};ALL;/")
+            INCLUDE(CPack)
         
         ELSE (APPLE)
             # ============ BUILD SETTINGS FOR KUBUNTU LINUX ============

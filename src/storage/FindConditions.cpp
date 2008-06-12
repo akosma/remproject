@@ -34,10 +34,8 @@
 
 #include "FindConditions.h"
 
-#include <sstream>
 #include <string>
 
-using std::stringstream;
 using std::string;
 using storage::AnyPropertyMap;
 
@@ -54,8 +52,6 @@ namespace storage
 
     const string FindConditions::getStringForWhere() const
     {
-        stringstream output;
-        output << joinMap(&FindConditions::getNameValuePair, " AND ");
-        return output.str();
+        return joinMap(&FindConditions::getNameValuePair, " AND ");
     }
 }
