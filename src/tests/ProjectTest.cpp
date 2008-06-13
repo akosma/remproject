@@ -152,6 +152,9 @@ namespace tests
         
         project << firstDiagram << secondDiagram;
         CPPUNIT_ASSERT_EQUAL(2, project.getChildrenCount());
+        
+        delete firstDiagram;
+        delete secondDiagram;
     }
     
     void ProjectTest::testCanRetrieveElementsUsingOperator()
@@ -171,5 +174,8 @@ namespace tests
         Diagram* pointer = project[first];
         CPPUNIT_ASSERT(pointer);
         CPPUNIT_ASSERT_EQUAL((int)pointer, (int)firstDiagram);
+        
+        delete firstDiagram;
+        delete secondDiagram;
     }
 }

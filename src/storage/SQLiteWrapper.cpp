@@ -177,6 +177,7 @@ namespace storage
             &numColumns,          // Number of result columns written here
             &error                // Error msg written here
         );
+        sqlite3_free_table(resultSet);
         return numRows;
     }
 

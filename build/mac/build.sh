@@ -28,6 +28,7 @@ mkdir bin
 cd bin
 cmake ../src
 make
+make package
 
 # Compile the documentation
 cd ..

@@ -248,6 +248,9 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL(0, diagramCopy->getChildrenCount());
 
         delete diagram;
+        delete diagramCopy;
+        delete peter;
+        delete john;
     }
     
     void ActiveRecordTest::testCanUseAssignmentOperatorSafely()
@@ -306,6 +309,8 @@ namespace tests
 
         project->save();
         delete project;
+        delete firstDiagram;
+        delete secondDiagram;
     }
     
     void ActiveRecordTest::testSavedObjectsHaveCreationAndUpdateTime()

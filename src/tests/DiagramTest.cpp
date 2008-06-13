@@ -84,6 +84,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
         
         delete diagram;
+        delete actor1;
     }
     
     void DiagramTest::testCanAddElementsUsingOperator()
@@ -111,5 +112,7 @@ namespace tests
         CPPUNIT_ASSERT_EQUAL((int)element, (int)actor1);
         
         delete diagram;
+        delete actor1;
+        delete actor2;
     }
 }
