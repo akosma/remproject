@@ -17,7 +17,7 @@
 
 PROJECT (rem)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 SET(CMAKE_COLOR_MAKEFILE ON)
 SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
@@ -318,7 +318,9 @@ ELSE (WIN32)
             # The support for Mac OS X bundle installation is available for version 2.6 of CMake:
             # http://www.cmake.org/pipermail/cmake/2007-October/016893.html
             INSTALL(TARGETS Rem
-               BUNDLE DESTINATION /Applications
+                # If not using ".." the package would not build correctly
+                # or even worse, it would install the app in /usr
+                BUNDLE DESTINATION ../Applications
             )
             
             SET(CPACK_PACKAGE_NAME "Rem")
