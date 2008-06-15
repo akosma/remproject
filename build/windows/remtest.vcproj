@@ -289,6 +289,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\storage\FindConditions.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\tests\main.cpp"
 				>
 				<FileConfiguration
@@ -466,6 +470,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\tests\FileControllerTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\FindConditions.h"
 				>
 			</File>
 			<File
