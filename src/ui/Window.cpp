@@ -33,11 +33,9 @@
 
 #include "Window.h"
 
-#ifndef DIAGRAMCOMPONENT_H_
-#include "DiagramComponent.h"
+#ifndef PROJECT_H_
+#include "ProjectComponent.h"
 #endif
-
-#include "Toolbar.h"
 
 /*!
  * \namespace ui
@@ -54,25 +52,12 @@ namespace ui
                       DocumentWindow::allButtons, 
                       true)
     {
-        TabbedComponent* project = new TabbedComponent(TabbedButtonBar::TabsAtBottom);
-        DiagramComponent* diagram1 = new DiagramComponent();
-        DiagramComponent* diagram2 = new DiagramComponent();
-        project->addTab(String("diagram1"), Colours::white, diagram1, true);
-        project->addTab(String("diagram2"), Colours::white, diagram2, true);
+        ProjectComponent* project = new ProjectComponent();
         setContentComponent(project);
-        centreWithSize(800, 600);
+        centreWithSize(620, 850);
         setResizable(true, true);
         setUsingNativeTitleBar(true);
         setVisible (true);
-
-        // TODO: create a "project" class that will add a TabbedComponent and a
-        // toolbar separately from the Window class; the code below generates
-        // runtime warnings (since Windows per se are not supposed to have components
-        // other than the one set by "setContentComponent")
-
-        // Toolbar* t = new Toolbar();
-        // t->setTopLeftPosition(10, 10);
-        // addAndMakeVisible(t, -1);
 
         // File file("test.png");
         // FileOutputStream* stream = file.createOutputStream();

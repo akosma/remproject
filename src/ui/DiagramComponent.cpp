@@ -77,7 +77,7 @@ namespace ui
         //[UserPrePaint] Add your own custom painting code here..
         //[/UserPrePaint]
 
-        g.fillAll (Colours::white);
+        g.fillAll (Colours::grey);
 
         //[UserPaint] Add your own custom painting code here..
         //[/UserPaint]

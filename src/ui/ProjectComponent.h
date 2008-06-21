@@ -17,10 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the ui::ProjectComponent class.
 /*!
- * \file ContentComponent.h
+ * \file ProjectComponent.h
  *
- * Contains the interface of the ui::ContentComponent class.
+ * Contains the interface of the ui::ProjectComponent class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,13 +29,13 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/11/08
+ * \date      6/21/08
  */
 
 #include "juce.h"
 
-#ifndef CONTENTCOMPONENT_H_
-#define CONTENTCOMPONENT_H_
+#ifndef PROJECTCOMPONENT_H_
+#define PROJECTCOMPONENT_H_
 
 /*!
  * \namespace ui
@@ -42,36 +43,30 @@
  */
 namespace ui
 {
-    class Figure;
-    class ArrowCanvas;
-    
     /*!
-     * \class ContentComponent
+     * \class ProjectComponent
      *
      *  
      */
-    class ContentComponent : public Component, public DragAndDropTarget
+    class ProjectComponent : public Component
     {
     public:
-        ContentComponent();
-        ~ContentComponent();
 
-        void paint (Graphics&);
+        /*!
+         *  ProjectComponent constructor.
+         */
+        ProjectComponent();
 
-        bool isInterestedInDragSource (const String& sourceDescription);
-
-        void itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y);
-
-        void setCurrent(Figure*);
+        /*!
+         *  ProjectComponent virtual destructor.
+         */
+        virtual ~ProjectComponent();
         
-        void resize();
+        void resized();
         
-        ArrowCanvas& getArrowCanvas();
-    
     private:
-        ArrowCanvas* _canvas;
-        Figure* _current;
+        TabbedComponent* _tabs;
     };
 }
 
-#endif /* CONTENTCOMPONENT_H_ */
+#endif /* PROJECTCOMPONENT_H_ */

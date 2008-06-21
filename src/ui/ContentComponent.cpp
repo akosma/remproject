@@ -55,8 +55,7 @@ namespace ui
     : _current(0)
     {
         _canvas = new ArrowCanvas(this);
-        _canvas->setSize(800, 600);
-        _canvas->setBounds(0, 0, 800, 600);
+        _canvas->setSize(565, 800);
         addAndMakeVisible(_canvas, 0);
         
         ActorFigure* a = new ActorFigure(this);
@@ -68,13 +67,13 @@ namespace ui
         addAndMakeVisible(b, -1);
         
         UseCaseFigure* c = new UseCaseFigure(this);
-        c->setTopLeftPosition(400, 300);
+        c->setTopLeftPosition(300, 300);
         addAndMakeVisible(c, -1);
         
         _canvas->addArrow(a, c);
         _canvas->addArrow(a, b);
 
-        setSize(800, 600);
+        setSize(565, 800);
     }
 
     ContentComponent::~ContentComponent()
