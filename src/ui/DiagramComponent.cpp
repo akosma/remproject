@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the ui::Toolbar class.
+//! Contains the implementation of the ui::DiagramComponent class.
 /*!
- * \file Toolbar.cpp
+ * \file DiagramComponent.cpp
  *
- * Contains the implementation of the ui::Toolbar class.
+ * Contains the implementation of the ui::DiagramComponent class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,15 +29,16 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:48:24 pm
+ * \date      21 Jun 2008 3:27:04 pm
  */
 
 //[Headers] You can add your own extra header files here...
-#include "ActorToolbarButton.h"
-#include "UseCaseToolbarButton.h"
+#ifndef CONTENTCOMPONENT_H_
+#include "ContentComponent.h"
+#endif
 //[/Headers]
 
-#include "Toolbar.h"
+#include "DiagramComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -45,51 +46,46 @@
 
 namespace ui
 {
-    Toolbar::Toolbar ()
-
+    DiagramComponent::DiagramComponent ()
+        : viewport (0)
     {
+        addAndMakeVisible (viewport = new Viewport (T("new viewport")));
+
 
         //[UserPreSize]
         //[/UserPreSize]
 
-        setSize (60, 220);
-
         //[Constructor] You can add your own custom stuff here..
-    ActorToolbarButton* button = new ActorToolbarButton();
-    button->setTopLeftPosition(10, 10);
-    addAndMakeVisible(button, -1);
-
-    UseCaseToolbarButton* button2 = new UseCaseToolbarButton();
-    button2->setTopLeftPosition(10, 60);
-    addAndMakeVisible(button2, -1);
+        ContentComponent* content = new ContentComponent();
+        viewport->setViewedComponent(content);
         //[/Constructor]
     }
 
-    Toolbar::~Toolbar()
+    DiagramComponent::~DiagramComponent()
     {
         //[Destructor_pre]. You can add your own custom destruction code here..
         //[/Destructor_pre]
 
-
+        deleteAndZero (viewport);
 
         //[Destructor]. You can add your own custom destruction code here..
         //[/Destructor]
     }
 
-    void Toolbar::paint (Graphics& g)
+    void DiagramComponent::paint (Graphics& g)
     {
         //[UserPrePaint] Add your own custom painting code here..
         //[/UserPrePaint]
 
-        g.setColour (Colour (0xffe2e2e2));
-        g.fillRoundedRectangle (0.0f, 0.0f, (float) (getWidth() - 0), (float) (getHeight() - 0), 6.0000f);
+        g.fillAll (Colours::white);
 
         //[UserPaint] Add your own custom painting code here..
         //[/UserPaint]
     }
 
-    void Toolbar::resized()
+    void DiagramComponent::resized()
     {
+        viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
         //[UserResized] Add your own custom resize handling here..
         //[/UserResized]
     }
@@ -105,13 +101,15 @@ namespace ui
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="Toolbar" componentName=""
+<JUCER_COMPONENT documentType="Component" className="DiagramComponent" componentName=""
                  parentClasses="public Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="60" initialHeight="220">
-  <BACKGROUND backgroundColour="0">
-    <ROUNDRECT pos="0 0 0M 0M" cornerSize="6" fill="solid: ffe2e2e2" hasStroke="0"/>
-  </BACKGROUND>
+                 fixedSize="0" initialWidth="600" initialHeight="400">
+  <BACKGROUND backgroundColour="ffffffff"/>
+  <VIEWPORT name="new viewport" id="599396c1b455d99a" memberName="viewport"
+            virtualName="" explicitFocusOrder="0" pos="0 0 100% 100%" vscroll="1"
+            hscroll="1" scrollbarThickness="18" contentType="0" jucerFile=""
+            contentClass="" constructorParams=""/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

@@ -29,7 +29,7 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      27 May 2008 10:26:34 pm
+ * \date      21 Jun 2008 4:46:09 pm
  */
 
 //[Headers] You can add your own extra header files here...
@@ -69,15 +69,25 @@ namespace ui
 
     void ActorToolbarButton::resized()
     {
-        internalPath1.clear();
-        internalPath1.startNewSubPath (11.0f, 35.0f);
-        internalPath1.lineTo (19.0f, 25.0f);
-        internalPath1.lineTo (29.0f, 35.0f);
-
         internalPath2.clear();
-        internalPath2.startNewSubPath (11.0f, 35.0f);
-        internalPath2.lineTo (19.0f, 25.0f);
-        internalPath2.lineTo (29.0f, 35.0f);
+        internalPath2.startNewSubPath (11.0f, 36.0f);
+        internalPath2.lineTo (19.0f, 26.0f);
+        internalPath2.lineTo (29.0f, 36.0f);
+
+        internalPath3.clear();
+        internalPath3.startNewSubPath (11.0f, 26.0f);
+        internalPath3.lineTo (19.0f, 16.0f);
+        internalPath3.lineTo (29.0f, 26.0f);
+
+        internalPath5.clear();
+        internalPath5.startNewSubPath (11.0f, 36.0f);
+        internalPath5.lineTo (19.0f, 26.0f);
+        internalPath5.lineTo (29.0f, 36.0f);
+
+        internalPath6.clear();
+        internalPath6.startNewSubPath (11.0f, 26.0f);
+        internalPath6.lineTo (19.0f, 16.0f);
+        internalPath6.lineTo (29.0f, 26.0f);
 
         //[UserResized] Add your own custom resize handling here..
         //[/UserResized]
@@ -85,45 +95,55 @@ namespace ui
 
     void ActorToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
-        if (isButtonDown || isMouseOverButton)
+        if (isButtonDown)
         {
+            GradientBrush gradient_4 (Colours::black,
+                                      20.0f, 19.0f,
+                                      Colours::white,
+                                      20.0f, 1.0f,
+                                      false);
+            g.setBrush (&gradient_4);
+            g.fillRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f);
+
             g.setColour (Colours::white);
-            g.fillRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 10.0000f);
+            g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f, 0.6000f);
 
-            g.setColour (Colour (0xff2a6ba5));
-            g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 10.0000f, 1.0000f);
+            g.setColour (Colours::white);
+            g.fillRect (18, 13, 3, 15);
 
-            g.setColour (Colour (0xff2a6ba5));
-            g.fillEllipse (13.0f, 3.0f, 13.0f, 11.0f);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath5, PathStrokeType (2.9000f));
 
-            g.setColour (Colour (0xff2a6ba5));
-            g.fillRect (18, 9, 3, 18);
+            g.setColour (Colours::white);
+            g.drawEllipse (13.0f, 3.0f, 13.0f, 11.0f, 2.5000f);
 
-            g.setColour (Colour (0xff2a6ba5));
-            g.strokePath (internalPath2, PathStrokeType (2.9000f));
-
-            g.setColour (Colour (0xff2a6ba5));
-            g.fillRect (8, 17, 24, 3);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath6, PathStrokeType (2.9000f));
         }
         else
         {
+            GradientBrush gradient_1 (Colours::black,
+                                      20.0f, 13.0f,
+                                      Colours::white,
+                                      20.0f, 1.0f,
+                                      false);
+            g.setBrush (&gradient_1);
+            g.fillRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f);
+
             g.setColour (Colours::white);
-            g.fillRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 10.0000f);
+            g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f, 0.6000f);
 
-            g.setColour (Colours::black);
-            g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 10.0000f, 1.0000f);
+            g.setColour (Colours::white);
+            g.fillRect (18, 13, 3, 15);
 
-            g.setColour (Colours::black);
-            g.fillEllipse (13.0f, 3.0f, 13.0f, 11.0f);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath2, PathStrokeType (2.9000f));
 
-            g.setColour (Colours::black);
-            g.fillRect (18, 9, 3, 18);
+            g.setColour (Colours::white);
+            g.drawEllipse (13.0f, 3.0f, 13.0f, 11.0f, 2.5000f);
 
-            g.setColour (Colours::black);
-            g.strokePath (internalPath1, PathStrokeType (2.9000f));
-
-            g.setColour (Colours::black);
-            g.fillRect (8, 17, 24, 3);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath3, PathStrokeType (2.9000f));
         }
     }
 
@@ -143,15 +163,17 @@ BEGIN_JUCER_METADATA
                  snapPixels="4" snapActive="0" snapShown="1" overlayOpacity="0.330000013"
                  fixedSize="1" initialWidth="40" initialHeight="40">
   <BACKGROUND backgroundColour="0" buttonState="normal" enabled="1">
-    <ROUNDRECT pos="1 1 38 38" cornerSize="10" fill="solid: ffffffff" hasStroke="1"
-               stroke="1, mitered, butt" strokeColour="solid: ff000000"/>
-    <ELLIPSE pos="13 3 13 11" fill="solid: ff000000" hasStroke="0"/>
-    <RECT pos="18 9 3 18" fill="solid: ff000000" hasStroke="0"/>
+    <ROUNDRECT pos="1 1 38 38" cornerSize="6" fill="linear: 20 13, 20 1, 0=ff000000, 1=ffffffff"
+               hasStroke="1" stroke="0.600000024, mitered, butt" strokeColour="solid: ffffffff"/>
+    <RECT pos="18 13 3 15" fill="solid: ffffffff" hasStroke="0"/>
     <PATH pos="0 0 100 100" fill="solid: ffffff" hasStroke="1" stroke="2.9000001, mitered, butt"
-          strokeColour="solid: ff000000" nonZeroWinding="1">s 11 35 l 19 25 l 29 35</PATH>
-    <RECT pos="8 17 24 3" fill="solid: ff000000" hasStroke="0"/>
+          strokeColour="solid: ffffffff" nonZeroWinding="1">s 11 36 l 19 26 l 29 36</PATH>
+    <ELLIPSE pos="13 3 13 11" fill="solid: 0" hasStroke="1" stroke="2.5, mitered, butt"
+             strokeColour="solid: ffffffff"/>
+    <PATH pos="0 0 100 100" fill="solid: ffffff" hasStroke="1" stroke="2.9000001, mitered, butt"
+          strokeColour="solid: ffffffff" nonZeroWinding="1">s 11 26 l 19 16 l 29 26</PATH>
   </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="over" enabled="1">
+  <BACKGROUND backgroundColour="0" buttonState="over" enabled="0">
     <ROUNDRECT pos="1 1 38 38" cornerSize="10" fill="solid: ffffffff" hasStroke="1"
                stroke="1, mitered, butt" strokeColour="solid: ff2a6ba5"/>
     <ELLIPSE pos="13 3 13 11" fill="solid: ff2a6ba5" hasStroke="0"/>
@@ -160,7 +182,17 @@ BEGIN_JUCER_METADATA
           strokeColour="solid: ff2a6ba5" nonZeroWinding="1">s 11 35 l 19 25 l 29 35</PATH>
     <RECT pos="8 17 24 3" fill="solid: ff2a6ba5" hasStroke="0"/>
   </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="down" enabled="0"/>
+  <BACKGROUND backgroundColour="0" buttonState="down" enabled="1">
+    <ROUNDRECT pos="1 1 38 38" cornerSize="6" fill="linear: 20 19, 20 1, 0=ff000000, 1=ffffffff"
+               hasStroke="1" stroke="0.600000024, mitered, butt" strokeColour="solid: ffffffff"/>
+    <RECT pos="18 13 3 15" fill="solid: ffffffff" hasStroke="0"/>
+    <PATH pos="0 0 100 100" fill="solid: ffffff" hasStroke="1" stroke="2.9000001, mitered, butt"
+          strokeColour="solid: ffffffff" nonZeroWinding="1">s 11 36 l 19 26 l 29 36</PATH>
+    <ELLIPSE pos="13 3 13 11" fill="solid: 0" hasStroke="1" stroke="2.5, mitered, butt"
+             strokeColour="solid: ffffffff"/>
+    <PATH pos="0 0 100 100" fill="solid: ffffff" hasStroke="1" stroke="2.9000001, mitered, butt"
+          strokeColour="solid: ffffffff" nonZeroWinding="1">s 11 26 l 19 16 l 29 26</PATH>
+  </BACKGROUND>
   <BACKGROUND backgroundColour="0" buttonState="normal on" enabled="0"/>
   <BACKGROUND backgroundColour="0" buttonState="over on" enabled="0"/>
   <BACKGROUND backgroundColour="0" buttonState="down on" enabled="0"/>

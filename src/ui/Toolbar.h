@@ -29,11 +29,11 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      27 May 2008 10:12:55 pm
+ * \date      21 Jun 2008 4:48:24 pm
  */
 
-#ifndef __JUCER_HEADER_TOOLBAR_TOOLBAR_8E8B548B__
-#define __JUCER_HEADER_TOOLBAR_TOOLBAR_8E8B548B__
+#ifndef __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
+#define __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "juce.h"
@@ -59,11 +59,9 @@ namespace ui
     class Toolbar  : public Component
     {
     public:
-        //==============================================================================
         Toolbar ();
         ~Toolbar();
 
-        //==============================================================================
         //[UserMethods]     -- You can add your own custom methods in this section.
         //[/UserMethods]
 
@@ -71,21 +69,18 @@ namespace ui
         void resized();
 
 
-        //==============================================================================
         juce_UseDebuggingNewOperator
 
     private:
         //[UserVariables]   -- You can add your own custom variables in this section.
         //[/UserVariables]
 
-        //==============================================================================
 
 
-        //==============================================================================
-        // (prevent copy constructor and operator= being generated..)
+        // (prevent copy constructor and operator= from being generated..)
         Toolbar (const Toolbar&);
         const Toolbar& operator= (const Toolbar&);
     };
 }
 
-#endif   // __JUCER_HEADER_TOOLBAR_TOOLBAR_8E8B548B__
+#endif   // __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__

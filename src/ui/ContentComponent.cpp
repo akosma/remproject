@@ -45,8 +45,6 @@
 #include "ArrowCanvas.h"
 #endif
 
-#include "Toolbar.h"
-
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -73,12 +71,10 @@ namespace ui
         c->setTopLeftPosition(400, 300);
         addAndMakeVisible(c, -1);
         
-        Toolbar* t = new Toolbar();
-        t->setTopLeftPosition(10, 10);
-        addAndMakeVisible(t, -1);
-        
         _canvas->addArrow(a, c);
         _canvas->addArrow(a, b);
+
+        setSize(800, 600);
     }
 
     ContentComponent::~ContentComponent()
@@ -99,9 +95,7 @@ namespace ui
         return true;
     }
 
-    void ContentComponent::itemDropped (const String& sourceDescription,
-                          Component* sourceComponent,
-                          int x, int y)
+    void ContentComponent::itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y)
     {
         repaint();
     }

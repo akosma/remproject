@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the ui::ActorToolbarButton class.
+//! Contains the interface of the ui::DiagramComponent class.
 /*!
- * \file ActorToolbarButton.cpp
+ * \file DiagramComponent.cpp
  *
- * Contains the interface of the ui::ActorToolbarButton class.
+ * Contains the interface of the ui::DiagramComponent class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,17 +29,11 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:46:09 pm
+ * \date      21 Jun 2008 3:27:04 pm
  */
 
-#ifndef __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
-#define __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
-
-//[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
-//[/Headers]
-
-
+#ifndef DIAGRAMCOMPONENT_H_
+#define DIAGRAMCOMPONENT_H_
 
 /*!
  * \namespace ui
@@ -48,7 +42,7 @@
 namespace ui
 {
     /*!
-     * \class ActorToolbarButton
+     * \class DiagramComponent
      *
      * [Comments]
      * An auto-generated component, created by the Jucer.
@@ -56,34 +50,25 @@ namespace ui
      * [/Comments]
      *
      */
-    class ActorToolbarButton  : public Button
+    class DiagramComponent  : public Component
     {
     public:
-        ActorToolbarButton ();
-        ~ActorToolbarButton();
+        DiagramComponent ();
+        ~DiagramComponent();
 
-        //[UserMethods]     -- You can add your own custom methods in this section.
-        //[/UserMethods]
-
+        void paint (Graphics& g);
         void resized();
-        void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
 
 
         juce_UseDebuggingNewOperator
 
     private:
-        //[UserVariables]   -- You can add your own custom variables in this section.
-        //[/UserVariables]
-
-        Path internalPath2;
-        Path internalPath3;
-        Path internalPath5;
-        Path internalPath6;
+        Viewport* viewport;
 
         // (prevent copy constructor and operator= from being generated..)
-        ActorToolbarButton (const ActorToolbarButton&);
-        const ActorToolbarButton& operator= (const ActorToolbarButton&);
+        DiagramComponent (const DiagramComponent&);
+        const DiagramComponent& operator= (const DiagramComponent&);
     };
 }
 
-#endif   // __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
+#endif   // DIAGRAMCOMPONENT_H_

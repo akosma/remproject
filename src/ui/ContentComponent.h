@@ -60,10 +60,8 @@ namespace ui
 
         bool isInterestedInDragSource (const String& sourceDescription);
 
-        void itemDropped (const String& sourceDescription,
-                              Component* sourceComponent,
-                              int x, int y);
-                              
+        void itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y);
+
         void setCurrent(Figure*);
         
         ArrowCanvas& getArrowCanvas();

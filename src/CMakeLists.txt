@@ -31,6 +31,9 @@ SET (ui_SRCS
     ui/ContentComponent.h 
     ui/ContentComponent.cpp 
     
+    ui/DiagramComponent.h
+    ui/DiagramComponent.cpp
+    
     ui/ActorFigure.h
     ui/ActorFigure.cpp
 
@@ -207,6 +210,8 @@ ELSE (WIN32)
             # By the way, there is a bug in the cross-compilation SDKs for Tiger in Leopard, 
             # so you need to follow these instructions:
             # http://groups.google.com/group/vim_mac/browse_thread/thread/064da55ec412e768
+            # which means typing the following command in Terminal.app:
+            # $ sudo ln -s /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.o /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.10.5.o
             SET(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
             SET(CMAKE_OSX_ARCHITECTURES ppc;i386)
             SET(CMAKE_FIND_ROOT_PATH /Developer/SDKs/MacOSX10.4u.sdk)

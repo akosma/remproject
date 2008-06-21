@@ -15,6 +15,7 @@
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
 		3A3852000DECAC1B009A749A /* ActorFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */; };
 		3A3852010DECAC1B009A749A /* UseCaseFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */; };
+		3A42BBBD0E0D4D9800C26929 /* DiagramComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A42BBBB0E0D4D9800C26929 /* DiagramComponent.cpp */; };
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
@@ -68,6 +69,8 @@
 		3A3851FD0DECAC1B009A749A /* ActorFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActorFigure.h; path = ../../src/ui/ActorFigure.h; sourceTree = SOURCE_ROOT; };
 		3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseFigure.cpp; path = ../../src/ui/UseCaseFigure.cpp; sourceTree = SOURCE_ROOT; };
 		3A3851FF0DECAC1B009A749A /* UseCaseFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseFigure.h; path = ../../src/ui/UseCaseFigure.h; sourceTree = SOURCE_ROOT; };
+		3A42BBBB0E0D4D9800C26929 /* DiagramComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramComponent.cpp; path = ../../src/ui/DiagramComponent.cpp; sourceTree = SOURCE_ROOT; };
+		3A42BBBC0E0D4D9800C26929 /* DiagramComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramComponent.h; path = ../../src/ui/DiagramComponent.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2ED0D968AD7002F1AC2 /* PropertyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyTest.h; path = ../../src/tests/PropertyTest.h; sourceTree = SOURCE_ROOT; };
 		3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropertyTest.cpp; path = ../../src/tests/PropertyTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyProperty.h; path = ../../src/storage/AnyProperty.h; sourceTree = SOURCE_ROOT; };
@@ -236,12 +239,11 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3AF1F5AF0E0D31FA005D4A36 /* Diagrams */,
 				3A63E7840DBB9C510016AFE0 /* Components */,
 				3A308A6B0DB7DE6A00965CD1 /* Figures */,
 				3AC065BE0DB13102000EB33E /* Application.cpp */,
 				3AC065BF0DB13102000EB33E /* Application.h */,
-				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
-				3AC065C10DB13102000EB33E /* ContentComponent.h */,
 				3AC065C20DB13102000EB33E /* Window.cpp */,
 				3AC065C30DB13102000EB33E /* Window.h */,
 				3A7596370DAFC09A000AC38C /* Main.cpp */,
@@ -348,6 +350,17 @@
 				3A75965F0DAFC350000AC38C /* rem-Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3AF1F5AF0E0D31FA005D4A36 /* Diagrams */ = {
+			isa = PBXGroup;
+			children = (
+				3A42BBBB0E0D4D9800C26929 /* DiagramComponent.cpp */,
+				3A42BBBC0E0D4D9800C26929 /* DiagramComponent.h */,
+				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
+				3AC065C10DB13102000EB33E /* ContentComponent.h */,
+			);
+			name = Diagrams;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -490,6 +503,7 @@
 				3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */,
 				3A3852000DECAC1B009A749A /* ActorFigure.cpp in Sources */,
 				3A3852010DECAC1B009A749A /* UseCaseFigure.cpp in Sources */,
+				3A42BBBD0E0D4D9800C26929 /* DiagramComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
