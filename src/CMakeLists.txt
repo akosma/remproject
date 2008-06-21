@@ -34,6 +34,9 @@ SET (ui_SRCS
     ui/DiagramComponent.h
     ui/DiagramComponent.cpp
     
+    ui/ProjectComponent.h
+    ui/ProjectComponent.cpp
+    
     ui/ActorFigure.h
     ui/ActorFigure.cpp
 
