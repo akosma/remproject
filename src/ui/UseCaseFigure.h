@@ -56,7 +56,7 @@ namespace ui
         /*!
          *  UseCaseFigure constructor.
          */
-        UseCaseFigure(ContentComponent*);
+        UseCaseFigure();
 
         /*!
          *  UseCaseFigure virtual destructor.

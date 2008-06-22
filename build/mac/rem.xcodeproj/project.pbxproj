@@ -49,6 +49,9 @@
 		3AC4D3430DEC9C9F00D26FFA /* Toolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4D3400DEC9C9F00D26FFA /* Toolbar.cpp */; };
 		3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
+		3AEE8CA40E0E76D2001192FB /* FigureSelectedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE8CA30E0E76D2001192FB /* FigureSelectedNotification.cpp */; };
+		3AEE8D040E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE8D030E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp */; };
+		3AEE8D270E0E8C12001192FB /* FigureMovedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE8D260E0E8C12001192FB /* FigureMovedNotification.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +136,12 @@
 		3AD1A8760DC64FF4009977AE /* HasMany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HasMany.h; path = ../../src/storage/HasMany.h; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
 		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
+		3AEE8CA20E0E76D2001192FB /* FigureSelectedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureSelectedNotification.h; path = ../../src/ui/FigureSelectedNotification.h; sourceTree = SOURCE_ROOT; };
+		3AEE8CA30E0E76D2001192FB /* FigureSelectedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureSelectedNotification.cpp; path = ../../src/ui/FigureSelectedNotification.cpp; sourceTree = SOURCE_ROOT; };
+		3AEE8D020E0E86F2001192FB /* ArrowCanvasClickedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvasClickedNotification.h; path = ../../src/ui/ArrowCanvasClickedNotification.h; sourceTree = SOURCE_ROOT; };
+		3AEE8D030E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvasClickedNotification.cpp; path = ../../src/ui/ArrowCanvasClickedNotification.cpp; sourceTree = SOURCE_ROOT; };
+		3AEE8D250E0E8C12001192FB /* FigureMovedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureMovedNotification.h; path = ../../src/ui/FigureMovedNotification.h; sourceTree = SOURCE_ROOT; };
+		3AEE8D260E0E8C12001192FB /* FigureMovedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureMovedNotification.cpp; path = ../../src/ui/FigureMovedNotification.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +251,7 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3AEE8CA10E0E76BB001192FB /* Notifications */,
 				3AF1F5AF0E0D31FA005D4A36 /* Diagrams */,
 				3A63E7840DBB9C510016AFE0 /* Components */,
 				3A308A6B0DB7DE6A00965CD1 /* Figures */,
@@ -353,6 +363,19 @@
 				3A75965F0DAFC350000AC38C /* rem-Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3AEE8CA10E0E76BB001192FB /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				3AEE8CA20E0E76D2001192FB /* FigureSelectedNotification.h */,
+				3AEE8CA30E0E76D2001192FB /* FigureSelectedNotification.cpp */,
+				3AEE8D020E0E86F2001192FB /* ArrowCanvasClickedNotification.h */,
+				3AEE8D030E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp */,
+				3AEE8D250E0E8C12001192FB /* FigureMovedNotification.h */,
+				3AEE8D260E0E8C12001192FB /* FigureMovedNotification.cpp */,
+			);
+			name = Notifications;
 			sourceTree = "<group>";
 		};
 		3AF1F5AF0E0D31FA005D4A36 /* Diagrams */ = {
@@ -510,6 +533,9 @@
 				3A3852010DECAC1B009A749A /* UseCaseFigure.cpp in Sources */,
 				3A42BBBD0E0D4D9800C26929 /* DiagramComponent.cpp in Sources */,
 				3A23DCDA0E0DAC5B00DB428C /* ProjectComponent.cpp in Sources */,
+				3AEE8CA40E0E76D2001192FB /* FigureSelectedNotification.cpp in Sources */,
+				3AEE8D040E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp in Sources */,
+				3AEE8D270E0E8C12001192FB /* FigureMovedNotification.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,12 +703,21 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
+					"\"$(SRCROOT)/../../lib/juce\"",
+				);
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce/bin\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/lib\"",
+					"\"$(SRCROOT)/../../lib/juce/bin\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ljucedebug";
+				OTHER_LDFLAGS = (
+					"-ljucedebug",
+					"-lPocoFoundation",
+				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Rem;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
@@ -702,12 +737,21 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
+					"\"$(SRCROOT)/../../lib/juce\"",
+				);
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../lib/juce/bin\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../lib/poco-universal/poco/lib\"",
+					"\"$(SRCROOT)/../../lib/juce/bin\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ljuce";
+				OTHER_LDFLAGS = (
+					"-ljuce",
+					"-lPocoFoundation",
+				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Rem;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";

@@ -54,7 +54,7 @@ namespace ui
     class ActorFigure : public Figure
     {
     public:
-        ActorFigure(ContentComponent*);
+        ActorFigure();
         virtual ~ActorFigure();
         
         void mouseDoubleClick(const MouseEvent& e); 

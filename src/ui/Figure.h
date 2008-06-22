@@ -42,8 +42,6 @@
  */
 namespace ui
 {
-    class ContentComponent;
-    
     /*!
      * \class Figure
      *
@@ -55,7 +53,7 @@ namespace ui
         /*!
          *  Figure constructor.
          */
-        Figure(ContentComponent*, const int, const int);
+        Figure(const int, const int);
 
         /*!
          *  Figure virtual destructor.
@@ -85,13 +83,14 @@ namespace ui
         
     private:
         void drawDashedLineAround(Graphics&);
+        void postFigureSelectedNotification();
+        void postFigureMovedNotification();
 
     private:
         bool _current;
         bool _hover;
         ComponentDragger _dragger;
         ResizableBorderComponent* _resizer;
-        ContentComponent* _parent;
         const int _initWidth;
         const int _initHeight;
         const float _initMargin;

@@ -42,8 +42,8 @@ namespace ui
     /*!
      * UseCaseFigure Constructor.
      */
-    UseCaseFigure::UseCaseFigure(ContentComponent* parent)
-    : Figure(parent, 200, 150)
+    UseCaseFigure::UseCaseFigure()
+    : Figure(200, 150)
     , _nameLabel(0)
     {
         const float margin = getInitialMargin();

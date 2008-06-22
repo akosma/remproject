@@ -46,7 +46,6 @@ using std::vector;
  */
 namespace ui
 {
-    class ContentComponent;
     class Figure;
     
     /*!
@@ -60,7 +59,7 @@ namespace ui
         /*!
          *  ArrowCanvas constructor.
          */
-        ArrowCanvas(ContentComponent*);
+        ArrowCanvas();
 
         /*!
          *  ArrowCanvas virtual destructor.
@@ -68,10 +67,14 @@ namespace ui
         virtual ~ArrowCanvas();
 
         void mouseDown(const MouseEvent&);
+        void mouseMove(const MouseEvent&);
         void paint(Graphics&);
         void setNoCurrentArrow();
         
         void addArrow(Figure*, Figure*);
+        
+    private:
+        void postArrowCanvasClickedNotification();
 
     private:
         class Arrow
@@ -91,7 +94,6 @@ namespace ui
         };
 
     private:
-        ContentComponent* _parent;
         const float _strokeWidth;
         vector<Arrow*> _arrows;
         Arrow* _currentArrow;

@@ -55,6 +55,15 @@ namespace ui
         Toolbar* t = new Toolbar();
         t->setTopLeftPosition(10, 10);
         addAndMakeVisible(t, -1);
+        
+//        PropertyPanel* panel = new PropertyPanel();
+//        panel->setTopLeftPosition(100, 100);
+//        addAndMakeVisible(panel, -1);
+//        
+//        TextPropertyComponent* text = new TextPropertyComponent(String("Test"), 2000, true);
+//        Array<PropertyComponent*> array;
+//        array << text;
+//        panel.addProperties(array);
     }
     
     ProjectComponent::~ProjectComponent()

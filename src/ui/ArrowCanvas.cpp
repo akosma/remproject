@@ -33,6 +33,8 @@
 
 #include "ArrowCanvas.h"
 
+#include <Poco/NotificationCenter.h>
+
 #ifndef CONTENTCOMPONENT_H_
 #include "ContentComponent.h"
 #endif
@@ -41,7 +43,12 @@
 #include "Figure.h"
 #endif
 
+#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
+#include "ArrowCanvasClickedNotification.h"
+#endif
+
 using std::vector;
+using Poco::NotificationCenter;
 
 /*!
  * \namespace ui
@@ -52,9 +59,8 @@ namespace ui
     /*!
      * ArrowCanvas Constructor.
      */
-    ArrowCanvas::ArrowCanvas(ContentComponent* parent)
-    : _parent(parent)
-    , _strokeWidth(1.0f)
+    ArrowCanvas::ArrowCanvas()
+    : _strokeWidth(1.0f)
     , _arrows()
     , _currentArrow(0)
     {
@@ -76,6 +82,11 @@ namespace ui
         _arrows.erase(_arrows.begin(), _arrows.end());
     }
     
+    void ArrowCanvas::mouseMove(const MouseEvent& e)
+    {
+        repaint();
+    }
+
     void ArrowCanvas::mouseDown(const MouseEvent& e)
     {
         _currentArrow = NULL;
@@ -88,7 +99,7 @@ namespace ui
                 break;
             }
         }
-        _parent->setCurrent(NULL);
+        postArrowCanvasClickedNotification();
     }
     
     void ArrowCanvas::setNoCurrentArrow()
@@ -129,6 +140,12 @@ namespace ui
     {
         Arrow* arrow = new Arrow(start, end);
         _arrows.push_back(arrow);
+    }
+    
+    void ArrowCanvas::postArrowCanvasClickedNotification()
+    {
+        ArrowCanvasClickedNotification* notification = new ArrowCanvasClickedNotification(this);
+        NotificationCenter::defaultCenter().postNotification(notification);
     }
     
     ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end)

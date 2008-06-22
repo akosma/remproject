@@ -39,8 +39,8 @@
  */
 namespace ui
 {
-    ActorFigure::ActorFigure(ContentComponent* parent)
-    : Figure(parent, 80, 200)
+    ActorFigure::ActorFigure()
+    : Figure(80, 200)
     , _nameLabel(0)
     {
         _nameLabel = new Label("NameLabel", "Name");

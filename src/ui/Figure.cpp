@@ -33,13 +33,17 @@
 
 #include "Figure.h"
 
-#ifndef CONTENTCOMPONENT_H_
-#include "ContentComponent.h"
+#include <Poco/NotificationCenter.h>
+
+#ifndef FIGURESELECTEDNOTIFICATION_H_
+#include "FigureSelectedNotification.h"
 #endif
 
-#ifndef ARROWCANVAS_H_
-#include "ArrowCanvas.h"
+#ifndef FIGUREMOVEDNOTIFICATION_H_
+#include "FigureMovedNotification.h"
 #endif
+
+using Poco::NotificationCenter;
 
 /*!
  * \namespace ui
@@ -47,15 +51,11 @@
  */
 namespace ui
 {
-    /*!
-     * Figure Constructor.
-     */
-    Figure::Figure(ContentComponent* parent, const int initWidth, const int initHeight)
+    Figure::Figure(const int initWidth, const int initHeight)
     : _current(false)
     , _hover(false)
     , _dragger()
     , _resizer(0)
-    , _parent(parent)
     , _initWidth(initWidth)
     , _initHeight(initHeight)
     , _initMargin(10.0f)
@@ -68,23 +68,20 @@ namespace ui
         setBufferedToImage(true);
 
         _resizer = new ResizableBorderComponent(this, 0);
-        this->addChildComponent(_resizer, -1);
+        addChildComponent(_resizer, -1);
         _resizer->setSize(getWidth(),getHeight());
         _resizer->setBounds(0, 0, getWidth(), getHeight());
     }
-    
-    /*!
-     * Figure Virtual destructor.
-     */
+
     Figure::~Figure()
     {
-        this->deleteAllChildren();
+        deleteAllChildren();
     }
-
+    
     void Figure::mouseDown(const MouseEvent& e)
     {
-        this->toFront(true);
-        _parent->setCurrent(this);
+        toFront(true);
+        postFigureSelectedNotification();
         _dragger.startDraggingComponent(this, 0);
         setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
     }
@@ -97,7 +94,7 @@ namespace ui
     void Figure::mouseDrag(const MouseEvent& e)
     {
         _dragger.dragComponent(this, e);
-        _parent->getArrowCanvas().repaint();
+        postFigureMovedNotification();
     }
     
     void Figure::mouseEnter(const MouseEvent& e)
@@ -113,11 +110,11 @@ namespace ui
     void Figure::resized()
     {
         // Somehow resized() is called before _resizer is constructed!
-        if (_parent && _resizer)
+        if (_resizer)
         {
-            this->toFront(true);
-            _parent->setCurrent(this);
-            _resizer->setBounds (0,0,getWidth(),getHeight());
+            toFront(true);
+            postFigureSelectedNotification();
+            _resizer->setBounds (0, 0, getWidth(), getHeight());
         }
     }
     
@@ -150,10 +147,10 @@ namespace ui
     
     const Point* Figure::getAnchorPointRelativeTo(const Figure* other) const
     {
-        const bool isBelow = (other->getY() + other->getHeight()) < this->getY();
-        const bool isAbove = (this->getY() + this->getHeight()) < other->getY();
-        const bool isRightOf = (other->getX() + other->getWidth()) < this->getX();
-        const bool isLeftOf = (this->getX() + this->getWidth()) < other->getX();
+        const bool isBelow = (other->getY() + other->getHeight()) < getY();
+        const bool isAbove = (getY() + getHeight()) < other->getY();
+        const bool isRightOf = (other->getX() + other->getWidth()) < getX();
+        const bool isLeftOf = (getX() + getWidth()) < other->getX();
         
         Point* point = NULL;
         
@@ -183,7 +180,7 @@ namespace ui
     {
         Colour transparentWhite = Colours::white.withAlpha(0.9f);
         Path figure;
-        this->drawFigure(figure);
+        drawFigure(figure);
         if (_current)
         {
             g.fillAll(transparentWhite);
@@ -211,5 +208,17 @@ namespace ui
         g.drawDashedLine(0, 0, getWidth(), 0, dashLengths, 2, 2.0f);
         g.drawDashedLine(getWidth(), 0, getWidth(), getHeight(), dashLengths, 2, 2.0f);
         g.drawDashedLine(0, getHeight(), getWidth(), getHeight(), dashLengths, 2, 2.0f);
+    }
+    
+    void Figure::postFigureSelectedNotification()
+    {
+        FigureSelectedNotification* notification = new FigureSelectedNotification(this);
+        NotificationCenter::defaultCenter().postNotification(notification);
+    }
+    
+    void Figure::postFigureMovedNotification()
+    {
+        FigureMovedNotification* notification = new FigureMovedNotification(this);
+        NotificationCenter::defaultCenter().postNotification(notification);
     }
 }

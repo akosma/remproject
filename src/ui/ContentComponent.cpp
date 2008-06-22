@@ -33,6 +33,9 @@
 
 #include "ContentComponent.h"
 
+#include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
+
 #ifndef ACTORFIGURE_H_
 #include "ActorFigure.h"
 #endif
@@ -45,28 +48,28 @@
 #include "ArrowCanvas.h"
 #endif
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
+using Poco::NotificationCenter;
+using Poco::NObserver;
+using Poco::AutoPtr;
+
 namespace ui
 {
     ContentComponent::ContentComponent()
     : _current(0)
     {
-        _canvas = new ArrowCanvas(this);
+        _canvas = new ArrowCanvas();
         _canvas->setSize(565, 800);
         addAndMakeVisible(_canvas, 0);
         
-        ActorFigure* a = new ActorFigure(this);
+        ActorFigure* a = new ActorFigure();
         a->setTopLeftPosition(100, 300);
         addAndMakeVisible(a, -1);
 
-        ActorFigure* b = new ActorFigure(this);
+        ActorFigure* b = new ActorFigure();
         b->setTopLeftPosition(100, 10);
         addAndMakeVisible(b, -1);
         
-        UseCaseFigure* c = new UseCaseFigure(this);
+        UseCaseFigure* c = new UseCaseFigure();
         c->setTopLeftPosition(300, 300);
         addAndMakeVisible(c, -1);
         
@@ -74,6 +77,18 @@ namespace ui
         _canvas->addArrow(a, b);
 
         setSize(565, 800);
+        
+        // The NotificationCenter in the POCO libraries is inspired from Cocoa
+        // http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/Reference/Reference.html
+        // However, this implementation uses template adaptors, in a true C++ style!
+        NObserver<ContentComponent, FigureSelectedNotification> figureObserver(*this, &ContentComponent::handleFigureSelectedNotification);
+        NotificationCenter::defaultCenter().addObserver(figureObserver);
+
+        NObserver<ContentComponent, ArrowCanvasClickedNotification> arrowObserver(*this, &ContentComponent::handleArrowCanvasClickedNotification);
+        NotificationCenter::defaultCenter().addObserver(arrowObserver);
+
+        NObserver<ContentComponent, FigureMovedNotification> movementObserver(*this, &ContentComponent::handleFigureMovedNotification);
+        NotificationCenter::defaultCenter().addObserver(movementObserver);
     }
 
     ContentComponent::~ContentComponent()
@@ -116,5 +131,32 @@ namespace ui
     ArrowCanvas& ContentComponent::getArrowCanvas()
     {
         return *_canvas;
+    }
+    
+    void ContentComponent::handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>& notification)
+    {
+        Figure* figure = notification->getSelectedFigure();
+        if (isParentOf(figure))
+        {
+            setCurrent(figure);
+        }
+    }
+
+    void ContentComponent::handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>& notification)
+    {
+        ArrowCanvas* canvas = notification->getClickedArrowCanvas();
+        if (isParentOf(canvas))
+        {
+            setCurrent(NULL);
+        }
+    }
+    
+    void ContentComponent::handleFigureMovedNotification(const AutoPtr<FigureMovedNotification>& notification)
+    {
+        Figure* figure = notification->getMovedFigure();
+        if (isParentOf(figure))
+        {
+            _canvas->repaint();
+        }
     }
 }

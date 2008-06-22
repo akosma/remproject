@@ -57,6 +57,15 @@ SET (ui_SRCS
 
     ui/UseCaseToolbarButton.h
     ui/UseCaseToolbarButton.cpp
+    
+    ui/FigureMovedNotification.h
+    ui/FigureMovedNotification.cpp
+    
+    ui/FigureSelectedNotification.h
+    ui/FigureSelectedNotification.cpp
+    
+    ui/ArrowCanvasClickedNotification.h
+    ui/ArrowCanvasClickedNotification.cpp
 
     ui/Main.cpp 
 )

@@ -36,6 +36,22 @@
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
 
+#include <Poco/AutoPtr.h>
+
+#ifndef FIGURESELECTEDNOTIFICATION_H_
+#include "FigureSelectedNotification.h"
+#endif
+
+#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
+#include "ArrowCanvasClickedNotification.h"
+#endif
+
+#ifndef FIGUREMOVEDNOTIFICATION_H_
+#include "FigureMovedNotification.h"
+#endif
+
+using Poco::AutoPtr;
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -67,7 +83,11 @@ namespace ui
         void resize();
         
         ArrowCanvas& getArrowCanvas();
-    
+
+        void handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>&);
+        void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
+        void handleFigureMovedNotification(const AutoPtr<FigureMovedNotification>&);
+
     private:
         ArrowCanvas* _canvas;
         Figure* _current;
