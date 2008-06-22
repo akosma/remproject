@@ -54,7 +54,7 @@ namespace ui
     {
         ProjectComponent* project = new ProjectComponent();
         setContentComponent(project);
-        centreWithSize(620, 850);
+        centreWithSize(620, 650);
         setResizable(true, true);
         setUsingNativeTitleBar(true);
         setVisible (true);
