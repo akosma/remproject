@@ -36,7 +36,7 @@
 #define __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 //[/Headers]
 
 

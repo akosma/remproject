@@ -31,9 +31,9 @@
  * \date      4/21/08
  */
 
-#include "ArrowCanvas.h"
-
 #include <Poco/NotificationCenter.h>
+
+#include "ArrowCanvas.h"
 
 #ifndef CONTENTCOMPONENT_H_
 #include "ContentComponent.h"

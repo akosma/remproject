@@ -47,7 +47,7 @@ namespace ui
      * Window Constructor.
      */
     Window::Window()
-    : DocumentWindow (T("Rem"),
+    : DocumentWindow ("Rem",
                       Colours::lightgrey, 
                       DocumentWindow::allButtons, 
                       true)

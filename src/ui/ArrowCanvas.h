@@ -31,7 +31,7 @@
  * \date      4/21/08
  */
 
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 
 #include <vector>
 

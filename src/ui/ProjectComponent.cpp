@@ -38,7 +38,9 @@
 #include "DiagramComponent.h"
 #endif
 
+#ifndef __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
 #include "Toolbar.h"
+#endif
 
 namespace ui
 {

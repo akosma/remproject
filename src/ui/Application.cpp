@@ -64,12 +64,12 @@ namespace ui
 
     const String Application::getApplicationName()
     {
-        return T("Rem Application");
+        return String("Rem Application");
     }
 
     const String Application::getApplicationVersion()
     {
-        return T("1.0");
+        return String("1.0");
     }
 
     bool Application::moreThanOneInstanceAllowed()

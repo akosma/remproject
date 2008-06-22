@@ -31,7 +31,7 @@
  * \date      4/17/08
  */
 
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 
 #ifndef ACTORFIGURE_H_
 #define ACTORFIGURE_H_

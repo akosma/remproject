@@ -31,7 +31,7 @@
  * \date      4/11/08
  */
 
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 
 #ifndef WINDOW_H_
 #define WINDOW_H_

@@ -31,10 +31,10 @@
  * \date      4/11/08
  */
 
-#include "ContentComponent.h"
-
 #include <Poco/NotificationCenter.h>
 #include <Poco/NObserver.h>
+
+#include "ContentComponent.h"
 
 #ifndef ACTORFIGURE_H_
 #include "ActorFigure.h"

@@ -31,12 +31,12 @@
  * \date      4/11/08
  */
 
-#include "juce.h"
+#include <Poco/AutoPtr.h>
+
+#include <src/juce_WithoutMacros.h>
 
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
-
-#include <Poco/AutoPtr.h>
 
 #ifndef FIGURESELECTEDNOTIFICATION_H_
 #include "FigureSelectedNotification.h"

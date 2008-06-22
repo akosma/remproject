@@ -32,6 +32,8 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include <src/juce_WithoutMacros.h>
+
 #ifndef DIAGRAMCOMPONENT_H_
 #define DIAGRAMCOMPONENT_H_
 

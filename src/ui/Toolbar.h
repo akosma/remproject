@@ -36,7 +36,7 @@
 #define __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 //[/Headers]
 
 

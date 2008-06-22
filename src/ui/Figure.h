@@ -31,7 +31,7 @@
  * \date      4/19/08
  */
 
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 
 #ifndef FIGURE_H_
 #define FIGURE_H_

@@ -32,7 +32,7 @@
  * \date      6/21/08
  */
 
-#include "juce.h"
+#include <src/juce_WithoutMacros.h>
 
 #ifndef PROJECTCOMPONENT_H_
 #define PROJECTCOMPONENT_H_

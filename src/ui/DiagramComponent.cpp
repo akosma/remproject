@@ -32,14 +32,13 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include "DiagramComponent.h"
+
 //[Headers] You can add your own extra header files here...
 #ifndef CONTENTCOMPONENT_H_
 #include "ContentComponent.h"
 #endif
 //[/Headers]
-
-#include "DiagramComponent.h"
-
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
@@ -47,9 +46,9 @@
 namespace ui
 {
     DiagramComponent::DiagramComponent ()
-        : viewport (0)
+        : viewport (new Viewport())
     {
-        addAndMakeVisible (viewport = new Viewport (T("new viewport")));
+        addAndMakeVisible(viewport);
 
 
         //[UserPreSize]

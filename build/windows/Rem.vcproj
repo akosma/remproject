@@ -81,7 +81,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /MACHINE:X86 /debug"
-				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib "
+				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib PocoFoundation.lib $(NOINHERIT)"
 				OutputFile="Debug\Rem.exe"
 				Version="0.0"
 				LinkIncremental="2"
@@ -230,7 +230,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\ArrowCanvasClickedNotification.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ContentComponent.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\DiagramComponent.cpp"
 				>
 			</File>
 			<File
@@ -238,7 +246,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\FigureMovedNotification.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\FigureSelectedNotification.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ProjectComponent.cpp"
 				>
 			</File>
 			<File
@@ -278,11 +298,31 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\ArrowCanvasClickedNotification.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ContentComponent.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\DiagramComponent.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Figure.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\FigureMovedNotification.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\FigureSelectedNotification.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ProjectComponent.h"
 				>
 			</File>
 			<File

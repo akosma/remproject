@@ -31,9 +31,9 @@
  * \date      4/19/08
  */
 
-#include "Figure.h"
-
 #include <Poco/NotificationCenter.h>
+
+#include "Figure.h"
 
 #ifndef FIGURESELECTEDNOTIFICATION_H_
 #include "FigureSelectedNotification.h"

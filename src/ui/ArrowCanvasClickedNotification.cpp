@@ -14,6 +14,10 @@
 
 #include "ArrowCanvasClickedNotification.h"
 
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
+
 namespace ui
 {
     ArrowCanvasClickedNotification::ArrowCanvasClickedNotification(ArrowCanvas* canvas)

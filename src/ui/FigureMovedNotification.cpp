@@ -14,6 +14,12 @@
 
 #include "FigureMovedNotification.h"
 
+#ifndef FIGURE_H_
+#include "Figure.h"
+#endif
+
+using Poco::Notification;
+
 namespace ui
 {
     FigureMovedNotification::FigureMovedNotification(Figure* figure)
