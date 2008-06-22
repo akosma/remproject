@@ -31,7 +31,11 @@
  * \date      4/17/08
  */
 
+#if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
 
 #ifndef ACTORFIGURE_H_
 #define ACTORFIGURE_H_

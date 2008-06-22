@@ -705,7 +705,7 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
-					"\"$(SRCROOT)/../../lib/juce\"",
+					"\"$(SRCROOT)/../../lib/juce\"/**",
 				);
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -739,7 +739,7 @@
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
-					"\"$(SRCROOT)/../../lib/juce\"",
+					"\"$(SRCROOT)/../../lib/juce\"/**",
 				);
 				INFOPLIST_FILE = "rem-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";

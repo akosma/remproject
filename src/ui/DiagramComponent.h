@@ -32,7 +32,11 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
 
 #ifndef DIAGRAMCOMPONENT_H_
 #define DIAGRAMCOMPONENT_H_

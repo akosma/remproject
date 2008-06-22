@@ -36,7 +36,11 @@
 #define __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
 
 //[Headers]     -- You can add your own extra header files here --
+#if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
 //[/Headers]
 
 

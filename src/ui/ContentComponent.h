@@ -33,7 +33,11 @@
 
 #include <Poco/AutoPtr.h>
 
+#if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
 
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_

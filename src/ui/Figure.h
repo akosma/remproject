@@ -31,7 +31,11 @@
  * \date      4/19/08
  */
 
+#if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
 
 #ifndef FIGURE_H_
 #define FIGURE_H_
