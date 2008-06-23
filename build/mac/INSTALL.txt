@@ -1,0 +1,115 @@
+Building Rem in Mac OS X 10.5 "Leopard" (PowerPC or Intel)
+==========================================================
+
+These instructions explain how to build Rem from source code in Leopard.
+
+1) Install Xcode
+----------------
+
+Install the Xcode developer tools (bundled with Mac OS X).
+
+
+
+2) CMake 2.6
+------------
+
+- Download CMake 2.6 from http://www.cmake.org/files/v2.6/cmake-2.6.0-Darwin-universal.dmg 
+- Open the DMG file, and execute the installer in the disk image.
+- When prompted to install the command-line utilities in /usr/bin, answer "YES"
+
+
+
+3) CppUnit 1.12.1
+-----------------
+
+Install CppUnit in the usual Unix paths, with the following commands:
+
+    $ mkdir ~/Desktop/cppunit/
+    $ cd ~/Desktop/cppunit/
+    $ curl http://switch.dl.sourceforge.net/sourceforge/cppunit/cppunit-1.12.1.tar.gz > cppunit-1.12.1.tar.gz
+    $ tar xvfpz cppunit-1.12.1.tar.gz
+    $ cd cppunit-1.12.1
+
+To build Universal Binaries of the CppUnit library, follow these instructions taken from the CppUnit wiki,
+http://cppunit.sourceforge.net/cgi-bin/moin.cgi/BuildingCppUnit1#head-606831052dc6f25163a5f79aec04dcdbd05a7329
+
+When building on an Intel machine:
+
+    $ ./configure --disable-dependency-tracking CXXFLAGS="-arch ppc -arch i386 -gdwarf-2 -O2"
+    $ make AM_LDFLAGS="-XCClinker -arch -XCClinker ppc -XCClinker -arch -XCClinker i386"
+    $ sudo make install
+
+When building on a PowerPC machine (with Universal SDK installed):
+
+    $ ./configure --disable-dependency-tracking CXXFLAGS="-isysroot /Developer/SDKs/MacOSX10.5.sdk -arch ppc -arch i386 -gdwarf-2 -O2"
+    $ make AM_LDFLAGS="-XCClinker -arch -XCClinker ppc -XCClinker -arch -XCClinker i386 -XCClinker -isysroot -XCClinker /Developer/SDKs/MacOSX10.5.sdk"
+    $ sudo make install
+
+This last step will install the headers in /usr/local/include/cppunit and the libraries in /usr/local/lib.
+
+
+
+4) Fix an incompatibility in the 10.4u SDK
+------------------------------------------
+
+Type the following command in Terminal.app
+    
+    $ sudo ln -s /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.o /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.10.5.o
+
+
+
+5) Get a Universal Binary version of POCO 1.3.2
+-----------------------------------------------
+
+To download a precompiled version of POCO as Universal Binary, go to this forum post:
+http://www.openframeworks.cc/forum/viewtopic.php?p=2371#2371
+There is a link to download the lib there:
+http://openframeworks.cc/files/poco/poco-universal.zip
+Unzip the file and place it in the "lib" subfolder of this project, together with the "juce" folder.
+
+
+
+6) Build JUCE 1.45
+------------------
+
+Go to lib/juce/build/macosx and open the Juce.xcodeproj file with Xcode. 
+
+    a) In Xcode 2.5 the library compiles out of the box.
+    b) In Xcode 3 (Leopard-only):
+        b.1) Select the "Juce" target and open the "Info" dialog box, "Build" tab.
+        b.2) Remove the dependencies to GCC 3 and to the Mac OS X 10.2 SDK. Instead, specify GCC 4.0.
+        b.3) In the "Base SDK Path" entry specify "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk" for Release and Debug
+        b.4) In the "Architectures" entry specify "$(NATIVE_ARCH)" for Debug, and "ppc i386" for Release.
+    c) Build the solution using the "Build" button in the toolbar, in both Debug and Release modes.
+
+
+
+7) Install Doxygen
+------------------
+
+Install Doxygen using MacPorts:
+
+    $ sudo port install doxygen
+
+
+
+8) Build Rem using Xcode
+------------------------
+
+Open build/mac/rem.xcodeproj and click the "Build" button on the toolbar, either in Release or Debug mode. The solution should compile without problems now.
+
+
+
+9) Build Rem using CMake
+------------------------
+
+The "build.sh" shell script in this folder shows how to use CMake, CPack and CTest to build the application from the command line.
+
+
+
+10) Build the documentation with Doxygen
+----------------------------------------
+
+Type the following command at the root of the project (where the Doxyfile file resides):
+
+    $ /opt/local/bin/doxygen 

@@ -1,0 +1,4 @@
+Building Rem in Linux, Windows or Mac
+=====================================
+
+Please refer to the individual files "INSTALL.txt" in the "build" subfolders of this distribution.

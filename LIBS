@@ -4,3 +4,6 @@ Rem source code depends on the following libraries:
 - Juce 1.45     http://downloads.sourceforge.net/juce/juce_1_45.zip
 - SQLite 3.5.6  http://www.sqlite.org/sqlite-amalgamation-3_5_6.zip
 - Poco 1.3.2    http://downloads.sourceforge.net/poco/poco-1.3.2-data.tar.gz
+
+The Xcode templates come from 
+http://brianray.chipy.org/MacDev/CustomizeXcodeTemplates.html
