@@ -35,7 +35,8 @@ In that page, follow the link at the bottom, agree to the end-user license agree
 4) Checkout and build POCO
 --------------------------
 
-POCO is bundled with the file "lib\poco\Foundation\Foundation_vs80.sln" which can be opened with Visual C++ 2008 Express Edition (you will be asked to upgrade it to the Visual Studio 2008 format). Right click on the project and select "Build".
+POCO is bundled with the file "lib\poco\Foundation\Foundation_vs80.sln" which can be opened with Visual C++ 2008 Express Edition (you will be asked to upgrade it to the Visual Studio 2008 format). Right click on the project and select "Build", in each of the four available configurations. The generated libraries will be generated in "lib\poco\lib" and the DLLs will be installed in "lib\poco\bin".
+
 
 
 5) Build JUCE
@@ -43,6 +44,7 @@ POCO is bundled with the file "lib\poco\Foundation\Foundation_vs80.sln" which ca
 
 JUCE is bundled with a Visual Studio solution, that can be used to build the library. Open the "lib\juce\build\win32\vc8\JUCE.sln" file (you will be asked to upgrade it to the Visual Studio 2008 format) and right-click on the JUCE project inside. Go to "Configuration Properties - C/C++ - General" and modify the the "Additional Include Directories" to the value: 
 "C:\Program Files\QuickTime";"C:\ASIOSDK2\common".
+Right-click on the project and select "Build", in both Release and Debug configurations.
 
 
 
@@ -58,10 +60,22 @@ Open the "C:\cppunit-1.12.0\src\CppUnitLibraries.sln" file and build the "cppuni
 7) Install SQLite
 -----------------
 
+Download the precompiled DLL for Windows here:
+http://www.sqlite.org/sqlitedll-3_5_8.zip
+Unzip it and install the files "sqlite3.dll" and "sqlite3.def" in "lib/sqlite".
 
 
-8) Generate the TLB from the SQLite DLL
+
+8) Generate the DEF from the SQLite DLL
 ---------------------------------------
+
+In order to use the DLL from within Rem, you need to generate a DEF file out of it. To do this, follow the instructions at:
+http://support.microsoft.com/kb/131313
+
+  a) "cd lib\sqlite"
+  b) "LIB /DEF:sqlite.def"
+  
+This will generate the "sqlite3.exp" file required by the Rem Visual Studio solution.
 
 
 
@@ -91,5 +105,6 @@ Open the "build\windows\Rem.sln" file and select "Build".
 12) Build Rem using CMake
 -------------------------
 
+To be done.
 
 
