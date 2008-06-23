@@ -61,6 +61,8 @@ Type the following command in Terminal.app
 5) Get a Universal Binary version of POCO 1.3.2
 -----------------------------------------------
 
+The POCO libraries included in the Rem source distribution (as an "svn:externals") is not prepared to be built as a Universal Binary. You can use it to create platform-specific (i.e., only PowerPC or Intel) versions of Rem.
+
 To download a precompiled version of POCO as Universal Binary, go to this forum post:
 http://www.openframeworks.cc/forum/viewtopic.php?p=2371#2371
 There is a link to download the lib there:
@@ -97,6 +99,8 @@ Install Doxygen using MacPorts:
 ------------------------
 
 Open build/mac/rem.xcodeproj and click the "Build" button on the toolbar, either in Release or Debug mode. The solution should compile without problems now.
+
+The Xcode project is configured to build a Universal Binary of Rem and remtest only in "Release" mode. In "Debug" configuration, the binaries built will only work in the same architecture in which Xcode is running (as specified by the "$(NATIVE_ARCH)" configuration value).
 
 
 
