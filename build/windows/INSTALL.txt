@@ -1,0 +1,4 @@
+Building Rem in Windows XP Service Pack 2
+=========================================
+
+To be done.

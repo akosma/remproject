@@ -1,0 +1,68 @@
+Building Rem in Kubuntu Linux 7.10
+==================================
+
+Much of the explanations for building JUCE in Kubuntu are taken from this entry in Rem author's blog:
+http://kosmaczewski.net/2007/11/16/building-juce-on-kubuntu-710/
+
+1) Lua
+------
+
+Make sure that you have the Lua programming language installed (you can use your favorite package manager to install it), or you can grab the source files from 
+http://www.lua.org/
+
+
+
+2) External Libraries
+---------------------
+
+Make sure that you have the following libraries installed in your Kubuntu installation using Synaptic or any other package manager, as specified in this JUCE forum post:
+http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?t=1312&highlight=audio+build
+
+- libx11-dev
+- libasound2-dev
+- libfreetype6-dev
+- libxinerama-dev
+- libglu1-mesa-dev
+- libglut3-dev (with its dependency freeglut3-dev too)
+
+
+
+3) Download premake from Sourceforge
+------------------------------------
+
+You can download premake http://premake.sourceforge.net/ from this link:
+http://prdownloads.sf.net/premake/premake-linux-3.4.tar.gz
+
+Unzip the file and install the binary where you want (typically /usr/bin). You have to do this manually, since premake is not available through the Synaptic package manager, in any repository.
+
+
+
+4) Install CMake 2.4
+--------------------
+
+Install it using Synaptic or any other package manager.
+
+
+
+5) Build JUCE
+-------------
+
+- "cd" into the lib/juce/build/linux folder.
+- Run "sh runpremake" which will use premake and Lua to create a makefile
+- Run "make" (which is equal to "make CONFIG=Debug") or "make CONFIG=Release" to build the library; a couple of minutes later you’ll have a juce/bin/libjuce_debug.a file ready to use
+
+
+
+6) Build POCO
+-------------
+
+- Checkout POCO into the "lib" folder of this distribution
+- "configure", and then "make"
+
+
+
+7) Build Rem
+------------
+
+The "build.sh" shell script in this folder shows how to build Rem using CMake. The resulting binaries will be placed in a "bin" subfolder at the root of the current distribution of Rem.
+

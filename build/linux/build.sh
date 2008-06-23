@@ -21,7 +21,6 @@ cd ../../
 
 # Erase previous build output
 rm -r bin
-rm -r doc
 
 # Build the whole project
 mkdir bin
