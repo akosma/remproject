@@ -126,3 +126,10 @@ Download the disk image file from
 http://mirror.ctan.org/systems/mac/mactex/MacTeX.dmg
 
 Open the image file and execute the installer inside. This will install all the required tools to generate PDF files from the Doxygen documentation.
+
+
+
+Note about dynamic libraries and Xcode
+--------------------------------------
+
+Xcode has a feature (bug?) when linking executables to static libraries: if both the dynamic and static version of the same library are available (which usually is the case, for example with CppUnit), Xcode will link to the dynamic version, and there is no configuration possible to change this behavior. The only possible solution to get a statically-linked executable is to delete the dynamic library, which forces Xcode to link to the static version. This way, the deployment of the application is easier (even if the resulting binary is obviously larger)
