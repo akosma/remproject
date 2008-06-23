@@ -1,4 +1,91 @@
 Building Rem in Windows XP Service Pack 2
 =========================================
 
-To be done.
+1) Install Microsoft Visual C++ 2008 Express Edition
+----------------------------------------------------
+
+Free download from here:
+http://www.microsoft.com/express/download/
+
+It is recommended to download the "Offline Install DVD", available at the bottom of the page. You only need to install the C++ IDE and libraries from that DVD.
+
+
+
+2) Download and install QuickTime for Windows
+---------------------------------------------
+
+JUCE depends on the QuickTime libraries for displaying media files. You can download and install QuickTime from this address:
+http://www.apple.com/quicktime/download/
+
+
+
+3) Install the ASIO SDK
+-----------------------
+
+Juce requires this SDK to be available. Follow the instructions in this forum post:
+http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?p=12107&highlight=&sid=1a6b77fdef10736f25f1dc05caecb4c9#12107
+
+The ASIO drivers can be downloaded from here:
+http://www.steinberg.net/324+M52087573ab0.html
+
+In that page, follow the link at the bottom, agree to the end-user license agreement and fill the form to access the download link.
+
+
+
+4) Checkout and build POCO
+--------------------------
+
+POCO is bundled with a Visual Studio solution, that can be used to build the library.
+
+
+
+5) Build JUCE
+-------------
+
+JUCE is bundled with a Visual Studio solution, that can be used to build the library.
+
+
+
+6) Install CppUnit
+------------------
+
+
+
+
+7) Install SQLite
+-----------------
+
+
+
+8) Generate the TLB from the SQLite DLL
+---------------------------------------
+
+
+
+9) Install CMake 2.6
+--------------------
+
+There is an installer available here:
+http://www.cmake.org/files/v2.6/cmake-2.6.0-win32-x86.exe
+
+
+
+10) Install NSIS 2.37
+---------------------
+
+NSIS (Nullsoft Scriptable Install System) is used by CMake to generate installers for Windows. You can download it from here:
+http://prdownloads.sourceforge.net/nsis/nsis-2.37-setup.exe?download
+
+
+
+11) Build Rem in Visual Studio
+------------------------------
+
+
+
+
+12) Build Rem using CMake
+-------------------------
+
+
+

@@ -1,5 +1,5 @@
-Building Rem in Kubuntu Linux 7.10
-==================================
+Building Rem in Kubuntu Linux 7.10 "Gutsy Gibbon"
+=================================================
 
 Much of the explanations for building JUCE in Kubuntu are taken from this entry in Rem author's blog:
 http://kosmaczewski.net/2007/11/16/building-juce-on-kubuntu-710/
