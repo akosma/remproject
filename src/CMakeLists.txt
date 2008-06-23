@@ -212,6 +212,21 @@ IF (WIN32)
     SET_SOURCE_FILES_PROPERTIES(${tests_SRCS} PROPERTIES
         COMPILE_FLAGS "/MDd"
     )
+
+    ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
+    
+        # Copy DLLs in build directory
+        COMMAND mkdir
+            ARGS -p ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+
+        COMMAND cp
+            ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../lib/sqlite/sqlite.dll
+                ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+
+        COMMAND cp
+            ARGS ${CMAKE_CURRENT_SOURCE_DIR}/../lib/poco/bin/PocoFoundation.dll
+                ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    )
     
 ELSE (WIN32)
 
