@@ -58,8 +58,8 @@ Type the following command in Terminal.app
 
 
 
-5) Get a Universal Binary version of POCO 1.3.2
------------------------------------------------
+5) Get a Universal Binary version of POCO
+-----------------------------------------
 
 The POCO libraries included in the Rem source distribution (as an "svn:externals") is not prepared to be built as a Universal Binary. You can use it to create platform-specific (i.e., only PowerPC or Intel) versions of Rem.
 
