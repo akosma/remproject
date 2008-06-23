@@ -6,7 +6,7 @@ These instructions explain how to build Rem from source code in Leopard.
 1) Install Xcode
 ----------------
 
-Install the Xcode developer tools (bundled with Mac OS X).
+Install the Xcode developer tools (bundled with Mac OS X). Rem has been successfully built with both Xcode 3.0 (bundled with Leopard) and 3.1 (bundled with the iPhone developer tools).
 
 
 
