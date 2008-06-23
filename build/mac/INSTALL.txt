@@ -113,3 +113,16 @@ The "build.sh" shell script in this folder shows how to use CMake, CPack and CTe
 Type the following command at the root of the project (where the Doxyfile file resides):
 
     $ /opt/local/bin/doxygen 
+
+
+
+Note about PDF output with Doxygen
+----------------------------------
+
+If you want to create a PDF output using Doxygen, you should install first the MacTex distribution, freely available from
+http://www.tug.org/mactex/
+
+Download the disk image file from
+http://mirror.ctan.org/systems/mac/mactex/MacTeX.dmg
+
+Open the image file and execute the installer inside. This will install all the required tools to generate PDF files from the Doxygen documentation.
