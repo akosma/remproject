@@ -28,27 +28,30 @@ http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?p=12107&highlight=&si
 The ASIO drivers can be downloaded from here:
 http://www.steinberg.net/324+M52087573ab0.html
 
-In that page, follow the link at the bottom, agree to the end-user license agreement and fill the form to access the download link.
+In that page, follow the link at the bottom, agree to the end-user license agreement and fill the form to access the download link. Install the libraries in "C:\ASIOSDK2\".
 
 
 
 4) Checkout and build POCO
 --------------------------
 
-POCO is bundled with a Visual Studio solution, that can be used to build the library.
-
+POCO is bundled with the file "lib\poco\Foundation\Foundation_vs80.sln" which can be opened with Visual C++ 2008 Express Edition (you will be asked to upgrade it to the Visual Studio 2008 format). Right click on the project and select "Build".
 
 
 5) Build JUCE
 -------------
 
-JUCE is bundled with a Visual Studio solution, that can be used to build the library.
+JUCE is bundled with a Visual Studio solution, that can be used to build the library. Open the "lib\juce\build\win32\vc8\JUCE.sln" file (you will be asked to upgrade it to the Visual Studio 2008 format) and right-click on the JUCE project inside. Go to "Configuration Properties - C/C++ - General" and modify the the "Additional Include Directories" to the value: 
+"C:\Program Files\QuickTime";"C:\ASIOSDK2\common".
 
 
 
 6) Install CppUnit
 ------------------
 
+Download http://downloads.sourceforge.net/cppunit/cppunit-1.12.1.tar.gz and unzip it into:
+"C:\cppunit-1.12.1"
+Open the "C:\cppunit-1.12.0\src\CppUnitLibraries.sln" file and build the "cppunit" project. The resulting libraries are stored at "C:\cppunit-1.12.0\lib".
 
 
 
@@ -81,6 +84,7 @@ http://prdownloads.sourceforge.net/nsis/nsis-2.37-setup.exe?download
 11) Build Rem in Visual Studio
 ------------------------------
 
+Open the "build\windows\Rem.sln" file and select "Build".
 
 
 
