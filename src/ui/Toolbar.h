@@ -67,6 +67,17 @@ namespace ui
         ~Toolbar();
 
         //[UserMethods]     -- You can add your own custom methods in this section.
+        void mouseDown(const MouseEvent& e)
+        {
+            _dragger.startDraggingComponent(this, 0);
+            setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
+        }
+
+        void mouseDrag(const MouseEvent& e)
+        {
+            _dragger.dragComponent(this, e);
+        }
+        
         //[/UserMethods]
 
         void paint (Graphics& g);
@@ -77,6 +88,7 @@ namespace ui
 
     private:
         //[UserVariables]   -- You can add your own custom variables in this section.
+        ComponentDragger _dragger;
         //[/UserVariables]
 
 

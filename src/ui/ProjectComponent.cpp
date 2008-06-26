@@ -46,7 +46,7 @@ namespace ui
 {
     ProjectComponent::ProjectComponent()
     : Component()
-    , _tabs(new TabbedComponent(TabbedButtonBar::TabsAtBottom))
+    , _tabs(new TabbedComponent(TabbedButtonBar::TabsAtTop))
     {
         DiagramComponent* diagram1 = new DiagramComponent();
         DiagramComponent* diagram2 = new DiagramComponent();
@@ -55,7 +55,7 @@ namespace ui
         addAndMakeVisible(_tabs);
 
         Toolbar* t = new Toolbar();
-        t->setTopLeftPosition(10, 10);
+        t->setTopLeftPosition(10, 50);
         addAndMakeVisible(t, -1);
         
 //        PropertyPanel* panel = new PropertyPanel();

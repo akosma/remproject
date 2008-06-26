@@ -46,7 +46,7 @@
 namespace ui
 {
     Toolbar::Toolbar ()
-
+    : _dragger()
     {
 
         //[UserPreSize]
