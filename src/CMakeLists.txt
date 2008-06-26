@@ -37,6 +37,9 @@ SET (ui_SRCS
     ui/ProjectComponent.h
     ui/ProjectComponent.cpp
     
+    ui/ProjectTabbedComponent.h
+    ui/ProjectTabbedComponent.cpp
+    
     ui/ActorFigure.h
     ui/ActorFigure.cpp
 
@@ -66,6 +69,9 @@ SET (ui_SRCS
     
     ui/ArrowCanvasClickedNotification.h
     ui/ArrowCanvasClickedNotification.cpp
+    
+    ui/ProjectTabbedComponentChangedTabNotification.h
+    ui/ProjectTabbedComponentChangedTabNotification.cpp
 
     ui/Main.cpp 
 )

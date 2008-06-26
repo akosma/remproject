@@ -42,11 +42,15 @@
 #include "UseCaseDiagramToolbar.h"
 #endif
 
+#ifndef PROJECTTABBEDCOMPONENT_H_
+#include "ProjectTabbedComponent.h"
+#endif
+
 namespace ui
 {
     ProjectComponent::ProjectComponent()
     : Component()
-    , _tabs(new TabbedComponent(TabbedButtonBar::TabsAtTop))
+    , _tabs(new ProjectTabbedComponent())
     {
         DiagramComponent* diagram1 = new DiagramComponent();
         DiagramComponent* diagram2 = new DiagramComponent();

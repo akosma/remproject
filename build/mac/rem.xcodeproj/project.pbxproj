@@ -20,6 +20,8 @@
 		3A4CD2EF0D968AD7002F1AC2 /* PropertyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */; };
 		3A4CD3C30D96A65D002F1AC2 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
 		3A4D2DC40E140E960000CBC5 /* UseCaseDiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D2DC20E140E960000CBC5 /* UseCaseDiagramToolbar.cpp */; };
+		3A4D2DC90E140F940000CBC5 /* ProjectTabbedComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */; };
+		3A4D2DE00E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D2DDF0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
 		3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
@@ -83,6 +85,10 @@
 		3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnyProperty.cpp; path = ../../src/storage/AnyProperty.cpp; sourceTree = SOURCE_ROOT; };
 		3A4D2DC20E140E960000CBC5 /* UseCaseDiagramToolbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseDiagramToolbar.cpp; path = ../../src/ui/UseCaseDiagramToolbar.cpp; sourceTree = SOURCE_ROOT; };
 		3A4D2DC30E140E960000CBC5 /* UseCaseDiagramToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagramToolbar.h; path = ../../src/ui/UseCaseDiagramToolbar.h; sourceTree = SOURCE_ROOT; };
+		3A4D2DC70E140F940000CBC5 /* ProjectTabbedComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponent.h; path = ../../src/ui/ProjectTabbedComponent.h; sourceTree = SOURCE_ROOT; };
+		3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponent.cpp; path = ../../src/ui/ProjectTabbedComponent.cpp; sourceTree = SOURCE_ROOT; };
+		3A4D2DDE0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTabNotification.h; path = ../../src/ui/ProjectTabbedComponentChangedTabNotification.h; sourceTree = SOURCE_ROOT; };
+		3A4D2DDF0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponentChangedTabNotification.cpp; path = ../../src/ui/ProjectTabbedComponentChangedTabNotification.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +325,8 @@
 				3AC013070DECA62C000E5B92 /* UseCaseToolbarButton.h */,
 				3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */,
 				3AC4D33F0DEC9C9F00D26FFA /* ActorToolbarButton.h */,
+				3A4D2DC70E140F940000CBC5 /* ProjectTabbedComponent.h */,
+				3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -374,6 +382,8 @@
 				3AEE8D030E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp */,
 				3AEE8D250E0E8C12001192FB /* FigureMovedNotification.h */,
 				3AEE8D260E0E8C12001192FB /* FigureMovedNotification.cpp */,
+				3A4D2DDE0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.h */,
+				3A4D2DDF0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -536,6 +546,8 @@
 				3AEE8D040E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp in Sources */,
 				3AEE8D270E0E8C12001192FB /* FigureMovedNotification.cpp in Sources */,
 				3A4D2DC40E140E960000CBC5 /* UseCaseDiagramToolbar.cpp in Sources */,
+				3A4D2DC90E140F940000CBC5 /* ProjectTabbedComponent.cpp in Sources */,
+				3A4D2DE00E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -47,6 +47,8 @@
  */
 namespace ui
 {
+    class ProjectTabbedComponent;
+
     /*!
      * \class ProjectComponent
      *
@@ -69,7 +71,7 @@ namespace ui
         void resized();
         
     private:
-        TabbedComponent* _tabs;
+        ProjectTabbedComponent* _tabs;
     };
 }
 
