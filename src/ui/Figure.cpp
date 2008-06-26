@@ -156,21 +156,37 @@ namespace ui
         
         if (isBelow)
         {
+            if (point)
+            {
+                delete point;
+            }
             point = new Point(getX() + getWidth() / 2, getY());
         }
         
         if (isAbove)
         {
+            if (point)
+            {
+                delete point;
+            }
             point = new Point(getX() + getWidth() / 2, getY() + getHeight());
         }
         
         if (isRightOf)
         {
+            if (point)
+            {
+                delete point;
+            }
             point = new Point(getX(), getY() + getHeight() / 2);
         }
 
         if (isLeftOf)
         {
+            if (point)
+            {
+                delete point;
+            }
             point = new Point(getX() + getWidth(), getY() + getHeight() / 2);
         }
         return point;
