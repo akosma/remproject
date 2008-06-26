@@ -55,7 +55,7 @@ namespace ui
     class UseCaseDiagramToolbar  : public Component
     {
     public:
-        UseCaseDiagramToolbar ();
+        UseCaseDiagramToolbar (Component*);
         ~UseCaseDiagramToolbar();
 
         void mouseDown(const MouseEvent& e);
@@ -69,6 +69,7 @@ namespace ui
 
     private:
         ComponentDragger _dragger;
+        Component* _parent;
 
     private:
         UseCaseDiagramToolbar (const UseCaseDiagramToolbar&);

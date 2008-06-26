@@ -39,11 +39,13 @@
 
 namespace ui
 {
-    UseCaseDiagramToolbar::UseCaseDiagramToolbar ()
+    UseCaseDiagramToolbar::UseCaseDiagramToolbar (Component* parent)
     : Component()
     , _dragger()
+    , _parent(parent)
     {
-        setSize (60, 220);
+        setSize(60, 220);
+        setOpaque(!Desktop::canUseSemiTransparentWindows());
 
         ActorToolbarButton* button = new ActorToolbarButton();
         button->setTopLeftPosition(10, 10);
@@ -66,7 +68,31 @@ namespace ui
 
     void UseCaseDiagramToolbar::mouseDrag(const MouseEvent& e)
     {
-        _dragger.dragComponent(this, e);
+        if (!_parent->isValidComponent())
+        {
+            delete this;
+        }
+        else
+        {
+            MouseEvent e2 (e.getEventRelativeTo(_parent));
+
+            // if the mouse is inside the parent component, we'll make that the
+            // parent - otherwise, we'll put this comp on the desktop.
+            if (e2.x >= 0 && e2.y >= 0 && e2.x < _parent->getWidth() && e2.y < _parent->getHeight())
+            {
+                // re-add this component to a parent component, which will
+                // remove it from the desktop..
+                _parent->addChildComponent(this);
+            }
+            else
+            {
+                // add the component to the desktop, which will remove it
+                // from its current parent component..
+                addToDesktop(ComponentPeer::windowIsTemporary | ComponentPeer::windowHasDropShadow);
+            }
+
+            _dragger.dragComponent (this, e);
+        }
     }
 
     void UseCaseDiagramToolbar::paint (Graphics& g)

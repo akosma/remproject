@@ -58,7 +58,7 @@ namespace ui
         _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
         addAndMakeVisible(_tabs);
 
-        UseCaseDiagramToolbar* t = new UseCaseDiagramToolbar();
+        UseCaseDiagramToolbar* t = new UseCaseDiagramToolbar(this);
         t->setTopLeftPosition(10, 50);
         addAndMakeVisible(t, -1);
         
