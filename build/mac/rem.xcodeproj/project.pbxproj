@@ -244,12 +244,12 @@
 				3AC608C90DEC0A34002D0B12 /* Persistable.cpp */,
 				3A4CD3C10D96A65D002F1AC2 /* AnyProperty.h */,
 				3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */,
-				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
-				3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */,
 				3A3556820D96D8090079D03E /* AnyPropertyMap.h */,
 				3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */,
 				3A8DB0110DF9BC4F00B9D679 /* FindConditions.h */,
 				3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */,
+				3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */,
+				3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */,
 			);
 			name = storage;
 			sourceTree = "<group>";
@@ -257,26 +257,36 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3A23BF090E143DEB00DAC85C /* Properties Panels */,
 				3AEE8CA10E0E76BB001192FB /* Notifications */,
 				3AF1F5AF0E0D31FA005D4A36 /* Diagrams */,
-				3A63E7840DBB9C510016AFE0 /* Components */,
+				3A63E7840DBB9C510016AFE0 /* Toolbars */,
 				3A308A6B0DB7DE6A00965CD1 /* Figures */,
-				3AC065BE0DB13102000EB33E /* Application.cpp */,
-				3AC065BF0DB13102000EB33E /* Application.h */,
-				3AC065C20DB13102000EB33E /* Window.cpp */,
-				3AC065C30DB13102000EB33E /* Window.h */,
 				3A7596370DAFC09A000AC38C /* Main.cpp */,
+				3AC065BF0DB13102000EB33E /* Application.h */,
+				3AC065BE0DB13102000EB33E /* Application.cpp */,
+				3AC065C30DB13102000EB33E /* Window.h */,
+				3AC065C20DB13102000EB33E /* Window.cpp */,
+				3A23DCD80E0DAC5B00DB428C /* ProjectComponent.h */,
+				3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */,
 			);
 			name = ui;
+			sourceTree = "<group>";
+		};
+		3A23BF090E143DEB00DAC85C /* Properties Panels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Properties Panels";
 			sourceTree = "<group>";
 		};
 		3A308A6B0DB7DE6A00965CD1 /* Figures */ = {
 			isa = PBXGroup;
 			children = (
-				3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */,
 				3A3851FD0DECAC1B009A749A /* ActorFigure.h */,
-				3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */,
+				3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */,
 				3A3851FF0DECAC1B009A749A /* UseCaseFigure.h */,
+				3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */,
 				3A98E1B30DB9FB0A0095EADC /* Figure.h */,
 				3A98E1B40DB9FB0A0095EADC /* Figure.cpp */,
 				3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */,
@@ -295,13 +305,13 @@
 		3A4EAEA90D8D32BD00C4895F /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */,
-				3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */,
-				3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */,
-				3A70B4290D8D61E200F61DB0 /* DiagramTest.h */,
-				3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */,
-				3A70B42B0D8D61E200F61DB0 /* ProjectTest.h */,
 				3A4EAEAA0D8D332000C4895F /* main.cpp */,
+				3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */,
+				3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */,
+				3A70B4290D8D61E200F61DB0 /* DiagramTest.h */,
+				3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */,
+				3A70B42B0D8D61E200F61DB0 /* ProjectTest.h */,
+				3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */,
 				3A4CD2ED0D968AD7002F1AC2 /* PropertyTest.h */,
 				3A4CD2EE0D968AD7002F1AC2 /* PropertyTest.cpp */,
 				3A81015A0D96BF91003EFF96 /* SQLiteWrapperTest.h */,
@@ -316,7 +326,7 @@
 			name = tests;
 			sourceTree = "<group>";
 		};
-		3A63E7840DBB9C510016AFE0 /* Components */ = {
+		3A63E7840DBB9C510016AFE0 /* Toolbars */ = {
 			isa = PBXGroup;
 			children = (
 				3A4D2DC20E140E960000CBC5 /* UseCaseDiagramToolbar.cpp */,
@@ -325,10 +335,8 @@
 				3AC013070DECA62C000E5B92 /* UseCaseToolbarButton.h */,
 				3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */,
 				3AC4D33F0DEC9C9F00D26FFA /* ActorToolbarButton.h */,
-				3A4D2DC70E140F940000CBC5 /* ProjectTabbedComponent.h */,
-				3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */,
 			);
-			name = Components;
+			name = Toolbars;
 			sourceTree = "<group>";
 		};
 		3A75963B0DAFC0BE000AC38C /* Frameworks */ = {
@@ -349,8 +357,8 @@
 		3AA5DE760DE9AAA20059C4D9 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3A0840390DE9F6770080A93A /* FileController.cpp */,
 				3A08403A0DE9F6770080A93A /* FileController.h */,
+				3A0840390DE9F6770080A93A /* FileController.cpp */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -391,12 +399,12 @@
 		3AF1F5AF0E0D31FA005D4A36 /* Diagrams */ = {
 			isa = PBXGroup;
 			children = (
-				3A42BBBB0E0D4D9800C26929 /* DiagramComponent.cpp */,
 				3A42BBBC0E0D4D9800C26929 /* DiagramComponent.h */,
-				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
+				3A42BBBB0E0D4D9800C26929 /* DiagramComponent.cpp */,
 				3AC065C10DB13102000EB33E /* ContentComponent.h */,
-				3A23DCD80E0DAC5B00DB428C /* ProjectComponent.h */,
-				3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */,
+				3AC065C00DB13102000EB33E /* ContentComponent.cpp */,
+				3A4D2DC70E140F940000CBC5 /* ProjectTabbedComponent.h */,
+				3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */,
 			);
 			name = Diagrams;
 			sourceTree = "<group>";

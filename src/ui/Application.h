@@ -74,7 +74,7 @@ namespace ui
         void anotherInstanceStarted (const String&);
 
     private:
-        Window* window;
+        Window* _window;
     };
 }
 

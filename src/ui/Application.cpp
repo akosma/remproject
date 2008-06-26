@@ -44,7 +44,7 @@
 namespace ui
 {
     Application::Application()
-    : window(0)
+    : _window(0)
     {
     }
 
@@ -54,12 +54,12 @@ namespace ui
 
     void Application::initialise (const String& commandLine)
     {
-        window = new Window();
+        _window = new Window();
     }
 
     void Application::shutdown()
     {
-        delete window;
+        delete _window;
     }
 
     const String Application::getApplicationName()
