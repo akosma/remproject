@@ -38,8 +38,8 @@
 #include "DiagramComponent.h"
 #endif
 
-#ifndef __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
-#include "Toolbar.h"
+#ifndef USECASEDIAGRAMTOOLBAR_H_
+#include "UseCaseDiagramToolbar.h"
 #endif
 
 namespace ui
@@ -54,7 +54,7 @@ namespace ui
         _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
         addAndMakeVisible(_tabs);
 
-        Toolbar* t = new Toolbar();
+        UseCaseDiagramToolbar* t = new UseCaseDiagramToolbar();
         t->setTopLeftPosition(10, 50);
         addAndMakeVisible(t, -1);
         

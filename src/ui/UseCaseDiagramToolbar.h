@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the ui::Toolbar class.
+//! Contains the interface of the ui::UseCaseDiagramToolbar class.
 /*!
  * \file Toolbar.cpp
  *
- * Contains the interface of the ui::Toolbar class.
+ * Contains the interface of the ui::UseCaseDiagramToolbar class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,18 +32,14 @@
  * \date      21 Jun 2008 4:48:24 pm
  */
 
-#ifndef __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
-#define __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
+#ifndef USECASEDIAGRAMTOOLBAR_H_
+#define USECASEDIAGRAMTOOLBAR_H_
 
-//[Headers]     -- You can add your own extra header files here --
 #if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
 #else
 #include <juce.h>
 #endif
-//[/Headers]
-
-
 
 /*!
  * \namespace ui
@@ -54,31 +50,16 @@ namespace ui
     /*!
      * \class Toolbar
      *
-     * [Comments]
-     * An auto-generated component, created by the Jucer.
-     * Describe your class and how it works here!
-     * [/Comments]
      *
      */
-    class Toolbar  : public Component
+    class UseCaseDiagramToolbar  : public Component
     {
     public:
-        Toolbar ();
-        ~Toolbar();
+        UseCaseDiagramToolbar ();
+        ~UseCaseDiagramToolbar();
 
-        //[UserMethods]     -- You can add your own custom methods in this section.
-        void mouseDown(const MouseEvent& e)
-        {
-            _dragger.startDraggingComponent(this, 0);
-            setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
-        }
-
-        void mouseDrag(const MouseEvent& e)
-        {
-            _dragger.dragComponent(this, e);
-        }
-        
-        //[/UserMethods]
+        void mouseDown(const MouseEvent& e);
+        void mouseDrag(const MouseEvent& e);
 
         void paint (Graphics& g);
         void resized();
@@ -87,16 +68,12 @@ namespace ui
         juce_UseDebuggingNewOperator
 
     private:
-        //[UserVariables]   -- You can add your own custom variables in this section.
         ComponentDragger _dragger;
-        //[/UserVariables]
 
-
-
-        // (prevent copy constructor and operator= from being generated..)
-        Toolbar (const Toolbar&);
-        const Toolbar& operator= (const Toolbar&);
+    private:
+        UseCaseDiagramToolbar (const UseCaseDiagramToolbar&);
+        const UseCaseDiagramToolbar& operator= (const UseCaseDiagramToolbar&);
     };
 }
 
-#endif   // __JUCER_HEADER_TOOLBAR_TOOLBAR_393F2C9B__
+#endif   // USECASEDIAGRAMTOOLBAR_H_

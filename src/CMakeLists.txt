@@ -49,8 +49,8 @@ SET (ui_SRCS
     ui/ArrowCanvas.h
     ui/ArrowCanvas.cpp
 
-    ui/Toolbar.h
-    ui/Toolbar.cpp
+    ui/UseCaseDiagramToolbar.h
+    ui/UseCaseDiagramToolbar.cpp
 
     ui/ActorToolbarButton.h
     ui/ActorToolbarButton.cpp
