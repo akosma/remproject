@@ -58,9 +58,9 @@ namespace ui
         _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
         addAndMakeVisible(_tabs);
 
-        UseCaseDiagramToolbar* t = new UseCaseDiagramToolbar(this);
-        t->setTopLeftPosition(10, 50);
-        addAndMakeVisible(t, -1);
+        _toolbar = new UseCaseDiagramToolbar(this);
+        _toolbar->setTopLeftPosition(10, 50);
+        addAndMakeVisible(_toolbar, -1);
         
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);
@@ -74,6 +74,10 @@ namespace ui
     
     ProjectComponent::~ProjectComponent()
     {
+        if (_toolbar->isOnDesktop())
+        {
+            delete _toolbar;
+        }
         deleteAllChildren();
     }
     

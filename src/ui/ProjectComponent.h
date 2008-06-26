@@ -48,6 +48,7 @@
 namespace ui
 {
     class ProjectTabbedComponent;
+    class UseCaseDiagramToolbar;
 
     /*!
      * \class ProjectComponent
@@ -72,6 +73,7 @@ namespace ui
         
     private:
         ProjectTabbedComponent* _tabs;
+        UseCaseDiagramToolbar* _toolbar;
     };
 }
 
