@@ -63,6 +63,7 @@ namespace ui
     : _strokeWidth(1.0f)
     , _arrows()
     , _currentArrow(0)
+    , _drawGrid(true)
     {
         setBroughtToFrontOnMouseClick(false);
         setBufferedToImage(true);
@@ -107,10 +108,17 @@ namespace ui
         _currentArrow = NULL;
         repaint();
     }
+    
+    void ArrowCanvas::shouldDrawGrid(const bool should)
+    {
+        _drawGrid = should;
+        repaint();
+    }
 
     void ArrowCanvas::paint(Graphics& g)
     {
         g.fillAll(Colours::white);
+        drawGrid(g);
         vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
@@ -133,6 +141,40 @@ namespace ui
             g.strokePath(arrow, PathStrokeType (width));
             delete s;
             delete e;
+        }
+    }
+    
+    void ArrowCanvas::drawGrid(Graphics& g)
+    {
+        if (_drawGrid)
+        {
+            int width = getWidth();
+            int height = getHeight();
+            for (int i = 0; i < width; ++i)
+            {
+                g.setColour(Colour(0xfff5f5f5));
+                if (i % 10 == 0)
+                {
+                    if (i % 100 == 0)
+                    {
+                        g.setColour(Colour(0xffededed));
+                    }
+                    g.drawLine((float)i, 0.0, (float)i, (float)height);
+                }
+            }
+            for (int j = 0; j < height; ++j)
+            {
+                g.setColour(Colour(0xfff5f5f5));
+                if (j % 10 == 0)
+                {
+                    if (j % 100 == 0)
+                    {
+                        g.setColour(Colour(0xffededed));
+                    }
+                    g.drawLine(0.0, (float)j, (float)width, (float)j);
+                }
+                
+            }
         }
     }
     

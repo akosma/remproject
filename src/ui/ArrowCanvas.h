@@ -77,8 +77,11 @@ namespace ui
         
         void addArrow(Figure*, Figure*);
         
+        void shouldDrawGrid(const bool);
+        
     private:
         void postArrowCanvasClickedNotification();
+        void drawGrid(Graphics& g);
 
     private:
         class Arrow
@@ -101,6 +104,7 @@ namespace ui
         const float _strokeWidth;
         vector<Arrow*> _arrows;
         Arrow* _currentArrow;
+        bool _drawGrid;
     };
 }
 
