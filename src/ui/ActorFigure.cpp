@@ -71,8 +71,8 @@ namespace ui
         const float margin = getInitialMargin();
         const float strokeWidth = getStrokeWidth();
         
-        const int horizMargin = currentWidth * margin / initWidth;
-        const int vertMargin = currentHeight * margin / initHeight;
+        const int horizMargin = currentWidth * (int)margin / initWidth;
+        const int vertMargin = currentHeight * (int)margin / initHeight;
         
         const float headWidth = currentWidth * 35.0f / initWidth;
         const float headHeight = currentHeight * 35.0f / initHeight;

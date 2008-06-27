@@ -50,7 +50,7 @@ namespace ui
 
         _nameLabel = new Label("NameLabel", "Name");
         _nameLabel->setJustificationType(Justification::horizontallyCentred);
-        _nameLabel->setTopLeftPosition(20 + margin, getInitialHeight() - 30);
+        _nameLabel->setTopLeftPosition(20 + (int)margin, getInitialHeight() - 30);
         _nameLabel->setSize(getInitialWidth() - 40, 30);
         _nameLabel->setEditable(false, true, false);
         _nameLabel->setInterceptsMouseClicks(false, false);
@@ -78,8 +78,8 @@ namespace ui
         const int initHeight = getInitialHeight();
         const float margin = getInitialMargin();
 
-        const int horizMargin = currentWidth * margin / initWidth;
-        const int vertMargin = currentHeight * margin / initHeight;
+        const int horizMargin = currentWidth * (int)margin / initWidth;
+        const int vertMargin = currentHeight * (int)margin / initHeight;
 
         const float width = currentWidth * 180.0f / initWidth;
         const float height = currentHeight * 130.0f / initHeight;
