@@ -57,7 +57,7 @@ namespace ui
     , _toolbar(new UseCaseDiagramToolbar(this))
     {
         addAndMakeVisible(_viewport);
-        addChildComponent(_toolbar, -1); // Don't make it visible yet!
+//        addChildComponent(_toolbar, -1); // Don't make it visible yet!
         _toolbar->setTopLeftPosition(10, 50);
         
         ContentComponent* content = new ContentComponent();

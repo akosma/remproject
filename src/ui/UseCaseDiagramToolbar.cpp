@@ -46,6 +46,7 @@ namespace ui
     {
         setSize(60, 220);
         setOpaque(!Desktop::canUseSemiTransparentWindows());
+        addToDesktop(ComponentPeer::windowIsTemporary | ComponentPeer::windowHasDropShadow);
 
         ActorToolbarButton* button = new ActorToolbarButton();
         button->setTopLeftPosition(10, 10);
