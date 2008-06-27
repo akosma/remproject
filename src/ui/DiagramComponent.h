@@ -32,6 +32,8 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include <Poco/AutoPtr.h>
+
 #if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
 #else
@@ -41,25 +43,29 @@
 #ifndef DIAGRAMCOMPONENT_H_
 #define DIAGRAMCOMPONENT_H_
 
+#ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
+#include "ProjectTabbedComponentChangedTabNotification.h"
+#endif
+
+using Poco::AutoPtr;
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
  */
 namespace ui
 {
+    class UseCaseDiagramToolbar;
+
     /*!
      * \class DiagramComponent
      *
-     * [Comments]
-     * An auto-generated component, created by the Jucer.
-     * Describe your class and how it works here!
-     * [/Comments]
      *
      */
     class DiagramComponent  : public Component
     {
     public:
-        DiagramComponent ();
+        DiagramComponent (const int);
         ~DiagramComponent();
 
         void paint (Graphics& g);
@@ -67,9 +73,14 @@ namespace ui
 
 
         juce_UseDebuggingNewOperator
+        
+    private:
+        void handleProjectTabbedComponentChangedTabNotification(const AutoPtr<ProjectTabbedComponentChangedTabNotification>&);
 
     private:
-        Viewport* viewport;
+        const int _index;
+        Viewport* _viewport;
+        UseCaseDiagramToolbar* _toolbar;
 
         // (prevent copy constructor and operator= from being generated..)
         DiagramComponent (const DiagramComponent&);

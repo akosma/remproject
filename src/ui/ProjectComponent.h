@@ -73,7 +73,6 @@ namespace ui
         
     private:
         ProjectTabbedComponent* _tabs;
-        UseCaseDiagramToolbar* _toolbar;
     };
 }
 

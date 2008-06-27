@@ -32,85 +32,60 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
+
 #include "DiagramComponent.h"
 
-//[Headers] You can add your own extra header files here...
 #ifndef CONTENTCOMPONENT_H_
 #include "ContentComponent.h"
 #endif
-//[/Headers]
 
-//[MiscUserDefs] You can add your own user definitions and misc code here...
-//[/MiscUserDefs]
+#ifndef USECASEDIAGRAMTOOLBAR_H_
+#include "UseCaseDiagramToolbar.h"
+#endif
+
+using Poco::NotificationCenter;
+using Poco::NObserver;
+using Poco::AutoPtr;
 
 namespace ui
 {
-    DiagramComponent::DiagramComponent ()
-        : viewport (new Viewport())
+    DiagramComponent::DiagramComponent (const int index)
+    : _index(index)
+    , _viewport (new Viewport())
+    , _toolbar(new UseCaseDiagramToolbar(this))
     {
-        addAndMakeVisible(viewport);
-
-
-        //[UserPreSize]
-        //[/UserPreSize]
-
-        //[Constructor] You can add your own custom stuff here..
+        addAndMakeVisible(_viewport);
+        addChildComponent(_toolbar, -1); // Don't make it visible yet!
+        _toolbar->setTopLeftPosition(10, 50);
+        
         ContentComponent* content = new ContentComponent();
-        viewport->setViewedComponent(content);
-        //[/Constructor]
+        _viewport->setViewedComponent(content);
+        
+        NObserver<DiagramComponent, ProjectTabbedComponentChangedTabNotification> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTabNotification);
+        NotificationCenter::defaultCenter().addObserver(tabObserver);
     }
 
     DiagramComponent::~DiagramComponent()
     {
-        //[Destructor_pre]. You can add your own custom destruction code here..
-        //[/Destructor_pre]
-
-        deleteAndZero (viewport);
-
-        //[Destructor]. You can add your own custom destruction code here..
-        //[/Destructor]
+        deleteAndZero (_toolbar);
+        deleteAndZero (_viewport);
     }
 
     void DiagramComponent::paint (Graphics& g)
     {
-        //[UserPrePaint] Add your own custom painting code here..
-        //[/UserPrePaint]
-
         g.fillAll (Colours::grey);
-
-        //[UserPaint] Add your own custom painting code here..
-        //[/UserPaint]
     }
 
     void DiagramComponent::resized()
     {
-        viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
-        //[UserResized] Add your own custom resize handling here..
-        //[/UserResized]
+        _viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
     }
-
+    
+    void DiagramComponent::handleProjectTabbedComponentChangedTabNotification(const AutoPtr<ProjectTabbedComponentChangedTabNotification>& notification)
+    {
+        const bool shouldBeVisible = (_index == notification->getNewCurrentTabIndex());
+        _toolbar->setVisible(shouldBeVisible);
+    }
 }
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-//[/MiscUserCode]
-
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="DiagramComponent" componentName=""
-                 parentClasses="public Component" constructorParams="" variableInitialisers=""
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="0" initialWidth="600" initialHeight="400">
-  <BACKGROUND backgroundColour="ffffffff"/>
-  <VIEWPORT name="new viewport" id="599396c1b455d99a" memberName="viewport"
-            virtualName="" explicitFocusOrder="0" pos="0 0 100% 100%" vscroll="1"
-            hscroll="1" scrollbarThickness="18" contentType="0" jucerFile=""
-            contentClass="" constructorParams=""/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

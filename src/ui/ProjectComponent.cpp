@@ -38,10 +38,6 @@
 #include "DiagramComponent.h"
 #endif
 
-#ifndef USECASEDIAGRAMTOOLBAR_H_
-#include "UseCaseDiagramToolbar.h"
-#endif
-
 #ifndef PROJECTTABBEDCOMPONENT_H_
 #include "ProjectTabbedComponent.h"
 #endif
@@ -52,15 +48,14 @@ namespace ui
     : Component()
     , _tabs(new ProjectTabbedComponent())
     {
-        DiagramComponent* diagram1 = new DiagramComponent();
-        DiagramComponent* diagram2 = new DiagramComponent();
+        DiagramComponent* diagram1 = new DiagramComponent(_tabs->getNumTabs());
         _tabs->addTab(String("diagram1"), Colours::white, diagram1, true);
-        _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
-        addAndMakeVisible(_tabs);
 
-        _toolbar = new UseCaseDiagramToolbar(this);
-        _toolbar->setTopLeftPosition(10, 50);
-        addAndMakeVisible(_toolbar, -1);
+        DiagramComponent* diagram2 = new DiagramComponent(_tabs->getNumTabs());
+        _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
+        
+        _tabs->setCurrentTabIndex(0);
+        addAndMakeVisible(_tabs);
         
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);
@@ -74,10 +69,6 @@ namespace ui
     
     ProjectComponent::~ProjectComponent()
     {
-        if (_toolbar->isOnDesktop())
-        {
-            delete _toolbar;
-        }
         deleteAllChildren();
     }
     
