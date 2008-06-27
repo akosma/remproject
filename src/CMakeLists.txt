@@ -236,7 +236,7 @@ IF (WIN32)
     )
 
     INSTALL(TARGETS Rem
-        BUNDLE DESTINATION Rem
+        RUNTIME DESTINATION Rem
     )
 
     SET(CPACK_PACKAGE_NAME "Rem")
