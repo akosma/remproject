@@ -160,7 +160,7 @@ namespace ui
             {
                 delete point;
             }
-            point = new Point(getX() + getWidth() / 2, getY());
+            point = new Point((float)(getX() + getWidth() / 2), (float)getY());
         }
         
         if (isAbove)
@@ -169,7 +169,7 @@ namespace ui
             {
                 delete point;
             }
-            point = new Point(getX() + getWidth() / 2, getY() + getHeight());
+            point = new Point((float)(getX() + getWidth() / 2), (float)(getY() + getHeight()));
         }
         
         if (isRightOf)
@@ -178,7 +178,7 @@ namespace ui
             {
                 delete point;
             }
-            point = new Point(getX(), getY() + getHeight() / 2);
+            point = new Point((float)getX(), (float)(getY() + getHeight() / 2));
         }
 
         if (isLeftOf)
@@ -187,7 +187,7 @@ namespace ui
             {
                 delete point;
             }
-            point = new Point(getX() + getWidth(), getY() + getHeight() / 2);
+            point = new Point((float)(getX() + getWidth()), (float)(getY() + getHeight() / 2));
         }
         return point;
     }
@@ -220,10 +220,10 @@ namespace ui
     void Figure::drawDashedLineAround(Graphics& g)
     {
         const float dashLengths[] = { 5.0F, 5.0F };
-        g.drawDashedLine(0, 0, 0, getHeight(), dashLengths, 2, 2.0f);
-        g.drawDashedLine(0, 0, getWidth(), 0, dashLengths, 2, 2.0f);
-        g.drawDashedLine(getWidth(), 0, getWidth(), getHeight(), dashLengths, 2, 2.0f);
-        g.drawDashedLine(0, getHeight(), getWidth(), getHeight(), dashLengths, 2, 2.0f);
+        g.drawDashedLine(0.0f, 0.0f, 0.0f, (float)getHeight(), dashLengths, 2, 2.0f);
+        g.drawDashedLine(0.0f, 0.0f, (float)getWidth(), 0.0f, dashLengths, 2, 2.0f);
+        g.drawDashedLine((float)getWidth(), 0.0f, (float)getWidth(), (float)getHeight(), dashLengths, 2, 2.0f);
+        g.drawDashedLine(0.0f, (float)getHeight(), (float)getWidth(), (float)getHeight(), dashLengths, 2, 2.0f);
     }
     
     void Figure::postFigureSelectedNotification()

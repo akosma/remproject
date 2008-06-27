@@ -87,12 +87,12 @@ namespace ui
         const float bodyEndY = bodyStartY + bodyLength;
 
         const float headStartX = bodyX - (headWidth / 2);
-        const float headStartY = vertMargin;
+        const float headStartY = (float)vertMargin;
         
         const float shoulderY = vertMargin + headHeight + neckLength;
-        const float leftHandX = horizMargin;
+        const float leftHandX = (float)horizMargin;
         const float leftHandY = shoulderY + armHeight;
-        const float leftFootX = horizMargin;
+        const float leftFootX = (float)horizMargin;
         const float leftFootY = bodyEndY + legHeight;
         const float rightFootX = horizMargin + (2 * extremityWidth);
         const float rightFootY = leftFootY;

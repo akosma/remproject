@@ -84,8 +84,8 @@ namespace ui
         const float width = currentWidth * 180.0f / initWidth;
         const float height = currentHeight * 130.0f / initHeight;
 
-        const float startX = horizMargin;
-        const float startY = vertMargin;
+        const float startX = (float)horizMargin;
+        const float startY = (float)vertMargin;
 
         _nameLabel->setTopLeftPosition(20 + horizMargin, currentHeight / 2 - 15);
         _nameLabel->setSize(currentWidth - 40 - 2 * horizMargin, 30);
