@@ -224,19 +224,18 @@ IF (WIN32)
         # Copy DLLs in build directory
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\sqlite\\sqlite3.dll
-                ${CMAKE_CURRENT_BINARY_DIR}
+                ${CMAKE_CURRENT_BINARY_DIR}\\Release
 
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\poco\\bin\\PocoFoundation.dll
-                ${CMAKE_CURRENT_BINARY_DIR}
-                
-        COMMAND copy
-            ARGS ${CMAKE_CURRENT_BINARY_DIR}\\Release\\Rem.exe
-                ${CMAKE_CURRENT_BINARY_DIR}
+                ${CMAKE_CURRENT_BINARY_DIR}\\Release
     )
 
-    INSTALL(TARGETS Rem
-        RUNTIME DESTINATION Rem
+    INSTALL(FILES 
+            ${CMAKE_CURRENT_BINARY_DIR}/Release/PocoFoundation.dll 
+            ${CMAKE_CURRENT_BINARY_DIR}/Release/sqlite3.dll 
+            ${CMAKE_CURRENT_BINARY_DIR}/Release/Rem.exe
+        DESTINATION bin
     )
 
     SET(CPACK_PACKAGE_NAME "Rem")
