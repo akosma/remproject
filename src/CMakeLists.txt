@@ -224,11 +224,11 @@ IF (WIN32)
         # Copy DLLs in build directory
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\sqlite\\sqlite3.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Debug\\
+                ${CMAKE_CURRENT_BINARY_DIR}\\Release\\
 
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\poco\\bin\\PocoFoundation.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Debug\\
+                ${CMAKE_CURRENT_BINARY_DIR}\\Release\\
     )
     
 ELSE (WIN32)

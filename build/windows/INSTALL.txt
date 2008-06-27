@@ -98,7 +98,7 @@ http://prdownloads.sourceforge.net/nsis/nsis-2.37-setup.exe?download
 11) Build Rem in Visual Studio
 ------------------------------
 
-Open the "build\windows\Rem.sln" file and select "Build".
+Open the "build\windows\Rem.sln" file; select the "Release" configuration, click on the "Rem" project on the solution tree, and select "Build Rem" on the "Build" menu.
 
 
 
