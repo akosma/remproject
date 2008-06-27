@@ -15,7 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-PROJECT (Rem)
+PROJECT (rem)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 SET(CMAKE_COLOR_MAKEFILE ON)
