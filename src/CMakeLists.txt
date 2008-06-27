@@ -15,7 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-PROJECT (rem)
+PROJECT (Rem)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 SET(CMAKE_COLOR_MAKEFILE ON)
@@ -224,11 +224,19 @@ IF (WIN32)
         # Copy DLLs in build directory
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\sqlite\\sqlite3.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Release\\
+                ${CMAKE_CURRENT_BINARY_DIR}
 
         COMMAND copy
             ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\poco\\bin\\PocoFoundation.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Release\\
+                ${CMAKE_CURRENT_BINARY_DIR}
+                
+        COMMAND copy
+            ARGS ${CMAKE_CURRENT_BINARY_DIR}\\Release\\Rem.exe
+                ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
+    INSTALL(TARGETS Rem
+        BUNDLE DESTINATION Rem
     )
 
     SET(CPACK_PACKAGE_NAME "Rem")
@@ -240,10 +248,13 @@ IF (WIN32)
     SET(CPACK_PACKAGE_VERSION_MAJOR "1")
     SET(CPACK_PACKAGE_VERSION_MINOR "0")
     SET(CPACK_PACKAGE_VERSION_PATCH "0")
-    SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+    SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem")
+    SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Rem 1.0.0")
     SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
     SET(CPACK_GENERATOR "NSIS")
     SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${CMAKE_PROJECT_NAME};ALL;/")
+    SET(CPACK_NSIS_DISPLAY_NAME "Rem")
+    SET(CPACK_NSIS_INSTALLER_ICON_CODE "")
     INCLUDE(CPack)
     
 ELSE (WIN32)
