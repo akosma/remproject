@@ -82,11 +82,7 @@ namespace ui
 
         void itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y);
 
-        void setCurrent(Figure*);
-        
         void resize();
-        
-        ArrowCanvas& getArrowCanvas();
 
         void handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>&);
         void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
@@ -94,7 +90,7 @@ namespace ui
 
     private:
         ArrowCanvas* _canvas;
-        Figure* _current;
+        SelectedItemSet<Figure*> _selection;
     };
 }
 

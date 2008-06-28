@@ -41,9 +41,10 @@ using Poco::Notification;
 
 namespace ui
 {
-    FigureSelectedNotification::FigureSelectedNotification(Figure* figure)
+    FigureSelectedNotification::FigureSelectedNotification(Figure* figure, ModifierKeys modifierKeys)
     : Notification()
     , _figure(figure)
+    , _modifierKeys(modifierKeys)
     {
     }
     
@@ -54,5 +55,10 @@ namespace ui
     Figure* FigureSelectedNotification::getSelectedFigure() const
     {
         return _figure;
+    }
+    
+    const ModifierKeys FigureSelectedNotification::getModifierKeys() const
+    {
+        return _modifierKeys;
     }
 }

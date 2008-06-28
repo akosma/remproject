@@ -32,8 +32,17 @@
  */
 
 #include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
 
 #include "Figure.h"
+
+#ifndef DIAGRAMCOMPONENT_H_
+#include "DiagramComponent.h"
+#endif
+
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
 
 #ifndef FIGURESELECTEDNOTIFICATION_H_
 #include "FigureSelectedNotification.h"
@@ -43,7 +52,12 @@
 #include "FigureMovedNotification.h"
 #endif
 
+#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
+#include "ArrowCanvasClickedNotification.h"
+#endif
+
 using Poco::NotificationCenter;
+using Poco::NObserver;
 
 /*!
  * \namespace ui
@@ -52,7 +66,7 @@ using Poco::NotificationCenter;
 namespace ui
 {
     Figure::Figure(const int initWidth, const int initHeight)
-    : _current(false)
+    : _selected(false)
     , _hover(false)
     , _dragger()
     , _resizer(0)
@@ -71,6 +85,9 @@ namespace ui
         addChildComponent(_resizer, -1);
         _resizer->setSize(getWidth(),getHeight());
         _resizer->setBounds(0, 0, getWidth(), getHeight());
+        
+        NObserver<Figure, ArrowCanvasClickedNotification> arrowCanvasObserver(*this, &Figure::handleArrowCanvasClickedNotification);
+        NotificationCenter::defaultCenter().addObserver(arrowCanvasObserver);
     }
 
     Figure::~Figure()
@@ -81,7 +98,7 @@ namespace ui
     void Figure::mouseDown(const MouseEvent& e)
     {
         toFront(true);
-        postFigureSelectedNotification();
+        postFigureSelectedNotification(e);
         _dragger.startDraggingComponent(this, 0);
         setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
     }
@@ -113,7 +130,7 @@ namespace ui
         if (_resizer)
         {
             toFront(true);
-            postFigureSelectedNotification();
+            postFigureMovedNotification();
             _resizer->setBounds (0, 0, getWidth(), getHeight());
         }
     }
@@ -138,11 +155,16 @@ namespace ui
         return _strokeWidth;
     }
 
-    void Figure::setCurrent(bool current)
+    void Figure::setSelected(bool selected)
     {
-        _resizer->setVisible(current);
-        _current = current;
+        _resizer->setVisible(selected);
+        _selected = selected;
         repaint();
+    }
+    
+    const bool Figure::isSelected()
+    {
+        return _selected;
     }
     
     const Point* Figure::getAnchorPointRelativeTo(const Figure* other) const
@@ -197,7 +219,7 @@ namespace ui
         Colour transparentWhite = Colours::white.withAlpha(0.9f);
         Path figure;
         drawFigure(figure);
-        if (_current)
+        if (_selected)
         {
             g.fillAll(transparentWhite);
 
@@ -226,9 +248,19 @@ namespace ui
         g.drawDashedLine(0.0f, (float)getHeight(), (float)getWidth(), (float)getHeight(), dashLengths, 2, 2.0f);
     }
     
-    void Figure::postFigureSelectedNotification()
+    void Figure::handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>& notification)
     {
-        FigureSelectedNotification* notification = new FigureSelectedNotification(this);
+        DiagramComponent* component = findParentComponentOfClass<DiagramComponent>();
+        ArrowCanvas* canvas = notification->getClickedArrowCanvas();
+        if (component->isParentOf(canvas))
+        {
+            setSelected(false);
+        }
+    }
+    
+    void Figure::postFigureSelectedNotification(const MouseEvent& e)
+    {
+        FigureSelectedNotification* notification = new FigureSelectedNotification(this, e.mods);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     

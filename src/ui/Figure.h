@@ -31,6 +31,8 @@
  * \date      4/19/08
  */
 
+#include <Poco/AutoPtr.h>
+
 #if defined(_WIN32)
 #include <src/juce_WithoutMacros.h>
 #else
@@ -39,6 +41,12 @@
 
 #ifndef FIGURE_H_
 #define FIGURE_H_
+
+#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
+#include "ArrowCanvasClickedNotification.h"
+#endif
+
+using Poco::AutoPtr;
 
 /*!
  * \namespace ui
@@ -75,7 +83,8 @@ namespace ui
         
         const Point* getAnchorPointRelativeTo(const Figure*) const;
         
-        void setCurrent(bool);
+        void setSelected(bool);
+        const bool isSelected();
 
     protected:
         virtual void drawFigure(Path&) = 0;
@@ -87,11 +96,12 @@ namespace ui
         
     private:
         void drawDashedLineAround(Graphics&);
-        void postFigureSelectedNotification();
+        void postFigureSelectedNotification(const MouseEvent&);
         void postFigureMovedNotification();
+        void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
 
     private:
-        bool _current;
+        bool _selected;
         bool _hover;
         ComponentDragger _dragger;
         ResizableBorderComponent* _resizer;

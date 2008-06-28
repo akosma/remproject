@@ -36,6 +36,12 @@
 
 #include <Poco/Notification.h>
 
+#if defined(_WIN32)
+#include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
+#endif
+
 using Poco::Notification;
 
 /*!
@@ -58,7 +64,7 @@ namespace ui
         /*!
          *  FigureSelectedNotification constructor.
          */
-        FigureSelectedNotification(Figure*);
+        FigureSelectedNotification(Figure*, ModifierKeys);
 
         /*!
          *  FigureSelectedNotification virtual destructor.
@@ -66,9 +72,11 @@ namespace ui
         virtual ~FigureSelectedNotification();
         
         Figure* getSelectedFigure() const;
+        const ModifierKeys getModifierKeys() const;
         
     private:
         Figure* _figure;
+        ModifierKeys _modifierKeys;
     };
 }
 

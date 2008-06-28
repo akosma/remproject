@@ -55,9 +55,11 @@ using Poco::AutoPtr;
 namespace ui
 {
     ContentComponent::ContentComponent()
-    : _current(0)
+    : Component()
+    , DragAndDropTarget()
+    , _canvas(new ArrowCanvas())
+    , _selection()
     {
-        _canvas = new ArrowCanvas();
         _canvas->setSize(565, 800);
         addAndMakeVisible(_canvas, 0);
         
@@ -100,7 +102,7 @@ namespace ui
     {
         g.fillAll(Colours::white);
     }
-
+    
     bool ContentComponent::isInterestedInDragSource (const String& sourceDescription)
     {
         // normally you'd check the sourceDescription value to see if it's the
@@ -113,32 +115,39 @@ namespace ui
     {
         repaint();
     }
-    
-    void ContentComponent::setCurrent(Figure* current)
-    {
-        if (_current)
-        {
-            _current->setCurrent(false);
-        }
-        _current = current;
-        if (_current)
-        {
-            _current->setCurrent(true);
-            _canvas->setNoCurrentArrow();
-        }
-    }
-    
-    ArrowCanvas& ContentComponent::getArrowCanvas()
-    {
-        return *_canvas;
-    }
-    
+
     void ContentComponent::handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>& notification)
     {
         Figure* figure = notification->getSelectedFigure();
         if (isParentOf(figure))
         {
-            setCurrent(figure);
+            ModifierKeys keys = notification->getModifierKeys();
+            if (keys.isShiftDown() && figure->isSelected())
+            {
+                _selection.deselect(figure);
+            }
+            else if (figure->isSelected())
+            {
+                _selection.selectOnly(figure);
+            }
+            else
+            {
+                _selection.addToSelectionOnMouseDown(figure, notification->getModifierKeys());
+            }
+            for (int i = 0; i < getNumChildComponents(); ++i)
+            {
+                Component* child = getChildComponent(i);
+                Figure* castChild = dynamic_cast<Figure*>(child);
+                if (castChild)
+                {
+                    castChild->setSelected(false);
+                }
+            }
+            for (int j = 0; j < _selection.getNumSelected(); ++j)
+            {
+                Figure* item = _selection.getSelectedItem(j);
+                item->setSelected(true);
+            }
         }
     }
 
@@ -147,7 +156,7 @@ namespace ui
         ArrowCanvas* canvas = notification->getClickedArrowCanvas();
         if (isParentOf(canvas))
         {
-            setCurrent(NULL);
+            _selection.deselectAll();
         }
     }
     
