@@ -235,6 +235,10 @@ IF (WIN32)
             ${CMAKE_CURRENT_BINARY_DIR}/Release/PocoFoundation.dll 
             ${CMAKE_CURRENT_BINARY_DIR}/Release/sqlite3.dll 
             ${CMAKE_CURRENT_BINARY_DIR}/Release/Rem.exe
+            "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcm90.dll"
+            "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcp90.dll"
+            "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcr90.dll"
+            "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest"
         DESTINATION bin
     )
 
