@@ -421,7 +421,6 @@ ELSE (WIN32)
                 "/usr/local/include/"
                 "/usr/include"
                 ${rem_SOURCE_DIR}/../lib/juce
-                ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
             )
         
             # Libraries are located in these directories
@@ -429,7 +428,6 @@ ELSE (WIN32)
                 "/usr/local/lib/"
                 "/usr/X11R6/lib/"
                 ${rem_SOURCE_DIR}/../lib/juce/bin
-                ${rem_SOURCE_DIR}/../lib/poco/lib/Linux/i686/
             )
             
             ADD_DEFINITIONS(
@@ -460,6 +458,26 @@ ELSE (WIN32)
 
             ENABLE_TESTING()
             ADD_TEST(remtest ${CMAKE_CURRENT_BINARY_DIR}/remtest)
+
+            INSTALL(TARGETS Rem
+                RUNTIME DESTINATION bin
+            )
+        
+            SET(CPACK_PACKAGE_NAME "Rem")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem UML Editor")
+            SET(CPACK_PACKAGE_VENDOR "Adrian Kosmaczewski")
+            SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Rem is a UML Editor")
+            SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}/../LICENSE.txt")
+            SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}/../README.txt")
+            SET(CPACK_PACKAGE_VERSION_MAJOR "1")
+            SET(CPACK_PACKAGE_VERSION_MINOR "0")
+            SET(CPACK_PACKAGE_VERSION_PATCH "0")
+            SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Rem")
+            SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Rem 1.0.0")
+            SET(CPACK_PACKAGE_EXECUTABLES "Rem;Rem")
+            SET(CPACK_GENERATOR "TGZ")
+            SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${CMAKE_PROJECT_NAME};ALL;/")
+            INCLUDE(CPack)
 
         ENDIF (APPLE)
     ENDIF (UNIX)

@@ -31,6 +31,7 @@ http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?t=1312&highlight=audi
 - libxinerama-dev
 - libglu1-mesa-dev
 - libglut3-dev (with its dependency freeglut3-dev too)
+- libssl-dev
 
 
 
@@ -66,12 +67,12 @@ Install it using Synaptic or any other package manager.
 - "cd" into the lib/poco folder.
 - Type "chmod 755 configure" to make the "configure" script executable.
 - Type "chmod 755 build/script/*" to make all build scripts executable.
-- Type "configure", and then "make Foundation-libexec" to build the POCO Foundation library. A couple of minutes later you'll have a set of static libraries in "poco/lib/Linux/i686", including the required "libPocoFoundation.so" and "libPocoFoundationd.so" files.
+- Type "configure", "make" and "sudo make install" to build and install the POCO library. This operation might take several minutes.
 
 
 
 8) Build Rem
 ------------
 
-The "build.sh" shell script in this folder shows how to build Rem using CMake. The resulting binaries will be placed in a "bin" subfolder at the root of the current distribution of Rem.
+The "build.sh" shell script in this folder shows how to build Rem and the distribution package using CMake. The resulting binaries will be placed in a "bin" subfolder at the root of the current distribution of Rem.
 
