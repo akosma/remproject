@@ -428,6 +428,7 @@ ELSE (WIN32)
                 "/usr/local/lib/"
                 "/usr/X11R6/lib/"
                 ${rem_SOURCE_DIR}/../lib/juce/bin
+                ${rem_SOURCE_DIR}/../lib/poco/lib/Linux/i686
             )
             
             ADD_DEFINITIONS(
@@ -461,6 +462,12 @@ ELSE (WIN32)
 
             INSTALL(TARGETS Rem
                 RUNTIME DESTINATION bin
+            )
+            
+            INSTALL(FILES 
+                    ${rem_SOURCE_DIR}/../lib/poco/lib/Linux/i686/libPocoFoundation.so.5
+                    ${rem_SOURCE_DIR}/../build/linux/install.sh
+                DESTINATION bin
             )
         
             SET(CPACK_PACKAGE_NAME "Rem")

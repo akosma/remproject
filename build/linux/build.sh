@@ -27,6 +27,7 @@ mkdir bin
 cd bin
 cmake ../src
 make
+make package
 
 # Launch the tests
 ctest
