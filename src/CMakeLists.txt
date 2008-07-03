@@ -72,6 +72,12 @@ SET (ui_SRCS
     
     ui/ProjectTabbedComponentChangedTabNotification.h
     ui/ProjectTabbedComponentChangedTabNotification.cpp
+    
+    ui/CommandDelegate.h
+    ui/CommandDelegate.cpp
+    
+    ui/MenuBar.h
+    ui/MenuBar.cpp
 
     ui/Main.cpp 
 )

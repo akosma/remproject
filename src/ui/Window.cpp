@@ -37,6 +37,14 @@
 #include "ProjectComponent.h"
 #endif
 
+#ifndef MENUBAR_H_
+#include "MenuBar.h"
+#endif
+
+#ifndef COMMANDDELEGATE_H_
+#include "CommandDelegate.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -47,17 +55,19 @@ namespace ui
      * Window Constructor.
      */
     Window::Window()
-    : DocumentWindow ("Rem",
-                      Colours::lightgrey, 
-                      DocumentWindow::allButtons, 
-                      true)
+    : DocumentWindow ("Rem", Colours::lightgrey, DocumentWindow::allButtons, true)
+    , _menuBarModel(new MenuBar(this))
+    , _commandDelegate(new CommandDelegate())
+    , _commandManager(new ApplicationCommandManager())
+    , _tooltipWindow()
     {
         ProjectComponent* project = new ProjectComponent();
         setContentComponent(project);
-        centreWithSize(620, 650);
-        setResizable(true, true);
-        setUsingNativeTitleBar(true);
-        setVisible (true);
+
+        _commandManager->registerAllCommandsForTarget(_commandDelegate);
+        _commandManager->setFirstCommandTarget(_commandDelegate);
+        addKeyListener(_commandManager->getKeyMappings());
+        _menuBarModel->setApplicationCommandManagerToWatch(_commandManager);
 
         // File file("test.png");
         // FileOutputStream* stream = file.createOutputStream();
@@ -67,20 +77,35 @@ namespace ui
         // stream->flush();
         // delete stream;
         // delete image;
-        
-        
+
 #if defined(__APPLE__) && defined(__MACH__)
-//        MenuBarModel::setMacMainMenu(this->getContentComponent());
-//        mainWindow->setMenuBar (0);
+        MenuBarModel::setMacMainMenu(_menuBarModel);
+        setMenuBar(NULL);
+#else
+        setMenuBar(_menuBarModel);
 #endif
+        centreWithSize(620, 650);
+        setResizable(true, true);
+        setUsingNativeTitleBar(true);
+        setVisible (true);
     }
 
     Window::~Window()
     {
+        setMenuBar(NULL);
+        setContentComponent(NULL, true);
+        delete _menuBarModel;
+        delete _commandDelegate;
+        delete _commandManager;
+    }
+    
+    ApplicationCommandManager* Window::getCommandManager()
+    {
+        return _commandManager;
     }
 
     void Window::closeButtonPressed()
     {
-        JUCEApplication::quit();
+        JUCEApplication::getInstance()->systemRequestedQuit();
     }
 }

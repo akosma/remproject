@@ -43,6 +43,18 @@
 		3A8DB0490DF9C33D00B9D679 /* FindConditions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */; };
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AA1E5C70E1D4C2D00B752D0 /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
+		3AA1E5C80E1D4C3000B752D0 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4490D8D64B000F61DB0 /* Project.cpp */; };
+		3AA1E5C90E1D4C3000B752D0 /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
+		3AA1E5CA0E1D4C3100B752D0 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
+		3AA1E5CB0E1D4C3200B752D0 /* Member.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A02E6350DEDCBD1009A9590 /* Member.cpp */; };
+		3AA1E5CC0E1D4C3C00B752D0 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
+		3AA1E5CD0E1D4C3C00B752D0 /* AnyProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4CD3C20D96A65D002F1AC2 /* AnyProperty.cpp */; };
+		3AA1E5CE0E1D4C3D00B752D0 /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
+		3AA1E5CF0E1D4C3E00B752D0 /* FindConditions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */; };
+		3AA1E5D00E1D4C3E00B752D0 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
+		3AA1E6210E1D577800B752D0 /* CommandDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1E6200E1D577800B752D0 /* CommandDelegate.cpp */; };
+		3AA1E6CF0E1D67D100B752D0 /* MenuBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1E6CD0E1D67D100B752D0 /* MenuBar.cpp */; };
 		3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3AC065C50DB13102000EB33E /* ContentComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C00DB13102000EB33E /* ContentComponent.cpp */; };
@@ -123,6 +135,10 @@
 		3A98E1B40DB9FB0A0095EADC /* Figure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Figure.cpp; path = ../../src/ui/Figure.cpp; sourceTree = SOURCE_ROOT; };
 		3A9BC7700D8D6C82005ED14A /* Diagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diagram.h; path = ../../src/metamodel/Diagram.h; sourceTree = SOURCE_ROOT; };
 		3A9BC7710D8D6C82005ED14A /* Diagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diagram.cpp; path = ../../src/metamodel/Diagram.cpp; sourceTree = SOURCE_ROOT; };
+		3AA1E61F0E1D577800B752D0 /* CommandDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandDelegate.h; path = ../../src/ui/CommandDelegate.h; sourceTree = SOURCE_ROOT; };
+		3AA1E6200E1D577800B752D0 /* CommandDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandDelegate.cpp; path = ../../src/ui/CommandDelegate.cpp; sourceTree = SOURCE_ROOT; };
+		3AA1E6CD0E1D67D100B752D0 /* MenuBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuBar.cpp; path = ../../src/ui/MenuBar.cpp; sourceTree = SOURCE_ROOT; };
+		3AA1E6CE0E1D67D100B752D0 /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuBar.h; path = ../../src/ui/MenuBar.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE830DE9AD070059C4D9 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/utility/Property.h; sourceTree = SOURCE_ROOT; };
 		3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseToolbarButton.cpp; path = ../../src/ui/UseCaseToolbarButton.cpp; sourceTree = SOURCE_ROOT; };
@@ -260,6 +276,7 @@
 		3A18FB640D843CB600744B33 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1E5D40E1D4E0D00B752D0 /* Menus and Commands */,
 				3A23BF090E143DEB00DAC85C /* Properties Panels */,
 				3AEE8CA10E0E76BB001192FB /* Notifications */,
 				3AF1F5AF0E0D31FA005D4A36 /* Diagrams */,
@@ -356,6 +373,17 @@
 				3A7596680DAFC484000AC38C /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3AA1E5D40E1D4E0D00B752D0 /* Menus and Commands */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1E6CD0E1D67D100B752D0 /* MenuBar.cpp */,
+				3AA1E6CE0E1D67D100B752D0 /* MenuBar.h */,
+				3AA1E61F0E1D577800B752D0 /* CommandDelegate.h */,
+				3AA1E6200E1D577800B752D0 /* CommandDelegate.cpp */,
+			);
+			name = "Menus and Commands";
 			sourceTree = "<group>";
 		};
 		3AA5DE760DE9AAA20059C4D9 /* controllers */ = {
@@ -560,6 +588,18 @@
 				3A4D2DC40E140E960000CBC5 /* UseCaseDiagramToolbar.cpp in Sources */,
 				3A4D2DC90E140F940000CBC5 /* ProjectTabbedComponent.cpp in Sources */,
 				3A4D2DE00E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */,
+				3AA1E5C70E1D4C2D00B752D0 /* FileController.cpp in Sources */,
+				3AA1E5C80E1D4C3000B752D0 /* Project.cpp in Sources */,
+				3AA1E5C90E1D4C3000B752D0 /* Diagram.cpp in Sources */,
+				3AA1E5CA0E1D4C3100B752D0 /* Element.cpp in Sources */,
+				3AA1E5CB0E1D4C3200B752D0 /* Member.cpp in Sources */,
+				3AA1E5CC0E1D4C3C00B752D0 /* Persistable.cpp in Sources */,
+				3AA1E5CD0E1D4C3C00B752D0 /* AnyProperty.cpp in Sources */,
+				3AA1E5CE0E1D4C3D00B752D0 /* AnyPropertyMap.cpp in Sources */,
+				3AA1E5CF0E1D4C3E00B752D0 /* FindConditions.cpp in Sources */,
+				3AA1E5D00E1D4C3E00B752D0 /* SQLiteWrapper.cpp in Sources */,
+				3AA1E6210E1D577800B752D0 /* CommandDelegate.cpp in Sources */,
+				3AA1E6CF0E1D67D100B752D0 /* MenuBar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +786,7 @@
 				OTHER_LDFLAGS = (
 					"-ljucedebug",
 					"-lPocoFoundation",
+					"-lsqlite3",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Rem;

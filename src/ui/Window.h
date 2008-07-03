@@ -46,6 +46,9 @@
  */
 namespace ui
 {
+    class MenuBar;
+    class CommandDelegate;
+
     /*!
      * \class Window
      *
@@ -58,6 +61,14 @@ namespace ui
         ~Window();
 
         void closeButtonPressed();
+        
+        ApplicationCommandManager* getCommandManager();
+        
+    private:
+        MenuBar* _menuBarModel;
+        CommandDelegate* _commandDelegate;
+        ApplicationCommandManager* _commandManager;
+        TooltipWindow _tooltipWindow;
     };
 }
 
