@@ -19,6 +19,9 @@
 
 cd ../../
 
+# Update the project from the repository
+svn update --ignore-externals
+
 # Erase previous build output
 rm -r bin
 rm -r doc
