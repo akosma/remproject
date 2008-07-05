@@ -180,13 +180,18 @@ IF (WIN32)
     # /Gm -> enable minimal rebuild
     # /RTC1 -> runtime checks: stack frames + uninitialized variables
     # /MTd -> Multi-threaded Debug
+    
+    # Given this bug in the NMake generator related to 'manifest files' in CMake 2.6
+    # http://www.cmake.org/Bug/view.php?id=7222
+    # it is recommended to use CMake 2.4.7 in Windows, so that both the 
+    # application and the installer can be built from the command line.
+
     SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
     SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
-    SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO")
-
+    SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO /MANIFEST:NO")
+    
     # Header files are located in these directories
     INCLUDE_DIRECTORIES (
-        C:/cppunit-1.12.0/include
         ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
         ${rem_SOURCE_DIR}/../lib/juce
         ${rem_SOURCE_DIR}/../lib/sqlite
@@ -194,14 +199,9 @@ IF (WIN32)
 
     # Libraries are located in these directories
     LINK_DIRECTORIES (
-        C:/cppunit-1.12.0/lib
         ${rem_SOURCE_DIR}/../lib/poco/lib
         ${rem_SOURCE_DIR}/../lib/juce/bin
         ${rem_SOURCE_DIR}/../lib/sqlite
-    )
-
-    ADD_EXECUTABLE (remtest 
-        ${remtests_SRCS}
     )
 
     ADD_EXECUTABLE (Rem WIN32
@@ -215,32 +215,10 @@ IF (WIN32)
         PocoFoundation
     )
 
-    TARGET_LINK_LIBRARIES(remtest
-        cppunitd
-        sqlite3 
-        PocoFoundation
-    )
-    
-    SET_SOURCE_FILES_PROPERTIES(${tests_SRCS} PROPERTIES
-        COMPILE_FLAGS "/MDd"
-    )
-
-    ADD_CUSTOM_COMMAND(TARGET Rem POST_BUILD
-    
-        # Copy DLLs in build directory
-        COMMAND copy
-            ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\sqlite\\sqlite3.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Release
-
-        COMMAND copy
-            ARGS ${CMAKE_CURRENT_SOURCE_DIR}\\..\\lib\\poco\\bin\\PocoFoundation.dll
-                ${CMAKE_CURRENT_BINARY_DIR}\\Release
-    )
-
     INSTALL(FILES 
-            ${CMAKE_CURRENT_BINARY_DIR}/Release/PocoFoundation.dll 
-            ${CMAKE_CURRENT_BINARY_DIR}/Release/sqlite3.dll 
-            ${CMAKE_CURRENT_BINARY_DIR}/Release/Rem.exe
+            ${CMAKE_CURRENT_SOURCE_DIR}/../lib/poco/bin/PocoFoundation.dll
+            ${CMAKE_CURRENT_SOURCE_DIR}/../lib/sqlite/sqlite3.dll 
+            ${CMAKE_CURRENT_BINARY_DIR}/Rem.exe
             "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcm90.dll"
             "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcp90.dll"
             "C:/Program Files/Microsoft Visual Studio 9.0/VC/redist/x86/Microsoft.VC90.CRT/msvcr90.dll"

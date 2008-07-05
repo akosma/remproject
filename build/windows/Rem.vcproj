@@ -234,6 +234,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\CommandDelegate.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ContentComponent.cpp"
 				>
 			</File>
@@ -258,11 +262,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\MenuBar.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ProjectComponent.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\Toolbar.cpp"
+				RelativePath="..\..\src\ui\ProjectTabbedComponent.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ProjectTabbedComponentChangedTabNotification.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseDiagramToolbar.cpp"
 				>
 			</File>
 			<File
@@ -302,6 +318,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\CommandDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ContentComponent.h"
 				>
 			</File>
@@ -322,11 +342,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\MenuBar.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ProjectComponent.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\Toolbar.h"
+				RelativePath="..\..\src\ui\ProjectTabbedComponent.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ProjectTabbedComponentChangedTabNotification.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseDiagramToolbar.h"
 				>
 			</File>
 			<File
