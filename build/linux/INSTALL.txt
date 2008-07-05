@@ -4,18 +4,29 @@ Building Rem in Kubuntu Linux 7.10 "Gutsy Gibbon"
 Much of the explanations for building JUCE in Kubuntu are taken from this entry in Rem author's blog:
 http://kosmaczewski.net/2007/11/16/building-juce-on-kubuntu-710/
 
+
+
+Note about processor architectures
+----------------------------------
+
+JUCE cannot run on Linux on PowerPC processors, given that it relies on assembler code for dealing with endianness issues, as shown here:
+http://www.koders.com/c/fid26F230513834417D1CC7BE6FDF5CE455DA49BE09.aspx
+This rules out the possibility of running Rem on PowerPC systems, like G3, G4 and G5 Macs running Linux. For the moment, Rem can only be built with Linux running on processors supporting the i386 architecture.
+
+
+
 1) Lua
 ------
 
-Make sure that you have the Lua programming language installed (you can use your favorite package manager to install it), or you can grab the source files from 
+Make sure that you have the Lua programming language installed; you can use your favorite package manager to install it, or you can grab the source files from 
 http://www.lua.org/
 
 
 
-2) SQLite 3
------------
+2) SQLite 3 and CppUnit
+-----------------------
 
-Using Synaptic manager or any other package manager, install the "libsqlite3" library.
+Using Synaptic manager or any other package manager, install the "libsqlite3" and "libcppunit-dev" libraries.
 
 
 
@@ -31,11 +42,17 @@ http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?t=1312&highlight=audi
 - libxinerama-dev
 - libglu1-mesa-dev
 - libglut3-dev (with its dependency freeglut3-dev too)
-- libssl-dev
 
 
 
-4) Download premake from Sourceforge
+4) Libraries required by POCO
+-----------------------------
+
+Install "libssl-dev" using Synaptic or any other package manager.
+
+
+
+5) Download premake from Sourceforge
 ------------------------------------
 
 You can download premake http://premake.sourceforge.net/ from this link:
@@ -43,16 +60,20 @@ http://prdownloads.sf.net/premake/premake-linux-3.4.tar.gz
 
 Unzip the file and install the binary where you want (typically /usr/bin). You have to do this manually, since premake is not available through the Synaptic package manager, in any repository.
 
+You can also build it from source, downloading and extracting the following file:
+http://prdownloads.sf.net/premake/premake-src-3.6.zip
 
 
-5) Install CMake 2.4
+
+6) Install CMake 2.6
 --------------------
 
-Install it using Synaptic or any other package manager.
+Download the source files for CMake and install it following the instructions:
+http://www.cmake.org/files/v2.6/cmake-2.6.0.tar.gz
 
 
 
-6) Build JUCE
+7) Build JUCE
 -------------
 
 - "cd" into the lib/juce/build/linux folder.
@@ -61,7 +82,7 @@ Install it using Synaptic or any other package manager.
 
 
 
-7) Build POCO
+8) Build POCO
 -------------
 
 - "cd" into the lib/poco folder.
@@ -71,8 +92,7 @@ Install it using Synaptic or any other package manager.
 
 
 
-8) Build Rem
+9) Build Rem
 ------------
 
 The "build.sh" shell script in this folder shows how to build Rem and the distribution package using CMake. The resulting binaries will be placed in a "bin" subfolder at the root of the current distribution of Rem.
-
