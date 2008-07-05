@@ -79,11 +79,14 @@ This will generate the "sqlite3.exp" file required by the Rem Visual Studio solu
 
 
 
-9) Install CMake 2.6
+9) Install CMake 2.4
 --------------------
 
 There is an installer available here:
-http://www.cmake.org/files/v2.6/cmake-2.6.0-win32-x86.exe
+http://www.cmake.org/files/v2.4/cmake-2.4.8-win32-x86.exe
+
+Do not use CMake 2.6 (the latest version available at the time of this writing) since there is a regression bug that affects the command-line script that builds Rem from scratch:
+http://www.cmake.org/Bug/view.php?id=7222
 
 
 
@@ -105,6 +108,4 @@ Open the "build\windows\Rem.sln" file; select the "Release" configuration, click
 12) Build Rem using CMake
 -------------------------
 
-To be done.
-
-
+Use the "build/windows/build.bat" file, which generates an NMake makefile from the CMake file, and then uses NMake (available with Visual C++ 2008 Express Edition) to build the application and the installer from the command line.
