@@ -1,8 +1,9 @@
+@echo off
+
 REM execute this file from the "Visual Studio 2008 Command Prompt" console,
 REM so that the proper PATHs and variables are set properly.
 
-@echo off
-
+REM change the current dir to the project root
 cd ..\..
 
 REM remove previous build
