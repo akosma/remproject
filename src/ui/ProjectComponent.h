@@ -32,11 +32,7 @@
  * \date      6/21/08
  */
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 #ifndef PROJECTCOMPONENT_H_
 #define PROJECTCOMPONENT_H_

@@ -35,11 +35,7 @@
 #ifndef USECASEDIAGRAMTOOLBAR_H_
 #define USECASEDIAGRAMTOOLBAR_H_
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 /*!
  * \namespace ui

@@ -17,10 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains platform-specific symbols used throughout the Rem application.
 /*!
- * \file ActorFigure.h
+ * \file PlatformDefinitions.h
  *
- * Contains the interface of the ui::ActorFigure class.
+ * Contains platform-specific symbols used throughout the Rem application.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,43 +29,27 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/17/08
+ * \date      7/6/08
  */
 
-#include "PlatformDefinitions.h"
-
-#ifndef ACTORFIGURE_H_
-#define ACTORFIGURE_H_
-
-#ifndef FIGURE_H_
-#include "Figure.h"
+// When using POCO and JUCE together, Windows requires to use
+// a different set of header files for JUCE than in Unixes:
+#if defined(_WIN32)
+#include <src/juce_WithoutMacros.h>
+#else
+#include <juce.h>
 #endif
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
-namespace ui
-{
-    /*!
-     * \class ActorFigure
-     *
-     *  
-     */
-    class ActorFigure : public Figure
-    {
-    public:
-        ActorFigure();
-        virtual ~ActorFigure();
-        
-        void mouseDoubleClick(const MouseEvent& e); 
-
-    protected:
-        virtual void drawFigure(Path&);
-
-    private:
-        Label* _nameLabel;
-    };
-}
-
-#endif /* ACTORFIGURE_H_ */
+// Somehow in Mac OS X, using the native UI controls 
+// in "Debug" mode hangs the application... This does not
+// happen in "Release", so here we make the compiler 
+// choose the right setting for each environment.
+// When calling JUCE dialog boxes, use the NATIVE_DIALOG macro
+// to specify the type of control to use.
+#if defined(__APPLE__) && defined(__MACH__)
+#ifdef USE_JUCE_DIALOGS
+#define NATIVE_DIALOG false
+#else
+#define NATIVE_DIALOG true
+#endif
+#endif

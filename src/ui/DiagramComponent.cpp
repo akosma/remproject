@@ -49,18 +49,6 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 
-// Somehow in Mac OS X, using the native UI controls 
-// in "Debug" mode hangs the application... This does not
-// happen in "Release", so here we make the compiler 
-// choose the right setting for each environment
-#if defined(__APPLE__) && defined(__MACH__)
-#ifdef USE_JUCE_DIALOGS
-#define NATIVE_DIALOG false
-#else
-#define NATIVE_DIALOG true
-#endif
-#endif
-
 namespace ui
 {
     DiagramComponent::DiagramComponent (const int index)

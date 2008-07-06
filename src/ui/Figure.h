@@ -33,11 +33,7 @@
 
 #include <Poco/AutoPtr.h>
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 #ifndef FIGURE_H_
 #define FIGURE_H_

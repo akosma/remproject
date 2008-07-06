@@ -127,6 +127,7 @@
 		3A7596720DAFC574000AC38C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		3A7596730DAFC574000AC38C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		3A7596740DAFC574000AC38C /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
+		3A7A0AB00E21086000775A07 /* PlatformDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformDefinitions.h; path = ../../src/ui/PlatformDefinitions.h; sourceTree = SOURCE_ROOT; };
 		3A81014F0D96BC66003EFF96 /* SQLiteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLiteWrapper.h; path = ../../src/storage/SQLiteWrapper.h; sourceTree = SOURCE_ROOT; };
 		3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapper.cpp; path = ../../src/storage/SQLiteWrapper.cpp; sourceTree = SOURCE_ROOT; };
 		3A81015A0D96BF91003EFF96 /* SQLiteWrapperTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLiteWrapperTest.h; path = ../../src/tests/SQLiteWrapperTest.h; sourceTree = SOURCE_ROOT; };
@@ -295,6 +296,7 @@
 				3AC065C20DB13102000EB33E /* Window.cpp */,
 				3A23DCD80E0DAC5B00DB428C /* ProjectComponent.h */,
 				3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */,
+				3A7A0AB00E21086000775A07 /* PlatformDefinitions.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";

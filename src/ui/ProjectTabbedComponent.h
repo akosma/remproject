@@ -36,11 +36,7 @@
 #ifndef PROJECTTABBEDCOMPONENT_H_
 #define PROJECTTABBEDCOMPONENT_H_
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 #ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
 #include "ExportDiagramAsPNGNotification.h"

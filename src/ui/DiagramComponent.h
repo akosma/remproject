@@ -34,11 +34,7 @@
 
 #include <Poco/AutoPtr.h>
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 #ifndef DIAGRAMCOMPONENT_H_
 #define DIAGRAMCOMPONENT_H_

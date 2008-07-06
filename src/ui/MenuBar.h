@@ -12,11 +12,7 @@
  * \date      7/3/08
  */
 
-#if defined(_WIN32)
-#include <src/juce_WithoutMacros.h>
-#else
-#include <juce.h>
-#endif
+#include "PlatformDefinitions.h"
 
 #ifndef MENUBAR_H_
 #define MENUBAR_H_
