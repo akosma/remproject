@@ -73,7 +73,7 @@ namespace ui
         
         void postProjectTabbedComponentChangedTabNotification(const int, const String&);
         
-        void ProjectTabbedComponent::handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>&);
+        void handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>&);
     };
 }
 
