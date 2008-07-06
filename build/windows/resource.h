@@ -19,7 +19,7 @@
 
 //! Resource file used by Visual Studio to add an icon to the application
 /*!
- * \file resource.rc
+ * \file resource.h
  *
  * Resource file used by Visual Studio to add an icon to the application
  *
