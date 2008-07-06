@@ -91,6 +91,9 @@ namespace ui
 
         NObserver<ContentComponent, FigureMovedNotification> movementObserver(*this, &ContentComponent::handleFigureMovedNotification);
         NotificationCenter::defaultCenter().addObserver(movementObserver);
+
+        NObserver<ContentComponent, DiagramToggleGridNotification> gridObserver(*this, &ContentComponent::handleDiagramToggleGridNotification);
+        NotificationCenter::defaultCenter().addObserver(gridObserver);
     }
 
     ContentComponent::~ContentComponent()
@@ -167,5 +170,10 @@ namespace ui
         {
             _canvas->repaint();
         }
+    }
+    
+    void ContentComponent::handleDiagramToggleGridNotification(const AutoPtr<DiagramToggleGridNotification>&)
+    {
+        _canvas->toggleGrid();
     }
 }

@@ -40,6 +40,7 @@
 		3A75967E0DAFC5CD000AC38C /* rem-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A75965F0DAFC350000AC38C /* rem-Info.plist */; };
 		3A8101510D96BC66003EFF96 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
 		3A81015C0D96BF91003EFF96 /* SQLiteWrapperTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */; };
+		3A84FFB80E20FCA50043EA45 /* DiagramToggleGridNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A84FFB60E20FCA50043EA45 /* DiagramToggleGridNotification.cpp */; };
 		3A8DB0490DF9C33D00B9D679 /* FindConditions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */; };
 		3A98E1B50DB9FB0A0095EADC /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
 		3A9BC7720D8D6C82005ED14A /* Diagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BC7710D8D6C82005ED14A /* Diagram.cpp */; };
@@ -63,6 +64,7 @@
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC4D3420DEC9C9F00D26FFA /* ActorToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */; };
 		3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
+		3AD82D440E20F47800F374B3 /* ExportDiagramAsPNGNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD82D430E20F47800F374B3 /* ExportDiagramAsPNGNotification.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
 		3AEE8CA40E0E76D2001192FB /* FigureSelectedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE8CA30E0E76D2001192FB /* FigureSelectedNotification.cpp */; };
 		3AEE8D040E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE8D030E0E86F2001192FB /* ArrowCanvasClickedNotification.cpp */; };
@@ -129,6 +131,8 @@
 		3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapper.cpp; path = ../../src/storage/SQLiteWrapper.cpp; sourceTree = SOURCE_ROOT; };
 		3A81015A0D96BF91003EFF96 /* SQLiteWrapperTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLiteWrapperTest.h; path = ../../src/tests/SQLiteWrapperTest.h; sourceTree = SOURCE_ROOT; };
 		3A81015B0D96BF91003EFF96 /* SQLiteWrapperTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SQLiteWrapperTest.cpp; path = ../../src/tests/SQLiteWrapperTest.cpp; sourceTree = SOURCE_ROOT; };
+		3A84FFB60E20FCA50043EA45 /* DiagramToggleGridNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramToggleGridNotification.cpp; path = ../../src/ui/DiagramToggleGridNotification.cpp; sourceTree = SOURCE_ROOT; };
+		3A84FFB70E20FCA50043EA45 /* DiagramToggleGridNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramToggleGridNotification.h; path = ../../src/ui/DiagramToggleGridNotification.h; sourceTree = SOURCE_ROOT; };
 		3A8DB0110DF9BC4F00B9D679 /* FindConditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindConditions.h; path = ../../src/storage/FindConditions.h; sourceTree = SOURCE_ROOT; };
 		3A8DB0480DF9C33D00B9D679 /* FindConditions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FindConditions.cpp; path = ../../src/storage/FindConditions.cpp; sourceTree = SOURCE_ROOT; };
 		3A98E1B30DB9FB0A0095EADC /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Figure.h; path = ../../src/ui/Figure.h; sourceTree = SOURCE_ROOT; };
@@ -158,6 +162,8 @@
 		3AC608C90DEC0A34002D0B12 /* Persistable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Persistable.cpp; path = ../../src/storage/Persistable.cpp; sourceTree = SOURCE_ROOT; };
 		3AD1A8700DC64F20009977AE /* BelongsTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BelongsTo.h; path = ../../src/storage/BelongsTo.h; sourceTree = SOURCE_ROOT; };
 		3AD1A8760DC64FF4009977AE /* HasMany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HasMany.h; path = ../../src/storage/HasMany.h; sourceTree = SOURCE_ROOT; };
+		3AD82D420E20F47800F374B3 /* ExportDiagramAsPNGNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportDiagramAsPNGNotification.h; path = ../../src/ui/ExportDiagramAsPNGNotification.h; sourceTree = SOURCE_ROOT; };
+		3AD82D430E20F47800F374B3 /* ExportDiagramAsPNGNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportDiagramAsPNGNotification.cpp; path = ../../src/ui/ExportDiagramAsPNGNotification.cpp; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
 		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
 		3AEE8CA20E0E76D2001192FB /* FigureSelectedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureSelectedNotification.h; path = ../../src/ui/FigureSelectedNotification.h; sourceTree = SOURCE_ROOT; };
@@ -416,6 +422,8 @@
 		3AEE8CA10E0E76BB001192FB /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				3A84FFB60E20FCA50043EA45 /* DiagramToggleGridNotification.cpp */,
+				3A84FFB70E20FCA50043EA45 /* DiagramToggleGridNotification.h */,
 				3AEE8CA20E0E76D2001192FB /* FigureSelectedNotification.h */,
 				3AEE8CA30E0E76D2001192FB /* FigureSelectedNotification.cpp */,
 				3AEE8D020E0E86F2001192FB /* ArrowCanvasClickedNotification.h */,
@@ -424,6 +432,8 @@
 				3AEE8D260E0E8C12001192FB /* FigureMovedNotification.cpp */,
 				3A4D2DDE0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.h */,
 				3A4D2DDF0E14113C0000CBC5 /* ProjectTabbedComponentChangedTabNotification.cpp */,
+				3AD82D420E20F47800F374B3 /* ExportDiagramAsPNGNotification.h */,
+				3AD82D430E20F47800F374B3 /* ExportDiagramAsPNGNotification.cpp */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -600,6 +610,8 @@
 				3AA1E5D00E1D4C3E00B752D0 /* SQLiteWrapper.cpp in Sources */,
 				3AA1E6210E1D577800B752D0 /* CommandDelegate.cpp in Sources */,
 				3AA1E6CF0E1D67D100B752D0 /* MenuBar.cpp in Sources */,
+				3AD82D440E20F47800F374B3 /* ExportDiagramAsPNGNotification.cpp in Sources */,
+				3A84FFB80E20FCA50043EA45 /* DiagramToggleGridNotification.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +819,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_NATIVE_DIALOGS;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
 					"\"$(SRCROOT)/../../lib/juce\"/**",
@@ -821,6 +834,7 @@
 				OTHER_LDFLAGS = (
 					"-ljuce",
 					"-lPocoFoundation",
+					"-lsqlite3",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Rem;

@@ -73,6 +73,9 @@ SET (ui_SRCS
     ui/ProjectTabbedComponentChangedTabNotification.h
     ui/ProjectTabbedComponentChangedTabNotification.cpp
     
+    ui/ExportDiagramAsPNGNotification.h
+    ui/ExportDiagramAsPNGNotification.cpp
+    
     ui/CommandDelegate.h
     ui/CommandDelegate.cpp
     

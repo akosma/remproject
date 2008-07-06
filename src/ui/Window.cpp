@@ -69,15 +69,6 @@ namespace ui
         addKeyListener(_commandManager->getKeyMappings());
         _menuBarModel->setApplicationCommandManagerToWatch(_commandManager);
 
-        // File file("test.png");
-        // FileOutputStream* stream = file.createOutputStream();
-        // Image* image = diagram1->createComponentSnapshot(Rectangle (0, 0, diagram1->getWidth(), diagram1->getHeight()));
-        // PNGImageFormat png;
-        // bool result = png.writeImageToStream(*image, *stream);
-        // stream->flush();
-        // delete stream;
-        // delete image;
-
 #if defined(__APPLE__) && defined(__MACH__)
         MenuBarModel::setMacMainMenu(_menuBarModel);
         setMenuBar(NULL);

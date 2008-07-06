@@ -109,9 +109,9 @@ namespace ui
         repaint();
     }
     
-    void ArrowCanvas::shouldDrawGrid(const bool should)
+    void ArrowCanvas::toggleGrid()
     {
-        _drawGrid = should;
+        _drawGrid = !_drawGrid;
         repaint();
     }
 

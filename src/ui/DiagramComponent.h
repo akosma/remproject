@@ -56,6 +56,7 @@ using Poco::AutoPtr;
 namespace ui
 {
     class UseCaseDiagramToolbar;
+    class ContentComponent;
 
     /*!
      * \class DiagramComponent
@@ -70,7 +71,7 @@ namespace ui
 
         void paint (Graphics& g);
         void resized();
-
+        bool exportAsPNG();
 
         juce_UseDebuggingNewOperator
         
@@ -81,6 +82,7 @@ namespace ui
         const int _index;
         Viewport* _viewport;
         UseCaseDiagramToolbar* _toolbar;
+        ContentComponent* _component;
 
         // (prevent copy constructor and operator= from being generated..)
         DiagramComponent (const DiagramComponent&);

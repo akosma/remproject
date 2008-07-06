@@ -54,6 +54,10 @@
 #include "FigureMovedNotification.h"
 #endif
 
+#ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
+#include "DiagramToggleGridNotification.h"
+#endif
+
 using Poco::AutoPtr;
 
 /*!
@@ -87,6 +91,7 @@ namespace ui
         void handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>&);
         void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
         void handleFigureMovedNotification(const AutoPtr<FigureMovedNotification>&);
+        void handleDiagramToggleGridNotification(const AutoPtr<DiagramToggleGridNotification>&);
 
     private:
         ArrowCanvas* _canvas;

@@ -12,7 +12,24 @@
  * \date      7/3/08
  */
 
+#include <Poco/NotificationCenter.h>
+
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
+#endif
+
+#ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
+#include "ExportDiagramAsPNGNotification.h"
+#endif
+
+#ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
+#include "DiagramToggleGridNotification.h"
+#endif
+
 #include "CommandDelegate.h"
+
+using Poco::NotificationCenter;
+using controllers::FileController;
 
 namespace ui
 {
@@ -34,13 +51,11 @@ namespace ui
     {
         const CommandID ids[] = { 
             fileNewProject,
-            fileNewUseCaseDiagram,
-            fileNewClassDiagram,
-            fileNewSequenceDiagram,
             fileOpen,
             fileClose,
             fileSave,
             fileSaveAs,
+            fileExportPNG,
 #if JUCE_WIN32 || JUCE_LINUX
             fileQuit,
 #endif
@@ -48,7 +63,13 @@ namespace ui
             editCut,
             editCopy,
             editPaste,
-            editDelete
+            editDelete,
+            
+            projectNewUseCaseDiagram,
+            projectNewClassDiagram,
+            projectNewSequenceDiagram,
+            
+            diagramToggleGrid
         };
         commands.addArray(ids, numElementsInArray(ids));
     }
@@ -58,87 +79,154 @@ namespace ui
         switch (command)
         {
             case fileNewProject:
+            {
                 info.shortName = "New Project";
                 info.description = "Creates a new project, closing the current one if needed";
                 info.flags = 0;
                 info.addDefaultKeypress(110, ModifierKeys::commandModifier);
-                info.setActive(true);
+                info.setActive(false);
                 break;
-
-            case fileNewUseCaseDiagram:
-                info.shortName = "Use Case Diagram";
-                info.description = "Creates a new use-case diagram on the current project";
-                info.flags = 0;
-                info.addDefaultKeypress(117, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
-                info.setActive(true);
-                break;
-
-            case fileNewClassDiagram:
-                info.shortName = "Class Diagram";
-                info.description = "Creates a new class diagram on the current project";
-                info.flags = 0;
-                info.addDefaultKeypress(99, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
-                info.setActive(true);
-                break;
-
-            case fileNewSequenceDiagram:
-                info.shortName = "Sequence Diagram";
-                info.description = "Creates a new sequence diagram on the current project";
-                info.flags = 0;
-                info.addDefaultKeypress(100, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
-                info.setActive(true);
-                break;
+            }
 
             case fileOpen:
+            {
                 info.shortName = "Open...";
                 info.description = "Opens a project in disk";
                 info.flags = 0;
                 info.addDefaultKeypress(111, ModifierKeys::commandModifier);
-                info.setActive(true);
+                info.setActive(false);
                 break;
+            }
 
             case fileClose:
+            {
                 info.shortName = "Close";
                 info.description = "Closes the current project";
                 info.flags = 0;
                 info.addDefaultKeypress(119, ModifierKeys::commandModifier);
-                info.setActive(true);
+                info.setActive(false);
                 break;
+            }
 
             case fileSave:
+            {
                 info.shortName = "Save...";
                 info.description = "Saves the current project to disk";
                 info.flags = 0;
                 info.addDefaultKeypress(115, ModifierKeys::commandModifier);
-                info.setActive(true);
+                info.setActive(false);
                 break;
+            }
 
             case fileSaveAs:
+            {
                 info.shortName = "Save As...";
                 info.description = "Saves the current project with a new file name";
                 info.flags = 0;
                 info.addDefaultKeypress(115, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.setActive(false);
+                break;
+            }
+                
+            case fileExportPNG:
+            {
+                info.shortName = "Export As PNG...";
+                info.description = "Saves a snapshot of the current diagram as a PNG file";
+                info.flags = 0;
                 info.setActive(true);
                 break;
+            }
 
 #if JUCE_WIN32 || JUCE_LINUX
             case fileQuit:
+            {
                 info.shortName = "Quit";
                 info.description = "Quit the application";
                 info.flags = 0;
                 info.addDefaultKeypress(81, ModifierKeys::commandModifier);
                 info.setActive(true);
                 break;
+            }
 #endif
-            default:
+
+            case projectNewUseCaseDiagram:
+            {
+                info.shortName = "Use Case Diagram";
+                info.description = "Creates a new use-case diagram on the current project";
+                info.flags = 0;
+                info.addDefaultKeypress(117, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.setActive(false);
                 break;
+            }
+
+            case projectNewClassDiagram:
+            {
+                info.shortName = "Class Diagram";
+                info.description = "Creates a new class diagram on the current project";
+                info.flags = 0;
+                info.addDefaultKeypress(99, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.setActive(false);
+                break;
+            }
+
+            case projectNewSequenceDiagram:
+            {
+                info.shortName = "Sequence Diagram";
+                info.description = "Creates a new sequence diagram on the current project";
+                info.flags = 0;
+                info.addDefaultKeypress(100, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.setActive(false);
+                break;
+            }
+
+            case diagramToggleGrid:
+            {
+                info.shortName = "Toggle Grid";
+                info.description = "Shows / hides the grid of the diagrams";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
+
+            default:
+            {
+                break;
+            }
         }
     }
 
     bool CommandDelegate::perform(const InvocationInfo &info)
     {
-        ApplicationCommandInfo appInfo(info.commandID);
-        getCommandInfo(info.commandID, appInfo);
-        return AlertWindow::showNativeDialogBox(appInfo.shortName, appInfo.description, false);
+        switch (info.commandID)
+        {
+            case fileExportPNG:
+            {
+                ExportDiagramAsPNGNotification* notification = new ExportDiagramAsPNGNotification();
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramToggleGrid:
+            {
+                DiagramToggleGridNotification* notification = new DiagramToggleGridNotification();
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case fileQuit:
+            {
+                JUCEApplication::getInstance()->systemRequestedQuit();
+                break;
+            }
+                
+            default:
+            {
+                ApplicationCommandInfo appInfo(info.commandID);
+                getCommandInfo(info.commandID, appInfo);
+                return AlertWindow::showNativeDialogBox(appInfo.shortName, appInfo.description, false);
+                break;
+            }
+        }
+        return true;
     }
 }

@@ -77,7 +77,7 @@ namespace ui
         
         void addArrow(Figure*, Figure*);
         
-        void shouldDrawGrid(const bool);
+        void toggleGrid();
         
     private:
         void postArrowCanvasClickedNotification();

@@ -49,6 +49,18 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 
+// Somehow in Mac OS X, using the native UI controls 
+// in "Debug" mode hangs the application... This does not
+// happen in "Release", so here we make the compiler 
+// choose the right setting for each environment
+#if defined(__APPLE__) && defined(__MACH__)
+#ifndef USE_NATIVE_DIALOGS
+#define NATIVE_DIALOG false
+#else
+#define NATIVE_DIALOG true
+#endif
+#endif
+
 namespace ui
 {
     DiagramComponent::DiagramComponent (const int index)
@@ -60,8 +72,8 @@ namespace ui
 //        addChildComponent(_toolbar, -1); // Don't make it visible yet!
         _toolbar->setTopLeftPosition(10, 50);
         
-        ContentComponent* content = new ContentComponent();
-        _viewport->setViewedComponent(content);
+        _component = new ContentComponent();
+        _viewport->setViewedComponent(_component);
         
         NObserver<DiagramComponent, ProjectTabbedComponentChangedTabNotification> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTabNotification);
         NotificationCenter::defaultCenter().addObserver(tabObserver);
@@ -76,6 +88,29 @@ namespace ui
     void DiagramComponent::paint (Graphics& g)
     {
         g.fillAll (Colours::grey);
+    }
+
+    bool DiagramComponent::exportAsPNG()
+    {
+        FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);
+        bool result = false;
+        // Mac OS X native controls hang the app...!
+        if (fileChooser.browseForFileToSave(true))
+        {
+            File file = fileChooser.getResult();
+            if (file.exists())
+            {
+                file.deleteFile();
+            }
+            FileOutputStream* stream = file.createOutputStream();
+            Image* image = _component->createComponentSnapshot(Rectangle (0, 0, _component->getWidth(), _component->getHeight()));
+            PNGImageFormat png;
+            result = png.writeImageToStream(*image, *stream);
+            stream->flush();
+            delete stream;
+            delete image;
+        }
+        return result;
     }
 
     void DiagramComponent::resized()

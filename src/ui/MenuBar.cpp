@@ -60,19 +60,14 @@ namespace ui
             {
                 // "File" menu items
                 menu.addCommandItem(manager, CommandDelegate::fileNewProject);
-
-                PopupMenu diagramSubMenu;
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::fileNewUseCaseDiagram);
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::fileNewClassDiagram);
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::fileNewSequenceDiagram);
-                menu.addSubMenu("Add New Diagram", diagramSubMenu, true, NULL);
-
                 menu.addCommandItem(manager, CommandDelegate::fileOpen);
 
                 menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::fileClose);
                 menu.addCommandItem(manager, CommandDelegate::fileSave);
                 menu.addCommandItem(manager, CommandDelegate::fileSaveAs);
+                menu.addSeparator();
+                menu.addCommandItem(manager, CommandDelegate::fileExportPNG);
 #if JUCE_WIN32 || JUCE_LINUX
                 menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::fileQuit);
@@ -96,22 +91,18 @@ namespace ui
             case 2:
             {
                 // "Project" menu items
-                menu.addItem (20, "Item 1");
-                menu.addItem (21, "Item 2");
-                menu.addSeparator();
-                menu.addItem (22, "Item 3");
-                menu.addItem (23, "Item 4");
-                menu.addItem (24, "Item 5");
+                PopupMenu diagramSubMenu;
+                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewUseCaseDiagram);
+                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewClassDiagram);
+                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewSequenceDiagram);
+                menu.addSubMenu("Add New Diagram", diagramSubMenu, true, NULL);
                 break;
             }
 
             case 3:
             {
                 // "Diagram" menu items
-                menu.addItem (30, "Item 1");
-                menu.addItem (31, "Item 2");
-                menu.addItem (32, "Item 3");
-                menu.addItem (33, "Item 4");
+                menu.addCommandItem(manager, CommandDelegate::diagramToggleGrid);
                 break;
             }
 

@@ -31,6 +31,8 @@
  * \date      6/26/08
  */
 
+#include <Poco/AutoPtr.h>
+
 #ifndef PROJECTTABBEDCOMPONENT_H_
 #define PROJECTTABBEDCOMPONENT_H_
 
@@ -39,6 +41,12 @@
 #else
 #include <juce.h>
 #endif
+
+#ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
+#include "ExportDiagramAsPNGNotification.h"
+#endif
+
+using Poco::AutoPtr;
 
 /*!
  * \namespace ui
@@ -68,6 +76,8 @@ namespace ui
         virtual void currentTabChanged(const int, const String&);
         
         void postProjectTabbedComponentChangedTabNotification(const int, const String&);
+        
+        void ProjectTabbedComponent::handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>&);
     };
 }
 

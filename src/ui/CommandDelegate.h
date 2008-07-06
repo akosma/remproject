@@ -50,19 +50,24 @@ namespace ui
         enum CommandIDs
         {
             fileNewProject = 0x2000,
-            fileNewUseCaseDiagram = 0x2001,
-            fileNewClassDiagram = 0x2002,
-            fileNewSequenceDiagram = 0x2003,
-            fileOpen = 0x2004,
-            fileClose = 0x2005,
-            fileSave = 0x2006,
-            fileSaveAs = 0x2007,
+            fileOpen = 0x2001,
+            fileClose = 0x2002,
+            fileSave = 0x2003,
+            fileSaveAs = 0x2004,
+            fileExportPNG = 0x2005,
             fileQuit = StandardApplicationCommandIDs::quit,
-            editUndo = 0x2008,
-            editCut = 0x2009,
-            editCopy = 0x2010,
-            editPaste = 0x2011,
-            editDelete = 0x2012
+
+            editUndo = 0x2020,
+            editCut = 0x2021,
+            editCopy = 0x2022,
+            editPaste = 0x2023,
+            editDelete = 0x2024,
+
+            projectNewUseCaseDiagram = 0x2030,
+            projectNewClassDiagram = 0x2031,
+            projectNewSequenceDiagram = 0x2032,
+
+            diagramToggleGrid = 0x2040
         };
     };
 }

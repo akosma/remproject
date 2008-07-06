@@ -32,6 +32,7 @@
  */
 
 #include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
 
 #include "ProjectTabbedComponent.h"
 
@@ -39,13 +40,21 @@
 #include "ProjectTabbedComponentChangedTabNotification.h"
 #endif
 
+#ifndef DIAGRAMCOMPONENT_H_
+#include "DiagramComponent.h"
+#endif
+
 using Poco::NotificationCenter;
+using Poco::NObserver;
+using Poco::AutoPtr;
 
 namespace ui
 {
     ProjectTabbedComponent::ProjectTabbedComponent()
     : TabbedComponent(TabbedButtonBar::TabsAtTop)
     {
+        NObserver<ProjectTabbedComponent, ExportDiagramAsPNGNotification> exportObserver(*this, &ProjectTabbedComponent::handleExportDiagramAsPNGNotification);
+        NotificationCenter::defaultCenter().addObserver(exportObserver);
     }
     
     ProjectTabbedComponent::~ProjectTabbedComponent()
@@ -61,5 +70,11 @@ namespace ui
     {
         ProjectTabbedComponentChangedTabNotification* notification = new ProjectTabbedComponentChangedTabNotification(newCurrentTabIndex, newCurrentTabName);
         NotificationCenter::defaultCenter().postNotification(notification);
+    }
+    
+    void ProjectTabbedComponent::handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>& notification)
+    {
+        DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
+        currentDiagram->exportAsPNG();
     }
 }
