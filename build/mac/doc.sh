@@ -22,16 +22,11 @@ cd ../../
 # Update the project from the repository
 svn update --ignore-externals
 
-# Erase previous build output
-rm -r bin
+# Erase previous Doxygen output
+rm -r doc
 
-# Build the whole project
-mkdir bin
-cd bin
-cmake ../src
-make
-make package
-
-# Launch the tests
-ctest
-cd ..
+# Compile the documentation
+/opt/local/bin/doxygen
+make --directory=doc/latex pdf
+mv doc/latex/refman.pdf doc/
+rm -r doc/latex/
