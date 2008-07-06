@@ -22,6 +22,8 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
 SET (ui_SRCS
+    ui/PlatformDefinitions.h
+    
     ui/Application.h 
     ui/Application.cpp 
 
