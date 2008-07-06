@@ -246,6 +246,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\DiagramToggleGridNotification.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ExportDiagramAsPNGNotification.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Figure.cpp"
 				>
 			</File>
@@ -330,6 +338,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ui\DiagramToggleGridNotification.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ExportDiagramAsPNGNotification.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\Figure.h"
 				>
 			</File>
@@ -343,6 +359,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\ui\MenuBar.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\PlatformDefinitions.h"
 				>
 			</File>
 			<File
@@ -371,6 +391,22 @@
 			</File>
 			<File
 				RelativePath="..\..\src\ui\Window.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resources"
+			>
+			<File
+				RelativePath=".\rem.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\resource.rc"
 				>
 			</File>
 		</Filter>

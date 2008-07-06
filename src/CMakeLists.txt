@@ -197,7 +197,13 @@ IF (WIN32)
     SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
     SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
     SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO /MANIFEST:NO")
-    
+
+    SET (win_resources_SRCS
+        ${rem_SOURCE_DIR}/../build/windows/resource.rc
+        ${rem_SOURCE_DIR}/../build/windows/resource.h
+        ${rem_SOURCE_DIR}/../build/windows/rem.ico
+    )
+
     # Header files are located in these directories
     INCLUDE_DIRECTORIES (
         ${rem_SOURCE_DIR}/../lib/poco/Foundation/include
@@ -214,6 +220,7 @@ IF (WIN32)
 
     ADD_EXECUTABLE (Rem WIN32
         ${Rem_SRCS}
+        ${win_resources_SRCS}
     )
 
     # These are the symbols for the linker

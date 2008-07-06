@@ -48,6 +48,7 @@
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
+using juce::Rectangle;
 
 namespace ui
 {
@@ -91,7 +92,9 @@ namespace ui
                 file.deleteFile();
             }
             FileOutputStream* stream = file.createOutputStream();
-            Image* image = _component->createComponentSnapshot(Rectangle (0, 0, _component->getWidth(), _component->getHeight()));
+            // Windows requires the "juce::" identifier, to avoid ambiguous symbols errors
+            juce::Rectangle rect(0, 0, _component->getWidth(), _component->getHeight());
+            Image* image = _component->createComponentSnapshot(rect);
             PNGImageFormat png;
             result = png.writeImageToStream(*image, *stream);
             stream->flush();

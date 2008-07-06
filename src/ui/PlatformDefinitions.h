@@ -46,10 +46,8 @@
 // choose the right setting for each environment.
 // When calling JUCE dialog boxes, use the NATIVE_DIALOG macro
 // to specify the type of control to use.
-#if defined(__APPLE__) && defined(__MACH__)
-#ifdef USE_JUCE_DIALOGS
+#if defined(__APPLE__) && defined(__MACH__) && defined(USE_JUCE_DIALOGS)
 #define NATIVE_DIALOG false
 #else
 #define NATIVE_DIALOG true
-#endif
 #endif
