@@ -784,6 +784,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_JUCE_DIALOGS;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
 					"\"$(SRCROOT)/../../lib/juce\"/**",
@@ -819,7 +820,6 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = USE_NATIVE_DIALOGS;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../lib/poco-universal/poco/include\"",
 					"\"$(SRCROOT)/../../lib/juce\"/**",

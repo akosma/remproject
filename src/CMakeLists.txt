@@ -76,6 +76,9 @@ SET (ui_SRCS
     ui/ExportDiagramAsPNGNotification.h
     ui/ExportDiagramAsPNGNotification.cpp
     
+    ui/DiagramToggleGridNotification.h
+    ui/DiagramToggleGridNotification.cpp
+    
     ui/CommandDelegate.h
     ui/CommandDelegate.cpp
     
