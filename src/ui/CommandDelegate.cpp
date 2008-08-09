@@ -14,10 +14,6 @@
 
 #include <Poco/NotificationCenter.h>
 
-#ifndef FILECONTROLLER_H_
-#include "../controllers/FileController.h"
-#endif
-
 #ifndef EXPORTDIAGRAMASPNG_H_
 #include "../notifications/ExportDiagramAsPNG.h"
 #endif
@@ -26,8 +22,8 @@
 #include "../notifications/DiagramToggleGrid.h"
 #endif
 
-#ifndef SAVEFILE_H_
-#include "../notifications/SaveFile.h"
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
 #endif
 
 #include "CommandDelegate.h"
@@ -36,12 +32,12 @@ using Poco::NotificationCenter;
 using controllers::FileController;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
-using notifications::SaveFile;
 
 namespace ui
 {
     CommandDelegate::CommandDelegate()
     : ApplicationCommandTarget()
+    , _fileController(FileController::get())
     {
     }
     
@@ -131,7 +127,7 @@ namespace ui
                 info.description = "Saves the current project with a new file name";
                 info.flags = 0;
                 info.addDefaultKeypress(115, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
-                info.setActive(false);
+                info.setActive(true);
                 break;
             }
                 
@@ -228,8 +224,20 @@ namespace ui
             
             case fileSave:
             {
-                SaveFile* notification = new SaveFile();
-                NotificationCenter::defaultCenter().postNotification(notification);
+                if (_fileController.isProjectNew())
+                {
+                    performFileSaveAs();
+                }
+                else
+                {
+                    _fileController.saveProject();
+                }
+                break;
+            }
+            
+            case fileSaveAs:
+            {
+                performFileSaveAs();
                 break;
             }
 
@@ -242,5 +250,20 @@ namespace ui
             }
         }
         return true;
+    }
+    
+    void CommandDelegate::performFileSaveAs()
+    {
+        FileChooser fileChooser("Choose a file name for the project", File::getSpecialLocation(File::userDesktopDirectory), "*.rem", NATIVE_DIALOG);
+        if (fileChooser.browseForFileToSave(true))
+        {
+            File file = fileChooser.getResult();
+            if (file.exists())
+            {
+                file.deleteFile();
+            }
+            std::string fileName = std::string(file.getFullPathName().toUTF8());
+            _fileController.saveProjectAs(fileName);
+        }
     }
 }

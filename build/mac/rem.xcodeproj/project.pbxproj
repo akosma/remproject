@@ -29,14 +29,12 @@
 		3A5192030E4DC747003053A9 /* FigureMoved.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F80E4DC747003053A9 /* FigureMoved.cpp */; };
 		3A5192040E4DC747003053A9 /* FigureSelected.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */; };
 		3A5192050E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */; };
-		3A5192060E4DC747003053A9 /* SaveFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FE0E4DC747003053A9 /* SaveFile.cpp */; };
 		3A5192070E4DC747003053A9 /* ArrowCanvasClicked.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */; };
 		3A5192080E4DC747003053A9 /* DiagramToggleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */; };
 		3A5192090E4DC747003053A9 /* ExportDiagramAsPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */; };
 		3A51920A0E4DC747003053A9 /* FigureMoved.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F80E4DC747003053A9 /* FigureMoved.cpp */; };
 		3A51920B0E4DC747003053A9 /* FigureSelected.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */; };
 		3A51920C0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */; };
-		3A51920D0E4DC747003053A9 /* SaveFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FE0E4DC747003053A9 /* SaveFile.cpp */; };
 		3A5B73820E4DBD3A009D4BCF /* ActorFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */; };
 		3A5B73830E4DBD3C009D4BCF /* UseCaseFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */; };
 		3A5B73840E4DBD3C009D4BCF /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
@@ -149,8 +147,6 @@
 		3A5191FB0E4DC747003053A9 /* FigureSelected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureSelected.h; path = ../../src/notifications/FigureSelected.h; sourceTree = SOURCE_ROOT; };
 		3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponentChangedTab.cpp; path = ../../src/notifications/ProjectTabbedComponentChangedTab.cpp; sourceTree = SOURCE_ROOT; };
 		3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTab.h; path = ../../src/notifications/ProjectTabbedComponentChangedTab.h; sourceTree = SOURCE_ROOT; };
-		3A5191FE0E4DC747003053A9 /* SaveFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveFile.cpp; path = ../../src/notifications/SaveFile.cpp; sourceTree = SOURCE_ROOT; };
-		3A5191FF0E4DC747003053A9 /* SaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveFile.h; path = ../../src/notifications/SaveFile.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -410,8 +406,6 @@
 				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
 				3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */,
 				3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */,
-				3A5191FE0E4DC747003053A9 /* SaveFile.cpp */,
-				3A5191FF0E4DC747003053A9 /* SaveFile.h */,
 			);
 			name = notifications;
 			sourceTree = "<group>";
@@ -639,7 +633,6 @@
 				3A51920A0E4DC747003053A9 /* FigureMoved.cpp in Sources */,
 				3A51920B0E4DC747003053A9 /* FigureSelected.cpp in Sources */,
 				3A51920C0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */,
-				3A51920D0E4DC747003053A9 /* SaveFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +672,6 @@
 				3A5192030E4DC747003053A9 /* FigureMoved.cpp in Sources */,
 				3A5192040E4DC747003053A9 /* FigureSelected.cpp in Sources */,
 				3A5192050E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */,
-				3A5192060E4DC747003053A9 /* SaveFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

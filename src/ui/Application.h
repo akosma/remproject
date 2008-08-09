@@ -34,12 +34,12 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
-#ifndef FILECONTROLLER_H_
-#include "../controllers/FileController.h"
-#endif
-
 #include "PlatformDefinitions.h"
 
+namespace controllers
+{
+    class FileController;
+}
 using controllers::FileController;
 
 /*!

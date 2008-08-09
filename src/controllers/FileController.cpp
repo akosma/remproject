@@ -66,7 +66,6 @@ using std::stringstream;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using notifications::SaveFile;
 
 namespace controllers
 {
@@ -76,8 +75,6 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
-        NObserver<FileController, SaveFile> fileSaveObserver(*this, &FileController::handleSaveFile);
-        NotificationCenter::defaultCenter().addObserver(fileSaveObserver);
     }
 
     FileController::~FileController()
@@ -113,6 +110,7 @@ namespace controllers
         path << _counter;
         path << ".rem";
         SQLiteWrapper::get().setFileName(path.str());
+        delete _project;
         _project = new Project();
     }
     
@@ -171,8 +169,12 @@ namespace controllers
         return (_currentDiagram != NULL);
     }
     
-    void FileController::handleSaveFile(const AutoPtr<SaveFile>&)
+    const bool FileController::isProjectNew() const
     {
-        saveProject();
+        if (_project)
+        {
+            return _project->isNew();
+        }
+        return true;
     }
 }

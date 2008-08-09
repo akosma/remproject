@@ -31,11 +31,17 @@
  * \date      4/11/08
  */
 
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
+#endif
+
 #include "Application.h"
 
 #ifndef WINDOW_H_
 #include "Window.h"
 #endif
+
+using controllers::FileController;
 
 /*!
  * \namespace ui
@@ -47,6 +53,7 @@ namespace ui
     : _window(0)
     , _fileController(FileController::get())
     {
+        _fileController.newProject();
     }
 
     Application::~Application()

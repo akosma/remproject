@@ -94,9 +94,6 @@ SET (notifications_SRCS
     
     notifications/DiagramToggleGrid.h
     notifications/DiagramToggleGrid.cpp
-    
-    notifications/SaveFile.h
-    notifications/SaveFile.cpp
 )
 
 SET (storage_SRCS

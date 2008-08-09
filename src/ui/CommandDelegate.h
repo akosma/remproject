@@ -12,10 +12,16 @@
  * \date      7/3/08
  */
 
-#include "PlatformDefinitions.h"
-
 #ifndef COMMANDDELEGATE_H_
 #define COMMANDDELEGATE_H_
+
+#include "PlatformDefinitions.h"
+
+namespace controllers
+{
+    class FileController;
+}
+using controllers::FileController;
 
 namespace ui
 {
@@ -65,6 +71,12 @@ namespace ui
 
             diagramToggleGrid = 0x2040
         };
+        
+    private:
+        void performFileSaveAs();
+        
+    private:
+        FileController& _fileController;
     };
 }
 

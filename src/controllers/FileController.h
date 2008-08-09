@@ -53,16 +53,11 @@
 #include "../metamodel/Diagram.h"
 #endif
 
-#ifndef SaveFile_H_
-#include "../notifications/SaveFile.h"
-#endif
-
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
 using std::string;
 using Poco::AutoPtr;
-using notifications::SaveFile;
 
 //! Contains the controller classes of the application.
 /*!
@@ -153,6 +148,8 @@ namespace controllers
          * \return A boolean value.
          */
         const bool hasCurrentDiagram() const;
+        
+        const bool isProjectNew() const;
 
     private:
 
@@ -165,8 +162,6 @@ namespace controllers
         //! Allow the Singleton template class to access the private constructor.
         friend FileController& Singleton<FileController>::get();
 
-        void handleSaveFile(const AutoPtr<SaveFile>&);
-        
     private:
         //! Instance of the Project class "controlled" by this FileController.
         Project* _project;
