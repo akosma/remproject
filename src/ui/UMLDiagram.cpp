@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file ContentComponent.cpp
+ * \file UMLDiagram.cpp
  *
- * Contains the implementation of the ui::ContentComponent class.
+ * Contains the implementation of the ui::UMLDiagram class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -34,15 +34,7 @@
 #include <Poco/NotificationCenter.h>
 #include <Poco/NObserver.h>
 
-#include "ContentComponent.h"
-
-#ifndef ACTORFIGURE_H_
-#include "ActorFigure.h"
-#endif
-
-#ifndef USECASEFIGURE_H_
-#include "UseCaseFigure.h"
-#endif
+#include "UMLDiagram.h"
 
 #ifndef ARROWCANVAS_H_
 #include "ArrowCanvas.h"
@@ -54,59 +46,59 @@ using Poco::AutoPtr;
 
 namespace ui
 {
-    ContentComponent::ContentComponent()
+    UMLDiagram::UMLDiagram()
     : Component()
     , DragAndDropTarget()
     , _canvas(new ArrowCanvas())
     , _selection()
+    , _toolbar(NULL)
     {
         _canvas->setSize(565, 800);
         addAndMakeVisible(_canvas, 0);
         
-        ActorFigure* a = new ActorFigure();
-        a->setTopLeftPosition(100, 300);
-        addAndMakeVisible(a, -1);
-
-        ActorFigure* b = new ActorFigure();
-        b->setTopLeftPosition(100, 10);
-        addAndMakeVisible(b, -1);
-        
-        UseCaseFigure* c = new UseCaseFigure();
-        c->setTopLeftPosition(300, 300);
-        addAndMakeVisible(c, -1);
-        
-        _canvas->addArrow(a, c);
-        _canvas->addArrow(a, b);
-
         setSize(565, 800);
         
         // The NotificationCenter in the POCO libraries is inspired from Cocoa
         // http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/Reference/Reference.html
         // However, this implementation uses template adaptors, in a true C++ style!
-        NObserver<ContentComponent, FigureSelected> figureObserver(*this, &ContentComponent::handleFigureSelected);
+        NObserver<UMLDiagram, FigureSelected> figureObserver(*this, &UMLDiagram::handleFigureSelected);
         NotificationCenter::defaultCenter().addObserver(figureObserver);
 
-        NObserver<ContentComponent, ArrowCanvasClicked> arrowObserver(*this, &ContentComponent::handleArrowCanvasClicked);
+        NObserver<UMLDiagram, ArrowCanvasClicked> arrowObserver(*this, &UMLDiagram::handleArrowCanvasClicked);
         NotificationCenter::defaultCenter().addObserver(arrowObserver);
 
-        NObserver<ContentComponent, FigureMoved> movementObserver(*this, &ContentComponent::handleFigureMoved);
+        NObserver<UMLDiagram, FigureMoved> movementObserver(*this, &UMLDiagram::handleFigureMoved);
         NotificationCenter::defaultCenter().addObserver(movementObserver);
 
-        NObserver<ContentComponent, DiagramToggleGrid> gridObserver(*this, &ContentComponent::handleDiagramToggleGrid);
+        NObserver<UMLDiagram, DiagramToggleGrid> gridObserver(*this, &UMLDiagram::handleDiagramToggleGrid);
         NotificationCenter::defaultCenter().addObserver(gridObserver);
     }
 
-    ContentComponent::~ContentComponent()
+    UMLDiagram::~UMLDiagram()
     {
         deleteAllChildren();
     }
+    
+    DiagramToolbar* UMLDiagram::getToolbar()
+    {
+        if (!_toolbar)
+        {
+            _toolbar = createToolbar();
+        }
+        return _toolbar;
+    }
+    
+    void UMLDiagram::addArrowToCanvas(Figure* a, Figure* b)
+    {
+        _canvas->addArrow(a, b);
+    }
 
-    void ContentComponent::paint (Graphics& g)
+    void UMLDiagram::paint (Graphics& g)
     {
         g.fillAll(Colours::white);
     }
     
-    bool ContentComponent::isInterestedInDragSource (const String& sourceDescription)
+    bool UMLDiagram::isInterestedInDragSource (const String& sourceDescription)
     {
         // normally you'd check the sourceDescription value to see if it's the
         // sort of object that you're interested in before returning true, but for
@@ -114,12 +106,12 @@ namespace ui
         return true;
     }
 
-    void ContentComponent::itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y)
+    void UMLDiagram::itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y)
     {
         repaint();
     }
 
-    void ContentComponent::handleFigureSelected(const AutoPtr<FigureSelected>& notification)
+    void UMLDiagram::handleFigureSelected(const AutoPtr<FigureSelected>& notification)
     {
         Figure* figure = notification->getSelectedFigure();
         if (isParentOf(figure))
@@ -154,7 +146,7 @@ namespace ui
         }
     }
 
-    void ContentComponent::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
+    void UMLDiagram::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
     {
         ArrowCanvas* canvas = notification->getClickedArrowCanvas();
         if (isParentOf(canvas))
@@ -163,7 +155,7 @@ namespace ui
         }
     }
     
-    void ContentComponent::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
+    void UMLDiagram::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
     {
         Figure* figure = notification->getMovedFigure();
         if (isParentOf(figure))
@@ -172,7 +164,7 @@ namespace ui
         }
     }
     
-    void ContentComponent::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
+    void UMLDiagram::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
     {
         _canvas->toggleGrid();
     }

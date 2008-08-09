@@ -52,8 +52,8 @@ using notifications::ProjectTabbedComponentChangedTab;
  */
 namespace ui
 {
-    class UseCaseDiagramToolbar;
-    class ContentComponent;
+    class DiagramToolbar;
+    class UMLDiagram;
 
     /*!
      * \class DiagramComponent
@@ -63,7 +63,7 @@ namespace ui
     class DiagramComponent  : public Component
     {
     public:
-        DiagramComponent (const int);
+        DiagramComponent(UMLDiagram*, const int);
         ~DiagramComponent();
 
         void paint (Graphics& g);
@@ -78,8 +78,8 @@ namespace ui
     private:
         const int _index;
         Viewport* _viewport;
-        UseCaseDiagramToolbar* _toolbar;
-        ContentComponent* _component;
+        DiagramToolbar* _toolbar;
+        UMLDiagram* _component;
 
         // (prevent copy constructor and operator= from being generated..)
         DiagramComponent (const DiagramComponent&);

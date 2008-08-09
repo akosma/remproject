@@ -61,9 +61,6 @@ namespace ui
     , _commandManager(new ApplicationCommandManager())
     , _tooltipWindow()
     {
-        ProjectComponent* project = new ProjectComponent();
-        setContentComponent(project);
-
         _commandManager->registerAllCommandsForTarget(_commandDelegate);
         _commandManager->setFirstCommandTarget(_commandDelegate);
         addKeyListener(_commandManager->getKeyMappings());
@@ -78,6 +75,14 @@ namespace ui
         centreWithSize(620, 650);
         setResizable(true, true);
         setUsingNativeTitleBar(true);
+
+        ProjectComponent* project = new ProjectComponent();
+        setContentComponent(project);
+
+        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
+        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
+        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
+
         setVisible (true);
     }
 

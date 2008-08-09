@@ -69,7 +69,7 @@ namespace ui
         const String getApplicationName();
 
         const String getApplicationVersion();
-
+        
         bool moreThanOneInstanceAllowed();
 
         void anotherInstanceStarted (const String&);

@@ -35,8 +35,8 @@
 
 #include "ArrowCanvas.h"
 
-#ifndef CONTENTCOMPONENT_H_
-#include "ContentComponent.h"
+#ifndef USECASEDIAGRAM_H_
+#include "UseCaseDiagram.h"
 #endif
 
 #ifndef FIGURE_H_
@@ -230,10 +230,17 @@ namespace ui
     {
         const Point* start = _start->getAnchorPointRelativeTo(_end);
         const Point* end = _end->getAnchorPointRelativeTo(_start);
-        juce::Line line(*start, *end);
-        bool result = (line.getDistanceFromLine((float)e.getMouseDownX(), (float)e.getMouseDownY()) < 10.0f);
-        delete start;
-        delete end;
-        return result;
+        if (start && end)
+        {
+            juce::Line line(*start, *end);
+            bool result = (line.getDistanceFromLine((float)e.getMouseDownX(), (float)e.getMouseDownY()) < 10.0f);
+            delete start;
+            delete end;
+            return result;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

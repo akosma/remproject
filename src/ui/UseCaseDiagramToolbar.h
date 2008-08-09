@@ -35,7 +35,9 @@
 #ifndef USECASEDIAGRAMTOOLBAR_H_
 #define USECASEDIAGRAMTOOLBAR_H_
 
-#include "PlatformDefinitions.h"
+#ifndef DIAGRAMTOOLBAR_H_
+#include "DiagramToolbar.h"
+#endif
 
 /*!
  * \namespace ui
@@ -44,32 +46,15 @@
 namespace ui
 {
     /*!
-     * \class Toolbar
+     * \class UseCaseDiagramToolbar
      *
      *
      */
-    class UseCaseDiagramToolbar  : public Component
+    class UseCaseDiagramToolbar  : public DiagramToolbar
     {
     public:
-        UseCaseDiagramToolbar (Component*);
+        UseCaseDiagramToolbar();
         ~UseCaseDiagramToolbar();
-
-        void mouseDown(const MouseEvent& e);
-        void mouseDrag(const MouseEvent& e);
-
-        void paint (Graphics& g);
-        void resized();
-
-
-        juce_UseDebuggingNewOperator
-
-    private:
-        ComponentDragger _dragger;
-        Component* _parent;
-
-    private:
-        UseCaseDiagramToolbar (const UseCaseDiagramToolbar&);
-        const UseCaseDiagramToolbar& operator= (const UseCaseDiagramToolbar&);
     };
 }
 

@@ -22,8 +22,20 @@
 #include "../notifications/DiagramToggleGrid.h"
 #endif
 
+#ifndef NEWUSECASEDIAGRAMADDED_H_
+#include "../notifications/NewUseCaseDiagramAdded.h"
+#endif
+
 #ifndef FILECONTROLLER_H_
 #include "../controllers/FileController.h"
+#endif
+
+#ifndef WINDOW_H_
+#include "Window.h"
+#endif
+
+#ifndef APPLICATION_H_
+#include "Application.h"
 #endif
 
 #include "CommandDelegate.h"
@@ -32,6 +44,7 @@ using Poco::NotificationCenter;
 using controllers::FileController;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
+using notifications::NewUseCaseDiagramAdded;
 
 namespace ui
 {
@@ -44,7 +57,7 @@ namespace ui
     CommandDelegate::~CommandDelegate()
     {
     }
-
+    
     ApplicationCommandTarget* CommandDelegate::getNextCommandTarget()
     {
         return NULL;
@@ -158,7 +171,7 @@ namespace ui
                 info.description = "Creates a new use-case diagram on the current project";
                 info.flags = 0;
                 info.addDefaultKeypress(117, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
-                info.setActive(false);
+                info.setActive(true);
                 break;
             }
 
@@ -238,6 +251,13 @@ namespace ui
             case fileSaveAs:
             {
                 performFileSaveAs();
+                break;
+            }
+            
+            case projectNewUseCaseDiagram:
+            {
+                NewUseCaseDiagramAdded* notification = new NewUseCaseDiagramAdded();
+                NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }
 

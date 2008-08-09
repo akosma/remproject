@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file ContentComponent.h
+ * \file UMLDiagram.h
  *
- * Contains the interface of the ui::ContentComponent class.
+ * Contains the interface of the ui::UMLDiagram class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,11 +32,25 @@
  */
 
 #include <Poco/AutoPtr.h>
+#include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
 
 #include "PlatformDefinitions.h"
 
-#ifndef CONTENTCOMPONENT_H_
-#define CONTENTCOMPONENT_H_
+#ifndef UMLDIAGRAM_H_
+#define UMLDIAGRAM_H_
+
+#ifndef ACTORFIGURE_H_
+#include "ActorFigure.h"
+#endif
+
+#ifndef USECASEFIGURE_H_
+#include "UseCaseFigure.h"
+#endif
+
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
 
 #ifndef FIGURESELECTED_H_
 #include "../notifications/FigureSelected.h"
@@ -55,6 +69,8 @@
 #endif
 
 using Poco::AutoPtr;
+using Poco::NotificationCenter;
+using Poco::NObserver;
 using notifications::FigureSelected;
 using notifications::ArrowCanvasClicked;
 using notifications::FigureMoved;
@@ -68,17 +84,18 @@ namespace ui
 {
     class Figure;
     class ArrowCanvas;
+    class DiagramToolbar;
     
     /*!
-     * \class ContentComponent
+     * \class UMLDiagram
      *
      *  
      */
-    class ContentComponent : public Component, public DragAndDropTarget
+    class UMLDiagram : public Component, public DragAndDropTarget
     {
     public:
-        ContentComponent();
-        ~ContentComponent();
+        UMLDiagram();
+        ~UMLDiagram();
 
         void paint (Graphics&);
 
@@ -92,11 +109,20 @@ namespace ui
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
         void handleFigureMoved(const AutoPtr<FigureMoved>&);
         void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
+        
+        DiagramToolbar* getToolbar();
+        
+    protected:
+        virtual DiagramToolbar* createToolbar() = 0;
+        
+    protected:
+        void addArrowToCanvas(Figure*, Figure*);
 
     private:
         ArrowCanvas* _canvas;
         SelectedItemSet<Figure*> _selection;
+        DiagramToolbar* _toolbar;
     };
 }
 
-#endif /* CONTENTCOMPONENT_H_ */
+#endif /* UMLDIAGRAM_H_ */

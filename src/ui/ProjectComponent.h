@@ -32,10 +32,19 @@
  * \date      6/21/08
  */
 
+#include <Poco/AutoPtr.h>
+
 #include "PlatformDefinitions.h"
 
 #ifndef PROJECTCOMPONENT_H_
 #define PROJECTCOMPONENT_H_
+
+#ifndef NEWUSECASEDIAGRAMADDED_H_
+#include "../notifications/NewUseCaseDiagramAdded.h"
+#endif
+
+using Poco::AutoPtr;
+using notifications::NewUseCaseDiagramAdded;
 
 /*!
  * \namespace ui
@@ -44,7 +53,7 @@
 namespace ui
 {
     class ProjectTabbedComponent;
-    class UseCaseDiagramToolbar;
+    class UseCaseDiagram;
 
     /*!
      * \class ProjectComponent
@@ -67,6 +76,11 @@ namespace ui
         
         void resized();
         
+        UseCaseDiagram* addUseCaseDiagram();
+    
+    private:
+        void handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>&);
+    
     private:
         ProjectTabbedComponent* _tabs;
     };

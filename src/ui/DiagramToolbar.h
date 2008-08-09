@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the ui::UseCaseDiagramToolbar class.
+//! Contains the interface of the ui::DiagramToolbar class.
 /*!
  * \file Toolbar.cpp
  *
- * Contains the implementation of the ui::UseCaseDiagramToolbar class.
+ * Contains the interface of the ui::DiagramToolbar class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,26 +32,46 @@
  * \date      21 Jun 2008 4:48:24 pm
  */
 
-#include "UseCaseDiagramToolbar.h"
+#ifndef DIAGRAMTOOLBAR_H_
+#define DIAGRAMTOOLBAR_H_
 
-#include "ActorToolbarButton.h"
-#include "UseCaseToolbarButton.h"
+#include "PlatformDefinitions.h"
 
+/*!
+ * \namespace ui
+ * Insert a description for the namespace here
+ */
 namespace ui
 {
-    UseCaseDiagramToolbar::UseCaseDiagramToolbar()
-    : DiagramToolbar()
+    /*!
+     * \class Toolbar
+     *
+     *
+     */
+    class DiagramToolbar  : public Component
     {
-        ActorToolbarButton* button = new ActorToolbarButton();
-        button->setTopLeftPosition(10, 10);
-        addAndMakeVisible(button, -1);
+    public:
+        DiagramToolbar();
+        ~DiagramToolbar();
 
-        UseCaseToolbarButton* button2 = new UseCaseToolbarButton();
-        button2->setTopLeftPosition(10, 60);
-        addAndMakeVisible(button2, -1);
-    }
+        void mouseDown(const MouseEvent& e);
+        void mouseDrag(const MouseEvent& e);
 
-    UseCaseDiagramToolbar::~UseCaseDiagramToolbar()
-    {
-    }
+        void paint (Graphics& g);
+        void resized();
+
+        void setParent(Component*);
+
+        juce_UseDebuggingNewOperator
+
+    private:
+        ComponentDragger _dragger;
+        Component* _parent;
+
+    private:
+        DiagramToolbar (const DiagramToolbar&);
+        const DiagramToolbar& operator= (const DiagramToolbar&);
+    };
 }
+
+#endif   // DIAGRAMTOOLBAR_H_

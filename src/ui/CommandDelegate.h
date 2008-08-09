@@ -48,7 +48,7 @@ namespace ui
         virtual void getAllCommands(Array<CommandID>&);
         virtual void getCommandInfo(const CommandID, ApplicationCommandInfo&);
         virtual bool perform(const InvocationInfo&);
-
+        
         enum CommandIDs
         {
             fileNewProject = 0x2000,

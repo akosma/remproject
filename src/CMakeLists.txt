@@ -30,8 +30,11 @@ SET (ui_SRCS
     ui/Window.h 
     ui/Window.cpp 
 
-    ui/ContentComponent.h 
-    ui/ContentComponent.cpp 
+    ui/UseCaseDiagram.h 
+    ui/UseCaseDiagram.cpp 
+
+    ui/UMLDiagram.h 
+    ui/UMLDiagram.cpp 
     
     ui/DiagramComponent.h
     ui/DiagramComponent.cpp
@@ -56,6 +59,9 @@ SET (ui_SRCS
 
     ui/UseCaseDiagramToolbar.h
     ui/UseCaseDiagramToolbar.cpp
+
+    ui/DiagramToolbar.h
+    ui/DiagramToolbar.cpp
 
     ui/ActorToolbarButton.h
     ui/ActorToolbarButton.cpp
@@ -94,6 +100,9 @@ SET (notifications_SRCS
     
     notifications/DiagramToggleGrid.h
     notifications/DiagramToggleGrid.cpp
+
+    notifications/NewUseCaseDiagramAdded.h
+    notifications/NewUseCaseDiagramAdded.cpp
 )
 
 SET (storage_SRCS

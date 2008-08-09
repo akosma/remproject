@@ -37,12 +37,12 @@
 
 #include "DiagramComponent.h"
 
-#ifndef CONTENTCOMPONENT_H_
-#include "ContentComponent.h"
+#ifndef USECASEDIAGRAM_H_
+#include "UseCaseDiagram.h"
 #endif
 
-#ifndef USECASEDIAGRAMTOOLBAR_H_
-#include "UseCaseDiagramToolbar.h"
+#ifndef DIAGRAMTOOLBAR_H_
+#include "DiagramToolbar.h"
 #endif
 
 using Poco::NotificationCenter;
@@ -52,16 +52,17 @@ using juce::Rectangle;
 
 namespace ui
 {
-    DiagramComponent::DiagramComponent (const int index)
+    DiagramComponent::DiagramComponent(UMLDiagram* diagram, const int index)
     : _index(index)
     , _viewport (new Viewport())
-    , _toolbar(new UseCaseDiagramToolbar(this))
+    , _component (diagram)
+    , _toolbar(diagram->getToolbar())
     {
+        _toolbar->setParent(this);
         addAndMakeVisible(_viewport);
 //        addChildComponent(_toolbar, -1); // Don't make it visible yet!
         _toolbar->setTopLeftPosition(10, 50);
         
-        _component = new ContentComponent();
         _viewport->setViewedComponent(_component);
         
         NObserver<DiagramComponent, ProjectTabbedComponentChangedTab> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab);

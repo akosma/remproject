@@ -32,6 +32,9 @@
  * \date      6/21/08
  */
 
+#include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
+
 #include "ProjectComponent.h"
 
 #ifndef DIAGRAMCOMPONENT_H_
@@ -42,21 +45,26 @@
 #include "ProjectTabbedComponent.h"
 #endif
 
+#ifndef USECASEDIAGRAM_H_
+#include "UseCaseDiagram.h"
+#endif
+
+using Poco::NotificationCenter;
+using Poco::NObserver;
+using Poco::AutoPtr;
+using notifications::NewUseCaseDiagramAdded;
+
 namespace ui
 {
     ProjectComponent::ProjectComponent()
     : Component()
     , _tabs(new ProjectTabbedComponent())
     {
-        DiagramComponent* diagram1 = new DiagramComponent(_tabs->getNumTabs());
-        _tabs->addTab(String("diagram1"), Colours::white, diagram1, true);
-
-        DiagramComponent* diagram2 = new DiagramComponent(_tabs->getNumTabs());
-        _tabs->addTab(String("diagram2"), Colours::white, diagram2, true);
-        
-        _tabs->setCurrentTabIndex(0);
         addAndMakeVisible(_tabs);
         
+        NObserver<ProjectComponent, NewUseCaseDiagramAdded> newUseCaseObserver(*this, &ProjectComponent::handleNewUseCaseDiagramAdded);
+        NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
+
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);
 //        addAndMakeVisible(panel, -1);
@@ -71,12 +79,27 @@ namespace ui
     {
         deleteAllChildren();
     }
-    
+
+    UseCaseDiagram* ProjectComponent::addUseCaseDiagram()
+    {
+        int index = _tabs->getNumTabs();
+        UseCaseDiagram* diagram = new UseCaseDiagram();
+        DiagramComponent* diagramComponent = new DiagramComponent(diagram, index);
+        _tabs->addTab(String("Use Case Diagram"), Colours::white, diagramComponent, true);
+        _tabs->setCurrentTabIndex(index);
+        return diagram;
+    }
+
     void ProjectComponent::resized()
     {
         if(_tabs)
         {
             _tabs->setSize(getWidth(), getHeight());
         }
+    }
+    
+    void ProjectComponent::handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>& notification)
+    {
+        addUseCaseDiagram();
     }
 }

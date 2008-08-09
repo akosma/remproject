@@ -36,6 +36,7 @@
 
 #include <sstream>
 #include <string>
+#include <iostream>
 
 #if defined(__APPLE__) && defined(__MACH__)
 // The Mac OS X compiler requires this line, because "nil" is a reserved
@@ -66,6 +67,7 @@ using std::stringstream;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
+using notifications::NewUseCaseDiagramAdded;
 
 namespace controllers
 {
@@ -75,6 +77,8 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
+        NObserver<FileController, NewUseCaseDiagramAdded> newUseCaseObserver(*this, &FileController::handleNewUseCaseDiagramAdded);
+        NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
     }
 
     FileController::~FileController()
@@ -176,5 +180,10 @@ namespace controllers
             return _project->isNew();
         }
         return true;
+    }
+
+    void FileController::handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>& notification)
+    {
+        addDiagram("usecase");
     }
 }

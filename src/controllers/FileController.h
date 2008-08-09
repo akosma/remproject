@@ -53,11 +53,16 @@
 #include "../metamodel/Diagram.h"
 #endif
 
+#ifndef NEWUSECASEDIAGRAMADDED_H_
+#include "../notifications/NewUseCaseDiagramAdded.h"
+#endif
+
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
 using std::string;
 using Poco::AutoPtr;
+using notifications::NewUseCaseDiagramAdded;
 
 //! Contains the controller classes of the application.
 /*!
@@ -161,6 +166,9 @@ namespace controllers
 
         //! Allow the Singleton template class to access the private constructor.
         friend FileController& Singleton<FileController>::get();
+        
+    private:
+        void handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>&);
 
     private:
         //! Instance of the Project class "controlled" by this FileController.
