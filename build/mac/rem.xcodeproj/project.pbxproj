@@ -406,20 +406,20 @@
 		3A5B73530E4DB9D3009D4BCF /* notifications */ = {
 			isa = PBXGroup;
 			children = (
-				3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */,
 				3A5191F30E4DC747003053A9 /* ArrowCanvasClicked.h */,
-				3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */,
+				3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */,
 				3A5191F50E4DC747003053A9 /* DiagramToggleGrid.h */,
-				3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */,
+				3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */,
 				3A5191F70E4DC747003053A9 /* ExportDiagramAsPNG.h */,
-				3A5191F80E4DC747003053A9 /* FigureMoved.cpp */,
+				3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */,
 				3A5191F90E4DC747003053A9 /* FigureMoved.h */,
-				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
+				3A5191F80E4DC747003053A9 /* FigureMoved.cpp */,
 				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
-				3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */,
-				3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */,
+				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
 				3A0AA2430E4DEC5700E2F57A /* NewUseCaseDiagramAdded.h */,
 				3A0AA2440E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp */,
+				3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */,
+				3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */,
 			);
 			name = notifications;
 			sourceTree = "<group>";
