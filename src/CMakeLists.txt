@@ -472,6 +472,8 @@ ELSE (WIN32)
             )
 
             TARGET_LINK_LIBRARIES(remtest
+                ${EXTRA_LIBS}
+                juce
                 cppunit 
                 sqlite3 
                 PocoFoundation
