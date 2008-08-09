@@ -69,9 +69,6 @@ namespace ui
 
         NObserver<UMLDiagram, FigureMoved> movementObserver(*this, &UMLDiagram::handleFigureMoved);
         NotificationCenter::defaultCenter().addObserver(movementObserver);
-
-        NObserver<UMLDiagram, DiagramToggleGrid> gridObserver(*this, &UMLDiagram::handleDiagramToggleGrid);
-        NotificationCenter::defaultCenter().addObserver(gridObserver);
     }
 
     UMLDiagram::~UMLDiagram()
@@ -163,8 +160,8 @@ namespace ui
             _canvas->repaint();
         }
     }
-    
-    void UMLDiagram::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
+
+    void UMLDiagram::toggleGrid()
     {
         _canvas->toggleGrid();
     }

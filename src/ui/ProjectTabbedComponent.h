@@ -42,8 +42,13 @@
 #include "../notifications/ExportDiagramAsPNG.h"
 #endif
 
+#ifndef DIAGRAMTOGGLEGRID_H_
+#include "../notifications/DiagramToggleGrid.h"
+#endif
+
 using Poco::AutoPtr;
 using notifications::ExportDiagramAsPNG;
+using notifications::DiagramToggleGrid;
 
 /*!
  * \namespace ui
@@ -75,6 +80,8 @@ namespace ui
         void postProjectTabbedComponentChangedTab(const int, const String&);
         
         void handleExportDiagramAsPNG(const AutoPtr<ExportDiagramAsPNG>&);
+
+        void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
     };
 }
 

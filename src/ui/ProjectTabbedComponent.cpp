@@ -56,6 +56,9 @@ namespace ui
     {
         NObserver<ProjectTabbedComponent, ExportDiagramAsPNG> exportObserver(*this, &ProjectTabbedComponent::handleExportDiagramAsPNG);
         NotificationCenter::defaultCenter().addObserver(exportObserver);
+
+        NObserver<ProjectTabbedComponent, DiagramToggleGrid> gridObserver(*this, &ProjectTabbedComponent::handleDiagramToggleGrid);
+        NotificationCenter::defaultCenter().addObserver(gridObserver);
     }
     
     ProjectTabbedComponent::~ProjectTabbedComponent()
@@ -77,5 +80,11 @@ namespace ui
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
         currentDiagram->exportAsPNG();
+    }
+
+    void ProjectTabbedComponent::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
+    {
+        DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
+        currentDiagram->toggleGrid();
     }
 }

@@ -55,7 +55,7 @@ namespace ui
     DiagramComponent::DiagramComponent(UMLDiagram* diagram, const int index)
     : _index(index)
     , _viewport (new Viewport())
-    , _component (diagram)
+    , _diagram (diagram)
     , _toolbar(diagram->getToolbar())
     {
         _toolbar->setParent(this);
@@ -63,7 +63,7 @@ namespace ui
 //        addChildComponent(_toolbar, -1); // Don't make it visible yet!
         _toolbar->setTopLeftPosition(10, 50);
         
-        _viewport->setViewedComponent(_component);
+        _viewport->setViewedComponent(_diagram);
         
         NObserver<DiagramComponent, ProjectTabbedComponentChangedTab> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab);
         NotificationCenter::defaultCenter().addObserver(tabObserver);
@@ -94,8 +94,8 @@ namespace ui
             }
             FileOutputStream* stream = file.createOutputStream();
             // Windows requires the "juce::" identifier, to avoid ambiguous symbols errors
-            juce::Rectangle rect(0, 0, _component->getWidth(), _component->getHeight());
-            Image* image = _component->createComponentSnapshot(rect);
+            juce::Rectangle rect(0, 0, _diagram->getWidth(), _diagram->getHeight());
+            Image* image = _diagram->createComponentSnapshot(rect);
             PNGImageFormat png;
             result = png.writeImageToStream(*image, *stream);
             stream->flush();
@@ -114,5 +114,10 @@ namespace ui
     {
         const bool shouldBeVisible = (_index == notification->getNewCurrentTabIndex());
         _toolbar->setVisible(shouldBeVisible);
+    }
+    
+    void DiagramComponent::toggleGrid()
+    {
+        _diagram->toggleGrid();
     }
 }

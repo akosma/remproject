@@ -69,6 +69,7 @@ namespace ui
         void paint (Graphics& g);
         void resized();
         bool exportAsPNG();
+        void toggleGrid();
 
         juce_UseDebuggingNewOperator
         
@@ -79,7 +80,7 @@ namespace ui
         const int _index;
         Viewport* _viewport;
         DiagramToolbar* _toolbar;
-        UMLDiagram* _component;
+        UMLDiagram* _diagram;
 
         // (prevent copy constructor and operator= from being generated..)
         DiagramComponent (const DiagramComponent&);

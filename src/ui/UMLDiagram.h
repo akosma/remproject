@@ -64,17 +64,12 @@
 #include "../notifications/FigureMoved.h"
 #endif
 
-#ifndef DIAGRAMTOGGLEGRID_H_
-#include "../notifications/DiagramToggleGrid.h"
-#endif
-
 using Poco::AutoPtr;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using notifications::FigureSelected;
 using notifications::ArrowCanvasClicked;
 using notifications::FigureMoved;
-using notifications::DiagramToggleGrid;
 
 /*!
  * \namespace ui
@@ -108,7 +103,7 @@ namespace ui
         void handleFigureSelected(const AutoPtr<FigureSelected>&);
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
         void handleFigureMoved(const AutoPtr<FigureMoved>&);
-        void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
+        void toggleGrid();
         
         DiagramToolbar* getToolbar();
         
