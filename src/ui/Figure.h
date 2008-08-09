@@ -38,12 +38,12 @@
 #ifndef FIGURE_H_
 #define FIGURE_H_
 
-#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "../notifications/ArrowCanvasClickedNotification.h"
+#ifndef ARROWCANVASCLICKED_H_
+#include "../notifications/ArrowCanvasClicked.h"
 #endif
 
 using Poco::AutoPtr;
-using notifications::ArrowCanvasClickedNotification;
+using notifications::ArrowCanvasClicked;
 
 /*!
  * \namespace ui
@@ -93,9 +93,9 @@ namespace ui
         
     private:
         void drawDashedLineAround(Graphics&);
-        void postFigureSelectedNotification(const MouseEvent&);
-        void postFigureMovedNotification();
-        void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
+        void postFigureSelected(const MouseEvent&);
+        void postFigureMoved();
+        void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
 
     private:
         bool _selected;

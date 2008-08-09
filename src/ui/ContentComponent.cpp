@@ -83,16 +83,16 @@ namespace ui
         // The NotificationCenter in the POCO libraries is inspired from Cocoa
         // http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/Reference/Reference.html
         // However, this implementation uses template adaptors, in a true C++ style!
-        NObserver<ContentComponent, FigureSelectedNotification> figureObserver(*this, &ContentComponent::handleFigureSelectedNotification);
+        NObserver<ContentComponent, FigureSelected> figureObserver(*this, &ContentComponent::handleFigureSelected);
         NotificationCenter::defaultCenter().addObserver(figureObserver);
 
-        NObserver<ContentComponent, ArrowCanvasClickedNotification> arrowObserver(*this, &ContentComponent::handleArrowCanvasClickedNotification);
+        NObserver<ContentComponent, ArrowCanvasClicked> arrowObserver(*this, &ContentComponent::handleArrowCanvasClicked);
         NotificationCenter::defaultCenter().addObserver(arrowObserver);
 
-        NObserver<ContentComponent, FigureMovedNotification> movementObserver(*this, &ContentComponent::handleFigureMovedNotification);
+        NObserver<ContentComponent, FigureMoved> movementObserver(*this, &ContentComponent::handleFigureMoved);
         NotificationCenter::defaultCenter().addObserver(movementObserver);
 
-        NObserver<ContentComponent, DiagramToggleGridNotification> gridObserver(*this, &ContentComponent::handleDiagramToggleGridNotification);
+        NObserver<ContentComponent, DiagramToggleGrid> gridObserver(*this, &ContentComponent::handleDiagramToggleGrid);
         NotificationCenter::defaultCenter().addObserver(gridObserver);
     }
 
@@ -119,7 +119,7 @@ namespace ui
         repaint();
     }
 
-    void ContentComponent::handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>& notification)
+    void ContentComponent::handleFigureSelected(const AutoPtr<FigureSelected>& notification)
     {
         Figure* figure = notification->getSelectedFigure();
         if (isParentOf(figure))
@@ -154,7 +154,7 @@ namespace ui
         }
     }
 
-    void ContentComponent::handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>& notification)
+    void ContentComponent::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
     {
         ArrowCanvas* canvas = notification->getClickedArrowCanvas();
         if (isParentOf(canvas))
@@ -163,7 +163,7 @@ namespace ui
         }
     }
     
-    void ContentComponent::handleFigureMovedNotification(const AutoPtr<FigureMovedNotification>& notification)
+    void ContentComponent::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
     {
         Figure* figure = notification->getMovedFigure();
         if (isParentOf(figure))
@@ -172,7 +172,7 @@ namespace ui
         }
     }
     
-    void ContentComponent::handleDiagramToggleGridNotification(const AutoPtr<DiagramToggleGridNotification>&)
+    void ContentComponent::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
     {
         _canvas->toggleGrid();
     }

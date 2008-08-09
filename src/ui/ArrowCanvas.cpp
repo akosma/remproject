@@ -43,8 +43,8 @@
 #include "Figure.h"
 #endif
 
-#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "ArrowCanvasClickedNotification.h"
+#ifndef ARROWCANVASCLICKED_H_
+#include "ArrowCanvasClicked.h"
 #endif
 
 using std::vector;
@@ -100,7 +100,7 @@ namespace ui
                 break;
             }
         }
-        postArrowCanvasClickedNotification();
+        postArrowCanvasClicked();
     }
     
     void ArrowCanvas::setNoCurrentArrow()
@@ -184,9 +184,9 @@ namespace ui
         _arrows.push_back(arrow);
     }
     
-    void ArrowCanvas::postArrowCanvasClickedNotification()
+    void ArrowCanvas::postArrowCanvasClicked()
     {
-        ArrowCanvasClickedNotification* notification = new ArrowCanvasClickedNotification(this);
+        ArrowCanvasClicked* notification = new ArrowCanvasClicked(this);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     

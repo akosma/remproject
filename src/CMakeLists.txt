@@ -77,26 +77,26 @@ SET (ui_Main_SRCS
 )
 
 SET (notifications_SRCS
-    notifications/FigureMovedNotification.h
-    notifications/FigureMovedNotification.cpp
+    notifications/FigureMoved.h
+    notifications/FigureMoved.cpp
     
-    notifications/FigureSelectedNotification.h
-    notifications/FigureSelectedNotification.cpp
+    notifications/FigureSelected.h
+    notifications/FigureSelected.cpp
     
-    notifications/ArrowCanvasClickedNotification.h
-    notifications/ArrowCanvasClickedNotification.cpp
+    notifications/ArrowCanvasClicked.h
+    notifications/ArrowCanvasClicked.cpp
     
-    notifications/ProjectTabbedComponentChangedTabNotification.h
-    notifications/ProjectTabbedComponentChangedTabNotification.cpp
+    notifications/ProjectTabbedComponentChangedTab.h
+    notifications/ProjectTabbedComponentChangedTab.cpp
     
-    notifications/ExportDiagramAsPNGNotification.h
-    notifications/ExportDiagramAsPNGNotification.cpp
+    notifications/ExportDiagramAsPNG.h
+    notifications/ExportDiagramAsPNG.cpp
     
-    notifications/DiagramToggleGridNotification.h
-    notifications/DiagramToggleGridNotification.cpp
+    notifications/DiagramToggleGrid.h
+    notifications/DiagramToggleGrid.cpp
     
-    notifications/SaveFileNotification.h
-    notifications/SaveFileNotification.cpp
+    notifications/SaveFile.h
+    notifications/SaveFile.cpp
 )
 
 SET (storage_SRCS

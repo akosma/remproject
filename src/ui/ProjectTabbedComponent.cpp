@@ -36,8 +36,8 @@
 
 #include "ProjectTabbedComponent.h"
 
-#ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
-#include "../notifications/ProjectTabbedComponentChangedTabNotification.h"
+#ifndef PROJECTTABBEDCOMPONENTCHANGEDTAB_H_
+#include "../notifications/ProjectTabbedComponentChangedTab.h"
 #endif
 
 #ifndef DIAGRAMCOMPONENT_H_
@@ -47,14 +47,14 @@
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using notifications::ProjectTabbedComponentChangedTabNotification;
+using notifications::ProjectTabbedComponentChangedTab;
 
 namespace ui
 {
     ProjectTabbedComponent::ProjectTabbedComponent()
     : TabbedComponent(TabbedButtonBar::TabsAtTop)
     {
-        NObserver<ProjectTabbedComponent, ExportDiagramAsPNGNotification> exportObserver(*this, &ProjectTabbedComponent::handleExportDiagramAsPNGNotification);
+        NObserver<ProjectTabbedComponent, ExportDiagramAsPNG> exportObserver(*this, &ProjectTabbedComponent::handleExportDiagramAsPNG);
         NotificationCenter::defaultCenter().addObserver(exportObserver);
     }
     
@@ -64,16 +64,16 @@ namespace ui
     
     void ProjectTabbedComponent::currentTabChanged(const int newCurrentTabIndex, const String& newCurrentTabName)
     {
-        postProjectTabbedComponentChangedTabNotification(newCurrentTabIndex, newCurrentTabName);
+        postProjectTabbedComponentChangedTab(newCurrentTabIndex, newCurrentTabName);
     }
     
-    void ProjectTabbedComponent::postProjectTabbedComponentChangedTabNotification(const int newCurrentTabIndex, const String& newCurrentTabName)
+    void ProjectTabbedComponent::postProjectTabbedComponentChangedTab(const int newCurrentTabIndex, const String& newCurrentTabName)
     {
-        ProjectTabbedComponentChangedTabNotification* notification = new ProjectTabbedComponentChangedTabNotification(newCurrentTabIndex, newCurrentTabName);
+        ProjectTabbedComponentChangedTab* notification = new ProjectTabbedComponentChangedTab(newCurrentTabIndex, newCurrentTabName);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     
-    void ProjectTabbedComponent::handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>& notification)
+    void ProjectTabbedComponent::handleExportDiagramAsPNG(const AutoPtr<ExportDiagramAsPNG>& notification)
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
         currentDiagram->exportAsPNG();

@@ -66,7 +66,7 @@ using std::stringstream;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using notifications::SaveFileNotification;
+using notifications::SaveFile;
 
 namespace controllers
 {
@@ -76,7 +76,7 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
-        NObserver<FileController, SaveFileNotification> fileSaveObserver(*this, &FileController::handleSaveFileNotification);
+        NObserver<FileController, SaveFile> fileSaveObserver(*this, &FileController::handleSaveFile);
         NotificationCenter::defaultCenter().addObserver(fileSaveObserver);
     }
 
@@ -171,7 +171,7 @@ namespace controllers
         return (_currentDiagram != NULL);
     }
     
-    void FileController::handleSaveFileNotification(const AutoPtr<SaveFileNotification>&)
+    void FileController::handleSaveFile(const AutoPtr<SaveFile>&)
     {
         saveProject();
     }

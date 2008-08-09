@@ -44,23 +44,23 @@
 #include "ArrowCanvas.h"
 #endif
 
-#ifndef FIGURESELECTEDNOTIFICATION_H_
-#include "../notifications/FigureSelectedNotification.h"
+#ifndef FIGURESELECTED_H_
+#include "../notifications/FigureSelected.h"
 #endif
 
-#ifndef FIGUREMOVEDNOTIFICATION_H_
-#include "../notifications/FigureMovedNotification.h"
+#ifndef FIGUREMOVED_H_
+#include "../notifications/FigureMoved.h"
 #endif
 
-#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "../notifications/ArrowCanvasClickedNotification.h"
+#ifndef ARROWCANVASCLICKED_H_
+#include "../notifications/ArrowCanvasClicked.h"
 #endif
 
 using Poco::NotificationCenter;
 using Poco::NObserver;
-using notifications::FigureSelectedNotification;
-using notifications::FigureMovedNotification;
-using notifications::ArrowCanvasClickedNotification;
+using notifications::FigureSelected;
+using notifications::FigureMoved;
+using notifications::ArrowCanvasClicked;
 
 /*!
  * \namespace ui
@@ -89,7 +89,7 @@ namespace ui
         _resizer->setSize(getWidth(),getHeight());
         _resizer->setBounds(0, 0, getWidth(), getHeight());
         
-        NObserver<Figure, ArrowCanvasClickedNotification> arrowCanvasObserver(*this, &Figure::handleArrowCanvasClickedNotification);
+        NObserver<Figure, ArrowCanvasClicked> arrowCanvasObserver(*this, &Figure::handleArrowCanvasClicked);
         NotificationCenter::defaultCenter().addObserver(arrowCanvasObserver);
     }
 
@@ -101,7 +101,7 @@ namespace ui
     void Figure::mouseDown(const MouseEvent& e)
     {
         toFront(true);
-        postFigureSelectedNotification(e);
+        postFigureSelected(e);
         _dragger.startDraggingComponent(this, 0);
         setMouseCursor(MouseCursor(MouseCursor::DraggingHandCursor));
     }
@@ -114,7 +114,7 @@ namespace ui
     void Figure::mouseDrag(const MouseEvent& e)
     {
         _dragger.dragComponent(this, e);
-        postFigureMovedNotification();
+        postFigureMoved();
     }
     
     void Figure::mouseEnter(const MouseEvent& e)
@@ -133,7 +133,7 @@ namespace ui
         if (_resizer)
         {
             toFront(true);
-            postFigureMovedNotification();
+            postFigureMoved();
             _resizer->setBounds (0, 0, getWidth(), getHeight());
         }
     }
@@ -251,7 +251,7 @@ namespace ui
         g.drawDashedLine(0.0f, (float)getHeight(), (float)getWidth(), (float)getHeight(), dashLengths, 2, 2.0f);
     }
     
-    void Figure::handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>& notification)
+    void Figure::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
     {
         DiagramComponent* component = findParentComponentOfClass<DiagramComponent>();
         ArrowCanvas* canvas = notification->getClickedArrowCanvas();
@@ -261,15 +261,15 @@ namespace ui
         }
     }
     
-    void Figure::postFigureSelectedNotification(const MouseEvent& e)
+    void Figure::postFigureSelected(const MouseEvent& e)
     {
-        FigureSelectedNotification* notification = new FigureSelectedNotification(this, e.mods);
+        FigureSelected* notification = new FigureSelected(this, e.mods);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     
-    void Figure::postFigureMovedNotification()
+    void Figure::postFigureMoved()
     {
-        FigureMovedNotification* notification = new FigureMovedNotification(this);
+        FigureMoved* notification = new FigureMoved(this);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
 }

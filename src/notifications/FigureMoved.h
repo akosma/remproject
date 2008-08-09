@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file FigureSelectedNotification.h
+ * \file FigureMoved.h
  *
- * Contains the interface of the notifications::FigureSelectedNotification class.
+ * Contains the interface of the notifications::FigureMoved class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,12 +31,10 @@
  * \date      6/22/08
  */
 
-#ifndef FIGURESELECTEDNOTIFICATION_H_
-#define FIGURESELECTEDNOTIFICATION_H_
+#ifndef FIGUREMOVED_H_
+#define FIGUREMOVED_H_
 
 #include <Poco/Notification.h>
-
-#include "../ui/PlatformDefinitions.h"
 
 using Poco::Notification;
 
@@ -44,7 +42,6 @@ namespace ui
 {
     class Figure;
 }
-
 using ui::Figure;
 
 /*!
@@ -54,31 +51,29 @@ using ui::Figure;
 namespace notifications
 {
     /*!
-     * \class FigureSelectedNotification
+     * \class FigureMoved
      *
      *  
      */
-    class FigureSelectedNotification : public Notification
+    class FigureMoved : public Notification
     {
     public:
 
         /*!
-         *  FigureSelectedNotification constructor.
+         *  FigureMoved constructor.
          */
-        FigureSelectedNotification(Figure*, ModifierKeys);
+        FigureMoved(Figure*);
 
         /*!
-         *  FigureSelectedNotification virtual destructor.
+         *  FigureMoved virtual destructor.
          */
-        virtual ~FigureSelectedNotification();
+        virtual ~FigureMoved();
         
-        Figure* getSelectedFigure() const;
-        const ModifierKeys getModifierKeys() const;
-        
+        Figure* getMovedFigure() const;
+
     private:
         Figure* _figure;
-        ModifierKeys _modifierKeys;
     };
 }
 
-#endif /* FIGURESELECTEDNOTIFICATION_H_ */
+#endif /* FIGUREMOVED_H_ */

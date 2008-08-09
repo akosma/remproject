@@ -76,7 +76,7 @@ namespace ui
         void toggleGrid();
         
     private:
-        void postArrowCanvasClickedNotification();
+        void postArrowCanvasClicked();
         void drawGrid(Graphics& g);
 
     private:

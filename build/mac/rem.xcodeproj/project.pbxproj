@@ -23,20 +23,20 @@
 		3A4D2DC40E140E960000CBC5 /* UseCaseDiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D2DC20E140E960000CBC5 /* UseCaseDiagramToolbar.cpp */; };
 		3A4D2DC90E140F940000CBC5 /* ProjectTabbedComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */; };
 		3A4EB46E0D8D4A5700C4895F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EAEAA0D8D332000C4895F /* main.cpp */; };
-		3A5B73620E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73540E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp */; };
-		3A5B73630E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73560E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp */; };
-		3A5B73640E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73580E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp */; };
-		3A5B73650E4DB9F6009D4BCF /* FigureMovedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735A0E4DB9F6009D4BCF /* FigureMovedNotification.cpp */; };
-		3A5B73660E4DB9F6009D4BCF /* FigureSelectedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735C0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp */; };
-		3A5B73670E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp */; };
-		3A5B73680E4DB9F6009D4BCF /* SaveFileNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73600E4DB9F6009D4BCF /* SaveFileNotification.cpp */; };
-		3A5B73690E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73540E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp */; };
-		3A5B736A0E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73560E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp */; };
-		3A5B736B0E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73580E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp */; };
-		3A5B736C0E4DB9F6009D4BCF /* FigureMovedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735A0E4DB9F6009D4BCF /* FigureMovedNotification.cpp */; };
-		3A5B736D0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735C0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp */; };
-		3A5B736E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B735E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp */; };
-		3A5B736F0E4DB9F6009D4BCF /* SaveFileNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B73600E4DB9F6009D4BCF /* SaveFileNotification.cpp */; };
+		3A5192000E4DC747003053A9 /* ArrowCanvasClicked.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */; };
+		3A5192010E4DC747003053A9 /* DiagramToggleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */; };
+		3A5192020E4DC747003053A9 /* ExportDiagramAsPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */; };
+		3A5192030E4DC747003053A9 /* FigureMoved.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F80E4DC747003053A9 /* FigureMoved.cpp */; };
+		3A5192040E4DC747003053A9 /* FigureSelected.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */; };
+		3A5192050E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */; };
+		3A5192060E4DC747003053A9 /* SaveFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FE0E4DC747003053A9 /* SaveFile.cpp */; };
+		3A5192070E4DC747003053A9 /* ArrowCanvasClicked.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */; };
+		3A5192080E4DC747003053A9 /* DiagramToggleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */; };
+		3A5192090E4DC747003053A9 /* ExportDiagramAsPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */; };
+		3A51920A0E4DC747003053A9 /* FigureMoved.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191F80E4DC747003053A9 /* FigureMoved.cpp */; };
+		3A51920B0E4DC747003053A9 /* FigureSelected.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */; };
+		3A51920C0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */; };
+		3A51920D0E4DC747003053A9 /* SaveFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5191FE0E4DC747003053A9 /* SaveFile.cpp */; };
 		3A5B73820E4DBD3A009D4BCF /* ActorFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FC0DECAC1B009A749A /* ActorFigure.cpp */; };
 		3A5B73830E4DBD3C009D4BCF /* UseCaseFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */; };
 		3A5B73840E4DBD3C009D4BCF /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A98E1B40DB9FB0A0095EADC /* Figure.cpp */; };
@@ -137,20 +137,20 @@
 		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A5B73540E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvasClickedNotification.cpp; path = ../../src/notifications/ArrowCanvasClickedNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B73550E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvasClickedNotification.h; path = ../../src/notifications/ArrowCanvasClickedNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B73560E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramToggleGridNotification.cpp; path = ../../src/notifications/DiagramToggleGridNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B73570E4DB9F6009D4BCF /* DiagramToggleGridNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramToggleGridNotification.h; path = ../../src/notifications/DiagramToggleGridNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B73580E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportDiagramAsPNGNotification.cpp; path = ../../src/notifications/ExportDiagramAsPNGNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B73590E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportDiagramAsPNGNotification.h; path = ../../src/notifications/ExportDiagramAsPNGNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B735A0E4DB9F6009D4BCF /* FigureMovedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureMovedNotification.cpp; path = ../../src/notifications/FigureMovedNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B735B0E4DB9F6009D4BCF /* FigureMovedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureMovedNotification.h; path = ../../src/notifications/FigureMovedNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B735C0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureSelectedNotification.cpp; path = ../../src/notifications/FigureSelectedNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B735D0E4DB9F6009D4BCF /* FigureSelectedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureSelectedNotification.h; path = ../../src/notifications/FigureSelectedNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B735E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponentChangedTabNotification.cpp; path = ../../src/notifications/ProjectTabbedComponentChangedTabNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B735F0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTabNotification.h; path = ../../src/notifications/ProjectTabbedComponentChangedTabNotification.h; sourceTree = SOURCE_ROOT; };
-		3A5B73600E4DB9F6009D4BCF /* SaveFileNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveFileNotification.cpp; path = ../../src/notifications/SaveFileNotification.cpp; sourceTree = SOURCE_ROOT; };
-		3A5B73610E4DB9F6009D4BCF /* SaveFileNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveFileNotification.h; path = ../../src/notifications/SaveFileNotification.h; sourceTree = SOURCE_ROOT; };
+		3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvasClicked.cpp; path = ../../src/notifications/ArrowCanvasClicked.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191F30E4DC747003053A9 /* ArrowCanvasClicked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvasClicked.h; path = ../../src/notifications/ArrowCanvasClicked.h; sourceTree = SOURCE_ROOT; };
+		3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramToggleGrid.cpp; path = ../../src/notifications/DiagramToggleGrid.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191F50E4DC747003053A9 /* DiagramToggleGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramToggleGrid.h; path = ../../src/notifications/DiagramToggleGrid.h; sourceTree = SOURCE_ROOT; };
+		3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportDiagramAsPNG.cpp; path = ../../src/notifications/ExportDiagramAsPNG.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191F70E4DC747003053A9 /* ExportDiagramAsPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportDiagramAsPNG.h; path = ../../src/notifications/ExportDiagramAsPNG.h; sourceTree = SOURCE_ROOT; };
+		3A5191F80E4DC747003053A9 /* FigureMoved.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureMoved.cpp; path = ../../src/notifications/FigureMoved.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191F90E4DC747003053A9 /* FigureMoved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureMoved.h; path = ../../src/notifications/FigureMoved.h; sourceTree = SOURCE_ROOT; };
+		3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureSelected.cpp; path = ../../src/notifications/FigureSelected.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191FB0E4DC747003053A9 /* FigureSelected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureSelected.h; path = ../../src/notifications/FigureSelected.h; sourceTree = SOURCE_ROOT; };
+		3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponentChangedTab.cpp; path = ../../src/notifications/ProjectTabbedComponentChangedTab.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTab.h; path = ../../src/notifications/ProjectTabbedComponentChangedTab.h; sourceTree = SOURCE_ROOT; };
+		3A5191FE0E4DC747003053A9 /* SaveFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveFile.cpp; path = ../../src/notifications/SaveFile.cpp; sourceTree = SOURCE_ROOT; };
+		3A5191FF0E4DC747003053A9 /* SaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveFile.h; path = ../../src/notifications/SaveFile.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -398,20 +398,20 @@
 		3A5B73530E4DB9D3009D4BCF /* notifications */ = {
 			isa = PBXGroup;
 			children = (
-				3A5B73540E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp */,
-				3A5B73550E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.h */,
-				3A5B73560E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp */,
-				3A5B73570E4DB9F6009D4BCF /* DiagramToggleGridNotification.h */,
-				3A5B73580E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp */,
-				3A5B73590E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.h */,
-				3A5B735A0E4DB9F6009D4BCF /* FigureMovedNotification.cpp */,
-				3A5B735B0E4DB9F6009D4BCF /* FigureMovedNotification.h */,
-				3A5B735C0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp */,
-				3A5B735D0E4DB9F6009D4BCF /* FigureSelectedNotification.h */,
-				3A5B735E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp */,
-				3A5B735F0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.h */,
-				3A5B73600E4DB9F6009D4BCF /* SaveFileNotification.cpp */,
-				3A5B73610E4DB9F6009D4BCF /* SaveFileNotification.h */,
+				3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */,
+				3A5191F30E4DC747003053A9 /* ArrowCanvasClicked.h */,
+				3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */,
+				3A5191F50E4DC747003053A9 /* DiagramToggleGrid.h */,
+				3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */,
+				3A5191F70E4DC747003053A9 /* ExportDiagramAsPNG.h */,
+				3A5191F80E4DC747003053A9 /* FigureMoved.cpp */,
+				3A5191F90E4DC747003053A9 /* FigureMoved.h */,
+				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
+				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
+				3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */,
+				3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */,
+				3A5191FE0E4DC747003053A9 /* SaveFile.cpp */,
+				3A5191FF0E4DC747003053A9 /* SaveFile.h */,
 			);
 			name = notifications;
 			sourceTree = "<group>";
@@ -618,13 +618,6 @@
 				3A02E6370DEDCBD6009A9590 /* Member.cpp in Sources */,
 				3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */,
 				3A8DB0490DF9C33D00B9D679 /* FindConditions.cpp in Sources */,
-				3A5B73690E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp in Sources */,
-				3A5B736A0E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp in Sources */,
-				3A5B736B0E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp in Sources */,
-				3A5B736C0E4DB9F6009D4BCF /* FigureMovedNotification.cpp in Sources */,
-				3A5B736D0E4DB9F6009D4BCF /* FigureSelectedNotification.cpp in Sources */,
-				3A5B736E0E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */,
-				3A5B736F0E4DB9F6009D4BCF /* SaveFileNotification.cpp in Sources */,
 				3A5B73820E4DBD3A009D4BCF /* ActorFigure.cpp in Sources */,
 				3A5B73830E4DBD3C009D4BCF /* UseCaseFigure.cpp in Sources */,
 				3A5B73840E4DBD3C009D4BCF /* Figure.cpp in Sources */,
@@ -640,6 +633,13 @@
 				3A5B73D30E4DC115009D4BCF /* Window.cpp in Sources */,
 				3A5B73D40E4DC11A009D4BCF /* ProjectComponent.cpp in Sources */,
 				3A5B73D50E4DC11C009D4BCF /* Application.cpp in Sources */,
+				3A5192070E4DC747003053A9 /* ArrowCanvasClicked.cpp in Sources */,
+				3A5192080E4DC747003053A9 /* DiagramToggleGrid.cpp in Sources */,
+				3A5192090E4DC747003053A9 /* ExportDiagramAsPNG.cpp in Sources */,
+				3A51920A0E4DC747003053A9 /* FigureMoved.cpp in Sources */,
+				3A51920B0E4DC747003053A9 /* FigureSelected.cpp in Sources */,
+				3A51920C0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */,
+				3A51920D0E4DC747003053A9 /* SaveFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,13 +673,13 @@
 				3AA1E5D00E1D4C3E00B752D0 /* SQLiteWrapper.cpp in Sources */,
 				3AA1E6210E1D577800B752D0 /* CommandDelegate.cpp in Sources */,
 				3AA1E6CF0E1D67D100B752D0 /* MenuBar.cpp in Sources */,
-				3A5B73620E4DB9F6009D4BCF /* ArrowCanvasClickedNotification.cpp in Sources */,
-				3A5B73630E4DB9F6009D4BCF /* DiagramToggleGridNotification.cpp in Sources */,
-				3A5B73640E4DB9F6009D4BCF /* ExportDiagramAsPNGNotification.cpp in Sources */,
-				3A5B73650E4DB9F6009D4BCF /* FigureMovedNotification.cpp in Sources */,
-				3A5B73660E4DB9F6009D4BCF /* FigureSelectedNotification.cpp in Sources */,
-				3A5B73670E4DB9F6009D4BCF /* ProjectTabbedComponentChangedTabNotification.cpp in Sources */,
-				3A5B73680E4DB9F6009D4BCF /* SaveFileNotification.cpp in Sources */,
+				3A5192000E4DC747003053A9 /* ArrowCanvasClicked.cpp in Sources */,
+				3A5192010E4DC747003053A9 /* DiagramToggleGrid.cpp in Sources */,
+				3A5192020E4DC747003053A9 /* ExportDiagramAsPNG.cpp in Sources */,
+				3A5192030E4DC747003053A9 /* FigureMoved.cpp in Sources */,
+				3A5192040E4DC747003053A9 /* FigureSelected.cpp in Sources */,
+				3A5192050E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp in Sources */,
+				3A5192060E4DC747003053A9 /* SaveFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

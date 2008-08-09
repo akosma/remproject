@@ -38,12 +38,12 @@
 
 #include "PlatformDefinitions.h"
 
-#ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
-#include "../notifications/ExportDiagramAsPNGNotification.h"
+#ifndef EXPORTDIAGRAMASPNG_H_
+#include "../notifications/ExportDiagramAsPNG.h"
 #endif
 
 using Poco::AutoPtr;
-using notifications::ExportDiagramAsPNGNotification;
+using notifications::ExportDiagramAsPNG;
 
 /*!
  * \namespace ui
@@ -72,9 +72,9 @@ namespace ui
         
         virtual void currentTabChanged(const int, const String&);
         
-        void postProjectTabbedComponentChangedTabNotification(const int, const String&);
+        void postProjectTabbedComponentChangedTab(const int, const String&);
         
-        void handleExportDiagramAsPNGNotification(const AutoPtr<ExportDiagramAsPNGNotification>&);
+        void handleExportDiagramAsPNG(const AutoPtr<ExportDiagramAsPNG>&);
     };
 }
 

@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file FigureMovedNotification.h
+ * \file FigureSelected.cpp
  *
- * Contains the interface of the notifications::FigureMovedNotification class.
+ * Contains the implementation of the notifications::FigureSelected class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,49 +31,35 @@
  * \date      6/22/08
  */
 
-#ifndef FIGUREMOVEDNOTIFICATION_H_
-#define FIGUREMOVEDNOTIFICATION_H_
+#include "FigureSelected.h"
 
-#include <Poco/Notification.h>
+#ifndef FIGURE_H_
+#include "../ui/Figure.h"
+#endif
 
 using Poco::Notification;
-
-namespace ui
-{
-    class Figure;
-}
 using ui::Figure;
 
-/*!
- * \namespace notifications
- * Insert a description for the namespace here
- */
 namespace notifications
 {
-    /*!
-     * \class FigureMovedNotification
-     *
-     *  
-     */
-    class FigureMovedNotification : public Notification
+    FigureSelected::FigureSelected(Figure* figure, ModifierKeys modifierKeys)
+    : Notification()
+    , _figure(figure)
+    , _modifierKeys(modifierKeys)
     {
-    public:
-
-        /*!
-         *  FigureMovedNotification constructor.
-         */
-        FigureMovedNotification(Figure*);
-
-        /*!
-         *  FigureMovedNotification virtual destructor.
-         */
-        virtual ~FigureMovedNotification();
-        
-        Figure* getMovedFigure() const;
-
-    private:
-        Figure* _figure;
-    };
+    }
+    
+    FigureSelected::~FigureSelected()
+    {
+    }
+    
+    Figure* FigureSelected::getSelectedFigure() const
+    {
+        return _figure;
+    }
+    
+    const ModifierKeys FigureSelected::getModifierKeys() const
+    {
+        return _modifierKeys;
+    }
 }
-
-#endif /* FIGUREMOVEDNOTIFICATION_H_ */

@@ -18,25 +18,25 @@
 #include "../controllers/FileController.h"
 #endif
 
-#ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
-#include "../notifications/ExportDiagramAsPNGNotification.h"
+#ifndef EXPORTDIAGRAMASPNG_H_
+#include "../notifications/ExportDiagramAsPNG.h"
 #endif
 
-#ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
-#include "../notifications/DiagramToggleGridNotification.h"
+#ifndef DIAGRAMTOGGLEGRID_H_
+#include "../notifications/DiagramToggleGrid.h"
 #endif
 
-#ifndef SAVEFILENOTIFICATION_H_
-#include "../notifications/SaveFileNotification.h"
+#ifndef SAVEFILE_H_
+#include "../notifications/SaveFile.h"
 #endif
 
 #include "CommandDelegate.h"
 
 using Poco::NotificationCenter;
 using controllers::FileController;
-using notifications::ExportDiagramAsPNGNotification;
-using notifications::DiagramToggleGridNotification;
-using notifications::SaveFileNotification;
+using notifications::ExportDiagramAsPNG;
+using notifications::DiagramToggleGrid;
+using notifications::SaveFile;
 
 namespace ui
 {
@@ -208,14 +208,14 @@ namespace ui
         {
             case fileExportPNG:
             {
-                ExportDiagramAsPNGNotification* notification = new ExportDiagramAsPNGNotification();
+                ExportDiagramAsPNG* notification = new ExportDiagramAsPNG();
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }
             
             case diagramToggleGrid:
             {
-                DiagramToggleGridNotification* notification = new DiagramToggleGridNotification();
+                DiagramToggleGrid* notification = new DiagramToggleGrid();
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }
@@ -228,7 +228,7 @@ namespace ui
             
             case fileSave:
             {
-                SaveFileNotification* notification = new SaveFileNotification();
+                SaveFile* notification = new SaveFile();
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }

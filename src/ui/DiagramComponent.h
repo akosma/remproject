@@ -39,12 +39,12 @@
 #ifndef DIAGRAMCOMPONENT_H_
 #define DIAGRAMCOMPONENT_H_
 
-#ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
-#include "../notifications/ProjectTabbedComponentChangedTabNotification.h"
+#ifndef PROJECTTABBEDCOMPONENTCHANGEDTAB_H_
+#include "../notifications/ProjectTabbedComponentChangedTab.h"
 #endif
 
 using Poco::AutoPtr;
-using notifications::ProjectTabbedComponentChangedTabNotification;
+using notifications::ProjectTabbedComponentChangedTab;
 
 /*!
  * \namespace ui
@@ -73,7 +73,7 @@ namespace ui
         juce_UseDebuggingNewOperator
         
     private:
-        void handleProjectTabbedComponentChangedTabNotification(const AutoPtr<ProjectTabbedComponentChangedTabNotification>&);
+        void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);
 
     private:
         const int _index;

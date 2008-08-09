@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file FigureMovedNotification.cpp
+ * \file ArrowCanvasClicked.cpp
  *
- * Contains the implementation of the notifications::FigureMovedNotification class.
+ * Contains the implementation of the notifications::ArrowCanvasClicked class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,29 +31,28 @@
  * \date      6/22/08
  */
 
-#include "FigureMovedNotification.h"
+#include "ArrowCanvasClicked.h"
 
-#ifndef FIGURE_H_
-#include "../ui/Figure.h"
+#ifndef ARROWCANVAS_H_
+#include "../ui/ArrowCanvas.h"
 #endif
 
-using Poco::Notification;
-using ui::Figure;
+using ui::ArrowCanvas;
 
 namespace notifications
 {
-    FigureMovedNotification::FigureMovedNotification(Figure* figure)
+    ArrowCanvasClicked::ArrowCanvasClicked(ArrowCanvas* canvas)
     : Notification()
-    , _figure(figure)
+    , _arrowCanvas(canvas)
     {
     }
     
-    FigureMovedNotification::~FigureMovedNotification()
+    ArrowCanvasClicked::~ArrowCanvasClicked()
     {
     }
-
-    Figure* FigureMovedNotification::getMovedFigure() const
+    
+    ArrowCanvas* ArrowCanvasClicked::getClickedArrowCanvas() const
     {
-        return _figure;
+        return _arrowCanvas;
     }
 }

@@ -38,27 +38,27 @@
 #ifndef CONTENTCOMPONENT_H_
 #define CONTENTCOMPONENT_H_
 
-#ifndef FIGURESELECTEDNOTIFICATION_H_
-#include "../notifications/FigureSelectedNotification.h"
+#ifndef FIGURESELECTED_H_
+#include "../notifications/FigureSelected.h"
 #endif
 
-#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "../notifications/ArrowCanvasClickedNotification.h"
+#ifndef ARROWCANVASCLICKED_H_
+#include "../notifications/ArrowCanvasClicked.h"
 #endif
 
-#ifndef FIGUREMOVEDNOTIFICATION_H_
-#include "../notifications/FigureMovedNotification.h"
+#ifndef FIGUREMOVED_H_
+#include "../notifications/FigureMoved.h"
 #endif
 
-#ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
-#include "../notifications/DiagramToggleGridNotification.h"
+#ifndef DIAGRAMTOGGLEGRID_H_
+#include "../notifications/DiagramToggleGrid.h"
 #endif
 
 using Poco::AutoPtr;
-using notifications::FigureSelectedNotification;
-using notifications::ArrowCanvasClickedNotification;
-using notifications::FigureMovedNotification;
-using notifications::DiagramToggleGridNotification;
+using notifications::FigureSelected;
+using notifications::ArrowCanvasClicked;
+using notifications::FigureMoved;
+using notifications::DiagramToggleGrid;
 
 /*!
  * \namespace ui
@@ -88,10 +88,10 @@ namespace ui
 
         void resize();
 
-        void handleFigureSelectedNotification(const AutoPtr<FigureSelectedNotification>&);
-        void handleArrowCanvasClickedNotification(const AutoPtr<ArrowCanvasClickedNotification>&);
-        void handleFigureMovedNotification(const AutoPtr<FigureMovedNotification>&);
-        void handleDiagramToggleGridNotification(const AutoPtr<DiagramToggleGridNotification>&);
+        void handleFigureSelected(const AutoPtr<FigureSelected>&);
+        void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
+        void handleFigureMoved(const AutoPtr<FigureMoved>&);
+        void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
 
     private:
         ArrowCanvas* _canvas;

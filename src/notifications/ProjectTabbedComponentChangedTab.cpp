@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file ArrowCanvasClickedNotification.cpp
+ * \file ProjectTabbedComponentChangedTab.cpp
  *
- * Contains the implementation of the notifications::ArrowCanvasClickedNotification class.
+ * Contains the implementation of the notifications::ProjectTabbedComponentChangedTab class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,31 +28,31 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      6/22/08
+ * \date      6/26/08
  */
 
-#include "ArrowCanvasClickedNotification.h"
-
-#ifndef ARROWCANVAS_H_
-#include "../ui/ArrowCanvas.h"
-#endif
-
-using ui::ArrowCanvas;
+#include "ProjectTabbedComponentChangedTab.h"
 
 namespace notifications
 {
-    ArrowCanvasClickedNotification::ArrowCanvasClickedNotification(ArrowCanvas* canvas)
+    ProjectTabbedComponentChangedTab::ProjectTabbedComponentChangedTab(const int newCurrentTabIndex, const String& newCurrentTabName)
     : Notification()
-    , _arrowCanvas(canvas)
+    , _newCurrentTabIndex(newCurrentTabIndex)
+    , _newCurrentTabName(newCurrentTabName)
     {
     }
     
-    ArrowCanvasClickedNotification::~ArrowCanvasClickedNotification()
+    ProjectTabbedComponentChangedTab::~ProjectTabbedComponentChangedTab()
     {
     }
     
-    ArrowCanvas* ArrowCanvasClickedNotification::getClickedArrowCanvas() const
+    const int ProjectTabbedComponentChangedTab::getNewCurrentTabIndex() const
     {
-        return _arrowCanvas;
+        return _newCurrentTabIndex;
+    }
+
+    const String ProjectTabbedComponentChangedTab::getNewCurrentTabName() const
+    {
+        return _newCurrentTabName;
     }
 }

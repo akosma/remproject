@@ -64,7 +64,7 @@ namespace ui
         _component = new ContentComponent();
         _viewport->setViewedComponent(_component);
         
-        NObserver<DiagramComponent, ProjectTabbedComponentChangedTabNotification> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTabNotification);
+        NObserver<DiagramComponent, ProjectTabbedComponentChangedTab> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab);
         NotificationCenter::defaultCenter().addObserver(tabObserver);
     }
 
@@ -109,7 +109,7 @@ namespace ui
         _viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
     }
     
-    void DiagramComponent::handleProjectTabbedComponentChangedTabNotification(const AutoPtr<ProjectTabbedComponentChangedTabNotification>& notification)
+    void DiagramComponent::handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>& notification)
     {
         const bool shouldBeVisible = (_index == notification->getNewCurrentTabIndex());
         _toolbar->setVisible(shouldBeVisible);
