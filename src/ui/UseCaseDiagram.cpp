@@ -57,6 +57,7 @@ namespace ui
     UseCaseDiagram::UseCaseDiagram()
     : UMLDiagram()
     {
+        setInterceptsMouseClicks(true, true);
         Figure* a = addActorFigure();
         Figure* b = addActorFigure();
         Figure* c = addUseCaseFigure();

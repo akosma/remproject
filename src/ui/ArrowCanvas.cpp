@@ -32,11 +32,12 @@
  */
 
 #include <Poco/NotificationCenter.h>
+#include <iostream>
 
 #include "ArrowCanvas.h"
 
-#ifndef USECASEDIAGRAM_H_
-#include "UseCaseDiagram.h"
+#ifndef UMLDIAGRAM_H_
+#include "UMLDiagram.h"
 #endif
 
 #ifndef FIGURE_H_
@@ -45,6 +46,10 @@
 
 #ifndef ARROWCANVASCLICKED_H_
 #include "ArrowCanvasClicked.h"
+#endif
+
+#ifndef FIGURELASSOSOURCE_H_
+#include "FigureLassoSource.h"
 #endif
 
 using std::vector;
@@ -64,10 +69,14 @@ namespace ui
     , _arrows()
     , _currentArrow(0)
     , _drawGrid(true)
+    , _lassoComponent(new LassoComponent<Figure*>)
+    , _lassoSource(NULL)
     {
+        addAndMakeVisible(_lassoComponent, -1);
         setBroughtToFrontOnMouseClick(false);
         setBufferedToImage(true);
         setRepaintsOnMouseActivity(true);
+        setOpaque(false);
     }
     
     /*!
@@ -83,6 +92,21 @@ namespace ui
         _arrows.erase(_arrows.begin(), _arrows.end());
     }
     
+    void ArrowCanvas::setSelectedItemSet(SelectedItemSet<Figure*>& itemSet, UMLDiagram* diagram)
+    {
+        _lassoSource = new FigureLassoSource(itemSet, diagram);
+    }
+
+    void ArrowCanvas::mouseUp(const MouseEvent& e)
+    {
+        _lassoComponent->endLasso();
+    }
+
+    void ArrowCanvas::mouseDrag(const MouseEvent& e)
+    {
+        _lassoComponent->dragLasso(e);
+    }
+
     void ArrowCanvas::mouseMove(const MouseEvent& e)
     {
         repaint();
@@ -90,6 +114,8 @@ namespace ui
 
     void ArrowCanvas::mouseDown(const MouseEvent& e)
     {
+        _lassoComponent->beginLasso(e, _lassoSource);
+
         _currentArrow = NULL;
         vector<ArrowCanvas::Arrow*>::iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
@@ -117,7 +143,7 @@ namespace ui
 
     void ArrowCanvas::paint(Graphics& g)
     {
-        g.fillAll(Colours::white);
+        g.fillAll(Colours::white.withAlpha(0.0f));
         drawGrid(g);
         vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)

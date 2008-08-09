@@ -219,13 +219,10 @@ namespace ui
     
     void Figure::paint(Graphics& g)
     {
-        Colour transparentWhite = Colours::white.withAlpha(0.9f);
         Path figure;
         drawFigure(figure);
         if (_selected)
         {
-            g.fillAll(transparentWhite);
-
             // This will create a dashed rectangle around the selected element
             drawDashedLineAround(g);
         }

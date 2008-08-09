@@ -48,14 +48,14 @@ namespace ui
 {
     UMLDiagram::UMLDiagram()
     : Component()
-    , DragAndDropTarget()
     , _canvas(new ArrowCanvas())
     , _selection()
     , _toolbar(NULL)
     {
         _canvas->setSize(565, 800);
+        _canvas->setSelectedItemSet(_selection, this);
         addAndMakeVisible(_canvas, 0);
-        
+
         setSize(565, 800);
         
         // The NotificationCenter in the POCO libraries is inspired from Cocoa
@@ -75,7 +75,7 @@ namespace ui
     {
         deleteAllChildren();
     }
-    
+
     DiagramToolbar* UMLDiagram::getToolbar()
     {
         if (!_toolbar)
@@ -93,14 +93,6 @@ namespace ui
     void UMLDiagram::paint (Graphics& g)
     {
         g.fillAll(Colours::white);
-    }
-    
-    bool UMLDiagram::isInterestedInDragSource (const String& sourceDescription)
-    {
-        // normally you'd check the sourceDescription value to see if it's the
-        // sort of object that you're interested in before returning true, but for
-        // the demo, we'll say yes to anything..
-        return true;
     }
 
     void UMLDiagram::itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y)

@@ -80,21 +80,20 @@ namespace ui
     class Figure;
     class ArrowCanvas;
     class DiagramToolbar;
+    class FigureLassoSource;
     
     /*!
      * \class UMLDiagram
      *
      *  
      */
-    class UMLDiagram : public Component, public DragAndDropTarget
+    class UMLDiagram : public Component
     {
     public:
         UMLDiagram();
         ~UMLDiagram();
 
         void paint (Graphics&);
-
-        bool isInterestedInDragSource (const String& sourceDescription);
 
         void itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y);
 

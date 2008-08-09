@@ -34,6 +34,7 @@
 
 #include <Poco/NotificationCenter.h>
 #include <Poco/NObserver.h>
+#include <iostream>
 
 #include "DiagramComponent.h"
 

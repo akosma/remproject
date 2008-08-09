@@ -47,6 +47,8 @@ using std::vector;
 namespace ui
 {
     class Figure;
+    class FigureLassoSource;
+    class UMLDiagram;
     
     /*!
      * \class ArrowCanvas
@@ -66,10 +68,14 @@ namespace ui
          */
         virtual ~ArrowCanvas();
 
-        void mouseDown(const MouseEvent&);
-        void mouseMove(const MouseEvent&);
+        virtual void mouseDown(const MouseEvent&);
+        virtual void mouseMove(const MouseEvent&);
+        virtual void mouseUp(const MouseEvent& e);
+        virtual void mouseDrag(const MouseEvent& e);
+
         void paint(Graphics&);
         void setNoCurrentArrow();
+        void setSelectedItemSet(SelectedItemSet<Figure*>&, UMLDiagram*);
         
         void addArrow(Figure*, Figure*);
         
@@ -101,6 +107,8 @@ namespace ui
         vector<Arrow*> _arrows;
         Arrow* _currentArrow;
         bool _drawGrid;
+        LassoComponent<Figure*>* _lassoComponent;
+        FigureLassoSource* _lassoSource;
     };
 }
 

@@ -60,6 +60,8 @@
 		3A5B73D40E4DC11A009D4BCF /* ProjectComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */; };
 		3A5B73D50E4DC11C009D4BCF /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */; };
+		3A65AA930E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */; };
+		3A65AA940E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
 		3A70B42D0D8D61E200F61DB0 /* ProjectTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */; };
 		3A70B44A0D8D64B000F61DB0 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4490D8D64B000F61DB0 /* Project.cpp */; };
@@ -157,6 +159,8 @@
 		3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTab.h; path = ../../src/notifications/ProjectTabbedComponentChangedTab.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
+		3A65AA910E4E1F87005CFE1A /* FigureLassoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureLassoSource.h; path = ../../src/ui/FigureLassoSource.h; sourceTree = SOURCE_ROOT; };
+		3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureLassoSource.cpp; path = ../../src/ui/FigureLassoSource.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4290D8D61E200F61DB0 /* DiagramTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramTest.h; path = ../../src/tests/DiagramTest.h; sourceTree = SOURCE_ROOT; };
 		3A70B42A0D8D61E200F61DB0 /* ProjectTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTest.cpp; path = ../../src/tests/ProjectTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -368,6 +372,8 @@
 				3A98E1B40DB9FB0A0095EADC /* Figure.cpp */,
 				3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */,
 				3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */,
+				3A65AA910E4E1F87005CFE1A /* FigureLassoSource.h */,
+				3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */,
 			);
 			name = Figures;
 			sourceTree = "<group>";
@@ -654,6 +660,7 @@
 				3A790B3F0E4DDAA300699A8A /* UMLDiagram.cpp in Sources */,
 				3AE7D1D10E4DE239005F0575 /* DiagramToolbar.cpp in Sources */,
 				3A0AA2460E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
+				3A65AA930E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +703,7 @@
 				3AE7D1D20E4DE239005F0575 /* DiagramToolbar.cpp in Sources */,
 				3AE7D1FF0E4DE6EA005F0575 /* UMLDiagram.cpp in Sources */,
 				3A0AA2450E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
+				3A65AA940E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

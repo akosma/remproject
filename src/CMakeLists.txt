@@ -74,6 +74,9 @@ SET (ui_SRCS
     
     ui/MenuBar.h
     ui/MenuBar.cpp
+    
+    ui/FigureLassoSource.h
+    ui/FigureLassoSource.cpp
 )
 
 SET (ui_Main_SRCS
