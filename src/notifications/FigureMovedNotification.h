@@ -20,7 +20,7 @@
 /*!
  * \file FigureMovedNotification.h
  *
- * Contains the interface of the ui::FigureMovedNotification class.
+ * Contains the interface of the notifications::FigureMovedNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -38,14 +38,18 @@
 
 using Poco::Notification;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     class Figure;
+}
+using ui::Figure;
 
+/*!
+ * \namespace notifications
+ * Insert a description for the namespace here
+ */
+namespace notifications
+{
     /*!
      * \class FigureMovedNotification
      *

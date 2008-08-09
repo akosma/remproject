@@ -39,10 +39,11 @@
 #include "PlatformDefinitions.h"
 
 #ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
-#include "ExportDiagramAsPNGNotification.h"
+#include "../notifications/ExportDiagramAsPNGNotification.h"
 #endif
 
 using Poco::AutoPtr;
+using notifications::ExportDiagramAsPNGNotification;
 
 /*!
  * \namespace ui

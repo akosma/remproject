@@ -1,7 +1,7 @@
 /*!
  * \file ExportDiagramAsPNGNotification.h
  *
- * Contains the interface of the ui::ExportDiagramAsPNGNotification class.
+ * Contains the interface of the notifications::ExportDiagramAsPNGNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -23,7 +23,7 @@ using Poco::Notification;
  * \namespace ui
  * Insert a description for the namespace here
  */
-namespace ui
+namespace notifications
 {
     /*!
      * \class ExportDiagramAsPNGNotification

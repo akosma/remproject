@@ -23,7 +23,7 @@ SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
 SET (ui_SRCS
     ui/PlatformDefinitions.h
-    
+
     ui/Application.h 
     ui/Application.cpp 
 
@@ -63,34 +63,40 @@ SET (ui_SRCS
     ui/UseCaseToolbarButton.h
     ui/UseCaseToolbarButton.cpp
     
-    ui/FigureMovedNotification.h
-    ui/FigureMovedNotification.cpp
-    
-    ui/FigureSelectedNotification.h
-    ui/FigureSelectedNotification.cpp
-    
-    ui/ArrowCanvasClickedNotification.h
-    ui/ArrowCanvasClickedNotification.cpp
-    
-    ui/ProjectTabbedComponentChangedTabNotification.h
-    ui/ProjectTabbedComponentChangedTabNotification.cpp
-    
-    ui/ExportDiagramAsPNGNotification.h
-    ui/ExportDiagramAsPNGNotification.cpp
-    
-    ui/DiagramToggleGridNotification.h
-    ui/DiagramToggleGridNotification.cpp
-    
-    ui/SaveFileNotification.h
-    ui/SaveFileNotification.cpp
-    
     ui/CommandDelegate.h
     ui/CommandDelegate.cpp
     
     ui/MenuBar.h
     ui/MenuBar.cpp
+)
+
+SET (ui_Main_SRCS
+    ui/PlatformDefinitions.h
 
     ui/Main.cpp 
+)
+
+SET (notifications_SRCS
+    notifications/FigureMovedNotification.h
+    notifications/FigureMovedNotification.cpp
+    
+    notifications/FigureSelectedNotification.h
+    notifications/FigureSelectedNotification.cpp
+    
+    notifications/ArrowCanvasClickedNotification.h
+    notifications/ArrowCanvasClickedNotification.cpp
+    
+    notifications/ProjectTabbedComponentChangedTabNotification.h
+    notifications/ProjectTabbedComponentChangedTabNotification.cpp
+    
+    notifications/ExportDiagramAsPNGNotification.h
+    notifications/ExportDiagramAsPNGNotification.cpp
+    
+    notifications/DiagramToggleGridNotification.h
+    notifications/DiagramToggleGridNotification.cpp
+    
+    notifications/SaveFileNotification.h
+    notifications/SaveFileNotification.cpp
 )
 
 SET (storage_SRCS
@@ -167,20 +173,23 @@ SET (utility_SRCS
 )
 
 SET (remtests_SRCS 
-    ${ui_SRCS}
     ${tests_SRCS}
+    ${ui_SRCS}
+    ${notifications_SRCS}
+    ${controllers_SRCS}
     ${metamodel_SRCS} 
     ${storage_SRCS}
     ${utility_SRCS}
-    ${controllers_SRCS}
 )
 
 SET (Rem_SRCS
+    ${ui_Main_SRCS}
     ${ui_SRCS}
+    ${notifications_SRCS}
+    ${controllers_SRCS}
     ${metamodel_SRCS} 
     ${storage_SRCS}
     ${utility_SRCS}
-    ${controllers_SRCS}
 )
 
 IF (WIN32)

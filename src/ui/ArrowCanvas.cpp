@@ -230,7 +230,7 @@ namespace ui
     {
         const Point* start = _start->getAnchorPointRelativeTo(_end);
         const Point* end = _end->getAnchorPointRelativeTo(_start);
-        Line line(*start, *end);
+        juce::Line line(*start, *end);
         bool result = (line.getDistanceFromLine((float)e.getMouseDownX(), (float)e.getMouseDownY()) < 10.0f);
         delete start;
         delete end;

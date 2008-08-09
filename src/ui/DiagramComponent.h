@@ -40,10 +40,11 @@
 #define DIAGRAMCOMPONENT_H_
 
 #ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
-#include "ProjectTabbedComponentChangedTabNotification.h"
+#include "../notifications/ProjectTabbedComponentChangedTabNotification.h"
 #endif
 
 using Poco::AutoPtr;
+using notifications::ProjectTabbedComponentChangedTabNotification;
 
 /*!
  * \namespace ui

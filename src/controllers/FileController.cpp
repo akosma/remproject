@@ -66,7 +66,7 @@ using std::stringstream;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using ui::SaveFileNotification;
+using notifications::SaveFileNotification;
 
 namespace controllers
 {

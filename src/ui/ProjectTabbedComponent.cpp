@@ -37,7 +37,7 @@
 #include "ProjectTabbedComponent.h"
 
 #ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
-#include "ProjectTabbedComponentChangedTabNotification.h"
+#include "../notifications/ProjectTabbedComponentChangedTabNotification.h"
 #endif
 
 #ifndef DIAGRAMCOMPONENT_H_
@@ -47,6 +47,7 @@
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
+using notifications::ProjectTabbedComponentChangedTabNotification;
 
 namespace ui
 {

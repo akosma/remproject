@@ -1,7 +1,7 @@
 /*!
  * \file DiagramToggleGridNotification.h
  *
- * Contains the interface of the ui::DiagramToggleGridNotification class.
+ * Contains the interface of the notifications::DiagramToggleGridNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -20,10 +20,10 @@
 using Poco::Notification;
 
 /*!
- * \namespace ui
+ * \namespace notifications
  * Insert a description for the namespace here
  */
-namespace ui
+namespace notifications
 {
     /*!
      * \class DiagramToggleGridNotification

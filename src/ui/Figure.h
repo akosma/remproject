@@ -39,10 +39,11 @@
 #define FIGURE_H_
 
 #ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "ArrowCanvasClickedNotification.h"
+#include "../notifications/ArrowCanvasClickedNotification.h"
 #endif
 
 using Poco::AutoPtr;
+using notifications::ArrowCanvasClickedNotification;
 
 /*!
  * \namespace ui

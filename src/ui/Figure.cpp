@@ -45,19 +45,22 @@
 #endif
 
 #ifndef FIGURESELECTEDNOTIFICATION_H_
-#include "FigureSelectedNotification.h"
+#include "../notifications/FigureSelectedNotification.h"
 #endif
 
 #ifndef FIGUREMOVEDNOTIFICATION_H_
-#include "FigureMovedNotification.h"
+#include "../notifications/FigureMovedNotification.h"
 #endif
 
 #ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "ArrowCanvasClickedNotification.h"
+#include "../notifications/ArrowCanvasClickedNotification.h"
 #endif
 
 using Poco::NotificationCenter;
 using Poco::NObserver;
+using notifications::FigureSelectedNotification;
+using notifications::FigureMovedNotification;
+using notifications::ArrowCanvasClickedNotification;
 
 /*!
  * \namespace ui

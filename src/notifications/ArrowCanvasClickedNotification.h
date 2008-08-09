@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file FigureSelectedNotification.cpp
+ * \file ArrowCanvasClickedNotification.h
  *
- * Contains the implementation of the ui::FigureSelectedNotification class.
+ * Contains the interface of the notifications::ArrowCanvasClickedNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -31,34 +31,49 @@
  * \date      6/22/08
  */
 
-#include "FigureSelectedNotification.h"
+#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
+#define ARROWCANVASCLICKEDNOTIFICATION_H_
 
-#ifndef FIGURE_H_
-#include "Figure.h"
-#endif
+#include <Poco/Notification.h>
 
 using Poco::Notification;
 
 namespace ui
 {
-    FigureSelectedNotification::FigureSelectedNotification(Figure* figure, ModifierKeys modifierKeys)
-    : Notification()
-    , _figure(figure)
-    , _modifierKeys(modifierKeys)
-    {
-    }
-    
-    FigureSelectedNotification::~FigureSelectedNotification()
-    {
-    }
-    
-    Figure* FigureSelectedNotification::getSelectedFigure() const
-    {
-        return _figure;
-    }
-    
-    const ModifierKeys FigureSelectedNotification::getModifierKeys() const
-    {
-        return _modifierKeys;
-    }
+    class ArrowCanvas;
 }
+using ui::ArrowCanvas;
+
+/*!
+ * \namespace notifications
+ * Insert a description for the namespace here
+ */
+namespace notifications
+{
+    /*!
+     * \class ArrowCanvasClickedNotification
+     *
+     *  
+     */
+    class ArrowCanvasClickedNotification : public Notification
+    {
+    public:
+
+        /*!
+         *  ArrowCanvasClickedNotification constructor.
+         */
+        ArrowCanvasClickedNotification(ArrowCanvas*);
+
+        /*!
+         *  ArrowCanvasClickedNotification virtual destructor.
+         */
+        virtual ~ArrowCanvasClickedNotification();
+        
+        ArrowCanvas* getClickedArrowCanvas() const;
+    
+    private:
+        ArrowCanvas* _arrowCanvas;
+    };
+}
+
+#endif /* ARROWCANVASCLICKEDNOTIFICATION_H_ */

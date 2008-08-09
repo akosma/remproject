@@ -39,22 +39,26 @@
 #define CONTENTCOMPONENT_H_
 
 #ifndef FIGURESELECTEDNOTIFICATION_H_
-#include "FigureSelectedNotification.h"
+#include "../notifications/FigureSelectedNotification.h"
 #endif
 
 #ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#include "ArrowCanvasClickedNotification.h"
+#include "../notifications/ArrowCanvasClickedNotification.h"
 #endif
 
 #ifndef FIGUREMOVEDNOTIFICATION_H_
-#include "FigureMovedNotification.h"
+#include "../notifications/FigureMovedNotification.h"
 #endif
 
 #ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
-#include "DiagramToggleGridNotification.h"
+#include "../notifications/DiagramToggleGridNotification.h"
 #endif
 
 using Poco::AutoPtr;
+using notifications::FigureSelectedNotification;
+using notifications::ArrowCanvasClickedNotification;
+using notifications::FigureMovedNotification;
+using notifications::DiagramToggleGridNotification;
 
 /*!
  * \namespace ui

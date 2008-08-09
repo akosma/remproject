@@ -1,7 +1,7 @@
 /*!
  * \file ExportDiagramAsPNGNotification.cpp
  *
- * Contains the implementation of the ui::ExportDiagramAsPNGNotification class.
+ * Contains the implementation of the notifications::ExportDiagramAsPNGNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -14,7 +14,7 @@
 
 #include "ExportDiagramAsPNGNotification.h"
 
-namespace ui
+namespace notifications
 {
     ExportDiagramAsPNGNotification::ExportDiagramAsPNGNotification()
     : Notification()

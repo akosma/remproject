@@ -54,7 +54,7 @@
 #endif
 
 #ifndef SAVEFILENOTIFICATION_H_
-#include "../ui/SaveFileNotification.h"
+#include "../notifications/SaveFileNotification.h"
 #endif
 
 using utility::Singleton;
@@ -62,7 +62,7 @@ using metamodel::Project;
 using metamodel::Diagram;
 using std::string;
 using Poco::AutoPtr;
-using ui::SaveFileNotification;
+using notifications::SaveFileNotification;
 
 //! Contains the controller classes of the application.
 /*!

@@ -1,7 +1,7 @@
 /*!
  * \file DiagramToggleGridNotification.cpp
  *
- * Contains the implementation of the ui::DiagramToggleGridNotification class.
+ * Contains the implementation of the notifications::DiagramToggleGridNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -14,7 +14,7 @@
 
 #include "DiagramToggleGridNotification.h"
 
-namespace ui
+namespace notifications
 {
     DiagramToggleGridNotification::DiagramToggleGridNotification()
     : Notification()

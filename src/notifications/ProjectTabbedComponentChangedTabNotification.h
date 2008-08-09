@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file ArrowCanvasClickedNotification.h
+ * \file ProjectTabbedComponentChangedTabNotification.h
  *
- * Contains the interface of the ui::ArrowCanvasClickedNotification class.
+ * Contains the interface of the notifications::ProjectTabbedComponentChangedTabNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,48 +28,52 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      6/22/08
+ * \date      6/26/08
  */
 
-#ifndef ARROWCANVASCLICKEDNOTIFICATION_H_
-#define ARROWCANVASCLICKEDNOTIFICATION_H_
+#ifndef PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
+#define PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_
 
 #include <Poco/Notification.h>
+
+#include "../ui/PlatformDefinitions.h"
 
 using Poco::Notification;
 
 /*!
- * \namespace ui
+ * \namespace notifications
  * Insert a description for the namespace here
  */
-namespace ui
+namespace notifications
 {
-    class ArrowCanvas;
-    
     /*!
-     * \class ArrowCanvasClickedNotification
+     * \class ProjectTabbedComponentChangedTabNotification
      *
      *  
      */
-    class ArrowCanvasClickedNotification : public Notification
+    class ProjectTabbedComponentChangedTabNotification : public Notification
     {
     public:
 
         /*!
-         *  ArrowCanvasClickedNotification constructor.
+         *  ProjectTabbedComponentChangedTabNotification constructor.
          */
-        ArrowCanvasClickedNotification(ArrowCanvas*);
+        ProjectTabbedComponentChangedTabNotification(const int, const String&);
 
         /*!
-         *  ArrowCanvasClickedNotification virtual destructor.
+         *  ProjectTabbedComponentChangedTabNotification virtual destructor.
          */
-        virtual ~ArrowCanvasClickedNotification();
+        virtual ~ProjectTabbedComponentChangedTabNotification();
+
+        const int getNewCurrentTabIndex() const;
+        const String getNewCurrentTabName() const;
         
-        ArrowCanvas* getClickedArrowCanvas() const;
-    
     private:
-        ArrowCanvas* _arrowCanvas;
+        
+        const int _newCurrentTabIndex;
+        const String _newCurrentTabName;
+
     };
 }
 
-#endif /* ARROWCANVASCLICKEDNOTIFICATION_H_ */
+#endif /* PROJECTTABBEDCOMPONENTCHANGEDTABNOTIFICATION_H_ */

@@ -1,13 +1,13 @@
 /*!
  * \file SaveFileNotification.h
  *
- * Contains the interface of the ui::SaveFileNotification class.
+ * Contains the interface of the notifications::SaveFileNotification class.
  * 
- * $LastChangedDate: 2008-07-06 15:52:13 +0200 (Sun, 06 Jul 2008) $
- * $LastChangedBy: akosma $
- * $HeadURL: https://remproject.googlecode.com/svn/trunk/src/ui/SaveFileNotification.h $
+ * $LastChangedDate$
+ * $LastChangedBy$
+ * $HeadURL$
  * 
- * \version   $LastChangedRevision: 198 $
+ * \version   $LastChangedRevision$
  * \author    Adrian
  * \date      7/6/08
  */
@@ -20,10 +20,10 @@
 using Poco::Notification;
 
 /*!
- * \namespace ui
+ * \namespace notifications
  * Insert a description for the namespace here
  */
-namespace ui
+namespace notifications
 {
     /*!
      * \class SaveFileNotification

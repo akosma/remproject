@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file ProjectTabbedComponentChangedTabNotification.cpp
+ * \file FigureMovedNotification.cpp
  *
- * Contains the implementation of the ui::ProjectTabbedComponentChangedTabNotification class.
+ * Contains the implementation of the notifications::FigureMovedNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,31 +28,32 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      6/26/08
+ * \date      6/22/08
  */
 
-#include "ProjectTabbedComponentChangedTabNotification.h"
+#include "FigureMovedNotification.h"
 
-namespace ui
+#ifndef FIGURE_H_
+#include "../ui/Figure.h"
+#endif
+
+using Poco::Notification;
+using ui::Figure;
+
+namespace notifications
 {
-    ProjectTabbedComponentChangedTabNotification::ProjectTabbedComponentChangedTabNotification(const int newCurrentTabIndex, const String& newCurrentTabName)
+    FigureMovedNotification::FigureMovedNotification(Figure* figure)
     : Notification()
-    , _newCurrentTabIndex(newCurrentTabIndex)
-    , _newCurrentTabName(newCurrentTabName)
+    , _figure(figure)
     {
     }
     
-    ProjectTabbedComponentChangedTabNotification::~ProjectTabbedComponentChangedTabNotification()
+    FigureMovedNotification::~FigureMovedNotification()
     {
-    }
-    
-    const int ProjectTabbedComponentChangedTabNotification::getNewCurrentTabIndex() const
-    {
-        return _newCurrentTabIndex;
     }
 
-    const String ProjectTabbedComponentChangedTabNotification::getNewCurrentTabName() const
+    Figure* FigureMovedNotification::getMovedFigure() const
     {
-        return _newCurrentTabName;
+        return _figure;
     }
 }

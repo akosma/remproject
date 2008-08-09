@@ -19,21 +19,24 @@
 #endif
 
 #ifndef EXPORTDIAGRAMASPNGNOTIFICATION_H_
-#include "ExportDiagramAsPNGNotification.h"
+#include "../notifications/ExportDiagramAsPNGNotification.h"
 #endif
 
 #ifndef DIAGRAMTOGGLEGRIDNOTIFICATION_H_
-#include "DiagramToggleGridNotification.h"
+#include "../notifications/DiagramToggleGridNotification.h"
 #endif
 
 #ifndef SAVEFILENOTIFICATION_H_
-#include "SaveFileNotification.h"
+#include "../notifications/SaveFileNotification.h"
 #endif
 
 #include "CommandDelegate.h"
 
 using Poco::NotificationCenter;
 using controllers::FileController;
+using notifications::ExportDiagramAsPNGNotification;
+using notifications::DiagramToggleGridNotification;
+using notifications::SaveFileNotification;
 
 namespace ui
 {

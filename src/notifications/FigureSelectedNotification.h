@@ -20,7 +20,7 @@
 /*!
  * \file FigureSelectedNotification.h
  *
- * Contains the interface of the ui::FigureSelectedNotification class.
+ * Contains the interface of the notifications::FigureSelectedNotification class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -36,18 +36,23 @@
 
 #include <Poco/Notification.h>
 
-#include "PlatformDefinitions.h"
+#include "../ui/PlatformDefinitions.h"
 
 using Poco::Notification;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     class Figure;
+}
 
+using ui::Figure;
+
+/*!
+ * \namespace notifications
+ * Insert a description for the namespace here
+ */
+namespace notifications
+{
     /*!
      * \class FigureSelectedNotification
      *
