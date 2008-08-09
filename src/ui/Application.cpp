@@ -45,6 +45,7 @@ namespace ui
 {
     Application::Application()
     : _window(0)
+    , _fileController(FileController::get())
     {
     }
 

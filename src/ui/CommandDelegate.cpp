@@ -26,6 +26,10 @@
 #include "DiagramToggleGridNotification.h"
 #endif
 
+#ifndef SAVEFILENOTIFICATION_H_
+#include "SaveFileNotification.h"
+#endif
+
 #include "CommandDelegate.h"
 
 using Poco::NotificationCenter;
@@ -114,7 +118,7 @@ namespace ui
                 info.description = "Saves the current project to disk";
                 info.flags = 0;
                 info.addDefaultKeypress(115, ModifierKeys::commandModifier);
-                info.setActive(false);
+                info.setActive(true);
                 break;
             }
 
@@ -218,7 +222,14 @@ namespace ui
                 JUCEApplication::getInstance()->systemRequestedQuit();
                 break;
             }
-                
+            
+            case fileSave:
+            {
+                SaveFileNotification* notification = new SaveFileNotification();
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+
             default:
             {
                 ApplicationCommandInfo appInfo(info.commandID);

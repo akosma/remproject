@@ -53,6 +53,9 @@ using Poco::UUIDGenerator;
 using Poco::UUID;
 #endif
 
+#include <Poco/NotificationCenter.h>
+#include <Poco/NObserver.h>
+
 #ifndef SQLITEWRAPPER_H_
 #include "../storage/SQLiteWrapper.h"
 #endif
@@ -60,6 +63,10 @@ using Poco::UUID;
 using storage::SQLiteWrapper;
 using std::string;
 using std::stringstream;
+using Poco::NotificationCenter;
+using Poco::NObserver;
+using Poco::AutoPtr;
+using ui::SaveFileNotification;
 
 namespace controllers
 {
@@ -69,6 +76,8 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
+        NObserver<FileController, SaveFileNotification> fileSaveObserver(*this, &FileController::handleSaveFileNotification);
+        NotificationCenter::defaultCenter().addObserver(fileSaveObserver);
     }
 
     FileController::~FileController()
@@ -160,5 +169,10 @@ namespace controllers
     const bool FileController::hasCurrentDiagram() const
     {
         return (_currentDiagram != NULL);
+    }
+    
+    void FileController::handleSaveFileNotification(const AutoPtr<SaveFileNotification>&)
+    {
+        saveProject();
     }
 }

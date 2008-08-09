@@ -81,6 +81,9 @@ SET (ui_SRCS
     ui/DiagramToggleGridNotification.h
     ui/DiagramToggleGridNotification.cpp
     
+    ui/SaveFileNotification.h
+    ui/SaveFileNotification.cpp
+    
     ui/CommandDelegate.h
     ui/CommandDelegate.cpp
     
@@ -164,6 +167,7 @@ SET (utility_SRCS
 )
 
 SET (remtests_SRCS 
+    ${ui_SRCS}
     ${tests_SRCS}
     ${metamodel_SRCS} 
     ${storage_SRCS}
@@ -342,6 +346,8 @@ ELSE (WIN32)
             )
         
             TARGET_LINK_LIBRARIES(remtest
+                ${EXTRA_LIBS}
+                juce
                 cppunit 
                 sqlite3 
                 PocoFoundation

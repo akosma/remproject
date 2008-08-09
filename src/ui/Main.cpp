@@ -31,11 +31,11 @@
  * \date      4/11/08
  */
 
-#include "PlatformDefinitions.h"
-
 #ifndef APPLICATION_H_
 #include "Application.h"
 #endif
+
+#include "PlatformDefinitions.h"
 
 START_JUCE_APPLICATION (ui::Application)
 

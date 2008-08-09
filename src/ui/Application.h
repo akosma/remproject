@@ -30,11 +30,17 @@
  * \author    Adrian
  * \date      4/11/08
  */
- 
-#include "PlatformDefinitions.h"
 
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
+
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
+#endif
+
+#include "PlatformDefinitions.h"
+
+using controllers::FileController;
 
 /*!
  * \namespace ui
@@ -69,6 +75,7 @@ namespace ui
         void anotherInstanceStarted (const String&);
 
     private:
+        FileController& _fileController;
         Window* _window;
     };
 }

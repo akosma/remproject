@@ -35,6 +35,8 @@
 #ifndef FILECONTROLLER_H_
 #define FILECONTROLLER_H_
 
+#include <Poco/AutoPtr.h>
+
 #ifndef SINGLETON_H_
 #include "../utility/Singleton.h"
 #endif
@@ -51,10 +53,16 @@
 #include "../metamodel/Diagram.h"
 #endif
 
+#ifndef SAVEFILENOTIFICATION_H_
+#include "../ui/SaveFileNotification.h"
+#endif
+
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
 using std::string;
+using Poco::AutoPtr;
+using ui::SaveFileNotification;
 
 //! Contains the controller classes of the application.
 /*!
@@ -156,6 +164,8 @@ namespace controllers
 
         //! Allow the Singleton template class to access the private constructor.
         friend FileController& Singleton<FileController>::get();
+
+        void handleSaveFileNotification(const AutoPtr<SaveFileNotification>&);
         
     private:
         //! Instance of the Project class "controlled" by this FileController.
