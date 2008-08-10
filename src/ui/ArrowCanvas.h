@@ -47,6 +47,7 @@
 using Poco::AutoPtr;
 using std::vector;
 using notifications::FigureSelected;
+using juce::Rectangle;
 
 /*!
  * \namespace ui
@@ -88,7 +89,7 @@ namespace ui
         
         void addArrow(Figure*, Figure*, ArrowFigure*);
         void showArrowSelected(ArrowFigure*);
-        const bool arrowIntersects(ArrowFigure*, const Rectangle&);
+        const bool arrowIntersects(ArrowFigure*, const juce::Rectangle&);
         void deselectAllArrows();
         
         void toggleGrid();
@@ -113,8 +114,8 @@ namespace ui
             const bool isSelected() const;
             void setSelected(const bool);
             const bool intersects(const MouseEvent&);
-            const Rectangle* getEnclosingRectangle() const;
-            const bool intersects(const Rectangle&) const;
+            const juce::Rectangle* getEnclosingRectangle() const;
+            const bool intersects(const juce::Rectangle&) const;
 
         private:
             Figure* _start;

@@ -63,6 +63,7 @@ using std::vector;
 using Poco::AutoPtr;
 using notifications::ArrowCanvasClicked;
 using notifications::FigureSelected;
+using juce::Rectangle;
 
 /*!
  * \namespace ui
@@ -245,7 +246,7 @@ namespace ui
         }
     }
 
-    const bool ArrowCanvas::arrowIntersects(ArrowFigure* arrowFigure, const Rectangle& rect)
+    const bool ArrowCanvas::arrowIntersects(ArrowFigure* arrowFigure, const juce::Rectangle& rect)
     {
         vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
@@ -352,28 +353,28 @@ namespace ui
         }
     }
 
-    const Rectangle* ArrowCanvas::Arrow::getEnclosingRectangle() const
+    const juce::Rectangle* ArrowCanvas::Arrow::getEnclosingRectangle() const
     {
         const Point* start = _start->getAnchorPointRelativeTo(_end);
         const Point* end = _end->getAnchorPointRelativeTo(_start);
-        float startX = 0.0;
-        float startY = 0.0;
-        float width = 0.0;
-        float height = 0.0;
+        int startX = 0;
+        int startY = 0;
+        int width = 0;
+        int height = 0;
         if (start && end)
         {
             juce::Line line(*start, *end);
-            startX = (start->getX() > end->getX()) ? end->getX() : start->getX();
-            startY = (start->getY() > end->getY()) ? end->getY() : start->getY();
-            width = (float)fabs(start->getX() - end->getX());
-            height = (float)fabs(start->getY() - end->getY());
+            startX = (start->getX() > end->getX()) ? (int)end->getX() : (int)start->getX();
+            startY = (start->getY() > end->getY()) ? (int)end->getY() : (int)start->getY();
+            width = abs((int)start->getX() - (int)end->getX());
+            height = abs((int)start->getY() - (int)end->getY());
             if (line.isHorizontal())
             {
-                height = 10.0f;
+                height = 10;
             }
             else if (line.isVertical())
             {
-                width = 10.0f;
+                width = 10;
             }
             else
             {
@@ -381,13 +382,13 @@ namespace ui
             delete start;
             delete end;
         }
-        Rectangle* result = new Rectangle(startX, startY, width, height);
+        juce::Rectangle* result = new juce::Rectangle(startX, startY, width, height);
         return result;
     }
     
-    const bool ArrowCanvas::Arrow::intersects(const Rectangle& rect) const
+    const bool ArrowCanvas::Arrow::intersects(const juce::Rectangle& rect) const
     {
-        const Rectangle* arrowRect = getEnclosingRectangle();
+        const juce::Rectangle* arrowRect = getEnclosingRectangle();
         bool result = false;
         if (arrowRect)
         {

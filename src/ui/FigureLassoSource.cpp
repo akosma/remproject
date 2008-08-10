@@ -71,7 +71,7 @@ namespace ui
 
     void FigureLassoSource::findLassoItemsInArea(Array<Figure*>& itemsFound, int x, int y, int width, int height)
     {
-        const Rectangle lasso (x, y, width, height);
+        const juce::Rectangle lasso (x, y, width, height);
         for (int i = 0; i < _diagram->getNumChildComponents(); ++i)
         {
             Figure* figure = dynamic_cast<Figure*>(_diagram->getChildComponent(i));

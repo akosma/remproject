@@ -34,7 +34,7 @@ mkdir bin
 cd bin
 
 REM Generate the NMake makefiles from the CMake file
-cmake -G "NMake Makefiles" ..\src
+cmake -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" ..\src
 
 REM Build the application
 nmake

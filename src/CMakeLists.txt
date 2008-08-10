@@ -222,9 +222,9 @@ IF (WIN32)
     # it is recommended to use CMake 2.4.7 in Windows, so that both the 
     # application and the installer can be built from the command line.
 
-    SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
-    SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT")
-    SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO /MANIFEST:NO")
+    # SET(CMAKE_CXX_FLAGS_DEBUG "/RTC1 /Gm /MTd /ZI /W3 /Od")
+    SET(CMAKE_CXX_FLAGS_RELEASE "/RTC1 /Gm /MT /Zi")
+    SET(CMAKE_EXE_LINKER_FLAGS "/MACHINE:X86 /DYNAMICBASE:NO /MANIFEST:NO /LTCG")
 
     SET (win_resources_SRCS
         ${rem_SOURCE_DIR}/../build/windows/resource.rc
