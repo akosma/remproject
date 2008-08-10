@@ -37,6 +37,14 @@
 #include "UMLDiagram.h"
 #endif
 
+#ifndef ARROWCANVAS_H_
+#include "ArrowCanvas.h"
+#endif
+
+#ifndef ARROWFIGURE_H_
+#include "ArrowFigure.h"
+#endif
+
 /*!
  * \namespace ui
  * Insert a description for the namespace here
@@ -46,10 +54,11 @@ namespace ui
     /*!
      * FigureLassoSource Constructor.
      */
-    FigureLassoSource::FigureLassoSource(SelectedItemSet<Figure*>& items, UMLDiagram* diagram)
+    FigureLassoSource::FigureLassoSource(SelectedItemSet<Figure*>& items, UMLDiagram* diagram, ArrowCanvas* canvas)
     : LassoSource<Figure*>()
     , _itemSet(items)
     , _diagram(diagram)
+    , _canvas(canvas)
     {
     }
     
@@ -65,21 +74,33 @@ namespace ui
         const Rectangle lasso (x, y, width, height);
         for (int i = 0; i < _diagram->getNumChildComponents(); ++i)
         {
-            Figure* f = dynamic_cast<Figure*>(_diagram->getChildComponent(i));
-            if (f != 0 && f->getBounds().intersects(lasso))
+            Figure* figure = dynamic_cast<Figure*>(_diagram->getChildComponent(i));
+            if (figure != NULL)
             {
-                f->setSelected(true);
-                itemsFound.add(f);
-            }
-            else
-            {
-                if (f)
+                if (figure->getBounds().intersects(lasso))
                 {
-                    f->setSelected(false);
+                    figure->setSelected(true);
+                    itemsFound.add(figure);
                 }
-                if (itemsFound.contains(f))
+                else
                 {
-                    itemsFound.removeValue(f);
+                    figure->setSelected(false);
+                    if (itemsFound.contains(figure))
+                    {
+                        itemsFound.removeValue(figure);
+                    }
+                }
+            }
+            ArrowFigure* arrow = dynamic_cast<ArrowFigure*>(_diagram->getChildComponent(i));
+            if (arrow != NULL)
+            {
+                if (_canvas->arrowIntersects(arrow, lasso))
+                {
+                    itemsFound.add(figure);
+                }
+                else
+                {
+                    itemsFound.removeValue(figure);
                 }
             }
         }

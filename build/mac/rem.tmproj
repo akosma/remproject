@@ -20,8 +20,20 @@
 	<key>metaData</key>
 	<dict/>
 	<key>showFileHierarchyDrawer</key>
+	<false/>
+	<key>showFileHierarchyPanel</key>
 	<true/>
+	<key>treeState</key>
+	<dict>
+		<key>remproject</key>
+		<dict>
+			<key>isExpanded</key>
+			<true/>
+			<key>subItems</key>
+			<dict/>
+		</dict>
+	</dict>
 	<key>windowFrame</key>
-	<string>{{70, 232}, {1020, 774}}</string>
+	<string>{{70, 85}, {1243, 921}}</string>
 </dict>
 </plist>

@@ -18,9 +18,9 @@
  */
 
 /*!
- * \file FigureLassoSource.h
+ * \file ArrowFigure.cpp
  *
- * Contains the interface of the ui::FigureLassoSource class.
+ * Contains the implementation of the ui::ArrowFigure class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,13 +28,10 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/19/08
+ * \date      4/17/08
  */
 
-#include "PlatformDefinitions.h"
-
-#ifndef FIGURELASSOSOURCE_H_
-#define FIGURELASSOSOURCE_H_
+#include "ArrowFigure.h"
 
 /*!
  * \namespace ui
@@ -42,37 +39,16 @@
  */
 namespace ui
 {
-    class Figure;
-    class UMLDiagram;
-    class ArrowCanvas;
-
-    /*!
-     * \class FigureLassoSource
-     *
-     *  
-     */
-    class FigureLassoSource : public LassoSource<Figure*>
+    ArrowFigure::ArrowFigure()
+    : Figure(0, 0)
     {
-    public:
+    }
 
-        /*!
-         *  FigureLassoSource constructor.
-         */
-        FigureLassoSource(SelectedItemSet<Figure*>&, UMLDiagram*, ArrowCanvas*);
+    ArrowFigure::~ArrowFigure()
+    {
+    }
 
-        /*!
-         *  FigureLassoSource virtual destructor.
-         */
-        virtual ~FigureLassoSource();
-
-        virtual void findLassoItemsInArea(Array<Figure*> &itemsFound, int x, int y, int width, int height);
-        virtual SelectedItemSet<Figure*>& getLassoSelection();
-        
-    private:
-        SelectedItemSet<Figure*>& _itemSet;
-        UMLDiagram* _diagram;
-        ArrowCanvas* _canvas;
-    };
+    void ArrowFigure::drawFigure(Path& actor)
+    {
+    }
 }
-
-#endif /* FIGURELASSOSOURCE_H_ */

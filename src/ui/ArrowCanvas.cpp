@@ -31,8 +31,7 @@
  * \date      4/21/08
  */
 
-#include <Poco/NotificationCenter.h>
-#include <iostream>
+#include <cmath>
 
 #include "ArrowCanvas.h"
 
@@ -44,8 +43,16 @@
 #include "Figure.h"
 #endif
 
+#ifndef ARROWFIGURE_H_
+#include "ArrowFigure.h"
+#endif
+
 #ifndef ARROWCANVASCLICKED_H_
-#include "ArrowCanvasClicked.h"
+#include "../notifications/ArrowCanvasClicked.h"
+#endif
+
+#ifndef FIGURESELECTED_H_
+#include "../notifications/FigureSelected.h"
 #endif
 
 #ifndef FIGURELASSOSOURCE_H_
@@ -53,7 +60,9 @@
 #endif
 
 using std::vector;
-using Poco::NotificationCenter;
+using Poco::AutoPtr;
+using notifications::ArrowCanvasClicked;
+using notifications::FigureSelected;
 
 /*!
  * \namespace ui
@@ -67,7 +76,6 @@ namespace ui
     ArrowCanvas::ArrowCanvas()
     : _strokeWidth(1.0f)
     , _arrows()
-    , _currentArrow(0)
     , _drawGrid(true)
     , _lassoComponent(new LassoComponent<Figure*>)
     , _lassoSource(NULL)
@@ -94,7 +102,7 @@ namespace ui
     
     void ArrowCanvas::setSelectedItemSet(SelectedItemSet<Figure*>& itemSet, UMLDiagram* diagram)
     {
-        _lassoSource = new FigureLassoSource(itemSet, diagram);
+        _lassoSource = new FigureLassoSource(itemSet, diagram, this);
     }
 
     void ArrowCanvas::mouseUp(const MouseEvent& e)
@@ -105,6 +113,7 @@ namespace ui
     void ArrowCanvas::mouseDrag(const MouseEvent& e)
     {
         _lassoComponent->dragLasso(e);
+        repaint();
     }
 
     void ArrowCanvas::mouseMove(const MouseEvent& e)
@@ -116,23 +125,22 @@ namespace ui
     {
         _lassoComponent->beginLasso(e, _lassoSource);
 
-        _currentArrow = NULL;
+        bool noneSelected = true;
         vector<ArrowCanvas::Arrow*>::iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
-            if ((*it)->intercepts(e))
+            if ((*it)->intersects(e))
             {
-                _currentArrow = (*it);
+                ArrowFigure* arrowFigure = const_cast<ArrowFigure*>((*it)->getArrowFigure());
+                postFigureSelected(arrowFigure, e);
+                noneSelected = false;
                 break;
             }
         }
-        postArrowCanvasClicked();
-    }
-    
-    void ArrowCanvas::setNoCurrentArrow()
-    {
-        _currentArrow = NULL;
-        repaint();
+        if (noneSelected)
+        {
+            postArrowCanvasClicked();
+        }
     }
     
     void ArrowCanvas::toggleGrid()
@@ -151,10 +159,9 @@ namespace ui
             Path arrow;
             g.setColour(Colours::black);
             float width = 1.0f;
-            if (_currentArrow == (*it))
+            if ((*it)->isSelected())
             {
-                width = 2.0f;
-                g.setColour(Colours::red);
+                width = 3.0f;
             }
             const Figure* start = (*it)->getStartFigure();
             const Figure* end = (*it)->getEndFigure();
@@ -164,9 +171,23 @@ namespace ui
             {
                 arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
             }
-            g.strokePath(arrow, PathStrokeType (width));
+            g.strokePath(arrow, PathStrokeType(width));
             delete s;
             delete e;
+        }
+    }
+    
+    const int ArrowCanvas::getNumArrows() const
+    {
+        return _arrows.size();
+    }
+    
+    void ArrowCanvas::deselectAllArrows()
+    {
+        vector<ArrowCanvas::Arrow*>::const_iterator it;
+        for (it = _arrows.begin(); it != _arrows.end(); ++it)
+        {
+            (*it)->setSelected(false);
         }
     }
     
@@ -204,27 +225,71 @@ namespace ui
         }
     }
     
-    void ArrowCanvas::addArrow(Figure* start, Figure* end)
+    void ArrowCanvas::addArrow(Figure* start, Figure* end, ArrowFigure* arrowFigure)
     {
-        Arrow* arrow = new Arrow(start, end);
+        Arrow* arrow = new Arrow(start, end, arrowFigure);
         _arrows.push_back(arrow);
     }
-    
+
+    void ArrowCanvas::showArrowSelected(ArrowFigure* arrowFigure)
+    {
+        vector<ArrowCanvas::Arrow*>::const_iterator it;
+        for (it = _arrows.begin(); it != _arrows.end(); ++it)
+        {
+            if ((*it)->getArrowFigure() == arrowFigure)
+            {
+                const bool value = !(*it)->isSelected();
+                (*it)->setSelected(value);
+                break;
+            }
+        }
+    }
+
+    const bool ArrowCanvas::arrowIntersects(ArrowFigure* arrowFigure, const Rectangle& rect)
+    {
+        vector<ArrowCanvas::Arrow*>::const_iterator it;
+        for (it = _arrows.begin(); it != _arrows.end(); ++it)
+        {
+            if ((*it)->getArrowFigure() == arrowFigure)
+            {
+                if ((*it)->intersects(rect))
+                {
+                    (*it)->setSelected(true);
+                }
+                else
+                {
+                    (*it)->setSelected(false);
+                }
+            }
+        }
+        return false;
+    }
+
     void ArrowCanvas::postArrowCanvasClicked()
     {
         ArrowCanvasClicked* notification = new ArrowCanvasClicked(this);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     
-    ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end)
+    void ArrowCanvas::postFigureSelected(ArrowFigure* arrowFigure, const MouseEvent& e)
+    {
+        FigureSelected* notification = new FigureSelected(arrowFigure, e.mods);
+        NotificationCenter::defaultCenter().postNotification(notification);
+    }
+
+    ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end, ArrowFigure* arrowFigure)
     : _start(start)
     , _end(end)
+    , _arrowFigure(arrowFigure)
+    , _selected(false)
     {
     }
     
     ArrowCanvas::Arrow::Arrow(const Arrow& rhs)
     : _start(rhs._start)
     , _end(rhs._end)
+    , _arrowFigure(rhs._arrowFigure)
+    , _selected(rhs._selected)
     {
     }
 
@@ -234,6 +299,8 @@ namespace ui
         {
             this->_start = rhs._start;
             this->_end = rhs._end;
+            this->_arrowFigure = rhs._arrowFigure;
+            this->_selected = rhs._selected;
         }
         return *this;
     }
@@ -252,7 +319,22 @@ namespace ui
         return _end;
     }
     
-    const bool ArrowCanvas::Arrow::intercepts(const MouseEvent& e)
+    const ArrowFigure* ArrowCanvas::Arrow::getArrowFigure() const
+    {
+        return _arrowFigure;
+    }
+    
+    const bool ArrowCanvas::Arrow::isSelected() const
+    {
+        return _selected;
+    }
+    
+    void ArrowCanvas::Arrow::setSelected(const bool selected)
+    {
+        _selected = selected;
+    }
+    
+    const bool ArrowCanvas::Arrow::intersects(const MouseEvent& e)
     {
         const Point* start = _start->getAnchorPointRelativeTo(_end);
         const Point* end = _end->getAnchorPointRelativeTo(_start);
@@ -268,5 +350,50 @@ namespace ui
         {
             return false;
         }
+    }
+
+    const Rectangle* ArrowCanvas::Arrow::getEnclosingRectangle() const
+    {
+        const Point* start = _start->getAnchorPointRelativeTo(_end);
+        const Point* end = _end->getAnchorPointRelativeTo(_start);
+        float startX = 0.0;
+        float startY = 0.0;
+        float width = 0.0;
+        float height = 0.0;
+        if (start && end)
+        {
+            juce::Line line(*start, *end);
+            startX = (start->getX() > end->getX()) ? end->getX() : start->getX();
+            startY = (start->getY() > end->getY()) ? end->getY() : start->getY();
+            width = (float)fabs(start->getX() - end->getX());
+            height = (float)fabs(start->getY() - end->getY());
+            if (line.isHorizontal())
+            {
+                height = 10.0f;
+            }
+            else if (line.isVertical())
+            {
+                width = 10.0f;
+            }
+            else
+            {
+            }
+            delete start;
+            delete end;
+        }
+        Rectangle* result = new Rectangle(startX, startY, width, height);
+        return result;
+    }
+    
+    const bool ArrowCanvas::Arrow::intersects(const Rectangle& rect) const
+    {
+        const Rectangle* arrowRect = getEnclosingRectangle();
+        bool result = false;
+        if (arrowRect)
+        {
+            result = arrowRect->intersects(rect);
+            delete arrowRect;
+        }
+        return result;
     }
 }

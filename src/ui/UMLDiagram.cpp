@@ -40,6 +40,10 @@
 #include "ArrowCanvas.h"
 #endif
 
+#ifndef ARROWFIGURE_H_
+#include "ArrowFigure.h"
+#endif
+
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
@@ -87,7 +91,9 @@ namespace ui
     
     void UMLDiagram::addArrowToCanvas(Figure* a, Figure* b)
     {
-        _canvas->addArrow(a, b);
+        ArrowFigure* arrowFigure = new ArrowFigure();
+        addChildComponent(arrowFigure, -1);
+        _canvas->addArrow(a, b, arrowFigure);
     }
 
     void UMLDiagram::paint (Graphics& g)
@@ -126,11 +132,17 @@ namespace ui
                 {
                     castChild->setSelected(false);
                 }
+                _canvas->deselectAllArrows();
             }
             for (int j = 0; j < _selection.getNumSelected(); ++j)
             {
                 Figure* item = _selection.getSelectedItem(j);
                 item->setSelected(true);
+                ArrowFigure* arrowFigure = dynamic_cast<ArrowFigure*>(item);
+                if (arrowFigure)
+                {
+                    _canvas->showArrowSelected(arrowFigure);
+                }
             }
         }
     }
@@ -141,6 +153,7 @@ namespace ui
         if (isParentOf(canvas))
         {
             _selection.deselectAll();
+            _canvas->deselectAllArrows();
         }
     }
     

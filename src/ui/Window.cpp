@@ -34,6 +34,7 @@
 #include <Poco/NotificationCenter.h>
 
 #include "Window.h"
+#include <iostream>
 
 #ifndef PROJECT_H_
 #include "ProjectComponent.h"
@@ -48,7 +49,7 @@
 #endif
 
 #ifndef ACTIVEWINDOWSTATUSCHANGED_H_
-#include "ActiveWindowStatusChanged.h"
+#include "../notifications/ActiveWindowStatusChanged.h"
 #endif
 
 using Poco::NotificationCenter;
@@ -114,7 +115,7 @@ namespace ui
         ActiveWindowStatusChanged* notification = new ActiveWindowStatusChanged(isActiveWindow());
         NotificationCenter::defaultCenter().postNotification(notification);
     }
-
+    
     void Window::closeButtonPressed()
     {
         JUCEApplication::getInstance()->systemRequestedQuit();

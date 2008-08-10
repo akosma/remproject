@@ -77,6 +77,9 @@ SET (ui_SRCS
     
     ui/FigureLassoSource.h
     ui/FigureLassoSource.cpp
+    
+    ui/ArrowFigure.h
+    ui/ArrowFigure.cpp
 )
 
 SET (ui_Main_SRCS
@@ -106,6 +109,9 @@ SET (notifications_SRCS
 
     notifications/NewUseCaseDiagramAdded.h
     notifications/NewUseCaseDiagramAdded.cpp
+    
+    notifications/ActiveWindowStatusChanged.h
+    notifications/ActiveWindowStatusChanged.cpp
 )
 
 SET (storage_SRCS

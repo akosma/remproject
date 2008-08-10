@@ -31,6 +31,8 @@
  * \date      4/21/08
  */
 
+#include <Poco/AutoPtr.h>
+
 #include "PlatformDefinitions.h"
 
 #include <vector>
@@ -38,7 +40,13 @@
 #ifndef ARROWCANVAS_H_
 #define ARROWCANVAS_H_
 
+#ifndef FIGURESELECTED_H_
+#include "../notifications/FigureSelected.h"
+#endif
+
+using Poco::AutoPtr;
 using std::vector;
+using notifications::FigureSelected;
 
 /*!
  * \namespace ui
@@ -49,6 +57,7 @@ namespace ui
     class Figure;
     class FigureLassoSource;
     class UMLDiagram;
+    class ArrowFigure;
     
     /*!
      * \class ArrowCanvas
@@ -74,38 +83,49 @@ namespace ui
         virtual void mouseDrag(const MouseEvent& e);
 
         void paint(Graphics&);
-        void setNoCurrentArrow();
         void setSelectedItemSet(SelectedItemSet<Figure*>&, UMLDiagram*);
+        const int getNumArrows() const;
         
-        void addArrow(Figure*, Figure*);
+        void addArrow(Figure*, Figure*, ArrowFigure*);
+        void showArrowSelected(ArrowFigure*);
+        const bool arrowIntersects(ArrowFigure*, const Rectangle&);
+        void deselectAllArrows();
         
         void toggleGrid();
         
     private:
         void postArrowCanvasClicked();
+        void postFigureSelected(ArrowFigure*, const MouseEvent&);
+        void handleFigureSelected(const AutoPtr<FigureSelected>&);
         void drawGrid(Graphics& g);
 
     private:
         class Arrow
         {
         public:
-            Arrow(Figure*, Figure*);
+            Arrow(Figure*, Figure*, ArrowFigure*);
             Arrow(const Arrow&);
             Arrow& operator=(const Arrow&);
             virtual ~Arrow();
             const Figure* getStartFigure() const;
             const Figure* getEndFigure() const;
-            const bool intercepts(const MouseEvent&);
+            const ArrowFigure* getArrowFigure() const;
+            const bool isSelected() const;
+            void setSelected(const bool);
+            const bool intersects(const MouseEvent&);
+            const Rectangle* getEnclosingRectangle() const;
+            const bool intersects(const Rectangle&) const;
 
         private:
             Figure* _start;
             Figure* _end;
+            ArrowFigure* _arrowFigure;
+            bool _selected;
         };
 
     private:
         const float _strokeWidth;
         vector<Arrow*> _arrows;
-        Arrow* _currentArrow;
         bool _drawGrid;
         LassoComponent<Figure*>* _lassoComponent;
         FigureLassoSource* _lassoSource;

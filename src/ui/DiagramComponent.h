@@ -44,7 +44,7 @@
 #endif
 
 #ifndef ACTIVEWINDOWSTATUSCHANGED_H_
-#include "ActiveWindowStatusChanged.h"
+#include "../notifications/ActiveWindowStatusChanged.h"
 #endif
 
 using Poco::AutoPtr;
