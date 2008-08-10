@@ -31,6 +31,8 @@
  * \date      4/11/08
  */
 
+#include <Poco/NotificationCenter.h>
+
 #include "Window.h"
 
 #ifndef PROJECT_H_
@@ -44,6 +46,13 @@
 #ifndef COMMANDDELEGATE_H_
 #include "CommandDelegate.h"
 #endif
+
+#ifndef ACTIVEWINDOWSTATUSCHANGED_H_
+#include "ActiveWindowStatusChanged.h"
+#endif
+
+using Poco::NotificationCenter;
+using notifications::ActiveWindowStatusChanged;
 
 /*!
  * \namespace ui
@@ -98,6 +107,12 @@ namespace ui
     ApplicationCommandManager* Window::getCommandManager()
     {
         return _commandManager;
+    }
+    
+    void Window::activeWindowStatusChanged()
+    {
+        ActiveWindowStatusChanged* notification = new ActiveWindowStatusChanged(isActiveWindow());
+        NotificationCenter::defaultCenter().postNotification(notification);
     }
 
     void Window::closeButtonPressed()

@@ -43,8 +43,13 @@
 #include "../notifications/ProjectTabbedComponentChangedTab.h"
 #endif
 
+#ifndef ACTIVEWINDOWSTATUSCHANGED_H_
+#include "ActiveWindowStatusChanged.h"
+#endif
+
 using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
+using notifications::ActiveWindowStatusChanged;
 
 /*!
  * \namespace ui
@@ -75,8 +80,10 @@ namespace ui
         
     private:
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);
+        void handleActiveWindowStatusChanged(const AutoPtr<ActiveWindowStatusChanged>&);
 
     private:
+        bool _isActive;
         const int _index;
         Viewport* _viewport;
         DiagramToolbar* _toolbar;

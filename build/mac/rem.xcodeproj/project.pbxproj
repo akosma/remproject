@@ -95,6 +95,8 @@
 		3AA1E5D00E1D4C3E00B752D0 /* SQLiteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8101500D96BC66003EFF96 /* SQLiteWrapper.cpp */; };
 		3AA1E6210E1D577800B752D0 /* CommandDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1E6200E1D577800B752D0 /* CommandDelegate.cpp */; };
 		3AA1E6CF0E1D67D100B752D0 /* MenuBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1E6CD0E1D67D100B752D0 /* MenuBar.cpp */; };
+		3AAEC48B0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAEC48A0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp */; };
+		3AAEC48C0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AAEC48A0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp */; };
 		3AC013080DECA62C000E5B92 /* UseCaseToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */; };
 		3AC065C40DB13102000EB33E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3AC065C60DB13102000EB33E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065C20DB13102000EB33E /* Window.cpp */; };
@@ -199,6 +201,8 @@
 		3AA1E6CE0E1D67D100B752D0 /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuBar.h; path = ../../src/ui/MenuBar.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE7C0DE9AB900059C4D9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../src/utility/Singleton.h; sourceTree = SOURCE_ROOT; };
 		3AA5DE830DE9AD070059C4D9 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../../src/utility/Property.h; sourceTree = SOURCE_ROOT; };
+		3AAEC4890E4EF17E006B527D /* ActiveWindowStatusChanged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveWindowStatusChanged.h; path = ../../src/notifications/ActiveWindowStatusChanged.h; sourceTree = SOURCE_ROOT; };
+		3AAEC48A0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveWindowStatusChanged.cpp; path = ../../src/notifications/ActiveWindowStatusChanged.cpp; sourceTree = SOURCE_ROOT; };
 		3AC013060DECA62C000E5B92 /* UseCaseToolbarButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UseCaseToolbarButton.cpp; path = ../../src/ui/UseCaseToolbarButton.cpp; sourceTree = SOURCE_ROOT; };
 		3AC013070DECA62C000E5B92 /* UseCaseToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseToolbarButton.h; path = ../../src/ui/UseCaseToolbarButton.h; sourceTree = SOURCE_ROOT; };
 		3AC065BE0DB13102000EB33E /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../src/ui/Application.cpp; sourceTree = SOURCE_ROOT; };
@@ -412,6 +416,8 @@
 		3A5B73530E4DB9D3009D4BCF /* notifications */ = {
 			isa = PBXGroup;
 			children = (
+				3AAEC4890E4EF17E006B527D /* ActiveWindowStatusChanged.h */,
+				3AAEC48A0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp */,
 				3A5191F30E4DC747003053A9 /* ArrowCanvasClicked.h */,
 				3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */,
 				3A5191F50E4DC747003053A9 /* DiagramToggleGrid.h */,
@@ -661,6 +667,7 @@
 				3AE7D1D10E4DE239005F0575 /* DiagramToolbar.cpp in Sources */,
 				3A0AA2460E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
 				3A65AA930E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
+				3AAEC48B0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +711,7 @@
 				3AE7D1FF0E4DE6EA005F0575 /* UMLDiagram.cpp in Sources */,
 				3A0AA2450E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
 				3A65AA940E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
+				3AAEC48C0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,7 +59,10 @@ namespace ui
         void closeButtonPressed();
         
         ApplicationCommandManager* getCommandManager();
-        
+    
+    protected:
+        virtual void activeWindowStatusChanged();
+
     private:
         MenuBar* _menuBarModel;
         CommandDelegate* _commandDelegate;

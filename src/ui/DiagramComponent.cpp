@@ -58,6 +58,7 @@ namespace ui
     , _viewport (new Viewport())
     , _diagram (diagram)
     , _toolbar(diagram->getToolbar())
+    , _isActive(false)
     {
         _toolbar->setParent(this);
         addAndMakeVisible(_viewport);
@@ -68,6 +69,9 @@ namespace ui
         
         NObserver<DiagramComponent, ProjectTabbedComponentChangedTab> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab);
         NotificationCenter::defaultCenter().addObserver(tabObserver);
+
+        NObserver<DiagramComponent, ActiveWindowStatusChanged> windowStatusObserver(*this, &DiagramComponent::handleActiveWindowStatusChanged);
+        NotificationCenter::defaultCenter().addObserver(windowStatusObserver);
     }
 
     DiagramComponent::~DiagramComponent()
@@ -80,7 +84,7 @@ namespace ui
     {
         g.fillAll (Colours::grey);
     }
-
+    
     bool DiagramComponent::exportAsPNG()
     {
         FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);
@@ -114,6 +118,13 @@ namespace ui
     void DiagramComponent::handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>& notification)
     {
         const bool shouldBeVisible = (_index == notification->getNewCurrentTabIndex());
+        _toolbar->setVisible(shouldBeVisible);
+        _isActive = shouldBeVisible;
+    }
+    
+    void DiagramComponent::handleActiveWindowStatusChanged(const AutoPtr<ActiveWindowStatusChanged>& notification)
+    {
+        const bool shouldBeVisible = (notification->getStatus() && _isActive);
         _toolbar->setVisible(shouldBeVisible);
     }
     
