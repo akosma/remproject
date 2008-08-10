@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the notifications::ProjectTabbedComponentChangedTab class.
 /*!
  * \file ProjectTabbedComponentChangedTab.h
  *
@@ -40,37 +41,62 @@
 
 using Poco::Notification;
 
+//! Notifications passed between application layers to signal events.
 /*!
  * \namespace notifications
- * Insert a description for the namespace here
+ * Contains notifications passed between application layers to signal events.
  */
 namespace notifications
 {
+    //! Raised to notify that a new diagram has been chosen in the project.
     /*!
      * \class ProjectTabbedComponentChangedTab
      *
-     *  
+     * Raised by the ui::ProjectTabbedComponent class and caught
+     * by the ui::DiagramComponent class, to inform that the user has
+     * selected another diagram in the project, and that the corresponding
+     * toolbar should be shown.
      */
     class ProjectTabbedComponentChangedTab : public Notification
     {
     public:
 
+        //! Constructor.
         /*!
-         *  ProjectTabbedComponentChangedTab constructor.
+         * Constructor.
+         * 
+         * \param newCurrentTabIndex The index of the newly selected tab.
+         * \param newCurrentTabName The name of the newly selected tab.
          */
         ProjectTabbedComponentChangedTab(const int, const String&);
 
+        //! Virtual destructor.
         /*!
-         *  ProjectTabbedComponentChangedTab virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ProjectTabbedComponentChangedTab();
 
+        //! Returns the index of the newly selected tab.
+        /*!
+         * Returns the index of the newly selected tab.
+         * 
+         * \return An integer.
+         */
         const int getNewCurrentTabIndex() const;
+        
+        //! Returns the name of the newly selected tab.
+        /*!
+         * Returns the name of the newly selected tab.
+         * 
+         * \return A string.
+         */
         const String getNewCurrentTabName() const;
         
     private:
-        
+        //! Stores the index of the newly selected tab index.
         const int _newCurrentTabIndex;
+        
+        //! Stores the name of the newly selected tab name.
         const String _newCurrentTabName;
 
     };

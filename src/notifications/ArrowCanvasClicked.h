@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the notifications::ArrowCanvasClicked class.
 /*!
  * \file ArrowCanvasClicked.h
  *
@@ -38,42 +39,58 @@
 
 using Poco::Notification;
 
+// Forward declaration to avoid includes.
 namespace ui
 {
     class ArrowCanvas;
 }
 using ui::ArrowCanvas;
 
+//! Notifications passed between application layers to signal events.
 /*!
  * \namespace notifications
- * Insert a description for the namespace here
+ * Contains notifications passed between application layers to signal events.
  */
 namespace notifications
 {
+    //! Indicates that the user clicked on an empty region of the ArrowCanvas.
     /*!
      * \class ArrowCanvasClicked
      *
-     *  
+     * Raised by ArrowCanvas instances when the user clicks on them 
+     * without intercepting an arrow. This causes all selected items
+     * in the canvas to be deselected.
      */
     class ArrowCanvasClicked : public Notification
     {
     public:
 
+        //! Constructor.
         /*!
-         *  ArrowCanvasClicked constructor.
+         * Constructor.
+         * 
+         * \param canvas The ArrowCanvas instance posting this notification.
          */
         ArrowCanvasClicked(ArrowCanvas*);
 
+        //! Virtual destructor.
         /*!
-         *  ArrowCanvasClicked virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ArrowCanvasClicked();
-        
+
+        //! Returns a pointer to the ArrowCanvas that posted this notification.
+        /*!
+         * Returns a pointer to the ArrowCanvas that posted this notification.
+         * 
+         * \return A pointer to an ArrowCanvas instance.
+         */
         ArrowCanvas* getClickedArrowCanvas() const;
     
     private:
+        //! Stores a pointer to the ArrowCanvas instance posting this notification.
         ArrowCanvas* _arrowCanvas;
     };
 }
 
-#endif /* ArrowCanvasClicked_H_ */
+#endif /* ARROWCANVASCLICKED_H_ */

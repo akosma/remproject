@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the notifications::FigureMoved class.
 /*!
  * \file FigureMoved.h
  *
@@ -38,40 +39,55 @@
 
 using Poco::Notification;
 
+// Forward declaration to avoid includes.
 namespace ui
 {
     class Figure;
 }
 using ui::Figure;
 
+//! Notifications passed between application layers to signal events.
 /*!
  * \namespace notifications
- * Insert a description for the namespace here
+ * Contains notifications passed between application layers to signal events.
  */
 namespace notifications
 {
+    //! Raised whenever a ui::Figure instance is moved on the canvas.
     /*!
      * \class FigureMoved
      *
-     *  
+     * Posted by the ui::Figure class and intercepted by the ui::UMLDiagram class
+     * whenever a Figure instance is moved on the canvas.
      */
     class FigureMoved : public Notification
     {
     public:
 
+        //! Constructor.
         /*!
-         *  FigureMoved constructor.
+         * Constructor.
+         * 
+         * \param figure The figure being moved.
          */
         FigureMoved(Figure*);
 
+        //! Virtual destructor.
         /*!
-         *  FigureMoved virtual destructor.
+         * Virtual destructor.
          */
         virtual ~FigureMoved();
-        
+
+        //! Returns a pointer to the moved figure.
+        /*!
+         * Returns a pointer to the moved figure.
+         * 
+         * \return A pointer to a ui::Figure instance.
+         */
         Figure* getMovedFigure() const;
 
     private:
+        //! Stores a pointer to the figure being moved.
         Figure* _figure;
     };
 }

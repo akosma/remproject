@@ -154,20 +154,24 @@ namespace controllers
          */
         const bool hasCurrentDiagram() const;
         
+        //! States whether the controller has a new project.
+        /*!
+         * States whether the controller has a new project.
+         * 
+         * \return A boolean value.
+         */
         const bool isProjectNew() const;
 
     private:
 
         //! Private constructor.
-        /*!
-         * Private constructor.
-         */
         FileController();
 
         //! Allow the Singleton template class to access the private constructor.
         friend FileController& Singleton<FileController>::get();
         
     private:
+        //! Handles notifications of type notification::NewUseCaseDiagramAdded
         void handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>&);
 
     private:

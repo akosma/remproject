@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the notifications::FigureSelected class.
 /*!
  * \file FigureSelected.h
  *
@@ -40,6 +41,7 @@
 
 using Poco::Notification;
 
+// Forward declaration to avoid includes.
 namespace ui
 {
     class Figure;
@@ -47,36 +49,65 @@ namespace ui
 
 using ui::Figure;
 
+//! Notifications passed between application layers to signal events.
 /*!
  * \namespace notifications
- * Insert a description for the namespace here
+ * Contains notifications passed between application layers to signal events.
  */
 namespace notifications
 {
+    //! Raised whenever a ui::Figure instance is selected on the canvas.
     /*!
      * \class FigureSelected
      *
-     *  
+     * Posted by the ui::Figure and ui::ArrowCanvas classes 
+     * and intercepted by the ui::UMLDiagram class
+     * whenever a Figure instance is selected on the canvas.
+     * It stores the key combination held by the user (SHIFT, CTRL, etc)
+     * while performing the selection.
      */
     class FigureSelected : public Notification
     {
     public:
 
+        //! Constructor.
         /*!
-         *  FigureSelected constructor.
+         * Constructor.
+         * 
+         * \param figure The figure being selected.
+         * \param modifierKeys The key combination held by the user
+         * while selecting the figure.
          */
         FigureSelected(Figure*, ModifierKeys);
 
+        //! Virtual destructor.
         /*!
-         *  FigureSelected virtual destructor.
+         * Virtual destructor.
          */
         virtual ~FigureSelected();
         
+        //! Returns a pointer to the selected figure.
+        /*!
+         * Returns a pointer to the selected figure.
+         * 
+         * \return A pointer to a ui::Figure instance.
+         */
         Figure* getSelectedFigure() const;
+
+        //! Returns the key combination held while selecting the figure.
+        /*!
+         * Returns the key combination held (SHIFT, CTRL) 
+         * while selecting the figure.
+         * 
+         * \return A ModifierKeys value.
+         */
         const ModifierKeys getModifierKeys() const;
         
     private:
+        //! Stores a pointer to the Figure that was selected.
         Figure* _figure;
+        
+        //! Stores the key combination held by the user while selecting the Figure.
         ModifierKeys _modifierKeys;
     };
 }
