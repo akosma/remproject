@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests several features of the metamodel::Diagram class.
     /*!
      * \class DiagramTest
      *
-     *  
+     * Tests several features of the metamodel::Diagram class.
      */
     class DiagramTest : public CppUnit::TestFixture
     {
@@ -60,17 +61,28 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
          * Constructor.
          */
         DiagramTest();
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~DiagramTest();
 
+        //! Tests that a diagram can have one or many elements.
+        /*!
+         * Tests that a diagram can have one or many elements.
+         */
         void testDiagramCanHaveSeveralElements();
+
+        //! Tests that an element can be added using the [] operator.
+        /*!
+         * Tests that an element can be added using the [] operator.
+         */
         void testCanAddElementsUsingOperator();
     };
 }

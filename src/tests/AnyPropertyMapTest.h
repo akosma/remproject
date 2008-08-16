@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests several features of the AnyPropertyMap class.
     /*!
      * \class AnyPropertyMapTest
      *
-     *  
+     * Tests several features of the AnyPropertyMap class. 
      */
     class AnyPropertyMapTest : public CppUnit::TestFixture
     {
@@ -61,19 +62,40 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
          * Constructor.
          */
         AnyPropertyMapTest();
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~AnyPropertyMapTest();
 
+        //! Tests that a client can add and retrieve properties from a map.
+        /*!
+         * Tests that a client can add and retrieve properties from a map.
+         */
         void testAddAndRetrieveProperties();
+        
+        //! Tests that retrieving properties of the wrong type raises an exception.
+        /*!
+         * Tests that retrieving properties of the wrong type raises an exception.
+         */
         void testRetrievingInvalidPropertiesRaiseException();
+
+        //! Tests that maps can be copied safely.
+        /*!
+         * Tests that maps can be copied safely.
+         */
         void testCanUseCopyConstructorSafely();
+
+        //! Tests that maps can be assigned safely.
+        /*!
+         * Tests that maps can be assigned safely.
+         */
         void testCanUseAssignmentOperatorSafely();
 
     };

@@ -47,8 +47,11 @@ using std::string;
  */
 namespace tests
 {
+    //! Tests several features of the SQLiteWrapper class.
     /*!
      * \class SQLiteWrapperTest
+     *
+     * Tests several features of the SQLiteWrapper class.
      * This class is adapted from the one used in the "BirthdayCard"
      * project by Adrian Kosmaczewski
      * http://kosmaczewski.net/projects/birthdaycard/
@@ -64,31 +67,37 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
          * Constructor.
          */
         SQLiteWrapperTest();
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~SQLiteWrapperTest();
 
+        //! Tests the automatic creation of a database file.
         /*!
          * Tests the automatic creation of a database file.
          */
         void testCreateDatabase();
 
+        //! Tests the creation of tables.
         /*!
          * Tests the creation of tables.
          */
         void testCreateTable();
 
+        //! Tests the insertion of values in the table created previously.
         /*!
          * Tests the insertion of values in the table created previously.
          */
         void testInsertion();
 
+        //! Tests the reading of values stored previously.
         /*!
          * Tests the reading of values stored previously.
          */

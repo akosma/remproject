@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests the functionality of the controllers::FileController class.
     /*!
      * \class FileControllerTest
      *
-     *  
+     * This class tests the functionality of the controllers::FileController class.
      */
     class FileControllerTest : public CppUnit::TestFixture
     {
@@ -61,19 +62,40 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
          * Constructor.
          */
         FileControllerTest();
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~FileControllerTest();
 
+        //! Tests that the class is a singleton.
+        /*! 
+         * Tests that the class is a singleton.
+         */
         void testFileControllerIsSingleton();
+        
+        //! Tests that the class can be used to create a new project.
+        /*!
+         * Tests that the class can be used to create a new project.
+         */
         void testCanCreateNewProject();
+        
+        //! Tests that the class can save, open and close projects.
+        /*!
+         * Tests that the class can save, open and close projects.
+         */
         void testCanSaveOpenAndCloseProject();
+        
+        //! Tests that the class can add new diagrams to a project.
+        /*!
+         * Tests that the class can add new diagrams to a project.
+         */
         void testCanAddDiagram();
     };
 }

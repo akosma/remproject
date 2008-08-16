@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests several features of the metamodel::Project class.
     /*!
      * \class ProjectTest
      *
-     *  
+     * Tests several features of the metamodel::Project class.
      */
     class ProjectTest : public CppUnit::TestFixture
     {
@@ -62,19 +63,40 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
-         * ProjectTest constructor.
+         * Constructor.
          */
         ProjectTest();
 
+        //! Virtual destructor.
         /*!
-         * ProjectTest virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ProjectTest();
 
+        //! Tests that a project can have one or many diagrams.
+        /*!
+         * Tests that a project can have one or many diagrams.
+         */
         void testProjectHasManyDiagrams();
+
+        //! Tests that all the diagrams can be removed at once.
+        /*!
+         * Tests that all the diagrams can be removed at once.
+         */
         void testCanRemoveAllDiagramsFromProject();
+
+        //! Tests that diagrams can be added using the [] operator.
+        /*!
+         * Tests that diagrams can be added using the [] operator.
+         */
         void testCanAddElementsUsingOperator();
+        
+        //! Tests that diagrams can be retrieved using the [] operator.
+        /*!
+         * Tests that diagrams can be retrieved using the [] operator.
+         */
         void testCanRetrieveElementsUsingOperator();
     };
 }

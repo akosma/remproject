@@ -45,10 +45,12 @@
  */
 namespace tests
 {
+    //! Tests several features of the storage::Property and storage::AnyProperty template classes.
     /*!
      * \class PropertyTest
      *
-     *  
+     * Tests several features of the storage::Property and 
+     * storage::AnyProperty template classes.
      */
     class PropertyTest : public CppUnit::TestFixture
     {
@@ -61,19 +63,40 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
          * Constructor.
          */
         PropertyTest();
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~PropertyTest();
 
+        //! Tests that the Property class can be used with different types.
+        /*!
+         * Tests that the Property class can be used with different types.
+         */
         void testCanCreatePropertiesOfDifferentTypes();
+        
+        //! Tests that an instance of the AnyProperty class can accept values of any type.
+        /*!
+         * Tests that an instance of the AnyProperty class can accept values of any type.
+         */
         void testDefaultPropertiesAcceptAnyValue();
+
+        //! Shows that instances of the AnyProperty template class can be copied.
+        /*!
+         * Shows that instances of the AnyProperty template class can be copied.
+         */
         void testCanUseCopyConstructorSafely();
+        
+        //! Shows that instances of the AnyProperty template class can be assigned.
+        /*!
+         * Shows that instances of the AnyProperty template class can be assigned.
+         */
         void testCanUseAssignmentOperatorSafely();
 
     };

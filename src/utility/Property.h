@@ -61,26 +61,30 @@ namespace utility
     class Property
     {
     public:
+        //! Parameterless constructor.
         /*!
-         * Property constructor. Creates a new Property instance with default values.
+         * Parameterless constructor. Creates a new Property instance with default values.
          */
         Property();
         
+        //! Constructor.
         /*!
-         * Property constructor. Creates a new Property with the name passed as parameter.
+         * Constructor. Creates a new Property with the name passed as parameter.
          * 
          * \param name The name of the new instance.
          */
         Property(const N&);
         
+        //! Constructor.
         /*!
-         * Property constructor. Creates a new Property with the name and value passed as parameters.
+         * Constructor. Creates a new Property with the name and value passed as parameters.
          * 
          * \param name The name of the new instance.
          * \param value The value of the new instance.
          */
         Property(const N&, const V&);
         
+        //! Copy constructor.
         /*!
          * Copy constructor.
          *
@@ -88,11 +92,13 @@ namespace utility
          */
         Property(const Property<N, V>&);
 
+        //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~Property();
         
+        //! Assignment operator.
         /*!
          * Assignment operator.
          *
@@ -102,6 +108,7 @@ namespace utility
          */
         Property<N, V>& operator=(const Property<N, V>&);
 
+        //! Comparison operator.
         /*!
          * Comparison operator. Tests whether the current instance is "equal" (that is,
          * whether it has the same name and value) as the Property 
@@ -113,6 +120,7 @@ namespace utility
          */
         const bool operator==(const Property<N, V>&);
 
+        //! Parenthesis operator.
         /*!
          * Parenthesis operator. Same as Property::getValue()
          *
@@ -120,6 +128,7 @@ namespace utility
          */
         virtual const V& operator()() const;
         
+        //! Getter.
         /*!
          * Returns the value of the current instance.
          *
@@ -127,6 +136,7 @@ namespace utility
          */
         virtual const V& getValue() const;
 
+        //! Setter.
         /*!
          * Parenthesis operator. Same as Property::setValue(const V& value)
          *
@@ -134,6 +144,7 @@ namespace utility
          */
         virtual void operator()(const V&);
 
+        //! Setter.
         /*!
          * Sets the value of the current instance.
          *
@@ -141,6 +152,7 @@ namespace utility
          */
         virtual void setValue(const V&);
 
+        //! Getter.
         /*!
          * Returns the name of the current Property.
          *

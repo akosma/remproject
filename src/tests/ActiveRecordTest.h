@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests several features of the ActiveRecord family of template classes.
     /*!
      * \class ActiveRecordTest
      *
-     *  
+     * Tests several features of the ActiveRecord family of template classes.
      */
     class ActiveRecordTest : public CppUnit::TestFixture
     {
@@ -80,18 +81,82 @@ namespace tests
          */
         virtual ~ActiveRecordTest();
 
-        void testCanSaveIndividualInstance();        
+        //! Tests that individual instances can be saved.
+        /*!
+         * Tests that individual instances can be saved.
+         */
+        void testCanSaveIndividualInstance();
+        
+        //! Tests that a "SELECT *" retrieves all the instances of a type.
+        /*!
+         * Tests that a "SELECT *" retrieves all the instances of a type.
+         */
         void testCanRetrieveAllInstances();
+
+        //! Tests that a "SELECT * WHERE id" retrieves one instance of a type.
+        /*!
+         * Tests that a "SELECT * WHERE id" retrieves one instance of a type.
+         */
         void testCanRetrieveOneInstance();
+
+        //! Tests that a "SELECT * WHERE" retrieves one instance of a type.
+        /*!
+         * Tests that a "SELECT * WHERE" retrieves one instance of a type.
+         */
         void testCanUseConditionsToFindAnItem();
+        
+        //! Tests that searching for a non-existent instance returns NULL
+        /*!
+         * Tests that searching for a non-existent instance returns NULL
+         */
         void testSearchingForInstancesNotExistingInDatabaseReturnsNull();
+        
+        //! Tests that using the destroy() methods removes an instance from the database.
+        /*! 
+         * Tests that using the destroy() methods removes an instance from the database.
+         */
         void testDestroyingObjectsRemovesThemFromTheDatabase();
+        
+        //! Tests that ActiveRecord instances can be copied safely.
+        /*!
+         * Tests that ActiveRecord instances can be copied safely.
+         */        
         void testCanUseCopyConstructorSafely();
+
+        //! Tests that ActiveRecord instances can be assigned safely.
+        /*!
+         * Tests that ActiveRecord instances can be assigned safely.
+         */
         void testCanUseAssignmentOperatorSafely();
+
+        //! Tests that objects using the HasMany interface can save their children.
+        /*!
+         * Tests that objects using the HasMany interface can save their children.
+         */
         void testObjectCanSaveItsChildren();
+        
+        //! Tests that objects saved have creation and modification times.
+        /*!
+         * Tests that objects saved have creation and modification times.
+         */
         void testSavedObjectsHaveCreationAndUpdateTime();
+        
+        //! Tests that objects implementing the BelongsTo interface can set their parents as 'dirty'.
+        /*!
+         * Tests that objects implementing the BelongsTo interface can set their parents as 'dirty'.
+         */
         void testSettingAChildDirtySetsTheParentDirtyToo();
+        
+        //! Tests that SQLite files cannot be corrupted using SQL injection attacks.
+        /*!
+         * Tests that SQLite files cannot be corrupted using SQL injection attacks.
+         */
         void testObjectsCannotBeAttackedWithSqlInjection();
+        
+        //! Tests that children are loaded using 'lazy loading'
+        /*!
+         * Tests that children are loaded using 'lazy loading'
+         */
         void testUsesLazyLoadingToRetrieveChildren();
     };
 }

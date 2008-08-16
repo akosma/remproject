@@ -45,10 +45,11 @@
  */
 namespace tests
 {
+    //! Tests several features of the metamodel::Element class.
     /*!
      * \class ElementTest
      *
-     *  
+     * Tests several features of the metamodel::Element class.
      */
     class ElementTest : public CppUnit::TestFixture
     {
@@ -61,19 +62,40 @@ namespace tests
 
     public:
 
+        //! Constructor.
         /*!
-         *  ElementTest constructor.
+         * Constructor.
          */
         ElementTest();
 
+        //! Virtual destructor.
         /*!
-         *  ElementTest virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ElementTest();
 
+        //! Tests that an Element instance can have many Member instances.
+        /*!
+         * Tests that an Element instance can have many Member instances.
+         */
         void testElementHasManyMembers();
+        
+        //! Tests that a client can remove all the Member instances of an Element.
+        /*!
+         * Tests that a client can remove all the Member instances of an Element.
+         */
         void testCanRemoveAllMembersFromElement();
+        
+        //! Tests that clients can add Member instances using the [] operator.
+        /*!
+         * Tests that clients can add Member instances using the [] operator.
+         */
         void testCanAddMembersUsingOperator();
+        
+        //! Tests that clients can retrieve Member instances using the [] operator.
+        /*!
+         * Tests that clients can retrieve Member instances using the [] operator.
+         */
         void testCanRetrieveMembersUsingOperator();
     };
 }
