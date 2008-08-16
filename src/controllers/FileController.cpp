@@ -237,6 +237,10 @@ namespace controllers
             case NewFigureAdded::UseCase:
                 addFigure("usecase");
                 break;
+                
+            case NewFigureAdded::Arrow:
+                addFigure("arrow");
+                break;
             
             default:
                 break;

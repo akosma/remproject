@@ -72,7 +72,8 @@ namespace ui
 
             diagramAddActor = 0x2040,
             diagramAddUseCase = 0x2041,
-            diagramToggleGrid = 0x2042,
+            diagramAddArrow = 0x2042,
+            diagramToggleGrid = 0x2043,
             
             helpAbout = 0x2060
         };

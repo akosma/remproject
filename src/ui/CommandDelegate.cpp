@@ -55,6 +55,7 @@ namespace ui
 {
     CommandDelegate::CommandDelegate()
     : ApplicationCommandTarget()
+    , Singleton<CommandDelegate>()
     , _fileController(FileController::get())
     {
     }
@@ -92,6 +93,7 @@ namespace ui
             
             diagramAddActor,
             diagramAddUseCase,
+            diagramAddArrow,
             diagramToggleGrid,
             
             helpAbout
@@ -221,6 +223,15 @@ namespace ui
                 info.setActive(true);
                 break;
             }
+            
+            case diagramAddArrow:
+            {
+                info.shortName = "Add an Arrow";
+                info.description = "Add an arrow to the current diagram";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
 
             case diagramToggleGrid:
             {
@@ -300,6 +311,13 @@ namespace ui
             case diagramAddUseCase:
             {
                 NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::UseCase);
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramAddArrow:
+            {
+                NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::Arrow);
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }

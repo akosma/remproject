@@ -103,6 +103,18 @@ namespace ui
                 addUseCaseFigure();
                 break;
                 
+            case NewFigureAdded::Arrow:
+            {
+                if (getSelectedItemsCount() == 2)
+                {
+                    const Array<Figure*>& items = getSelectedItems();
+                    Figure* a = items[0];
+                    Figure* b = items[1];
+                    addArrowToCanvas(a, b);
+                }
+                break;
+            }
+                
             default:
                 break;
         }

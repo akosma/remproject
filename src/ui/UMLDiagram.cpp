@@ -141,6 +141,16 @@ namespace ui
             }
         }
     }
+    
+    const int UMLDiagram::getSelectedItemsCount() const
+    {
+        return _selection.getNumSelected();
+    }
+    
+    const Array<Figure*>& UMLDiagram::getSelectedItems()
+    {
+        return _selection.getItemArray();
+    }
 
     void UMLDiagram::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
     {

@@ -113,6 +113,8 @@ namespace ui
 
     protected:
         virtual DiagramToolbar* createToolbar() = 0;
+        const int getSelectedItemsCount() const;
+        const Array<Figure*>& getSelectedItems();
         
     protected:
         void addArrowToCanvas(Figure*, Figure*);
