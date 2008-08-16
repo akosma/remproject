@@ -58,11 +58,6 @@ namespace ui
     : UMLDiagram()
     {
         setInterceptsMouseClicks(true, true);
-//        Figure* a = addActorFigure();
-//        Figure* b = addActorFigure();
-//        Figure* c = addUseCaseFigure();
-//        addArrowToCanvas(a, c);
-//        addArrowToCanvas(a, b);
     }
 
     UseCaseDiagram::~UseCaseDiagram()
@@ -108,9 +103,33 @@ namespace ui
                 if (getSelectedItemsCount() == 2)
                 {
                     const Array<Figure*>& items = getSelectedItems();
-                    Figure* a = items[0];
-                    Figure* b = items[1];
-                    addArrowToCanvas(a, b);
+                    ActorFigure* a = dynamic_cast<ActorFigure*>(items[0]);
+                    ActorFigure* b = dynamic_cast<ActorFigure*>(items[1]);
+                    if (a && b)
+                    {
+                        addArrowToCanvas(a, b);
+                    }
+                }
+                break;
+            }
+            
+            case NewFigureAdded::Line:
+            {
+                if (getSelectedItemsCount() == 2)
+                {
+                    const Array<Figure*>& items = getSelectedItems();
+                    ActorFigure* a1 = dynamic_cast<ActorFigure*>(items[0]);
+                    ActorFigure* a2 = dynamic_cast<ActorFigure*>(items[1]);
+                    UseCaseFigure* b1 = dynamic_cast<UseCaseFigure*>(items[0]);
+                    UseCaseFigure* b2 = dynamic_cast<UseCaseFigure*>(items[1]);
+                    if (a1 && b2)
+                    {
+                        addLineToCanvas(a1, b2);
+                    }
+                    if (a2 && b1)
+                    {
+                        addLineToCanvas(a2, b1);
+                    }
                 }
                 break;
             }

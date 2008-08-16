@@ -40,15 +40,11 @@
 namespace ui
 {
     ArrowFigure::ArrowFigure()
-    : Figure(0, 0)
+    : LineFigure()
     {
     }
 
     ArrowFigure::~ArrowFigure()
-    {
-    }
-
-    void ArrowFigure::drawFigure(Path& actor)
     {
     }
 }

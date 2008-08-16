@@ -80,17 +80,17 @@ namespace ui
                         itemsFound.removeValue(figure);
                     }
                 }
-            }
-            ArrowFigure* arrow = dynamic_cast<ArrowFigure*>(_diagram->getChildComponent(i));
-            if (arrow != NULL)
-            {
-                if (_canvas->arrowIntersects(arrow, lasso))
+                LineFigure* line = dynamic_cast<LineFigure*>(figure);
+                if (line != NULL)
                 {
-                    itemsFound.add(figure);
-                }
-                else
-                {
-                    itemsFound.removeValue(figure);
+                    if (_canvas->lineIntersects(line, lasso))
+                    {
+                        itemsFound.add(figure);
+                    }
+                    else
+                    {
+                        itemsFound.removeValue(figure);
+                    }
                 }
             }
         }

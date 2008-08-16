@@ -102,6 +102,7 @@ namespace ui
                 // "Diagram" menu items
                 menu.addCommandItem(manager, CommandDelegate::diagramAddActor);
                 menu.addCommandItem(manager, CommandDelegate::diagramAddUseCase);
+                menu.addCommandItem(manager, CommandDelegate::diagramAddLine);
                 menu.addCommandItem(manager, CommandDelegate::diagramAddArrow);
                 menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::diagramToggleGrid);

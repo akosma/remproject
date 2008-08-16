@@ -36,8 +36,8 @@
 #ifndef ARROWFIGURE_H_
 #define ARROWFIGURE_H_
 
-#ifndef FIGURE_H_
-#include "Figure.h"
+#ifndef LINEFIGURE_H_
+#include "LineFigure.h"
 #endif
 
 /*!
@@ -51,14 +51,11 @@ namespace ui
      *
      *  
      */
-    class ArrowFigure : public Figure
+    class ArrowFigure : public LineFigure
     {
     public:
         ArrowFigure();
         virtual ~ArrowFigure();
-        
-    protected:
-        virtual void drawFigure(Path&);
     };
 }
 

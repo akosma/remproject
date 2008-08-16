@@ -44,6 +44,10 @@
 #include "ArrowFigure.h"
 #endif
 
+#ifndef LINEFIGURE_H_
+#include "LineFigure.h"
+#endif
+
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
@@ -96,6 +100,13 @@ namespace ui
         _canvas->addArrow(a, b, arrowFigure);
     }
 
+    void UMLDiagram::addLineToCanvas(Figure* a, Figure* b)
+    {
+        LineFigure* lineFigure = new LineFigure();
+        addChildComponent(lineFigure, -1);
+        _canvas->addLine(a, b, lineFigure);
+    }
+
     void UMLDiagram::paint (Graphics& g)
     {
         g.fillAll(Colours::white);
@@ -133,10 +144,10 @@ namespace ui
             {
                 Figure* item = _selection.getSelectedItem(j);
                 item->setSelected(true);
-                ArrowFigure* arrowFigure = dynamic_cast<ArrowFigure*>(item);
-                if (arrowFigure)
+                LineFigure* lineFigure = dynamic_cast<LineFigure*>(item);
+                if (lineFigure)
                 {
-                    _canvas->showArrowSelected(arrowFigure);
+                    _canvas->showLineSelected(lineFigure);
                 }
             }
         }

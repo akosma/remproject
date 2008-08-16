@@ -59,6 +59,7 @@ namespace ui
     class FigureLassoSource;
     class UMLDiagram;
     class ArrowFigure;
+    class LineFigure;
     
     /*!
      * \class ArrowCanvas
@@ -88,15 +89,16 @@ namespace ui
         const int getNumArrows() const;
         
         void addArrow(Figure*, Figure*, ArrowFigure*);
-        void showArrowSelected(ArrowFigure*);
-        const bool arrowIntersects(ArrowFigure*, const juce::Rectangle&);
+        void addLine(Figure*, Figure*, LineFigure*);
+        void showLineSelected(LineFigure*);
+        const bool lineIntersects(LineFigure*, const juce::Rectangle&);
         void deselectAllArrows();
         
         void toggleGrid();
         
     private:
         void postArrowCanvasClicked();
-        void postFigureSelected(ArrowFigure*, const MouseEvent&);
+        void postFigureSelected(Figure*, const MouseEvent&);
         void handleFigureSelected(const AutoPtr<FigureSelected>&);
         void drawGrid(Graphics& g);
 
@@ -104,23 +106,24 @@ namespace ui
         class Arrow
         {
         public:
-            Arrow(Figure*, Figure*, ArrowFigure*);
+            Arrow(Figure*, Figure*, LineFigure*);
             Arrow(const Arrow&);
             Arrow& operator=(const Arrow&);
             virtual ~Arrow();
             const Figure* getStartFigure() const;
             const Figure* getEndFigure() const;
-            const ArrowFigure* getArrowFigure() const;
+            LineFigure* getLineFigure() const;
             const bool isSelected() const;
             void setSelected(const bool);
             const bool intersects(const MouseEvent&);
             const juce::Rectangle* getEnclosingRectangle() const;
             const bool intersects(const juce::Rectangle&) const;
+            const bool isArrow() const;
 
         private:
             Figure* _start;
             Figure* _end;
-            ArrowFigure* _arrowFigure;
+            LineFigure* _lineFigure;
             bool _selected;
         };
 

@@ -94,6 +94,7 @@ namespace ui
             diagramAddActor,
             diagramAddUseCase,
             diagramAddArrow,
+            diagramAddLine,
             diagramToggleGrid,
             
             helpAbout
@@ -233,6 +234,15 @@ namespace ui
                 break;
             }
 
+            case diagramAddLine:
+            {
+                info.shortName = "Add a Line";
+                info.description = "Add a line to the current diagram";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
+
             case diagramToggleGrid:
             {
                 info.shortName = "Toggle Grid";
@@ -318,6 +328,13 @@ namespace ui
             case diagramAddArrow:
             {
                 NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::Arrow);
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramAddLine:
+            {
+                NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::Line);
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }

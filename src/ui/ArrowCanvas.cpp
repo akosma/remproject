@@ -47,6 +47,10 @@
 #include "ArrowFigure.h"
 #endif
 
+#ifndef LINEFIGURE_H_
+#include "LineFigure.h"
+#endif
+
 #ifndef ARROWCANVASCLICKED_H_
 #include "../notifications/ArrowCanvasClicked.h"
 #endif
@@ -132,8 +136,8 @@ namespace ui
         {
             if ((*it)->intersects(e))
             {
-                ArrowFigure* arrowFigure = const_cast<ArrowFigure*>((*it)->getArrowFigure());
-                postFigureSelected(arrowFigure, e);
+                LineFigure* lineFigure = (*it)->getLineFigure();
+                postFigureSelected(lineFigure, e);
                 noneSelected = false;
                 break;
             }
@@ -170,7 +174,14 @@ namespace ui
             const Point* e = end->getAnchorPointRelativeTo(start);
             if (s && e)
             {
-                arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
+                if ((*it)->isArrow())
+                {
+                    arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
+                }
+                else
+                {
+                    arrow.addLineSegment(s->getX(), s->getY(), e->getX(), e->getY(), width);
+                }
             }
             g.strokePath(arrow, PathStrokeType(width));
             delete s;
@@ -232,12 +243,18 @@ namespace ui
         _arrows.push_back(arrow);
     }
 
-    void ArrowCanvas::showArrowSelected(ArrowFigure* arrowFigure)
+    void ArrowCanvas::addLine(Figure* start, Figure* end, LineFigure* lineFigure)
+    {
+        Arrow* arrow = new Arrow(start, end, lineFigure);
+        _arrows.push_back(arrow);
+    }
+
+    void ArrowCanvas::showLineSelected(LineFigure* lineFigure)
     {
         vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
-            if ((*it)->getArrowFigure() == arrowFigure)
+            if ((*it)->getLineFigure() == lineFigure)
             {
                 const bool value = !(*it)->isSelected();
                 (*it)->setSelected(value);
@@ -246,12 +263,12 @@ namespace ui
         }
     }
 
-    const bool ArrowCanvas::arrowIntersects(ArrowFigure* arrowFigure, const juce::Rectangle& rect)
+    const bool ArrowCanvas::lineIntersects(LineFigure* lineFigure, const juce::Rectangle& rect)
     {
         vector<ArrowCanvas::Arrow*>::const_iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
-            if ((*it)->getArrowFigure() == arrowFigure)
+            if ((*it)->getLineFigure() == lineFigure)
             {
                 if ((*it)->intersects(rect))
                 {
@@ -272,16 +289,16 @@ namespace ui
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     
-    void ArrowCanvas::postFigureSelected(ArrowFigure* arrowFigure, const MouseEvent& e)
+    void ArrowCanvas::postFigureSelected(Figure* arrowFigure, const MouseEvent& e)
     {
         FigureSelected* notification = new FigureSelected(arrowFigure, e.mods);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
 
-    ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end, ArrowFigure* arrowFigure)
+    ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end, LineFigure* arrowFigure)
     : _start(start)
     , _end(end)
-    , _arrowFigure(arrowFigure)
+    , _lineFigure(arrowFigure)
     , _selected(false)
     {
     }
@@ -289,7 +306,7 @@ namespace ui
     ArrowCanvas::Arrow::Arrow(const Arrow& rhs)
     : _start(rhs._start)
     , _end(rhs._end)
-    , _arrowFigure(rhs._arrowFigure)
+    , _lineFigure(rhs._lineFigure)
     , _selected(rhs._selected)
     {
     }
@@ -300,7 +317,7 @@ namespace ui
         {
             this->_start = rhs._start;
             this->_end = rhs._end;
-            this->_arrowFigure = rhs._arrowFigure;
+            this->_lineFigure = rhs._lineFigure;
             this->_selected = rhs._selected;
         }
         return *this;
@@ -320,9 +337,9 @@ namespace ui
         return _end;
     }
     
-    const ArrowFigure* ArrowCanvas::Arrow::getArrowFigure() const
+    LineFigure* ArrowCanvas::Arrow::getLineFigure() const
     {
-        return _arrowFigure;
+        return _lineFigure;
     }
     
     const bool ArrowCanvas::Arrow::isSelected() const
@@ -396,5 +413,11 @@ namespace ui
             delete arrowRect;
         }
         return result;
+    }
+    
+    const bool ArrowCanvas::Arrow::isArrow() const
+    {
+        ArrowFigure* arrow = dynamic_cast<ArrowFigure*>(_lineFigure);
+        return arrow != NULL;
     }
 }

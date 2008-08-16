@@ -68,6 +68,12 @@ SET (ui_SRCS
 
     ui/UseCaseToolbarButton.h
     ui/UseCaseToolbarButton.cpp
+
+    ui/LineToolbarButton.h
+    ui/LineToolbarButton.cpp
+
+    ui/ArrowToolbarButton.h
+    ui/ArrowToolbarButton.cpp
     
     ui/CommandDelegate.h
     ui/CommandDelegate.cpp
@@ -80,6 +86,9 @@ SET (ui_SRCS
     
     ui/ArrowFigure.h
     ui/ArrowFigure.cpp
+
+    ui/LineFigure.h
+    ui/LineFigure.cpp
 )
 
 SET (ui_Main_SRCS

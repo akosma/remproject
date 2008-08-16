@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the ui::UseCaseToolbarButton class.
+//! Contains the interface of the ui::LineToolbarButton class.
 /*!
- * \file UseCaseToolbarButton.cpp
+ * \file LineToolbarButton.cpp
  *
- * Contains the interface of the ui::UseCaseToolbarButton class.
+ * Contains the interface of the ui::LineToolbarButton class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,11 +29,11 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:46:22 pm
+ * \date      16 Aug 2008 5:12:21 pm
  */
 
-#ifndef USECASETOOLBARBUTTON_H_
-#define USECASETOOLBARBUTTON_H_
+#ifndef __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__
+#define __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__
 
 #include "PlatformDefinitions.h"
 
@@ -44,23 +44,26 @@
 namespace ui
 {
     /*!
-     * \class UseCaseToolbarButton
-     *
+     * \class LineToolbarButton
      *
      */
-    class UseCaseToolbarButton  : public Button
+    class LineToolbarButton  : public Button
     {
     public:
-        UseCaseToolbarButton ();
-        ~UseCaseToolbarButton();
+        LineToolbarButton ();
+        ~LineToolbarButton();
 
+        void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
         void clicked();
 
     private:
-        UseCaseToolbarButton (const UseCaseToolbarButton&);
-        const UseCaseToolbarButton& operator= (const UseCaseToolbarButton&);
+        Path internalPath2;
+        Path internalPath4;
+
+        LineToolbarButton (const LineToolbarButton&);
+        const LineToolbarButton& operator= (const LineToolbarButton&);
     };
 }
 
-#endif   // USECASETOOLBARBUTTON_H_
+#endif   // __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__

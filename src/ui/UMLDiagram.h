@@ -118,6 +118,7 @@ namespace ui
         
     protected:
         void addArrowToCanvas(Figure*, Figure*);
+        void addLineToCanvas(Figure*, Figure*);
 
     private:
         ArrowCanvas* _canvas;

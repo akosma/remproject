@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the ui::UseCaseToolbarButton class.
+//! Contains the implementation of the ui::LineToolbarButton class.
 /*!
- * \file UseCaseToolbarButton.cpp
+ * \file LineToolbarButton.cpp
  *
- * Contains the implementation of the ui::UseCaseToolbarButton class.
+ * Contains the implementation of the ui::LineToolbarButton class.
  *
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,10 +29,10 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:46:22 pm
+ * \date      16 Aug 2008 5:12:21 pm
  */
 
-#include "UseCaseToolbarButton.h"
+#include "LineToolbarButton.h"
 
 #ifndef COMMANDDELEGATE_H_
 #include "CommandDelegate.h"
@@ -40,36 +40,48 @@
 
 namespace ui
 {
-    UseCaseToolbarButton::UseCaseToolbarButton ()
+    LineToolbarButton::LineToolbarButton ()
     : Button (String::empty)
     {
         setSize (40, 40);
     }
 
-    UseCaseToolbarButton::~UseCaseToolbarButton()
+    LineToolbarButton::~LineToolbarButton()
     {
     }
 
-    void UseCaseToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
+    void LineToolbarButton::resized()
+    {
+        internalPath2.clear();
+        internalPath2.startNewSubPath (32.0f, 8.0f);
+        internalPath2.lineTo (8.0f, 32.0f);
+        internalPath2.closeSubPath();
+
+        internalPath4.clear();
+        internalPath4.startNewSubPath (32.0f, 8.0f);
+        internalPath4.lineTo (8.0f, 32.0f);
+        internalPath4.closeSubPath();
+    }
+
+    void LineToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
         if (isButtonDown)
         {
-            GradientBrush gradient_2 (Colours::black,
+            GradientBrush gradient_3 (Colours::black,
                                       20.0f, 19.0f,
                                       Colours::white,
                                       20.0f, 1.0f,
                                       false);
-            g.setBrush (&gradient_2);
+            g.setBrush (&gradient_3);
             g.fillRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f);
 
             g.setColour (Colours::white);
             g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f, 0.6000f);
 
-            g.setColour (Colours::black);
-            g.fillEllipse (10.0f, 12.0f, 21.0f, 15.0f);
-
             g.setColour (Colours::white);
-            g.drawEllipse (10.0f, 12.0f, 21.0f, 15.0f, 2.0000f);
+            g.fillPath (internalPath4);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath4, PathStrokeType (2.3000f));
         }
         else
         {
@@ -84,17 +96,15 @@ namespace ui
             g.setColour (Colours::white);
             g.drawRoundedRectangle (1.0f, 1.0f, 38.0f, 38.0f, 6.0000f, 0.6000f);
 
-            g.setColour (Colours::black);
-            g.fillEllipse (10.0f, 12.0f, 21.0f, 15.0f);
-
             g.setColour (Colours::white);
-            g.drawEllipse (10.0f, 12.0f, 21.0f, 15.0f, 2.0000f);
+            g.fillPath (internalPath2);
+            g.setColour (Colours::white);
+            g.strokePath (internalPath2, PathStrokeType (2.3000f));
         }
     }
 
-    void UseCaseToolbarButton::clicked()
+    void LineToolbarButton::clicked()
     {
-        CommandDelegate::get().invokeDirectly(CommandDelegate::diagramAddUseCase, false);
+        CommandDelegate::get().invokeDirectly(CommandDelegate::diagramAddLine, false);
     }
-
 }

@@ -36,6 +36,8 @@
 
 #include "ActorToolbarButton.h"
 #include "UseCaseToolbarButton.h"
+#include "LineToolbarButton.h"
+#include "ArrowToolbarButton.h"
 
 namespace ui
 {
@@ -49,6 +51,14 @@ namespace ui
         UseCaseToolbarButton* button2 = new UseCaseToolbarButton();
         button2->setTopLeftPosition(10, 60);
         addAndMakeVisible(button2, -1);
+        
+        LineToolbarButton* button3 = new LineToolbarButton();
+        button3->setTopLeftPosition(10, 110);
+        addAndMakeVisible(button3, -1);
+        
+        ArrowToolbarButton* button4 = new ArrowToolbarButton();
+        button4->setTopLeftPosition(10, 160);
+        addAndMakeVisible(button4, -1);
     }
 
     UseCaseDiagramToolbar::~UseCaseDiagramToolbar()

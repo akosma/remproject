@@ -242,6 +242,10 @@ namespace controllers
                 addFigure("arrow");
                 break;
             
+            case NewFigureAdded::Line:
+                addFigure("line");
+                break;
+            
             default:
                 break;
         }

@@ -85,9 +85,7 @@ namespace ui
         ProjectComponent* project = new ProjectComponent();
         setContentComponent(project);
 
-        // Create some default diagrams when the window opens
-        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
-        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
+        // Create a default diagram when the window opens
         _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
 
         // When everything's ready, show the window.

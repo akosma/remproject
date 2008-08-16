@@ -72,6 +72,9 @@ namespace notifications
             //! Arrows
             Arrow,
             
+            //! Lines
+            Line,
+            
             // Use case bubbles
             UseCase
         };
