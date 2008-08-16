@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the ui::FigureLassoSource class.
 /*!
  * \file FigureLassoSource.h
  *
@@ -36,9 +37,10 @@
 #ifndef FIGURELASSOSOURCE_H_
 #define FIGURELASSOSOURCE_H_
 
+//! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
  * \namespace ui
- * Insert a description for the namespace here
+ * Contains the classes derived directly or indirectly from the JUCE framework.
  */
 namespace ui
 {
