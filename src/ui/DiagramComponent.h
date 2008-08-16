@@ -47,9 +47,14 @@
 #include "../notifications/ActiveWindowStatusChanged.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::ActiveWindowStatusChanged;
+using notifications::NewFigureAdded;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -79,6 +84,7 @@ namespace ui
         void resized();
         bool exportAsPNG();
         void toggleGrid();
+        void addFigure(const NewFigureAdded::FigureType);
 
         juce_UseDebuggingNewOperator
         

@@ -17,11 +17,16 @@
 
 #include "PlatformDefinitions.h"
 
+#ifndef SINGLETON_H_
+#include "../utility/Singleton.h"
+#endif
+
 namespace controllers
 {
     class FileController;
 }
 using controllers::FileController;
+using utility::Singleton;
 
 namespace ui
 {
@@ -30,14 +35,10 @@ namespace ui
      *
      *  
      */
-    class CommandDelegate : public ApplicationCommandTarget
+    class CommandDelegate : public ApplicationCommandTarget, 
+                            public Singleton<CommandDelegate>
     {
     public:
-
-        /*!
-         *  CommandDelegate constructor.
-         */
-        CommandDelegate();
 
         /*!
          *  CommandDelegate virtual destructor.
@@ -69,11 +70,20 @@ namespace ui
             projectNewClassDiagram = 0x2031,
             projectNewSequenceDiagram = 0x2032,
 
-            diagramToggleGrid = 0x2040,
+            diagramAddActor = 0x2040,
+            diagramAddUseCase = 0x2041,
+            diagramToggleGrid = 0x2042,
             
             helpAbout = 0x2060
         };
-        
+    
+    private:
+        //! Private constructor.
+        CommandDelegate();
+
+        //! Allow the Singleton template class to access the private constructor.
+        friend CommandDelegate& Singleton<CommandDelegate>::get();
+    
     private:
         void performFileSaveAs();
         

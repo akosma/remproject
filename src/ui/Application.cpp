@@ -84,7 +84,7 @@ namespace ui
                     // "Yes" => save and quit.
                     if (_fileController.isProjectNew())
                     {
-                        _window->getCommandManager()->invokeDirectly(CommandDelegate::fileSaveAs, false);
+                        CommandDelegate::get().invokeDirectly(CommandDelegate::fileSaveAs, false);
                     }
                     else
                     {

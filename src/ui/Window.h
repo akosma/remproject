@@ -100,7 +100,7 @@ namespace ui
         MenuBar* _menuBarModel;
         
         //! Command delegate of the current window.
-        CommandDelegate* _commandDelegate;
+        CommandDelegate& _commandDelegate;
         
         //! Pointer to the command manager of the current window.
         ApplicationCommandManager* _commandManager;

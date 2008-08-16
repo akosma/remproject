@@ -64,12 +64,17 @@
 #include "../notifications/FigureMoved.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 using Poco::AutoPtr;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using notifications::FigureSelected;
 using notifications::ArrowCanvasClicked;
 using notifications::FigureMoved;
+using notifications::NewFigureAdded;
 
 /*!
  * \namespace ui
@@ -104,6 +109,8 @@ namespace ui
         
         DiagramToolbar* getToolbar();
         
+        virtual void addFigure(const NewFigureAdded::FigureType type) = 0;
+
     protected:
         virtual DiagramToolbar* createToolbar() = 0;
         

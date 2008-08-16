@@ -58,11 +58,11 @@ namespace ui
     : UMLDiagram()
     {
         setInterceptsMouseClicks(true, true);
-        Figure* a = addActorFigure();
-        Figure* b = addActorFigure();
-        Figure* c = addUseCaseFigure();
-        addArrowToCanvas(a, c);
-        addArrowToCanvas(a, b);
+//        Figure* a = addActorFigure();
+//        Figure* b = addActorFigure();
+//        Figure* c = addUseCaseFigure();
+//        addArrowToCanvas(a, c);
+//        addArrowToCanvas(a, b);
     }
 
     UseCaseDiagram::~UseCaseDiagram()
@@ -78,7 +78,7 @@ namespace ui
     ActorFigure* UseCaseDiagram::addActorFigure()
     {
         ActorFigure* figure = new ActorFigure();
-        figure->setTopLeftPosition(300, 300);
+        figure->setTopLeftPosition(10, 10);
         addAndMakeVisible(figure, -1);
         return figure;
     }
@@ -86,8 +86,25 @@ namespace ui
     UseCaseFigure* UseCaseDiagram::addUseCaseFigure()
     {
         UseCaseFigure* figure = new UseCaseFigure();
-        figure->setTopLeftPosition(100, 10);
+        figure->setTopLeftPosition(10, 10);
         addAndMakeVisible(figure, -1);
         return figure;
+    }
+
+    void UseCaseDiagram::addFigure(const NewFigureAdded::FigureType type)
+    {
+        switch(type)
+        {
+            case NewFigureAdded::Actor:
+                addActorFigure();
+                break;
+
+            case NewFigureAdded::UseCase:
+                addUseCaseFigure();
+                break;
+                
+            default:
+                break;
+        }
     }
 }

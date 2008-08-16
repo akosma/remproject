@@ -64,7 +64,9 @@ namespace ui
         
         ActorFigure* addActorFigure();
         UseCaseFigure* addUseCaseFigure();
-    
+
+        virtual void addFigure(const NewFigureAdded::FigureType type);
+
     protected:
         virtual DiagramToolbar* createToolbar();
     };

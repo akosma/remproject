@@ -67,7 +67,7 @@ namespace ui
 
         void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
-
+        void clicked();
 
         juce_UseDebuggingNewOperator
 

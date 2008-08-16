@@ -84,6 +84,11 @@ namespace ui
         g.fillAll (Colours::grey);
     }
     
+    void DiagramComponent::addFigure(const NewFigureAdded::FigureType type)
+    {
+        _diagram->addFigure(type);
+    }
+    
     bool DiagramComponent::exportAsPNG()
     {
         FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);

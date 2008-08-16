@@ -49,6 +49,7 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
+using notifications::NewFigureAdded;
 
 namespace ui
 {
@@ -60,6 +61,9 @@ namespace ui
 
         NObserver<ProjectTabbedComponent, DiagramToggleGrid> gridObserver(*this, &ProjectTabbedComponent::handleDiagramToggleGrid);
         NotificationCenter::defaultCenter().addObserver(gridObserver);
+
+        NObserver<ProjectTabbedComponent, NewFigureAdded> figureObserver(*this, &ProjectTabbedComponent::handleNewFigureAdded);
+        NotificationCenter::defaultCenter().addObserver(figureObserver);
     }
     
     ProjectTabbedComponent::~ProjectTabbedComponent()
@@ -87,5 +91,11 @@ namespace ui
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
         currentDiagram->toggleGrid();
+    }
+
+    void ProjectTabbedComponent::handleNewFigureAdded(const AutoPtr<NewFigureAdded>& notification)
+    {
+        DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
+        currentDiagram->addFigure(notification->getFigureType());
     }
 }

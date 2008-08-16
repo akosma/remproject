@@ -29,11 +29,11 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:46:09 pm
+ * \date      16 Aug 2008 3:51:59 pm
  */
 
-#ifndef __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
-#define __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
+#ifndef __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__
+#define __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "PlatformDefinitions.h"
@@ -67,6 +67,7 @@ namespace ui
 
         void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
+        void clicked();
 
 
         juce_UseDebuggingNewOperator
@@ -86,4 +87,4 @@ namespace ui
     };
 }
 
-#endif   // __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_ACB35A7F__
+#endif   // __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__

@@ -57,17 +57,48 @@ namespace notifications
     {
     public:
 
+        //! Enumerates the type of figures announced by this notification.
+        /*!
+         * Enumerates the type of figures announced by this notification.
+         */
+        enum FigureType
+        {
+            //! Actors
+            Actor,
+            
+            //! Class boxes
+            Class,
+            
+            //! Arrows
+            Arrow,
+            
+            // Use case bubbles
+            UseCase
+        };
+
         //! Constructor.
         /*!
          * Constructor.
          */
-        NewFigureAdded();
+        NewFigureAdded(const FigureType);
 
         //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
         virtual ~NewFigureAdded();
+        
+        //! Returns the type of diagram announced by the current instance.
+        /*!
+         * Returns the type of diagram announced by the current instance.
+         * 
+         * \return The type of diagram.
+         */
+        const FigureType getFigureType() const;
+        
+    private:
+        //! Type of diagram announced by the current instance.
+        const FigureType _type;
     };
 }
 

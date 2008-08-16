@@ -62,8 +62,8 @@ namespace ui
     {
         addAndMakeVisible(_tabs);
         
-        NObserver<ProjectComponent, NewDiagramAdded> newUseCaseObserver(*this, &ProjectComponent::handleNewDiagramAdded);
-        NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
+        NObserver<ProjectComponent, NewDiagramAdded> newDiagramObserver(*this, &ProjectComponent::handleNewDiagramAdded);
+        NotificationCenter::defaultCenter().addObserver(newDiagramObserver);
 
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);

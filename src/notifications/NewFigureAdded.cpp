@@ -36,12 +36,18 @@
 
 namespace notifications
 {
-    NewFigureAdded::NewFigureAdded()
+    NewFigureAdded::NewFigureAdded(const FigureType type)
     : Notification()
+    , _type(type)
     {
     }
     
     NewFigureAdded::~NewFigureAdded()
     {
+    }
+    
+    const NewFigureAdded::FigureType NewFigureAdded::getFigureType() const
+    {
+        return _type;
     }
 }

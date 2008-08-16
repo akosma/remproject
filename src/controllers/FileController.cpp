@@ -77,8 +77,11 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
-        NObserver<FileController, NewDiagramAdded> newUseCaseObserver(*this, &FileController::handleNewDiagramAdded);
-        NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
+        NObserver<FileController, NewDiagramAdded> newDiagramObserver(*this, &FileController::handleNewDiagramAdded);
+        NotificationCenter::defaultCenter().addObserver(newDiagramObserver);
+
+        NObserver<FileController, NewFigureAdded> newFigureObserver(*this, &FileController::handleNewFigureAdded);
+        NotificationCenter::defaultCenter().addObserver(newFigureObserver);
     }
 
     FileController::~FileController()
@@ -163,6 +166,25 @@ namespace controllers
         }
     }
     
+    void FileController::addFigure(const string& className)
+    {
+        if (_currentDiagram)
+        {
+            Element* element = new Element(className);
+#if defined(_WIN32)
+            string name(tmpnam(NULL));
+#else
+            UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
+            UUID uuid = generator.createRandom();
+            string name = uuid.toString();
+#endif
+            element->setName(name);
+            element->set<int>("x", 10);
+            element->set<int>("y", 10);
+            _currentDiagram->addChild(element);
+        }
+    }
+    
     const bool FileController::hasCurrentProject() const
     {
         return (_project != NULL);
@@ -197,6 +219,23 @@ namespace controllers
         {
             case NewDiagramAdded::UseCase:
                 addDiagram("usecase");
+                break;
+            
+            default:
+                break;
+        }
+    }
+
+    void FileController::handleNewFigureAdded(const AutoPtr<NewFigureAdded>& notification)
+    {
+        switch(notification->getFigureType())
+        {
+            case NewFigureAdded::Actor:
+                addFigure("actor");
+                break;
+                
+            case NewFigureAdded::UseCase:
+                addFigure("usecase");
                 break;
             
             default:

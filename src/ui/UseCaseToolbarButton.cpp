@@ -37,6 +37,10 @@
 
 #include "UseCaseToolbarButton.h"
 
+#ifndef COMMANDDELEGATE_H_
+#include "CommandDelegate.h"
+#endif
+
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
@@ -113,6 +117,13 @@ namespace ui
             g.setColour (Colours::white);
             g.drawEllipse (10.0f, 12.0f, 21.0f, 15.0f, 2.0000f);
         }
+    }
+
+    void UseCaseToolbarButton::clicked()
+    {
+        //[UserCode_clicked] -- Add your code here...
+        CommandDelegate::get().invokeDirectly(CommandDelegate::diagramAddUseCase, false);
+        //[/UserCode_clicked]
     }
 
 }

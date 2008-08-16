@@ -29,7 +29,7 @@
  *
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      21 Jun 2008 4:46:09 pm
+ * \date      16 Aug 2008 3:51:59 pm
  */
 
 //[Headers] You can add your own extra header files here...
@@ -37,6 +37,9 @@
 
 #include "ActorToolbarButton.h"
 
+#ifndef COMMANDDELEGATE_H_
+#include "CommandDelegate.h"
+#endif
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
@@ -147,6 +150,13 @@ namespace ui
         }
     }
 
+    void ActorToolbarButton::clicked()
+    {
+        //[UserCode_clicked] -- Add your code here...
+        CommandDelegate::get().invokeDirectly(CommandDelegate::diagramAddActor, false);
+        //[/UserCode_clicked]
+    }
+
 }
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 //[/MiscUserCode]
@@ -162,6 +172,9 @@ BEGIN_JUCER_METADATA
                  parentClasses="public Button" constructorParams="" variableInitialisers=""
                  snapPixels="4" snapActive="0" snapShown="1" overlayOpacity="0.330000013"
                  fixedSize="1" initialWidth="40" initialHeight="40">
+  <METHODS>
+    <METHOD name="clicked()"/>
+  </METHODS>
   <BACKGROUND backgroundColour="0" buttonState="normal" enabled="1">
     <ROUNDRECT pos="1 1 38 38" cornerSize="6" fill="linear: 20 13, 20 1, 0=ff000000, 1=ffffffff"
                hasStroke="1" stroke="0.600000024, mitered, butt" strokeColour="solid: ffffffff"/>

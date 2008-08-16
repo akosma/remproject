@@ -97,7 +97,7 @@ namespace notifications
         
     private:
         //! Type of diagram being announced by the notification
-        DiagramType _type;
+        const DiagramType _type;
     };
 }
 

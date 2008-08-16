@@ -47,9 +47,14 @@
 #include "../notifications/DiagramToggleGrid.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 using Poco::AutoPtr;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
+using notifications::NewFigureAdded;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -119,6 +124,14 @@ namespace ui
          * \param notification The DiagramToggleGrid notification received.
          */
         void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
+
+        //! Tells the current diagram to add a figure.
+        /*!
+         * Tells the current diagram to add a figure.
+         * 
+         * \param notification The NewFigureAdded notification received.
+         */
+        void handleNewFigureAdded(const AutoPtr<NewFigureAdded>&);
     };
 }
 

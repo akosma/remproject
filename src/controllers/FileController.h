@@ -57,12 +57,18 @@
 #include "../notifications/NewDiagramAdded.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 using utility::Singleton;
 using metamodel::Project;
 using metamodel::Diagram;
+using metamodel::Element;
 using std::string;
 using Poco::AutoPtr;
 using notifications::NewDiagramAdded;
+using notifications::NewFigureAdded;
 
 //! Contains the controller classes of the application.
 /*!
@@ -137,6 +143,14 @@ namespace controllers
          * \param className The type of diagram to create (use-case, class, etc).
          */
         void addDiagram(const string&);
+
+        //! Adds a figure to the current diagram.
+        /*!
+         * Adds a figure to the current diagram.
+         * 
+         * \param className The type of figure to create (actor, class, etc).
+         */
+        void addFigure(const string&);
         
         //! States whether the controller has a current project.
         /*!
@@ -181,6 +195,9 @@ namespace controllers
     private:
         //! Handles notifications of type notification::NewDiagramAdded
         void handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>&);
+
+        //! Handles notifications of type notification::NewFigureAdded
+        void handleNewFigureAdded(const AutoPtr<NewFigureAdded>&);
 
     private:
         //! Instance of the Project class "controlled" by this FileController.

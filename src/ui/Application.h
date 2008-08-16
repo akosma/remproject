@@ -134,6 +134,8 @@ namespace ui
          * launch the other instance of the application.
          */
         void anotherInstanceStarted (const String&);
+        
+        ApplicationCommandTarget* getTargetForCommand(const CommandID);
 
     private:
         //! A reference used to create a new project in the constructor.

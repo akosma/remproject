@@ -61,12 +61,12 @@ namespace ui
     Window::Window()
     : DocumentWindow ("Rem", Colours::lightgrey, DocumentWindow::allButtons, true)
     , _menuBarModel(new MenuBar(this))
-    , _commandDelegate(new CommandDelegate())
+    , _commandDelegate(CommandDelegate::get())
     , _commandManager(new ApplicationCommandManager())
     , _tooltipWindow()
     {
-        _commandManager->registerAllCommandsForTarget(_commandDelegate);
-        _commandManager->setFirstCommandTarget(_commandDelegate);
+        _commandManager->registerAllCommandsForTarget(&_commandDelegate);
+        _commandManager->setFirstCommandTarget(&_commandDelegate);
         addKeyListener(_commandManager->getKeyMappings());
         _menuBarModel->setApplicationCommandManagerToWatch(_commandManager);
 
@@ -102,7 +102,6 @@ namespace ui
         setMenuBar(NULL);
         setContentComponent(NULL, true);
         deleteAndZero(_menuBarModel);
-        deleteAndZero(_commandDelegate);
         deleteAndZero(_commandManager);
     }
     

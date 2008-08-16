@@ -91,17 +91,18 @@ namespace ui
             case 2:
             {
                 // "Project" menu items
-                PopupMenu diagramSubMenu;
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewUseCaseDiagram);
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewClassDiagram);
-                diagramSubMenu.addCommandItem(manager, CommandDelegate::projectNewSequenceDiagram);
-                menu.addSubMenu("Add New Diagram", diagramSubMenu, true, NULL);
+                menu.addCommandItem(manager, CommandDelegate::projectNewUseCaseDiagram);
+                menu.addCommandItem(manager, CommandDelegate::projectNewClassDiagram);
+                menu.addCommandItem(manager, CommandDelegate::projectNewSequenceDiagram);
                 break;
             }
 
             case 3:
             {
                 // "Diagram" menu items
+                menu.addCommandItem(manager, CommandDelegate::diagramAddActor);
+                menu.addCommandItem(manager, CommandDelegate::diagramAddUseCase);
+                menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::diagramToggleGrid);
                 break;
             }

@@ -26,6 +26,10 @@
 #include "../notifications/NewDiagramAdded.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 #ifndef FILECONTROLLER_H_
 #include "../controllers/FileController.h"
 #endif
@@ -45,6 +49,7 @@ using controllers::FileController;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
 using notifications::NewDiagramAdded;
+using notifications::NewFigureAdded;
 
 namespace ui
 {
@@ -85,6 +90,8 @@ namespace ui
             projectNewClassDiagram,
             projectNewSequenceDiagram,
             
+            diagramAddActor,
+            diagramAddUseCase,
             diagramToggleGrid,
             
             helpAbout
@@ -196,6 +203,24 @@ namespace ui
                 info.setActive(false);
                 break;
             }
+            
+            case diagramAddActor:
+            {
+                info.shortName = "Add Actor";
+                info.description = "Add an actor figure to the current diagram";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
+            
+            case diagramAddUseCase:
+            {
+                info.shortName = "Add Use Case Bubble";
+                info.description = "Add a use case bubble to the current diagram";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
 
             case diagramToggleGrid:
             {
@@ -233,13 +258,6 @@ namespace ui
                 break;
             }
             
-            case diagramToggleGrid:
-            {
-                DiagramToggleGrid* notification = new DiagramToggleGrid();
-                NotificationCenter::defaultCenter().postNotification(notification);
-                break;
-            }
-            
             case fileQuit:
             {
                 JUCEApplication::getInstance()->systemRequestedQuit();
@@ -268,6 +286,27 @@ namespace ui
             case projectNewUseCaseDiagram:
             {
                 NewDiagramAdded* notification = new NewDiagramAdded(NewDiagramAdded::UseCase);
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramAddActor:
+            {
+                NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::Actor);
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramAddUseCase:
+            {
+                NewFigureAdded* notification = new NewFigureAdded(NewFigureAdded::UseCase);
+                NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case diagramToggleGrid:
+            {
+                DiagramToggleGrid* notification = new DiagramToggleGrid();
                 NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }
