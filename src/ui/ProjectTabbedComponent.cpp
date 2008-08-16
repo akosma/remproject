@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the ui::ProjectTabbedComponent class.
 /*!
  * \file ProjectTabbedComponent.cpp
  *
@@ -82,7 +83,7 @@ namespace ui
         currentDiagram->exportAsPNG();
     }
 
-    void ProjectTabbedComponent::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&)
+    void ProjectTabbedComponent::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>& notification)
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
         currentDiagram->toggleGrid();

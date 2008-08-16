@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the ui::Window class.
 /*!
  * \file Window.cpp
  *
@@ -55,15 +56,8 @@
 using Poco::NotificationCenter;
 using notifications::ActiveWindowStatusChanged;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
-    /*!
-     * Window Constructor.
-     */
     Window::Window()
     : DocumentWindow ("Rem", Colours::lightgrey, DocumentWindow::allButtons, true)
     , _menuBarModel(new MenuBar(this))
@@ -77,22 +71,29 @@ namespace ui
         _menuBarModel->setApplicationCommandManagerToWatch(_commandManager);
 
 #if defined(__APPLE__) && defined(__MACH__)
+        // In the case of the Mac OS X system, the toolbar goes 
+        // on top of the screen, and it is not attached to the window.
         MenuBarModel::setMacMainMenu(_menuBarModel);
         setMenuBar(NULL);
 #else
         setMenuBar(_menuBarModel);
 #endif
-        centreWithSize(620, 650);
-        setResizable(true, true);
-        setUsingNativeTitleBar(true);
 
+        // This is the main component of the whole application, where the user
+        // adds diagrams and elements. When added using setContentComponent()
+        // it is owned and deleted by the Window class.
         ProjectComponent* project = new ProjectComponent();
         setContentComponent(project);
 
+        // Create some default diagrams when the window opens
         _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
         _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
         _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
 
+        // When everything's ready, show the window.
+        centreWithSize(620, 650);
+        setResizable(true, true);
+        setUsingNativeTitleBar(true);
         setVisible (true);
     }
 
@@ -100,9 +101,9 @@ namespace ui
     {
         setMenuBar(NULL);
         setContentComponent(NULL, true);
-        delete _menuBarModel;
-        delete _commandDelegate;
-        delete _commandManager;
+        deleteAndZero(_menuBarModel);
+        deleteAndZero(_commandDelegate);
+        deleteAndZero(_commandManager);
     }
     
     ApplicationCommandManager* Window::getCommandManager()

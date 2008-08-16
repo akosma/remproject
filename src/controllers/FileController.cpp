@@ -67,7 +67,7 @@ using std::stringstream;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using notifications::NewUseCaseDiagramAdded;
+using notifications::NewDiagramAdded;
 
 namespace controllers
 {
@@ -77,7 +77,7 @@ namespace controllers
     , _currentDiagram(NULL)
     , _counter(0)
     {
-        NObserver<FileController, NewUseCaseDiagramAdded> newUseCaseObserver(*this, &FileController::handleNewUseCaseDiagramAdded);
+        NObserver<FileController, NewDiagramAdded> newUseCaseObserver(*this, &FileController::handleNewDiagramAdded);
         NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
     }
 
@@ -181,9 +181,26 @@ namespace controllers
         }
         return true;
     }
-
-    void FileController::handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>& notification)
+    
+    const bool FileController::isProjectDirty() const
     {
-        addDiagram("usecase");
+        if (_project)
+        {
+            return _project->isDirty();
+        }
+        return false;
+    }
+
+    void FileController::handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>& notification)
+    {
+        switch(notification->getDiagramType())
+        {
+            case NewDiagramAdded::UseCase:
+                addDiagram("usecase");
+                break;
+            
+            default:
+                break;
+        }
     }
 }

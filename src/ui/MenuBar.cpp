@@ -126,7 +126,7 @@ namespace ui
             case 6:
             {
                 // "Help" menu items
-                menu.addItem (60, "About");
+                menu.addCommandItem(manager, CommandDelegate::helpAbout);
                 break;
             }
         }

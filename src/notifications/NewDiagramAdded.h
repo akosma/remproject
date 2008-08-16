@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the notifications::NewUseCaseDiagramAdded class.
+//! Contains the interface of the notifications::NewDiagramAdded class.
 /*!
- * \file NewUseCaseDiagramAdded.h
+ * \file NewDiagramAdded.h
  *
- * Contains the interface of the notifications::NewUseCaseDiagramAdded class.
+ * Contains the interface of the notifications::NewDiagramAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,8 +32,8 @@
  * \date      7/6/08
  */
 
-#ifndef NEWUSECASEDIAGRAMADDED_H_
-#define NEWUSECASEDIAGRAMADDED_H_
+#ifndef NEWDIAGRAMADDED_H_
+#define NEWDIAGRAMADDED_H_
 
 #include <Poco/Notification.h>
 
@@ -46,29 +46,59 @@ using Poco::Notification;
  */
 namespace notifications
 {
-    //! Triggers the adding of a new Use Case diagram to the project.
+    //! Triggers the adding of a new diagram to the project.
     /*!
-     * \class NewUseCaseDiagramAdded
+     * \class NewDiagramAdded
      *
      * Raised by the ui::CommandDelegate class when the user selects
-     * to add a new Use Case diagram to the project.
+     * to add a new diagram to the project.
      */
-    class NewUseCaseDiagramAdded : public Notification
+    class NewDiagramAdded : public Notification
     {
     public:
+
+        //! Enumerates the type of diagrams announced by this notification.
+        /*!
+         * Enumerates the type of diagrams announced by this notification.
+         */
+        enum DiagramType
+        {
+            //! Use Case diagrams
+            UseCase,
+            
+            //! Class diagrams
+            Class,
+            
+            //! Sequence diagrams
+            Sequence
+        };
 
         //! Constructor.
         /*!
          * Constructor.
+         * 
+         * \param type The type of diagram to be added.
          */
-        NewUseCaseDiagramAdded();
+        NewDiagramAdded(const DiagramType);
 
         //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
-        virtual ~NewUseCaseDiagramAdded();
+        virtual ~NewDiagramAdded();
+        
+        //! Returns the type of diagram announced by the notification.
+        /*!
+         * Returns the type of diagram announced by the notification.
+         * 
+         * \return The type of diagram announced by the notification.
+         */
+        const DiagramType getDiagramType() const;
+        
+    private:
+        //! Type of diagram being announced by the notification
+        DiagramType _type;
     };
 }
 
-#endif /* NEWUSECASEDIAGRAMADDED_H_ */
+#endif /* NEWDIAGRAMADDED_H_ */

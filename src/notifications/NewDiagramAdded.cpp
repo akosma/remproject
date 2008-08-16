@@ -17,10 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the notifications::NewDiagramAdded class.
 /*!
- * \file UseCaseDiagram.h
+ * \file NewDiagramAdded.cpp
  *
- * Contains the interface of the ui::UseCaseDiagram class.
+ * Contains the implementation of the notifications::NewDiagramAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,46 +29,25 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/11/08
+ * \date      7/6/08
  */
 
-#include <Poco/AutoPtr.h>
+#include "NewDiagramAdded.h"
 
-#ifndef USECASEDIAGRAM_H_
-#define USECASEDIAGRAM_H_
-
-#ifndef UMLDIAGRAM_H_
-#include "UMLDiagram.h"
-#endif
-
-using Poco::AutoPtr;
-
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
-namespace ui
+namespace notifications
 {
-    class ActorFigure;
-    class UseCaseFigure;
-
-    /*!
-     * \class UseCaseDiagram
-     *
-     *  
-     */
-    class UseCaseDiagram : public UMLDiagram
+    NewDiagramAdded::NewDiagramAdded(DiagramType type)
+    : Notification()
+    , _type(type)
     {
-    public:
-        UseCaseDiagram();
-        virtual ~UseCaseDiagram();
-        
-        ActorFigure* addActorFigure();
-        UseCaseFigure* addUseCaseFigure();
+    }
     
-    protected:
-        virtual DiagramToolbar* createToolbar();
-    };
+    NewDiagramAdded::~NewDiagramAdded()
+    {
+    }
+    
+    const NewDiagramAdded::DiagramType NewDiagramAdded::getDiagramType() const
+    {
+        return _type;
+    }
 }
-
-#endif /* USECASEDIAGRAM_H_ */

@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the ui::ProjectTabbedComponent class.
 /*!
  * \file ProjectTabbedComponent.h
  *
@@ -50,37 +51,73 @@ using Poco::AutoPtr;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
 
+//! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
  * \namespace ui
- * Insert a description for the namespace here
+ * Contains the classes derived directly or indirectly from the JUCE framework.
  */
 namespace ui
 {
+    //! This component holds tabs, each with a diagram inside.
     /*!
      * \class ProjectTabbedComponent
      *
-     *  
+     * This component holds tabs, each with a diagram inside. There is only
+     * one instance of this class in the application, created by the 
+     * ProjectComponent class on startup. 
+     * 
+     * This class is also in charge of exporting the currently displayed 
+     * diagram as a PNG file, and also toggles the visibility of the grid
+     * on and off. These two tasks are handled here, so that only the 
+     * currently visible diagram is affected by the operation. 
      */
     class ProjectTabbedComponent : public TabbedComponent
     {
     public:
 
         /*!
-         *  ProjectTabbedComponent constructor.
+         * Constructor.
          */
         ProjectTabbedComponent();
 
         /*!
-         *  ProjectTabbedComponent virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ProjectTabbedComponent();
         
+        //! Called when a new tab is selected.
+        /*!
+         * Called when a new tab is selected.
+         *
+         * \param newCurrentTabIndex The index of the new tab.
+         * \param newCurrentTabName The name of the new tab.
+         */
         virtual void currentTabChanged(const int, const String&);
         
+        //! Posts a ProjectTabbedComponentChangedTab notification.
+        /*!
+         * Posts a ProjectTabbedComponentChangedTab notification
+         * when a new tab is selected.
+         *
+         * \param newCurrentTabIndex The index of the new tab.
+         * \param newCurrentTabName The name of the new tab.
+         */
         void postProjectTabbedComponentChangedTab(const int, const String&);
         
+        //! Exports the current diagram as a PNG file.
+        /*!
+         * Exports the current diagram as a PNG file.
+         * 
+         * \param notification The ExportDiagramAsPNG notification received.
+         */
         void handleExportDiagramAsPNG(const AutoPtr<ExportDiagramAsPNG>&);
 
+        //! Toggles the grid of the current diagram on and off.
+        /*!
+         * Toggles the grid of the current diagram on and off.
+         * 
+         * \param notification The DiagramToggleGrid notification received.
+         */
         void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
     };
 }

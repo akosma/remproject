@@ -22,8 +22,8 @@
 #include "../notifications/DiagramToggleGrid.h"
 #endif
 
-#ifndef NEWUSECASEDIAGRAMADDED_H_
-#include "../notifications/NewUseCaseDiagramAdded.h"
+#ifndef NEWDIAGRAMADDED_H_
+#include "../notifications/NewDiagramAdded.h"
 #endif
 
 #ifndef FILECONTROLLER_H_
@@ -44,7 +44,7 @@ using Poco::NotificationCenter;
 using controllers::FileController;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
-using notifications::NewUseCaseDiagramAdded;
+using notifications::NewDiagramAdded;
 
 namespace ui
 {
@@ -85,7 +85,9 @@ namespace ui
             projectNewClassDiagram,
             projectNewSequenceDiagram,
             
-            diagramToggleGrid
+            diagramToggleGrid,
+            
+            helpAbout
         };
         commands.addArray(ids, numElementsInArray(ids));
     }
@@ -203,6 +205,15 @@ namespace ui
                 info.setActive(true);
                 break;
             }
+            
+            case helpAbout:
+            {
+                info.shortName = "About";
+                info.description = "About Rem";
+                info.flags = 0;
+                info.setActive(true);
+                break;
+            }
 
             default:
             {
@@ -256,8 +267,14 @@ namespace ui
             
             case projectNewUseCaseDiagram:
             {
-                NewUseCaseDiagramAdded* notification = new NewUseCaseDiagramAdded();
+                NewDiagramAdded* notification = new NewDiagramAdded(NewDiagramAdded::UseCase);
                 NotificationCenter::defaultCenter().postNotification(notification);
+                break;
+            }
+            
+            case helpAbout:
+            {
+                AlertWindow::showNativeDialogBox(String("Rem"), String("Rem Application\nCopyright (c) 2008 Adrian Kosmaczewski"), false);
                 break;
             }
 

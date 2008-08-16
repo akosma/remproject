@@ -53,8 +53,8 @@
 #include "../metamodel/Diagram.h"
 #endif
 
-#ifndef NEWUSECASEDIAGRAMADDED_H_
-#include "../notifications/NewUseCaseDiagramAdded.h"
+#ifndef NEWDIAGRAMADDED_H_
+#include "../notifications/NewDiagramAdded.h"
 #endif
 
 using utility::Singleton;
@@ -62,7 +62,7 @@ using metamodel::Project;
 using metamodel::Diagram;
 using std::string;
 using Poco::AutoPtr;
-using notifications::NewUseCaseDiagramAdded;
+using notifications::NewDiagramAdded;
 
 //! Contains the controller classes of the application.
 /*!
@@ -161,6 +161,14 @@ namespace controllers
          * \return A boolean value.
          */
         const bool isProjectNew() const;
+        
+        //! States whether the controller has a 'dirty' (not saved) project.
+        /*!
+         * States whether the controller has a 'dirty' (not saved) project.
+         * 
+         * \return A boolean value.
+         */
+        const bool isProjectDirty() const;
 
     private:
 
@@ -171,8 +179,8 @@ namespace controllers
         friend FileController& Singleton<FileController>::get();
         
     private:
-        //! Handles notifications of type notification::NewUseCaseDiagramAdded
-        void handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>&);
+        //! Handles notifications of type notification::NewDiagramAdded
+        void handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>&);
 
     private:
         //! Instance of the Project class "controlled" by this FileController.

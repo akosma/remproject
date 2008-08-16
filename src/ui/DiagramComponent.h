@@ -51,9 +51,10 @@ using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::ActiveWindowStatusChanged;
 
+//! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
  * \namespace ui
- * Insert a description for the namespace here
+ * Contains the classes derived directly or indirectly from the JUCE framework.
  */
 namespace ui
 {
@@ -63,13 +64,16 @@ namespace ui
     /*!
      * \class DiagramComponent
      *
-     *
+     * This class is basically a wrapper around a juce::Viewport instance
+     * which provides scrolling capabilities to a ui::UMLDiagram instance.
+     * Instances of this class are created by the ProjectComponent class, and
+     * passed to the ProjectTabbedComponent as new tabs.
      */
     class DiagramComponent  : public Component
     {
     public:
         DiagramComponent(UMLDiagram*, const int);
-        ~DiagramComponent();
+        virtual ~DiagramComponent();
 
         void paint (Graphics& g);
         void resized();

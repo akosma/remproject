@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the notifications::NewUseCaseDiagramAdded class.
+//! Contains the implementation of the notifications::NewFigureAdded class.
 /*!
- * \file NewUseCaseDiagramAdded.cpp
+ * \file NewFigureAdded.cpp
  *
- * Contains the implementation of the notifications::NewUseCaseDiagramAdded class.
+ * Contains the implementation of the notifications::NewFigureAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,19 +29,19 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      7/6/08
+ * \date      8/16/08
  */
 
-#include "NewUseCaseDiagramAdded.h"
+#include "NewFigureAdded.h"
 
 namespace notifications
 {
-    NewUseCaseDiagramAdded::NewUseCaseDiagramAdded()
+    NewFigureAdded::NewFigureAdded()
     : Notification()
     {
     }
     
-    NewUseCaseDiagramAdded::~NewUseCaseDiagramAdded()
+    NewFigureAdded::~NewFigureAdded()
     {
     }
 }

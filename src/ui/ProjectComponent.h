@@ -39,49 +39,75 @@
 #ifndef PROJECTCOMPONENT_H_
 #define PROJECTCOMPONENT_H_
 
-#ifndef NEWUSECASEDIAGRAMADDED_H_
-#include "../notifications/NewUseCaseDiagramAdded.h"
+#ifndef NEWDIAGRAMADDED_H_
+#include "../notifications/NewDiagramAdded.h"
 #endif
 
 using Poco::AutoPtr;
-using notifications::NewUseCaseDiagramAdded;
+using notifications::NewDiagramAdded;
 
+//! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
  * \namespace ui
- * Insert a description for the namespace here
+ * Contains the classes derived directly or indirectly from the JUCE framework.
  */
 namespace ui
 {
     class ProjectTabbedComponent;
     class UseCaseDiagram;
 
+    //! Core UI element of the application window.
     /*!
      * \class ProjectComponent
      *
-     *  
+     * This class is the core UI element inside the application window
+     * holding the whole set of visible elements. One instance of
+     * this class is created by the Window class constructor, and
+     * added as the "content component" of the window.
      */
     class ProjectComponent : public Component
     {
     public:
 
+        //! Constructor.
         /*!
-         *  ProjectComponent constructor.
+         * Constructor.
          */
         ProjectComponent();
 
+        //! Virtual destructor.
         /*!
-         *  ProjectComponent virtual destructor.
+         * Virtual destructor.
          */
         virtual ~ProjectComponent();
         
+        //! Called when the window is resized.
+        /*!
+         * Called when the window is resized. In turn, this
+         * resizes the tabbed component inside.
+         */
         void resized();
         
+        //! Adds a new Use Case diagram to the project.
+        /*!
+         * Adds a new Use Case diagram to the project, and returns
+         * a pointer to this new component.
+         * 
+         * \return A pointer to the UseCaseDiagram instance created.
+         */
         UseCaseDiagram* addUseCaseDiagram();
     
     private:
-        void handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>&);
+        //! Handles the NewDiagramAdded notification.
+        /*!
+         * Handles the NewDiagramAdded notification.
+         * 
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
+        void handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>&);
     
     private:
+        //! A tabbed component holding one tab per diagram.
         ProjectTabbedComponent* _tabs;
     };
 }

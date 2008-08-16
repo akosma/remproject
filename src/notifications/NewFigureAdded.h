@@ -17,10 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the notifications::NewFigureAdded class.
 /*!
- * \file UseCaseDiagram.h
+ * \file NewFigureAdded.h
  *
- * Contains the interface of the ui::UseCaseDiagram class.
+ * Contains the interface of the notifications::NewFigureAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -28,46 +29,46 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/11/08
+ * \date      8/16/08
  */
 
-#include <Poco/AutoPtr.h>
+#ifndef NEWFIGUREADDED_H_
+#define NEWFIGUREADDED_H_
 
-#ifndef USECASEDIAGRAM_H_
-#define USECASEDIAGRAM_H_
+#include <Poco/Notification.h>
 
-#ifndef UMLDIAGRAM_H_
-#include "UMLDiagram.h"
-#endif
+using Poco::Notification;
 
-using Poco::AutoPtr;
-
+//! Notifications passed between application layers to signal events.
 /*!
- * \namespace ui
- * Insert a description for the namespace here
+ * \namespace notifications
+ * Contains notifications passed between application layers to signal events.
  */
-namespace ui
+namespace notifications
 {
-    class ActorFigure;
-    class UseCaseFigure;
-
+    //! Triggers the adding of a new figure to a project.
     /*!
-     * \class UseCaseDiagram
+     * \class NewFigureAdded
      *
-     *  
+     * Raised by the ui::CommandDelegate class when the user selects
+     * to add a new figure to a diagram.
      */
-    class UseCaseDiagram : public UMLDiagram
+    class NewFigureAdded : public Notification
     {
     public:
-        UseCaseDiagram();
-        virtual ~UseCaseDiagram();
-        
-        ActorFigure* addActorFigure();
-        UseCaseFigure* addUseCaseFigure();
-    
-    protected:
-        virtual DiagramToolbar* createToolbar();
+
+        //! Constructor.
+        /*!
+         * Constructor.
+         */
+        NewFigureAdded();
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~NewFigureAdded();
     };
 }
 
-#endif /* USECASEDIAGRAM_H_ */
+#endif /* NEWFIGUREADDED_H_ */

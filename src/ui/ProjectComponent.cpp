@@ -52,7 +52,7 @@
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
-using notifications::NewUseCaseDiagramAdded;
+using notifications::NewDiagramAdded;
 
 namespace ui
 {
@@ -62,7 +62,7 @@ namespace ui
     {
         addAndMakeVisible(_tabs);
         
-        NObserver<ProjectComponent, NewUseCaseDiagramAdded> newUseCaseObserver(*this, &ProjectComponent::handleNewUseCaseDiagramAdded);
+        NObserver<ProjectComponent, NewDiagramAdded> newUseCaseObserver(*this, &ProjectComponent::handleNewDiagramAdded);
         NotificationCenter::defaultCenter().addObserver(newUseCaseObserver);
 
 //        PropertyPanel* panel = new PropertyPanel();
@@ -98,8 +98,16 @@ namespace ui
         }
     }
     
-    void ProjectComponent::handleNewUseCaseDiagramAdded(const AutoPtr<NewUseCaseDiagramAdded>& notification)
+    void ProjectComponent::handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>& notification)
     {
-        addUseCaseDiagram();
+        switch(notification->getDiagramType())
+        {
+            case NewDiagramAdded::UseCase:
+                addUseCaseDiagram();
+                break;
+            
+            default:
+                break;
+        }
     }
 }

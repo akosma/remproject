@@ -101,11 +101,6 @@ namespace ui
         g.fillAll(Colours::white);
     }
 
-    void UMLDiagram::itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y)
-    {
-        repaint();
-    }
-
     void UMLDiagram::handleFigureSelected(const AutoPtr<FigureSelected>& notification)
     {
         Figure* figure = notification->getSelectedFigure();

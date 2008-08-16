@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the interface of the ui::Window class.
 /*!
  * \file Window.h
  *
@@ -36,37 +37,77 @@
 #ifndef WINDOW_H_
 #define WINDOW_H_
 
+//! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
  * \namespace ui
- * Insert a description for the namespace here
+ * Contains the classes derived directly or indirectly from the JUCE framework.
  */
 namespace ui
 {
+    // Forward declarations to avoid inclusions
     class MenuBar;
     class CommandDelegate;
 
+    //! Represents the application window, where the user adds diagrams and elements.
     /*!
      * \class Window
      *
-     *  
+     * Represents the application window, where the user adds diagrams and elements.
+     * The only instance of this class is created by the Application::initialise method.
      */
     class Window  : public DocumentWindow
     {
     public:
+        
+        //! Constructor
+        /*!
+         * Constructor
+         */
         Window();
-        ~Window();
 
+        //! Virtual destructor
+        /*!
+         * Virtual destructor
+         */
+        virtual ~Window();
+
+        //! Called when the 'close' button of the window is pressed.
+        /*!
+         * Called when the 'close' button of the window is pressed. This
+         * implementation triggers the shutdown of the application.
+         */
         void closeButtonPressed();
         
+        //! Returns the command manager for the current window.
+        /*!
+         * Returns the command manager for the current window.
+         * 
+         * \return A pointer to a juce::ApplicationCommandManager instance.
+         */
         ApplicationCommandManager* getCommandManager();
     
     protected:
+        //! Called when the window becomes active or inactive.
+        /*!
+         * Called when the window becomes active or inactive. This implementation
+         * posts a notifications::ActiveWindowStatusChanged notification.
+         */
         virtual void activeWindowStatusChanged();
 
     private:
+        //! Menu bar of the window. 
+        //! In the case of Mac OS X, this points to the menu on top of the screen.
         MenuBar* _menuBarModel;
+        
+        //! Command delegate of the current window.
         CommandDelegate* _commandDelegate;
+        
+        //! Pointer to the command manager of the current window.
         ApplicationCommandManager* _commandManager;
+        
+        //! Single instance used to provide tooltips to individual components.
+        //! Individual components wanting to show tooltips must inherit from
+        //! juce::TooltipClient and implement the getTooltip() pure virtual method.
         TooltipWindow _tooltipWindow;
     };
 }

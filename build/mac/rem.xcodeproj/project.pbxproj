@@ -11,8 +11,6 @@
 		3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A02E69A0DEDD4EE009A9590 /* ElementTest.cpp */; };
 		3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
 		3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */; };
-		3A0AA2450E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA2440E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp */; };
-		3A0AA2460E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0AA2440E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp */; };
 		3A1A118A0E18B830009B2E6B /* libgcov.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1A11890E18B830009B2E6B /* libgcov.a */; };
 		3A23DCDA0E0DAC5B00DB428C /* ProjectComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
@@ -60,6 +58,8 @@
 		3A5B73D40E4DC11A009D4BCF /* ProjectComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */; };
 		3A5B73D50E4DC11C009D4BCF /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC065BE0DB13102000EB33E /* Application.cpp */; };
 		3A5FD4040DBCC8480074B763 /* ArrowCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */; };
+		3A631FA80E56EAD000F22A12 /* NewFigureAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */; };
+		3A631FA90E56EAD000F22A12 /* NewFigureAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */; };
 		3A65AA930E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */; };
 		3A65AA940E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */; };
 		3A70B42C0D8D61E200F61DB0 /* DiagramTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */; };
@@ -106,6 +106,8 @@
 		3AC075FE0D8D9A21004C5A73 /* Element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC075FC0D8D9A21004C5A73 /* Element.cpp */; };
 		3AC4D3420DEC9C9F00D26FFA /* ActorToolbarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4D33E0DEC9C9F00D26FFA /* ActorToolbarButton.cpp */; };
 		3AC608CA0DEC0A34002D0B12 /* Persistable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC608C90DEC0A34002D0B12 /* Persistable.cpp */; };
+		3AD9460A0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */; };
+		3AD9460B0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
 		3AE7D1D10E4DE239005F0575 /* DiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7D1D00E4DE239005F0575 /* DiagramToolbar.cpp */; };
 		3AE7D1D20E4DE239005F0575 /* DiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7D1D00E4DE239005F0575 /* DiagramToolbar.cpp */; };
@@ -121,8 +123,6 @@
 		3A08403A0DE9F6770080A93A /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileController.h; path = ../../src/controllers/FileController.h; sourceTree = SOURCE_ROOT; };
 		3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileControllerTest.cpp; path = ../../src/tests/FileControllerTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileControllerTest.h; path = ../../src/tests/FileControllerTest.h; sourceTree = SOURCE_ROOT; };
-		3A0AA2430E4DEC5700E2F57A /* NewUseCaseDiagramAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewUseCaseDiagramAdded.h; path = ../../src/notifications/NewUseCaseDiagramAdded.h; sourceTree = SOURCE_ROOT; };
-		3A0AA2440E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewUseCaseDiagramAdded.cpp; path = ../../src/notifications/NewUseCaseDiagramAdded.cpp; sourceTree = SOURCE_ROOT; };
 		3A1A11890E18B830009B2E6B /* libgcov.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgcov.a; sourceTree = "<group>"; };
 		3A23DCD80E0DAC5B00DB428C /* ProjectComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectComponent.h; path = ../../src/ui/ProjectComponent.h; sourceTree = SOURCE_ROOT; };
 		3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectComponent.cpp; path = ../../src/ui/ProjectComponent.cpp; sourceTree = SOURCE_ROOT; };
@@ -163,6 +163,8 @@
 		3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponentChangedTab.h; path = ../../src/notifications/ProjectTabbedComponentChangedTab.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4020DBCC8480074B763 /* ArrowCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrowCanvas.h; path = ../../src/ui/ArrowCanvas.h; sourceTree = SOURCE_ROOT; };
 		3A5FD4030DBCC8480074B763 /* ArrowCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvas.cpp; path = ../../src/ui/ArrowCanvas.cpp; sourceTree = SOURCE_ROOT; };
+		3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewFigureAdded.cpp; path = ../../src/notifications/NewFigureAdded.cpp; sourceTree = SOURCE_ROOT; };
+		3A631FA70E56EAD000F22A12 /* NewFigureAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewFigureAdded.h; path = ../../src/notifications/NewFigureAdded.h; sourceTree = SOURCE_ROOT; };
 		3A65AA910E4E1F87005CFE1A /* FigureLassoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FigureLassoSource.h; path = ../../src/ui/FigureLassoSource.h; sourceTree = SOURCE_ROOT; };
 		3A65AA920E4E1F87005CFE1A /* FigureLassoSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FigureLassoSource.cpp; path = ../../src/ui/FigureLassoSource.cpp; sourceTree = SOURCE_ROOT; };
 		3A70B4280D8D61E200F61DB0 /* DiagramTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramTest.cpp; path = ../../src/tests/DiagramTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -222,6 +224,8 @@
 		3AC608C90DEC0A34002D0B12 /* Persistable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Persistable.cpp; path = ../../src/storage/Persistable.cpp; sourceTree = SOURCE_ROOT; };
 		3AD1A8700DC64F20009977AE /* BelongsTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BelongsTo.h; path = ../../src/storage/BelongsTo.h; sourceTree = SOURCE_ROOT; };
 		3AD1A8760DC64FF4009977AE /* HasMany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HasMany.h; path = ../../src/storage/HasMany.h; sourceTree = SOURCE_ROOT; };
+		3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewDiagramAdded.cpp; path = ../../src/notifications/NewDiagramAdded.cpp; sourceTree = SOURCE_ROOT; };
+		3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDiagramAdded.h; path = ../../src/notifications/NewDiagramAdded.h; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
 		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
 		3AE7D1CF0E4DE239005F0575 /* DiagramToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramToolbar.h; path = ../../src/ui/DiagramToolbar.h; sourceTree = SOURCE_ROOT; };
@@ -430,8 +434,10 @@
 				3A5191F80E4DC747003053A9 /* FigureMoved.cpp */,
 				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
 				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
-				3A0AA2430E4DEC5700E2F57A /* NewUseCaseDiagramAdded.h */,
-				3A0AA2440E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp */,
+				3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */,
+				3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */,
+				3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */,
+				3A631FA70E56EAD000F22A12 /* NewFigureAdded.h */,
 				3A5191FD0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.h */,
 				3A5191FC0E4DC747003053A9 /* ProjectTabbedComponentChangedTab.cpp */,
 			);
@@ -671,10 +677,11 @@
 				3A790B330E4DD72200699A8A /* UseCaseDiagram.cpp in Sources */,
 				3A790B3F0E4DDAA300699A8A /* UMLDiagram.cpp in Sources */,
 				3AE7D1D10E4DE239005F0575 /* DiagramToolbar.cpp in Sources */,
-				3A0AA2460E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
 				3A65AA930E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
 				3AAEC48B0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */,
 				3AAEC4FC0E4F04CD006B527D /* ArrowFigure.cpp in Sources */,
+				3A631FA90E56EAD000F22A12 /* NewFigureAdded.cpp in Sources */,
+				3AD9460B0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,10 +723,11 @@
 				3A790B320E4DD72200699A8A /* UseCaseDiagram.cpp in Sources */,
 				3AE7D1D20E4DE239005F0575 /* DiagramToolbar.cpp in Sources */,
 				3AE7D1FF0E4DE6EA005F0575 /* UMLDiagram.cpp in Sources */,
-				3A0AA2450E4DEC5700E2F57A /* NewUseCaseDiagramAdded.cpp in Sources */,
 				3A65AA940E4E1F87005CFE1A /* FigureLassoSource.cpp in Sources */,
 				3AAEC48C0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp in Sources */,
 				3AAEC4FD0E4F04CD006B527D /* ArrowFigure.cpp in Sources */,
+				3A631FA80E56EAD000F22A12 /* NewFigureAdded.cpp in Sources */,
+				3AD9460A0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

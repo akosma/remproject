@@ -69,7 +69,9 @@ namespace ui
             projectNewClassDiagram = 0x2031,
             projectNewSequenceDiagram = 0x2032,
 
-            diagramToggleGrid = 0x2040
+            diagramToggleGrid = 0x2040,
+            
+            helpAbout = 0x2060
         };
         
     private:

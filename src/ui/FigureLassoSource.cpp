@@ -45,15 +45,8 @@
 #include "ArrowFigure.h"
 #endif
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
-    /*!
-     * FigureLassoSource Constructor.
-     */
     FigureLassoSource::FigureLassoSource(SelectedItemSet<Figure*>& items, UMLDiagram* diagram, ArrowCanvas* canvas)
     : LassoSource<Figure*>()
     , _itemSet(items)
@@ -62,9 +55,6 @@ namespace ui
     {
     }
     
-    /*!
-     * FigureLassoSource Virtual destructor.
-     */
     FigureLassoSource::~FigureLassoSource()
     {
     }

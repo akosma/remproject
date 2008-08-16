@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the implementation of the ui::Application class.
 /*!
  * \file Application.cpp
  *
@@ -41,16 +42,17 @@
 #include "Window.h"
 #endif
 
+#ifndef COMMANDDELEGATE_H_
+#include "CommandDelegate.h"
+#endif
+
 using controllers::FileController;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     Application::Application()
-    : _window(0)
+    : JUCEApplication()
+    , _window(0)
     , _fileController(FileController::get())
     {
         _fileController.newProject();
@@ -58,11 +60,49 @@ namespace ui
 
     Application::~Application()
     {
+        // Do not delete the Window instance!
+        // This is done in the shutdown() method.
     }
 
     void Application::initialise (const String& commandLine)
     {
         _window = new Window();
+    }
+    
+    void Application::systemRequestedQuit()
+    {
+        if (_fileController.isProjectDirty())
+        {
+            int answer = AlertWindow::showYesNoCancelBox(AlertWindow::QuestionIcon, String("Are you sure?"), String("The current project has unsaved modifications.\nSave the modifications prior to quit?"));
+            switch (answer)
+            {
+                case 0:
+                    // "Cancel" => do nothing.
+                    break;
+                    
+                case 1:
+                    // "Yes" => save and quit.
+                    if (_fileController.isProjectNew())
+                    {
+                        _window->getCommandManager()->invokeDirectly(CommandDelegate::fileSaveAs, false);
+                    }
+                    else
+                    {
+                        _fileController.saveProject();
+                    }
+                    quit();
+                    break;
+                    
+                case 2:
+                    // "No" => quit without saving.
+                    quit();
+                    break;
+            }
+        }
+        else
+        {
+            quit();
+        }
     }
 
     void Application::shutdown()
@@ -72,7 +112,7 @@ namespace ui
 
     const String Application::getApplicationName()
     {
-        return String("Rem Application");
+        return String("Rem");
     }
 
     const String Application::getApplicationVersion()
@@ -82,7 +122,7 @@ namespace ui
 
     bool Application::moreThanOneInstanceAllowed()
     {
-        return true;
+        return false;
     }
 
     void Application::anotherInstanceStarted (const String& commandLine)

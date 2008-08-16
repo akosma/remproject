@@ -17,10 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//! Contains the starting point of the GUI Rem application.
 /*!
  * \file Main.cpp
  *
- * Contains the implementation of the ui::Main class.
+ * Contains the starting point of the GUI Rem application.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -83,7 +84,7 @@ START_JUCE_APPLICATION (ui::Application)
  *
  * \section install_linux Linux
  *
- * \section install_mac Mac OS X (10.5, Intel or PowerPC)
+ * \section install_mac Mac OS X (10.4, Intel or PowerPC)
  */
 
 /*!

@@ -62,7 +62,6 @@ namespace ui
     {
         _toolbar->setParent(this);
         addAndMakeVisible(_viewport);
-//        addChildComponent(_toolbar, -1); // Don't make it visible yet!
         _toolbar->setTopLeftPosition(10, 50);
         
         _viewport->setViewedComponent(_diagram);
@@ -89,7 +88,6 @@ namespace ui
     {
         FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);
         bool result = false;
-        // Mac OS X native controls hang the app...!
         if (fileChooser.browseForFileToSave(true))
         {
             File file = fileChooser.getResult();

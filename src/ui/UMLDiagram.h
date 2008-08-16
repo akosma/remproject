@@ -91,11 +91,9 @@ namespace ui
     {
     public:
         UMLDiagram();
-        ~UMLDiagram();
+        virtual ~UMLDiagram();
 
         void paint (Graphics&);
-
-        void itemDropped (const String& sourceDescription, Component* sourceComponent, int x, int y);
 
         void resize();
 

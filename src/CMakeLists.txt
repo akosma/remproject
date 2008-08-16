@@ -107,9 +107,12 @@ SET (notifications_SRCS
     notifications/DiagramToggleGrid.h
     notifications/DiagramToggleGrid.cpp
 
-    notifications/NewUseCaseDiagramAdded.h
-    notifications/NewUseCaseDiagramAdded.cpp
-    
+    notifications/NewFigureAdded.h
+    notifications/NewFigureAdded.cpp
+
+    notifications/NewDiagramAdded.h
+    notifications/NewDiagramAdded.cpp
+
     notifications/ActiveWindowStatusChanged.h
     notifications/ActiveWindowStatusChanged.cpp
 )
