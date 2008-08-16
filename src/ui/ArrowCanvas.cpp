@@ -70,15 +70,8 @@ using notifications::ArrowCanvasClicked;
 using notifications::FigureSelected;
 using juce::Rectangle;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
-    /*!
-     * ArrowCanvas Constructor.
-     */
     ArrowCanvas::ArrowCanvas()
     : _strokeWidth(1.0f)
     , _arrows()
@@ -93,9 +86,6 @@ namespace ui
         setOpaque(false);
     }
     
-    /*!
-     * ArrowCanvas Virtual destructor.
-     */
     ArrowCanvas::~ArrowCanvas()
     {
         vector<ArrowCanvas::Arrow*>::iterator it;

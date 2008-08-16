@@ -63,10 +63,6 @@ using notifications::FigureSelected;
 using notifications::FigureMoved;
 using notifications::ArrowCanvasClicked;
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     Figure::Figure(const int initWidth, const int initHeight)

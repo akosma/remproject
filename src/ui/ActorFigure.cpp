@@ -34,10 +34,6 @@
 
 #include "ActorFigure.h"
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     ActorFigure::ActorFigure()

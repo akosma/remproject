@@ -34,15 +34,8 @@
 
 #include "UseCaseFigure.h"
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
-    /*!
-     * UseCaseFigure Constructor.
-     */
     UseCaseFigure::UseCaseFigure()
     : Figure(200, 150)
     , _nameLabel(0)
@@ -63,9 +56,6 @@ namespace ui
         _nameLabel->showEditor();
     }
     
-    /*!
-     * UseCaseFigure Virtual destructor.
-     */
     UseCaseFigure::~UseCaseFigure()
     {
     }

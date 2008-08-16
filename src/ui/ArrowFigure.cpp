@@ -34,10 +34,6 @@
 
 #include "ArrowFigure.h"
 
-/*!
- * \namespace ui
- * Insert a description for the namespace here
- */
 namespace ui
 {
     ArrowFigure::ArrowFigure()
