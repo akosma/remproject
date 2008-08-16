@@ -36,7 +36,7 @@
 #define __JUCER_HEADER_ARROWFIGUREBUTTON_ARROWFIGUREBUTTON_A444D0E1__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "PlatformDefinitions.h"
 //[/Headers]
 
 
