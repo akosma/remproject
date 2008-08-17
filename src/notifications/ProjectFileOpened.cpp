@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the ui::ArrowFigure class.
+//! Contains the implementation of the notifications::ProjectFileOpened class.
 /*!
- * \file ArrowFigure.h
+ * \file ProjectFileOpened.cpp
  *
- * Contains the interface of the ui::ArrowFigure class.
+ * Contains the implementation of the notifications::ProjectFileOpened class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,39 +29,19 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/17/08
+ * \date      8/17/08
  */
 
-#include <string>
-#include "PlatformDefinitions.h"
+#include "ProjectFileOpened.h"
 
-#ifndef ARROWFIGURE_H_
-#define ARROWFIGURE_H_
-
-#ifndef LINEFIGURE_H_
-#include "LineFigure.h"
-#endif
-
-using std::string;
-
-//! Contains the classes derived directly or indirectly from the JUCE framework.
-/*!
- * \namespace ui
- * Contains the classes derived directly or indirectly from the JUCE framework.
- */
-namespace ui
+namespace notifications
 {
-    /*!
-     * \class ArrowFigure
-     *
-     *  
-     */
-    class ArrowFigure : public LineFigure
+    ProjectFileOpened::ProjectFileOpened()
+    : Notification()
     {
-    public:
-        ArrowFigure(const string&);
-        virtual ~ArrowFigure();
-    };
+    }
+    
+    ProjectFileOpened::~ProjectFileOpened()
+    {
+    }
 }
-
-#endif /* ARROWFIGURE_H_ */

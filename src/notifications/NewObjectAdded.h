@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the notifications::NewDiagramAdded class.
+//! Contains the interface of the notifications::NewObjectAdded class.
 /*!
- * \file NewDiagramAdded.h
+ * \file NewObjectAdded.h
  *
- * Contains the interface of the notifications::NewDiagramAdded class.
+ * Contains the interface of the notifications::NewObjectAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,15 +29,18 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      7/6/08
+ * \date      8/17/08
  */
 
-#ifndef NEWDIAGRAMADDED_H_
-#define NEWDIAGRAMADDED_H_
-
 #ifndef NEWOBJECTADDED_H_
-#include "NewObjectAdded.h"
-#endif
+#define NEWOBJECTADDED_H_
+
+#include <string>
+
+#include <Poco/Notification.h>
+
+using Poco::Notification;
+using std::string;
 
 //! Notifications passed between application layers to signal events.
 /*!
@@ -46,59 +49,44 @@
  */
 namespace notifications
 {
-    //! Triggers the adding of a new diagram to the project.
+    //! Triggers the adding of a new object to a project.
     /*!
-     * \class NewDiagramAdded
+     * \class NewObjectAdded
      *
      * Raised by the ui::CommandDelegate class when the user selects
-     * to add a new diagram to the project.
+     * to add a new object to a diagram. The main raison-d'etre of this
+     * class is to generate a unique ID (ideally a UUID) to be used
+     * by both the GUI component and its SQLite representation, so that
+     * the controller can keep both in sync.
      */
-    class NewDiagramAdded : public NewObjectAdded
+    class NewObjectAdded : public Notification
     {
     public:
-
-        //! Enumerates the type of diagrams announced by this notification.
-        /*!
-         * Enumerates the type of diagrams announced by this notification.
-         */
-        enum DiagramType
-        {
-            //! Use Case diagrams
-            UseCase,
-            
-            //! Class diagrams
-            Class,
-            
-            //! Sequence diagrams
-            Sequence
-        };
 
         //! Constructor.
         /*!
          * Constructor.
-         * 
-         * \param type The type of diagram to be added.
          */
-        NewDiagramAdded(const DiagramType);
+        NewObjectAdded();
 
         //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
-        virtual ~NewDiagramAdded();
+        virtual ~NewObjectAdded();
         
-        //! Returns the type of diagram announced by the notification.
+        //! Returns the unique ID assigned to the newly created instance.
         /*!
-         * Returns the type of diagram announced by the notification.
-         * 
-         * \return The type of diagram announced by the notification.
+         * Returns the unique ID assigned to the newly created instance.
+         *
+         * \return A string.
          */
-        const DiagramType getDiagramType() const;
+        const string& getUniqueId() const;
         
     private:
-        //! Type of diagram being announced by the notification
-        const DiagramType _type;
+        //! Unique ID for the new object being added
+        string _id;
     };
 }
 
-#endif /* NEWDIAGRAMADDED_H_ */
+#endif /* NEWOBJECTADDED_H_ */

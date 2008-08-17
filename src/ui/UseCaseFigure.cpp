@@ -34,10 +34,12 @@
 
 #include "UseCaseFigure.h"
 
+using std::string;
+
 namespace ui
 {
-    UseCaseFigure::UseCaseFigure()
-    : Figure(200, 150)
+    UseCaseFigure::UseCaseFigure(const string& uniqueId)
+    : Figure(200, 150, uniqueId)
     , _nameLabel(0)
     {
         const float margin = getInitialMargin();

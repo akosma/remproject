@@ -86,8 +86,8 @@ namespace ui
 {
     class Figure;
     class ArrowCanvas;
-    class DiagramToolbar;
     class FigureLassoSource;
+    class DiagramToolbar;
     
     /*!
      * \class UMLDiagram
@@ -109,23 +109,23 @@ namespace ui
         void handleFigureMoved(const AutoPtr<FigureMoved>&);
         void toggleGrid();
         
-        DiagramToolbar* getToolbar();
-        
-        virtual void addFigure(const NewFigureAdded::FigureType type) = 0;
+        virtual DiagramToolbar* createToolbar() = 0;
+        virtual void addFigure(const AutoPtr<NewFigureAdded>&) = 0;
 
     protected:
-        virtual DiagramToolbar* createToolbar() = 0;
         const int getSelectedItemsCount() const;
         const Array<Figure*>& getSelectedItems();
         
     protected:
-        void addArrowToCanvas(Figure*, Figure*);
-        void addLineToCanvas(Figure*, Figure*);
+        void addArrowToCanvas(Figure*, Figure*, const string&);
+        void addLineToCanvas(Figure*, Figure*, const string&);
 
     private:
         ArrowCanvas* _canvas;
         SelectedItemSet<Figure*> _selection;
-        DiagramToolbar* _toolbar;
+        NObserver<UMLDiagram, FigureSelected>* _figureObserver;
+        NObserver<UMLDiagram, ArrowCanvasClicked>* _arrowObserver;
+        NObserver<UMLDiagram, FigureMoved>* _movementObserver;
     };
 }
 

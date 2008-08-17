@@ -36,8 +36,8 @@
 
 namespace ui
 {
-    ActorFigure::ActorFigure()
-    : Figure(80, 200)
+    ActorFigure::ActorFigure(const string& uniqueId)
+    : Figure(80, 200, uniqueId)
     , _nameLabel(0)
     {
         _nameLabel = new Label("NameLabel", "Name");

@@ -122,8 +122,14 @@ SET (notifications_SRCS
     notifications/NewDiagramAdded.h
     notifications/NewDiagramAdded.cpp
 
+    notifications/NewObjectAdded.h
+    notifications/NewObjectAdded.cpp
+
     notifications/ActiveWindowStatusChanged.h
     notifications/ActiveWindowStatusChanged.cpp
+    
+    notifications/ProjectFileOpened.h
+    notifications/ProjectFileOpened.cpp
 )
 
 SET (storage_SRCS

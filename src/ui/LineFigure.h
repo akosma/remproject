@@ -32,6 +32,7 @@
  * \date      8/16/08
  */
 
+#include <string>
 #include "PlatformDefinitions.h"
 
 #ifndef LINEFIGURE_H_
@@ -40,6 +41,8 @@
 #ifndef FIGURE_H_
 #include "Figure.h"
 #endif
+
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -56,7 +59,7 @@ namespace ui
     class LineFigure : public Figure
     {
     public:
-        LineFigure();
+        LineFigure(const string&);
         virtual ~LineFigure();
         
     protected:

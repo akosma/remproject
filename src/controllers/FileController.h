@@ -36,21 +36,10 @@
 #define FILECONTROLLER_H_
 
 #include <Poco/AutoPtr.h>
+#include <Poco/NObserver.h>
 
 #ifndef SINGLETON_H_
 #include "../utility/Singleton.h"
-#endif
-
-#ifndef PROJECT_H_
-#include "../metamodel/Project.h"
-#endif
-
-#ifndef ELEMENT_H_
-#include "../metamodel/Element.h"
-#endif
-
-#ifndef DIAGRAM_H_
-#include "../metamodel/Diagram.h"
 #endif
 
 #ifndef NEWDIAGRAMADDED_H_
@@ -61,14 +50,29 @@
 #include "../notifications/NewFigureAdded.h"
 #endif
 
+#ifndef FIGUREMOVED_H_
+#include "../notifications/FigureMoved.h"
+#endif
+
 using utility::Singleton;
+using std::string;
+using Poco::AutoPtr;
+using Poco::NObserver;
+using notifications::NewDiagramAdded;
+using notifications::NewFigureAdded;
+using notifications::FigureMoved;
+
+// Forward declaration
+namespace metamodel
+{
+    class Project;
+    class Diagram;
+    class Element;
+}
+
 using metamodel::Project;
 using metamodel::Diagram;
 using metamodel::Element;
-using std::string;
-using Poco::AutoPtr;
-using notifications::NewDiagramAdded;
-using notifications::NewFigureAdded;
 
 //! Contains the controller classes of the application.
 /*!
@@ -142,7 +146,7 @@ namespace controllers
          * 
          * \param className The type of diagram to create (use-case, class, etc).
          */
-        void addDiagram(const string&);
+        void addDiagram(const string&, const string&);
 
         //! Adds a figure to the current diagram.
         /*!
@@ -150,7 +154,7 @@ namespace controllers
          * 
          * \param className The type of figure to create (actor, class, etc).
          */
-        void addFigure(const string&);
+        void addFigure(const string&, const string&);
         
         //! States whether the controller has a current project.
         /*!
@@ -183,6 +187,14 @@ namespace controllers
          * \return A boolean value.
          */
         const bool isProjectDirty() const;
+        
+        //! Returns a pointer to the current project
+        /*!
+         * Returns a pointer to the current project
+         *
+         * \return A pointer to a Project instance.
+         */
+        Project* getProject() const;
 
     private:
 
@@ -198,6 +210,9 @@ namespace controllers
 
         //! Handles notifications of type notification::NewFigureAdded
         void handleNewFigureAdded(const AutoPtr<NewFigureAdded>&);
+        
+        //! Handles notifications of type notification::FigureMoved
+        void handleFigureMoved(const AutoPtr<FigureMoved>&);
 
     private:
         //! Instance of the Project class "controlled" by this FileController.
@@ -208,6 +223,15 @@ namespace controllers
         
         //! Counter used for the file names of new projects.
         int _counter;
+
+        //! Observer for NewDiagramAdded notifications.
+        NObserver<FileController, NewDiagramAdded>* _newDiagramObserver;
+        
+        //! Observer for NewFigureAdded notifications.
+        NObserver<FileController, NewFigureAdded>* _newFigureObserver;
+        
+        //! Observer for FigureMoved notifications.
+        NObserver<FileController, FigureMoved>* _movementObserver;
     };
 }
 

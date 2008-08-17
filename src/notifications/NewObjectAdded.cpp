@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the notifications::NewFigureAdded class.
+//! Contains the implementation of the notifications::NewObjectAdded class.
 /*!
- * \file NewFigureAdded.cpp
+ * \file NewObjectAdded.cpp
  *
- * Contains the implementation of the notifications::NewFigureAdded class.
+ * Contains the implementation of the notifications::NewObjectAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,25 +29,47 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      8/16/08
+ * \date      8/17/08
  */
 
-#include "NewFigureAdded.h"
+#include "NewObjectAdded.h"
+
+#if defined(__APPLE__) && defined(__MACH__)
+// The Mac OS X compiler requires this line, because "nil" is a reserved
+// word in the Objective-C language, and without it this file won't compile.
+// (The Poco/UUID.h file has definitions of a "nil()" method!)
+#undef nil
+#endif
+
+#if defined(_WIN32)
+#include <cstdio>
+#else
+#include <Poco/UUIDGenerator.h>
+#include <Poco/UUID.h>
+using Poco::UUIDGenerator;
+using Poco::UUID;
+#endif
 
 namespace notifications
 {
-    NewFigureAdded::NewFigureAdded(const FigureType type)
-    : NewObjectAdded()
-    , _type(type)
+    NewObjectAdded::NewObjectAdded()
+    : Notification()
+    {
+#if defined(_WIN32)
+        _id = string name(tmpnam(NULL));
+#else
+        UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
+        UUID uuid = generator.createRandom();
+        _id = uuid.toString();
+#endif
+    }
+    
+    NewObjectAdded::~NewObjectAdded()
     {
     }
     
-    NewFigureAdded::~NewFigureAdded()
+    const string& NewObjectAdded::getUniqueId() const
     {
-    }
-    
-    const NewFigureAdded::FigureType NewFigureAdded::getFigureType() const
-    {
-        return _type;
+        return _id;
     }
 }

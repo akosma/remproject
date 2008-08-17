@@ -33,7 +33,6 @@
  */
 
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 
 #include "Figure.h"
 
@@ -65,7 +64,7 @@ using notifications::ArrowCanvasClicked;
 
 namespace ui
 {
-    Figure::Figure(const int initWidth, const int initHeight)
+    Figure::Figure(const int initWidth, const int initHeight, const string& uniqueId)
     : _selected(false)
     , _hover(false)
     , _dragger()
@@ -74,6 +73,8 @@ namespace ui
     , _initHeight(initHeight)
     , _initMargin(10.0f)
     , _strokeWidth(1.0f)
+    , _id(uniqueId)
+    , _arrowCanvasObserver(new NObserver<Figure, ArrowCanvasClicked>(*this, &Figure::handleArrowCanvasClicked))
     {
         setSize(_initWidth, _initHeight);
         setBounds(0, 0, _initWidth, _initHeight);
@@ -86,13 +87,19 @@ namespace ui
         _resizer->setSize(getWidth(),getHeight());
         _resizer->setBounds(0, 0, getWidth(), getHeight());
         
-        NObserver<Figure, ArrowCanvasClicked> arrowCanvasObserver(*this, &Figure::handleArrowCanvasClicked);
-        NotificationCenter::defaultCenter().addObserver(arrowCanvasObserver);
+        NotificationCenter::defaultCenter().addObserver(*_arrowCanvasObserver);
     }
 
     Figure::~Figure()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_arrowCanvasObserver);
+        deleteAndZero(_arrowCanvasObserver);
         deleteAllChildren();
+    }
+    
+    const string& Figure::getUniqueId() const
+    {
+        return _id;
     }
     
     void Figure::mouseDown(const MouseEvent& e)

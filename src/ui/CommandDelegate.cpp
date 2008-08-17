@@ -46,6 +46,10 @@
 #include "../notifications/NewDiagramAdded.h"
 #endif
 
+#ifndef PROJECTFILEOPENED_H_
+#include "../notifications/ProjectFileOpened.h"
+#endif
+
 #ifndef NEWFIGUREADDED_H_
 #include "../notifications/NewFigureAdded.h"
 #endif
@@ -70,6 +74,7 @@ using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
 using notifications::NewDiagramAdded;
 using notifications::NewFigureAdded;
+using notifications::ProjectFileOpened;
 
 namespace ui
 {
@@ -142,7 +147,7 @@ namespace ui
                 info.description = "Opens a project in disk";
                 info.flags = 0;
                 info.addDefaultKeypress(111, ModifierKeys::commandModifier);
-                info.setActive(false);
+                info.setActive(true);
                 break;
             }
 
@@ -305,6 +310,12 @@ namespace ui
                 break;
             }
             
+            case fileOpen:
+            {
+                performFileOpen();
+                break;
+            }
+            
             case fileSave:
             {
                 if (_fileController.isProjectNew())
@@ -395,6 +406,26 @@ namespace ui
             }
             std::string fileName = std::string(file.getFullPathName().toUTF8());
             _fileController.saveProjectAs(fileName);
+        }
+    }
+
+    void CommandDelegate::performFileOpen()
+    {
+        FileChooser fileChooser("Choose a file", File::getSpecialLocation(File::userDesktopDirectory), "*.rem", NATIVE_DIALOG);
+        if (fileChooser.browseForFileToOpen(NULL))
+        {
+            File file = fileChooser.getResult();
+            std::string fileName = std::string(file.getFullPathName().toUTF8());
+            const bool ok = _fileController.openProject(fileName);
+            if (ok)
+            {
+                ProjectFileOpened* notification = new ProjectFileOpened();
+                NotificationCenter::defaultCenter().postNotification(notification);
+            }
+            else
+            {
+                AlertWindow::showNativeDialogBox(String("Error"), String("The file is not a valid Rem project file."), false);
+            }
         }
     }
 }

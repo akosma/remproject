@@ -33,7 +33,6 @@
  */
 
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 
 #include "UseCaseDiagram.h"
 
@@ -50,7 +49,6 @@
 #endif
 
 using Poco::NotificationCenter;
-using Poco::NObserver;
 using Poco::AutoPtr;
 
 namespace ui
@@ -71,32 +69,34 @@ namespace ui
         return new UseCaseDiagramToolbar();
     }
     
-    ActorFigure* UseCaseDiagram::addActorFigure()
+    ActorFigure* UseCaseDiagram::addActorFigure(const string& uniqueId)
     {
-        ActorFigure* figure = new ActorFigure();
+        ActorFigure* figure = new ActorFigure(uniqueId);
         figure->setTopLeftPosition(10, 10);
         addAndMakeVisible(figure, -1);
         return figure;
     }
     
-    UseCaseFigure* UseCaseDiagram::addUseCaseFigure()
+    UseCaseFigure* UseCaseDiagram::addUseCaseFigure(const string& uniqueId)
     {
-        UseCaseFigure* figure = new UseCaseFigure();
+        UseCaseFigure* figure = new UseCaseFigure(uniqueId);
         figure->setTopLeftPosition(10, 10);
         addAndMakeVisible(figure, -1);
         return figure;
     }
 
-    void UseCaseDiagram::addFigure(const NewFigureAdded::FigureType type)
+    void UseCaseDiagram::addFigure(const AutoPtr<NewFigureAdded>& notification)
     {
+        NewFigureAdded::FigureType type = notification->getFigureType();
+        const string& uniqueId = notification->getUniqueId();
         switch(type)
         {
             case NewFigureAdded::Actor:
-                addActorFigure();
+                addActorFigure(uniqueId);
                 break;
 
             case NewFigureAdded::UseCase:
-                addUseCaseFigure();
+                addUseCaseFigure(uniqueId);
                 break;
                 
             case NewFigureAdded::Arrow:
@@ -108,7 +108,7 @@ namespace ui
                     ActorFigure* b = dynamic_cast<ActorFigure*>(items[1]);
                     if (a && b)
                     {
-                        addArrowToCanvas(a, b);
+                        addArrowToCanvas(a, b, uniqueId);
                     }
                 }
                 break;
@@ -125,11 +125,11 @@ namespace ui
                     UseCaseFigure* b2 = dynamic_cast<UseCaseFigure*>(items[1]);
                     if (a1 && b2)
                     {
-                        addLineToCanvas(a1, b2);
+                        addLineToCanvas(a1, b2, uniqueId);
                     }
                     if (a2 && b1)
                     {
-                        addLineToCanvas(a2, b1);
+                        addLineToCanvas(a2, b1, uniqueId);
                     }
                 }
                 break;

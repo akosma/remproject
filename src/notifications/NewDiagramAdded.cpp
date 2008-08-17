@@ -37,7 +37,7 @@
 namespace notifications
 {
     NewDiagramAdded::NewDiagramAdded(DiagramType type)
-    : Notification()
+    : NewObjectAdded()
     , _type(type)
     {
     }

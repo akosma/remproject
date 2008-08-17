@@ -32,8 +32,24 @@
  * \date      6/21/08
  */
 
+#ifndef PROJECT_H_
+#include "../metamodel/Project.h"
+#endif
+
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
+#endif
+
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
+#endif
+
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
+#endif
+
+#include <iostream>
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 
 #include "ProjectComponent.h"
 
@@ -53,17 +69,22 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::NewDiagramAdded;
+using notifications::ProjectFileOpened;
+using controllers::FileController;
+using metamodel::Project;
 
 namespace ui
 {
     ProjectComponent::ProjectComponent()
     : Component()
     , _tabs(new ProjectTabbedComponent())
+    , _newDiagramObserver(new NObserver<ProjectComponent, NewDiagramAdded>(*this, &ProjectComponent::handleNewDiagramAdded))
+    , _projectOpenedObserver(new NObserver<ProjectComponent, ProjectFileOpened>(*this, &ProjectComponent::handleProjectFileOpened))
     {
         addAndMakeVisible(_tabs);
         
-        NObserver<ProjectComponent, NewDiagramAdded> newDiagramObserver(*this, &ProjectComponent::handleNewDiagramAdded);
-        NotificationCenter::defaultCenter().addObserver(newDiagramObserver);
+        NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
+        NotificationCenter::defaultCenter().addObserver(*_projectOpenedObserver);
 
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);
@@ -77,6 +98,10 @@ namespace ui
     
     ProjectComponent::~ProjectComponent()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_newDiagramObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_projectOpenedObserver);
+        deleteAndZero(_newDiagramObserver);
+        deleteAndZero(_projectOpenedObserver);
         deleteAllChildren();
     }
 
@@ -108,6 +133,22 @@ namespace ui
             
             default:
                 break;
+        }
+    }
+    
+    void ProjectComponent::handleProjectFileOpened(const AutoPtr<ProjectFileOpened>& notification)
+    {
+        FileController& controller = FileController::get();
+        Project* project = controller.getProject();
+        _tabs->clearTabs();
+        for (int i = 0; i < project->getChildrenCount(); ++i)
+        {
+            // Here the Project class should export an iterator!
+            // Then we'd go diagram by diagram, and we'd pass to each
+            // UMLDiagram instance the AnyPropertyMap of elements inside
+            // so that each diagram would populate itself with the 
+            // elements it requires...
+            addUseCaseDiagram();
         }
     }
 }

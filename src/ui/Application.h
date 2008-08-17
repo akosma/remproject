@@ -135,8 +135,6 @@ namespace ui
          */
         void anotherInstanceStarted (const String&);
         
-        ApplicationCommandTarget* getTargetForCommand(const CommandID);
-
     private:
         //! A reference used to create a new project in the constructor.
         FileController& _fileController;

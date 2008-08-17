@@ -32,7 +32,9 @@
  * \date      4/19/08
  */
 
+#include <string>
 #include <Poco/AutoPtr.h>
+#include <Poco/NObserver.h>
 
 #include "PlatformDefinitions.h"
 
@@ -44,7 +46,9 @@
 #endif
 
 using Poco::AutoPtr;
+using Poco::NObserver;
 using notifications::ArrowCanvasClicked;
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -64,7 +68,7 @@ namespace ui
         /*!
          *  Figure constructor.
          */
-        Figure(const int, const int);
+        Figure(const int, const int, const string&);
 
         /*!
          *  Figure virtual destructor.
@@ -84,6 +88,7 @@ namespace ui
         
         void setSelected(bool);
         const bool isSelected();
+        const string& getUniqueId() const;
 
     protected:
         virtual void drawFigure(Path&) = 0;
@@ -108,6 +113,8 @@ namespace ui
         const int _initHeight;
         const float _initMargin;
         const float _strokeWidth;
+        const string _id;
+        NObserver<Figure, ArrowCanvasClicked>* _arrowCanvasObserver;
     };
 }
 

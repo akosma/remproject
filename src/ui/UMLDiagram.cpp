@@ -59,7 +59,9 @@ namespace ui
     : Component()
     , _canvas(new ArrowCanvas())
     , _selection()
-    , _toolbar(NULL)
+    , _figureObserver(new NObserver<UMLDiagram, FigureSelected>(*this, &UMLDiagram::handleFigureSelected))
+    , _arrowObserver(new NObserver<UMLDiagram, ArrowCanvasClicked>(*this, &UMLDiagram::handleArrowCanvasClicked))
+    , _movementObserver(new NObserver<UMLDiagram, FigureMoved>(*this, &UMLDiagram::handleFigureMoved))
     {
         _canvas->setSize(565, 800);
         _canvas->setSelectedItemSet(_selection, this);
@@ -70,40 +72,32 @@ namespace ui
         // The NotificationCenter in the POCO libraries is inspired from Cocoa
         // http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/Reference/Reference.html
         // However, this implementation uses template adaptors, in a true C++ style!
-        NObserver<UMLDiagram, FigureSelected> figureObserver(*this, &UMLDiagram::handleFigureSelected);
-        NotificationCenter::defaultCenter().addObserver(figureObserver);
-
-        NObserver<UMLDiagram, ArrowCanvasClicked> arrowObserver(*this, &UMLDiagram::handleArrowCanvasClicked);
-        NotificationCenter::defaultCenter().addObserver(arrowObserver);
-
-        NObserver<UMLDiagram, FigureMoved> movementObserver(*this, &UMLDiagram::handleFigureMoved);
-        NotificationCenter::defaultCenter().addObserver(movementObserver);
+        NotificationCenter::defaultCenter().addObserver(*_figureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_arrowObserver);
+        NotificationCenter::defaultCenter().addObserver(*_movementObserver);
     }
 
     UMLDiagram::~UMLDiagram()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_figureObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_arrowObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_movementObserver);
+        deleteAndZero(_figureObserver);
+        deleteAndZero(_arrowObserver);
+        deleteAndZero(_movementObserver);
         deleteAllChildren();
     }
 
-    DiagramToolbar* UMLDiagram::getToolbar()
+    void UMLDiagram::addArrowToCanvas(Figure* a, Figure* b, const string& uniqueId)
     {
-        if (!_toolbar)
-        {
-            _toolbar = createToolbar();
-        }
-        return _toolbar;
-    }
-    
-    void UMLDiagram::addArrowToCanvas(Figure* a, Figure* b)
-    {
-        ArrowFigure* arrowFigure = new ArrowFigure();
+        ArrowFigure* arrowFigure = new ArrowFigure(uniqueId);
         addChildComponent(arrowFigure, -1);
         _canvas->addArrow(a, b, arrowFigure);
     }
 
-    void UMLDiagram::addLineToCanvas(Figure* a, Figure* b)
+    void UMLDiagram::addLineToCanvas(Figure* a, Figure* b, const string& uniqueId)
     {
-        LineFigure* lineFigure = new LineFigure();
+        LineFigure* lineFigure = new LineFigure(uniqueId);
         addChildComponent(lineFigure, -1);
         _canvas->addLine(a, b, lineFigure);
     }

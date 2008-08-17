@@ -31,6 +31,8 @@
  * \author    Adrian
  * \date      4/19/08
  */
+ 
+#include <string>
 
 #ifndef USECASEFIGURE_H_
 #define USECASEFIGURE_H_
@@ -38,6 +40,8 @@
 #ifndef FIGURE_H_
 #include "Figure.h"
 #endif
+
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -58,7 +62,7 @@ namespace ui
         /*!
          *  UseCaseFigure constructor.
          */
-        UseCaseFigure();
+        UseCaseFigure(const string&);
 
         /*!
          *  UseCaseFigure virtual destructor.

@@ -33,7 +33,6 @@
  */
 
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 
 #include "ProjectTabbedComponent.h"
 
@@ -55,19 +54,23 @@ namespace ui
 {
     ProjectTabbedComponent::ProjectTabbedComponent()
     : TabbedComponent(TabbedButtonBar::TabsAtTop)
+    , _exportObserver(new NObserver<ProjectTabbedComponent, ExportDiagramAsPNG>(*this, &ProjectTabbedComponent::handleExportDiagramAsPNG))
+    , _gridObserver(new NObserver<ProjectTabbedComponent, DiagramToggleGrid>(*this, &ProjectTabbedComponent::handleDiagramToggleGrid))
+    , _figureObserver(new NObserver<ProjectTabbedComponent, NewFigureAdded>(*this, &ProjectTabbedComponent::handleNewFigureAdded))
     {
-        NObserver<ProjectTabbedComponent, ExportDiagramAsPNG> exportObserver(*this, &ProjectTabbedComponent::handleExportDiagramAsPNG);
-        NotificationCenter::defaultCenter().addObserver(exportObserver);
-
-        NObserver<ProjectTabbedComponent, DiagramToggleGrid> gridObserver(*this, &ProjectTabbedComponent::handleDiagramToggleGrid);
-        NotificationCenter::defaultCenter().addObserver(gridObserver);
-
-        NObserver<ProjectTabbedComponent, NewFigureAdded> figureObserver(*this, &ProjectTabbedComponent::handleNewFigureAdded);
-        NotificationCenter::defaultCenter().addObserver(figureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_exportObserver);
+        NotificationCenter::defaultCenter().addObserver(*_gridObserver);
+        NotificationCenter::defaultCenter().addObserver(*_figureObserver);
     }
     
     ProjectTabbedComponent::~ProjectTabbedComponent()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_exportObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_gridObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_figureObserver);
+        deleteAndZero(_exportObserver);
+        deleteAndZero(_gridObserver);
+        deleteAndZero(_figureObserver);
     }
     
     void ProjectTabbedComponent::currentTabChanged(const int newCurrentTabIndex, const String& newCurrentTabName)
@@ -96,6 +99,6 @@ namespace ui
     void ProjectTabbedComponent::handleNewFigureAdded(const AutoPtr<NewFigureAdded>& notification)
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
-        currentDiagram->addFigure(notification->getFigureType());
+        currentDiagram->addFigure(notification);
     }
 }

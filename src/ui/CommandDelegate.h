@@ -113,6 +113,7 @@ namespace ui
     
     private:
         void performFileSaveAs();
+        void performFileOpen();
         
     private:
         FileController& _fileController;

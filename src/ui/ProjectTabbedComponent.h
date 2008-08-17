@@ -33,6 +33,7 @@
  */
 
 #include <Poco/AutoPtr.h>
+#include <Poco/NObserver.h>
 
 #ifndef PROJECTTABBEDCOMPONENT_H_
 #define PROJECTTABBEDCOMPONENT_H_
@@ -52,6 +53,7 @@
 #endif
 
 using Poco::AutoPtr;
+using Poco::NObserver;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
 using notifications::NewFigureAdded;
@@ -132,6 +134,13 @@ namespace ui
          * \param notification The NewFigureAdded notification received.
          */
         void handleNewFigureAdded(const AutoPtr<NewFigureAdded>&);
+        
+    private:
+    
+        NObserver<ProjectTabbedComponent, ExportDiagramAsPNG>* _exportObserver;
+        NObserver<ProjectTabbedComponent, DiagramToggleGrid>* _gridObserver;
+        NObserver<ProjectTabbedComponent, NewFigureAdded>* _figureObserver;
+
     };
 }
 

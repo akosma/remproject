@@ -33,6 +33,7 @@
  */
 
 #include <Poco/AutoPtr.h>
+#include <Poco/NObserver.h>
 
 #include "PlatformDefinitions.h"
 
@@ -43,8 +44,14 @@
 #include "../notifications/NewDiagramAdded.h"
 #endif
 
+#ifndef PROJECTFILEOPENED_H_
+#include "../notifications/ProjectFileOpened.h"
+#endif
+
 using Poco::AutoPtr;
+using Poco::NObserver;
 using notifications::NewDiagramAdded;
+using notifications::ProjectFileOpened;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -105,10 +112,21 @@ namespace ui
          * \param notification The notification passed by the Poco::NotificationCenter.
          */
         void handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>&);
+        
+        //! Handles the ProjectFileOpened notification.
+        /*!
+         * Handles the ProjectFileOpened notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
+        void handleProjectFileOpened(const AutoPtr<ProjectFileOpened>&);
     
     private:
         //! A tabbed component holding one tab per diagram.
         ProjectTabbedComponent* _tabs;
+        
+        NObserver<ProjectComponent, NewDiagramAdded>* _newDiagramObserver;
+        NObserver<ProjectComponent, ProjectFileOpened>* _projectOpenedObserver;
     };
 }
 

@@ -32,42 +32,48 @@
  * \date      5/25/08
  */
 
+#ifndef PROJECT_H_
+#include "../metamodel/Project.h"
+#endif
+
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
+#endif
+
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
+#endif
+
+#include "../ui/PlatformDefinitions.h"
 #include "FileController.h"
 
 #include <sstream>
 #include <string>
 #include <iostream>
 
-#if defined(__APPLE__) && defined(__MACH__)
-// The Mac OS X compiler requires this line, because "nil" is a reserved
-// word in the Objective-C language, and without it this file won't compile.
-// (The Poco/UUID.h file has definitions of a "nil()" method!)
-#undef nil
-#endif
-
-#if defined(_WIN32)
-#include <cstdio>
-#else
-#include <Poco/UUIDGenerator.h>
-#include <Poco/UUID.h>
-using Poco::UUIDGenerator;
-using Poco::UUID;
-#endif
-
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 
 #ifndef SQLITEWRAPPER_H_
 #include "../storage/SQLiteWrapper.h"
 #endif
 
+#ifndef FIGURE_H_
+#include "../ui/Figure.h"
+#endif
+
 using storage::SQLiteWrapper;
 using std::string;
 using std::stringstream;
+using metamodel::Project;
+using metamodel::Diagram;
+using metamodel::Element;
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::NewDiagramAdded;
+using notifications::NewFigureAdded;
+using notifications::FigureMoved;
+using ui::Figure;
 
 namespace controllers
 {
@@ -76,16 +82,23 @@ namespace controllers
     , _project(NULL)
     , _currentDiagram(NULL)
     , _counter(0)
+    , _newDiagramObserver(new NObserver<FileController, NewDiagramAdded>(*this, &FileController::handleNewDiagramAdded))
+    , _newFigureObserver(new NObserver<FileController, NewFigureAdded>(*this, &FileController::handleNewFigureAdded))
+    , _movementObserver(new NObserver<FileController, FigureMoved>(*this, &FileController::handleFigureMoved))
     {
-        NObserver<FileController, NewDiagramAdded> newDiagramObserver(*this, &FileController::handleNewDiagramAdded);
-        NotificationCenter::defaultCenter().addObserver(newDiagramObserver);
-
-        NObserver<FileController, NewFigureAdded> newFigureObserver(*this, &FileController::handleNewFigureAdded);
-        NotificationCenter::defaultCenter().addObserver(newFigureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
+        NotificationCenter::defaultCenter().addObserver(*_newFigureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_movementObserver);
     }
 
     FileController::~FileController()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_newDiagramObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_newFigureObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_movementObserver);
+        deleteAndZero(_newDiagramObserver);
+        deleteAndZero(_newFigureObserver);
+        deleteAndZero(_movementObserver);
         closeProject();
     }
     
@@ -102,7 +115,7 @@ namespace controllers
         {
             _project = Project::findById(0);
         }
-        return ok;
+        return (_project != NULL);
     }
     
     void FileController::newProject()
@@ -148,37 +161,23 @@ namespace controllers
         _currentDiagram = NULL;
     }
     
-    void FileController::addDiagram(const string& className)
+    void FileController::addDiagram(const string& className, const string& uniqueId)
     {
         if (_project)
         {
             Diagram* diagram = new Diagram(className);
-#if defined(_WIN32)
-            string name(tmpnam(NULL));
-#else
-            UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
-            UUID uuid = generator.createRandom();
-            string name = uuid.toString();
-#endif
-            diagram->setName(name);
+            diagram->setName(uniqueId);
             _project->addChild(diagram);
             _currentDiagram = diagram;
         }
     }
     
-    void FileController::addFigure(const string& className)
+    void FileController::addFigure(const string& className, const string& uniqueId)
     {
         if (_currentDiagram)
         {
             Element* element = new Element(className);
-#if defined(_WIN32)
-            string name(tmpnam(NULL));
-#else
-            UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
-            UUID uuid = generator.createRandom();
-            string name = uuid.toString();
-#endif
-            element->setName(name);
+            element->setName(uniqueId);
             element->set<int>("x", 10);
             element->set<int>("y", 10);
             _currentDiagram->addChild(element);
@@ -212,13 +211,19 @@ namespace controllers
         }
         return false;
     }
+    
+    Project* FileController::getProject() const
+    {
+        return _project;
+    }
 
     void FileController::handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>& notification)
     {
+        const string& uniqueId = notification->getUniqueId();
         switch(notification->getDiagramType())
         {
             case NewDiagramAdded::UseCase:
-                addDiagram("usecase");
+                addDiagram("usecase", uniqueId);
                 break;
             
             default:
@@ -228,26 +233,41 @@ namespace controllers
 
     void FileController::handleNewFigureAdded(const AutoPtr<NewFigureAdded>& notification)
     {
+        const string& uniqueId = notification->getUniqueId();
         switch(notification->getFigureType())
         {
             case NewFigureAdded::Actor:
-                addFigure("actor");
+                addFigure("actor", uniqueId);
                 break;
                 
             case NewFigureAdded::UseCase:
-                addFigure("usecase");
+                addFigure("usecase", uniqueId);
                 break;
                 
             case NewFigureAdded::Arrow:
-                addFigure("arrow");
+                addFigure("arrow", uniqueId);
                 break;
             
             case NewFigureAdded::Line:
-                addFigure("line");
+                addFigure("line", uniqueId);
                 break;
             
             default:
                 break;
+        }
+    }
+    
+    void FileController::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
+    {
+        if (_currentDiagram)
+        {
+            Figure* figure = notification->getMovedFigure();
+            const string& uniqueId = figure->getUniqueId();
+            Element* elem = _currentDiagram->getChild(uniqueId);
+            elem->set<int>("x", figure->getX());
+            elem->set<int>("y", figure->getY());
+            elem->set<int>("width", figure->getWidth());
+            elem->set<int>("height", figure->getHeight());
         }
     }
 }

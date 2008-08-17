@@ -35,9 +35,9 @@
 #ifndef NEWFIGUREADDED_H_
 #define NEWFIGUREADDED_H_
 
-#include <Poco/Notification.h>
-
-using Poco::Notification;
+#ifndef NEWOBJECTADDED_H_
+#include "NewObjectAdded.h"
+#endif
 
 //! Notifications passed between application layers to signal events.
 /*!
@@ -53,7 +53,7 @@ namespace notifications
      * Raised by the ui::CommandDelegate class when the user selects
      * to add a new figure to a diagram.
      */
-    class NewFigureAdded : public Notification
+    class NewFigureAdded : public NewObjectAdded
     {
     public:
 

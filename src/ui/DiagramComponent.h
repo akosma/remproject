@@ -33,6 +33,7 @@
  */
 
 #include <Poco/AutoPtr.h>
+#include <Poco/NObserver.h>
 
 #include "PlatformDefinitions.h"
 
@@ -52,6 +53,7 @@
 #endif
 
 using Poco::AutoPtr;
+using Poco::NObserver;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::ActiveWindowStatusChanged;
 using notifications::NewFigureAdded;
@@ -84,10 +86,8 @@ namespace ui
         void resized();
         bool exportAsPNG();
         void toggleGrid();
-        void addFigure(const NewFigureAdded::FigureType);
+        void addFigure(const AutoPtr<NewFigureAdded>&);
 
-        juce_UseDebuggingNewOperator
-        
     private:
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);
         void handleActiveWindowStatusChanged(const AutoPtr<ActiveWindowStatusChanged>&);
@@ -98,6 +98,8 @@ namespace ui
         Viewport* _viewport;
         DiagramToolbar* _toolbar;
         UMLDiagram* _diagram;
+        NObserver<DiagramComponent, ProjectTabbedComponentChangedTab>* _tabObserver;
+        NObserver<DiagramComponent, ActiveWindowStatusChanged>* _windowStatusObserver;
 
         // (prevent copy constructor and operator= from being generated..)
         DiagramComponent (const DiagramComponent&);

@@ -34,10 +34,12 @@
 
 #include "LineFigure.h"
 
+using std::string;
+
 namespace ui
 {
-    LineFigure::LineFigure()
-    : Figure(0, 0)
+    LineFigure::LineFigure(const string& uniqueId)
+    : Figure(0, 0, uniqueId)
     {
     }
 

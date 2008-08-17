@@ -32,6 +32,7 @@
  * \date      4/17/08
  */
 
+#include <string>
 #include "PlatformDefinitions.h"
 
 #ifndef ACTORFIGURE_H_
@@ -40,6 +41,8 @@
 #ifndef FIGURE_H_
 #include "Figure.h"
 #endif
+
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -56,7 +59,7 @@ namespace ui
     class ActorFigure : public Figure
     {
     public:
-        ActorFigure();
+        ActorFigure(const string&);
         virtual ~ActorFigure();
         
         void mouseDoubleClick(const MouseEvent& e); 

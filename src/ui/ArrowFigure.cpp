@@ -34,10 +34,12 @@
 
 #include "ArrowFigure.h"
 
+using std::string;
+
 namespace ui
 {
-    ArrowFigure::ArrowFigure()
-    : LineFigure()
+    ArrowFigure::ArrowFigure(const string& uniqueId)
+    : LineFigure(uniqueId)
     {
     }
 

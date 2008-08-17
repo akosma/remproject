@@ -31,7 +31,7 @@
  * \author    Adrian
  * \date      5/25/08
  */
-
+ 
 #include "FileControllerTest.h"
 
 #include <fstream>
@@ -124,7 +124,8 @@ namespace tests
         
         CPPUNIT_ASSERT(!controller.hasCurrentDiagram());
         const string diagramClassName("usecase");
-        controller.addDiagram(diagramClassName);
+        const string diagramName("diagramName");
+        controller.addDiagram(diagramClassName, diagramName);
         CPPUNIT_ASSERT(controller.hasCurrentDiagram());
         
         controller.saveProject();

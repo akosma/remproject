@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the ui::ArrowFigure class.
+//! Contains the interface of the notifications::ProjectFileOpened class.
 /*!
- * \file ArrowFigure.h
+ * \file ProjectFileOpened.h
  *
- * Contains the interface of the ui::ArrowFigure class.
+ * Contains the interface of the notifications::ProjectFileOpened class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,39 +29,46 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/17/08
+ * \date      7/6/08
  */
 
-#include <string>
-#include "PlatformDefinitions.h"
+#ifndef PROJECTFILEOPENED_H_
+#define PROJECTFILEOPENED_H_
 
-#ifndef ARROWFIGURE_H_
-#define ARROWFIGURE_H_
+#include <Poco/Notification.h>
 
-#ifndef LINEFIGURE_H_
-#include "LineFigure.h"
-#endif
+using Poco::Notification;
 
-using std::string;
-
-//! Contains the classes derived directly or indirectly from the JUCE framework.
+//! Notifications passed between application layers to signal events.
 /*!
- * \namespace ui
- * Contains the classes derived directly or indirectly from the JUCE framework.
+ * \namespace notifications
+ * Contains notifications passed between application layers to signal events.
  */
-namespace ui
+namespace notifications
 {
+    //! Notifies the application that a file has been opened.
     /*!
-     * \class ArrowFigure
+     * \class ProjectFileOpened
      *
-     *  
+     * Notifies the application that a file has been opened, and that
+     * its contents must be shown on the screen.
      */
-    class ArrowFigure : public LineFigure
+    class ProjectFileOpened : public Notification
     {
     public:
-        ArrowFigure(const string&);
-        virtual ~ArrowFigure();
+
+        //! Constructor
+        /*!
+         * Constructor.
+         */
+        ProjectFileOpened();
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~ProjectFileOpened();
     };
 }
 
-#endif /* ARROWFIGURE_H_ */
+#endif /* PROJECTFILEOPENED_H_ */

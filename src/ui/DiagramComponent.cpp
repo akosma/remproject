@@ -33,7 +33,6 @@
  */
 
 #include <Poco/NotificationCenter.h>
-#include <Poco/NObserver.h>
 #include <iostream>
 
 #include "DiagramComponent.h"
@@ -57,24 +56,28 @@ namespace ui
     : _index(index)
     , _viewport (new Viewport())
     , _diagram (diagram)
-    , _toolbar(diagram->getToolbar())
+    , _toolbar(diagram->createToolbar())
     , _isActive(false)
+    , _tabObserver(new NObserver<DiagramComponent, ProjectTabbedComponentChangedTab>(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab))
+    , _windowStatusObserver(new NObserver<DiagramComponent, ActiveWindowStatusChanged>(*this, &DiagramComponent::handleActiveWindowStatusChanged))
     {
         _toolbar->setParent(this);
         addAndMakeVisible(_viewport);
         _toolbar->setTopLeftPosition(10, 50);
         
         _viewport->setViewedComponent(_diagram);
-        
-        NObserver<DiagramComponent, ProjectTabbedComponentChangedTab> tabObserver(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab);
-        NotificationCenter::defaultCenter().addObserver(tabObserver);
 
-        NObserver<DiagramComponent, ActiveWindowStatusChanged> windowStatusObserver(*this, &DiagramComponent::handleActiveWindowStatusChanged);
-        NotificationCenter::defaultCenter().addObserver(windowStatusObserver);
+        NotificationCenter::defaultCenter().addObserver(*_tabObserver);
+        NotificationCenter::defaultCenter().addObserver(*_windowStatusObserver);
     }
 
     DiagramComponent::~DiagramComponent()
     {
+        NotificationCenter::defaultCenter().removeObserver(*_tabObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_windowStatusObserver);
+
+        deleteAndZero (_tabObserver);
+        deleteAndZero (_windowStatusObserver);
         deleteAndZero (_toolbar);
         deleteAndZero (_viewport);
     }
@@ -84,9 +87,9 @@ namespace ui
         g.fillAll (Colours::grey);
     }
     
-    void DiagramComponent::addFigure(const NewFigureAdded::FigureType type)
+    void DiagramComponent::addFigure(const AutoPtr<NewFigureAdded>& notification)
     {
-        _diagram->addFigure(type);
+        _diagram->addFigure(notification);
     }
     
     bool DiagramComponent::exportAsPNG()

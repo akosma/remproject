@@ -32,6 +32,7 @@
  * \date      4/11/08
  */
 
+#include <string>
 #include <Poco/AutoPtr.h>
 
 #ifndef USECASEDIAGRAM_H_
@@ -41,7 +42,13 @@
 #include "UMLDiagram.h"
 #endif
 
+#ifndef NEWFIGUREADDED_H_
+#include "../notifications/NewFigureAdded.h"
+#endif
+
 using Poco::AutoPtr;
+using notifications::NewFigureAdded;
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -64,10 +71,10 @@ namespace ui
         UseCaseDiagram();
         virtual ~UseCaseDiagram();
         
-        ActorFigure* addActorFigure();
-        UseCaseFigure* addUseCaseFigure();
+        ActorFigure* addActorFigure(const string&);
+        UseCaseFigure* addUseCaseFigure(const string&);
 
-        virtual void addFigure(const NewFigureAdded::FigureType type);
+        virtual void addFigure(const AutoPtr<NewFigureAdded>&);
 
     protected:
         virtual DiagramToolbar* createToolbar();
