@@ -56,7 +56,7 @@ namespace notifications
     : Notification()
     {
 #if defined(_WIN32)
-        _id = string name(tmpnam(NULL));
+        _id = tmpnam(NULL);
 #else
         UUIDGenerator& generator = UUIDGenerator::defaultGenerator();
         UUID uuid = generator.createRandom();
