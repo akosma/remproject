@@ -58,6 +58,7 @@ namespace tests
         CPPUNIT_TEST(testCanRemoveAllMembersFromElement);
         CPPUNIT_TEST(testCanAddMembersUsingOperator);
         CPPUNIT_TEST(testCanRetrieveMembersUsingOperator);
+        CPPUNIT_TEST(testCanRetrieveMembersUsingIterator);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -86,9 +87,9 @@ namespace tests
          */
         void testCanRemoveAllMembersFromElement();
         
-        //! Tests that clients can add Member instances using the [] operator.
+        //! Tests that clients can add Member instances using the << operator.
         /*!
-         * Tests that clients can add Member instances using the [] operator.
+         * Tests that clients can add Member instances using the << operator.
          */
         void testCanAddMembersUsingOperator();
         
@@ -97,6 +98,12 @@ namespace tests
          * Tests that clients can retrieve Member instances using the [] operator.
          */
         void testCanRetrieveMembersUsingOperator();
+        
+        //! Tests that members can be accessed using an iterator.
+        /*!
+         * Tests that members can be accessed using an iterator.
+         */
+        void testCanRetrieveMembersUsingIterator();
     };
 }
 

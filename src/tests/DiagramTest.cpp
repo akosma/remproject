@@ -115,4 +115,41 @@ namespace tests
         delete actor1;
         delete actor2;
     }
+    
+    void DiagramTest::testCanGetIteratorForChildren()
+    {
+        string diagramClassName("usecase");
+        string diagramName("diagramName");
+        Diagram* diagram = new Diagram(diagramClassName);
+        diagram->setName(diagramName);
+
+        string className("actor");
+        string actor1Name("actor1");
+        string actor2Name("actor2");
+        Element* actor1 = new Element(className);
+        actor1->setName(actor1Name);
+        Element* actor2 = new Element(className);
+        actor2->setName(actor2Name);
+
+        (*diagram) << actor1 << actor2;
+
+        int counter = 0;
+        Element* element = NULL;
+        diagram->beginIteration();
+        while (element = diagram->getNextChild())
+        {
+            if (counter == 0)
+            {
+                CPPUNIT_ASSERT_EQUAL(element->getName(), actor2Name);
+            }
+            else if (counter == 1)
+            {
+                CPPUNIT_ASSERT_EQUAL(element->getName(), actor1Name);
+            }
+        }
+        
+        delete diagram;
+        delete actor1;
+        delete actor2;
+    }
 }

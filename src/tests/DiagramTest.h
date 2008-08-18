@@ -57,6 +57,7 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::DiagramTest);
         CPPUNIT_TEST(testDiagramCanHaveSeveralElements);
         CPPUNIT_TEST(testCanAddElementsUsingOperator);
+        CPPUNIT_TEST(testCanGetIteratorForChildren);
         CPPUNIT_TEST_SUITE_END();
 
     public:
@@ -79,11 +80,17 @@ namespace tests
          */
         void testDiagramCanHaveSeveralElements();
 
-        //! Tests that an element can be added using the [] operator.
+        //! Tests that an element can be added using the << operator.
         /*!
-         * Tests that an element can be added using the [] operator.
+         * Tests that an element can be added using the << operator.
          */
         void testCanAddElementsUsingOperator();
+        
+        //! Tests that elements can be accessed using an iterator.
+        /*!
+         * Tests that elements can be accessed using an iterator.
+         */
+        void testCanGetIteratorForChildren();
     };
 }
 

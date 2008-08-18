@@ -161,4 +161,35 @@ namespace tests
         CPPUNIT_ASSERT(pointer);
         CPPUNIT_ASSERT_EQUAL((int)pointer, (int)firstMember);
     }
+
+    void ElementTest::testCanRetrieveMembersUsingIterator()
+    {
+        string first("first");
+        string second("second");
+        string memberClassName("field");
+        string elementClassName("class");
+
+        Element element(elementClassName);
+        Member* firstMember = new Member(memberClassName);
+        firstMember->setName(first);
+        Member* secondMember = new Member(memberClassName);
+        secondMember->setName(second);
+        
+        element << firstMember << secondMember;
+        
+        int counter = 0;
+        Member* current = NULL;
+        element.beginIteration();
+        while(current = element.getNextChild())
+        {
+            if (counter == 0)
+            {
+                CPPUNIT_ASSERT_EQUAL(current->getName(), second);
+            }
+            else if (counter == 1)
+            {
+                CPPUNIT_ASSERT_EQUAL(current->getName(), first);
+            }
+        }
+    }
 }

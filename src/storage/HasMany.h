@@ -182,6 +182,21 @@ namespace storage
          * \return A boolean; true if the children are in memory, false otherwise.
          */
         const bool hasLoadedChildren() const;
+        
+        //! Tells the instance to initialize the internal iterator.
+        /*!
+         * Tells the instance to initialize the internal iterator.
+         */
+        void beginIteration();
+        
+        //! While iterating, returns the next available item.
+        /*!
+         * While iterating, returns the next available item.
+         *
+         * \return A children item of the current instance, 
+         * or NULL if there aren't any more.
+         */
+        C* getNextChild();
     
     private:
         //! Performs "lazy-loading" of children instances.
@@ -202,12 +217,16 @@ namespace storage
         
         //! Flag used by the "lazyLoadChildren()" method.
         bool _childrenLoaded;
+        
+        //! Internal iterator to mimic a basic iterating behavior.
+        typename InternalMap::iterator _iterator;
     };
 
     template <class C>
     HasMany<C>::HasMany()
     : _children()
     , _childrenLoaded(false)
+    , _iterator()
     {
     }
 
@@ -321,6 +340,19 @@ namespace storage
     const bool HasMany<C>::hasLoadedChildren() const
     {
         return _childrenLoaded;
+    }
+
+    template <class C>
+    void HasMany<C>::beginIteration()
+    {
+        _iterator = _children.begin();
+    }
+
+    template <class C>
+    C* HasMany<C>::getNextChild()
+    {
+        ++_iterator;
+        return (*_iterator).second;
     }
 
     template <class C>
