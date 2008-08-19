@@ -55,7 +55,6 @@ namespace ui
     , _window(0)
     , _fileController(FileController::get())
     {
-        _fileController.newProject();
     }
 
     Application::~Application()

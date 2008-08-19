@@ -32,6 +32,8 @@
  * \date      6/26/08
  */
 
+#include <string>
+#include <iostream>
 #include <Poco/NotificationCenter.h>
 
 #include "ProjectTabbedComponent.h"
@@ -49,6 +51,7 @@ using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::NewFigureAdded;
+using std::string;
 
 namespace ui
 {
@@ -80,7 +83,10 @@ namespace ui
     
     void ProjectTabbedComponent::postProjectTabbedComponentChangedTab(const int newCurrentTabIndex, const String& newCurrentTabName)
     {
-        ProjectTabbedComponentChangedTab* notification = new ProjectTabbedComponentChangedTab(newCurrentTabIndex, newCurrentTabName);
+        DiagramComponent* diagramComponent = (DiagramComponent*)this->getTabContentComponent(newCurrentTabIndex);
+        const string& newCurrentDiagramName = diagramComponent->getUniqueId();
+        std::cout << newCurrentDiagramName << std::endl;
+        ProjectTabbedComponentChangedTab* notification = new ProjectTabbedComponentChangedTab(newCurrentTabIndex, newCurrentTabName, newCurrentDiagramName);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     

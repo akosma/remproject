@@ -75,7 +75,7 @@ namespace ui
     class UseCaseDiagram : public UMLDiagram
     {
     public:
-        UseCaseDiagram();
+        UseCaseDiagram(const string&);
         virtual ~UseCaseDiagram();
         
         ActorFigure* addActorFigure(const string&);

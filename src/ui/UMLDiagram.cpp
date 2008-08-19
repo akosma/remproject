@@ -55,8 +55,9 @@ using Poco::AutoPtr;
 
 namespace ui
 {
-    UMLDiagram::UMLDiagram()
+    UMLDiagram::UMLDiagram(const string& uniqueId)
     : Component()
+    , _id(uniqueId)
     , _canvas(new ArrowCanvas())
     , _selection()
     , _figureObserver(new NObserver<UMLDiagram, FigureSelected>(*this, &UMLDiagram::handleFigureSelected))
@@ -156,6 +157,11 @@ namespace ui
     const Array<Figure*>& UMLDiagram::getSelectedItems()
     {
         return _selection.getItemArray();
+    }
+    
+    const string& UMLDiagram::getUniqueId() const
+    {
+        return _id;
     }
 
     void UMLDiagram::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)

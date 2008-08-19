@@ -35,6 +35,7 @@
 #include <Poco/AutoPtr.h>
 #include <Poco/NotificationCenter.h>
 #include <Poco/NObserver.h>
+#include <string>
 
 #include "PlatformDefinitions.h"
 
@@ -83,6 +84,7 @@ using notifications::ArrowCanvasClicked;
 using notifications::FigureMoved;
 using notifications::NewFigureAdded;
 using metamodel::Diagram;
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -104,7 +106,7 @@ namespace ui
     class UMLDiagram : public Component
     {
     public:
-        UMLDiagram();
+        UMLDiagram(const string&);
         virtual ~UMLDiagram();
 
         void paint (Graphics&);
@@ -115,6 +117,7 @@ namespace ui
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
         void handleFigureMoved(const AutoPtr<FigureMoved>&);
         void toggleGrid();
+        const string& getUniqueId() const;
         
         virtual DiagramToolbar* createToolbar() = 0;
         virtual void addFigure(const AutoPtr<NewFigureAdded>&) = 0;
@@ -134,6 +137,7 @@ namespace ui
         NObserver<UMLDiagram, FigureSelected>* _figureObserver;
         NObserver<UMLDiagram, ArrowCanvasClicked>* _arrowObserver;
         NObserver<UMLDiagram, FigureMoved>* _movementObserver;
+        const string _id;
     };
 }
 

@@ -49,7 +49,6 @@
 #endif
 
 #include <string>
-#include <iostream>
 #include <Poco/NotificationCenter.h>
 
 #include "ProjectComponent.h"
@@ -71,6 +70,7 @@ using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::NewDiagramAdded;
 using notifications::ProjectFileOpened;
+using notifications::NewProjectCreated;
 using controllers::FileController;
 using metamodel::Project;
 using metamodel::Diagram;
@@ -83,11 +83,13 @@ namespace ui
     , _tabs(new ProjectTabbedComponent())
     , _newDiagramObserver(new NObserver<ProjectComponent, NewDiagramAdded>(*this, &ProjectComponent::handleNewDiagramAdded))
     , _projectOpenedObserver(new NObserver<ProjectComponent, ProjectFileOpened>(*this, &ProjectComponent::handleProjectFileOpened))
+    , _newProjectCreatedObserver(new NObserver<ProjectComponent, NewProjectCreated>(*this, &ProjectComponent::handleNewProjectCreated))
     {
         addAndMakeVisible(_tabs);
         
         NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().addObserver(*_projectOpenedObserver);
+        NotificationCenter::defaultCenter().addObserver(*_newProjectCreatedObserver);
 
 //        PropertyPanel* panel = new PropertyPanel();
 //        panel->setTopLeftPosition(100, 100);
@@ -103,15 +105,17 @@ namespace ui
     {
         NotificationCenter::defaultCenter().removeObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().removeObserver(*_projectOpenedObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_newProjectCreatedObserver);
         deleteAndZero(_newDiagramObserver);
         deleteAndZero(_projectOpenedObserver);
+        deleteAndZero(_newProjectCreatedObserver);
         deleteAllChildren();
     }
 
-    UseCaseDiagram* ProjectComponent::addUseCaseDiagram()
+    UseCaseDiagram* ProjectComponent::addUseCaseDiagram(const string& uniqueId)
     {
         int index = _tabs->getNumTabs();
-        UseCaseDiagram* diagram = new UseCaseDiagram();
+        UseCaseDiagram* diagram = new UseCaseDiagram(uniqueId);
         DiagramComponent* diagramComponent = new DiagramComponent(diagram, index);
         _tabs->addTab(String("Use Case Diagram"), Colours::white, diagramComponent, true);
         _tabs->setCurrentTabIndex(index);
@@ -128,10 +132,11 @@ namespace ui
     
     void ProjectComponent::handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>& notification)
     {
+        const string& uniqueId = notification->getUniqueId();
         switch(notification->getDiagramType())
         {
             case NewDiagramAdded::UseCase:
-                addUseCaseDiagram();
+                addUseCaseDiagram(uniqueId);
                 break;
             
             default:
@@ -150,10 +155,15 @@ namespace ui
         {
             if (diagram->get<string>("class") == string("usecase"))
             {
-                UseCaseDiagram* usecaseDiagram = addUseCaseDiagram();
+                UseCaseDiagram* usecaseDiagram = addUseCaseDiagram(diagram->getName());
                 usecaseDiagram->populateFrom(diagram);
             }
         }
         _tabs->setCurrentTabIndex(0);
+    }
+
+    void ProjectComponent::handleNewProjectCreated(const AutoPtr<NewProjectCreated>& notification)
+    {
+        _tabs->clearTabs();
     }
 }

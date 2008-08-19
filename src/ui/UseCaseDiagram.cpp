@@ -40,7 +40,6 @@
 #include "../metamodel/Element.h"
 #endif
 
-#include <iostream>
 #include <Poco/NotificationCenter.h>
 
 #include "UseCaseDiagram.h"
@@ -64,8 +63,8 @@ using metamodel::Element;
 
 namespace ui
 {
-    UseCaseDiagram::UseCaseDiagram()
-    : UMLDiagram()
+    UseCaseDiagram::UseCaseDiagram(const string& uniqueId)
+    : UMLDiagram(uniqueId)
     {
         setInterceptsMouseClicks(true, true);
     }

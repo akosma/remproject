@@ -100,19 +100,19 @@ SET (ui_Main_SRCS
 SET (notifications_SRCS
     notifications/FigureMoved.h
     notifications/FigureMoved.cpp
-    
+
     notifications/FigureSelected.h
     notifications/FigureSelected.cpp
-    
+
     notifications/ArrowCanvasClicked.h
     notifications/ArrowCanvasClicked.cpp
-    
+
     notifications/ProjectTabbedComponentChangedTab.h
     notifications/ProjectTabbedComponentChangedTab.cpp
-    
+
     notifications/ExportDiagramAsPNG.h
     notifications/ExportDiagramAsPNG.cpp
-    
+
     notifications/DiagramToggleGrid.h
     notifications/DiagramToggleGrid.cpp
 
@@ -127,9 +127,12 @@ SET (notifications_SRCS
 
     notifications/ActiveWindowStatusChanged.h
     notifications/ActiveWindowStatusChanged.cpp
-    
+
     notifications/ProjectFileOpened.h
     notifications/ProjectFileOpened.cpp
+
+    notifications/NewProjectCreated.h
+    notifications/NewProjectCreated.cpp
 )
 
 SET (storage_SRCS

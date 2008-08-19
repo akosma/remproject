@@ -16,6 +16,8 @@
 		3A1BCBE70E58A39500C44D99 /* NewObjectAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */; };
 		3A1BCCC10E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BCCC00E58B79E00C44D99 /* ProjectFileOpened.cpp */; };
 		3A1BCCC20E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BCCC00E58B79E00C44D99 /* ProjectFileOpened.cpp */; };
+		3A22D6560E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A22D6550E5B2EFB001BD4B2 /* NewProjectCreated.cpp */; };
+		3A22D6570E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A22D6550E5B2EFB001BD4B2 /* NewProjectCreated.cpp */; };
 		3A23DCDA0E0DAC5B00DB428C /* ProjectComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */; };
 		3A3556840D96D8090079D03E /* AnyPropertyMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556830D96D8090079D03E /* AnyPropertyMap.cpp */; };
 		3A3556890D96D8D60079D03E /* AnyPropertyMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A3556880D96D8D60079D03E /* AnyPropertyMapTest.cpp */; };
@@ -137,6 +139,8 @@
 		3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewObjectAdded.cpp; path = ../../src/notifications/NewObjectAdded.cpp; sourceTree = SOURCE_ROOT; };
 		3A1BCCBF0E58B79E00C44D99 /* ProjectFileOpened.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectFileOpened.h; path = ../../src/notifications/ProjectFileOpened.h; sourceTree = SOURCE_ROOT; };
 		3A1BCCC00E58B79E00C44D99 /* ProjectFileOpened.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectFileOpened.cpp; path = ../../src/notifications/ProjectFileOpened.cpp; sourceTree = SOURCE_ROOT; };
+		3A22D6540E5B2EFB001BD4B2 /* NewProjectCreated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewProjectCreated.h; path = ../../src/notifications/NewProjectCreated.h; sourceTree = SOURCE_ROOT; };
+		3A22D6550E5B2EFB001BD4B2 /* NewProjectCreated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewProjectCreated.cpp; path = ../../src/notifications/NewProjectCreated.cpp; sourceTree = SOURCE_ROOT; };
 		3A23DCD80E0DAC5B00DB428C /* ProjectComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectComponent.h; path = ../../src/ui/ProjectComponent.h; sourceTree = SOURCE_ROOT; };
 		3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectComponent.cpp; path = ../../src/ui/ProjectComponent.cpp; sourceTree = SOURCE_ROOT; };
 		3A2613790D8EFCAB00EBA471 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -455,6 +459,8 @@
 				3A5191F80E4DC747003053A9 /* FigureMoved.cpp */,
 				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
 				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
+				3A22D6540E5B2EFB001BD4B2 /* NewProjectCreated.h */,
+				3A22D6550E5B2EFB001BD4B2 /* NewProjectCreated.cpp */,
 				3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */,
 				3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */,
 				3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */,
@@ -715,6 +721,7 @@
 				3A374B240E572E9D00674B4E /* LineFigure.cpp in Sources */,
 				3A1BCBE60E58A39500C44D99 /* NewObjectAdded.cpp in Sources */,
 				3A1BCCC10E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
+				3A22D6560E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +773,7 @@
 				3A374B230E572E9D00674B4E /* LineFigure.cpp in Sources */,
 				3A1BCBE70E58A39500C44D99 /* NewObjectAdded.cpp in Sources */,
 				3A1BCCC20E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
+				3A22D6570E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -58,6 +58,10 @@
 #include "../controllers/FileController.h"
 #endif
 
+#ifndef NEWPROJECTCREATED_H_
+#include "../notifications/NewProjectCreated.h"
+#endif
+
 #ifndef WINDOW_H_
 #include "Window.h"
 #endif
@@ -75,6 +79,7 @@ using notifications::DiagramToggleGrid;
 using notifications::NewDiagramAdded;
 using notifications::NewFigureAdded;
 using notifications::ProjectFileOpened;
+using notifications::NewProjectCreated;
 
 namespace ui
 {
@@ -137,7 +142,7 @@ namespace ui
                 info.description = "Creates a new project, closing the current one if needed";
                 info.flags = 0;
                 info.addDefaultKeypress(110, ModifierKeys::commandModifier);
-                info.setActive(false);
+                info.setActive(true);
                 break;
             }
 
@@ -297,6 +302,15 @@ namespace ui
     {
         switch (info.commandID)
         {
+            case fileNewProject:
+            {
+                NewProjectCreated* notification1 = new NewProjectCreated();
+                NotificationCenter::defaultCenter().postNotification(notification1);
+                NewDiagramAdded* notification2 = new NewDiagramAdded(NewDiagramAdded::UseCase);
+                NotificationCenter::defaultCenter().postNotification(notification2);
+                break;
+            }
+
             case fileExportPNG:
             {
                 ExportDiagramAsPNG* notification = new ExportDiagramAsPNG();

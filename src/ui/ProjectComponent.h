@@ -34,6 +34,7 @@
 
 #include <Poco/AutoPtr.h>
 #include <Poco/NObserver.h>
+#include <string>
 
 #include "PlatformDefinitions.h"
 
@@ -48,10 +49,16 @@
 #include "../notifications/ProjectFileOpened.h"
 #endif
 
+#ifndef NEWPROJECTCREATED_H_
+#include "../notifications/NewProjectCreated.h"
+#endif
+
 using Poco::AutoPtr;
 using Poco::NObserver;
 using notifications::NewDiagramAdded;
 using notifications::ProjectFileOpened;
+using notifications::NewProjectCreated;
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -102,7 +109,7 @@ namespace ui
          * 
          * \return A pointer to the UseCaseDiagram instance created.
          */
-        UseCaseDiagram* addUseCaseDiagram();
+        UseCaseDiagram* addUseCaseDiagram(const string&);
     
     private:
         //! Handles the NewDiagramAdded notification.
@@ -112,7 +119,7 @@ namespace ui
          * \param notification The notification passed by the Poco::NotificationCenter.
          */
         void handleNewDiagramAdded(const AutoPtr<NewDiagramAdded>&);
-        
+
         //! Handles the ProjectFileOpened notification.
         /*!
          * Handles the ProjectFileOpened notification.
@@ -121,12 +128,26 @@ namespace ui
          */
         void handleProjectFileOpened(const AutoPtr<ProjectFileOpened>&);
     
+        //! Handles the NewProjectCreated notification.
+        /*!
+         * Handles the NewProjectCreated notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
+        void handleNewProjectCreated(const AutoPtr<NewProjectCreated>&);
+    
     private:
         //! A tabbed component holding one tab per diagram.
         ProjectTabbedComponent* _tabs;
         
+        //! Observer for NewDiagramAdded notifications.
         NObserver<ProjectComponent, NewDiagramAdded>* _newDiagramObserver;
+        
+        //! Observer for ProjectFileOpened notifications.
         NObserver<ProjectComponent, ProjectFileOpened>* _projectOpenedObserver;
+        
+        //! Observer for NewProjectCreated notifications.
+        NObserver<ProjectComponent, NewProjectCreated>* _newProjectCreatedObserver;
     };
 }
 

@@ -32,8 +32,8 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include <string>
 #include <Poco/NotificationCenter.h>
-#include <iostream>
 
 #include "DiagramComponent.h"
 
@@ -49,6 +49,7 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
 using juce::Rectangle;
+using std::string;
 
 namespace ui
 {
@@ -119,6 +120,11 @@ namespace ui
     void DiagramComponent::resized()
     {
         _viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
+    }
+    
+    const string& DiagramComponent::getUniqueId() const
+    {
+        return _diagram->getUniqueId();
     }
     
     void DiagramComponent::handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>& notification)

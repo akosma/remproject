@@ -32,6 +32,7 @@
  * \date      21 Jun 2008 3:27:04 pm
  */
 
+#include <string>
 #include <Poco/AutoPtr.h>
 #include <Poco/NObserver.h>
 
@@ -57,6 +58,7 @@ using Poco::NObserver;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::ActiveWindowStatusChanged;
 using notifications::NewFigureAdded;
+using std::string;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -87,6 +89,7 @@ namespace ui
         bool exportAsPNG();
         void toggleGrid();
         void addFigure(const AutoPtr<NewFigureAdded>&);
+        const string& getUniqueId() const;
 
     private:
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);

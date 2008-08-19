@@ -35,7 +35,6 @@
 #include <Poco/NotificationCenter.h>
 
 #include "Window.h"
-#include <iostream>
 
 #ifndef PROJECT_H_
 #include "ProjectComponent.h"
@@ -86,7 +85,7 @@ namespace ui
         setContentComponent(project);
 
         // Create a default diagram when the window opens
-        _commandManager->invokeDirectly(CommandDelegate::projectNewUseCaseDiagram, false);
+        _commandManager->invokeDirectly(CommandDelegate::fileNewProject, false);
 
         // When everything's ready, show the window.
         centreWithSize(620, 650);

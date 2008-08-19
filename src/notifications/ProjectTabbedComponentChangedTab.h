@@ -35,11 +35,13 @@
 #ifndef PROJECTTABBEDCOMPONENTCHANGEDTAB_H_
 #define PROJECTTABBEDCOMPONENTCHANGEDTAB_H_
 
+#include <string>
 #include <Poco/Notification.h>
 
 #include "../ui/PlatformDefinitions.h"
 
 using Poco::Notification;
+using std::string;
 
 //! Notifications passed between application layers to signal events.
 /*!
@@ -68,7 +70,7 @@ namespace notifications
          * \param newCurrentTabIndex The index of the newly selected tab.
          * \param newCurrentTabName The name of the newly selected tab.
          */
-        ProjectTabbedComponentChangedTab(const int, const String&);
+        ProjectTabbedComponentChangedTab(const int, const String&, const string&);
 
         //! Virtual destructor.
         /*!
@@ -88,9 +90,18 @@ namespace notifications
         /*!
          * Returns the name of the newly selected tab.
          * 
-         * \return A string.
+         * \return A juce::String value.
          */
         const String getNewCurrentTabName() const;
+        
+        //! Returns the name of the newly selected diagram.
+        /*!
+         * Returns the name of the newly selected diagram, used
+         * as a reference when saving objects in the database file.
+         * 
+         * \return An std::string reference.
+         */
+        const string& getNewCurrentDiagramName() const;
         
     private:
         //! Stores the index of the newly selected tab index.
@@ -98,7 +109,9 @@ namespace notifications
         
         //! Stores the name of the newly selected tab name.
         const String _newCurrentTabName;
-
+        
+        //! Name of the diagram, used to be saved in the database file.
+        const string _newCurrentDiagramName;
     };
 }
 

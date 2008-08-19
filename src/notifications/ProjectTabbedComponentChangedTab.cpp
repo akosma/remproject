@@ -34,12 +34,16 @@
 
 #include "ProjectTabbedComponentChangedTab.h"
 
+#include <string>
+using std::string;
+
 namespace notifications
 {
-    ProjectTabbedComponentChangedTab::ProjectTabbedComponentChangedTab(const int newCurrentTabIndex, const String& newCurrentTabName)
+    ProjectTabbedComponentChangedTab::ProjectTabbedComponentChangedTab(const int newCurrentTabIndex, const String& newCurrentTabName, const string& newCurrentDiagramName)
     : Notification()
     , _newCurrentTabIndex(newCurrentTabIndex)
     , _newCurrentTabName(newCurrentTabName)
+    , _newCurrentDiagramName(newCurrentDiagramName)
     {
     }
     
@@ -55,5 +59,10 @@ namespace notifications
     const String ProjectTabbedComponentChangedTab::getNewCurrentTabName() const
     {
         return _newCurrentTabName;
+    }
+    
+    const string& ProjectTabbedComponentChangedTab::getNewCurrentDiagramName() const
+    {
+        return _newCurrentDiagramName;
     }
 }
