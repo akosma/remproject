@@ -175,6 +175,7 @@ namespace controllers
     {
         if (_project)
         {
+            _currentDiagramName = uniqueId;
             Diagram* diagram = new Diagram(className);
             diagram->setName(uniqueId);
             _project->addChild(diagram);
@@ -197,6 +198,20 @@ namespace controllers
     const bool FileController::hasCurrentProject() const
     {
         return (_project != NULL);
+    }
+    
+    const bool FileController::hasCurrentDiagram() const
+    {
+        bool result = false;
+        if (_project)
+        {
+            if (_currentDiagramName != "")
+            {
+                Diagram* diagram = _project->getChild(_currentDiagramName);
+                result = (diagram != NULL);
+            }
+        }
+        return result;
     }
 
     const bool FileController::isProjectNew() const

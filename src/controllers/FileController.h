@@ -175,6 +175,14 @@ namespace controllers
          */
         const bool hasCurrentProject() const;
 
+        //! States whether the controller has a current diagram.
+        /*!
+         * States whether the controller has a current diagram.
+         * 
+         * \return A boolean value.
+         */
+        const bool hasCurrentDiagram() const;
+
         //! States whether the controller has a new project.
         /*!
          * States whether the controller has a new project.
