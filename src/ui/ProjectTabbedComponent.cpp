@@ -33,7 +33,6 @@
  */
 
 #include <string>
-#include <iostream>
 #include <Poco/NotificationCenter.h>
 
 #include "ProjectTabbedComponent.h"
@@ -85,7 +84,6 @@ namespace ui
     {
         DiagramComponent* diagramComponent = (DiagramComponent*)this->getTabContentComponent(newCurrentTabIndex);
         const string& newCurrentDiagramName = diagramComponent->getUniqueId();
-        std::cout << newCurrentDiagramName << std::endl;
         ProjectTabbedComponentChangedTab* notification = new ProjectTabbedComponentChangedTab(newCurrentTabIndex, newCurrentTabName, newCurrentDiagramName);
         NotificationCenter::defaultCenter().postNotification(notification);
     }

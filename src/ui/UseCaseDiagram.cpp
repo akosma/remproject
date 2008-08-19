@@ -82,7 +82,6 @@ namespace ui
         {
             string className = element->get<string>("class");
             string uniqueId = element->getName();
-            element->dump();
             Figure* figure = NULL;
             if (className == "actor")
             {
