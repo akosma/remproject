@@ -219,14 +219,14 @@ namespace storage
         bool _childrenLoaded;
         
         //! Internal iterator to mimic a basic iterating behavior.
-        typename InternalMap::iterator _iterator;
+        int _iterator;
     };
 
     template <class C>
     HasMany<C>::HasMany()
     : _children()
     , _childrenLoaded(false)
-    , _iterator()
+    , _iterator(0)
     {
     }
 
@@ -234,6 +234,7 @@ namespace storage
     HasMany<C>::HasMany(const HasMany& rhs)
     : _children()
     , _childrenLoaded(false)
+    , _iterator(0)
     {
     }
 
@@ -345,14 +346,30 @@ namespace storage
     template <class C>
     void HasMany<C>::beginIteration()
     {
-        _iterator = _children.begin();
+        lazyLoadChildren();
+        _iterator = 0;
     }
 
     template <class C>
     C* HasMany<C>::getNextChild()
     {
-        ++_iterator;
-        return (*_iterator).second;
+        C* instance = NULL;
+        if (_iterator < getChildrenCount())
+        {
+            int counter = 0;
+            typename InternalMap::iterator iter;
+            for (iter = _children.begin(); iter != _children.end(); ++iter)
+            {
+                if (counter == _iterator)
+                {
+                    instance = (*iter).second;
+                    break;
+                }
+                counter++;
+            }
+            _iterator++;
+        }
+        return instance;
     }
 
     template <class C>
@@ -375,7 +392,6 @@ namespace storage
                 // Let's create a temporary object to insert into the internal map
                 C* element = new C(*iter);
                 _children[element->getName()] = element;
-                delete element;
             }
 
             delete elements;

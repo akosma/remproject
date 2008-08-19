@@ -32,6 +32,15 @@
  * \date      4/11/08
  */
 
+#ifndef DIAGRAM_H_
+#include "../metamodel/Diagram.h"
+#endif
+
+#ifndef ELEMENT_H_
+#include "../metamodel/Element.h"
+#endif
+
+#include <iostream>
 #include <Poco/NotificationCenter.h>
 
 #include "UseCaseDiagram.h"
@@ -50,6 +59,8 @@
 
 using Poco::NotificationCenter;
 using Poco::AutoPtr;
+using metamodel::Diagram;
+using metamodel::Element;
 
 namespace ui
 {
@@ -62,6 +73,29 @@ namespace ui
     UseCaseDiagram::~UseCaseDiagram()
     {
         deleteAllChildren();
+    }
+    
+    void UseCaseDiagram::populateFrom(Diagram* diagram)
+    {
+        Element* element = NULL;
+        diagram->beginIteration();
+        while (element = diagram->getNextChild())
+        {
+            string className = element->get<string>("class");
+            string uniqueId = element->getName();
+            element->dump();
+            Figure* figure = NULL;
+            if (className == "actor")
+            {
+                figure = addActorFigure(uniqueId);
+                figure->setTopLeftPosition(element->get<int>("x"), element->get<int>("y"));
+            }
+            else if (className == "usecase")
+            {
+                figure = addUseCaseFigure(uniqueId);
+                figure->setTopLeftPosition(element->get<int>("x"), element->get<int>("y"));
+            }
+        }
     }
     
     DiagramToolbar* UseCaseDiagram::createToolbar()

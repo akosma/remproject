@@ -184,12 +184,13 @@ namespace tests
         {
             if (counter == 0)
             {
-                CPPUNIT_ASSERT_EQUAL(current->getName(), second);
+                CPPUNIT_ASSERT_EQUAL(current->getName(), first);
             }
             else if (counter == 1)
             {
-                CPPUNIT_ASSERT_EQUAL(current->getName(), first);
+                CPPUNIT_ASSERT_EQUAL(current->getName(), second);
             }
+            counter++;
         }
     }
 }

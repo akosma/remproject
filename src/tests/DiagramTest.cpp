@@ -140,12 +140,13 @@ namespace tests
         {
             if (counter == 0)
             {
-                CPPUNIT_ASSERT_EQUAL(element->getName(), actor2Name);
+                CPPUNIT_ASSERT_EQUAL(element->getName(), actor1Name);
             }
             else if (counter == 1)
             {
-                CPPUNIT_ASSERT_EQUAL(element->getName(), actor1Name);
+                CPPUNIT_ASSERT_EQUAL(element->getName(), actor2Name);
             }
+            counter++;
         }
         
         delete diagram;

@@ -48,6 +48,7 @@
 #include "../controllers/FileController.h"
 #endif
 
+#include <string>
 #include <iostream>
 #include <Poco/NotificationCenter.h>
 
@@ -72,6 +73,8 @@ using notifications::NewDiagramAdded;
 using notifications::ProjectFileOpened;
 using controllers::FileController;
 using metamodel::Project;
+using metamodel::Diagram;
+using std::string;
 
 namespace ui
 {
@@ -141,14 +144,16 @@ namespace ui
         FileController& controller = FileController::get();
         Project* project = controller.getProject();
         _tabs->clearTabs();
-        for (int i = 0; i < project->getChildrenCount(); ++i)
+        Diagram* diagram = NULL;
+        project->beginIteration();
+        while (diagram = project->getNextChild())
         {
-            // Here the Project class should export an iterator!
-            // Then we'd go diagram by diagram, and we'd pass to each
-            // UMLDiagram instance the AnyPropertyMap of elements inside
-            // so that each diagram would populate itself with the 
-            // elements it requires...
-            addUseCaseDiagram();
+            if (diagram->get<string>("class") == string("usecase"))
+            {
+                UseCaseDiagram* usecaseDiagram = addUseCaseDiagram();
+                usecaseDiagram->populateFrom(diagram);
+            }
         }
+        _tabs->setCurrentTabIndex(0);
     }
 }

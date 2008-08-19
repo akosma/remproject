@@ -243,6 +243,12 @@ namespace storage
          * every "setter" method.
          */
         virtual void setDirty();
+        
+        //! Dumps the internal structure of this instance into the console.
+        /*!
+         * Dumps the internal structure of this instance into the console.
+         */
+        void dump();
 
         //@}
 
@@ -546,6 +552,12 @@ namespace storage
     {
         // Do not call "setDirty()" here!
         _data.set<int>(T::getParentColumnName(), (int)value);
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::dump()
+    {
+        _data.dump();
     }
 
     template <class T>

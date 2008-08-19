@@ -87,6 +87,14 @@ namespace storage
         return _map.empty();
     }
     
+    void AnyPropertyMap::dump()
+    {
+        std::cout << "========================" << std::endl;
+        std::cout << "AnyPropertyMap instance:" << std::endl;
+        std::cout << joinMap(&AnyPropertyMap::getNameValuePair, "\n");
+        std::cout << std::endl << std::endl;
+    }
+    
     const unsigned int AnyPropertyMap::count() const
     {
         return (unsigned int)_map.size();

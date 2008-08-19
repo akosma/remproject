@@ -37,6 +37,7 @@
 
 #include <string>
 #include <map>
+#include <iostream>
 
 #include <Poco/DateTime.h>
 
@@ -201,6 +202,12 @@ namespace storage
          * \return A string.
          */
         const string getStringForUpdate(string&, const int id) const;
+
+        //! Dumps the internal structure of this instance into the console.
+        /*!
+         * Dumps the internal structure of this instance into the console.
+         */
+        void dump();
 
     protected:
         

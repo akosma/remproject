@@ -46,9 +46,16 @@
 #include "../notifications/NewFigureAdded.h"
 #endif
 
+// Forward declaration to avoid includes
+namespace metamodel
+{
+    class Diagram;
+}
+
 using Poco::AutoPtr;
 using notifications::NewFigureAdded;
 using std::string;
+using metamodel::Diagram;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -75,6 +82,7 @@ namespace ui
         UseCaseFigure* addUseCaseFigure(const string&);
 
         virtual void addFigure(const AutoPtr<NewFigureAdded>&);
+        virtual void populateFrom(Diagram*);
 
     protected:
         virtual DiagramToolbar* createToolbar();
