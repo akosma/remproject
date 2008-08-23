@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the notifications::FigureMoved class.
+//! Contains the implementation of the notifications::FigureChanged class.
 /*!
- * \file FigureMoved.cpp
+ * \file FigureChanged.cpp
  *
- * Contains the implementation of the notifications::FigureMoved class.
+ * Contains the implementation of the notifications::FigureChanged class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,7 +32,7 @@
  * \date      6/22/08
  */
 
-#include "FigureMoved.h"
+#include "FigureChanged.h"
 
 #ifndef FIGURE_H_
 #include "../ui/Figure.h"
@@ -43,17 +43,17 @@ using ui::Figure;
 
 namespace notifications
 {
-    FigureMoved::FigureMoved(Figure* figure)
+    FigureChanged::FigureChanged(Figure* figure)
     : Notification()
     , _figure(figure)
     {
     }
     
-    FigureMoved::~FigureMoved()
+    FigureChanged::~FigureChanged()
     {
     }
 
-    Figure* FigureMoved::getMovedFigure() const
+    Figure* FigureChanged::getChangedFigure() const
     {
         return _figure;
     }

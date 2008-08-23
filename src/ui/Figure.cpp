@@ -34,6 +34,10 @@
 
 #include <Poco/NotificationCenter.h>
 
+#ifndef ANYPROPERTYMAP_H_
+#include "../storage/AnyPropertyMap.h"
+#endif
+
 #include "Figure.h"
 
 #ifndef DIAGRAMCOMPONENT_H_
@@ -48,8 +52,8 @@
 #include "../notifications/FigureSelected.h"
 #endif
 
-#ifndef FIGUREMOVED_H_
-#include "../notifications/FigureMoved.h"
+#ifndef FIGURECHANGED_H_
+#include "../notifications/FigureChanged.h"
 #endif
 
 #ifndef ARROWCANVASCLICKED_H_
@@ -59,7 +63,7 @@
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using notifications::FigureSelected;
-using notifications::FigureMoved;
+using notifications::FigureChanged;
 using notifications::ArrowCanvasClicked;
 
 namespace ui
@@ -74,6 +78,7 @@ namespace ui
     , _initMargin(10.0f)
     , _strokeWidth(1.0f)
     , _id(uniqueId)
+    , _properties(new AnyPropertyMap())
     , _arrowCanvasObserver(new NObserver<Figure, ArrowCanvasClicked>(*this, &Figure::handleArrowCanvasClicked))
     {
         setSize(_initWidth, _initHeight);
@@ -93,6 +98,7 @@ namespace ui
 
     Figure::~Figure()
     {
+        delete _properties;
         NotificationCenter::defaultCenter().removeObserver(*_arrowCanvasObserver);
         deleteAndZero(_arrowCanvasObserver);
         deleteAllChildren();
@@ -119,7 +125,7 @@ namespace ui
     void Figure::mouseDrag(const MouseEvent& e)
     {
         _dragger.dragComponent(this, e);
-        postFigureMoved();
+        postFigureChanged();
     }
     
     void Figure::mouseEnter(const MouseEvent& e)
@@ -138,7 +144,7 @@ namespace ui
         if (_resizer)
         {
             toFront(true);
-            postFigureMoved();
+            postFigureChanged();
             _resizer->setBounds (0, 0, getWidth(), getHeight());
         }
     }
@@ -168,6 +174,15 @@ namespace ui
         _resizer->setVisible(selected);
         _selected = selected;
         repaint();
+    }
+    
+    void Figure::updateProperties()
+    {
+        _properties->set<int>("width", getWidth());
+        _properties->set<int>("height", getHeight());
+        _properties->set<int>("x", getX());
+        _properties->set<int>("y", getY());
+        updateSpecificProperties();
     }
     
     const bool Figure::isSelected()
@@ -256,6 +271,20 @@ namespace ui
         g.drawDashedLine(0.0f, (float)getHeight(), (float)getWidth(), (float)getHeight(), dashLengths, 2, 2.0f);
     }
     
+    AnyPropertyMap& Figure::getProperties()
+    {
+        return *_properties;
+    }
+    
+    void Figure::setProperties(const AnyPropertyMap& props)
+    {
+        delete _properties;
+        _properties = new AnyPropertyMap(props);
+        this->setTopLeftPosition(_properties->get<int>("x"), _properties->get<int>("y"));
+        this->setSize(_properties->get<int>("width"), _properties->get<int>("height"));
+        this->setSpecificProperties();
+    }
+    
     void Figure::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
     {
         DiagramComponent* component = findParentComponentOfClass<DiagramComponent>();
@@ -272,9 +301,10 @@ namespace ui
         NotificationCenter::defaultCenter().postNotification(notification);
     }
     
-    void Figure::postFigureMoved()
+    void Figure::postFigureChanged()
     {
-        FigureMoved* notification = new FigureMoved(this);
+        updateProperties();
+        FigureChanged* notification = new FigureChanged(this);
         NotificationCenter::defaultCenter().postNotification(notification);
     }
 }

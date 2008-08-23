@@ -62,8 +62,8 @@
 #include "../notifications/ArrowCanvasClicked.h"
 #endif
 
-#ifndef FIGUREMOVED_H_
-#include "../notifications/FigureMoved.h"
+#ifndef FIGURECHANGED_H_
+#include "../notifications/FigureChanged.h"
 #endif
 
 #ifndef NEWFIGUREADDED_H_
@@ -81,7 +81,7 @@ using Poco::NotificationCenter;
 using Poco::NObserver;
 using notifications::FigureSelected;
 using notifications::ArrowCanvasClicked;
-using notifications::FigureMoved;
+using notifications::FigureChanged;
 using notifications::NewFigureAdded;
 using metamodel::Diagram;
 using std::string;
@@ -115,9 +115,6 @@ namespace ui
 
         void resize();
 
-        void handleFigureSelected(const AutoPtr<FigureSelected>&);
-        void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
-        void handleFigureMoved(const AutoPtr<FigureMoved>&);
         void toggleGrid();
         const string& getUniqueId() const;
         void deleteSelectedFigures();
@@ -133,6 +130,9 @@ namespace ui
         void setGridVisible(const bool);
         
     protected:
+        void handleFigureSelected(const AutoPtr<FigureSelected>&);
+        void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
+        void handleFigureChanged(const AutoPtr<FigureChanged>&);
         void addArrowToCanvas(ArrowFigure*);
         void addLineToCanvas(LineFigure*);
         
@@ -141,7 +141,7 @@ namespace ui
         SelectedItemSet<Figure*> _selection;
         NObserver<UMLDiagram, FigureSelected>* _figureObserver;
         NObserver<UMLDiagram, ArrowCanvasClicked>* _arrowObserver;
-        NObserver<UMLDiagram, FigureMoved>* _movementObserver;
+        NObserver<UMLDiagram, FigureChanged>* _changeObserver;
         const string _id;
     };
 }

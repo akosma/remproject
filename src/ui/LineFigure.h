@@ -67,6 +67,8 @@ namespace ui
         
     protected:
         virtual void drawFigure(Path&);
+        virtual void updateSpecificProperties();
+        virtual void setSpecificProperties();
         
     private:
         Figure* _start;

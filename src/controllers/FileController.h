@@ -50,8 +50,8 @@
 #include "../notifications/NewFigureAdded.h"
 #endif
 
-#ifndef FIGUREMOVED_H_
-#include "../notifications/FigureMoved.h"
+#ifndef FIGURECHANGED_H_
+#include "../notifications/FigureChanged.h"
 #endif
 
 #ifndef PROJECTTABBEDCOMPONENTCHANGEDTAB_H_
@@ -76,7 +76,7 @@ using Poco::AutoPtr;
 using Poco::NObserver;
 using notifications::NewDiagramAdded;
 using notifications::NewFigureAdded;
-using notifications::FigureMoved;
+using notifications::FigureChanged;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::NewProjectCreated;
 using notifications::NewLineAdded;
@@ -254,8 +254,8 @@ namespace controllers
         //! Handles notifications of type notification::NewLineAdded
         void handleNewLineAdded(const AutoPtr<NewLineAdded>&);
         
-        //! Handles notifications of type notification::FigureMoved
-        void handleFigureMoved(const AutoPtr<FigureMoved>&);
+        //! Handles notifications of type notification::FigureChanged
+        void handleFigureChanged(const AutoPtr<FigureChanged>&);
 
         //! Handles notifications of type notification::ProjectTabbedComponentChangedTab
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);
@@ -285,8 +285,8 @@ namespace controllers
         //! Observer for NewLineAdded notifications.
         NObserver<FileController, NewLineAdded>* _newLineObserver;
         
-        //! Observer for FigureMoved notifications.
-        NObserver<FileController, FigureMoved>* _movementObserver;
+        //! Observer for FigureChanged notifications.
+        NObserver<FileController, FigureChanged>* _movementObserver;
 
         //! Observer for ProjectTabbedComponentChangedTab notifications.
         NObserver<FileController, ProjectTabbedComponentChangedTab>* _tabObserver;

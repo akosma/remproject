@@ -170,6 +170,14 @@ namespace storage
          */
         template <class T>
         const T& get(const string&);
+        
+        //! Takes the values of the properties in the parameter into the current instance.
+        /*!
+         * Takes the values of the properties in the parameter into the current instance.
+         * 
+         * \param otherMap A reference to an AnyPropertyMap instance.
+         */
+        void merge(AnyPropertyMap&);
 
         //! Creates an integer property marked as "primary key".
         /*!
@@ -279,7 +287,7 @@ namespace storage
         AnyProperty prop(key, any);
         _map[key] = prop;
     }
-
+    
     template <class T>
     const T& AnyPropertyMap::get(const string& key)
     {

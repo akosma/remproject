@@ -36,6 +36,7 @@
 #include <Poco/Any.h>
 #include <Poco/DateTime.h>
 #include <sstream>
+#include <algorithm>
 
 using storage::AnyProperty;
 using Poco::DateTime;
@@ -43,6 +44,7 @@ using Poco::Any;
 using std::string;
 using std::stringstream;
 using std::map;
+using std::merge;
 
 namespace storage
 {
@@ -85,6 +87,22 @@ namespace storage
     const bool AnyPropertyMap::isEmpty() const
     {
         return _map.empty();
+    }
+
+    template <>
+    void AnyPropertyMap::set<AnyProperty>(const string& key, const AnyProperty& value)
+    {
+        _map[key] = value;
+    }
+    
+    void AnyPropertyMap::merge(AnyPropertyMap& otherMap)
+    {
+        map<string, AnyProperty>::const_iterator it;
+        for (it = otherMap._map.begin(); it != otherMap._map.end(); ++it)
+        {
+            const pair<string, AnyProperty>& p = (*it);
+            set<AnyProperty>(p.first, p.second);
+        }
     }
     
     void AnyPropertyMap::dump()

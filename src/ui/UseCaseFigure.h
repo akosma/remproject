@@ -34,12 +34,12 @@
  
 #include <string>
 
-#ifndef USECASEFIGURE_H_
-#define USECASEFIGURE_H_
-
 #ifndef FIGURE_H_
 #include "Figure.h"
 #endif
+
+#ifndef USECASEFIGURE_H_
+#define USECASEFIGURE_H_
 
 using std::string;
 
@@ -55,7 +55,7 @@ namespace ui
      *
      *  
      */
-    class UseCaseFigure : public Figure
+    class UseCaseFigure : public Figure, public LabelListener
     {
     public:
 
@@ -70,9 +70,13 @@ namespace ui
         virtual ~UseCaseFigure();
 
         void mouseDoubleClick(const MouseEvent& e);
+        
+        virtual void labelTextChanged(Label*);
     
     protected:
         virtual void drawFigure(Path&);
+        virtual void updateSpecificProperties();
+        virtual void setSpecificProperties();
 
     private:
         Label* _nameLabel;

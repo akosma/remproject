@@ -32,8 +32,15 @@
  * \date      4/19/08
  */
 
+#include <string>
+
+#ifndef ANYPROPERTYMAP_H_
+#include "../storage/AnyPropertyMap.h"
+#endif
+
 #include "UseCaseFigure.h"
 
+using storage::AnyPropertyMap;
 using std::string;
 
 namespace ui
@@ -50,7 +57,12 @@ namespace ui
         _nameLabel->setSize(getInitialWidth() - 40, 30);
         _nameLabel->setEditable(false, true, false);
         _nameLabel->setInterceptsMouseClicks(false, false);
+        _nameLabel->addListener(this);
         this->addAndMakeVisible(_nameLabel, 0);
+    }
+    
+    UseCaseFigure::~UseCaseFigure()
+    {
     }
     
     void UseCaseFigure::mouseDoubleClick(const MouseEvent& e)
@@ -58,8 +70,23 @@ namespace ui
         _nameLabel->showEditor();
     }
     
-    UseCaseFigure::~UseCaseFigure()
+    void UseCaseFigure::labelTextChanged(Label* label)
     {
+        postFigureChanged();
+    }
+
+    void UseCaseFigure::setSpecificProperties()
+    {
+        AnyPropertyMap& properties = getProperties();
+        String title(properties.get<string>("title").c_str());
+        _nameLabel->setText(title, false);
+    }
+
+    void UseCaseFigure::updateSpecificProperties()
+    {
+        AnyPropertyMap& properties = getProperties();
+        string value = _nameLabel->getText(false).toUTF8();
+        properties.set<string>("title", value);
     }
 
     void UseCaseFigure::drawFigure(Path& usecase)

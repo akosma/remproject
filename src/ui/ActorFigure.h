@@ -56,7 +56,7 @@ namespace ui
      *
      *  
      */
-    class ActorFigure : public Figure
+    class ActorFigure : public Figure, public LabelListener
     {
     public:
         ActorFigure(const string&);
@@ -64,8 +64,12 @@ namespace ui
         
         void mouseDoubleClick(const MouseEvent& e); 
 
+        virtual void labelTextChanged(Label*);
+
     protected:
         virtual void drawFigure(Path&);
+        virtual void updateSpecificProperties();
+        virtual void setSpecificProperties();
 
     private:
         Label* _nameLabel;

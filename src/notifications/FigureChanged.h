@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the notifications::FigureMoved class.
+//! Contains the interface of the notifications::FigureChanged class.
 /*!
- * \file FigureMoved.h
+ * \file FigureChanged.h
  *
- * Contains the interface of the notifications::FigureMoved class.
+ * Contains the interface of the notifications::FigureChanged class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -32,8 +32,8 @@
  * \date      6/22/08
  */
 
-#ifndef FIGUREMOVED_H_
-#define FIGUREMOVED_H_
+#ifndef FIGURECHANGED_H_
+#define FIGURECHANGED_H_
 
 #include <Poco/Notification.h>
 
@@ -53,14 +53,15 @@ using ui::Figure;
  */
 namespace notifications
 {
-    //! Raised whenever a ui::Figure instance is moved on the canvas.
+    //! Raised whenever a ui::Figure instance is changed on the canvas.
     /*!
-     * \class FigureMoved
+     * \class FigureChanged
      *
-     * Posted by the ui::Figure class and intercepted by the ui::UMLDiagram class
-     * whenever a Figure instance is moved on the canvas.
+     * Posted by the ui::Figure class and intercepted by the ui::UMLDiagram 
+     * and the controllers::FileController classes whenever a 
+     * Figure instance is changed on the canvas.
      */
-    class FigureMoved : public Notification
+    class FigureChanged : public Notification
     {
     public:
 
@@ -68,29 +69,28 @@ namespace notifications
         /*!
          * Constructor.
          * 
-         * \param figure The figure being moved.
-         * \param diagram The diagram where the operation happens.
+         * \param figure The figure being changed.
          */
-        FigureMoved(Figure*);
+        FigureChanged(Figure*);
 
         //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
-        virtual ~FigureMoved();
+        virtual ~FigureChanged();
 
-        //! Returns a pointer to the moved figure.
+        //! Returns a pointer to the changed figure.
         /*!
-         * Returns a pointer to the moved figure.
+         * Returns a pointer to the changed figure.
          * 
          * \return A pointer to a ui::Figure instance.
          */
-        Figure* getMovedFigure() const;
+        Figure* getChangedFigure() const;
 
     private:
-        //! Stores a pointer to the figure being moved.
+        //! Stores a pointer to the changed figure.
         Figure* _figure;
     };
 }
 
-#endif /* FIGUREMOVED_H_ */
+#endif /* FIGURECHANGED_H_ */

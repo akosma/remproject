@@ -50,7 +50,7 @@ namespace notifications
      * \class DeleteSelectedFigures
      *
      * Raised by the ui::CommandDelegate class when the user selects
-     * to delete an element.
+     * to delete all selected elements.
      */
     class DeleteSelectedFigures : public Notification
     {

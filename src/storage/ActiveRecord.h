@@ -146,6 +146,23 @@ namespace storage
         template <class U>
         void set(const string&, const U&);
         
+        //! Set many properties in bulk.
+        /*!
+         * Set many properties in bulk.
+         *
+         * \param propertyMap A reference to an AnyPropertyMap instance with
+         * all the new properties for the current ActiveRecord instance.
+         */
+        void setProperties(AnyPropertyMap&);
+        
+        //! Returns a reference to the internal property map.
+        /*!
+         * Returns a reference to the internal property map.
+         * 
+         * \return A reference to an AnyPropertyMap instance.
+         */
+        const AnyPropertyMap& getProperties() const;
+        
         //! Get a property.
         /*!
          * Returns the value of the property whose name is passed as parameter.
@@ -484,6 +501,18 @@ namespace storage
     {
         setDirty();
         _data.set<U>(key, value);
+    }
+    
+    template <class T>
+    void ActiveRecord<T>::setProperties(AnyPropertyMap& propertyMap)
+    {
+        _data.merge(propertyMap);
+    }
+    
+    template <class T>
+    const AnyPropertyMap& ActiveRecord<T>::getProperties() const
+    {
+        return _data;
     }
 
     template <class T>

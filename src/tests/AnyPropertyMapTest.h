@@ -56,6 +56,7 @@ namespace tests
         CPPUNIT_TEST_SUITE(tests::AnyPropertyMapTest);
         CPPUNIT_TEST(testAddAndRetrieveProperties);
         CPPUNIT_TEST(testRetrievingInvalidPropertiesRaiseException);
+        CPPUNIT_TEST(testCanMergePropertyMaps);
         CPPUNIT_TEST(testCanUseCopyConstructorSafely);
         CPPUNIT_TEST(testCanUseAssignmentOperatorSafely);
         CPPUNIT_TEST_SUITE_END();
@@ -85,6 +86,12 @@ namespace tests
          * Tests that retrieving properties of the wrong type raises an exception.
          */
         void testRetrievingInvalidPropertiesRaiseException();
+
+        //! Tests that maps can be merged.
+        /*!
+         * Tests that maps can be merged.
+         */
+        void testCanMergePropertyMaps();
 
         //! Tests that maps can be copied safely.
         /*!

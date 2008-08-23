@@ -157,6 +157,50 @@ namespace tests
 #endif
     }
     
+    void AnyPropertyMapTest::testCanMergePropertyMaps()
+    {
+        AnyPropertyMap map1;
+        AnyPropertyMap map2;
+
+        string name1("prop1");
+        string name2("prop2");
+        string name3("prop3");
+        string name4("prop4");
+        string name5("prop5");
+        
+        bool ok = true;
+        string someValue("name");
+        int integer1 = 34;
+        int integer2 = 7897987;
+        double d = 45.24;
+        DateTime now;
+
+        map1.set<bool>(name1, ok);
+        map1.set<string>(name2, someValue);
+        map1.set<int>(name3, integer1);
+        map2.set<double>(name4, d);
+        map2.set<DateTime>(name5, now);
+        map2.set<int>(name3, integer2);
+
+        CPPUNIT_ASSERT_EQUAL(3, (int)map1.count());
+        CPPUNIT_ASSERT_EQUAL(integer1, map1.get<int>(name3));
+
+        CPPUNIT_ASSERT_EQUAL(3, (int)map2.count());
+        CPPUNIT_ASSERT_EQUAL(integer2, map2.get<int>(name3));
+
+        map1.merge(map2);
+
+        CPPUNIT_ASSERT(map1.hasProperty(name1));
+        CPPUNIT_ASSERT(map1.hasProperty(name2));
+        CPPUNIT_ASSERT(map1.hasProperty(name3));
+        CPPUNIT_ASSERT(map1.hasProperty(name4));
+        CPPUNIT_ASSERT(map1.hasProperty(name5));
+
+        CPPUNIT_ASSERT_EQUAL(integer2, map1.get<int>(name3));
+
+        CPPUNIT_ASSERT_EQUAL(5, (int)map1.count());
+    }
+    
     void AnyPropertyMapTest::testCanUseCopyConstructorSafely()
     {
         AnyPropertyMap map;

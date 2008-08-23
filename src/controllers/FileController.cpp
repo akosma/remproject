@@ -79,7 +79,7 @@ using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::NewDiagramAdded;
 using notifications::NewFigureAdded;
-using notifications::FigureMoved;
+using notifications::FigureChanged;
 using notifications::NewProjectCreated;
 using ui::Figure;
 using ui::LineFigure;
@@ -94,7 +94,7 @@ namespace controllers
     , _newDiagramObserver(new NObserver<FileController, NewDiagramAdded>(*this, &FileController::handleNewDiagramAdded))
     , _newFigureObserver(new NObserver<FileController, NewFigureAdded>(*this, &FileController::handleNewFigureAdded))
     , _newLineObserver(new NObserver<FileController, NewLineAdded>(*this, &FileController::handleNewLineAdded))
-    , _movementObserver(new NObserver<FileController, FigureMoved>(*this, &FileController::handleFigureMoved))
+    , _movementObserver(new NObserver<FileController, FigureChanged>(*this, &FileController::handleFigureChanged))
     , _tabObserver(new NObserver<FileController, ProjectTabbedComponentChangedTab>(*this, &FileController::handleProjectTabbedComponentChangedTab))
     , _newProjectCreatedObserver(new NObserver<FileController, NewProjectCreated>(*this, &FileController::handleNewProjectCreated))
     , _gridObserver(new NObserver<FileController, DiagramToggleGrid>(*this, &FileController::handleDiagramToggleGrid))
@@ -219,6 +219,7 @@ namespace controllers
             if (element)
             {
                 diagram->removeChild(uniqueId);
+                _project->setDirty();
             }
         }
     }
@@ -342,9 +343,9 @@ namespace controllers
         }
     }
 
-    void FileController::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
+    void FileController::handleFigureChanged(const AutoPtr<FigureChanged>& notification)
     {
-        Figure* figure = notification->getMovedFigure();
+        Figure* figure = notification->getChangedFigure();
         const string& uniqueId = figure->getUniqueId();
         Diagram* diagram = _project->getChild(_currentDiagramName);
         if (diagram)
@@ -352,10 +353,8 @@ namespace controllers
             Element* elem = diagram->getChild(uniqueId);
             if (elem)
             {
-                elem->set<int>("x", figure->getX());
-                elem->set<int>("y", figure->getY());
-                elem->set<int>("width", figure->getWidth());
-                elem->set<int>("height", figure->getHeight());
+                elem->setProperties(figure->getProperties());
+                _project->setDirty();
             }
         }
     }

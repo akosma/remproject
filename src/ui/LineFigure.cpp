@@ -52,6 +52,14 @@ namespace ui
     void LineFigure::drawFigure(Path& actor)
     {
     }
+
+    void LineFigure::updateSpecificProperties()
+    {
+    }
+
+    void LineFigure::setSpecificProperties()
+    {
+    }
     
     Figure* LineFigure::getStartFigure() const
     {

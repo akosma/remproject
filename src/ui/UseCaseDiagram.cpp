@@ -100,12 +100,12 @@ namespace ui
             if (className == "actor")
             {
                 figure = addActorFigure(uniqueId);
-                figure->setTopLeftPosition(element->get<int>("x"), element->get<int>("y"));
+                figure->setProperties(element->getProperties());
             }
             else if (className == "usecase")
             {
                 figure = addUseCaseFigure(uniqueId);
-                figure->setTopLeftPosition(element->get<int>("x"), element->get<int>("y"));
+                figure->setProperties(element->getProperties());
             }
         }
         

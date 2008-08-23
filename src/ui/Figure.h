@@ -45,10 +45,16 @@
 #include "../notifications/ArrowCanvasClicked.h"
 #endif
 
+namespace storage
+{
+    class AnyPropertyMap;
+}
+
 using Poco::AutoPtr;
 using Poco::NObserver;
 using notifications::ArrowCanvasClicked;
 using std::string;
+using storage::AnyPropertyMap;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -89,20 +95,25 @@ namespace ui
         void setSelected(bool);
         const bool isSelected();
         const string& getUniqueId() const;
+        AnyPropertyMap& getProperties();
+        void setProperties(const AnyPropertyMap&);
 
     protected:
         virtual void drawFigure(Path&) = 0;
+        virtual void updateSpecificProperties() = 0;
+        virtual void setSpecificProperties() = 0;
         
         const int getInitialWidth();
         const int getInitialHeight();
         const float getInitialMargin();
         const float getStrokeWidth();
+        void postFigureChanged();
         
     private:
         void drawDashedLineAround(Graphics&);
         void postFigureSelected(const MouseEvent&);
-        void postFigureMoved();
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
+        void updateProperties();
 
     private:
         bool _selected;
@@ -115,6 +126,7 @@ namespace ui
         const float _strokeWidth;
         const string _id;
         NObserver<Figure, ArrowCanvasClicked>* _arrowCanvasObserver;
+        AnyPropertyMap* _properties;
     };
 }
 

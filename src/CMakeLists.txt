@@ -98,8 +98,8 @@ SET (ui_Main_SRCS
 )
 
 SET (notifications_SRCS
-    notifications/FigureMoved.h
-    notifications/FigureMoved.cpp
+    notifications/FigureChanged.h
+    notifications/FigureChanged.cpp
 
     notifications/FigureSelected.h
     notifications/FigureSelected.cpp

@@ -32,7 +32,16 @@
  * \date      4/17/08
  */
 
+#include <string>
+
+#ifndef ANYPROPERTYMAP_H_
+#include "../storage/AnyPropertyMap.h"
+#endif
+
 #include "ActorFigure.h"
+
+using storage::AnyPropertyMap;
+using std::string;
 
 namespace ui
 {
@@ -41,12 +50,13 @@ namespace ui
     , _nameLabel(0)
     {
         _nameLabel = new Label("NameLabel", "Name");
-        this->addAndMakeVisible(_nameLabel, 0);
         _nameLabel->setJustificationType(Justification::horizontallyCentred);
         _nameLabel->setTopLeftPosition(0, getInitialHeight() - 30);
         _nameLabel->setSize(getInitialWidth(), 30);
         _nameLabel->setEditable(false, true, false);
         _nameLabel->setInterceptsMouseClicks(false, false);
+        _nameLabel->addListener(this);
+        this->addAndMakeVisible(_nameLabel, 0);
     }
 
     ActorFigure::~ActorFigure()
@@ -57,7 +67,26 @@ namespace ui
     {
         _nameLabel->showEditor();
     }
+
+    void ActorFigure::labelTextChanged(Label* label)
+    {
+        postFigureChanged();
+    }
     
+    void ActorFigure::setSpecificProperties()
+    {
+        AnyPropertyMap& properties = getProperties();
+        String title(properties.get<string>("title").c_str());
+        _nameLabel->setText(title, false);
+    }
+    
+    void ActorFigure::updateSpecificProperties()
+    {
+        AnyPropertyMap& properties = getProperties();
+        string value = _nameLabel->getText(false).toUTF8();
+        properties.set<string>("title", value);
+    }
+
     void ActorFigure::drawFigure(Path& actor)
     {
         const int currentWidth = getWidth();

@@ -69,7 +69,7 @@ namespace ui
     , _selection()
     , _figureObserver(new NObserver<UMLDiagram, FigureSelected>(*this, &UMLDiagram::handleFigureSelected))
     , _arrowObserver(new NObserver<UMLDiagram, ArrowCanvasClicked>(*this, &UMLDiagram::handleArrowCanvasClicked))
-    , _movementObserver(new NObserver<UMLDiagram, FigureMoved>(*this, &UMLDiagram::handleFigureMoved))
+    , _changeObserver(new NObserver<UMLDiagram, FigureChanged>(*this, &UMLDiagram::handleFigureChanged))
     {
         _canvas->setSize(565, 800);
         _canvas->setSelectedItemSet(_selection, this);
@@ -82,17 +82,17 @@ namespace ui
         // However, this implementation uses template adaptors, in a true C++ style!
         NotificationCenter::defaultCenter().addObserver(*_figureObserver);
         NotificationCenter::defaultCenter().addObserver(*_arrowObserver);
-        NotificationCenter::defaultCenter().addObserver(*_movementObserver);
+        NotificationCenter::defaultCenter().addObserver(*_changeObserver);
     }
 
     UMLDiagram::~UMLDiagram()
     {
         NotificationCenter::defaultCenter().removeObserver(*_figureObserver);
         NotificationCenter::defaultCenter().removeObserver(*_arrowObserver);
-        NotificationCenter::defaultCenter().removeObserver(*_movementObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_changeObserver);
         deleteAndZero(_figureObserver);
         deleteAndZero(_arrowObserver);
-        deleteAndZero(_movementObserver);
+        deleteAndZero(_changeObserver);
         deleteAllChildren();
     }
 
@@ -215,9 +215,9 @@ namespace ui
         }
     }
     
-    void UMLDiagram::handleFigureMoved(const AutoPtr<FigureMoved>& notification)
+    void UMLDiagram::handleFigureChanged(const AutoPtr<FigureChanged>& notification)
     {
-        Figure* figure = notification->getMovedFigure();
+        Figure* figure = notification->getChangedFigure();
         if (isParentOf(figure))
         {
             _canvas->repaint();
