@@ -321,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				3A5B73530E4DB9D3009D4BCF /* notifications */,
-				3A4EAEA00D8D313A00C4895F /* commandline */,
 				3AA5DE760DE9AAA20059C4D9 /* controllers */,
 				3A18FB610D843C9200744B33 /* metamodel */,
 				3A18FB620D843CA900744B33 /* storage */,
@@ -411,13 +410,6 @@
 				3A3851FE0DECAC1B009A749A /* UseCaseFigure.cpp */,
 			);
 			name = Figures;
-			sourceTree = "<group>";
-		};
-		3A4EAEA00D8D313A00C4895F /* commandline */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = commandline;
 			sourceTree = "<group>";
 		};
 		3A4EAEA90D8D32BD00C4895F /* tests */ = {
