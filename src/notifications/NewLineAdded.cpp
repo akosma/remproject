@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the implementation of the ui::ArrowFigure class.
+//! Contains the implementation of the notifications::NewLineAdded class.
 /*!
- * \file ArrowFigure.cpp
+ * \file NewLineAdded.cpp
  *
- * Contains the implementation of the ui::ArrowFigure class.
+ * Contains the implementation of the notifications::NewLineAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,21 +29,41 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      4/17/08
+ * \date      8/23/08
  */
 
-#include "ArrowFigure.h"
+#include "NewLineAdded.h"
 
-using std::string;
+#ifndef LINEFIGURE_H_
+#include "../ui/LineFigure.h"
+#endif
 
-namespace ui
+namespace notifications
 {
-    ArrowFigure::ArrowFigure(const string& uniqueId, Figure* a, Figure* b)
-    : LineFigure(uniqueId, a, b)
+    NewLineAdded::NewLineAdded(NewFigureAdded::FigureType type, LineFigure* line)
+    : NewObjectAdded()
+    , _line(line)
+    , _type(type)
+    , _uniqueId(line->getUniqueId())
     {
     }
-
-    ArrowFigure::~ArrowFigure()
+    
+    NewLineAdded::~NewLineAdded()
     {
+    }
+    
+    LineFigure* NewLineAdded::getLineFigure() const
+    {
+        return _line;
+    }
+    
+    const NewFigureAdded::FigureType NewLineAdded::getLineType() const
+    {
+        return _type;
+    }
+
+    const string& NewLineAdded::getUniqueId() const
+    {
+        return _uniqueId;
     }
 }

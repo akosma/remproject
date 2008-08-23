@@ -17,11 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-//! Contains the interface of the notifications::NewObjectAdded class.
+//! Contains the interface of the notifications::NewLineAdded class.
 /*!
- * \file NewObjectAdded.h
+ * \file NewLineAdded.h
  *
- * Contains the interface of the notifications::NewObjectAdded class.
+ * Contains the interface of the notifications::NewLineAdded class.
  * 
  * $LastChangedDate$
  * $LastChangedBy$
@@ -29,18 +29,29 @@
  * 
  * \version   $LastChangedRevision$
  * \author    Adrian
- * \date      8/17/08
+ * \date      8/23/08
  */
-
-#ifndef NEWOBJECTADDED_H_
-#define NEWOBJECTADDED_H_
 
 #include <string>
 
-#include <Poco/Notification.h>
+#ifndef NEWLINEADDED_H_
+#define NEWLINEADDED_H_
 
-using Poco::Notification;
+#ifndef NEWOBJECTADDED_H_
+#include "NewObjectAdded.h"
+#endif
+
+#ifndef NEWFIGUREADDED_H_
+#include "NewFigureAdded.h"
+#endif
+
+namespace ui
+{
+    class LineFigure;
+}
+
 using std::string;
+using ui::LineFigure;
 
 //! Notifications passed between application layers to signal events.
 /*!
@@ -49,17 +60,14 @@ using std::string;
  */
 namespace notifications
 {
-    //! Triggers the adding of a new object to a project.
+    //! Triggers the adding of a new line to a project.
     /*!
-     * \class NewObjectAdded
+     * \class NewLineAdded
      *
      * Raised by the ui::CommandDelegate class when the user selects
-     * to add a new object to a diagram. The main raison-d'etre of this
-     * class is to generate a unique ID (ideally a UUID) to be used
-     * by both the GUI component and its SQLite representation, so that
-     * the controller can keep both in sync.
+     * to add a new line (arrow or simple line) to a diagram.
      */
-    class NewObjectAdded : public Notification
+    class NewLineAdded : public NewObjectAdded
     {
     public:
 
@@ -67,26 +75,49 @@ namespace notifications
         /*!
          * Constructor.
          */
-        NewObjectAdded();
+        NewLineAdded(NewFigureAdded::FigureType, LineFigure*);
 
         //! Virtual destructor.
         /*!
          * Virtual destructor.
          */
-        virtual ~NewObjectAdded();
+        virtual ~NewLineAdded();
+        
+        //! Returns a pointer to the line that was added to the diagram.
+        /*!
+         * Returns a pointer to the line that was added to the diagram.
+         *
+         * \return A pointer to a LineFigure.
+         */
+        LineFigure* getLineFigure() const;
         
         //! Returns the unique ID assigned to the newly created instance.
         /*!
-         * Returns the unique ID assigned to the newly created instance.
+         * Returns the unique ID assigned to the newly created instance. 
+         * Overrides the NewObjectAdded::getUniqueId() method.
          *
          * \return A string.
          */
         virtual const string& getUniqueId() const;
         
+        //! Returns the type of line announced by the current instance.
+        /*!
+         * Returns the type of line announced by the current instance.
+         * 
+         * \return The type of line.
+         */
+        const NewFigureAdded::FigureType getLineType() const;
+        
     private:
-        //! Unique ID for the new object being added
-        string _id;
+        //! Stores a pointer to the line added to the diagram.
+        LineFigure* _line;
+        
+        //! Stores a value indicating the type of Figure
+        NewFigureAdded::FigureType _type;
+        
+        //! Stores the unique ID generated for this instance.
+        const string _uniqueId;
     };
 }
 
-#endif /* NEWOBJECTADDED_H_ */
+#endif /* NEWLINEADDED_H_ */

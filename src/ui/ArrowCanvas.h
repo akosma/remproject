@@ -90,8 +90,8 @@ namespace ui
         void setSelectedItemSet(SelectedItemSet<Figure*>&, UMLDiagram*);
         const int getNumArrows() const;
         
-        void addArrow(Figure*, Figure*, ArrowFigure*);
-        void addLine(Figure*, Figure*, LineFigure*);
+        void addArrow(ArrowFigure*);
+        void addLine(LineFigure*);
         void showLineSelected(LineFigure*);
         const bool lineIntersects(LineFigure*, const juce::Rectangle&);
         void deselectAllArrows();
@@ -108,7 +108,7 @@ namespace ui
         class Arrow
         {
         public:
-            Arrow(Figure*, Figure*, LineFigure*);
+            Arrow(LineFigure*);
             Arrow(const Arrow&);
             Arrow& operator=(const Arrow&);
             virtual ~Arrow();

@@ -59,11 +59,18 @@ namespace ui
     class LineFigure : public Figure
     {
     public:
-        LineFigure(const string&);
+        LineFigure(const string&, Figure*, Figure*);
         virtual ~LineFigure();
+        
+        Figure* getStartFigure() const;
+        Figure* getEndFigure() const;
         
     protected:
         virtual void drawFigure(Path&);
+        
+    private:
+        Figure* _start;
+        Figure* _end;
     };
 }
 

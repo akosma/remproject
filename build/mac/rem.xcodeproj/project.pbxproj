@@ -11,6 +11,8 @@
 		3A02E69B0DEDD4EE009A9590 /* ElementTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A02E69A0DEDD4EE009A9590 /* ElementTest.cpp */; };
 		3A08403B0DE9F6770080A93A /* FileController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0840390DE9F6770080A93A /* FileController.cpp */; };
 		3A08403F0DE9F6DA0080A93A /* FileControllerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */; };
+		3A1519150E60349E00FC3DAF /* NewLineAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1519140E60349E00FC3DAF /* NewLineAdded.cpp */; };
+		3A1519160E60349E00FC3DAF /* NewLineAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1519140E60349E00FC3DAF /* NewLineAdded.cpp */; };
 		3A1A118A0E18B830009B2E6B /* libgcov.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1A11890E18B830009B2E6B /* libgcov.a */; };
 		3A1BCBE60E58A39500C44D99 /* NewObjectAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */; };
 		3A1BCBE70E58A39500C44D99 /* NewObjectAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */; };
@@ -134,6 +136,8 @@
 		3A08403A0DE9F6770080A93A /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileController.h; path = ../../src/controllers/FileController.h; sourceTree = SOURCE_ROOT; };
 		3A08403D0DE9F6DA0080A93A /* FileControllerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileControllerTest.cpp; path = ../../src/tests/FileControllerTest.cpp; sourceTree = SOURCE_ROOT; };
 		3A08403E0DE9F6DA0080A93A /* FileControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileControllerTest.h; path = ../../src/tests/FileControllerTest.h; sourceTree = SOURCE_ROOT; };
+		3A1519130E60349E00FC3DAF /* NewLineAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewLineAdded.h; path = ../../src/notifications/NewLineAdded.h; sourceTree = SOURCE_ROOT; };
+		3A1519140E60349E00FC3DAF /* NewLineAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewLineAdded.cpp; path = ../../src/notifications/NewLineAdded.cpp; sourceTree = SOURCE_ROOT; };
 		3A1A11890E18B830009B2E6B /* libgcov.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgcov.a; sourceTree = "<group>"; };
 		3A1BCBE40E58A39500C44D99 /* NewObjectAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewObjectAdded.h; path = ../../src/notifications/NewObjectAdded.h; sourceTree = SOURCE_ROOT; };
 		3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NewObjectAdded.cpp; path = ../../src/notifications/NewObjectAdded.cpp; sourceTree = SOURCE_ROOT; };
@@ -465,6 +469,8 @@
 				3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */,
 				3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */,
 				3A631FA70E56EAD000F22A12 /* NewFigureAdded.h */,
+				3A1519130E60349E00FC3DAF /* NewLineAdded.h */,
+				3A1519140E60349E00FC3DAF /* NewLineAdded.cpp */,
 				3A1BCBE40E58A39500C44D99 /* NewObjectAdded.h */,
 				3A1BCBE50E58A39500C44D99 /* NewObjectAdded.cpp */,
 				3A1BCCBF0E58B79E00C44D99 /* ProjectFileOpened.h */,
@@ -722,6 +728,7 @@
 				3A1BCBE60E58A39500C44D99 /* NewObjectAdded.cpp in Sources */,
 				3A1BCCC10E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
 				3A22D6560E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
+				3A1519150E60349E00FC3DAF /* NewLineAdded.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +781,7 @@
 				3A1BCBE70E58A39500C44D99 /* NewObjectAdded.cpp in Sources */,
 				3A1BCCC20E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
 				3A22D6570E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
+				3A1519160E60349E00FC3DAF /* NewLineAdded.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

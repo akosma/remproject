@@ -91,16 +91,16 @@ namespace notifications
          */
         virtual ~NewFigureAdded();
         
-        //! Returns the type of diagram announced by the current instance.
+        //! Returns the type of figure announced by the current instance.
         /*!
-         * Returns the type of diagram announced by the current instance.
+         * Returns the type of figure announced by the current instance.
          * 
-         * \return The type of diagram.
+         * \return The type of figure.
          */
         const FigureType getFigureType() const;
         
     private:
-        //! Type of diagram announced by the current instance.
+        //! Type of figure announced by the current instance.
         const FigureType _type;
     };
 }

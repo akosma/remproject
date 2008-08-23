@@ -52,14 +52,27 @@
 #include "UseCaseFigure.h"
 #endif
 
+#ifndef ARROWFIGURE_H_
+#include "ArrowFigure.h"
+#endif
+
+#ifndef LINEFIGURE_H_
+#include "LineFigure.h"
+#endif
+
 #ifndef USECASEDIAGRAMTOOLBAR_H_
 #include "UseCaseDiagramToolbar.h"
+#endif
+
+#ifndef NEWLINEADDED_H_
+#include "../notifications/NewLineAdded.h"
 #endif
 
 using Poco::NotificationCenter;
 using Poco::AutoPtr;
 using metamodel::Diagram;
 using metamodel::Element;
+using notifications::NewLineAdded;
 
 namespace ui
 {
@@ -92,6 +105,31 @@ namespace ui
             {
                 figure = addUseCaseFigure(uniqueId);
                 figure->setTopLeftPosition(element->get<int>("x"), element->get<int>("y"));
+            }
+        }
+        
+        // Now add the arrows
+        diagram->beginIteration();
+        while (element = diagram->getNextChild())
+        {
+            string className = element->get<string>("class");
+            string uniqueId = element->getName();
+            string start = element->get<string>("start");
+            string end = element->get<string>("end");
+            Figure* a = getFigureByUniqueId(start);
+            Figure* b = getFigureByUniqueId(end);
+            if (a && b)
+            {
+                if (className == "line")
+                {
+                    LineFigure* lineFigure = new LineFigure(uniqueId, a, b);
+                    addLineToCanvas(lineFigure);
+                }
+                else if (className == "arrow")
+                {
+                    ArrowFigure* arrowFigure = new ArrowFigure(uniqueId, a, b);
+                    addArrowToCanvas(arrowFigure);
+                }
             }
         }
     }
@@ -140,7 +178,9 @@ namespace ui
                     ActorFigure* b = dynamic_cast<ActorFigure*>(items[1]);
                     if (a && b)
                     {
-                        addArrowToCanvas(a, b, uniqueId);
+                        ArrowFigure* arrowFigure = new ArrowFigure(uniqueId, a, b);
+                        addArrowToCanvas(arrowFigure);
+                        postNewLineAddedNotification(NewFigureAdded::Arrow, arrowFigure);
                     }
                 }
                 break;
@@ -157,11 +197,21 @@ namespace ui
                     UseCaseFigure* b2 = dynamic_cast<UseCaseFigure*>(items[1]);
                     if (a1 && b2)
                     {
-                        addLineToCanvas(a1, b2, uniqueId);
+                        LineFigure* lineFigure = new LineFigure(uniqueId, a1, b2);
+                        addLineToCanvas(lineFigure);
+                        postNewLineAddedNotification(NewFigureAdded::Line, lineFigure);
                     }
                     if (a2 && b1)
                     {
-                        addLineToCanvas(a2, b1, uniqueId);
+                        LineFigure* lineFigure = new LineFigure(uniqueId, a2, b1);
+                        addLineToCanvas(lineFigure);
+                        postNewLineAddedNotification(NewFigureAdded::Line, lineFigure);
+                    }
+                    if (b1 && b2)
+                    {
+                        LineFigure* lineFigure = new LineFigure(uniqueId, b1, b2);
+                        addLineToCanvas(lineFigure);
+                        postNewLineAddedNotification(NewFigureAdded::Line, lineFigure);
                     }
                 }
                 break;
@@ -170,5 +220,11 @@ namespace ui
             default:
                 break;
         }
+    }
+    
+    void UseCaseDiagram::postNewLineAddedNotification(NewFigureAdded::FigureType type, LineFigure* lineFigure)
+    {
+        NewLineAdded* notification = new NewLineAdded(type, lineFigure);
+        NotificationCenter::defaultCenter().postNotification(notification);
     }
 }

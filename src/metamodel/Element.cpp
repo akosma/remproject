@@ -85,5 +85,8 @@ namespace metamodel
         addProperty<int>("y");
         addProperty<int>("width");
         addProperty<int>("height");
+        addProperty<string>("start");
+        addProperty<string>("end");
+        addProperty<string>("title");
     }
 }

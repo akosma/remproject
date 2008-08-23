@@ -59,7 +59,7 @@ namespace ui
     class ArrowFigure : public LineFigure
     {
     public:
-        ArrowFigure(const string&);
+        ArrowFigure(const string&, Figure*, Figure*);
         virtual ~ArrowFigure();
     };
 }

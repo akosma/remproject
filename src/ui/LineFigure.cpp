@@ -38,8 +38,10 @@ using std::string;
 
 namespace ui
 {
-    LineFigure::LineFigure(const string& uniqueId)
+    LineFigure::LineFigure(const string& uniqueId, Figure* a, Figure* b)
     : Figure(0, 0, uniqueId)
+    , _start(a)
+    , _end(b)
     {
     }
 
@@ -49,5 +51,15 @@ namespace ui
 
     void LineFigure::drawFigure(Path& actor)
     {
+    }
+    
+    Figure* LineFigure::getStartFigure() const
+    {
+        return _start;
+    }
+    
+    Figure* LineFigure::getEndFigure() const
+    {
+        return _end;
     }
 }

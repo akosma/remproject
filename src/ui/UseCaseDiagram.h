@@ -66,6 +66,7 @@ namespace ui
 {
     class ActorFigure;
     class UseCaseFigure;
+    class LineFigure;
 
     /*!
      * \class UseCaseDiagram
@@ -86,6 +87,9 @@ namespace ui
 
     protected:
         virtual DiagramToolbar* createToolbar();
+        
+    private:
+        void postNewLineAddedNotification(NewFigureAdded::FigureType, LineFigure*);
     };
 }
 

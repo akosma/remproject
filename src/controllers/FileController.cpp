@@ -64,6 +64,10 @@
 #include "../ui/UMLDiagram.h"
 #endif
 
+#ifndef LINEFIGURE_H_
+#include "../ui/LineFigure.h"
+#endif
+
 using storage::SQLiteWrapper;
 using std::string;
 using std::stringstream;
@@ -78,6 +82,7 @@ using notifications::NewFigureAdded;
 using notifications::FigureMoved;
 using notifications::NewProjectCreated;
 using ui::Figure;
+using ui::LineFigure;
 
 namespace controllers
 {
@@ -88,12 +93,14 @@ namespace controllers
     , _currentDiagramName("")
     , _newDiagramObserver(new NObserver<FileController, NewDiagramAdded>(*this, &FileController::handleNewDiagramAdded))
     , _newFigureObserver(new NObserver<FileController, NewFigureAdded>(*this, &FileController::handleNewFigureAdded))
+    , _newLineObserver(new NObserver<FileController, NewLineAdded>(*this, &FileController::handleNewLineAdded))
     , _movementObserver(new NObserver<FileController, FigureMoved>(*this, &FileController::handleFigureMoved))
     , _tabObserver(new NObserver<FileController, ProjectTabbedComponentChangedTab>(*this, &FileController::handleProjectTabbedComponentChangedTab))
     , _newProjectCreatedObserver(new NObserver<FileController, NewProjectCreated>(*this, &FileController::handleNewProjectCreated))
     {
         NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().addObserver(*_newFigureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_newLineObserver);
         NotificationCenter::defaultCenter().addObserver(*_movementObserver);
         NotificationCenter::defaultCenter().addObserver(*_tabObserver);
         NotificationCenter::defaultCenter().addObserver(*_newProjectCreatedObserver);
@@ -103,11 +110,13 @@ namespace controllers
     {
         NotificationCenter::defaultCenter().removeObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().removeObserver(*_newFigureObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_newLineObserver);
         NotificationCenter::defaultCenter().removeObserver(*_movementObserver);
         NotificationCenter::defaultCenter().removeObserver(*_tabObserver);
         NotificationCenter::defaultCenter().removeObserver(*_newProjectCreatedObserver);
         deleteAndZero(_newDiagramObserver);
         deleteAndZero(_newFigureObserver);
+        deleteAndZero(_newLineObserver);
         deleteAndZero(_movementObserver);
         deleteAndZero (_tabObserver);
         deleteAndZero(_newProjectCreatedObserver);
@@ -194,6 +203,19 @@ namespace controllers
             diagram->addChild(element);
         }
     }
+
+    void FileController::addLine(const string& className, const string& uniqueId, const string& start, const string& end)
+    {
+        Diagram* diagram = _project->getChild(_currentDiagramName);
+        if (diagram)
+        {
+            Element* element = new Element(className);
+            element->setName(uniqueId);
+            element->set<string>("start", start);
+            element->set<string>("end", end);
+            diagram->addChild(element);
+        }
+    }
     
     const bool FileController::hasCurrentProject() const
     {
@@ -265,12 +287,35 @@ namespace controllers
                 break;
                 
             case NewFigureAdded::Arrow:
-                addFigure("arrow", uniqueId);
                 break;
             
             case NewFigureAdded::Line:
-                addFigure("line", uniqueId);
                 break;
+            
+            default:
+                break;
+        }
+    }
+
+    void FileController::handleNewLineAdded(const AutoPtr<NewLineAdded>& notification)
+    {
+        const string& uniqueId = notification->getUniqueId();
+        LineFigure* line = notification->getLineFigure();
+        const string start = line->getStartFigure()->getUniqueId();
+        const string end = line->getEndFigure()->getUniqueId();
+        switch(notification->getLineType())
+        {
+            case NewFigureAdded::Arrow:
+            {
+                addLine("arrow", uniqueId, start, end);
+                break;
+            }
+            
+            case NewFigureAdded::Line:
+            {
+                addLine("line", uniqueId, start, end);
+                break;
+            }
             
             default:
                 break;

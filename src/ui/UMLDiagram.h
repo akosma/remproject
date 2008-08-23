@@ -97,6 +97,8 @@ namespace ui
     class ArrowCanvas;
     class FigureLassoSource;
     class DiagramToolbar;
+    class ArrowFigure;
+    class LineFigure;
     
     /*!
      * \class UMLDiagram
@@ -126,11 +128,12 @@ namespace ui
     protected:
         const int getSelectedItemsCount() const;
         const Array<Figure*>& getSelectedItems();
+        Figure* getFigureByUniqueId(const string& uniqueId);
         
     protected:
-        void addArrowToCanvas(Figure*, Figure*, const string&);
-        void addLineToCanvas(Figure*, Figure*, const string&);
-
+        void addArrowToCanvas(ArrowFigure*);
+        void addLineToCanvas(LineFigure*);
+        
     private:
         ArrowCanvas* _canvas;
         SelectedItemSet<Figure*> _selection;

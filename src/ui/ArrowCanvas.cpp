@@ -228,15 +228,15 @@ namespace ui
         }
     }
     
-    void ArrowCanvas::addArrow(Figure* start, Figure* end, ArrowFigure* arrowFigure)
+    void ArrowCanvas::addArrow(ArrowFigure* arrowFigure)
     {
-        Arrow* arrow = new Arrow(start, end, arrowFigure);
+        Arrow* arrow = new Arrow(arrowFigure);
         _arrows.push_back(arrow);
     }
 
-    void ArrowCanvas::addLine(Figure* start, Figure* end, LineFigure* lineFigure)
+    void ArrowCanvas::addLine(LineFigure* lineFigure)
     {
-        Arrow* arrow = new Arrow(start, end, lineFigure);
+        Arrow* arrow = new Arrow(lineFigure);
         _arrows.push_back(arrow);
     }
 
@@ -286,9 +286,9 @@ namespace ui
         NotificationCenter::defaultCenter().postNotification(notification);
     }
 
-    ArrowCanvas::Arrow::Arrow(Figure* start, Figure* end, LineFigure* arrowFigure)
-    : _start(start)
-    , _end(end)
+    ArrowCanvas::Arrow::Arrow(LineFigure* arrowFigure)
+    : _start(arrowFigure->getStartFigure())
+    , _end(arrowFigure->getEndFigure())
     , _lineFigure(arrowFigure)
     , _selected(false)
     {

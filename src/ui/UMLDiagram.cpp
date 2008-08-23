@@ -89,18 +89,16 @@ namespace ui
         deleteAllChildren();
     }
 
-    void UMLDiagram::addArrowToCanvas(Figure* a, Figure* b, const string& uniqueId)
+    void UMLDiagram::addArrowToCanvas(ArrowFigure* arrowFigure)
     {
-        ArrowFigure* arrowFigure = new ArrowFigure(uniqueId);
         addChildComponent(arrowFigure, -1);
-        _canvas->addArrow(a, b, arrowFigure);
+        _canvas->addArrow(arrowFigure);
     }
 
-    void UMLDiagram::addLineToCanvas(Figure* a, Figure* b, const string& uniqueId)
+    void UMLDiagram::addLineToCanvas(LineFigure* lineFigure)
     {
-        LineFigure* lineFigure = new LineFigure(uniqueId);
         addChildComponent(lineFigure, -1);
-        _canvas->addLine(a, b, lineFigure);
+        _canvas->addLine(lineFigure);
     }
 
     void UMLDiagram::paint (Graphics& g)
@@ -162,6 +160,26 @@ namespace ui
     const string& UMLDiagram::getUniqueId() const
     {
         return _id;
+    }
+    
+    Figure* UMLDiagram::getFigureByUniqueId(const string& uniqueId)
+    {
+        Figure* figure = NULL;
+        for (int i = 0; i < getNumChildComponents(); ++i)
+        {
+            Component* child = getChildComponent(i);
+            Figure* castChild = dynamic_cast<Figure*>(child);
+            if (castChild)
+            {
+                const string& childId = castChild->getUniqueId();
+                if (childId == uniqueId)
+                {
+                    figure = castChild;
+                    break;
+                }
+            }
+        }
+        return figure;
     }
 
     void UMLDiagram::handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>& notification)
