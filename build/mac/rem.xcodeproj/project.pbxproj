@@ -122,6 +122,8 @@
 		3AD9460A0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */; };
 		3AD9460B0E56F73C00DB9DC7 /* NewDiagramAdded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */; };
 		3AE0349C0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */; };
+		3AE76FCF0E604AC4002E7299 /* DeleteSelectedFigures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE76FCE0E604AC4002E7299 /* DeleteSelectedFigures.cpp */; };
+		3AE76FD00E604AC4002E7299 /* DeleteSelectedFigures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE76FCE0E604AC4002E7299 /* DeleteSelectedFigures.cpp */; };
 		3AE7D1D10E4DE239005F0575 /* DiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7D1D00E4DE239005F0575 /* DiagramToolbar.cpp */; };
 		3AE7D1D20E4DE239005F0575 /* DiagramToolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7D1D00E4DE239005F0575 /* DiagramToolbar.cpp */; };
 		3AE7D1FF0E4DE6EA005F0575 /* UMLDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A790B3D0E4DDAA300699A8A /* UMLDiagram.cpp */; };
@@ -255,6 +257,8 @@
 		3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDiagramAdded.h; path = ../../src/notifications/NewDiagramAdded.h; sourceTree = SOURCE_ROOT; };
 		3AE0348D0DA8DD82006D7DB6 /* ActiveRecordTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRecordTest.h; path = ../../src/tests/ActiveRecordTest.h; sourceTree = SOURCE_ROOT; };
 		3AE0349B0DA8DFB3006D7DB6 /* ActiveRecordTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActiveRecordTest.cpp; path = ../../src/tests/ActiveRecordTest.cpp; sourceTree = SOURCE_ROOT; };
+		3AE76FCD0E604AC4002E7299 /* DeleteSelectedFigures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeleteSelectedFigures.h; path = ../../src/notifications/DeleteSelectedFigures.h; sourceTree = SOURCE_ROOT; };
+		3AE76FCE0E604AC4002E7299 /* DeleteSelectedFigures.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeleteSelectedFigures.cpp; path = ../../src/notifications/DeleteSelectedFigures.cpp; sourceTree = SOURCE_ROOT; };
 		3AE7D1CF0E4DE239005F0575 /* DiagramToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiagramToolbar.h; path = ../../src/ui/DiagramToolbar.h; sourceTree = SOURCE_ROOT; };
 		3AE7D1D00E4DE239005F0575 /* DiagramToolbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DiagramToolbar.cpp; path = ../../src/ui/DiagramToolbar.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -377,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				3AA1E5D40E1D4E0D00B752D0 /* Menus and Commands */,
-				3A23BF090E143DEB00DAC85C /* Property Panels */,
 				3AF1F5AF0E0D31FA005D4A36 /* Diagrams */,
 				3A63E7840DBB9C510016AFE0 /* Toolbars */,
 				3A308A6B0DB7DE6A00965CD1 /* Figures */,
@@ -391,13 +394,6 @@
 				3A23DCD90E0DAC5B00DB428C /* ProjectComponent.cpp */,
 			);
 			name = ui;
-			sourceTree = "<group>";
-		};
-		3A23BF090E143DEB00DAC85C /* Property Panels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Property Panels";
 			sourceTree = "<group>";
 		};
 		3A308A6B0DB7DE6A00965CD1 /* Figures */ = {
@@ -455,6 +451,8 @@
 				3AAEC48A0E4EF17E006B527D /* ActiveWindowStatusChanged.cpp */,
 				3A5191F30E4DC747003053A9 /* ArrowCanvasClicked.h */,
 				3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */,
+				3AE76FCD0E604AC4002E7299 /* DeleteSelectedFigures.h */,
+				3AE76FCE0E604AC4002E7299 /* DeleteSelectedFigures.cpp */,
 				3A5191F50E4DC747003053A9 /* DiagramToggleGrid.h */,
 				3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */,
 				3A5191F70E4DC747003053A9 /* ExportDiagramAsPNG.h */,
@@ -729,6 +727,7 @@
 				3A1BCCC10E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
 				3A22D6560E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
 				3A1519150E60349E00FC3DAF /* NewLineAdded.cpp in Sources */,
+				3AE76FD00E604AC4002E7299 /* DeleteSelectedFigures.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +781,7 @@
 				3A1BCCC20E58B79E00C44D99 /* ProjectFileOpened.cpp in Sources */,
 				3A22D6570E5B2EFB001BD4B2 /* NewProjectCreated.cpp in Sources */,
 				3A1519160E60349E00FC3DAF /* NewLineAdded.cpp in Sources */,
+				3AE76FCF0E604AC4002E7299 /* DeleteSelectedFigures.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -97,6 +97,7 @@ namespace controllers
     , _movementObserver(new NObserver<FileController, FigureMoved>(*this, &FileController::handleFigureMoved))
     , _tabObserver(new NObserver<FileController, ProjectTabbedComponentChangedTab>(*this, &FileController::handleProjectTabbedComponentChangedTab))
     , _newProjectCreatedObserver(new NObserver<FileController, NewProjectCreated>(*this, &FileController::handleNewProjectCreated))
+    , _gridObserver(new NObserver<FileController, DiagramToggleGrid>(*this, &FileController::handleDiagramToggleGrid))
     {
         NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().addObserver(*_newFigureObserver);
@@ -104,6 +105,7 @@ namespace controllers
         NotificationCenter::defaultCenter().addObserver(*_movementObserver);
         NotificationCenter::defaultCenter().addObserver(*_tabObserver);
         NotificationCenter::defaultCenter().addObserver(*_newProjectCreatedObserver);
+        NotificationCenter::defaultCenter().addObserver(*_gridObserver);
     }
 
     FileController::~FileController()
@@ -114,12 +116,14 @@ namespace controllers
         NotificationCenter::defaultCenter().removeObserver(*_movementObserver);
         NotificationCenter::defaultCenter().removeObserver(*_tabObserver);
         NotificationCenter::defaultCenter().removeObserver(*_newProjectCreatedObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_gridObserver);
         deleteAndZero(_newDiagramObserver);
         deleteAndZero(_newFigureObserver);
         deleteAndZero(_newLineObserver);
         deleteAndZero(_movementObserver);
         deleteAndZero (_tabObserver);
         deleteAndZero(_newProjectCreatedObserver);
+        deleteAndZero(_gridObserver);
         closeProject();
     }
     
@@ -188,6 +192,7 @@ namespace controllers
             Diagram* diagram = new Diagram(className);
             diagram->setName(uniqueId);
             _project->addChild(diagram);
+            _project->setDirty();
         }
     }
     
@@ -201,6 +206,20 @@ namespace controllers
             element->set<int>("x", 10);
             element->set<int>("y", 10);
             diagram->addChild(element);
+            _project->setDirty();
+        }
+    }
+    
+    void FileController::removeFigure(const string& uniqueId)
+    {
+        Diagram* diagram = _project->getChild(_currentDiagramName);
+        if (diagram)
+        {
+            Element* element = diagram->getChild(uniqueId);
+            if (element)
+            {
+                diagram->removeChild(uniqueId);
+            }
         }
     }
 
@@ -214,6 +233,7 @@ namespace controllers
             element->set<string>("start", start);
             element->set<string>("end", end);
             diagram->addChild(element);
+            _project->setDirty();
         }
     }
     
@@ -350,5 +370,16 @@ namespace controllers
         newProject();
         const string& uniqueId = notification->getUniqueId();
         _project->set<string>("name", uniqueId);
+    }
+
+    void FileController::handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>& notification)
+    {
+        Diagram* diagram = _project->getChild(_currentDiagramName);
+        if (diagram)
+        {
+            bool old = diagram->get<bool>("showgrid");
+            diagram->set<bool>("showgrid", !old);
+            _project->setDirty();
+        }
     }
 }

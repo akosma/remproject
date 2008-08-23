@@ -90,6 +90,7 @@ namespace ui
         void toggleGrid();
         void addFigure(const AutoPtr<NewFigureAdded>&);
         const string& getUniqueId() const;
+        void deleteSelectedFigures();
 
     private:
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);

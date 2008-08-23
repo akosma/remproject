@@ -119,6 +119,9 @@ SET (notifications_SRCS
     notifications/NewFigureAdded.h
     notifications/NewFigureAdded.cpp
 
+    notifications/NewLineAdded.h
+    notifications/NewLineAdded.cpp
+
     notifications/NewDiagramAdded.h
     notifications/NewDiagramAdded.cpp
 
@@ -133,6 +136,9 @@ SET (notifications_SRCS
 
     notifications/NewProjectCreated.h
     notifications/NewProjectCreated.cpp
+    
+    notifications/DeleteSelectedFigures.h
+    notifications/DeleteSelectedFigures.cpp
 )
 
 SET (storage_SRCS

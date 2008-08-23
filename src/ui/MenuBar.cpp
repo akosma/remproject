@@ -58,7 +58,7 @@ namespace ui
     
     const StringArray MenuBar::getMenuBarNames()
     {
-        const char* const names[] = {"File", "Edit", "Project", "Diagram", "Element", "Window", "Help", 0};
+        const char* const names[] = {"File", "Edit", "Project", "Diagram", "Window", "Help", 0};
         return StringArray((const char**)names);
     }
     
@@ -104,7 +104,7 @@ namespace ui
                 menu.addItem (12, "Copy");
                 menu.addItem (13, "Paste");
                 menu.addSeparator();
-                menu.addItem (14, "Delete");
+                menu.addCommandItem (manager, CommandDelegate::editDelete);
                 break;
             }
             
@@ -131,22 +131,12 @@ namespace ui
 
             case 4:
             {
-                // "Element" menu items
-                menu.addItem (40, "Item 1");
-                menu.addSeparator();
-                menu.addItem (41, "Item 2");
-                menu.addItem (42, "Item 3");
-                break;
-            }
-
-            case 5:
-            {
                 // "Window" menu items
                 menu.addItem (50, "Minimize");
                 break;
             }
 
-            case 6:
+            case 5:
             {
                 // "Help" menu items
                 menu.addCommandItem(manager, CommandDelegate::helpAbout);

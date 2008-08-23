@@ -81,6 +81,7 @@ namespace ui
         setRepaintsOnMouseActivity(true);
         setBroughtToFrontOnMouseClick(true);
         setBufferedToImage(true);
+        setVisible(true);
 
         _resizer = new ResizableBorderComponent(this, 0);
         addChildComponent(_resizer, -1);
@@ -176,47 +177,50 @@ namespace ui
     
     const Point* Figure::getAnchorPointRelativeTo(const Figure* other) const
     {
-        const bool isBelow = (other->getY() + other->getHeight()) < getY();
-        const bool isAbove = (getY() + getHeight()) < other->getY();
-        const bool isRightOf = (other->getX() + other->getWidth()) < getX();
-        const bool isLeftOf = (getX() + getWidth()) < other->getX();
-        
         Point* point = NULL;
         
-        if (isBelow)
+        if (other)
         {
-            if (point)
+            const bool isBelow = (other->getY() + other->getHeight()) < getY();
+            const bool isAbove = (getY() + getHeight()) < other->getY();
+            const bool isRightOf = (other->getX() + other->getWidth()) < getX();
+            const bool isLeftOf = (getX() + getWidth()) < other->getX();
+            
+            if (isBelow)
             {
-                delete point;
+                if (point)
+                {
+                    delete point;
+                }
+                point = new Point((float)(getX() + getWidth() / 2), (float)getY());
             }
-            point = new Point((float)(getX() + getWidth() / 2), (float)getY());
-        }
-        
-        if (isAbove)
-        {
-            if (point)
+            
+            if (isAbove)
             {
-                delete point;
+                if (point)
+                {
+                    delete point;
+                }
+                point = new Point((float)(getX() + getWidth() / 2), (float)(getY() + getHeight()));
             }
-            point = new Point((float)(getX() + getWidth() / 2), (float)(getY() + getHeight()));
-        }
-        
-        if (isRightOf)
-        {
-            if (point)
+            
+            if (isRightOf)
             {
-                delete point;
+                if (point)
+                {
+                    delete point;
+                }
+                point = new Point((float)getX(), (float)(getY() + getHeight() / 2));
             }
-            point = new Point((float)getX(), (float)(getY() + getHeight() / 2));
-        }
 
-        if (isLeftOf)
-        {
-            if (point)
+            if (isLeftOf)
             {
-                delete point;
+                if (point)
+                {
+                    delete point;
+                }
+                point = new Point((float)(getX() + getWidth()), (float)(getY() + getHeight() / 2));
             }
-            point = new Point((float)(getX() + getWidth()), (float)(getY() + getHeight() / 2));
         }
         return point;
     }

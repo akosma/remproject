@@ -89,6 +89,7 @@ namespace ui
     
     void UseCaseDiagram::populateFrom(Diagram* diagram)
     {
+        setGridVisible(diagram->get<bool>("showgrid"));
         Element* element = NULL;
         diagram->beginIteration();
         while (element = diagram->getNextChild())

@@ -50,6 +50,7 @@ using Poco::NObserver;
 using Poco::AutoPtr;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::NewFigureAdded;
+using notifications::DeleteSelectedFigures;
 using std::string;
 
 namespace ui
@@ -59,10 +60,12 @@ namespace ui
     , _exportObserver(new NObserver<ProjectTabbedComponent, ExportDiagramAsPNG>(*this, &ProjectTabbedComponent::handleExportDiagramAsPNG))
     , _gridObserver(new NObserver<ProjectTabbedComponent, DiagramToggleGrid>(*this, &ProjectTabbedComponent::handleDiagramToggleGrid))
     , _figureObserver(new NObserver<ProjectTabbedComponent, NewFigureAdded>(*this, &ProjectTabbedComponent::handleNewFigureAdded))
+    , _deleteObserver(new NObserver<ProjectTabbedComponent, DeleteSelectedFigures>(*this, &ProjectTabbedComponent::handleDeleteSelectedFigures))
     {
         NotificationCenter::defaultCenter().addObserver(*_exportObserver);
         NotificationCenter::defaultCenter().addObserver(*_gridObserver);
         NotificationCenter::defaultCenter().addObserver(*_figureObserver);
+        NotificationCenter::defaultCenter().addObserver(*_deleteObserver);
     }
     
     ProjectTabbedComponent::~ProjectTabbedComponent()
@@ -70,9 +73,11 @@ namespace ui
         NotificationCenter::defaultCenter().removeObserver(*_exportObserver);
         NotificationCenter::defaultCenter().removeObserver(*_gridObserver);
         NotificationCenter::defaultCenter().removeObserver(*_figureObserver);
+        NotificationCenter::defaultCenter().removeObserver(*_deleteObserver);
         deleteAndZero(_exportObserver);
         deleteAndZero(_gridObserver);
         deleteAndZero(_figureObserver);
+        deleteAndZero(_deleteObserver);
     }
     
     void ProjectTabbedComponent::currentTabChanged(const int newCurrentTabIndex, const String& newCurrentTabName)
@@ -104,5 +109,11 @@ namespace ui
     {
         DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
         currentDiagram->addFigure(notification);
+    }
+
+    void ProjectTabbedComponent::handleDeleteSelectedFigures(const AutoPtr<DeleteSelectedFigures>& notification)
+    {
+        DiagramComponent* currentDiagram = (DiagramComponent*)getTabContentComponent(getCurrentTabIndex());
+        currentDiagram->deleteSelectedFigures();
     }
 }

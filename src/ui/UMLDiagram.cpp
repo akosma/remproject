@@ -32,6 +32,7 @@
  * \date      4/11/08
  */
 
+#include <vector>
 #include <Poco/NotificationCenter.h>
 #include <Poco/NObserver.h>
 
@@ -49,9 +50,15 @@
 #include "LineFigure.h"
 #endif
 
+#ifndef FILECONTROLLER_H_
+#include "../controllers/FileController.h"
+#endif
+
 using Poco::NotificationCenter;
 using Poco::NObserver;
 using Poco::AutoPtr;
+using std::vector;
+using controllers::FileController;
 
 namespace ui
 {
@@ -104,6 +111,22 @@ namespace ui
     void UMLDiagram::paint (Graphics& g)
     {
         g.fillAll(Colours::white);
+    }
+    
+    void UMLDiagram::deleteSelectedFigures()
+    {
+        for (int i = 0; i < _selection.getNumSelected(); ++i)
+        {
+            Figure* figure = _selection.getSelectedItem(i);
+            figure->setVisible(false);
+            FileController::get().removeFigure(figure->getUniqueId());
+        }
+        _canvas->repaint();
+    }
+    
+    void UMLDiagram::setGridVisible(const bool visible)
+    {
+        _canvas->setGridVisible(visible);
     }
 
     void UMLDiagram::handleFigureSelected(const AutoPtr<FigureSelected>& notification)

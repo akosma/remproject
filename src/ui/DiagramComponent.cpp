@@ -93,6 +93,11 @@ namespace ui
         _diagram->addFigure(notification);
     }
     
+    void DiagramComponent::deleteSelectedFigures()
+    {
+        _diagram->deleteSelectedFigures();
+    }
+    
     bool DiagramComponent::exportAsPNG()
     {
         FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);

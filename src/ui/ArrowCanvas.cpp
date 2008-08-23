@@ -144,12 +144,18 @@ namespace ui
         _drawGrid = !_drawGrid;
         repaint();
     }
-
+    
+    void ArrowCanvas::setGridVisible(const bool visible)
+    {
+        _drawGrid = visible;
+        repaint();
+    }
+    
     void ArrowCanvas::paint(Graphics& g)
     {
         g.fillAll(Colours::white.withAlpha(0.0f));
         drawGrid(g);
-        vector<ArrowCanvas::Arrow*>::const_iterator it;
+        vector<ArrowCanvas::Arrow*>::iterator it;
         for (it = _arrows.begin(); it != _arrows.end(); ++it)
         {
             Path arrow;
@@ -159,24 +165,31 @@ namespace ui
             {
                 width = 3.0f;
             }
-            const Figure* start = (*it)->getStartFigure();
-            const Figure* end = (*it)->getEndFigure();
-            const Point* s = start->getAnchorPointRelativeTo(end);
-            const Point* e = end->getAnchorPointRelativeTo(start);
-            if (s && e)
+            const LineFigure* lineFigure = (*it)->getLineFigure();
+            if (lineFigure && lineFigure->isVisible())
             {
-                if ((*it)->isArrow())
+                const Figure* start = lineFigure->getStartFigure();
+                const Figure* end = lineFigure->getEndFigure();
+                if (start && end && start->isVisible() && end->isVisible())
                 {
-                    arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
-                }
-                else
-                {
-                    arrow.addLineSegment(s->getX(), s->getY(), e->getX(), e->getY(), width);
+                    const Point* s = start->getAnchorPointRelativeTo(end);
+                    const Point* e = end->getAnchorPointRelativeTo(start);
+                    if (s && e)
+                    {
+                        if ((*it)->isArrow())
+                        {
+                            arrow.addArrow(s->getX(), s->getY(), e->getX(), e->getY(), width, 20.0f, 20.0f);
+                        }
+                        else
+                        {
+                            arrow.addLineSegment(s->getX(), s->getY(), e->getX(), e->getY(), width);
+                        }
+                    }
+                    g.strokePath(arrow, PathStrokeType(width));
+                    delete s;
+                    delete e;
                 }
             }
-            g.strokePath(arrow, PathStrokeType(width));
-            delete s;
-            delete e;
         }
     }
     
@@ -198,11 +211,12 @@ namespace ui
     {
         if (_drawGrid)
         {
+            Colour gray = Colour(0xfff5f5f5);
             int width = getWidth();
             int height = getHeight();
             for (int i = 0; i < width; ++i)
             {
-                g.setColour(Colour(0xfff5f5f5));
+                g.setColour(gray);
                 if (i % 10 == 0)
                 {
                     if (i % 100 == 0)
@@ -214,7 +228,7 @@ namespace ui
             }
             for (int j = 0; j < height; ++j)
             {
-                g.setColour(Colour(0xfff5f5f5));
+                g.setColour(gray);
                 if (j % 10 == 0)
                 {
                     if (j % 100 == 0)
@@ -287,17 +301,13 @@ namespace ui
     }
 
     ArrowCanvas::Arrow::Arrow(LineFigure* arrowFigure)
-    : _start(arrowFigure->getStartFigure())
-    , _end(arrowFigure->getEndFigure())
-    , _lineFigure(arrowFigure)
+    : _lineFigure(arrowFigure)
     , _selected(false)
     {
     }
     
     ArrowCanvas::Arrow::Arrow(const Arrow& rhs)
-    : _start(rhs._start)
-    , _end(rhs._end)
-    , _lineFigure(rhs._lineFigure)
+    : _lineFigure(rhs._lineFigure)
     , _selected(rhs._selected)
     {
     }
@@ -306,8 +316,6 @@ namespace ui
     {
         if (this != &rhs)
         {
-            this->_start = rhs._start;
-            this->_end = rhs._end;
             this->_lineFigure = rhs._lineFigure;
             this->_selected = rhs._selected;
         }
@@ -317,17 +325,7 @@ namespace ui
     ArrowCanvas::Arrow::~Arrow()
     {
     }
-    
-    const Figure* ArrowCanvas::Arrow::getStartFigure() const
-    {
-        return _start;
-    }
-    
-    const Figure* ArrowCanvas::Arrow::getEndFigure() const
-    {
-        return _end;
-    }
-    
+
     LineFigure* ArrowCanvas::Arrow::getLineFigure() const
     {
         return _lineFigure;
@@ -345,8 +343,10 @@ namespace ui
     
     const bool ArrowCanvas::Arrow::intersects(const MouseEvent& e)
     {
-        const Point* start = _start->getAnchorPointRelativeTo(_end);
-        const Point* end = _end->getAnchorPointRelativeTo(_start);
+        const Figure* startFigure = _lineFigure->getStartFigure();
+        const Figure* endFigure = _lineFigure->getEndFigure();
+        const Point* start = startFigure->getAnchorPointRelativeTo(endFigure);
+        const Point* end = endFigure->getAnchorPointRelativeTo(startFigure);
         if (start && end)
         {
             juce::Line line(*start, *end);
@@ -363,8 +363,10 @@ namespace ui
 
     const juce::Rectangle* ArrowCanvas::Arrow::getEnclosingRectangle() const
     {
-        const Point* start = _start->getAnchorPointRelativeTo(_end);
-        const Point* end = _end->getAnchorPointRelativeTo(_start);
+        const Figure* startFigure = _lineFigure->getStartFigure();
+        const Figure* endFigure = _lineFigure->getEndFigure();
+        const Point* start = startFigure->getAnchorPointRelativeTo(endFigure);
+        const Point* end = endFigure->getAnchorPointRelativeTo(startFigure);
         int startX = 0;
         int startY = 0;
         int width = 0;

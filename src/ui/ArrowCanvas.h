@@ -97,7 +97,8 @@ namespace ui
         void deselectAllArrows();
         
         void toggleGrid();
-        
+        void setGridVisible(const bool);
+
     private:
         void postArrowCanvasClicked();
         void postFigureSelected(Figure*, const MouseEvent&);
@@ -112,8 +113,6 @@ namespace ui
             Arrow(const Arrow&);
             Arrow& operator=(const Arrow&);
             virtual ~Arrow();
-            const Figure* getStartFigure() const;
-            const Figure* getEndFigure() const;
             LineFigure* getLineFigure() const;
             const bool isSelected() const;
             void setSelected(const bool);
@@ -123,8 +122,6 @@ namespace ui
             const bool isArrow() const;
 
         private:
-            Figure* _start;
-            Figure* _end;
             LineFigure* _lineFigure;
             bool _selected;
         };

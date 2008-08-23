@@ -66,6 +66,10 @@
 #include "../notifications/NewLineAdded.h"
 #endif
 
+#ifndef DIAGRAMTOGGLEGRID_H_
+#include "../notifications/DiagramToggleGrid.h"
+#endif
+
 using utility::Singleton;
 using std::string;
 using Poco::AutoPtr;
@@ -76,6 +80,7 @@ using notifications::FigureMoved;
 using notifications::ProjectTabbedComponentChangedTab;
 using notifications::NewProjectCreated;
 using notifications::NewLineAdded;
+using notifications::DiagramToggleGrid;
 
 // Forward declaration
 namespace metamodel
@@ -172,6 +177,14 @@ namespace controllers
          */
         void addFigure(const string&, const string&);
         
+        //! Removes a figure from the current diagram.
+        /*!
+         * Removes a figure from the current diagram.
+         * 
+         * \param uniqueId The "name" field of the figure.
+         */
+        void removeFigure(const string&);
+        
         //! Adds a line or an arrow to the current diagram.
         /*!
          * Adds a line or an arrow to the current diagram.
@@ -250,6 +263,9 @@ namespace controllers
         //! Handles notifications of type notification::NewProjectCreated
         void handleNewProjectCreated(const AutoPtr<NewProjectCreated>&);
 
+        //! Handles notifications of type notification::DiagramToggleGrid
+        void handleDiagramToggleGrid(const AutoPtr<DiagramToggleGrid>&);
+
     private:
         //! Instance of the Project class "controlled" by this FileController.
         Project* _project;
@@ -277,6 +293,9 @@ namespace controllers
 
         //! Observer for NewProjectCreated notifications.
         NObserver<FileController, NewProjectCreated>* _newProjectCreatedObserver;
+
+        //! Observer for DiagramToggleGrid notifications.
+        NObserver<FileController, DiagramToggleGrid>* _gridObserver;
     };
 }
 

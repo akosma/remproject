@@ -62,6 +62,10 @@
 #include "../notifications/NewProjectCreated.h"
 #endif
 
+#ifndef DELETESELECTEDFIGURES_H_
+#include "../notifications/DeleteSelectedFigures.h"
+#endif
+
 #ifndef WINDOW_H_
 #include "Window.h"
 #endif
@@ -80,6 +84,7 @@ using notifications::NewDiagramAdded;
 using notifications::NewFigureAdded;
 using notifications::ProjectFileOpened;
 using notifications::NewProjectCreated;
+using notifications::DeleteSelectedFigures;
 
 namespace ui
 {
@@ -141,7 +146,7 @@ namespace ui
                 info.shortName = "New Project";
                 info.description = "Creates a new project, closing the current one if needed";
                 info.flags = 0;
-                info.addDefaultKeypress(110, ModifierKeys::commandModifier);
+                info.addDefaultKeypress(110, ModifierKeys::commandModifier);  // CTRL + N
                 info.setActive(true);
                 break;
             }
@@ -151,7 +156,7 @@ namespace ui
                 info.shortName = "Open...";
                 info.description = "Opens a project in disk";
                 info.flags = 0;
-                info.addDefaultKeypress(111, ModifierKeys::commandModifier);
+                info.addDefaultKeypress(111, ModifierKeys::commandModifier); // CTRL + O
                 info.setActive(true);
                 break;
             }
@@ -161,7 +166,7 @@ namespace ui
                 info.shortName = "Close";
                 info.description = "Closes the current project";
                 info.flags = 0;
-                info.addDefaultKeypress(119, ModifierKeys::commandModifier);
+                info.addDefaultKeypress(119, ModifierKeys::commandModifier); // CTRL + W
                 info.setActive(false);
                 break;
             }
@@ -171,7 +176,7 @@ namespace ui
                 info.shortName = "Save...";
                 info.description = "Saves the current project to disk";
                 info.flags = 0;
-                info.addDefaultKeypress(115, ModifierKeys::commandModifier);
+                info.addDefaultKeypress(115, ModifierKeys::commandModifier); // CTRL + S
                 info.setActive(true);
                 break;
             }
@@ -181,7 +186,7 @@ namespace ui
                 info.shortName = "Save As...";
                 info.description = "Saves the current project with a new file name";
                 info.flags = 0;
-                info.addDefaultKeypress(115, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.addDefaultKeypress(115, ModifierKeys::commandModifier | ModifierKeys::shiftModifier); // CTRL + SHIFT + S
                 info.setActive(true);
                 break;
             }
@@ -201,18 +206,29 @@ namespace ui
                 info.shortName = "Quit";
                 info.description = "Quit the application";
                 info.flags = 0;
-                info.addDefaultKeypress(81, ModifierKeys::commandModifier);
+                info.addDefaultKeypress(81, ModifierKeys::commandModifier);  // CTRL + Q
                 info.setActive(true);
                 break;
             }
 #endif
+
+            case editDelete:
+            {
+                info.shortName = "Delete";
+                info.description = "Delete the currently selected element";
+                info.flags = 0;
+                info.addDefaultKeypress(127, 0); // "Delete"
+                info.addDefaultKeypress(8, 0); // "Backspace"
+                info.setActive(true);
+                break;
+            }
 
             case projectNewUseCaseDiagram:
             {
                 info.shortName = "Use Case Diagram";
                 info.description = "Creates a new use-case diagram on the current project";
                 info.flags = 0;
-                info.addDefaultKeypress(117, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.addDefaultKeypress(117, ModifierKeys::commandModifier | ModifierKeys::shiftModifier); // CTRL + SHIFT + U
                 info.setActive(true);
                 break;
             }
@@ -222,7 +238,7 @@ namespace ui
                 info.shortName = "Class Diagram";
                 info.description = "Creates a new class diagram on the current project";
                 info.flags = 0;
-                info.addDefaultKeypress(99, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+                info.addDefaultKeypress(99, ModifierKeys::commandModifier | ModifierKeys::shiftModifier); // CTRL + SHIFT + C
                 info.setActive(false);
                 break;
             }
@@ -230,7 +246,7 @@ namespace ui
             case projectNewSequenceDiagram:
             {
                 info.shortName = "Sequence Diagram";
-                info.description = "Creates a new sequence diagram on the current project";
+                info.description = "Creates a new sequence diagram on the current project"; // CTRL + SHIFT + D
                 info.flags = 0;
                 info.addDefaultKeypress(100, ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
                 info.setActive(false);
@@ -346,6 +362,13 @@ namespace ui
             case fileSaveAs:
             {
                 performFileSaveAs();
+                break;
+            }
+            
+            case editDelete:
+            {
+                DeleteSelectedFigures* notification = new DeleteSelectedFigures();
+                NotificationCenter::defaultCenter().postNotification(notification);
                 break;
             }
             

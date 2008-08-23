@@ -52,11 +52,16 @@
 #include "../notifications/NewFigureAdded.h"
 #endif
 
+#ifndef DELETESELECTEDFIGURES_H_
+#include "../notifications/DeleteSelectedFigures.h"
+#endif
+
 using Poco::AutoPtr;
 using Poco::NObserver;
 using notifications::ExportDiagramAsPNG;
 using notifications::DiagramToggleGrid;
 using notifications::NewFigureAdded;
+using notifications::DeleteSelectedFigures;
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -101,6 +106,7 @@ namespace ui
          */
         virtual void currentTabChanged(const int, const String&);
         
+    private:
         //! Posts a ProjectTabbedComponentChangedTab notification.
         /*!
          * Posts a ProjectTabbedComponentChangedTab notification
@@ -134,12 +140,21 @@ namespace ui
          * \param notification The NewFigureAdded notification received.
          */
         void handleNewFigureAdded(const AutoPtr<NewFigureAdded>&);
+
+        //! Tells the current diagram to delete the figures currently selected.
+        /*!
+         * Tells the current diagram to delete the figures currently selected.
+         * 
+         * \param notification The DeleteSelectedFigures notification received.
+         */
+        void handleDeleteSelectedFigures(const AutoPtr<DeleteSelectedFigures>&);
         
     private:
     
         NObserver<ProjectTabbedComponent, ExportDiagramAsPNG>* _exportObserver;
         NObserver<ProjectTabbedComponent, DiagramToggleGrid>* _gridObserver;
         NObserver<ProjectTabbedComponent, NewFigureAdded>* _figureObserver;
+        NObserver<ProjectTabbedComponent, DeleteSelectedFigures>* _deleteObserver;
 
     };
 }

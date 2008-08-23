@@ -120,6 +120,7 @@ namespace ui
         void handleFigureMoved(const AutoPtr<FigureMoved>&);
         void toggleGrid();
         const string& getUniqueId() const;
+        void deleteSelectedFigures();
         
         virtual DiagramToolbar* createToolbar() = 0;
         virtual void addFigure(const AutoPtr<NewFigureAdded>&) = 0;
@@ -129,6 +130,7 @@ namespace ui
         const int getSelectedItemsCount() const;
         const Array<Figure*>& getSelectedItems();
         Figure* getFigureByUniqueId(const string& uniqueId);
+        void setGridVisible(const bool);
         
     protected:
         void addArrowToCanvas(ArrowFigure*);
