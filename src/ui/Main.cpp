@@ -67,7 +67,9 @@ START_JUCE_APPLICATION (ui::Application)
  *
  * \li \subpage pageLicense "License"
  * \li \subpage pageScreenshots "Screenshots"
- * \li \subpage pageBuild "Build"
+ * \li \subpage pageBuildWindows "Build in Windows XP"
+ * \li \subpage pageBuildLinux "Build in Kubuntu Linux"
+ * \li \subpage pageBuildMac "Build in Mac OS X"
  * \li \subpage pageInstallation "Installation"
  * \li \subpage pageDocumentation "Documentation"
  */
@@ -448,23 +450,21 @@ Public License instead of this License.
  */
 
 /*!
- * \page pageBuild Build
- *
- * \section build_win Windows XP Service Pack 2
+ * \page pageBuildWindows Build in Windows XP Service Pack 2
  * 
- * \subsection Install Microsoft Visual C++ 2008 Express Edition
+ * \section sec_1 Install Microsoft Visual C++ 2008 Express Edition
  * 
  * Free download from here:
  * http://www.microsoft.com/express/download/
  * 
  * It is recommended to download the "Offline Install DVD", available at the bottom of the page. You only need to install the C++ IDE and libraries from that DVD.
  * 
- * \subsection Download and install QuickTime for Windows
+ * \section sec_2 Download and install QuickTime for Windows
  * 
  * JUCE depends on the QuickTime libraries for displaying media files. You can download and install QuickTime from this address:
  * http://www.apple.com/quicktime/download/
  * 
- * \subsection Install the ASIO SDK
+ * \section sec_3 Install the ASIO SDK
  * 
  * Juce requires this SDK to be available. Follow the instructions in this forum post:
  * http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?p=12107&highlight=&sid=1a6b77fdef10736f25f1dc05caecb4c9#12107
@@ -474,29 +474,29 @@ Public License instead of this License.
  * 
  * In that page, follow the link at the bottom, agree to the end-user license agreement and fill the form to access the download link. Install the libraries in "C:\ASIOSDK2\".
  * 
- * \subsection Checkout and build POCO
+ * \section sec_4 Checkout and build POCO
  * 
  * POCO is bundled with the file "lib\poco\Foundation\Foundation_vs80.sln" which can be opened with Visual C++ 2008 Express Edition (you will be asked to upgrade it to the Visual Studio 2008 format). Right click on the project and select "Build", in each of the four available configurations. The generated libraries will be generated in "lib\poco\lib" and the DLLs will be installed in "lib\poco\bin".
  * 
- * \subsection Build JUCE
+ * \section sec_5 Build JUCE
  * 
  * JUCE is bundled with a Visual Studio solution, that can be used to build the library. Open the "lib\juce\build\win32\vc8\JUCE.sln" file (you will be asked to upgrade it to the Visual Studio 2008 format) and right-click on the JUCE project inside. Go to "Configuration Properties - C/C++ - General" and modify the the "Additional Include Directories" to the value: 
  * "C:\Program Files\QuickTime";"C:\ASIOSDK2\common".
  * Right-click on the project and select "Build", in both Release and Debug configurations.
  * 
- * \subsection Install CppUnit
+ * \section sec_6 Install CppUnit
  * 
  * Download http://downloads.sourceforge.net/cppunit/cppunit-1.12.1.tar.gz and unzip it into:
  * "C:\cppunit-1.12.1"
  * Open the "C:\cppunit-1.12.0\src\CppUnitLibraries.sln" file and build the "cppunit" project. The resulting libraries are stored at "C:\cppunit-1.12.0\lib".
  * 
- * \subsection Install SQLite
+ * \section sec_7 Install SQLite
  * 
  * Download the precompiled DLL for Windows here:
  * http://www.sqlite.org/sqlitedll-3_5_8.zip
  * Unzip it and install the files "sqlite3.dll" and "sqlite3.def" in "lib/sqlite".
  * 
- * \subsection Generate the DEF from the SQLite DLL
+ * \section sec_8 Generate the DEF from the SQLite DLL
  * 
  * In order to use the DLL from within Rem, you need to generate a DEF file out of it. To do this, follow the instructions at:
  * http://support.microsoft.com/kb/131313
@@ -506,7 +506,7 @@ Public License instead of this License.
  * 
  * This will generate the "sqlite3.exp" file required by the Rem Visual Studio solution.
  * 
- * \subsection Install CMake 2.4
+ * \section sec_9 Install CMake 2.4
  * 
  * There is an installer available here:
  * http://www.cmake.org/files/v2.4/cmake-2.4.8-win32-x86.exe
@@ -514,41 +514,44 @@ Public License instead of this License.
  * Do not use CMake 2.6 (the latest version available at the time of this writing) since there is a regression bug that affects the command-line script that builds Rem from scratch:
  * http://www.cmake.org/Bug/view.php?id=7222
  * 
- * \subsection Install NSIS 2.37
+ * \section sec_10 Install NSIS 2.37
  * 
  * NSIS (Nullsoft Scriptable Install System) is used by CMake to generate installers for Windows. You can download it from here:
  * http://prdownloads.sourceforge.net/nsis/nsis-2.37-setup.exe?download
  * 
- * \subsection Build Rem in Visual Studio
+ * \section sec_11 Build Rem in Visual Studio
  * 
  * Open the "build\windows\Rem.sln" file; select the "Release" configuration, click on the "Rem" project on the solution tree, and select "Build Rem" on the "Build" menu.
  * 
- * \subsection Build Rem using CMake
+ * \section sec_12 Build Rem using CMake
  * 
  * Use the "build/windows/build.bat" file, which generates an NMake makefile from the CMake file, and then uses NMake (available with Visual C++ 2008 Express Edition) to build the application and the installer from the command line.
  * 
- * \section build_linux Kubuntu Linux 7.10 "Gutsy Gibbon"
+ */
+
+/*!
+ * \page pageBuildLinux Build in Kubuntu Linux 7.10 "Gutsy Gibbon"
  * 
  * Much of the explanations for building JUCE in Kubuntu are taken from this 
  * entry in Rem author's blog:
  * http://kosmaczewski.net/2007/11/16/building-juce-on-kubuntu-710/
  * 
- * \subsection Note about processor architectures
+ * \section sec_1 Note about processor architectures
  * 
  * JUCE cannot run on Linux on PowerPC processors, given that it relies on assembler code for dealing with endianness issues, as shown here:
  * http://www.koders.com/c/fid26F230513834417D1CC7BE6FDF5CE455DA49BE09.aspx
  * This rules out the possibility of running Rem on PowerPC systems, like G3, G4 and G5 Macs running Linux. For the moment, Rem can only be built with Linux running on processors supporting the i386 architecture.
  * 
- * \subsection Lua
+ * \section sec_2 Lua
  * 
  * Make sure that you have the Lua programming language installed; you can use your favorite package manager to install it, or you can grab the source files from 
  * http://www.lua.org/
  * 
- * \subsection SQLite 3 and CppUnit
+ * \section sec_3 SQLite 3 and CppUnit
  * 
  * Using Synaptic manager or any other package manager, install the "libsqlite3" and "libcppunit-dev" libraries.
  * 
- * \subsection Libraries required by JUCE
+ * \section sec_4 Libraries required by JUCE
  * 
  * Make sure that you have the following libraries installed in your Kubuntu installation using Synaptic or any other package manager, as specified in this JUCE forum post:
  * http://www.rawmaterialsoftware.com/juceforum/viewtopic.php?t=1312&highlight=audio+build
@@ -560,11 +563,11 @@ Public License instead of this License.
  * \li libglu1-mesa-dev
  * \li libglut3-dev (with its dependency freeglut3-dev too)
  * 
- * \subsection Libraries required by POCO
+ * \section sec_5 Libraries required by POCO
  * 
  * Install "libssl-dev" using Synaptic or any other package manager.
  * 
- * \subsection Download premake from Sourceforge
+ * \section sec_6 Download premake from Sourceforge
  * 
  * You can download premake http://premake.sourceforge.net/ from this link:
  * http://prdownloads.sf.net/premake/premake-linux-3.4.tar.gz
@@ -574,43 +577,46 @@ Public License instead of this License.
  * You can also build it from source, downloading and extracting the following file:
  * http://prdownloads.sf.net/premake/premake-src-3.6.zip
  * 
- * \subsection Install CMake 2.6
+ * \section sec_7 Install CMake 2.6
  * 
  * Download the source files for CMake and install it following the instructions:
  * http://www.cmake.org/files/v2.6/cmake-2.6.0.tar.gz
  * 
- * \subsection Build JUCE
+ * \section sec_8 Build JUCE
  * 
  * \li "cd" into the lib/juce/build/linux folder.
  * \li Run "sh runpremake" which will use premake and Lua to create a makefile
  * \li Run "make" (which is equal to "make CONFIG=Debug") or "make CONFIG=Release" to build the library; a couple of minutes later you’ll have a "juce/bin/libjuce_debug.a" and a "juce/bin/libjuce.a" library files ready to use.
  * 
- * \subsection Build POCO
+ * \section sec_9 Build POCO
  * 
  * \li "cd" into the lib/poco folder.
  * \li Type "chmod 755 configure" to make the "configure" script executable.
  * \li Type "chmod 755 build/script/*" to make all build scripts executable.
  * \li Type "configure", "make" and "sudo make install" to build and install the POCO library. This operation might take several minutes.
  * 
- * \subsection Build Rem
+ * \section sec_10 Build Rem
  * 
  * The "build.sh" shell script in this folder shows how to build Rem and the distribution package using CMake. The resulting binaries will be placed in a "bin" subfolder at the root of the current distribution of Rem.
  *
- * \section build_mac Mac OS X 10.5 "Leopard" (PowerPC or Intel)
+ */
+
+/*!
+ * \page pageBuildMac Build in Mac OS X 10.5 "Leopard" (PowerPC or Intel)
  * 
  * These instructions explain how to build Rem from source code in Leopard.
  * 
- * \subsection Install Xcode
+ * \section sec_1 Install Xcode
  * 
  * Install the Xcode developer tools (bundled with Mac OS X). Rem has been successfully built with both Xcode 3.0 (bundled with Leopard) and 3.1 (bundled with the iPhone developer tools).
  * 
- * \subsection CMake 2.6
+ * \section sec_2 CMake 2.6
  * 
  * \li Download CMake 2.6 from http://www.cmake.org/files/v2.6/cmake-2.6.0-Darwin-universal.dmg 
  * \li Open the DMG file, and execute the installer in the disk image.
  * \li When prompted to install the command-line utilities in /usr/bin, answer "YES"
  * 
- * \subsection CppUnit 1.12.1
+ * \section sec_3 CppUnit 1.12.1
  * 
  * Install CppUnit in the usual Unix paths, with the following commands:
  * \verbatim
@@ -642,7 +648,7 @@ Public License instead of this License.
  * 
  * This last step will install the headers in /usr/local/include/cppunit and the libraries in /usr/local/lib.
  * 
- * \subsection Fix an incompatibility in the 10.4u SDK
+ * \section sec_4 Fix an incompatibility in the 10.4u SDK
  * 
  * Type the following command in Terminal.app
  * 
@@ -650,7 +656,7 @@ Public License instead of this License.
  *    $ sudo ln -s /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.o /Developer/SDKs/MacOSX10.4u.sdk/usr/lib/crt1.10.5.o
  * \endverbatim
  * 
- * \subsection Get a Universal Binary version of POCO
+ * \section sec_5 Get a Universal Binary version of POCO
  * 
  * The POCO libraries included in the Rem source distribution (as an "svn:externals") is not prepared to be built as a Universal Binary. You can use it to create platform-specific (i.e., only PowerPC or Intel) versions of Rem.
  * 
@@ -660,7 +666,7 @@ Public License instead of this License.
  * http://openframeworks.cc/files/poco/poco-universal.zip
  * Unzip the file and place it in the "lib" subfolder of this project, together with the "juce" folder.
  * 
- * \subsection Build JUCE 1.45
+ * \section sec_6 Build JUCE 1.45
  * 
  * Go to lib/juce/build/macosx and open the Juce.xcodeproj file with Xcode. 
  * 
@@ -677,7 +683,7 @@ Public License instead of this License.
  *     <li>Build the solution using the "Build" button in the toolbar, in both Debug and Release modes.</li>
  *     </ol>
  * 
- * \subsection Install Doxygen
+ * \section sec_7 Install Doxygen
  * 
  * Install Doxygen using MacPorts:
  * 
@@ -685,17 +691,17 @@ Public License instead of this License.
  *     $ sudo port install doxygen
  * \endverbatim
  * 
- * \subsection Build Rem using Xcode
+ * \section sec_8 Build Rem using Xcode
  * 
  * Open build/mac/rem.xcodeproj and click the "Build" button on the toolbar, either in Release or Debug mode. The solution should compile without problems now.
  * 
  * The Xcode project is configured to build a Universal Binary of Rem and remtest only in "Release" mode. In "Debug" configuration, the binaries built will only work in the same architecture in which Xcode is running (as specified by the "$(NATIVE_ARCH)" configuration value).
  * 
- * \subsection Build Rem using CMake
+ * \section sec_9 Build Rem using CMake
  * 
  * The "build.sh" shell script in this folder shows how to use CMake, CPack and CTest to build the application from the command line.
  * 
- * \subsection Build the documentation with Doxygen
+ * \section sec_10 Build the documentation with Doxygen
  * 
  * Type the following command at the root of the project (where the Doxyfile file resides):
  * 
@@ -703,7 +709,7 @@ Public License instead of this License.
  *     $ /opt/local/bin/doxygen 
  * \endverbatim
  * 
- * \subsection Note about PDF output with Doxygen
+ * \section sec_11 Note about PDF output with Doxygen
  * 
  * If you want to create a PDF output using Doxygen, you should install first the MacTex distribution, freely available from
  * http://www.tug.org/mactex/
@@ -713,7 +719,7 @@ Public License instead of this License.
  * 
  * Open the image file and execute the installer inside. This will install all the required tools to generate PDF files from the Doxygen documentation.
  * 
- * \subsection Note about dynamic libraries and Xcode
+ * \section sec_12 Note about dynamic libraries and Xcode
  * 
  * Xcode has a feature (bug?) when linking executables to static libraries: if both the dynamic and static version of the same library are available (which usually is the case, for example with CppUnit), Xcode will link to the dynamic version, and there is no configuration possible to change this behavior. The only possible solution to get a statically-linked executable is to delete the dynamic library, which forces Xcode to link to the static version. This way, the deployment of the application is easier (even if the resulting binary is obviously larger)
  * 
