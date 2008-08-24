@@ -42,18 +42,6 @@
 #ifndef UMLDIAGRAM_H_
 #define UMLDIAGRAM_H_
 
-#ifndef ACTORFIGURE_H_
-#include "ActorFigure.h"
-#endif
-
-#ifndef USECASEFIGURE_H_
-#include "UseCaseFigure.h"
-#endif
-
-#ifndef ARROWCANVAS_H_
-#include "ArrowCanvas.h"
-#endif
-
 #ifndef FIGURESELECTED_H_
 #include "../notifications/FigureSelected.h"
 #endif
@@ -93,53 +81,182 @@ using std::string;
  */
 namespace ui
 {
+    // Forward declarations to avoid includes
     class Figure;
     class ArrowCanvas;
     class FigureLassoSource;
     class DiagramToolbar;
     class LineFigure;
     
+    //! Base class for all visible diagram components.
     /*!
      * \class UMLDiagram
      *
-     *  
+     * Abstract base class for all visible diagram components. Instances of 
+     * the subclasses of this class are created by the ProjectComponent class,
+     * which wraps them around DiagramComponent classes, and are later added
+     * as individual tabs of the ProjectTabbedComponent class.
      */
     class UMLDiagram : public Component
     {
     public:
+        //! Constructor.
+        /*!
+         * Constructor.
+         * 
+         * \param uniqueId The unique ID of the current instance.
+         */
         UMLDiagram(const string&);
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
         virtual ~UMLDiagram();
 
+        //! Repaints the current diagram and all its children.
+        /*!
+         * Repaints the current diagram and all its children.
+         * 
+         * \param g The Graphics component where the drawing takes place.
+         */
         void paint (Graphics&);
 
-        void resize();
-
+        //! Toggles the visibility of the grid on and off.
+        /*!
+         * Toggles the visibility of the grid on and off. This method
+         * calls the ArrowCanvas::toggleGrid() method in turn.
+         */
         void toggleGrid();
+        
+        //! Returns the unique ID of the current instance.
+        /*!
+         * Returns the unique ID of the current instance.
+         * 
+         * \return A reference to a string.
+         */
         const string& getUniqueId() const;
+        
+        //! Deletes the figures selected by the user.
+        /*!
+         * Deletes the figures selected by the user.
+         */
         void deleteSelectedFigures();
         
-        virtual DiagramToolbar* createToolbar() = 0;
+        //! Adds a new figure to the current diagram.
+        /*!
+         * Adds a new figure to the current diagram. Subclasses implement this
+         * method to handle the subclasses of Figure that interest them.
+         * 
+         * \param notification A reference to the NewFigureAdded notification 
+         * received by the parent ProjectTabbedComponent instance.
+         */
         virtual void addFigure(const AutoPtr<NewFigureAdded>&) = 0;
+        
+        //! Populates this instance with the contents of a metamodel::Diagram.
+        /*!
+         * Populates this instance with the contents of a metamodel::Diagram.
+         *
+         * \param diagram An instance of the metamodel::Diagram class, retrieved from file.
+         */
         virtual void populateFrom(Diagram*) = 0;
 
+        //! Returns the DiagramToolbar instance that belongs to this class.
+        /*!
+         * Returns the DiagramToolbar instance that belongs to this class.
+         * Subclasses implement this method to return an object that corresponds
+         * to their specific needs, and which is displayed as the diagram toolbar.
+         * Clients calling this method are responsible for disposing of the instance.
+         * 
+         * \return A pointer to a DiagramToolbar instance.
+         */
+        virtual DiagramToolbar* createToolbar() = 0;
+
     protected:
+        
+        //! Informs subclasses of the number of selected items.
+        /*!
+         * Informs subclasses of the number of selected items.
+         * 
+         * \return An integer.
+         */
         const int getSelectedItemsCount() const;
+        
+        //! Returns an array of figures which have been selected.
+        /*!
+         * Returns an array of figures which have been selected.
+         *
+         * \return An array of Figure instances.
+         */
         const Array<Figure*>& getSelectedItems();
+        
+        //! Returns a figure contained in this diagram, identified by its unique ID.
+        /*!
+         * Returns a figure contained in this diagram, identified by its unique ID.
+         * 
+         * \return A pointer to a Figure instance, or NULL.
+         */
         Figure* getFigureByUniqueId(const string& uniqueId);
+
+        //! Sets the grid visible or not.
+        /*!
+         * Sets the grid visible or not.
+         * 
+         * \param visible True to make the grid visible, false otherwise.
+         */
         void setGridVisible(const bool);
         
     protected:
+        //! Handles the FigureSelected notification.
+        /*!
+         * Handles the FigureSelected notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
         void handleFigureSelected(const AutoPtr<FigureSelected>&);
+
+        //! Handles the ArrowCanvasClicked notification.
+        /*!
+         * Handles the ArrowCanvasClicked notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
+
+        //! Handles the FigureChanged notification.
+        /*!
+         * Handles the FigureChanged notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
         void handleFigureChanged(const AutoPtr<FigureChanged>&);
+        
+        //! Adds the line passed as parameter to the canvas.
+        /*!
+         * Adds the line passed as parameter to the canvas.
+         * 
+         * \param lineFigure The line to add to the canvas.
+         */
         void addLineToCanvas(LineFigure*);
         
     private:
+        //! A canvas to draw arrows in.
         ArrowCanvas* _canvas;
+        
+        //! A set of selected items.
         SelectedItemSet<Figure*> _selection;
+
+        //! Observer of FigureSelected notifications.
         NObserver<UMLDiagram, FigureSelected>* _figureObserver;
+
+        //! Observer of ArrowCanvasClicked notifications.
         NObserver<UMLDiagram, ArrowCanvasClicked>* _arrowObserver;
+
+        //! Observer of FigureChanged notifications.
         NObserver<UMLDiagram, FigureChanged>* _changeObserver;
+
+        //! The unique identifier of the current instance. This ID is used
+        //! to match this instance to the metamodel::Diagram corresponding instance.
         const string _id;
     };
 }

@@ -95,9 +95,4 @@ namespace ui
         g.setColour (Colour (0xffe2e2e2));
         g.fillRoundedRectangle (0.0f, 0.0f, (float) (getWidth() - 0), (float) (getHeight() - 0), 6.0000f);
     }
-
-    void DiagramToolbar::resized()
-    {
-    }
-
 }

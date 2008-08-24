@@ -32,14 +32,10 @@
  * \date      16 Aug 2008 3:51:59 pm
  */
 
-#ifndef __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__
-#define __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__
+#ifndef ACTORTOOLBARBUTTON_H_
+#define ACTORTOOLBARBUTTON_H_
 
-//[Headers]     -- You can add your own extra header files here --
 #include "PlatformDefinitions.h"
-//[/Headers]
-
-
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -51,10 +47,6 @@ namespace ui
     /*!
      * \class ActorToolbarButton
      *
-     * [Comments]
-     * An auto-generated component, created by the Jucer.
-     * Describe your class and how it works here!
-     * [/Comments]
      *
      */
     class ActorToolbarButton  : public Button
@@ -62,9 +54,6 @@ namespace ui
     public:
         ActorToolbarButton ();
         ~ActorToolbarButton();
-
-        //[UserMethods]     -- You can add your own custom methods in this section.
-        //[/UserMethods]
 
         void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
@@ -74,18 +63,11 @@ namespace ui
         juce_UseDebuggingNewOperator
 
     private:
-        //[UserVariables]   -- You can add your own custom variables in this section.
-        //[/UserVariables]
-
         Path internalPath2;
         Path internalPath3;
         Path internalPath5;
         Path internalPath6;
-
-        // (prevent copy constructor and operator= from being generated..)
-        ActorToolbarButton (const ActorToolbarButton&);
-        const ActorToolbarButton& operator= (const ActorToolbarButton&);
     };
 }
 
-#endif   // __JUCER_HEADER_ACTORTOOLBARBUTTON_ACTORTOOLBARBUTTON_52D977C7__
+#endif   /* ACTORTOOLBARBUTTON_H_ */

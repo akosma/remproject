@@ -44,35 +44,66 @@
  */
 namespace ui
 {
+    // Forward declarations to avoid inclusions.
     class Figure;
     class UMLDiagram;
     class ArrowCanvas;
 
+    //! Used to catch figures while the user drags the mouse on the canvas.
     /*!
      * \class FigureLassoSource
      *
-     *  
+     * Represents an object used to "catch" items while the user drags
+     * the mouse on the canvas.
      */
     class FigureLassoSource : public LassoSource<Figure*>
     {
     public:
 
+        //! Constructor.
         /*!
-         *  FigureLassoSource constructor.
+         * Constructor.
+         * 
+         * \param items A set of Figures.
+         * \param diagram A pointer to a UMLDiagram instance.
+         * \param canvas A pointer to an ArrowCanvas instance.
          */
         FigureLassoSource(SelectedItemSet<Figure*>&, UMLDiagram*, ArrowCanvas*);
 
+        //! Virtual destructor.
         /*!
-         *  FigureLassoSource virtual destructor.
+         * Virtual destructor.
          */
         virtual ~FigureLassoSource();
 
-        virtual void findLassoItemsInArea(Array<Figure*> &itemsFound, int x, int y, int width, int height);
+        //! Returns the set of items that lie within a given region.
+        /*!
+         * Returns the set of items that lie within a given region. 
+         * 
+         * \param itemsFound An array of items to be filled with the items found.
+         * \param x The x coordinate of the lasso rectangle.
+         * \param y The y coordinate of the lasso rectangle.
+         * \param width The width of the lasso rectangle.
+         * \param height The height of the lasso rectangle.
+         */
+        virtual void findLassoItemsInArea(Array<Figure*>&, int, int, int, int);
+
+        //! Returns the SelectedItemSet that the lasso should update.
+        /*!
+         * Returns the SelectedItemSet that the lasso should update.
+         * 
+         * \return A set of selected items.
+         */
         virtual SelectedItemSet<Figure*>& getLassoSelection();
         
     private:
+        //! The set of selected items.
         SelectedItemSet<Figure*>& _itemSet;
+        
+        //! The diagram in which the selection is performed.
         UMLDiagram* _diagram;
+        
+        //! The canvas in which the selection is performed.
         ArrowCanvas* _canvas;
     };
 }

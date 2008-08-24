@@ -64,31 +64,90 @@ using metamodel::Diagram;
  */
 namespace ui
 {
+    // Forward declarations to avoid includes
     class ActorFigure;
     class UseCaseFigure;
     class LineFigure;
 
+    //! Represents a diagram holding Actors, Use Case bubbles and their relationships.
     /*!
      * \class UseCaseDiagram
      *
-     *  
+     * Represents a diagram holding Actors, Use Case bubbles and their relationships.
      */
     class UseCaseDiagram : public UMLDiagram
     {
     public:
+        //! Constructor.
+        /*!
+         * Constructor.
+         * 
+         * \param uniqueId The unique ID of the current instance.
+         */
         UseCaseDiagram(const string&);
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
         virtual ~UseCaseDiagram();
-        
+
+        //! Adds an ActorFigure to the current diagram.
+        /*!
+         * Adds an ActorFigure to the current diagram.
+         * 
+         * \param uniqueId The unique ID of the figure to be added.
+         * 
+         * \return A pointer to the newly created instance.
+         */
         ActorFigure* addActorFigure(const string&);
+
+        //! Adds an UseCaseFigure to the current diagram.
+        /*!
+         * Adds an UseCaseFigure to the current diagram.
+         * 
+         * \param uniqueId The unique ID of the figure to be added.
+         * 
+         * \return A pointer to the newly created instance.
+         */
         UseCaseFigure* addUseCaseFigure(const string&);
 
+        //! Adds a new figure to the current diagram.
+        /*!
+         * Adds a new figure to the current diagram. Subclasses implement this
+         * method to handle the subclasses of Figure that interest them.
+         * 
+         * \param notification A reference to the NewFigureAdded notification 
+         * received by the parent ProjectTabbedComponent instance.
+         */
         virtual void addFigure(const AutoPtr<NewFigureAdded>&);
+
+        //! Populates this instance with the contents of a metamodel::Diagram.
+        /*!
+         * Populates this instance with the contents of a metamodel::Diagram.
+         *
+         * \param diagram An instance of the metamodel::Diagram class, retrieved from file.
+         */
         virtual void populateFrom(Diagram*);
 
-    protected:
+        //! Returns the DiagramToolbar instance that belongs to this class.
+        /*!
+         * Returns the DiagramToolbar instance that belongs to this class.
+         * Subclasses implement this method to return an object that corresponds
+         * to their specific needs, and which is displayed as the diagram toolbar.
+         * 
+         * \return A pointer to a DiagramToolbar instance.
+         */
         virtual DiagramToolbar* createToolbar();
         
     private:
+        //! Posts a NewLineAdded notification.
+        /*!
+         * Posts a NewLineAdded notification.
+         * 
+         * \param type The type of line that has been added.
+         * \param lineFigure The line that has been added.
+         */
         void postNewLineAddedNotification(NewFigureAdded::FigureType, LineFigure*);
     };
 }

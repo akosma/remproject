@@ -40,10 +40,6 @@
 #include "UMLDiagram.h"
 #endif
 
-#ifndef FIGURE_H_
-#include "Figure.h"
-#endif
-
 #ifndef LINEFIGURE_H_
 #include "LineFigure.h"
 #endif
@@ -69,7 +65,8 @@ using juce::Rectangle;
 namespace ui
 {
     ArrowCanvas::ArrowCanvas()
-    : _strokeWidth(1.0f)
+    : Component()
+    , _strokeWidth(1.0f)
     , _lines()
     , _drawGrid(true)
     , _lassoComponent(new LassoComponent<Figure*>)
@@ -167,7 +164,7 @@ namespace ui
         vector<DrawableLine*>::const_iterator it;
         for (it = _lines.begin(); it != _lines.end(); ++it)
         {
-            (*it)->setSelected(false);
+            (*it)->getLineFigure()->setSelected(false);
         }
     }
     
@@ -212,20 +209,6 @@ namespace ui
         _lines.push_back(line);
     }
 
-    void ArrowCanvas::setLineSelected(LineFigure* lineFigure)
-    {
-        vector<DrawableLine*>::const_iterator it;
-        for (it = _lines.begin(); it != _lines.end(); ++it)
-        {
-            if ((*it)->getLineFigure() == lineFigure)
-            {
-                const bool value = !(*it)->isSelected();
-                (*it)->setSelected(value);
-                break;
-            }
-        }
-    }
-
     const bool ArrowCanvas::lineIntersects(LineFigure* lineFigure, const juce::Rectangle& rect)
     {
         vector<DrawableLine*>::const_iterator it;
@@ -235,11 +218,11 @@ namespace ui
             {
                 if ((*it)->intersects(rect))
                 {
-                    (*it)->setSelected(true);
+                    lineFigure->setSelected(true);
                 }
                 else
                 {
-                    (*it)->setSelected(false);
+                    lineFigure->setSelected(false);
                 }
             }
         }
@@ -287,16 +270,6 @@ namespace ui
     LineFigure* ArrowCanvas::DrawableLine::getLineFigure() const
     {
         return _lineFigure;
-    }
-    
-    const bool ArrowCanvas::DrawableLine::isSelected() const
-    {
-        return _selected;
-    }
-    
-    void ArrowCanvas::DrawableLine::setSelected(const bool selected)
-    {
-        _selected = selected;
     }
     
     const bool ArrowCanvas::DrawableLine::intersects(const MouseEvent& e)

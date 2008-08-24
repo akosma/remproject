@@ -54,7 +54,8 @@ using std::string;
 namespace ui
 {
     DiagramComponent::DiagramComponent(UMLDiagram* diagram, const int index)
-    : _index(index)
+    : Component()
+    , _index(index)
     , _viewport (new Viewport())
     , _diagram (diagram)
     , _toolbar(diagram->createToolbar())

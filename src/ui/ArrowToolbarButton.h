@@ -32,14 +32,10 @@
  * \date      16 Aug 2008 5:12:18 pm
  */
 
-#ifndef __JUCER_HEADER_ARROWFIGUREBUTTON_ARROWFIGUREBUTTON_A444D0E1__
-#define __JUCER_HEADER_ARROWFIGUREBUTTON_ARROWFIGUREBUTTON_A444D0E1__
+#ifndef ARROWTOOLBARBUTTON_H_
+#define ARROWTOOLBARBUTTON_H_
 
-//[Headers]     -- You can add your own extra header files here --
 #include "PlatformDefinitions.h"
-//[/Headers]
-
-
 
 //! Contains the classes derived directly or indirectly from the JUCE framework.
 /*!
@@ -51,10 +47,6 @@ namespace ui
     /*!
      * \class ArrowToolbarButton
      *
-     * [Comments]
-     * An auto-generated component, created by the Jucer.
-     * Describe your class and how it works here!
-     * [/Comments]
      *
      */
     class ArrowToolbarButton  : public Button
@@ -62,9 +54,6 @@ namespace ui
     public:
         ArrowToolbarButton ();
         ~ArrowToolbarButton();
-
-        //[UserMethods]     -- You can add your own custom methods in this section.
-        //[/UserMethods]
 
         void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);

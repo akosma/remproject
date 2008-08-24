@@ -34,10 +34,21 @@
 
 #include "UseCaseDiagramToolbar.h"
 
+#ifndef ACTORTOOLBARBUTTON_H_
 #include "ActorToolbarButton.h"
+#endif
+
+#ifndef USECASETOOLBARBUTTON_H_
 #include "UseCaseToolbarButton.h"
+#endif 
+
+#ifndef LINETOOLBARBUTTON_H_
 #include "LineToolbarButton.h"
+#endif
+
+#ifndef ARROWTOOLBARBUTTON_H_
 #include "ArrowToolbarButton.h"
+#endif
 
 namespace ui
 {

@@ -57,21 +57,12 @@ namespace ui
 
         void mouseDown(const MouseEvent& e);
         void mouseDrag(const MouseEvent& e);
-
         void paint (Graphics& g);
-        void resized();
-
         void setParent(Component*);
-
-        juce_UseDebuggingNewOperator
 
     private:
         ComponentDragger _dragger;
         Component* _parent;
-
-    private:
-        DiagramToolbar (const DiagramToolbar&);
-        const DiagramToolbar& operator= (const DiagramToolbar&);
     };
 }
 

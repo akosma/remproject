@@ -32,42 +32,22 @@
  * \date      16 Aug 2008 5:12:18 pm
  */
 
-//[Headers] You can add your own extra header files here...
-//[/Headers]
-
 #include "ArrowToolbarButton.h"
 
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
 #ifndef COMMANDDELEGATE_H_
 #include "CommandDelegate.h"
 #endif
-//[/MiscUserDefs]
 
 namespace ui
 {
     ArrowToolbarButton::ArrowToolbarButton ()
-        : Button (String::empty)
+    : Button (String::empty)
     {
-
-        //[UserPreSize]
-        //[/UserPreSize]
-
         setSize (40, 40);
-
-        //[Constructor] You can add your own custom stuff here..
-        //[/Constructor]
     }
 
     ArrowToolbarButton::~ArrowToolbarButton()
     {
-        //[Destructor_pre]. You can add your own custom destruction code here..
-        //[/Destructor_pre]
-
-
-
-        //[Destructor]. You can add your own custom destruction code here..
-        //[/Destructor]
     }
 
     const String ArrowToolbarButton::getTooltip()
@@ -98,9 +78,6 @@ namespace ui
         internalPath6.startNewSubPath (32.0f, 8.0f);
         internalPath6.lineTo (8.0f, 32.0f);
         internalPath6.closeSubPath();
-
-        //[UserResized] Add your own custom resize handling here..
-        //[/UserResized]
     }
 
     void ArrowToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
@@ -151,50 +128,6 @@ namespace ui
 
     void ArrowToolbarButton::clicked()
     {
-        //[UserCode_clicked] -- Add your code here...
         CommandDelegate::get().invokeDirectly(CommandDelegate::diagramAddArrow, false);
-        //[/UserCode_clicked]
     }
-
 }
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-//[/MiscUserCode]
-
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Button" className="ArrowToolbarButton" componentName=""
-                 parentClasses="public Button" constructorParams="" variableInitialisers=""
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="40" initialHeight="40">
-  <METHODS>
-    <METHOD name="clicked()"/>
-  </METHODS>
-  <BACKGROUND backgroundColour="0" buttonState="normal" enabled="1">
-    <ROUNDRECT pos="1 1 38 38" cornerSize="6" fill="linear: 20 13, 20 1, 0=ff000000, 1=ffffffff"
-               hasStroke="1" stroke="0.600000024, mitered, butt" strokeColour="solid: ffffffff"/>
-    <PATH pos="0 0 100 100" fill="solid: ffffffff" hasStroke="0" nonZeroWinding="1">s 24 8 l 32 8 l 32 16 x</PATH>
-    <PATH pos="0 0 100 100" fill="solid: ffffffff" hasStroke="1" stroke="2.29999995, mitered, butt"
-          strokeColour="solid: ffffffff" nonZeroWinding="1">s 32 8 l 8 32 x</PATH>
-  </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="over" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="down" enabled="1">
-    <ROUNDRECT pos="1 1 38 38" cornerSize="6" fill="linear: 20 19, 20 1, 0=ff000000, 1=ffffffff"
-               hasStroke="1" stroke="0.600000024, mitered, butt" strokeColour="solid: ffffffff"/>
-    <PATH pos="0 0 100 100" fill="solid: ffffffff" hasStroke="0" nonZeroWinding="1">s 24 8 l 32 8 l 32 16 x</PATH>
-    <PATH pos="0 0 100 100" fill="solid: ffffffff" hasStroke="1" stroke="2.29999995, mitered, butt"
-          strokeColour="solid: ffffffff" nonZeroWinding="1">s 32 8 l 8 32 x</PATH>
-  </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="normal on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="over on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="down on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="common background" enabled="0"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

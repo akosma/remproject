@@ -56,10 +56,6 @@
 #include "ArrowFigure.h"
 #endif
 
-#ifndef LINEFIGURE_H_
-#include "LineFigure.h"
-#endif
-
 #ifndef USECASEDIAGRAMTOOLBAR_H_
 #include "UseCaseDiagramToolbar.h"
 #endif

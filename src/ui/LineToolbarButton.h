@@ -32,8 +32,8 @@
  * \date      16 Aug 2008 5:12:21 pm
  */
 
-#ifndef __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__
-#define __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__
+#ifndef LINETOOLBARBUTTON_H_
+#define LINETOOLBARBUTTON_H_
 
 #include "PlatformDefinitions.h"
 
@@ -62,10 +62,7 @@ namespace ui
     private:
         Path internalPath2;
         Path internalPath4;
-
-        LineToolbarButton (const LineToolbarButton&);
-        const LineToolbarButton& operator= (const LineToolbarButton&);
     };
 }
 
-#endif   // __JUCER_HEADER_LINEFIGUREBUTTON_LINEFIGUREBUTTON_8E1BB03A__
+#endif   /* LINETOOLBARBUTTON_H_ */

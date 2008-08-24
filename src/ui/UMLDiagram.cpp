@@ -151,11 +151,6 @@ namespace ui
             {
                 Figure* item = _selection.getSelectedItem(j);
                 item->setSelected(true);
-                LineFigure* lineFigure = dynamic_cast<LineFigure*>(item);
-                if (lineFigure)
-                {
-                    _canvas->setLineSelected(lineFigure);
-                }
             }
         }
     }

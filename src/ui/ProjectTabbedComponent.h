@@ -150,10 +150,16 @@ namespace ui
         void handleDeleteSelectedFigures(const AutoPtr<DeleteSelectedFigures>&);
         
     private:
-    
+        //! Observer of ExportDiagramAsPNG notifications.
         NObserver<ProjectTabbedComponent, ExportDiagramAsPNG>* _exportObserver;
+
+        //! Observer of DiagramToggleGrid notifications.
         NObserver<ProjectTabbedComponent, DiagramToggleGrid>* _gridObserver;
+
+        //! Observer of NewFigureAdded notifications.
         NObserver<ProjectTabbedComponent, NewFigureAdded>* _figureObserver;
+
+        //! Observer of DeleteSelectedFigures notifications.
         NObserver<ProjectTabbedComponent, DeleteSelectedFigures>* _deleteObserver;
 
     };

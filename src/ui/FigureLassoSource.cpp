@@ -42,8 +42,8 @@
 #include "ArrowCanvas.h"
 #endif
 
-#ifndef ARROWFIGURE_H_
-#include "ArrowFigure.h"
+#ifndef LINEFIGURE_H_
+#include "LineFigure.h"
 #endif
 
 namespace ui
