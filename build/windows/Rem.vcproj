@@ -81,7 +81,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /MACHINE:X86 /debug"
-				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib PocoFoundation.lib $(NOINHERIT)"
+				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib PocoFoundation.lib sqlite3.lib $(NOINHERIT)"
 				OutputFile="Debug\Rem.exe"
 				Version="0.0"
 				LinkIncremental="2"
@@ -176,7 +176,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /MACHINE:X86"
-				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib "
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib jucelib_static_Win32.lib sqlite3.lib PocoFoundation.lib "
 				OutputFile="Release\Rem.exe"
 				Version="0.0"
 				LinkIncremental="1"
@@ -214,11 +214,23 @@
 			Name="Source Files"
 			>
 			<File
+				RelativePath="..\..\src\notifications\ActiveWindowStatusChanged.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ActorFigure.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\ui\ActorToolbarButton.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\AnyProperty.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\AnyPropertyMap.cpp"
 				>
 			</File>
 			<File
@@ -230,7 +242,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ArrowCanvasClickedNotification.cpp"
+				RelativePath="..\..\src\notifications\ArrowCanvasClicked.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ArrowFigure.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ArrowToolbarButton.cpp"
 				>
 			</File>
 			<File
@@ -238,7 +258,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ContentComponent.cpp"
+				RelativePath="..\..\src\notifications\DeleteSelectedFigures.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Diagram.cpp"
 				>
 			</File>
 			<File
@@ -246,11 +270,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\DiagramToggleGridNotification.cpp"
+				RelativePath="..\..\src\notifications\DiagramToggleGrid.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ExportDiagramAsPNGNotification.cpp"
+				RelativePath="..\..\src\ui\DiagramToolbar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Element.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\ExportDiagramAsPNG.cpp"
 				>
 			</File>
 			<File
@@ -258,11 +290,31 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\FigureMovedNotification.cpp"
+				RelativePath="..\..\src\notifications\FigureChanged.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\FigureSelectedNotification.cpp"
+				RelativePath="..\..\src\ui\FigureLassoSource.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\FigureSelected.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\controllers\FileController.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\FindConditions.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\LineFigure.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\LineToolbarButton.cpp"
 				>
 			</File>
 			<File
@@ -270,7 +322,39 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\metamodel\Member.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\MenuBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewDiagramAdded.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewFigureAdded.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewLineAdded.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewObjectAdded.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewProjectCreated.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\Persistable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Project.cpp"
 				>
 			</File>
 			<File
@@ -278,11 +362,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\notifications\ProjectFileOpened.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ProjectTabbedComponent.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ProjectTabbedComponentChangedTabNotification.cpp"
+				RelativePath="..\..\src\notifications\ProjectTabbedComponentChangedTab.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\SQLiteWrapper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UMLDiagram.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseDiagram.cpp"
 				>
 			</File>
 			<File
@@ -306,11 +406,27 @@
 			Name="Header Files"
 			>
 			<File
+				RelativePath="..\..\src\storage\ActiveRecord.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\ActiveWindowStatusChanged.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ActorFigure.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\ui\ActorToolbarButton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\AnyProperty.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\AnyPropertyMap.h"
 				>
 			</File>
 			<File
@@ -322,7 +438,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ArrowCanvasClickedNotification.h"
+				RelativePath="..\..\src\notifications\ArrowCanvasClicked.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ArrowFigure.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\ArrowToolbarButton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\BelongsTo.h"
 				>
 			</File>
 			<File
@@ -330,7 +458,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ContentComponent.h"
+				RelativePath="..\..\src\notifications\DeleteSelectedFigures.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Diagram.h"
 				>
 			</File>
 			<File
@@ -338,11 +470,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\DiagramToggleGridNotification.h"
+				RelativePath="..\..\src\notifications\DiagramToggleGrid.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ExportDiagramAsPNGNotification.h"
+				RelativePath="..\..\src\ui\DiagramToolbar.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Element.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\ExportDiagramAsPNG.h"
 				>
 			</File>
 			<File
@@ -350,11 +490,39 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\FigureMovedNotification.h"
+				RelativePath="..\..\src\notifications\FigureChanged.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\FigureSelectedNotification.h"
+				RelativePath="..\..\src\ui\FigureLassoSource.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\FigureSelected.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\controllers\FileController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\FindConditions.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\HasMany.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\LineFigure.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\LineToolbarButton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Member.h"
 				>
 			</File>
 			<File
@@ -362,7 +530,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\notifications\NewDiagramAdded.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewFigureAdded.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewLineAdded.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewObjectAdded.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\notifications\NewProjectCreated.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\Persistable.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\PlatformDefinitions.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\metamodel\Project.h"
 				>
 			</File>
 			<File
@@ -370,11 +566,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\notifications\ProjectFileOpened.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ui\ProjectTabbedComponent.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\ui\ProjectTabbedComponentChangedTabNotification.h"
+				RelativePath="..\..\src\notifications\ProjectTabbedComponentChangedTab.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\utility\Property.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\utility\Singleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\storage\SQLiteWrapper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UMLDiagram.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ui\UseCaseDiagram.h"
 				>
 			</File>
 			<File
