@@ -88,5 +88,6 @@ namespace metamodel
         addProperty<string>("start");
         addProperty<string>("end");
         addProperty<string>("title");
+        set<bool>("selected", false);
     }
 }

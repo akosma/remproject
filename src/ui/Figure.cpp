@@ -69,7 +69,8 @@ using notifications::ArrowCanvasClicked;
 namespace ui
 {
     Figure::Figure(const int initWidth, const int initHeight, const string& uniqueId)
-    : _selected(false)
+    : Component()
+    , _selected(false)
     , _hover(false)
     , _dragger()
     , _resizer(0)
@@ -149,22 +150,22 @@ namespace ui
         }
     }
     
-    const int Figure::getInitialWidth()
+    const int Figure::getInitialWidth() const
     {
         return _initWidth;
     }
     
-    const int Figure::getInitialHeight()
+    const int Figure::getInitialHeight() const
     {
         return _initHeight;
     }
     
-    const float Figure::getInitialMargin()
+    const float Figure::getInitialMargin() const
     {
         return _initMargin;
     }
     
-    const float Figure::getStrokeWidth()
+    const float Figure::getStrokeWidth() const
     {
         return _strokeWidth;
     }
@@ -172,6 +173,7 @@ namespace ui
     void Figure::setSelected(bool selected)
     {
         _resizer->setVisible(selected);
+        _properties->set<bool>("selected", selected);
         _selected = selected;
         repaint();
     }
@@ -182,6 +184,7 @@ namespace ui
         _properties->set<int>("height", getHeight());
         _properties->set<int>("x", getX());
         _properties->set<int>("y", getY());
+        _properties->set<bool>("selected", _selected);
         updateSpecificProperties();
     }
     
@@ -282,6 +285,7 @@ namespace ui
         _properties = new AnyPropertyMap(props);
         this->setTopLeftPosition(_properties->get<int>("x"), _properties->get<int>("y"));
         this->setSize(_properties->get<int>("width"), _properties->get<int>("height"));
+        this->setSelected(_properties->get<bool>("selected"));
         this->setSpecificProperties();
     }
     

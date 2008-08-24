@@ -46,16 +46,26 @@
  */
 namespace ui
 {
+    //! Represents a specific toolbar taylored to Use Case diagrams.
     /*!
      * \class UseCaseDiagramToolbar
      *
-     *
+     * Represents a specific toolbar taylored to Use Case diagrams.
      */
     class UseCaseDiagramToolbar  : public DiagramToolbar
     {
     public:
+        //! Constructor
+        /*!
+         * Constructor.
+         */
         UseCaseDiagramToolbar();
-        ~UseCaseDiagramToolbar();
+
+        //! Virtual destructor
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~UseCaseDiagramToolbar();
     };
 }
 

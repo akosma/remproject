@@ -34,6 +34,10 @@
 
 #include "DiagramToolbar.h"
 
+#ifndef DIAGRAMCOMPONENT_H_
+#include "DiagramComponent.h"
+#endif
+
 namespace ui
 {
     DiagramToolbar::DiagramToolbar()
@@ -50,7 +54,7 @@ namespace ui
     {
     }
     
-    void DiagramToolbar::setParent(Component* parent)
+    void DiagramToolbar::setParent(DiagramComponent* parent)
     {
         _parent = parent;
     }

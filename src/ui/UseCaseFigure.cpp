@@ -48,6 +48,7 @@ namespace ui
     UseCaseFigure::UseCaseFigure(const string& uniqueId)
     : Figure(200, 150, uniqueId)
     , LabelListener()
+    , TooltipClient()
     , _nameLabel(0)
     {
         const float margin = getInitialMargin();
@@ -90,7 +91,12 @@ namespace ui
         properties.set<string>("title", value);
     }
 
-    void UseCaseFigure::drawFigure(Path& usecase)
+    const String UseCaseFigure::getTooltip()
+    {
+        return String("Click once to select, double-click to edit");
+    }
+
+    void UseCaseFigure::drawFigure(Path& usecase) const
     {
         const int currentWidth = getWidth();
         const int currentHeight = getHeight();

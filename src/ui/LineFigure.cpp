@@ -49,7 +49,7 @@ namespace ui
     {
     }
 
-    void LineFigure::drawFigure(Path& actor)
+    void LineFigure::drawFigure(Path& actor) const
     {
     }
 

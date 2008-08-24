@@ -63,11 +63,11 @@ namespace storage
          */
         FindConditions();
         
-        //! Destructor.
+        //! Virtual destructor.
         /*!
-         * Destructor.
+         * Virtual destructor.
          */
-        ~FindConditions();
+        virtual ~FindConditions();
 
         //! Generates a WHERE SQL statement.
         /*!

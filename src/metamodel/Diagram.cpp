@@ -81,7 +81,6 @@ namespace metamodel
 
     void Diagram::createSchemaStructure()
     {
-        addProperty<bool>("showgrid");
         set<bool>("showgrid", true);
     }
 }

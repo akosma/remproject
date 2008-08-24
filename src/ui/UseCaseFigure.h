@@ -50,35 +50,81 @@ using std::string;
  */
 namespace ui
 {
+    //! Represents a use-case bubble in a Use Case diagram.
     /*!
      * \class UseCaseFigure
      *
-     *  
+     * Represents a use-case bubble in a Use Case diagram.
      */
-    class UseCaseFigure : public Figure, public LabelListener
+    class UseCaseFigure : public Figure, public LabelListener, public TooltipClient
     {
     public:
 
+        //! Constructor.
         /*!
-         *  UseCaseFigure constructor.
+         * Constructor.
+         * 
+         * \param uniqueId The unique ID of this instance.
          */
         UseCaseFigure(const string&);
 
+        //! Virtual destructor.
         /*!
-         *  UseCaseFigure virtual destructor.
+         * Virtual destructor.
          */
         virtual ~UseCaseFigure();
 
+        //! Called when the user double-clicks on the canvas.
+        /*!
+         * Called when the user double-clicks on the canvas.
+         *
+         * \param e The MouseEvent object passed by the runtime.
+         */
         void mouseDoubleClick(const MouseEvent& e);
         
+        //! Called when the text of the label changes.
+        /*!
+         * Called when the text of the label changes.
+         * 
+         * \param label The label which triggered this callback.
+         */
         virtual void labelTextChanged(Label*);
-    
+
+        //! Returns a string to be shown as tooltip.
+        /*!
+         * Returns a string to be shown as tooltip when the 
+         * user hovers over the figure.
+         * 
+         * \return A String value.
+         */
+        virtual const String getTooltip();
+
     protected:
-        virtual void drawFigure(Path&);
+        //! Draws the figure.
+        /*!
+         * Draws the figure. This method is called during paint() and
+         * tells subclasses to perrform any additional drawing polymorphically.
+         *
+         * \param figure A Path object where the figure is drawn as a vector image.
+         */
+        virtual void drawFigure(Path&) const;
+
+        //! Gives subclasses a chance to update the AnyPropertyMap instance.
+        /*!
+         * Gives subclasses a chance to update the AnyPropertyMap instance 
+         * with other properties than those of the base class. This information
+         * is meant to be saved later in the SQLite file.
+         */
         virtual void updateSpecificProperties();
+
+        //! Tells subclasses to update their state accordingly to the AnyPropertyMap instance.
+        /*!
+         * Tells subclasses to update their state accordingly to the AnyPropertyMap instance.
+         */
         virtual void setSpecificProperties();
 
     private:
+        //! A label holding a title for the current instance.
         Label* _nameLabel;
     };
 }

@@ -51,28 +51,87 @@ using std::string;
  */
 namespace ui
 {
+    //! Represents a straight, solid line between two figures.
     /*!
      * \class LineFigure
      *
-     *  
+     * Represents a straight, solid line between two figures. Works as a
+     * base class for any type of lines used in the application, like arrows.
      */
     class LineFigure : public Figure
     {
     public:
+        //! Constructor.
+        /*!
+         * Constructor.
+         * 
+         * \param uniqueId The unique ID of this instance.
+         * \param a The figure from which the line starts.
+         * \param b The figure where the line ends.
+         */
         LineFigure(const string&, Figure*, Figure*);
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
         virtual ~LineFigure();
         
+        //! Gets the figure where the line starts.
+        /*!
+         * Gets the figure where the line starts.
+         * 
+         * \return A pointer to a Figure.
+         */
         Figure* getStartFigure() const;
+
+        //! Gets the figure where the line ends.
+        /*!
+         * Gets the figure where the line ends.
+         * 
+         * \return A pointer to a Figure.
+         */
         Figure* getEndFigure() const;
+
+        //! Draws the line on the ArrowCanvas of the diagram.
+        /*!
+         * Draws the line on the ArrowCanvas of the diagram. This
+         * method can be overridden by child classes, to provide custom
+         * arrow or line effects.
+         * 
+         * \param g The Graphics context where the drawing takes place.
+         */
         virtual void drawLine(Graphics&) const;
         
     protected:
-        virtual void drawFigure(Path&);
+        //! Draws the figure.
+        /*!
+         * Draws the figure. This method is called during paint() and
+         * tells subclasses to perrform any additional drawing polymorphically.
+         *
+         * \param figure A Path object where the figure is drawn as a vector image.
+         */
+        virtual void drawFigure(Path&) const;
+
+        //! Gives subclasses a chance to update the AnyPropertyMap instance.
+        /*!
+         * Gives subclasses a chance to update the AnyPropertyMap instance 
+         * with other properties than those of the base class. This information
+         * is meant to be saved later in the SQLite file.
+         */
         virtual void updateSpecificProperties();
+
+        //! Tells subclasses to update their state accordingly to the AnyPropertyMap instance.
+        /*!
+         * Tells subclasses to update their state accordingly to the AnyPropertyMap instance.
+         */
         virtual void setSpecificProperties();
         
     private:
+        //! Pointer to the Figure instance where this line starts.
         Figure* _start;
+        
+        //! Pointer to the Figure instance where this line ends.
         Figure* _end;
     };
 }

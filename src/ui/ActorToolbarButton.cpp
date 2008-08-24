@@ -55,8 +55,13 @@ namespace ui
     {
     }
 
-    void ActorToolbarButton::resized()
+    void ActorToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
+        Path internalPath2;
+        Path internalPath3;
+        Path internalPath5;
+        Path internalPath6;
+        
         internalPath2.clear();
         internalPath2.startNewSubPath (11.0f, 36.0f);
         internalPath2.lineTo (19.0f, 26.0f);
@@ -76,10 +81,7 @@ namespace ui
         internalPath6.startNewSubPath (11.0f, 26.0f);
         internalPath6.lineTo (19.0f, 16.0f);
         internalPath6.lineTo (29.0f, 26.0f);
-    }
 
-    void ActorToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
-    {
         if (isButtonDown)
         {
             GradientBrush gradient_4 (Colours::black,

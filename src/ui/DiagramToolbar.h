@@ -44,25 +44,68 @@
  */
 namespace ui
 {
+    // Forward declaration to avoid includes.
+    class DiagramComponent;
+    
+    //! Base class for toolbars.
     /*!
-     * \class Toolbar
+     * \class DiagramToolbar
      *
-     *
+     * Base class for toolbars.
      */
     class DiagramToolbar  : public Component
     {
     public:
+        //! Constructor
+        /*!
+         * Constructor.
+         */
         DiagramToolbar();
-        ~DiagramToolbar();
 
-        void mouseDown(const MouseEvent& e);
-        void mouseDrag(const MouseEvent& e);
-        void paint (Graphics& g);
-        void setParent(Component*);
+        //! Virtual destructor
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~DiagramToolbar();
+
+        //! Called when the user clicks on the toolbar.
+        /*!
+         * Called when the user clicks on the toolbar.
+         *
+         * \param e The MouseEvent object passed by the runtime.
+         */
+        void mouseDown(const MouseEvent&);
+
+        //! Called when the user drags the toolbar.
+        /*!
+         * Called when the user drags the toolbar.
+         *
+         * \param e The MouseEvent object passed by the runtime.
+         */
+        void mouseDrag(const MouseEvent&);
+
+        //! Called when the component is asked to redraw itself on screen.
+        /*!
+         * Called when the component is asked to redraw itself on screen.
+         * 
+         * \param g The Graphics component where the redrawing takes place.
+         */
+        void paint (Graphics&);
+        
+        //! Sets the parent component of the toolbar.
+        /*!
+         * Sets the parent component of the toolbar.
+         * 
+         * \param parent The parent component of the current toolbar.
+         */
+        void setParent(DiagramComponent*);
 
     private:
+        //! Allows the toolbar to be dragged on the screen.
         ComponentDragger _dragger;
-        Component* _parent;
+        
+        //! Stores a pointer to the parent component of the toolbar.
+        DiagramComponent* _parent;
     };
 }
 

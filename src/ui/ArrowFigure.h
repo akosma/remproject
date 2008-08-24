@@ -51,16 +51,38 @@ using std::string;
  */
 namespace ui
 {
+    //! Represents an arrow between different figures.
     /*!
      * \class ArrowFigure
      *
-     *  
+     * Represents an arrow between different figures.
      */
     class ArrowFigure : public LineFigure
     {
     public:
+        //! Constructor.
+        /*!
+         * Constructor.
+         * 
+         * \param uniqueId The unique ID of this instance.
+         * \param a The figure from which the arrow starts.
+         * \param b The figure where the arrow ends.
+         */
         ArrowFigure(const string&, Figure*, Figure*);
+
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
         virtual ~ArrowFigure();
+
+        //! Draws the arrow on the ArrowCanvas of the diagram.
+        /*!
+         * Draws the arrow on the ArrowCanvas of the diagram. This
+         * method overrides the base class method of the same name.
+         * 
+         * \param g The Graphics context where the drawing takes place.
+         */
         virtual void drawLine(Graphics&) const;
     };
 }

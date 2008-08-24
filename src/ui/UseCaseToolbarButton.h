@@ -44,24 +44,51 @@
  */
 namespace ui
 {
+    //! Button used to add use case bubbles in use case diagrams.
     /*!
      * \class UseCaseToolbarButton
      *
-     *
+     * Button used to add use case bubbles in use case diagrams.
      */
     class UseCaseToolbarButton  : public Button
     {
     public:
+        //! Constructor
+        /*!
+         * Constructor.
+         */
         UseCaseToolbarButton ();
-        ~UseCaseToolbarButton();
 
-        void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
+        //! Virtual destructor
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~UseCaseToolbarButton();
+
+        //! Paints the button on screen.
+        /*!
+         * Paints the button on screen.
+         * 
+         * \param g The Graphics context where the button is drawn.
+         * \param isMouseOverButton A flag stating if the mouse hovers the button.
+         * \param isButtonDown A flag stating if the mouse button is pressed.
+         */
+        void paintButton (Graphics&, bool, bool);
+
+        //! Called when the user clicks on the button.
+        /*!
+         * Called when the user clicks on the button.
+         */
         void clicked();
+
+        //! Returns a string to be shown as tooltip.
+        /*!
+         * Returns a string to be shown as tooltip when the 
+         * user hovers over the figure.
+         * 
+         * \return A String value.
+         */
         virtual const String getTooltip();
-        
-    private:
-        UseCaseToolbarButton (const UseCaseToolbarButton&);
-        const UseCaseToolbarButton& operator= (const UseCaseToolbarButton&);
     };
 }
 

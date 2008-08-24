@@ -55,8 +55,13 @@ namespace ui
         return String("To create an arrow, select two actors.");
     }
 
-    void ArrowToolbarButton::resized()
+    void ArrowToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
+        Path internalPath2;
+        Path internalPath3;
+        Path internalPath5;
+        Path internalPath6;
+
         internalPath2.clear();
         internalPath2.startNewSubPath (24.0f, 8.0f);
         internalPath2.lineTo (32.0f, 8.0f);
@@ -78,10 +83,7 @@ namespace ui
         internalPath6.startNewSubPath (32.0f, 8.0f);
         internalPath6.lineTo (8.0f, 32.0f);
         internalPath6.closeSubPath();
-    }
 
-    void ArrowToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
-    {
         if (isButtonDown)
         {
             GradientBrush gradient_4 (Colours::black,

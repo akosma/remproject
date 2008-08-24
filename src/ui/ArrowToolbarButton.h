@@ -44,27 +44,51 @@
  */
 namespace ui
 {
+    //! Button used to add arrows in diagrams.
     /*!
      * \class ArrowToolbarButton
      *
-     *
+     * Button used to add arrows in diagrams.
      */
     class ArrowToolbarButton  : public Button
     {
     public:
+        //! Constructor
+        /*!
+         * Constructor.
+         */
         ArrowToolbarButton ();
-        ~ArrowToolbarButton();
 
-        void resized();
-        void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
+        //! Virtual destructor
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~ArrowToolbarButton();
+
+        //! Paints the button on screen.
+        /*!
+         * Paints the button on screen.
+         * 
+         * \param g The Graphics context where the button is drawn.
+         * \param isMouseOverButton A flag stating if the mouse hovers the button.
+         * \param isButtonDown A flag stating if the mouse button is pressed.
+         */
+        void paintButton (Graphics&, bool, bool);
+
+        //! Called when the user clicks on the button.
+        /*!
+         * Called when the user clicks on the button.
+         */
         void clicked();
-        virtual const String getTooltip();
 
-    private:
-        Path internalPath2;
-        Path internalPath3;
-        Path internalPath5;
-        Path internalPath6;
+        //! Returns a string to be shown as tooltip.
+        /*!
+         * Returns a string to be shown as tooltip when the 
+         * user hovers over the figure.
+         * 
+         * \return A String value.
+         */
+        virtual const String getTooltip();
     };
 }
 

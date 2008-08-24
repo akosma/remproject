@@ -48,16 +48,17 @@ namespace ui
     ActorFigure::ActorFigure(const string& uniqueId)
     : Figure(80, 200, uniqueId)
     , LabelListener()
-    , _nameLabel(0)
+    , TooltipClient()
+    , _titleLabel(0)
     {
-        _nameLabel = new Label("NameLabel", "Name");
-        _nameLabel->setJustificationType(Justification::horizontallyCentred);
-        _nameLabel->setTopLeftPosition(0, getInitialHeight() - 30);
-        _nameLabel->setSize(getInitialWidth(), 30);
-        _nameLabel->setEditable(false, true, false);
-        _nameLabel->setInterceptsMouseClicks(false, false);
-        _nameLabel->addListener(this);
-        this->addAndMakeVisible(_nameLabel, 0);
+        _titleLabel = new Label("NameLabel", "Name");
+        _titleLabel->setJustificationType(Justification::horizontallyCentred);
+        _titleLabel->setTopLeftPosition(0, getInitialHeight() - 30);
+        _titleLabel->setSize(getInitialWidth(), 30);
+        _titleLabel->setEditable(false, true, false);
+        _titleLabel->setInterceptsMouseClicks(false, false);
+        _titleLabel->addListener(this);
+        this->addAndMakeVisible(_titleLabel, 0);
     }
 
     ActorFigure::~ActorFigure()
@@ -66,7 +67,7 @@ namespace ui
     
     void ActorFigure::mouseDoubleClick(const MouseEvent& e)
     {
-        _nameLabel->showEditor();
+        _titleLabel->showEditor();
     }
 
     void ActorFigure::labelTextChanged(Label* label)
@@ -78,17 +79,22 @@ namespace ui
     {
         AnyPropertyMap& properties = getProperties();
         String title(properties.get<string>("title").c_str());
-        _nameLabel->setText(title, false);
+        _titleLabel->setText(title, false);
     }
     
     void ActorFigure::updateSpecificProperties()
     {
         AnyPropertyMap& properties = getProperties();
-        string value = _nameLabel->getText(false).toUTF8();
+        string value = _titleLabel->getText(false).toUTF8();
         properties.set<string>("title", value);
     }
+    
+    const String ActorFigure::getTooltip()
+    {
+        return String("Click once to select, double-click to edit");
+    }
 
-    void ActorFigure::drawFigure(Path& actor)
+    void ActorFigure::drawFigure(Path& actor) const
     {
         const int currentWidth = getWidth();
         const int currentHeight = getHeight();
@@ -126,8 +132,8 @@ namespace ui
         const float rightHandX = rightFootX;
         const float rightHandY = leftHandY;
         
-        _nameLabel->setTopLeftPosition(0, currentHeight - 30);
-        _nameLabel->setSize(currentWidth, 30);
+        _titleLabel->setTopLeftPosition(0, currentHeight - 30);
+        _titleLabel->setSize(currentWidth, 30);
         
         actor.addEllipse(headStartX, headStartY, headWidth, headHeight);
         actor.addLineSegment(bodyX, bodyStartY, bodyX, bodyEndY, strokeWidth);       // body

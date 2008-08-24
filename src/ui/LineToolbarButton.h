@@ -44,24 +44,51 @@
  */
 namespace ui
 {
+    //! Button used to add straight lines.
     /*!
      * \class LineToolbarButton
      *
+     * Button used to add straight lines.
      */
     class LineToolbarButton  : public Button
     {
     public:
+        //! Constructor
+        /*!
+         * Constructor.
+         */
         LineToolbarButton ();
-        ~LineToolbarButton();
 
-        void resized();
-        void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
+        //! Virtual destructor
+        /*!
+         * Virtual destructor.
+         */
+        virtual ~LineToolbarButton();
+
+        //! Paints the button on screen.
+        /*!
+         * Paints the button on screen.
+         * 
+         * \param g The Graphics context where the button is drawn.
+         * \param isMouseOverButton A flag stating if the mouse hovers the button.
+         * \param isButtonDown A flag stating if the mouse button is pressed.
+         */
+        void paintButton (Graphics&, bool, bool);
+
+        //! Called when the user clicks on the button.
+        /*!
+         * Called when the user clicks on the button.
+         */
         void clicked();
-        virtual const String getTooltip();
 
-    private:
-        Path internalPath2;
-        Path internalPath4;
+        //! Returns a string to be shown as tooltip.
+        /*!
+         * Returns a string to be shown as tooltip when the 
+         * user hovers over the figure.
+         * 
+         * \return A String value.
+         */
+        virtual const String getTooltip();
     };
 }
 

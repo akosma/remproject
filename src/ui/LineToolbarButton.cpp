@@ -55,8 +55,11 @@ namespace ui
         return String("To create a line, select an actor and a use case bubble, or two use case bubbles.");
     }
 
-    void LineToolbarButton::resized()
+    void LineToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
+        Path internalPath2;
+        Path internalPath4;
+
         internalPath2.clear();
         internalPath2.startNewSubPath (32.0f, 8.0f);
         internalPath2.lineTo (8.0f, 32.0f);
@@ -66,10 +69,7 @@ namespace ui
         internalPath4.startNewSubPath (32.0f, 8.0f);
         internalPath4.lineTo (8.0f, 32.0f);
         internalPath4.closeSubPath();
-    }
 
-    void LineToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
-    {
         if (isButtonDown)
         {
             GradientBrush gradient_3 (Colours::black,
