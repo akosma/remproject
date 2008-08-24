@@ -60,8 +60,6 @@ namespace ui
         void clicked();
         virtual const String getTooltip();
 
-        juce_UseDebuggingNewOperator
-
     private:
         Path internalPath2;
         Path internalPath3;

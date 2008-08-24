@@ -66,4 +66,4 @@ namespace ui
     };
 }
 
-#endif   // DIAGRAMTOOLBAR_H_
+#endif   /* DIAGRAMTOOLBAR_H_ */

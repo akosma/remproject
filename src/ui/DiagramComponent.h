@@ -67,9 +67,11 @@ using std::string;
  */
 namespace ui
 {
+    // Forward declarations to avoid includes
     class DiagramToolbar;
     class UMLDiagram;
 
+    //! Wrapper around a Viewport instance holding a UMLDiagram instance inside.
     /*!
      * \class DiagramComponent
      *
@@ -81,34 +83,108 @@ namespace ui
     class DiagramComponent  : public Component
     {
     public:
+        //! Constructor.
+        /*!
+         * Constructor.
+         * 
+         * \param diagram The diagram to wrap.
+         * \param index The index of this diagram in the parent tabbed component.
+         */
         DiagramComponent(UMLDiagram*, const int);
+        
+        //! Virtual destructor.
+        /*!
+         * Virtual destructor.
+         */
         virtual ~DiagramComponent();
 
-        void paint (Graphics& g);
+        //! Called when the component must redraw itself.
+        /*!
+         * Called when the component must redraw itself.
+         *
+         * \param g The Graphics instance where the instance is drawn.
+         */
+        void paint(Graphics&);
+        
+        //! Called when the component is resized.
+        /*!
+         * Called when the component is resized.
+         */
         void resized();
-        bool exportAsPNG();
+        
+        //! Exports the wrapped diagram as a PNG file.
+        /*!
+         * Exports the wrapped diagram as a PNG file.
+         */
+        void exportAsPNG();
+
+        //! Tells the wrapped diagram to show or hide the grid.
+        /*!
+         * Tells the wrapped diagram to show or hide the grid.
+         */
         void toggleGrid();
+        
+        //! Forwards a notification to the wrapped diagram.
+        /*!
+         * Forwards a notification to the wrapped diagram.
+         * 
+         * \param notification A NewFigureAdded notification.
+         */
         void addFigure(const AutoPtr<NewFigureAdded>&);
+        
+        //! Returns the unique ID of the wrapped diagram.
+        /*!
+         * Returns the unique ID of the wrapped diagram.
+         * 
+         * \return A string.
+         */
         const string& getUniqueId() const;
+        
+        //! Tells the wrapped diagram to delete the figures selected by the user.
+        /*!
+         * Tells the wrapped diagram to delete the figures selected by the user.
+         */
         void deleteSelectedFigures();
 
     private:
+        //! Handles the ProjectTabbedComponentChangedTab notification.
+        /*!
+         * Handles the ProjectTabbedComponentChangedTab notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
         void handleProjectTabbedComponentChangedTab(const AutoPtr<ProjectTabbedComponentChangedTab>&);
+
+        //! Handles the ActiveWindowStatusChanged notification.
+        /*!
+         * Handles the ActiveWindowStatusChanged notification.
+         *
+         * \param notification The notification passed by the Poco::NotificationCenter.
+         */
         void handleActiveWindowStatusChanged(const AutoPtr<ActiveWindowStatusChanged>&);
 
     private:
+        //! States whether the current instance is visible in the parent tabbed component.
         bool _isActive;
+        
+        //! Stores the index of the current instance in the parent tabbed component.
         const int _index;
+        
+        //! Provides scrolling capabilities to the internal UMLDiagram instance.
         Viewport* _viewport;
+        
+        //! Pointer to the toolbar of the diagram wrapped by the current instance.
         DiagramToolbar* _toolbar;
+        
+        //! The UMLDiagram instance wrapped by the current object.
         UMLDiagram* _diagram;
-        NObserver<DiagramComponent, ProjectTabbedComponentChangedTab>* _tabObserver;
-        NObserver<DiagramComponent, ActiveWindowStatusChanged>* _windowStatusObserver;
 
-        // (prevent copy constructor and operator= from being generated..)
-        DiagramComponent (const DiagramComponent&);
-        const DiagramComponent& operator= (const DiagramComponent&);
+        //! Observer for ProjectTabbedComponentChangedTab notifications.
+        NObserver<DiagramComponent, ProjectTabbedComponentChangedTab>* _tabObserver;
+
+        //! Observer for ActiveWindowStatusChanged notifications.
+        NObserver<DiagramComponent, ActiveWindowStatusChanged>* _windowStatusObserver;
     };
 }
 
-#endif   // DIAGRAMCOMPONENT_H_
+#endif   /* DIAGRAMCOMPONENT_H_ */

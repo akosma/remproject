@@ -60,21 +60,12 @@ namespace ui
         void clicked();
         virtual const String getTooltip();
 
-        juce_UseDebuggingNewOperator
-
     private:
-        //[UserVariables]   -- You can add your own custom variables in this section.
-        //[/UserVariables]
-
         Path internalPath2;
         Path internalPath3;
         Path internalPath5;
         Path internalPath6;
-
-        // (prevent copy constructor and operator= from being generated..)
-        ArrowToolbarButton (const ArrowToolbarButton&);
-        const ArrowToolbarButton& operator= (const ArrowToolbarButton&);
     };
 }
 
-#endif   // __JUCER_HEADER_ARROWFIGUREBUTTON_ARROWFIGUREBUTTON_A444D0E1__
+#endif   /* ARROWTOOLBARBUTTON_H_ */

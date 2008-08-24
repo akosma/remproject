@@ -59,4 +59,4 @@ namespace ui
     };
 }
 
-#endif   // USECASEDIAGRAMTOOLBAR_H_
+#endif   /* USECASEDIAGRAMTOOLBAR_H_ */

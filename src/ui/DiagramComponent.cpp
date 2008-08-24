@@ -56,8 +56,8 @@ namespace ui
     DiagramComponent::DiagramComponent(UMLDiagram* diagram, const int index)
     : Component()
     , _index(index)
-    , _viewport (new Viewport())
-    , _diagram (diagram)
+    , _viewport(new Viewport())
+    , _diagram(diagram)
     , _toolbar(diagram->createToolbar())
     , _isActive(false)
     , _tabObserver(new NObserver<DiagramComponent, ProjectTabbedComponentChangedTab>(*this, &DiagramComponent::handleProjectTabbedComponentChangedTab))
@@ -86,7 +86,7 @@ namespace ui
 
     void DiagramComponent::paint (Graphics& g)
     {
-        g.fillAll (Colours::grey);
+        g.fillAll(Colours::grey);
     }
     
     void DiagramComponent::addFigure(const AutoPtr<NewFigureAdded>& notification)
@@ -99,10 +99,9 @@ namespace ui
         _diagram->deleteSelectedFigures();
     }
     
-    bool DiagramComponent::exportAsPNG()
+    void DiagramComponent::exportAsPNG()
     {
         FileChooser fileChooser("Choose a file name for the diagram", File::getSpecialLocation(File::userDesktopDirectory), "*.png", NATIVE_DIALOG);
-        bool result = false;
         if (fileChooser.browseForFileToSave(true))
         {
             File file = fileChooser.getResult();
@@ -115,17 +114,16 @@ namespace ui
             juce::Rectangle rect(0, 0, _diagram->getWidth(), _diagram->getHeight());
             Image* image = _diagram->createComponentSnapshot(rect);
             PNGImageFormat png;
-            result = png.writeImageToStream(*image, *stream);
+            png.writeImageToStream(*image, *stream);
             stream->flush();
             delete stream;
             delete image;
         }
-        return result;
     }
 
     void DiagramComponent::resized()
     {
-        _viewport->setBounds (0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
+        _viewport->setBounds(0, 0, proportionOfWidth (1.0000f), proportionOfHeight (1.0000f));
     }
     
     const string& DiagramComponent::getUniqueId() const

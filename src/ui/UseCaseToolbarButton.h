@@ -65,4 +65,4 @@ namespace ui
     };
 }
 
-#endif   // USECASETOOLBARBUTTON_H_
+#endif   /* USECASETOOLBARBUTTON_H_ */
