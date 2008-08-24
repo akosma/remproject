@@ -19,7 +19,7 @@
 
 //! Contains the implementation of the storage::FindConditions class.
 /*!
- * \file ActiveRecord.h
+ * \file FindConditions.cpp
  *
  * Contains the implementation of the storage::FindConditions class.
  * 

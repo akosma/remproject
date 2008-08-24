@@ -19,7 +19,7 @@
 
 //! Contains the implementation of the tests::DiagramTest class.
 /*!  
- * \file DiagramTest.h
+ * \file DiagramTest.cpp
  * 
  * Contains the implementation of the tests::DiagramTest class.
  * 

@@ -96,7 +96,7 @@ using metamodel::Element;
 
 //! Contains the controller classes of the application.
 /*!
- * \namespace controller
+ * \namespace controllers
  * Contains the controller classes of the application, following
  * the naming conventions of the MVC design pattern.
  */

@@ -19,7 +19,7 @@
 
 //! Contains the interface of the storage::FindConditions class.
 /*!
- * \file ActiveRecord.h
+ * \file FindConditions.h
  *
  * Contains the interface of the storage::FindConditions class.
  * 

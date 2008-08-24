@@ -19,7 +19,7 @@
 
 //! Contains the starting point of the GUI Rem application.
 /*!
- * \file Main.cpp
+ * \file ui/Main.cpp
  *
  * Contains the starting point of the GUI Rem application.
  * 
@@ -66,7 +66,6 @@ START_JUCE_APPLICATION (ui::Application)
  * More information about Rem can be found in the following pages:
  *
  * \li \subpage pageLicense "License"
- * \li \subpage pageScreenshots "Screenshots"
  * \li \subpage pageBuildWindows "Build in Windows XP"
  * \li \subpage pageBuildLinux "Build in Kubuntu Linux"
  * \li \subpage pageBuildMac "Build in Mac OS X"
@@ -418,12 +417,6 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 \endverbatim
- */
-
-/*!
- * \page pageScreenshots Screenshots
- *
- * To be done.
  */
 
 /*!
