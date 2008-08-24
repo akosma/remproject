@@ -70,4 +70,29 @@ namespace ui
     {
         return _end;
     }
+    
+    void LineFigure::drawLine(Graphics& g) const
+    {
+        const Figure* start = getStartFigure();
+        const Figure* end = getEndFigure();
+        if (start && end && start->isVisible() && end->isVisible())
+        {
+            const Point* s = start->getAnchorPointRelativeTo(end);
+            const Point* e = end->getAnchorPointRelativeTo(start);
+            if (s && e)
+            {
+                Path arrow;
+                g.setColour(Colours::black);
+                float width = 1.0f;
+                if (isSelected())
+                {
+                    width = 3.0f;
+                }
+                arrow.addLineSegment(s->getX(), s->getY(), e->getX(), e->getY(), width);
+                g.strokePath(arrow, PathStrokeType(width));
+            }
+            delete s;
+            delete e;
+        }
+    }
 }

@@ -61,6 +61,7 @@ namespace ui
     public:
         ArrowFigure(const string&, Figure*, Figure*);
         virtual ~ArrowFigure();
+        virtual void drawLine(Graphics&) const;
     };
 }
 

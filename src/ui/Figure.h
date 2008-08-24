@@ -93,7 +93,7 @@ namespace ui
         const Point* getAnchorPointRelativeTo(const Figure*) const;
         
         void setSelected(bool);
-        const bool isSelected();
+        const bool isSelected() const;
         const string& getUniqueId() const;
         AnyPropertyMap& getProperties();
         void setProperties(const AnyPropertyMap&);

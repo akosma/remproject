@@ -129,7 +129,7 @@ namespace ui
                 else if (className == "arrow")
                 {
                     ArrowFigure* arrowFigure = new ArrowFigure(uniqueId, a, b);
-                    addArrowToCanvas(arrowFigure);
+                    addLineToCanvas(arrowFigure);
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace ui
                     if (a && b)
                     {
                         ArrowFigure* arrowFigure = new ArrowFigure(uniqueId, a, b);
-                        addArrowToCanvas(arrowFigure);
+                        addLineToCanvas(arrowFigure);
                         postNewLineAddedNotification(NewFigureAdded::Arrow, arrowFigure);
                     }
                 }

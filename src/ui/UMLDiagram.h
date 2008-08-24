@@ -97,7 +97,6 @@ namespace ui
     class ArrowCanvas;
     class FigureLassoSource;
     class DiagramToolbar;
-    class ArrowFigure;
     class LineFigure;
     
     /*!
@@ -133,7 +132,6 @@ namespace ui
         void handleFigureSelected(const AutoPtr<FigureSelected>&);
         void handleArrowCanvasClicked(const AutoPtr<ArrowCanvasClicked>&);
         void handleFigureChanged(const AutoPtr<FigureChanged>&);
-        void addArrowToCanvas(ArrowFigure*);
         void addLineToCanvas(LineFigure*);
         
     private:

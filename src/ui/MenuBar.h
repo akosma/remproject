@@ -44,36 +44,66 @@
  */
 namespace ui
 {
+    // Forward declaration
     class Window;
+    
+    //! Provides the menu bar of the application.
     /*!
      * \class MenuBar
      *
-     *  
+     * Used by the application to provide a set of menu items on top of
+     * the application window (or screen) with the various actions that
+     * users can perform on Rem.
      */
     class MenuBar : public MenuBarModel
     {
     public:
 
+        //! Constructor.
         /*!
-         *  MenuBar constructor.
+         * Constructor.
+         * 
+         * \param owner The ui::Window object that contains this menu bar.
+         * This class uses this element to retrieve the ApplicationCommandManager
+         * of this application.
          */
         MenuBar(Window*);
 
+        //! Virtual destructor.
         /*!
-         *  MenuBar virtual destructor.
+         * Virtual destructor.
          */
         virtual ~MenuBar();
         
+        //! Returns the titles of the items in the menu bar.
+        /*!
+         * Returns the titles of the items in the menu bar.
+         * 
+         * \return A StringArray value.
+         */
         virtual const StringArray getMenuBarNames();
         
+        //! Called when a menu item has been clicked on.
+        /*!
+         * Called when a menu item has been clicked on.
+         * 
+         * \param menuItemID The ID of the selected item
+         * \param topLevelMenuIndex The index of the top-level menu from which the item was chosen.
+         */
         virtual void menuItemSelected(int, int);
-        
+
+        //!
+        /*!
+         * Returns the popup menu to display for a given top-level menu.
+         * 
+         * \param topLevelMenuIndex The index of the top-level menu to show.
+         * \param menuName The name of the top-level menu item to show.
+         */
         virtual const PopupMenu getMenuForIndex(int, const String&);
 
     private:
-        ApplicationCommandManager* _manager;
+        //! The Window instance that owns this menu bar.
         Window* _owner;
-
     };
 }
 

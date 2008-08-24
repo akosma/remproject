@@ -185,7 +185,7 @@ namespace ui
         updateSpecificProperties();
     }
     
-    const bool Figure::isSelected()
+    const bool Figure::isSelected() const
     {
         return _selected;
     }

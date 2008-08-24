@@ -75,7 +75,7 @@ namespace notifications
             //! Lines
             Line,
             
-            // Use case bubbles
+            //! Use case bubbles
             UseCase
         };
 

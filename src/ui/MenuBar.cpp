@@ -46,14 +46,13 @@ namespace ui
 {
     MenuBar::MenuBar(Window* owner)
     : MenuBarModel()
-    , _manager(NULL)
     , _owner(owner)
     {
     }
     
     MenuBar::~MenuBar()
     {
-        // Do not "delete _manager" or "window" here, since this instance does not own them.
+        // Do not "delete window" here, since this instance does not own it.
     }
     
     const StringArray MenuBar::getMenuBarNames()
@@ -88,6 +87,8 @@ namespace ui
                 menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::fileExportPNG);
 #if JUCE_WIN32 || JUCE_LINUX
+                // In Mac OS X, the "Quit" menu item is located in the
+                // "Rem" menu, generated automatically by Juce during build.
                 menu.addSeparator();
                 menu.addCommandItem(manager, CommandDelegate::fileQuit);
 #endif

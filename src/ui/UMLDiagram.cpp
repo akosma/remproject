@@ -42,10 +42,6 @@
 #include "ArrowCanvas.h"
 #endif
 
-#ifndef ARROWFIGURE_H_
-#include "ArrowFigure.h"
-#endif
-
 #ifndef LINEFIGURE_H_
 #include "LineFigure.h"
 #endif
@@ -94,12 +90,6 @@ namespace ui
         deleteAndZero(_arrowObserver);
         deleteAndZero(_changeObserver);
         deleteAllChildren();
-    }
-
-    void UMLDiagram::addArrowToCanvas(ArrowFigure* arrowFigure)
-    {
-        addChildComponent(arrowFigure, -1);
-        _canvas->addArrow(arrowFigure);
     }
 
     void UMLDiagram::addLineToCanvas(LineFigure* lineFigure)
@@ -164,7 +154,7 @@ namespace ui
                 LineFigure* lineFigure = dynamic_cast<LineFigure*>(item);
                 if (lineFigure)
                 {
-                    _canvas->showLineSelected(lineFigure);
+                    _canvas->setLineSelected(lineFigure);
                 }
             }
         }

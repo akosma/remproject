@@ -64,6 +64,7 @@ namespace ui
         
         Figure* getStartFigure() const;
         Figure* getEndFigure() const;
+        virtual void drawLine(Graphics&) const;
         
     protected:
         virtual void drawFigure(Path&);
