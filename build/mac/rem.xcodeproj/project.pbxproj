@@ -171,7 +171,6 @@
 		3A4D2DC30E140E960000CBC5 /* UseCaseDiagramToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UseCaseDiagramToolbar.h; path = ../../src/ui/UseCaseDiagramToolbar.h; sourceTree = SOURCE_ROOT; };
 		3A4D2DC70E140F940000CBC5 /* ProjectTabbedComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectTabbedComponent.h; path = ../../src/ui/ProjectTabbedComponent.h; sourceTree = SOURCE_ROOT; };
 		3A4D2DC80E140F940000CBC5 /* ProjectTabbedComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProjectTabbedComponent.cpp; path = ../../src/ui/ProjectTabbedComponent.cpp; sourceTree = SOURCE_ROOT; };
-		3A4EAEA40D8D320400C4895F /* remtool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtool; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4EAEAA0D8D332000C4895F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/tests/main.cpp; sourceTree = SOURCE_ROOT; };
 		3A4EB45C0D8D48DF00C4895F /* remtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = remtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5191F20E4DC747003053A9 /* ArrowCanvasClicked.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArrowCanvasClicked.cpp; path = ../../src/notifications/ArrowCanvasClicked.cpp; sourceTree = SOURCE_ROOT; };
@@ -264,13 +263,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A4EAEA20D8D320400C4895F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3A4EB45A0D8D48DF00C4895F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -334,7 +326,6 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A4EAEA40D8D320400C4895F /* remtool */,
 				3A4EB45C0D8D48DF00C4895F /* remtest */,
 				3A75965D0DAFC350000AC38C /* Rem.app */,
 			);
@@ -449,16 +440,16 @@
 				3A5191F40E4DC747003053A9 /* DiagramToggleGrid.cpp */,
 				3A5191F70E4DC747003053A9 /* ExportDiagramAsPNG.h */,
 				3A5191F60E4DC747003053A9 /* ExportDiagramAsPNG.cpp */,
-				3AE095720E608E4400ED07CF /* FigureChanged.cpp */,
 				3AE095730E608E4400ED07CF /* FigureChanged.h */,
+				3AE095720E608E4400ED07CF /* FigureChanged.cpp */,
 				3A5191FB0E4DC747003053A9 /* FigureSelected.h */,
 				3A5191FA0E4DC747003053A9 /* FigureSelected.cpp */,
 				3A22D6540E5B2EFB001BD4B2 /* NewProjectCreated.h */,
 				3A22D6550E5B2EFB001BD4B2 /* NewProjectCreated.cpp */,
-				3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */,
 				3AD946090E56F73C00DB9DC7 /* NewDiagramAdded.h */,
-				3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */,
+				3AD946080E56F73C00DB9DC7 /* NewDiagramAdded.cpp */,
 				3A631FA70E56EAD000F22A12 /* NewFigureAdded.h */,
+				3A631FA60E56EAD000F22A12 /* NewFigureAdded.cpp */,
 				3A1519130E60349E00FC3DAF /* NewLineAdded.h */,
 				3A1519140E60349E00FC3DAF /* NewLineAdded.cpp */,
 				3A1BCBE40E58A39500C44D99 /* NewObjectAdded.h */,
@@ -574,22 +565,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A4EAEA30D8D320400C4895F /* remtool */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3A4EAEA80D8D322200C4895F /* Build configuration list for PBXNativeTarget "remtool" */;
-			buildPhases = (
-				3A4EAEA10D8D320400C4895F /* Sources */,
-				3A4EAEA20D8D320400C4895F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = remtool;
-			productName = remtool;
-			productReference = 3A4EAEA40D8D320400C4895F /* remtool */;
-			productType = "com.apple.product-type.tool";
-		};
 		3A4EB45B0D8D48DF00C4895F /* remtest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A4EB4600D8D490900C4895F /* Build configuration list for PBXNativeTarget "remtest" */;
@@ -635,7 +610,6 @@
 			projectDirPath = "";
 			projectRoot = ../..;
 			targets = (
-				3A4EAEA30D8D320400C4895F /* remtool */,
 				3A4EB45B0D8D48DF00C4895F /* remtest */,
 				3A75965C0DAFC350000AC38C /* Rem */,
 			);
@@ -654,13 +628,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3A4EAEA10D8D320400C4895F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3A4EB4590D8D48DF00C4895F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,53 +767,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-			};
-			name = Release;
-		};
-		3A4EAEA60D8D320400C4895F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INSTALL_PATH = /usr/local/bin;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = remtool;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		3A4EAEA70D8D320400C4895F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INSTALL_PATH = /usr/local/bin;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = remtool;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1020,15 +940,6 @@
 			buildConfigurations = (
 				1DEB923608733DC60010E9CD /* Debug */,
 				1DEB923708733DC60010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3A4EAEA80D8D322200C4895F /* Build configuration list for PBXNativeTarget "remtool" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A4EAEA60D8D320400C4895F /* Debug */,
-				3A4EAEA70D8D320400C4895F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

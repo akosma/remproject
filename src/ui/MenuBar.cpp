@@ -58,7 +58,7 @@ namespace ui
     
     const StringArray MenuBar::getMenuBarNames()
     {
-        const char* const names[] = {"File", "Edit", "Project", "Diagram", "Window", "Help", 0};
+        const char* const names[] = {"File", "Edit", "Project", "Diagram", "Help", 0};
         return StringArray((const char**)names);
     }
     
@@ -83,7 +83,6 @@ namespace ui
                 menu.addCommandItem(manager, CommandDelegate::fileOpen);
 
                 menu.addSeparator();
-                menu.addCommandItem(manager, CommandDelegate::fileClose);
                 menu.addCommandItem(manager, CommandDelegate::fileSave);
                 menu.addCommandItem(manager, CommandDelegate::fileSaveAs);
                 menu.addSeparator();
@@ -130,13 +129,6 @@ namespace ui
             }
 
             case 4:
-            {
-                // "Window" menu items
-                menu.addItem (50, "Minimize");
-                break;
-            }
-
-            case 5:
             {
                 // "Help" menu items
                 menu.addCommandItem(manager, CommandDelegate::helpAbout);

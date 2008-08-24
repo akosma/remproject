@@ -90,15 +90,6 @@ namespace ui
         NotificationCenter::defaultCenter().addObserver(*_newDiagramObserver);
         NotificationCenter::defaultCenter().addObserver(*_projectOpenedObserver);
         NotificationCenter::defaultCenter().addObserver(*_newProjectCreatedObserver);
-
-//        PropertyPanel* panel = new PropertyPanel();
-//        panel->setTopLeftPosition(100, 100);
-//        addAndMakeVisible(panel, -1);
-//        
-//        TextPropertyComponent* text = new TextPropertyComponent(String("Test"), 2000, true);
-//        Array<PropertyComponent*> array;
-//        array << text;
-//        panel.addProperties(array);
     }
     
     ProjectComponent::~ProjectComponent()

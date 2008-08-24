@@ -69,7 +69,7 @@ namespace ui
         void resized();
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
         void clicked();
-
+        virtual const String getTooltip();
 
         juce_UseDebuggingNewOperator
 

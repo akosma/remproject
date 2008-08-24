@@ -47,6 +47,7 @@ namespace ui
 {
     UseCaseFigure::UseCaseFigure(const string& uniqueId)
     : Figure(200, 150, uniqueId)
+    , LabelListener()
     , _nameLabel(0)
     {
         const float margin = getInitialMargin();

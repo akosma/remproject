@@ -47,6 +47,7 @@ namespace ui
 {
     ActorFigure::ActorFigure(const string& uniqueId)
     : Figure(80, 200, uniqueId)
+    , LabelListener()
     , _nameLabel(0)
     {
         _nameLabel = new Label("NameLabel", "Name");

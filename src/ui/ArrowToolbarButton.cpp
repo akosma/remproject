@@ -70,6 +70,11 @@ namespace ui
         //[/Destructor]
     }
 
+    const String ArrowToolbarButton::getTooltip()
+    {
+        return String("To create an arrow, select two actors.");
+    }
+
     void ArrowToolbarButton::resized()
     {
         internalPath2.clear();

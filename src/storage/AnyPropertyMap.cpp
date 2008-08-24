@@ -89,7 +89,11 @@ namespace storage
         return _map.empty();
     }
 
-    template <>
+    // Specialization of the "set()" template method to be used by the
+    // "merge()" method below. In this case we do not need to create
+    // an AnyProperty object wrapping another scalar value; just
+    // take the parameter and store it.
+    template <> 
     void AnyPropertyMap::set<AnyProperty>(const string& key, const AnyProperty& value)
     {
         _map[key] = value;

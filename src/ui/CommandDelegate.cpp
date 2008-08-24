@@ -109,7 +109,6 @@ namespace ui
         const CommandID ids[] = { 
             fileNewProject,
             fileOpen,
-            fileClose,
             fileSave,
             fileSaveAs,
             fileExportPNG,
@@ -161,19 +160,9 @@ namespace ui
                 break;
             }
 
-            case fileClose:
-            {
-                info.shortName = "Close";
-                info.description = "Closes the current project";
-                info.flags = 0;
-                info.addDefaultKeypress(119, ModifierKeys::commandModifier); // CTRL + W
-                info.setActive(false);
-                break;
-            }
-
             case fileSave:
             {
-                info.shortName = "Save...";
+                info.shortName = "Save";
                 info.description = "Saves the current project to disk";
                 info.flags = 0;
                 info.addDefaultKeypress(115, ModifierKeys::commandModifier); // CTRL + S

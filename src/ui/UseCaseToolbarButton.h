@@ -57,7 +57,8 @@ namespace ui
 
         void paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown);
         void clicked();
-
+        virtual const String getTooltip();
+        
     private:
         UseCaseToolbarButton (const UseCaseToolbarButton&);
         const UseCaseToolbarButton& operator= (const UseCaseToolbarButton&);

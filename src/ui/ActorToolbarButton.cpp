@@ -59,6 +59,11 @@ namespace ui
         //[/Constructor]
     }
 
+    const String ActorToolbarButton::getTooltip()
+    {
+        return String("Click to add an actor to the diagram.");
+    }
+
     ActorToolbarButton::~ActorToolbarButton()
     {
         //[Destructor_pre]. You can add your own custom destruction code here..

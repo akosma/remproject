@@ -49,6 +49,11 @@ namespace ui
     LineToolbarButton::~LineToolbarButton()
     {
     }
+    
+    const String LineToolbarButton::getTooltip()
+    {
+        return String("To create a line, select an actor and a use case bubble, or two use case bubbles.");
+    }
 
     void LineToolbarButton::resized()
     {

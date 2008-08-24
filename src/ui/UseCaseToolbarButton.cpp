@@ -50,6 +50,11 @@ namespace ui
     {
     }
 
+    const String UseCaseToolbarButton::getTooltip()
+    {
+        return String("Click to add an use case bubble to the diagram.");
+    }
+
     void UseCaseToolbarButton::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
     {
         if (isButtonDown)
