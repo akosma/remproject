@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::DiagramToolbar class.
 /*!
- * \file Toolbar.cpp
+ * \file DiagramToolbar.h
  *
  * Contains the interface of the ui::DiagramToolbar class.
  *

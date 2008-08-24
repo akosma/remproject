@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::UseCaseToolbarButton class.
 /*!
- * \file UseCaseToolbarButton.cpp
+ * \file UseCaseToolbarButton.h
  *
  * Contains the interface of the ui::UseCaseToolbarButton class.
  *

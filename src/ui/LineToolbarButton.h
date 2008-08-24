@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::LineToolbarButton class.
 /*!
- * \file LineToolbarButton.cpp
+ * \file LineToolbarButton.h
  *
  * Contains the interface of the ui::LineToolbarButton class.
  *

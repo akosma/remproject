@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::UseCaseDiagramToolbar class.
 /*!
- * \file Toolbar.cpp
+ * \file UseCaseDiagramToolbar.h
  *
  * Contains the interface of the ui::UseCaseDiagramToolbar class.
  *

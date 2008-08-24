@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::DiagramComponent class.
 /*!
- * \file DiagramComponent.cpp
+ * \file DiagramComponent.h
  *
  * Contains the interface of the ui::DiagramComponent class.
  *

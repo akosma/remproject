@@ -19,7 +19,7 @@
 
 //! Contains the starting point of the GUI Rem application.
 /*!
- * \file Main.cpp
+ * \file ui/Main.cpp
  *
  * Contains the starting point of the GUI Rem application.
  * 

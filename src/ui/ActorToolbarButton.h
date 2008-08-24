@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::ActorToolbarButton class.
 /*!
- * \file ActorToolbarButton.cpp
+ * \file ActorToolbarButton.h
  *
  * Contains the interface of the ui::ActorToolbarButton class.
  *

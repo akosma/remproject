@@ -19,7 +19,7 @@
 
 //! Contains the interface of the ui::ArrowToolbarButton class.
 /*!
- * \file ArrowToolbarButton.cpp
+ * \file ArrowToolbarButton.h
  *
  * Contains the interface of the ui::ArrowToolbarButton class.
  *

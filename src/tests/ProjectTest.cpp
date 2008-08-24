@@ -19,7 +19,7 @@
 
 //! Contains the implementation of the tests::ProjectTest class.
 /*!  
- * \file ProjectTest.h
+ * \file ProjectTest.cpp
  * 
  * Contains the implementation of the tests::ProjectTest class.
  * 

@@ -19,7 +19,7 @@
 
 //! Contains the entry point of the test application, using the CppUnit framework.
 /*!
- * \file main.cpp
+ * \file tests/main.cpp
  *
  * Contains the entry point of the test application, using the CppUnit framework.
  * 

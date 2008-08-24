@@ -19,7 +19,7 @@
 
 //! Contains the implementation of the ui::UseCaseDiagramToolbar class.
 /*!
- * \file Toolbar.cpp
+ * \file UseCaseDiagramToolbar.cpp
  *
  * Contains the implementation of the ui::UseCaseDiagramToolbar class.
  *

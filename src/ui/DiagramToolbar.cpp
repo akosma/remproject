@@ -19,7 +19,7 @@
 
 //! Contains the implementation of the ui::DiagramToolbar class.
 /*!
- * \file Toolbar.cpp
+ * \file DiagramToolbar.cpp
  *
  * Contains the implementation of the ui::DiagramToolbar class.
  *
